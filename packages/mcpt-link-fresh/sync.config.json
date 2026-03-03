@@ -1,0 +1,40 @@
+{
+  "version": "1.0.0",
+  "canonical": {
+    "presskitBaseUrl": "https://mcptoolshop.com/presskit",
+    "linksUrl": "https://mcptoolshop.com/links.json",
+    "toolPageBase": "https://mcptoolshop.com/tools",
+    "pressPageBase": "https://mcptoolshop.com/press"
+  },
+  "targets": [
+    {
+      "slug": "zip-meta-map",
+      "repo": "mcp-tool-shop-org/zip-meta-map",
+      "enabled": true,
+      "mode": "github-only",
+      "topicsMax": 12
+    }
+  ],
+  "rules": {
+    "appendReleaseNotesSection": true,
+    "openReadmePR": true,
+    "registryDriftPR": false,
+    "allowedDomains": ["mcptoolshop.com"]
+  },
+  "freeze": {
+    "disallowOwners": []
+  },
+  "marketingSitePath": "",
+  "outreach": {
+    "enabled": false,
+    "maxPerToolPerWeek": 3,
+    "dedupeWindowDays": 14,
+    "quietHours": { "start": "22:00", "end": "08:00", "tz": "America/New_York" },
+    "topTargetsPerItem": 3
+  },
+  "clearanceHook": {
+    "enabled": false,
+    "artifactPath": "",
+    "strict": false
+  }
+}

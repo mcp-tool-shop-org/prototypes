@@ -1,0 +1,14 @@
+node_modules
+dist
+.DS_Store
+*.local
+*.log
+.vscode/*
+!.vscode/extensions.json
+.idea
+coverage
+*.tsbuildinfo
+site/.astro/
+site/dist/
+site/node_modules/
+.polyglot-cache.json

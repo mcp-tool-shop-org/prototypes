@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "channels": "all",
+  "org": "mcp-tool-shop-org",
+  "dockerNamespace": "mcptoolshop",
+  "hfOwner": "mcptoolshop",
+  "risk": "conservative",
+  "radar": true,
+  "suggest": false,
+  "concurrency": 3,
+  "maxAgeHours": 168,
+  "variantBudget": 12,
+  "fuzzyQueryMode": "registries",
+  "cacheDir": ".coe-cache",
+  "maxRuntimeMinutes": 15
+}

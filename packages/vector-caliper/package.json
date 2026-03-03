@@ -1,0 +1,72 @@
+{
+  "private": true,
+  "name": "@mcptoolshop/vector-caliper",
+  "version": "1.0.0",
+  "description": "A geometrical debugger for learning dynamics — shows what happened, never tells you what it means",
+  "author": "mcp-tool-shop <64996768+mcp-tool-shop@users.noreply.github.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/VectorCaliper.git"
+  },
+  "keywords": [
+    "visualization",
+    "model-state",
+    "vector-graphics",
+    "svg",
+    "scientific",
+    "ml",
+    "training",
+    "debugging",
+    "trajectory",
+    "geometry"
+  ],
+  "bugs": {
+    "url": "https://github.com/mcp-tool-shop-org/VectorCaliper/issues"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/VectorCaliper#readme",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./schema": {
+      "import": "./dist/schema/index.js",
+      "types": "./dist/schema/index.d.ts"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "src/schema/state-schema.json",
+    "docs/VECTORCALIPER_V1_GUARANTEES.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.0",
+    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "rimraf": "^5.0.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

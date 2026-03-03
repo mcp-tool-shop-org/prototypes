@@ -1,0 +1,34 @@
+{
+  "slug": "test-tool",
+  "name": "Test Tool",
+  "tagline": "A test tool for unit testing drift detection",
+  "install": "npm install test-tool",
+  "stability": "beta",
+  "kind": "mcp-server",
+  "repo": "https://github.com/mcp-tool-shop-org/test-tool",
+  "site": "https://mcptoolshop.com/tools/test-tool/",
+  "valueProps": [
+    "Fast semantic search",
+    "Local-only execution"
+  ],
+  "provenClaims": [
+    {
+      "id": "claim-1",
+      "statement": "Sub-100ms query latency",
+      "evidence": [{ "id": "bench-1", "type": "benchmark", "url": "https://example.com/bench" }]
+    }
+  ],
+  "aspirationalClaims": [],
+  "antiClaims": ["Not for cloud deployments"],
+  "githubFacts": {
+    "stars": 42,
+    "forks": 5,
+    "observedAt": "2026-01-01T00:00:00.000Z"
+  },
+  "trackedLinks": [
+    { "id": "tt-npm", "url": "https://mcptoolshop.com/go/tt-npm/", "channel": "npm" }
+  ],
+  "press": null,
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "sourcelock": "abc123"
+}

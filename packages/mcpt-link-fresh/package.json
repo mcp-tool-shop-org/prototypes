@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "name": "@mcptoolshop/mcpt-link-fresh",
+  "version": "1.0.0",
+  "description": "Keep listings, links, and repo metadata fresh by syncing from canonical tool truth",
+  "type": "module",
+  "main": "src/index.mjs",
+  "bin": {
+    "mcpt-link-fresh": "src/index.mjs"
+  },
+  "scripts": {
+    "start": "node src/index.mjs",
+    "dry-run": "node src/index.mjs --dry-run",
+    "test": "node --test tests/unit/*.test.mjs",
+    "test:e2e": "node --test tests/e2e/*.test.mjs",
+    "test:queue": "node --test tests/unit/outreach-classifier.test.mjs tests/unit/queue-builder.test.mjs tests/unit/marketing-site-adapter.test.mjs",
+    "test:all": "node --test tests/unit/*.test.mjs tests/e2e/*.test.mjs"
+  },
+  "keywords": [
+    "mcp",
+    "marketing",
+    "drift-detection",
+    "metadata-sync",
+    "github-automation"
+  ],
+  "author": "mcp-tool-shop",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop/mcpt-link-fresh.git"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

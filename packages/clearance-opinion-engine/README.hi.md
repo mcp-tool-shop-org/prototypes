@@ -1,0 +1,474 @@
+<p align="center">
+  <a href="README.ja.md">日本語</a> | <a href="README.zh.md">中文</a> | <a href="README.es.md">Español</a> | <a href="README.fr.md">Français</a> | <a href="README.md">English</a> | <a href="README.it.md">Italiano</a> | <a href="README.pt-BR.md">Português (BR)</a>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mcp-tool-shop-org/brand/main/logos/clearance-opinion-engine/readme.png" width="400" alt="Clearance Opinion Engine" />
+</p>
+
+<p align="center">
+  <a href="https://github.com/mcp-tool-shop-org/clearance-opinion-engine/actions/workflows/ci.yml"><img src="https://github.com/mcp-tool-shop-org/clearance-opinion-engine/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://www.npmjs.com/package/@mcptoolshop/clearance-opinion-engine"><img src="https://img.shields.io/npm/v/@mcptoolshop/clearance-opinion-engine" alt="npm version" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License" /></a>
+  <a href="https://mcp-tool-shop-org.github.io/clearance-opinion-engine/"><img src="https://img.shields.io/badge/Landing_Page-live-blue" alt="Landing Page" /></a>
+</p>
+
+एक नियतात्मक ("नाम की उपलब्धता + स्पष्टता राय") इंजन।
+
+किसी उम्मीदवार नाम को देखते हुए, यह वास्तविक नेमस्पेस की उपलब्धता की जांच करता है (GitHub संगठन/रिपॉजिटरी, npm, PyPI, RDAP के माध्यम से डोमेन, crates.io, Docker Hub, Hugging Face), भाषाई रूपों (मानकीकृत, टोकनयुक्त, ध्वन्यात्मक, होमोग्लिफ, धुंधली संपादन दूरी = 1) उत्पन्न करता है, समान नामों को "कोलिजन रडार" (GitHub + npm खोज) के माध्यम से खोजता है, धुंधले रूपों के टकराव के लिए रजिस्ट्रीज़ की जांच करता है, उपयोगकर्ता द्वारा प्रदान किए गए ज्ञात चिह्नों के साथ तुलना करता है, और एक रूढ़िवादी "स्पष्टता राय" (हरा / पीला / लाल) उत्पन्न करता है, जिसमें एक व्याख्या योग्य स्कोर विवरण, कार्यकारी सारांश, कवरेज मैट्रिक्स और पूर्ण प्रमाण श्रृंखला शामिल होती है।
+
+---
+
+## सत्य अनुबंध
+
+- **समान इनपुट + समान एडाप्टर प्रतिक्रियाएं = बाइट-समान आउटपुट।**
+- प्रत्येक जांच एक `evidence` ऑब्जेक्ट उत्पन्न करती है जिसमें SHA-256, टाइमस्टैम्प और पुनरुत्पादन चरण होते हैं।
+- राय रूढ़िवादी होती हैं: केवल तभी "हरा" होता है जब _सभी_ नेमस्पेस जांच साफ़ हों _और_ कोई ध्वन्यात्मक/होमोग्लिफ टकराव न हो।
+- इंजन कभी भी कुछ भी नहीं भेजता, प्रकाशित नहीं करता या संशोधित नहीं करता। यह केवल पढ़ता है और रिपोर्ट करता है।
+- स्कोर विवरण बताते हैं कि किसी श्रेणी को _क्यों_ असाइन किया गया था, लेकिन यह नियम-आधारित श्रेणी तर्क को कभी ओवरराइड नहीं करता है।
+
+---
+
+## यह क्या जांचता है
+
+| चैनल | नेमस्पेस | विधि |
+| --------- | ----------- | -------- |
+| GitHub | संगठन का नाम | `GET /orgs/{name}` → 404 = उपलब्ध |
+| GitHub | रिपॉजिटरी का नाम | `GET /repos/{owner}/{name}` → 404 = उपलब्ध |
+| npm | पैकेज | `GET https://registry.npmjs.org/{name}` → 404 = उपलब्ध |
+| PyPI | पैकेज | `GET https://pypi.org/pypi/{name}/json` → 404 = उपलब्ध |
+| डोमेन | `.com`, `.dev` | RDAP (RFC 9083) `rdap.org` के माध्यम से → 404 = उपलब्ध |
+| crates.io | क्रेट | `GET https://crates.io/api/v1/crates/{name}` → 404 = उपलब्ध |
+| Docker Hub | रिपॉजिटरी | `GET https://hub.docker.com/v2/repositories/{ns}/{name}` → 404 = उपलब्ध |
+| Hugging Face | मॉडल | `GET https://huggingface.co/api/models/{owner}/{name}` → 404 = उपलब्ध |
+| Hugging Face | स्पेस | `GET https://huggingface.co/api/spaces/{owner}/{name}` → 404 = उपलब्ध |
+
+### चैनल समूह
+
+| समूह | चैनल |
+| ------- | ---------- |
+| `core` (डिफ़ॉल्ट) | github, npm, pypi, domain |
+| `dev` | cratesio, dockerhub |
+| `ai` | huggingface |
+| `all` | सभी चैनल |
+
+प्रीसेट के लिए `--channels <group>` का उपयोग करें, या योज्य सिंटैक्स (डिफ़ॉल्ट में जोड़ता है) के लिए `--channels +cratesio,+dockerhub` का उपयोग करें।
+
+### संकेत (वैकल्पिक)
+
+| स्रोत | यह क्या खोजता है | विधि |
+| -------- | ----------------- | -------- |
+| कोलिजन रडार | GitHub रिपॉजिटरी | `GET /search/repositories?q={name}` → समानता स्कोरिंग |
+| कोलिजन रडार | npm पैकेज | `GET /-/v1/search?text={name}` → समानता स्कोरिंग |
+| कोलिजन रडार | crates.io क्रेट | `GET https://crates.io/api/v1/crates?q={name}` → समानता स्कोरिंग |
+| कोलिजन रडार | Docker Hub रिपॉजिटरी | `GET https://hub.docker.com/v2/search/repositories?query={name}` → समानता स्कोरिंग |
+| कॉर्पस | उपयोगकर्ता द्वारा प्रदान किए गए चिह्न | ऑफ़लाइन जारो-विंक्लर + मेटेफोन तुलना |
+
+सभी एडेप्टर कॉल में एक्सपोनेंशियल बैकऑफ़ रीट्राय (2 बार पुनः प्रयास, 500ms का प्रारंभिक विलंब) का उपयोग किया जाता है। वैकल्पिक डिस्क कैशिंग से बार-बार एपीआई कॉल कम होते हैं।
+
+---
+
+## यह क्या उत्पन्न करता है
+
+### भिन्नताएं
+
+| प्रकार | उदाहरण इनपुट | उदाहरण आउटपुट |
+| ------ | --------------- | ---------------- |
+| सामान्यीकृत | `My Cool Tool` | `my-cool-tool` |
+| टोकनयुक्त | `my-cool-tool` | `["my", "cool", "tool"]` |
+| ध्वन्यात्मक (मेटैफोन) | `["my", "cool", "tool"]` | `["M", "KL", "TL"]` |
+| होमोग्लिफ़ | `my-cool-tool` | `["my-c00l-tool", "my-co0l-t00l"]` (ASCII + सिरिलिक + ग्रीक) |
+| अस्पष्ट (संपादन दूरी = 1) | `my-cool-tool` | `["my-cool-too", "my-cool-tools", ...]` |
+
+### राय श्रेणियां
+
+| श्रेणी | अर्थ |
+| ------ | --------- |
+| 🟢 हरा | सभी नेमस्पेस उपलब्ध हैं, कोई ध्वन्यात्मक/होमोग्लिफ़ टकराव नहीं। |
+| 🟡 पीला | कुछ जांच अनिर्णायक हैं (नेटवर्क), निकट-टकराव, या अस्पष्ट भिन्नता का उपयोग किया गया है। |
+| 🔴 लाल | सटीक टकराव, ध्वन्यात्मक टकराव, या उच्च भ्रमित होने का जोखिम। |
+
+### स्कोर का विवरण
+
+प्रत्येक राय में व्याख्या के लिए भारित स्कोर का विवरण शामिल होता है:
+
+| उप-स्कोर | यह क्या मापता है |
+| ----------- | ----------------- |
+| नेमस्पेस उपलब्धता | जांच किए गए नेमस्पेस का वह अंश जो उपलब्ध है। |
+| कवरेज पूर्णता | कितने नेमस्पेस प्रकारों की जांच की गई (4 में से)। |
+| टकराव की गंभीरता | सटीक, ध्वन्यात्मक, भ्रमित करने वाले, निकट और भिन्नता-उपयोग किए गए टकरावों के लिए दंड। |
+| डोमेन उपलब्धता | जांच किए गए टीएलडी (TLD) का वह अंश जिनके पास उपलब्ध डोमेन हैं। |
+
+भार प्रोफाइल (`--risk` ध्वज): **रूढ़िवादी** (डिफ़ॉल्ट), **संतुलित**, **आक्रामक**. उच्च जोखिम सहिष्णुता से GREEN/YELLOW श्रेणियों के लिए सीमाएं कम हो जाती हैं और नेमस्पेस उपलब्धता की ओर भार स्थानांतरित हो जाता है।
+
+> **ध्यान दें**: श्रेणी हमेशा नियम-आधारित होती है - सटीक टकराव लाल रंग में उत्पन्न होते हैं, चाहे संख्यात्मक स्कोर कुछ भी हो। विवरण केवल व्याख्या के लिए अतिरिक्त मेटाडेटा है।
+
+### राय v2 में सुधार
+
+राय इंजन अतिरिक्त विश्लेषण उत्पन्न करता है (v0.6.0+):
+
+| विशेषता | विवरण |
+| --------- | ------------- |
+| शीर्ष कारक | श्रेणी निर्णय को चलाने वाले 3-5 सबसे महत्वपूर्ण कारक, जिसमें भार वर्गीकरण शामिल है। |
+| जोखिम विवरण | एक नियतात्मक पैराग्राफ जो "यदि आप कुछ नहीं करते हैं..." का सारांश देता है, जो जोखिम को दर्शाता है। |
+| ड्यूपॉन्ट-लाइट विश्लेषण | चिह्नों की समानता, चैनल ओवरलैप, प्रसिद्धि प्रॉक्सी और इरादा प्रॉक्सी स्कोर। |
+| सुरक्षित विकल्प | 5 नियतात्मक वैकल्पिक नाम सुझाव, उपसर्ग/प्रत्यय/विभाजक/संक्षिप्त/संयुक्त रणनीतियों का उपयोग करके। |
+
+शीर्ष कारक और जोखिम विवरण टेम्पलेट कैटलॉग का उपयोग करते हैं - नियतात्मक, कोई एलएलएम पाठ नहीं। ड्यूपॉन्ट-लाइट कारक ड्यूपॉन्ट ट्रेडमार्क विश्लेषण ढांचे से प्रेरित हैं, लेकिन यह कानूनी सलाह नहीं है।
+
+### कोचिंग आउटपुट (v0.7.0+)
+
+| विशेषता | विवरण |
+| --------- | ------------- |
+| अगले कदम | श्रेणी + निष्कर्षों के आधार पर 2-4 कोचिंग चरण ("अगला क्या करें")। |
+| कवरेज स्कोर | यह मापने का 0-100% तरीका है कि कितने अनुरोधित नेमस्पेस की सफलतापूर्वक जांच की गई। |
+| जांच न किए गए नेमस्पेस | उन नेमस्पेस की सूची जो अज्ञात स्थिति वापस करते हैं। |
+| अस्वीकरण | कानूनी-स्पष्टता फुटर जो बताता है कि रिपोर्ट क्या है और क्या नहीं है। |
+| टकराव कार्ड | प्रत्येक टकराव के प्रकार के लिए नियतात्मक स्पष्टीकरण कार्ड। | `collisionCards[]` के बारे में राय। |
+
+अगली क्रियाएं `recommendedActions` (जो कि आरक्षण लिंक हैं) से अलग हैं। ये कोचिंग संबंधी जानकारी प्रदान करती हैं: "अभी दावा करें", "रेडार के साथ पुनः चलाएं", "एक ट्रेडमार्क वकील से परामर्श करें", आदि।
+
+---
+
+## आउटपुट प्रारूप
+
+प्रत्येक रन में चार फाइलें बनती हैं:
+
+```
+reports/<date>/
+├── run.json           # Complete run object (per schema)
+├── run.md             # Human-readable clearance report with score table
+├── report.html        # Self-contained attorney packet (dark theme)
+├── summary.json       # Condensed summary for integrations
+└── manifest.json      # SHA-256 lockfile for tamper detection (via gen-lock)
+```
+
+### वकील के लिए रिपोर्ट (`report.html`)
+
+यह एक स्व-निहित HTML रिपोर्ट है जो वकीलों के साथ साझा करने के लिए उपयुक्त है। इसमें पूरी राय, स्कोर ब्रेकडाउन टेबल, नेमस्पेस जांच, निष्कर्ष, साक्ष्य श्रृंखला और क्लिक करने योग्य आरक्षण लिंक के साथ अनुशंसित क्रियाएं शामिल हैं। इसमें डार्क थीम है और यह किसी भी बाहरी निर्भरता पर नहीं चलता।
+
+### सारांश JSON (`summary.json`)
+
+यह एक संक्षिप्त आउटपुट है जो अन्य प्रणालियों के साथ एकीकरण के लिए उपयोगी है: स्तर, कुल स्कोर, नेमस्पेस की स्थिति, निष्कर्षों का सारांश, टकराव रडार की संख्या, कॉर्पस मिलान की संख्या, अस्पष्ट भिन्नताओं की संख्या और अनुशंसित क्रियाएं।
+
+---
+
+## 1.0 मानदंड
+
+इंजन के v1.0.0 पर पहुंचने से पहले, निम्नलिखित बातें सत्य होनी चाहिए:
+
+- [x] आर्टिफैक्ट स्कीमा प्रकाशित और CI में मान्य ( `summary.schema.json`, `index-entry.schema.json`)
+- [ ] एडाप्टर विश्वसनीयता का दस्तावेजीकरण (अपटाइम, दर सीमाएं, प्रत्येक चैनल के लिए बैकअप व्यवहार)
+- [x] संगतता नीति बताई और लागू की गई (`docs/VERSIONING.md`)
+- [x] वेबसाइट उपयोग की स्थिरता सिद्ध ( `nameops` + मार्केटिंग साइट से `summary.json` का उपयोग → `/lab/clearance/`)
+- [x] गोल्डन स्नैपशॉट परीक्षण सभी स्तरों के परिणामों को कवर करते हैं (ग्रीन, येलो, रेड)
+- [ ] वास्तविक दुनिया के रनों के खिलाफ टकराव कार्डों का सत्यापन
+
+---
+
+## स्थापना
+
+```bash
+# Install globally from npm
+npm i -g @mcptoolshop/clearance-opinion-engine
+
+# Or run directly with npx
+npx @mcptoolshop/clearance-opinion-engine check my-cool-tool
+
+# Or clone and run locally
+git clone https://github.com/mcp-tool-shop-org/clearance-opinion-engine.git
+cd clearance-opinion-engine
+node src/index.mjs check my-cool-tool
+```
+
+---
+
+## उपयोग
+
+```bash
+# Check a name across default channels (github, npm, pypi, domain)
+coe check my-cool-tool
+
+# Or if running from source:
+node src/index.mjs check my-cool-tool
+
+# Check specific channels only
+node src/index.mjs check my-cool-tool --channels github,npm
+
+# Skip domain checks
+node src/index.mjs check my-cool-tool --channels github,npm,pypi
+
+# Add crates.io to default channels
+node src/index.mjs check my-cool-tool --channels +cratesio
+
+# Add multiple ecosystem channels
+node src/index.mjs check my-cool-tool --channels +cratesio,+dockerhub --dockerNamespace myorg
+
+# Check all channels (requires --dockerNamespace and --hfOwner for full coverage)
+node src/index.mjs check my-cool-tool --channels all --dockerNamespace myorg --hfOwner myuser
+
+# Use channel group presets
+node src/index.mjs check my-cool-tool --channels dev    # cratesio + dockerhub
+node src/index.mjs check my-cool-tool --channels ai     # huggingface
+
+# Check within a specific GitHub org
+node src/index.mjs check my-cool-tool --org mcp-tool-shop-org
+
+# Use aggressive risk tolerance
+node src/index.mjs check my-cool-tool --risk aggressive
+
+# Re-render an existing run as Markdown
+node src/index.mjs report reports/2026-02-15/run.json
+
+# Verify determinism: replay a previous run
+node src/index.mjs replay reports/2026-02-15
+
+# Specify output directory
+node src/index.mjs check my-cool-tool --output ./my-reports
+
+# Enable collision radar (GitHub + npm search for similar names)
+node src/index.mjs check my-cool-tool --radar
+
+# Generate safer alternative name suggestions
+node src/index.mjs check my-cool-tool --suggest
+
+# Run environment diagnostics
+node src/index.mjs doctor
+
+# Compare against a corpus of known marks
+node src/index.mjs check my-cool-tool --corpus marks.json
+
+# Enable caching (reduces API calls on repeated runs)
+node src/index.mjs check my-cool-tool --cache-dir .coe-cache
+
+# Disable fuzzy variant registry queries
+node src/index.mjs check my-cool-tool --fuzzyQueryMode off
+
+# Full pipeline: all channels + radar + corpus + cache
+node src/index.mjs check my-cool-tool --channels all --dockerNamespace myorg --hfOwner myuser --radar --corpus marks.json --cache-dir .coe-cache
+
+# ── Batch mode ──────────────────────────────────────────────
+
+# Check multiple names from a text file
+node src/index.mjs batch names.txt --channels github,npm --output reports
+
+# Check multiple names from a JSON file with per-name config
+node src/index.mjs batch names.json --concurrency 4 --cache-dir .coe-cache
+
+# Resume a previous batch (skips already-completed names)
+node src/index.mjs batch names.txt --resume reports/batch-2026-02-15 --output reports
+
+# ── Refresh ─────────────────────────────────────────────────
+
+# Re-run stale checks on an existing run (default: 24h threshold)
+node src/index.mjs refresh reports/2026-02-15
+
+# Custom freshness threshold
+node src/index.mjs refresh reports/2026-02-15 --max-age-hours 12
+
+# ── Corpus management ──────────────────────────────────────
+
+# Create a new corpus template
+node src/index.mjs corpus init --output marks.json
+
+# Add marks to the corpus
+node src/index.mjs corpus add --name "React" --class 9 --registrant "Meta" --corpus marks.json
+node src/index.mjs corpus add --name "Vue" --class 9 --registrant "Evan You" --corpus marks.json
+
+# ── Publish ─────────────────────────────────────────────────
+
+# Export run artifacts for website consumption
+node src/index.mjs publish reports/2026-02-15 --out dist/clearance/run1
+
+# Publish and update a shared runs index
+node src/index.mjs publish reports/2026-02-15 --out dist/clearance/run1 --index dist/clearance/runs.json
+
+# ── Validate artifacts ────────────────────────────────────
+
+# Validate JSON artifacts against built-in schemas
+node src/index.mjs validate-artifacts reports/2026-02-16
+```
+
+### `coe validate-artifacts <dir>`
+
+बिल्ट-इन स्कीमा के खिलाफ JSON आर्टिफैक्ट (`run.json`, `summary.json`, `runs.json`) को मान्य करें। प्रत्येक फ़ाइल के लिए पास/फेल का संकेत प्रिंट करता है। यदि सभी मान्य हैं तो 0, अन्यथा 1 के साथ बाहर निकलता है।
+
+### बैच मोड
+
+`coe batch <file>` एक `.txt` या `.json` फ़ाइल से उम्मीदवार नामों को पढ़ता है, प्रत्येक नाम को साझा कैशिंग और समवर्ती नियंत्रण के साथ जांचता है, और प्रत्येक नाम के लिए रन आर्टिफैक्ट के साथ-साथ बैच-स्तरीय सारांश उत्पन्न करता है।
+
+**टेक्स्ट प्रारूप** (`.txt`): प्रत्येक पंक्ति में एक नाम। खाली पंक्तियों और `#` टिप्पणियों को अनदेखा किया जाता है।
+
+**JSON प्रारूप** (`.json`): स्ट्रिंग की सरणी `["name1", "name2"]` या ऑब्जेक्ट `[{ "name": "name1", "riskTolerance": "aggressive" }]`।
+
+आउटपुट संरचना:
+```
+batch-2026-02-15/
+  batch/
+    results.json
+    summary.csv
+    index.html       (dashboard)
+  name-1/
+    run.json, run.md, report.html, summary.json
+  name-2/
+    ...
+```
+
+### रीप्ले कमांड
+
+`coe replay <dir>` निर्दिष्ट निर्देशिका से `run.json` पढ़ता है, यदि मौजूद है तो मैनिफेस्ट को सत्यापित करता है, और सभी आउटपुट को `replay/` उप-निर्देशिका में पुन: उत्पन्न करता है। फिर यह मूल के साथ पुन: उत्पन्न Markdown की तुलना यह सत्यापित करने के लिए करता है कि यह स्थिर है या नहीं।
+
+```bash
+# Run a check
+node src/index.mjs check my-cool-tool --output reports
+
+# Generate manifest (SHA-256 lockfile)
+node scripts/gen-lock.mjs reports/2026-02-15
+
+# Later: verify nothing changed
+node src/index.mjs replay reports/2026-02-15
+```
+
+---
+
+## कॉन्फ़िगरेशन
+
+किसी कॉन्फ़िगरेशन फ़ाइल की आवश्यकता नहीं है। सभी विकल्प CLI ध्वज हैं:
+
+| ध्वज | डिफ़ॉल्ट | विवरण |
+| ------ | --------- | ------------- |
+| `--channels` | `github,npm,pypi,domain` | जांच करने के लिए चैनल। स्पष्ट सूची, समूह नाम (`core`, `dev`, `ai`, `all`), या योगात्मक (`+cratesio,+dockerhub`) स्वीकार करता है। |
+| `--org` | _(कोई नहीं)_ | GitHub संगठन जिसे संगठन नाम की उपलब्धता के लिए जांचा जाना है। |
+| `--risk` | `conservative` | जोखिम सहनशीलता: `conservative`, `balanced`, `aggressive` |
+| `--output` | `reports/` | रन आर्टिफैक्ट के लिए आउटपुट निर्देशिका। |
+| `--radar` | _(बंद)_ | टकराव रडार सक्षम करें (समान नामों के लिए GitHub + npm + crates.io + Docker Hub खोज)। |
+| `--suggest` | _(बंद)_ | राय में सुरक्षित वैकल्पिक नाम सुझाव उत्पन्न करें। |
+| `--corpus` | _(कोई नहीं)_ | तुलना के लिए ज्ञात चिह्नों के JSON कॉर्पस का पथ। |
+| `--cache-dir` | _(बंद)_ | एडाप्टर प्रतिक्रियाओं के लिए कैशिंग निर्देशिका (या `COE_CACHE_DIR` सेट करें)। |
+| `--max-age-hours` | `24` | कैश TTL घंटे में ( `--cache-dir` की आवश्यकता है)। |
+| `--dockerNamespace` | _(कोई नहीं)_ | Docker Hub नेमस्पेस (उपयोगकर्ता/संगठन) - जब `dockerhub` चैनल सक्षम होता है तो आवश्यक। |
+| `--hfOwner` | _(कोई नहीं)_ | हगिंग फेस का स्वामी (उपयोगकर्ता/संगठन) — जब `huggingface` चैनल सक्षम किया जाता है, तो यह आवश्यक है। |
+| `--fuzzyQueryMode` | `registries` | फजी वैरिएंट क्वेरी मोड: `ऑफ`, `रजिस्ट्रीज़`, `ऑल` |
+| `--concurrency` | `4` | बैच मोड में अधिकतम एक साथ जांचें। |
+| `--resume` | _(कोई नहीं)_ | पिछले आउटपुट निर्देशिका से बैच को फिर से शुरू करें (पूरे किए गए नामों को छोड़ देता है)। |
+| `--variantBudget` | `12` | प्रत्येक रजिस्ट्री के लिए क्वेरी किए जाने वाले अधिकतम फजी वैरिएंट (अधिकतम: 30)। |
+
+### पर्यावरण चर
+
+| चर | प्रभाव |
+| ---------- | -------- |
+| `GITHUB_TOKEN` | यह GitHub API की दर सीमा को 60/घंटा से बढ़ाकर 5,000/घंटा कर देता है। |
+| `COE_CACHE_DIR` | डिफ़ॉल्ट कैश निर्देशिका (CLI `--cache-dir` फ़्लैग को प्राथमिकता दी जाती है)। |
+
+---
+
+## स्कीमा
+
+मानक डेटा मॉडल `schema/clearance.schema.json` (JSON Schema 2020-12) में परिभाषित है।
+
+मुख्य प्रकार: `रन`, `इंटेक`, `कैंडिडेट`, `चैनल`, `वैरिएंट्स`, `नेमस्पेसचेक`, `फाइंडिंग`, `एविडेंस`, `ओपिनियन`, `स्कोरब्रेकडाउन`, `मैनिफेस्ट`।
+
+---
+
+## परीक्षण
+
+```bash
+npm test            # unit tests
+npm run test:e2e    # integration tests with golden snapshots
+npm run test:all    # all tests
+```
+
+सभी परीक्षण फिक्स्चर-इंजेक्टेड एडेप्टर का उपयोग करते हैं (कोई नेटवर्क कॉल नहीं)। गोल्डन स्नैपशॉट बाइट-आइडेंटिकल दृढ़ता लागू करते हैं।
+
+---
+
+## त्रुटि कोड
+
+| कोड | अर्थ |
+| ------ | --------- |
+| `COE.INIT.NO_ARGS` | कोई उम्मीदवार नाम प्रदान नहीं किया गया। |
+| `COE.INIT.BAD_CHANNEL` | `--channels` में अज्ञात चैनल। |
+| `COE.ADAPTER.GITHUB_FAIL` | GitHub API ने अप्रत्याशित त्रुटि लौटाई। |
+| `COE.ADAPTER.NPM_FAIL` | npm रजिस्ट्री ने अप्रत्याशित त्रुटि लौटाई। |
+| `COE.ADAPTER.PYPI_FAIL` | PyPI API ने अप्रत्याशित त्रुटि लौटाई। |
+| `COE.ADAPTER.DOMAIN_FAIL` | RDAP लुकअप विफल। |
+| `COE.ADAPTER.DOMAIN_RATE_LIMITED` | RDAP दर सीमा पार हो गई (HTTP 429)। |
+| `COE.ADAPTER.CRATESIO_FAIL` | crates.io API ने अप्रत्याशित त्रुटि लौटाई। |
+| `COE.ADAPTER.DOCKERHUB_FAIL` | Docker Hub API ने अप्रत्याशित त्रुटि लौटाई। |
+| `COE.ADAPTER.HF_FAIL` | Hugging Face API ने अप्रत्याशित त्रुटि लौटाई। |
+| `COE.ADAPTER.RADAR_GITHUB_FAIL` | GitHub सर्च API दुर्गम। |
+| `COE.ADAPTER.RADAR_NPM_FAIL` | npm सर्च API दुर्गम। |
+| `COE.ADAPTER.RADAR_CRATESIO_FAIL` | crates.io सर्च API दुर्गम। |
+| `COE.ADAPTER.RADAR_DOCKERHUB_FAIL` | Docker Hub सर्च API दुर्गम। |
+| `COE.DOCTOR.FATAL` | डॉक्टर कमांड विफल। |
+| `COE.DOCKER.NAMESPACE_REQUIRED` | Docker Hub चैनल `--dockerNamespace` के बिना सक्षम किया गया। |
+| `COE.HF.OWNER_REQUIRED` | Hugging Face चैनल `--hfOwner` के बिना सक्षम किया गया। |
+| `COE.VARIANT.FUZZY_HIGH` | फजी वैरिएंट की संख्या सीमा से अधिक है (सूचनात्मक)। |
+| `COE.CORPUS.INVALID` | कॉर्पस फ़ाइल का प्रारूप अमान्य है। |
+| `COE.CORPUS.NOT_FOUND` | निर्दिष्ट पथ पर कॉर्पस फ़ाइल नहीं मिली। |
+| `COE.RENDER.WRITE_FAIL` | आउटपुट फ़ाइलें लिखने में असमर्थ। |
+| `COE.LOCK.MISMATCH` | लॉकफ़ाइल सत्यापन विफल (छेड़छाड़ किया गया)। |
+| `COE.REPLAY.NO_RUN` | रीप्ले निर्देशिका में `run.json` नहीं है। |
+| `COE.REPLAY.HASH_MISMATCH` | रीप्ले के दौरान मैनिफेस्ट हैश मिसमैच। |
+| `COE.REPLAY.MD_DIFF` | पुनर्जीवित Markdown मूल से भिन्न है। |
+| `COE.BATCH.BAD_FORMAT` | असमर्थित बैच फ़ाइल प्रारूप। |
+| `COE.BATCH.EMPTY` | बैच फ़ाइल में कोई नाम नहीं है। |
+| `COE.BATCH.DUPLICATE` | बैच फ़ाइल में डुप्लिकेट नाम। |
+| `COE.BATCH.TOO_MANY` | बैच 500 नामों की सुरक्षा सीमा से अधिक है। |
+| `COE.REFRESH.NO_RUN` | रिफ्रेश निर्देशिका में `run.json` नहीं है। |
+| `COE.PUBLISH.NOT_FOUND` | पब्लिश के लिए रन निर्देशिका नहीं मिली। |
+| `COE.PUBLISH.NO_FILES` | निर्देशिका में कोई पब्लिश करने योग्य फ़ाइल नहीं है। |
+| `COE.PUBLISH.SECRET_DETECTED` | पब्लिश आउटपुट में संभावित गुप्त का पता चला (चेतावनी)। |
+| `COE.NET.DNS_FAIL` | DNS लुकअप विफल — नेटवर्क कनेक्शन जांचें। |
+| `COE.NET.CONN_REFUSED` | रिमोट सर्वर द्वारा कनेक्शन अस्वीकार कर दिया गया। |
+| `COE.NET.TIMEOUT` | अनुरोध समय समाप्त। |
+| `COE.NET.RATE_LIMITED` | दर सीमित — प्रतीक्षा करें और पुनः प्रयास करें। |
+| `COE.FS.PERMISSION` | डिस्क पर लिखने की अनुमति अस्वीकृत। |
+| `COE.CORPUS.EXISTS` | कॉर्पस फ़ाइल पहले से मौजूद है (आरंभ के दौरान)। |
+| `COE.CORPUS.EMPTY_NAME` | मार्क नाम आवश्यक है लेकिन खाली है। |
+| `COE.VALIDATE.*` | कलाकृतियों के सत्यापन त्रुटियां। |
+
+पूर्ण त्रुटि संदर्भ और समस्या निवारण मार्गदर्शिका के लिए [docs/RUNBOOK.md](docs/RUNBOOK.md) देखें।
+
+---
+
+## सुरक्षा
+
+- **केवल पढ़ने के लिए**: यह किसी भी नेमस्पेस, रजिस्ट्री या रिपॉजिटरी को कभी भी संशोधित नहीं करता है।
+- **निश्चित**: समान इनपुट हमेशा समान आउटपुट उत्पन्न करते हैं।
+- **सबूत-आधारित**: प्रत्येक राय विशिष्ट जांचों से जुड़ी होती है, जिनके साथ SHA-256 हैश का उपयोग किया जाता है।
+- **सावधानीपूर्ण**: जब अनिश्चितता होती है, तो यह डिफ़ॉल्ट रूप से YELLOW/RED पर सेट होता है।
+- **आउटपुट में कोई गुप्त जानकारी नहीं**: एपीआई टोकन कभी भी रिपोर्ट में दिखाई नहीं देते हैं।
+- **XSS-सुरक्षित**: अटॉर्नी पैकेज में सभी उपयोगकर्ता स्ट्रिंग को HTML-एस्केप किया जाता है।
+- **संवेदनशील जानकारी का हटाना**: टोकन, एपीआई कुंजियाँ और ऑथराइजेशन हेडर लिखने से पहले हटा दिए जाते हैं।
+- **गुप्त जानकारी की जांच**: `coe publish` कमांड आउटपुट में लीक होने वाले टोकन की जांच करता है, लिखने से पहले।
+
+---
+
+## सीमाएं
+
+- यह कानूनी सलाह नहीं है — यह ट्रेडमार्क खोज नहीं है और पेशेवर सलाह का विकल्प नहीं है।
+- किसी भी ट्रेडमार्क डेटाबेस की जांच नहीं की जाती है (USPTO, EUIPO, WIPO)।
+- टकराव का पता लगाना केवल संकेत है (बाजार उपयोग के संकेत), यह आधिकारिक ट्रेडमार्क खोज नहीं है।
+- कॉर्पस तुलना केवल उपयोगकर्ता द्वारा प्रदान किए गए ट्रेडमार्क के साथ की जाती है, यह किसी व्यापक डेटाबेस पर आधारित नहीं है।
+- डोमेन जांच केवल `.com` और `.dev` के लिए की जाती है।
+- डॉकर हब के लिए `--dockerNamespace` की आवश्यकता होती है; हगिंग फेस के लिए `--hfOwner` की आवश्यकता होती है।
+- अस्पष्ट भिन्नताएं केवल edit-distance=1 तक ही हैं; क्वेरी npm, PyPI, crates.io तक ही सीमित हैं।
+- ध्वन्यात्मक विश्लेषण अंग्रेजी-केंद्रित है (Metaphone एल्गोरिदम)।
+- होमोग्लिफ का पता लगाना ASCII + सिरिलिक + ग्रीक (सभी यूनिकोड स्क्रिप्ट नहीं) को कवर करता है।
+- सोशल मीडिया हैंडल की जांच नहीं की जाती है।
+- सभी जांच एक निश्चित समय पर लिए गए स्नैपशॉट हैं।
+- बैच मोड में प्रति फ़ाइल 500 नामों की सीमा है।
+- ताज़ापन का पता लगाना केवल सूचनात्मक है (यह राय के स्तर को नहीं बदलता है)।
+
+पूर्ण सूची के लिए [docs/LIMITATIONS.md](docs/LIMITATIONS.md) देखें।
+
+---
+
+## लाइसेंस
+
+MIT
+
+---
+
+यह <a href="https://mcp-tool-shop.github.io/">MCP Tool Shop</a> द्वारा बनाया गया है।

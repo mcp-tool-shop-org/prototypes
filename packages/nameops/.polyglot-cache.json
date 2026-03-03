@@ -1,0 +1,775 @@
+{
+  "version": 1,
+  "entries": {
+    "a1b7ade660a1d1cd": {
+      "translation": "[clearance-opinion-engine](https://github.com/mcp-tool-shop-org/clearance-opinion-engine) 用の名前チェックオーケストレーター。",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "7103e0eb2516c955": {
+      "translation": "標準的な名前リストを、一括でのチェック実行、公開された成果物、そして人間が読みやすいプルリクエスト（PR）のサマリーに変換します。",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "2fee4ce31f4e8dc1": {
+      "translation": "動作原理",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "04c5c31e70b746d3": {
+      "translation": "1. `data/names.txt` には、チェック対象となる標準的な名前リストが格納されています。\n2. `data/profile.json` には、COE CLI のデフォルト設定（チャンネル、リスク、並列処理など）が格納されています。\n3. `src/run.mjs` が、COE の一括処理、成果物の公開、検証をオーケストレーションします。\n4. `src/build-pr-body.mjs` が、ティアごとのサマリー、衝突箇所のカード、およびコストに関する情報をまとめた Markdown 形式の PR の本文を生成します。\n5. マーケティングリポジトリのスケジュールされたワークフローがこのロジックを呼び出し、取り込まれた成果物とともに PR を作成します。",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "5a1bcd947bd94196": {
+      "translation": "使用方法",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "c184f48f73a05ae0": {
+      "translation": "設定",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "eea91fb6855991ac": {
+      "translation": "`data/names.txt`",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "c005358b14885d9b": {
+      "translation": "1行に1つの名前を記述します。 `#` で始まる行はコメントです。 最大500個の名前までです。",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "567ef612a565c205": {
+      "translation": "`data/profile.json`",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "4bff9af3316587a2": {
+      "translation": "COE フラグ",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "61ce3e4fffe6fcce": {
+      "translation": "デフォルト",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "59196af31abc0d4d": {
+      "translation": "-------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "52494e60f0fbc76b": {
+      "translation": "----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "2a56d6ea96d9fd14": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "1ebbb2d7a4372e0f": {
+      "translation": "`168` (7日間)",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "70695871966b07b6": {
+      "translation": "ワークフローのタイムアウト",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "493a741e18ad3962": {
+      "translation": "出力",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "7b1fedad86f33fe3": {
+      "translation": "アーキテクチャ",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "a976bf8b2e931f19": {
+      "translation": "NameOps は、サービスではなくオーケストレーターです。 NameOps は、COE CLI 以外の実行時依存関係を持たず、独自のデータモデルを所有していません。 スケジュールはマーケティングリポジトリが管理します（CLAUDE.md のルールに従う）。 NameOps は、そのロジックを所有します。",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "eede93e5d68a0114": {
+      "translation": "テスト",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "08ea9dfbe36d981b": {
+      "translation": "ライセンス",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "f044c126a8902f11": {
+      "translation": "MIT",
+      "model": "translategemma:12b",
+      "timestamp": 1772017888631
+    },
+    "60fbde2d0cf0efb7": {
+      "translation": "用于 [clearance-opinion-engine](https://github.com/mcp-tool-shop-org/clearance-opinion-engine) 的名称审查协调器。",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "4fa780637ab14643": {
+      "translation": "它将标准的名称列表转换为批量审查流程，发布构建产物，并生成易于阅读的拉取请求（PR）摘要。",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "96fff1a6471ac37c": {
+      "translation": "工作原理",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "e54a71d8388a76d5": {
+      "translation": "1. `data/names.txt` 包含需要检查的标准名称列表。\n2. `data/profile.json` 包含 COE CLI 的默认参数（例如：通道、风险、并发性等）。\n3. `src/run.mjs` 负责协调：COE 批量处理、发布、验证。\n4. `src/build-pr-body.mjs` 生成一个 Markdown 格式的 PR 内容，包含分级摘要、冲突信息卡和成本统计数据。\n5. 营销仓库的定时工作流调用此逻辑，并创建包含已导入构建产物的 PR。",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "0701e0fdda9d1418": {
+      "translation": "用法",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "f485b61099d5d966": {
+      "translation": "配置",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "1fd433ba02b3073d": {
+      "translation": "`data/names.txt`",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "72cb08b346d68b03": {
+      "translation": "每行一个名称。以 `#` 开头的行是注释。最多 500 个名称。",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "55a07f2a7ed6c588": {
+      "translation": "`data/profile.json`",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "285aa18f894454b0": {
+      "translation": "COE 参数",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "b1c112d53b373b2c": {
+      "translation": "默认值",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "d75d743091909926": {
+      "translation": "-------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "7bc35c26567fc0cb": {
+      "translation": "----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "3c50ad19fc6c359b": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "77411977b8595b62": {
+      "translation": "`168` (7 天)",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "f249817c53d81b3a": {
+      "translation": "工作流超时时间",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "4864c494c355f4e1": {
+      "translation": "输出",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "ec8506a5dbb06220": {
+      "translation": "架构",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "b5b4db70195112b1": {
+      "translation": "NameOps 是一个协调器，而不是一个服务。它不拥有任何数据模型，并且除了 COE CLI 之外没有运行时依赖。营销仓库负责调度（遵循 CLAUDE.md 的规则）；NameOps 负责逻辑。",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "55795e3cd79503cf": {
+      "translation": "测试",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "1fb815b9a436fadb": {
+      "translation": "许可证",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "6325e155e3ad88d6": {
+      "translation": "MIT",
+      "model": "translategemma:12b",
+      "timestamp": 1772017905836
+    },
+    "5246a9fdcfd70b1b": {
+      "translation": "Orquestador de verificación de nombres para el [motor de análisis de nombres](https://github.com/mcp-tool-shop-org/clearance-opinion-engine).",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "8d490d212f73855b": {
+      "translation": "Convierte una lista de nombres canónicos en ejecuciones de verificación por lotes, artefactos publicados y resúmenes de solicitudes de extracción (PR) legibles por humanos.",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "130a763c03e14db5": {
+      "translation": "Cómo funciona",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "0a1b5385e19ebab4": {
+      "translation": "1. `data/names.txt` contiene la lista canónica de nombres a verificar.\n2. `data/profile.json` contiene las opciones predeterminadas de la interfaz de línea de comandos (CLI) del motor de análisis de nombres (canales, riesgo, concurrencia, etc.).\n3. `src/run.mjs` orquesta: verificación por lotes, publicación, validación.\n4. `src/build-pr-body.mjs` genera el cuerpo de una solicitud de extracción (PR) en formato Markdown, con resúmenes de niveles, tarjetas de colisiones y estadísticas de costos.\n5. El flujo de trabajo programado del repositorio de marketing llama a esta lógica y abre solicitudes de extracción con los artefactos incluidos.",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "ef34faaf2d434dc4": {
+      "translation": "Uso",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "9489401db048958d": {
+      "translation": "Configuración",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "7376e6e862f28707": {
+      "translation": "`data/names.txt`",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "282d946e5909ff7f": {
+      "translation": "Un nombre por línea. Las líneas que comienzan con `#` son comentarios. Máximo 500 nombres.",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "5ecaf390c1f6ab03": {
+      "translation": "`data/profile.json`",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "6bd12bb8eeb186d0": {
+      "translation": "Opción del motor de análisis de nombres",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "5c8d03c6c35fd083": {
+      "translation": "Valor predeterminado",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "58e46b91ebfb210e": {
+      "translation": "-------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "7566658296739da2": {
+      "translation": "----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "f2088caa76d4a948": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "c13a4479e4f26cf5": {
+      "translation": "`168` (7 días)",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "10abf7e365490e78": {
+      "translation": "tiempo de espera del flujo de trabajo",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "51969d1878184ac9": {
+      "translation": "Salida",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "020594f2ddb90222": {
+      "translation": "Arquitectura",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "24824296fc281153": {
+      "translation": "NameOps es un orquestador, no un servicio. No posee ningún modelo de datos y no tiene dependencias de tiempo de ejecución más allá de la CLI del motor de análisis de nombres. El repositorio de marketing es responsable del programa (según las reglas de CLAUDE.md); NameOps es responsable de la lógica.",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "aa67fb01561c85ee": {
+      "translation": "Pruebas",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "9572f74b6d3f62b1": {
+      "translation": "Licencia",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "ed7f97ee046bbb09": {
+      "translation": "MIT",
+      "model": "translategemma:12b",
+      "timestamp": 1772017920700
+    },
+    "a03ebe7a1d8eb67c": {
+      "translation": "Orchestrateur de vérification des noms pour le [clearance-opinion-engine](https://github.com/mcp-tool-shop-org/clearance-opinion-engine).",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "7b2d1dfc5b43d320": {
+      "translation": "Convertit une liste de noms standard en exécutions de vérification par lots, publie des artefacts et génère des résumés de demandes de tirage (pull requests) lisibles par l'homme.",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "bd900f2b327065ec": {
+      "translation": "Fonctionnement",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "206e1adb447a3451": {
+      "translation": "1. `data/names.txt` contient la liste standard des noms à vérifier.\n2. `data/profile.json` contient les paramètres par défaut de l'interface de ligne de commande (CLI) du COE (channels, risque, concurrence, etc.).\n3. `src/run.mjs` orchestre les opérations suivantes : exécution par lots du COE, publication, validation.\n4. `src/build-pr-body.mjs` génère le corps d'une demande de tirage (pull request) au format Markdown, avec des résumés par niveau, des cartes de détection de collisions et des statistiques de coût.\n5. Le workflow planifié du dépôt marketing appelle cette logique et ouvre des demandes de tirage (pull requests) avec les artefacts intégrés.",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "35b366dd8551138a": {
+      "translation": "Utilisation",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "b34ee5ed97e49101": {
+      "translation": "Configuration",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "214360ab1e1e52f2": {
+      "translation": "`data/names.txt`",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "a894b4a190cae487": {
+      "translation": "Un nom par ligne. Les lignes commençant par `#` sont des commentaires. Maximum 500 noms.",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "3c6e158eec678307": {
+      "translation": "`data/profile.json`",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "fbd107216aef869c": {
+      "translation": "Paramètre du COE",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "198d4bb300eeed1c": {
+      "translation": "Valeur par défaut",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "b8a31ebdae787756": {
+      "translation": "-------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "6b553dd92e93e2b8": {
+      "translation": "----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "9c7087410e6c6801": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "a400af3e78f27f7f": {
+      "translation": "`168` (7 jours)",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "5fb8723bb7d7df57": {
+      "translation": "Délai d'exécution du workflow",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "57b2052ceb75361e": {
+      "translation": "Sortie",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "2ced690b13b08b76": {
+      "translation": "Architecture",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "b7f29fc0416fb15d": {
+      "translation": "NameOps est un orchestrateur, pas un service. Il ne possède aucun modèle de données et n'a aucune dépendance d'exécution autre que l'interface de ligne de commande (CLI) du COE. Le dépôt marketing gère la planification (selon les règles définies dans CLAUDE.md) ; NameOps gère la logique.",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "2dbe3b3fe308a765": {
+      "translation": "Tests",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "0174ffc9d6992c72": {
+      "translation": "Licence",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "9d6e22ae9823640e": {
+      "translation": "MIT",
+      "model": "translategemma:12b",
+      "timestamp": 1772017940377
+    },
+    "95f412881ce363e7": {
+      "translation": "[clearance-opinion-engine](https://github.com/mcp-tool-shop-org/clearance-opinion-engine) के लिए नाम सत्यापन ऑर्केस्ट्रेटर।",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "ca5dc5f460a6453c": {
+      "translation": "यह एक मानक नाम सूची को बैच सत्यापन प्रक्रियाओं, प्रकाशित कलाकृतियों और मानव-पठनीय पुल अनुरोध सारांशों में बदल देता है।",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "7573acd26640d31a": {
+      "translation": "यह कैसे काम करता है",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "b2e3441280a28f35": {
+      "translation": "1. `data/names.txt` में उन नामों की मानक सूची होती है जिनकी जांच की जानी है।\n2. `data/profile.json` में COE CLI के डिफ़ॉल्ट फ़्लैग (चैनल, जोखिम, समवर्तीता, आदि) होते हैं।\n3. `src/run.mjs` निम्नलिखित कार्यों का समन्वय करता है: COE बैच, प्रकाशन, सत्यापन।\n4. `src/build-pr-body.mjs` एक मार्कडाउन पुल अनुरोध बॉडी उत्पन्न करता है जिसमें स्तरों के सारांश, टकराव कार्ड और लागत आँकड़े शामिल होते हैं।\n5. मार्केटिंग रिपॉजिटरी का अनुसूचित वर्कफ़्लो इस लॉजिक को कॉल करता है और संसाधित कलाकृतियों के साथ पुल अनुरोध खोलता है।",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "98a2f8cba1b36eff": {
+      "translation": "उपयोग",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "5073e935ef64949d": {
+      "translation": "कॉन्फ़िगरेशन",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "f0bf6099c25b2901": {
+      "translation": "`data/names.txt`",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "1a9c4c9c6fd1fc56": {
+      "translation": "प्रत्येक पंक्ति में एक नाम होना चाहिए। `#` से शुरू होने वाली पंक्तियाँ टिप्पणियाँ हैं। अधिकतम 500 नाम।",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "56d794921ffe8991": {
+      "translation": "`data/profile.json`",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "920e2c90cb9e91db": {
+      "translation": "COE फ़्लैग",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "b0b589fbe2c488c1": {
+      "translation": "डिफ़ॉल्ट",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "6da5100c388f6595": {
+      "translation": "-------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "3b88b43261c1c270": {
+      "translation": "----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "1a20fc4dc8ce3304": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "50e4d872cacb951e": {
+      "translation": "`168` (7 दिन)",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "cd64cea01563ee34": {
+      "translation": "वर्कफ़्लो टाइमआउट",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "c3e9c0122ecf1cf4": {
+      "translation": "आउटपुट",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "c601496221a20045": {
+      "translation": "आर्किटेक्चर",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "f0ec7a31f4d8df1e": {
+      "translation": "NameOps एक ऑर्केस्ट्रेटर है, कोई सेवा नहीं। यह किसी भी डेटा मॉडल का स्वामी नहीं है और COE CLI के अलावा इसकी कोई रनटाइम निर्भरता नहीं है। मार्केटिंग रिपॉजिटरी शेड्यूल का प्रबंधन करती है (CLAUDE.md के नियमों के अनुसार); nameops लॉजिक का प्रबंधन करता है।",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "46367438797b3b53": {
+      "translation": "परीक्षण",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955185
+    },
+    "cfbc372f8058f151": {
+      "translation": "लाइसेंस",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955186
+    },
+    "8a691ee81405175f": {
+      "translation": "MIT",
+      "model": "translategemma:12b",
+      "timestamp": 1772017955186
+    },
+    "754c30081d0203c5": {
+      "translation": "Orchestratore per la verifica dei nomi, utilizzato con il motore di analisi [clearance-opinion-engine](https://github.com/mcp-tool-shop-org/clearance-opinion-engine).",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "bbd503642d2c9324": {
+      "translation": "Converte un elenco di nomi standard in esecuzioni di verifica batch, artefatti pubblicati e riepiloghi PR (Pull Request) leggibili.",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "b525d724f397f28f": {
+      "translation": "Come funziona",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "d24a6363fcd7a40e": {
+      "translation": "1. Il file `data/names.txt` contiene l'elenco standard dei nomi da verificare.\n2. Il file `data/profile.json` contiene i flag predefiniti della CLI (Command Line Interface) del COE (Clearance Opinion Engine), come i canali, il livello di rischio, la concorrenza, ecc.\n3. Il file `src/run.mjs` gestisce: l'esecuzione batch del COE, la pubblicazione e la validazione.\n4. Il file `src/build-pr-body.mjs` genera il corpo di una Pull Request in formato Markdown, con riepiloghi per livello, schede di rilevamento di conflitti e statistiche sui costi.\n5. Il workflow pianificato del repository di marketing richiama questa logica e apre le Pull Request con gli artefatti inclusi.",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "dce66a0db971cc12": {
+      "translation": "Utilizzo",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "e63ed43ff97b4dc9": {
+      "translation": "Configurazione",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "b9a9c1a108034a3a": {
+      "translation": "`data/names.txt`",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "53d0b3421a149882": {
+      "translation": "Un nome per riga. Le righe che iniziano con `#` sono commenti. Massimo 500 nomi.",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "dace3f25cd8e65f5": {
+      "translation": "`data/profile.json`",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "5e29ec1b4a14b899": {
+      "translation": "Flag COE",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "9fafbf435b816c48": {
+      "translation": "Valore predefinito",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "4f16a25e942668c8": {
+      "translation": "-------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "db5b48a0e074d983": {
+      "translation": "----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "859008cc19c8d7e4": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "5926e40d3340ab6d": {
+      "translation": "`168` (7 giorni)",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "ebf12e5aea4aae81": {
+      "translation": "Timeout del workflow",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "64e156f88c9d518d": {
+      "translation": "Output",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "2467ff9891958ea0": {
+      "translation": "Architettura",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "028c2f0537682b30": {
+      "translation": "NameOps è un orchestratore, non un servizio. Non possiede alcun modello di dati e non ha dipendenze di runtime al di là della CLI del COE. Il repository di marketing gestisce la pianificazione (secondo le regole specificate in CLAUDE.md); NameOps gestisce la logica.",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "77fb63cd23c2a2da": {
+      "translation": "Test",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "0870aa1dcfea97cc": {
+      "translation": "Licenza",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "cf7d056fb6111803": {
+      "translation": "MIT",
+      "model": "translategemma:12b",
+      "timestamp": 1772017974391
+    },
+    "0e9bccaadbddde70": {
+      "translation": "Orquestrador de verificação de nomes para o [clearance-opinion-engine](https://github.com/mcp-tool-shop-org/clearance-opinion-engine).",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988974
+    },
+    "55dac83a3fecea99": {
+      "translation": "Converte uma lista de nomes canônicos em execuções de verificação em lote, artefatos publicados e resumos de pull requests (PRs) legíveis por humanos.",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988974
+    },
+    "3786fdf0aaf7a7c2": {
+      "translation": "Como funciona",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988974
+    },
+    "5b1cb9754d5f0fc2": {
+      "translation": "1. `data/names.txt` contém a lista canônica de nomes a serem verificados.\n2. `data/profile.json` contém as flags padrão da interface de linha de comando (CLI) do COE (canais, risco, concorrência, etc.).\n3. `src/run.mjs` orquestra: lote do COE, publicação, validação.\n4. `src/build-pr-body.mjs` gera um corpo de Markdown para o PR, com resumos de níveis, cartões de colisão e estatísticas de custo.\n5. O fluxo de trabalho agendado do repositório de marketing chama essa lógica e abre PRs com os artefatos incluídos.",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988974
+    },
+    "2dc7b1f6ea4a38fe": {
+      "translation": "Uso",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988974
+    },
+    "a0b286f09c8f5b2f": {
+      "translation": "Configuração",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988974
+    },
+    "fc5489195a0cb4bf": {
+      "translation": "`data/names.txt`",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988974
+    },
+    "837de9ea34a40761": {
+      "translation": "Um nome por linha. As linhas que começam com `#` são comentários. Máximo de 500 nomes.",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988974
+    },
+    "47d1f5d1e5a01cfe": {
+      "translation": "`data/profile.json`",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988974
+    },
+    "91f7120bd9a001db": {
+      "translation": "Flag do COE",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988975
+    },
+    "7360d27593470f01": {
+      "translation": "Padrão",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988975
+    },
+    "1f04ef9e8cc1d860": {
+      "translation": "-------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988975
+    },
+    "f5f497abcadce090": {
+      "translation": "----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988975
+    },
+    "eeb243aa53a24f8e": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988975
+    },
+    "82facf6d661886a0": {
+      "translation": "`168` (7 dias)",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988975
+    },
+    "6d09796f03482ea8": {
+      "translation": "tempo limite do fluxo de trabalho",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988975
+    },
+    "0b3e0fa46881d1eb": {
+      "translation": "Saída",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988975
+    },
+    "57a87b809fa8de1a": {
+      "translation": "Arquitetura",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988975
+    },
+    "f7f523d8f636a282": {
+      "translation": "NameOps é um orquestrador, não um serviço. Ele não possui nenhum modelo de dados e não tem dependências de tempo de execução além da CLI do COE. O repositório de marketing possui o agendamento (de acordo com as regras do CLAUDE.md); o nameops possui a lógica.",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988975
+    },
+    "f5c32387ed3f39c1": {
+      "translation": "Testes",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988975
+    },
+    "2aca9b0e72841008": {
+      "translation": "Licença",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988975
+    },
+    "673d526b33ab644f": {
+      "translation": "MIT",
+      "model": "translategemma:12b",
+      "timestamp": 1772017988975
+    }
+  }
+}

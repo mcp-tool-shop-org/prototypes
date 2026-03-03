@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "aud.ci-maintainers",
+  "name": "CI/CD Maintainers",
+  "description": "Engineers who own CI pipelines and care about build reproducibility.",
+  "painPoints": [
+    "No confidence that repo metadata is fresh or accurate after merges",
+    "Build artifacts drift silently",
+    "Hard to enforce metadata quality gates without custom scripting"
+  ]
+}

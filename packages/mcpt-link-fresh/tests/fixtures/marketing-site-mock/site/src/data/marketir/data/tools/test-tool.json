@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "tool.test-tool",
+  "name": "test-tool",
+  "positioning": {
+    "oneLiner": "A test tool for unit testing drift detection",
+    "valueProps": [
+      "Fast semantic search",
+      "Local-only execution"
+    ]
+  },
+  "audienceRefs": ["aud.ci-maintainers", "aud.llm-toolchain-devs"],
+  "claims": [
+    {
+      "id": "claim.test-tool.sub-100ms",
+      "status": "proven",
+      "statement": "Sub-100ms query latency",
+      "evidenceRefs": ["ev.test-tool.bench.v1"]
+    },
+    {
+      "id": "claim.test-tool.deterministic",
+      "status": "proven",
+      "statement": "Deterministic output given the same input state.",
+      "evidenceRefs": ["ev.test-tool.deterministic-test.v1"]
+    },
+    {
+      "id": "claim.test-tool.fast-builds",
+      "status": "aspirational",
+      "statement": "Builds complete in under one second.",
+      "notes": "Not yet benchmarked."
+    }
+  ],
+  "antiClaims": [
+    { "statement": "Not for cloud deployments" }
+  ],
+  "messages": [
+    {
+      "id": "msg.test-tool.web-blurb",
+      "channel": "web",
+      "tone": "pragmatic",
+      "text": "test-tool: sub-100ms search with deterministic builds.",
+      "claimRefs": ["claim.test-tool.sub-100ms", "claim.test-tool.deterministic"],
+      "constraints": { "maxChars": 280 }
+    },
+    {
+      "id": "msg.test-tool.hn-post",
+      "channel": "hn",
+      "tone": "pragmatic",
+      "text": "test-tool makes repos searchable in <100ms. Proven in CI.",
+      "claimRefs": ["claim.test-tool.sub-100ms"],
+      "constraints": { "maxChars": 300 }
+    }
+  ],
+  "press": {
+    "boilerplate": {
+      "projectDescription": "A test tool for benchmarking metadata sync.",
+      "founderBio": "Built by the MCP Tool Shop team."
+    },
+    "contacts": [
+      { "method": "email", "value": "press@example.com", "label": "Press" }
+    ],
+    "quotes": [],
+    "comparables": [],
+    "partnerOffers": [
+      { "type": "integration", "description": "Early access to the API." }
+    ]
+  },
+  "targeting": {
+    "keywords": ["search", "metadata", "semantic"],
+    "topics": ["mcp", "search", "ci"],
+    "languages": ["JavaScript"],
+    "exclusions": [],
+    "seedRepos": []
+  }
+}

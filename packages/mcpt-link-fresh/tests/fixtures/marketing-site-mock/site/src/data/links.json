@@ -1,0 +1,26 @@
+[
+  {
+    "id": "tt-npm",
+    "slug": "test-tool",
+    "target": "https://mcptoolshop.com/tools/test-tool/",
+    "utm": { "source": "npm", "medium": "readme", "campaign": "launch" },
+    "channel": "npm",
+    "toolRef": "tool.test-tool"
+  },
+  {
+    "id": "tt-github",
+    "slug": "test-tool",
+    "target": "https://mcptoolshop.com/tools/test-tool/",
+    "utm": { "source": "github", "medium": "repo", "campaign": "launch" },
+    "channel": "github",
+    "toolRef": "tool.test-tool"
+  },
+  {
+    "id": "tt-hn",
+    "slug": "test-tool",
+    "target": "https://mcptoolshop.com/tools/test-tool/",
+    "utm": { "source": "hn", "medium": "comment", "campaign": "launch" },
+    "channel": "hn",
+    "toolRef": "tool.test-tool"
+  }
+]

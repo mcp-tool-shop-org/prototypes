@@ -1,0 +1,202 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/mcp-tool-shop-org/VectorCaliper/schema/state.json",
+  "title": "VectorCaliper Model State Schema",
+  "description": "Canonical schema for model state representation. Every variable has name, range, unit, and interpretation.",
+  "type": "object",
+  "required": ["id", "time", "geometry", "uncertainty", "performance"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for this state snapshot",
+      "minLength": 1
+    },
+    "time": {
+      "$ref": "#/definitions/positiveValue",
+      "description": "Timestamp or step number (monotonic in sequences)"
+    },
+    "geometry": {
+      "$ref": "#/definitions/geometryState"
+    },
+    "uncertainty": {
+      "$ref": "#/definitions/uncertaintyState"
+    },
+    "performance": {
+      "$ref": "#/definitions/performanceState"
+    },
+    "dynamics": {
+      "oneOf": [
+        { "$ref": "#/definitions/dynamicsState" },
+        { "type": "null" }
+      ],
+      "description": "Temporal dynamics (null for static snapshots)"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "source": { "type": "string" },
+        "version": { "type": "string" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["source", "version"]
+    }
+  },
+  "definitions": {
+    "boundedValue": {
+      "type": "object",
+      "required": ["value", "min", "max", "unit"],
+      "additionalProperties": false,
+      "properties": {
+        "value": { "type": "number" },
+        "min": { "type": "number" },
+        "max": { "type": "number" },
+        "unit": { "type": "string" }
+      },
+      "description": "A numeric value with explicit range constraints"
+    },
+    "normalizedValue": {
+      "type": "object",
+      "required": ["value", "interpretation"],
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "interpretation": { "type": "string" }
+      },
+      "description": "A value guaranteed to be in [0, 1]"
+    },
+    "positiveValue": {
+      "type": "object",
+      "required": ["value", "unit"],
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": { "type": "string" }
+      },
+      "description": "A non-negative value with no upper bound"
+    },
+    "geometryState": {
+      "type": "object",
+      "required": ["effectiveDimension", "anisotropy", "spread", "density"],
+      "additionalProperties": false,
+      "properties": {
+        "effectiveDimension": {
+          "$ref": "#/definitions/positiveValue",
+          "description": "Intrinsic dimensionality of the representation"
+        },
+        "anisotropy": {
+          "$ref": "#/definitions/positiveValue",
+          "description": "Ratio of largest to smallest principal component"
+        },
+        "spread": {
+          "$ref": "#/definitions/positiveValue",
+          "description": "Average pairwise distance in representation space"
+        },
+        "density": {
+          "$ref": "#/definitions/positiveValue",
+          "description": "Clustering coefficient or local density measure"
+        }
+      },
+      "description": "Geometric properties of the model's internal representation"
+    },
+    "uncertaintyState": {
+      "type": "object",
+      "required": ["entropy", "margin", "calibration"],
+      "additionalProperties": false,
+      "properties": {
+        "entropy": {
+          "$ref": "#/definitions/positiveValue",
+          "description": "Shannon entropy of output distribution (bits)"
+        },
+        "margin": {
+          "$ref": "#/definitions/normalizedValue",
+          "description": "Difference between top-1 and top-2 probabilities"
+        },
+        "calibration": {
+          "$ref": "#/definitions/normalizedValue",
+          "description": "Calibration error (ECE or similar)"
+        },
+        "epistemic": {
+          "oneOf": [
+            { "$ref": "#/definitions/normalizedValue" },
+            { "type": "null" }
+          ],
+          "description": "Epistemic uncertainty estimate"
+        },
+        "aleatoric": {
+          "oneOf": [
+            { "$ref": "#/definitions/normalizedValue" },
+            { "type": "null" }
+          ],
+          "description": "Aleatoric uncertainty estimate"
+        }
+      },
+      "description": "Uncertainty and confidence measures"
+    },
+    "performanceState": {
+      "type": "object",
+      "required": ["accuracy", "loss"],
+      "additionalProperties": false,
+      "properties": {
+        "accuracy": {
+          "$ref": "#/definitions/normalizedValue",
+          "description": "Classification accuracy or regression R²"
+        },
+        "loss": {
+          "$ref": "#/definitions/positiveValue",
+          "description": "Loss function value (lower is better)"
+        },
+        "taskScore": {
+          "oneOf": [
+            { "$ref": "#/definitions/normalizedValue" },
+            { "type": "null" }
+          ],
+          "description": "Task-specific score (F1, BLEU, etc.)"
+        },
+        "cost": {
+          "oneOf": [
+            { "$ref": "#/definitions/positiveValue" },
+            { "type": "null" }
+          ],
+          "description": "Computational cost proxy"
+        }
+      },
+      "description": "Performance and quality metrics"
+    },
+    "dynamicsState": {
+      "type": "object",
+      "required": ["velocity", "acceleration", "stability", "phase"],
+      "additionalProperties": false,
+      "properties": {
+        "velocity": {
+          "$ref": "#/definitions/positiveValue",
+          "description": "Rate of change in representation space"
+        },
+        "acceleration": {
+          "$ref": "#/definitions/boundedValue",
+          "description": "Acceleration (second derivative)"
+        },
+        "stability": {
+          "$ref": "#/definitions/boundedValue",
+          "description": "Stability measure (Lyapunov exponent proxy)"
+        },
+        "phase": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Discrete regime identifier"
+        }
+      },
+      "description": "Dynamics and change over time"
+    }
+  }
+}

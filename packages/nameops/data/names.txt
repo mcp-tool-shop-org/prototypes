@@ -1,0 +1,12 @@
+# NameOps canonical name list
+# One name per line. Lines starting with # are comments.
+# Max 500 names (COE hard limit).
+
+nameops
+clearance-opinion-engine
+zip-meta-map
+tool-compass
+file-compass
+attestia
+kokoro-desktop
+mcp-tool-shop

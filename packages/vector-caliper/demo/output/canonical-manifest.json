@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-02-05T13:15:57.033Z",
+  "generator": "VectorCaliper Canonical Demo",
+  "seed": 42,
+  "artifacts": {
+    "trajectory": {
+      "filename": "canonical-trajectory.json",
+      "states": 500,
+      "sha256": "c67bc4e7df3103602b0eaf6bb5eeb90b9e622d3f94616cd71bf3eac510d3ccd8"
+    },
+    "svg": {
+      "filename": "canonical-trajectory.svg",
+      "width": 800,
+      "height": 600,
+      "sha256": "cc570b5244102726266345bda21002da700f49d123bb504153767a27d748e0f1"
+    }
+  },
+  "guarantees": [
+    "Deterministic: same seed → same output",
+    "States are exact, not interpolated",
+    "Visual encoding matches v1 semantic mapping",
+    "SVG is Inkscape-compatible"
+  ]
+}

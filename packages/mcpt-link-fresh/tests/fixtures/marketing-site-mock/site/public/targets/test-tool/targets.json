@@ -1,0 +1,79 @@
+{
+  "slug": "test-tool",
+  "scoringVersion": "1.0.0",
+  "generatedAt": "2026-01-15T00:00:00.000Z",
+  "candidateCount": 5,
+  "errors": [],
+  "candidates": [
+    {
+      "owner": "acme-org",
+      "repo": "ci-toolkit",
+      "fullName": "acme-org/ci-toolkit",
+      "description": "CI pipeline toolkit with metadata gating",
+      "stars": 1200,
+      "language": "JavaScript",
+      "topics": ["ci", "pipeline", "gating", "metadata"],
+      "pushedAt": "2026-01-10T00:00:00Z",
+      "ownerType": "Organization",
+      "whyMatched": ["topic:ci", "topic:metadata", "keyword:gating"],
+      "score": 92,
+      "scoreBreakdown": { "topicMatch": 45, "keywordMatch": 20, "activity": 15, "stars": 12 }
+    },
+    {
+      "owner": "llm-tools",
+      "repo": "context-manager",
+      "fullName": "llm-tools/context-manager",
+      "description": "Token budget management for LLM context windows",
+      "stars": 850,
+      "language": "TypeScript",
+      "topics": ["llm", "context", "token-budget"],
+      "pushedAt": "2026-01-08T00:00:00Z",
+      "ownerType": "Organization",
+      "whyMatched": ["topic:llm", "keyword:token budget"],
+      "score": 87,
+      "scoreBreakdown": { "topicMatch": 30, "keywordMatch": 30, "activity": 15, "stars": 12 }
+    },
+    {
+      "owner": "dev-user",
+      "repo": "search-bench",
+      "fullName": "dev-user/search-bench",
+      "description": "Benchmarking semantic search tools",
+      "stars": 320,
+      "language": "Python",
+      "topics": ["search", "benchmark", "semantic"],
+      "pushedAt": "2026-01-05T00:00:00Z",
+      "ownerType": "User",
+      "whyMatched": ["topic:search", "keyword:semantic"],
+      "score": 71,
+      "scoreBreakdown": { "topicMatch": 30, "keywordMatch": 20, "activity": 12, "stars": 9 }
+    },
+    {
+      "owner": "platform-co",
+      "repo": "schema-validator",
+      "fullName": "platform-co/schema-validator",
+      "description": "JSON Schema validation for CI pipelines",
+      "stars": 540,
+      "language": "Go",
+      "topics": ["schema", "validation", "ci"],
+      "pushedAt": "2026-01-12T00:00:00Z",
+      "ownerType": "Organization",
+      "whyMatched": ["topic:ci", "topic:schema"],
+      "score": 68,
+      "scoreBreakdown": { "topicMatch": 30, "keywordMatch": 10, "activity": 18, "stars": 10 }
+    },
+    {
+      "owner": "solo-dev",
+      "repo": "meta-indexer",
+      "fullName": "solo-dev/meta-indexer",
+      "description": "Index repo metadata for search",
+      "stars": 45,
+      "language": "JavaScript",
+      "topics": ["metadata", "search", "index"],
+      "pushedAt": "2025-12-20T00:00:00Z",
+      "ownerType": "User",
+      "whyMatched": ["topic:metadata", "keyword:search"],
+      "score": 52,
+      "scoreBreakdown": { "topicMatch": 30, "keywordMatch": 10, "activity": 7, "stars": 5 }
+    }
+  ]
+}

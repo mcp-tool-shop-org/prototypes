@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use VectorCaliper, please cite it using the metadata from this file."
+type: software
+title: "VectorCaliper: A Geometrical Debugger for Learning Dynamics"
+version: 1.0.0
+date-released: 2026-02-05
+url: "https://github.com/mcp-tool-shop-org/VectorCaliper"
+repository-code: "https://github.com/mcp-tool-shop-org/VectorCaliper"
+license: MIT
+authors:
+  - name: "mcp-tool-shop"
+    email: "64996768+mcp-tool-shop@users.noreply.github.com"
+keywords:
+  - visualization
+  - machine learning
+  - training dynamics
+  - debugging
+  - trajectory
+  - geometry
+abstract: >-
+  VectorCaliper is a geometrical debugger for learning dynamics.
+  It visualizes model-state trajectories during training with
+  deterministic, faithful representation. Every visual element
+  traces back to a measured variable. Nothing is inferred,
+  smoothed, or recommended. VectorCaliper shows what happened;
+  it never tells you what it means.

@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "aud.llm-toolchain-devs",
+  "name": "LLM Toolchain Developers",
+  "description": "Developers building tooling for LLM context, token budgets, and structured output.",
+  "painPoints": [
+    "Context windows overflow with unstructured repo data",
+    "Token budget management is manual and error-prone",
+    "No structured metadata for LLM consumption"
+  ]
+}

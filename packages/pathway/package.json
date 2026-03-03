@@ -1,0 +1,34 @@
+{
+  "private": true,
+  "name": "@mcptoolshop/pathway",
+  "version": "0.2.2",
+  "description": "npm wrapper for pathway - Workflow automation tool",
+  "bin": {
+    "pathway": "./bin/pathway.js"
+  },
+  "scripts": {
+    "postinstall": "node postinstall.js"
+  },
+  "keywords": [
+    "workflow",
+    "automation",
+    "cli",
+    "python",
+    "wrapper"
+  ],
+  "author": "mcp-tool-shop <64996768+mcp-tool-shop@users.noreply.github.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcp-tool-shop-org/pathway.git",
+    "directory": "npm"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/pathway#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}

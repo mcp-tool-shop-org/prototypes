@@ -1,0 +1,7 @@
+node_modules/
+.coe-cache/
+artifacts/
+!artifacts/.gitkeep
+*.log
+.DS_Store
+site/.astro/
