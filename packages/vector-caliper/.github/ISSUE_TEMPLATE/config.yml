@@ -1,8 +1,0 @@
-blank_issues_enabled: false
-contact_links:
-  - name: Documentation
-    url: https://github.com/mcp-tool-shop-org/VectorCaliper/tree/main/docs
-    about: Check the documentation before opening an issue
-  - name: STOP.md (Feature Freeze)
-    url: https://github.com/mcp-tool-shop-org/VectorCaliper/blob/main/STOP.md
-    about: Check if we're in a feature freeze period
