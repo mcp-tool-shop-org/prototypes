@@ -32,5 +32,5 @@ jobs:
         with:
           node-version: 22
 
-      - run: pnpm install
-      - run: pnpm turbo build
+      - run: echo "Archived monorepo — CI validates checkout and structure only"
+      - run: test -f pnpm-workspace.yaml && test -f turbo.json && echo "Structure valid"
