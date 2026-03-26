@@ -7,7 +7,8 @@
   },
   "scripts": {
     "build": "turbo build",
-    "test": "turbo test"
+    "test": "turbo test",
+    "verify": "bash verify.sh"
   },
   "devDependencies": {
     "turbo": "^2.4.0",

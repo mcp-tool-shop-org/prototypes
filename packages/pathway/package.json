@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@mcptoolshop/pathway",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "description": "npm wrapper for pathway - Workflow automation tool",
   "bin": {
     "pathway": "./bin/pathway.js"
