@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Attestia.App.Pages.IntentsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:models="using:Attestia.Core.Models"
+    Loaded="Page_Loaded">
+
+    <Grid Padding="32,28,32,32" RowSpacing="20" MaxWidth="1100">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Spacing="4">
+                <TextBlock Text="Intent" Style="{StaticResource AttestiaPageTitleStyle}" />
+                <TextBlock Text="Declare financial actions that require human approval."
+                           FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8"
+                        VerticalAlignment="Top">
+                <Button Content="Declare Intent" Click="Declare_Click"
+                        Background="{StaticResource AttestiaAccentBrush}"
+                        Foreground="{StaticResource AttestiaPrimaryBackgroundBrush}"
+                        FontWeight="SemiBold" />
+                <Button Content="Run Reconciliation" Click="Reconcile_Click"
+                        FontSize="12" Padding="8,4" />
+                <Button Content="Recalculate State" Click="Refresh_Click"
+                        FontSize="12" Padding="8,4" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Status filter -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="8">
+            <TextBlock Text="Filter:" VerticalAlignment="Center"
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="13" />
+            <ComboBox x:Name="StatusFilter" Width="160"
+                      PlaceholderText="All statuses"
+                      SelectionChanged="StatusFilter_Changed">
+                <ComboBoxItem Content="All" Tag="" />
+                <ComboBoxItem Content="Declared" Tag="declared" />
+                <ComboBoxItem Content="Approved" Tag="approved" />
+                <ComboBoxItem Content="Executed" Tag="executed" />
+                <ComboBoxItem Content="Verified" Tag="verified" />
+                <ComboBoxItem Content="Rejected" Tag="rejected" />
+                <ComboBoxItem Content="Failed" Tag="failed" />
+            </ComboBox>
+        </StackPanel>
+
+        <!-- Empty state -->
+        <Grid Grid.Row="2" x:Name="EmptyState" Visibility="Collapsed"
+              HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Spacing="12" MaxWidth="400" HorizontalAlignment="Center">
+                <FontIcon Glyph="&#xE8A5;" FontSize="48"
+                          Foreground="{ThemeResource TextFillColorTertiaryBrush}" HorizontalAlignment="Center" />
+                <TextBlock Text="No intents yet" FontSize="18" FontWeight="SemiBold"
+                           HorizontalAlignment="Center" />
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" FontSize="13" LineHeight="20"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                           Text="Intents are the starting point of every auditable financial action. Declare an intent to record what you plan to do before it happens on-chain." />
+                <Button Content="Declare Your First Intent" Click="Declare_Click"
+                        Style="{ThemeResource AccentButtonStyle}"
+                        HorizontalAlignment="Center" Margin="0,8,0,0" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Intent list -->
+        <ListView Grid.Row="2" x:Name="IntentsList"
+                  SelectionMode="Single" IsItemClickEnabled="True"
+                  ItemClick="Intent_Click"
+                  ItemsSource="{x:Bind ViewModel.Intents, Mode=OneWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:Intent">
+                    <Grid Padding="16" Margin="0,0,0,6"
+                          CornerRadius="8"
+                          Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                          BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                          BorderThickness="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Intent ID + Kind -->
+                        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="8">
+                            <TextBlock Text="{x:Bind Id}" FontWeight="SemiBold" />
+                            <Border Padding="6,2" CornerRadius="4"
+                                    Background="{ThemeResource AccentFillColorDefaultBrush}">
+                                <TextBlock Text="{x:Bind Kind}" FontSize="11"
+                                           Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}" />
+                            </Border>
+                        </StackPanel>
+
+                        <!-- Status badge -->
+                        <Border Grid.Row="0" Grid.Column="1" Padding="8,2" CornerRadius="4"
+                                Background="{ThemeResource SubtleFillColorSecondaryBrush}">
+                            <TextBlock Text="{x:Bind Status}" FontSize="11" />
+                        </Border>
+
+                        <!-- Description + timestamp -->
+                        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,6,0,0">
+                            <TextBlock Text="{x:Bind Description}" TextTrimming="CharacterEllipsis"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="13" />
+                            <TextBlock Text="{x:Bind DeclaredAt}" FontSize="11" Margin="0,2,0,0"
+                                       Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Load more / Status -->
+        <StackPanel Grid.Row="3" Spacing="8">
+            <Button x:Name="LoadMoreBtn" Content="Load Earlier Intents" Click="LoadMore_Click"
+                    Visibility="Collapsed" FontSize="12" Padding="8,4" />
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <ProgressRing x:Name="LoadingRing" IsActive="False" Width="20" Height="20" />
+                <TextBlock x:Name="ErrorText" FontSize="13"
+                           Foreground="{ThemeResource SystemFillColorCautionBrush}"
+                           VerticalAlignment="Center" />
+                <Button x:Name="RetryBtn" Content="Reattempt Connection" Click="Refresh_Click"
+                        Visibility="Collapsed" FontSize="12" Padding="8,4" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

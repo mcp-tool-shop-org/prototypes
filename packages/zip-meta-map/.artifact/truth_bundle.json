@@ -1,0 +1,481 @@
+{
+  "atoms": [
+    {
+      "id": "cli_command:9e6288e2e402",
+      "type": "cli_command",
+      "value": "zip-meta-map",
+      "confidence": 0.9,
+      "source": {
+        "file": "pyproject.toml",
+        "lineStart": 38,
+        "lineEnd": 38
+      },
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "cli_flag:247852142db1",
+      "type": "cli_flag",
+      "value": "--color-muted",
+      "confidence": 0.9,
+      "source": {
+        "file": "site/src/site-config.ts",
+        "lineStart": 9,
+        "lineEnd": 9
+      },
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "cli_flag:ecbb66c05b20",
+      "type": "cli_flag",
+      "value": "--exit-code",
+      "confidence": 0.9,
+      "source": {
+        "file": "site/src/site-config.ts",
+        "lineStart": 44,
+        "lineEnd": 44
+      },
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "cli_flag:e40351579cd6",
+      "type": "cli_flag",
+      "value": "--report",
+      "confidence": 0.9,
+      "source": {
+        "file": "site/src/site-config.ts",
+        "lineStart": 61,
+        "lineEnd": 61
+      },
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "cli_flag:4713c96a1d8b",
+      "type": "cli_flag",
+      "value": "--version",
+      "confidence": 0.9,
+      "source": {
+        "file": "src/zip_meta_map/cli.py",
+        "lineStart": 21,
+        "lineEnd": 21
+      },
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "cli_flag:932eb19c15cf",
+      "type": "cli_flag",
+      "value": "--output",
+      "confidence": 0.9,
+      "source": {
+        "file": "src/zip_meta_map/cli.py",
+        "lineStart": 30,
+        "lineEnd": 30
+      },
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "cli_flag:466327b1a681",
+      "type": "cli_flag",
+      "value": "--profile",
+      "confidence": 0.9,
+      "source": {
+        "file": "src/zip_meta_map/cli.py",
+        "lineStart": 37,
+        "lineEnd": 37
+      },
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "cli_flag:90af30afebef",
+      "type": "cli_flag",
+      "value": "--policy",
+      "confidence": 0.9,
+      "source": {
+        "file": "src/zip_meta_map/cli.py",
+        "lineStart": 43,
+        "lineEnd": 43
+      },
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "cli_flag:30ed752d0622",
+      "type": "cli_flag",
+      "value": "--format",
+      "confidence": 0.9,
+      "source": {
+        "file": "src/zip_meta_map/cli.py",
+        "lineStart": 49,
+        "lineEnd": 49
+      },
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "cli_flag:8d92ed7c94af",
+      "type": "cli_flag",
+      "value": "--manifest-only",
+      "confidence": 0.9,
+      "source": {
+        "file": "src/zip_meta_map/cli.py",
+        "lineStart": 56,
+        "lineEnd": 56
+      },
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "cli_flag:2b6df46123f6",
+      "type": "cli_flag",
+      "value": "--summary",
+      "confidence": 0.9,
+      "source": {
+        "file": "src/zip_meta_map/cli.py",
+        "lineStart": 61,
+        "lineEnd": 61
+      },
+      "tags": [
+        "cli"
+      ]
+    },
+    {
+      "id": "repo_tagline:26879373eee5",
+      "type": "repo_tagline",
+      "value": "Generate machine-readable metadata manifests for ZIP archives and project directories",
+      "confidence": 0.9,
+      "source": {
+        "file": "pyproject.toml",
+        "lineStart": 8,
+        "lineEnd": 8
+      },
+      "tags": [
+        "identity"
+      ]
+    },
+    {
+      "id": "recent_change:d34a9ed33c0c",
+      "type": "recent_change",
+      "value": "Promoted to v1.0.0 — production-ready release",
+      "confidence": 0.85,
+      "source": {
+        "file": "CHANGELOG.md",
+        "lineStart": 11,
+        "lineEnd": 11
+      },
+      "tags": [
+        "freshness"
+      ]
+    },
+    {
+      "id": "recent_change:41b6f7ee114d",
+      "type": "recent_change",
+      "value": "Added SHIP_GATE.md, SCORECARD.md",
+      "confidence": 0.85,
+      "source": {
+        "file": "CHANGELOG.md",
+        "lineStart": 12,
+        "lineEnd": 12
+      },
+      "tags": [
+        "freshness"
+      ]
+    },
+    {
+      "id": "recent_change:884eea1cb1b6",
+      "type": "recent_change",
+      "value": "Added Security & Data Scope and Scorecard to README",
+      "confidence": 0.85,
+      "source": {
+        "file": "CHANGELOG.md",
+        "lineStart": 13,
+        "lineEnd": 13
+      },
+      "tags": [
+        "freshness"
+      ]
+    },
+    {
+      "id": "recent_change:9fdd339adb9d",
+      "type": "recent_change",
+      "value": "Updated SECURITY.md supported versions",
+      "confidence": 0.85,
+      "source": {
+        "file": "CHANGELOG.md",
+        "lineStart": 14,
+        "lineEnd": 14
+      },
+      "tags": [
+        "freshness"
+      ]
+    },
+    {
+      "id": "repo_tagline:327ce2c250e3",
+      "type": "repo_tagline",
+      "value": "Turn a ZIP or folder into a guided, LLM-friendly metadata bundle.<br>",
+      "confidence": 0.85,
+      "source": {
+        "file": "README.md",
+        "lineStart": 10,
+        "lineEnd": 10
+      },
+      "tags": [
+        "identity"
+      ]
+    },
+    {
+      "id": "anti_goal:113ee767692d",
+      "type": "anti_goal",
+      "value": "| **Data NOT touched** | No telemetry, no analytics, no network calls, no code execution from archives |",
+      "confidence": 0.8,
+      "source": {
+        "file": "README.md",
+        "lineStart": 225,
+        "lineEnd": 225
+      },
+      "tags": [
+        "constraint",
+        "security"
+      ]
+    },
+    {
+      "id": "anti_goal:7db70489781b",
+      "type": "anti_goal",
+      "value": "| **Network** | None — fully offline CLI tool |",
+      "confidence": 0.8,
+      "source": {
+        "file": "README.md",
+        "lineStart": 227,
+        "lineEnd": 227
+      },
+      "tags": [
+        "constraint",
+        "security"
+      ]
+    },
+    {
+      "id": "core_object:49315ff9a1c2",
+      "type": "core_object",
+      "value": "zip-meta-map",
+      "confidence": 0.8,
+      "source": {
+        "file": "pyproject.toml",
+        "lineStart": 6,
+        "lineEnd": 6
+      },
+      "tags": [
+        "identity"
+      ]
+    },
+    {
+      "id": "invariant:58eff8a81e3f",
+      "type": "invariant",
+      "value": "zip-meta-map generates a deterministic metadata layer that answers three questions for AI agents:",
+      "confidence": 0.75,
+      "source": {
+        "file": "README.md",
+        "lineStart": 25,
+        "lineEnd": 25
+      },
+      "tags": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "invariant:1e4f3f2268b3",
+      "type": "invariant",
+      "value": "chunker.py    # deterministic text chunking",
+      "confidence": 0.75,
+      "source": {
+        "file": "README.md",
+        "lineStart": 187,
+        "lineEnd": 187
+      },
+      "tags": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "invariant:33f4e31254e3",
+      "type": "invariant",
+      "value": "- keep heuristics deterministic",
+      "confidence": 0.75,
+      "source": {
+        "file": "README.md",
+        "lineStart": 205,
+        "lineEnd": 205
+      },
+      "tags": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "sharp_edge:b449a9ee32e8",
+      "type": "sharp_edge",
+      "value": "safety.py     # risk flag detection + warning generation",
+      "confidence": 0.7,
+      "source": {
+        "file": "README.md",
+        "lineStart": 189,
+        "lineEnd": 189
+      },
+      "tags": [
+        "caveat"
+      ]
+    },
+    {
+      "id": "core_object:eee8298efd37",
+      "type": "core_object",
+      "value": "role",
+      "confidence": 0.6,
+      "source": {
+        "file": "README.md",
+        "lineStart": 152,
+        "lineEnd": 152
+      },
+      "tags": [
+        "noun"
+      ]
+    },
+    {
+      "id": "core_object:0b0f61361c50",
+      "type": "core_object",
+      "value": "confidence",
+      "confidence": 0.6,
+      "source": {
+        "file": "README.md",
+        "lineStart": 152,
+        "lineEnd": 152
+      },
+      "tags": [
+        "noun"
+      ]
+    },
+    {
+      "id": "core_object:10b9e97ebf33",
+      "type": "core_object",
+      "value": "reason",
+      "confidence": 0.6,
+      "source": {
+        "file": "README.md",
+        "lineStart": 152,
+        "lineEnd": 152
+      },
+      "tags": [
+        "noun"
+      ]
+    },
+    {
+      "id": "core_object:e760aecf8b51",
+      "type": "core_object",
+      "value": "Chunk maps",
+      "confidence": 0.6,
+      "source": {
+        "file": "README.md",
+        "lineStart": 163,
+        "lineEnd": 163
+      },
+      "tags": [
+        "noun"
+      ]
+    },
+    {
+      "id": "core_object:3f7ec1abfc99",
+      "type": "core_object",
+      "value": "Module summaries",
+      "confidence": 0.6,
+      "source": {
+        "file": "README.md",
+        "lineStart": 164,
+        "lineEnd": 164
+      },
+      "tags": [
+        "noun"
+      ]
+    },
+    {
+      "id": "core_object:c16cd9f84c2c",
+      "type": "core_object",
+      "value": "Excerpts",
+      "confidence": 0.6,
+      "source": {
+        "file": "README.md",
+        "lineStart": 165,
+        "lineEnd": 165
+      },
+      "tags": [
+        "noun"
+      ]
+    },
+    {
+      "id": "core_object:6c3c947c88d2",
+      "type": "core_object",
+      "value": "Risk flags",
+      "confidence": 0.6,
+      "source": {
+        "file": "README.md",
+        "lineStart": 166,
+        "lineEnd": 166
+      },
+      "tags": [
+        "noun"
+      ]
+    },
+    {
+      "id": "core_object:1a36c1be01f6",
+      "type": "core_object",
+      "value": "Capabilities",
+      "confidence": 0.6,
+      "source": {
+        "file": "README.md",
+        "lineStart": 167,
+        "lineEnd": 167
+      },
+      "tags": [
+        "noun"
+      ]
+    },
+    {
+      "id": "core_object:7bfd23b80e43",
+      "type": "core_object",
+      "value": "Data touched",
+      "confidence": 0.6,
+      "source": {
+        "file": "README.md",
+        "lineStart": 224,
+        "lineEnd": 224
+      },
+      "tags": [
+        "noun"
+      ]
+    }
+  ],
+  "stats": {
+    "scanned_files": 31,
+    "atoms_by_type": {
+      "cli_command": 1,
+      "cli_flag": 10,
+      "repo_tagline": 2,
+      "recent_change": 4,
+      "anti_goal": 2,
+      "core_object": 10,
+      "invariant": 3,
+      "sharp_edge": 1
+    }
+  }
+}

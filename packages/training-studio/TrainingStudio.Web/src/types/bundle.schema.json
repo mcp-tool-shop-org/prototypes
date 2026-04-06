@@ -1,0 +1,379 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mcp-tool-shop/training-studio/bundle/v0.1/bundle.schema.json",
+  "title": "Training Studio Export Bundle Manifest v0.1",
+  "description": "Schema for bundle.json - the manifest file in Training Studio export bundles",
+  "type": "object",
+  "required": [
+    "bundle_version",
+    "created_utc",
+    "app",
+    "backend",
+    "dataset",
+    "model",
+    "training",
+    "artifacts"
+  ],
+  "properties": {
+    "bundle_version": {
+      "type": "string",
+      "const": "0.1",
+      "description": "Bundle format version. Breaking changes require version bump."
+    },
+    "created_utc": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when bundle was created"
+    },
+    "app": {
+      "$ref": "#/$defs/AppInfo"
+    },
+    "backend": {
+      "$ref": "#/$defs/BackendInfo"
+    },
+    "dataset": {
+      "$ref": "#/$defs/DatasetInfo"
+    },
+    "model": {
+      "$ref": "#/$defs/ModelInfo"
+    },
+    "training": {
+      "$ref": "#/$defs/TrainingInfo"
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ArtifactEntry"
+      },
+      "description": "List of all files in bundle with hashes. Invariant: every listed file must exist and hash-match."
+    }
+  },
+  "$defs": {
+    "AppInfo": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Application name"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+",
+          "description": "Semantic version"
+        },
+        "git_sha": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{7,40}$",
+          "description": "Git commit SHA (short or full)"
+        }
+      }
+    },
+    "BackendInfo": {
+      "type": "object",
+      "required": ["tfjs_version", "backend"],
+      "properties": {
+        "tfjs_version": {
+          "type": "string",
+          "description": "TensorFlow.js version used for training"
+        },
+        "backend": {
+          "type": "string",
+          "enum": ["webgpu", "webgl", "cpu", "wasm"],
+          "description": "TF.js backend used during training"
+        },
+        "device_info": {
+          "type": "string",
+          "description": "GPU/device identifier if available"
+        },
+        "flags": {
+          "type": "object",
+          "description": "TF.js environment flags"
+        }
+      }
+    },
+    "DatasetInfo": {
+      "type": "object",
+      "required": [
+        "source_file",
+        "total_rows",
+        "train_rows",
+        "val_rows",
+        "features",
+        "label",
+        "split_seed",
+        "train_indices_hash",
+        "val_indices_hash"
+      ],
+      "properties": {
+        "source_file": {
+          "type": "string",
+          "description": "Original filename of dataset"
+        },
+        "total_rows": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "train_rows": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "val_rows": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "features": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "description": "Feature column names in order"
+        },
+        "label": {
+          "type": "string",
+          "description": "Label column name"
+        },
+        "split_seed": {
+          "type": "integer",
+          "description": "PRNG seed used for train/val split"
+        },
+        "train_indices_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{8}$",
+          "description": "Hash of training indices for reproducibility verification"
+        },
+        "val_indices_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{8}$",
+          "description": "Hash of validation indices for reproducibility verification"
+        },
+        "normalization": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/NormalizationInfo" }
+          ]
+        }
+      }
+    },
+    "NormalizationInfo": {
+      "type": "object",
+      "required": ["feature_means", "feature_stds"],
+      "properties": {
+        "feature_means": {
+          "type": "array",
+          "items": { "type": "number" },
+          "description": "Per-feature mean values used for normalization"
+        },
+        "feature_stds": {
+          "type": "array",
+          "items": { "type": "number" },
+          "description": "Per-feature standard deviation values used for normalization"
+        }
+      }
+    },
+    "ModelInfo": {
+      "type": "object",
+      "required": [
+        "preset",
+        "input_shape",
+        "output_shape",
+        "task_type",
+        "layer_config",
+        "total_params",
+        "trainable_params"
+      ],
+      "properties": {
+        "preset": {
+          "type": "string",
+          "description": "Model preset identifier"
+        },
+        "input_shape": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of input features"
+        },
+        "output_shape": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of output units"
+        },
+        "task_type": {
+          "type": "string",
+          "enum": ["classification", "regression"]
+        },
+        "num_classes": {
+          "type": "integer",
+          "minimum": 2,
+          "description": "Number of classes (classification only)"
+        },
+        "class_labels": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Class label names in order"
+        },
+        "layer_config": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/LayerSummary" }
+        },
+        "total_params": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "trainable_params": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "LayerSummary": {
+      "type": "object",
+      "required": ["name", "type", "output_shape", "params"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "Layer class name (Dense, Dropout, etc.)"
+        },
+        "output_shape": {
+          "type": "array",
+          "items": { "type": ["integer", "null"] }
+        },
+        "params": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "config": {
+          "type": "object",
+          "description": "Layer-specific configuration"
+        }
+      }
+    },
+    "TrainingInfo": {
+      "type": "object",
+      "required": [
+        "hyperparams",
+        "epochs_completed",
+        "epochs_requested",
+        "early_stopped",
+        "best_epoch",
+        "final_metrics",
+        "duration_ms"
+      ],
+      "properties": {
+        "hyperparams": {
+          "$ref": "#/$defs/HyperparamsRecord"
+        },
+        "epochs_completed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "epochs_requested": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "early_stopped": {
+          "type": "boolean"
+        },
+        "best_epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "final_metrics": {
+          "$ref": "#/$defs/FinalMetrics"
+        },
+        "duration_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total training duration in milliseconds"
+        }
+      }
+    },
+    "HyperparamsRecord": {
+      "type": "object",
+      "required": [
+        "epochs",
+        "batch_size",
+        "learning_rate",
+        "optimizer",
+        "early_stopping",
+        "patience"
+      ],
+      "properties": {
+        "epochs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "batch_size": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "learning_rate": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "optimizer": {
+          "type": "string",
+          "enum": ["adam", "sgd", "rmsprop"]
+        },
+        "early_stopping": {
+          "type": "boolean"
+        },
+        "patience": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "FinalMetrics": {
+      "type": "object",
+      "required": ["train_loss"],
+      "properties": {
+        "train_loss": {
+          "type": "number"
+        },
+        "train_accuracy": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "val_loss": {
+          "type": "number"
+        },
+        "val_accuracy": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "best_val_loss": {
+          "type": "number"
+        },
+        "best_val_accuracy": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "ArtifactEntry": {
+      "type": "object",
+      "required": ["path", "size_bytes", "sha256"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-./]+$",
+          "description": "Relative path using forward slashes"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "SHA-256 hash of file contents"
+        }
+      }
+    }
+  }
+}

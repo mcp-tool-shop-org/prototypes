@@ -1,0 +1,149 @@
+[project]
+name = "cwm-mcp"
+version = "1.0.1"
+description = "MCP server for lossless LLM context restoration via KV cache persistence"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+authors = [
+    {name = "AI Development Lab"}
+]
+keywords = ["mcp", "llm", "vllm", "context", "kv-cache", "lmcache"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "mcp>=1.0.0",
+    "aiohttp>=3.9.0",
+    "aiofiles>=23.2.0",
+    "aiosqlite>=0.19.0",
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+    "structlog>=24.1.0",
+    "tenacity>=8.2.0",
+]
+
+[project.optional-dependencies]
+redis = ["redis>=5.0.0"]
+lmcache = ["lmcache>=0.1.0"]
+encryption = ["cryptography>=41.0.0"]
+all = [
+    "cwm-mcp[redis,lmcache,encryption]",
+]
+
+dev = [
+    # Testing
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=4.1.0",
+    "pytest-benchmark>=4.0.0",
+    "hypothesis>=6.92.0",
+    "respx>=0.20.0",
+    "aioresponses>=0.7.6",
+
+    # Code quality
+    "ruff>=0.1.9",
+    "pyright>=1.1.340",
+    "pre-commit>=3.6.0",
+
+    # Documentation
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.5.0",
+    "mkdocstrings[python]>=0.24.0",
+]
+
+[project.scripts]
+cwm = "context_window_manager.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/mcp-tool-shop-org/context-window-manager"
+Documentation = "https://github.com/mcp-tool-shop-org/context-window-manager/blob/main/docs/USER_GUIDE.md"
+Repository = "https://github.com/mcp-tool-shop-org/context-window-manager"
+Issues = "https://github.com/mcp-tool-shop-org/context-window-manager/issues"
+Changelog = "https://github.com/mcp-tool-shop-org/context-window-manager/blob/main/RELEASE_NOTES.md"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/context_window_manager"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = [
+    "integration: marks tests requiring external services",
+    "benchmark: marks performance benchmark tests",
+    "slow: marks tests as slow running",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
+[tool.coverage.run]
+source = ["src/context_window_manager"]
+branch = true
+omit = ["*/tests/*", "*/__main__.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+    "if __name__ == .__main__.:",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",     # pycodestyle errors
+    "W",     # pycodestyle warnings
+    "F",     # Pyflakes
+    "I",     # isort
+    "B",     # flake8-bugbear
+    "C4",    # flake8-comprehensions
+    "UP",    # pyupgrade
+    "ARG",   # flake8-unused-arguments
+    "SIM",   # flake8-simplify
+    "TCH",   # flake8-type-checking
+    "PTH",   # flake8-use-pathlib
+    "ERA",   # eradicate (commented code)
+    "PL",    # pylint
+    "RUF",   # Ruff-specific
+]
+ignore = [
+    "PLR0913",  # Too many arguments
+    "PLR2004",  # Magic value comparison
+    "PLC0415",  # Import not at top level (lazy/conditional imports)
+    "PLW0603",  # Global statement
+    "PLR0911",  # Too many return statements
+    "UP042",    # Use StrEnum (requires 3.11+, str+Enum is fine)
+    "SIM102",   # Nested if → combined if (readability preference)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["ARG", "PLR2004", "SIM117", "RUF001", "RUF059", "B017"]
+
+[tool.pyright]
+include = ["src"]
+exclude = ["**/node_modules", "**/__pycache__", ".venv"]
+pythonVersion = "3.11"
+typeCheckingMode = "standard"
+reportMissingTypeStubs = false
+reportUnknownMemberType = false
+reportOptionalMemberAccess = "warning"
+reportArgumentType = "warning"

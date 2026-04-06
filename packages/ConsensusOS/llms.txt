@@ -1,0 +1,78 @@
+# ConsensusOS
+
+> Modular, zero-dependency control plane for multi-chain consensus governance
+
+## Overview
+
+ConsensusOS is a plugin-based control plane for governing multi-chain infrastructure. The core is deliberately thin — all functionality lives in plugins that communicate through a shared event bus. Governance rules are enforced by a fail-closed invariant engine. Zero production dependencies.
+
+## Quick Start
+
+```
+git clone https://github.com/mcp-tool-shop-org/ConsensusOS.git
+cd ConsensusOS
+npm install
+npm test    # 295 tests passing
+```
+
+## Architecture
+
+```
+CLI (entry point)
+├── Plugin SDK / Attestation
+├── Health Sentinel | Verifier | Config Guardian | Sandbox
+├── Governor Layer (Token, Policy, Queue)
+├── Adapters (XRPL / Ethereum / Cosmos)
+└── Core: EventBus, InvariantEngine, Loader, Logger
+    └── Plugin API v1 (frozen)
+```
+
+## Key Modules
+
+- **Health Sentinel** — Node health monitoring via heartbeats
+- **Release Verifier** — Software release hash verification
+- **Config Guardian** — Configuration schema validation
+- **Sandbox Engine** — Isolated simulation, deterministic replay, amendments
+- **Governor** — Token-based execution limits, policy enforcement, build queue
+
+## Chain Adapters
+
+- XRPL — Implemented
+- Ethereum — Implemented
+- Cosmos — Implemented
+
+## Constraints
+
+- Zero production dependencies (no npm packages in production)
+- Plugin API v1 is frozen — breaking changes are not permitted
+- Fail-closed: invalid state transitions are always rejected
+- All state is deterministically replayable from event history
+- Resource-bounded execution: CPU, memory, and time limits enforced via tokens
+
+## Test Suites
+
+```
+npm test         # Full suite (295 tests)
+npx vitest       # Watch mode
+```
+
+Categories: Architecture (16), Security (27), Stress (22), Unit (230)
+
+## Documentation
+
+- QUICKSTART.md — Get running in 3 minutes
+- ARCHITECTURE.md — Frozen v1.0 architecture spec
+- PLUGIN_GUIDE.md — How to write a plugin
+- ADAPTER_GUIDE.md — How to create a chain adapter
+- SANDBOX_GUIDE.md — Sandbox, replay, and amendment walkthrough
+- GOVERNOR_GUIDE.md — Token execution, policies, build queue
+- THREAT_MODEL.md — STRIDE threat analysis
+
+## Links
+
+- Repository: https://github.com/mcp-tool-shop-org/ConsensusOS
+- Issues: https://github.com/mcp-tool-shop-org/ConsensusOS/issues
+
+## License
+
+MIT

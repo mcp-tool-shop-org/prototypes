@@ -1,0 +1,33 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+[Rr]elease/
+x64/
+x86/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.cache
+*.vsidx
+
+# NuGet
+packages/
+*.nupkg
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Temp inspection folders
+temp-inspect/
+temp-inspect2/
+
+# Zip archives
+*.zip
+site/.astro/
+site/dist/
+site/node_modules/
+.polyglot-cache.json

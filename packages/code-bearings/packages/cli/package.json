@@ -1,0 +1,48 @@
+{
+  "name": "@code-bearings/cli",
+  "version": "1.0.1",
+  "description": "Code Bearings CLI — source-grounded review, learning, and control for modern codebases",
+  "type": "module",
+  "bin": {
+    "code-bearings": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "tsc --noEmit",
+    "verify": "npm run lint"
+  },
+  "keywords": [
+    "code-review",
+    "code-bearings",
+    "module-cards",
+    "change-brief",
+    "static-analysis",
+    "code-graph",
+    "cli",
+    "typescript"
+  ],
+  "author": "mcp-tool-shop",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/code-bearings.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/code-bearings#readme",
+  "dependencies": {
+    "@code-bearings/core": "1.0.0",
+    "commander": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
+}

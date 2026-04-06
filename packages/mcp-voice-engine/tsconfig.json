@@ -1,0 +1,11 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./packages/voice-engine-core"
+    },
+    {
+      "path": "./packages/voice-engine-dsp"
+    }
+  ]
+}

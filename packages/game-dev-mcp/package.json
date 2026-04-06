@@ -1,0 +1,74 @@
+{
+  "name": "@mcptoolshop/game-dev-mcp",
+  "version": "1.0.1",
+  "description": "MCP server giving any LLM control over game engines. Unreal Engine 5 today, more tomorrow.",
+  "type": "module",
+  "main": "./build/index.js",
+  "bin": {
+    "game-dev-mcp": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node ./build/index.js",
+    "pretest": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext .ts",
+    "clean": "rimraf build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "unreal-engine",
+    "ue5",
+    "unity",
+    "godot",
+    "game-development",
+    "game-engine",
+    "level-design",
+    "remote-control",
+    "claude",
+    "anthropic",
+    "ai"
+  ],
+  "author": {
+    "name": "mcp-tool-shop",
+    "email": "64996768+mcp-tool-shop@users.noreply.github.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/game-dev-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mcp-tool-shop-org/game-dev-mcp/issues"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/game-dev-mcp#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "build",
+    "knowledge",
+    "skills",
+    ".claude-plugin",
+    ".mcp.json",
+    "CLAUDE.md",
+    "README.md",
+    "LICENSE",
+    "logo.png"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "gray-matter": "^4.0.3",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "eslint": "^9.0.0",
+    "rimraf": "^6.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.0.0"
+  }
+}

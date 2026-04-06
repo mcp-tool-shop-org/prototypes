@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - '*.sln'
+      - '**/*.csproj'
+      - '.github/workflows/ci.yml'
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - '*.sln'
+      - '**/*.csproj'
+      - '.github/workflows/ci.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore
+        run: |
+          dotnet restore src/Attestia.Core/Attestia.Core.csproj
+          dotnet restore src/Attestia.Client/Attestia.Client.csproj
+          dotnet restore src/Attestia.Sidecar/Attestia.Sidecar.csproj
+          dotnet restore tests/Attestia.Tests/Attestia.Tests.csproj
+
+      - name: Build
+        run: |
+          dotnet build src/Attestia.Core/Attestia.Core.csproj --no-restore
+          dotnet build src/Attestia.Client/Attestia.Client.csproj --no-restore
+          dotnet build src/Attestia.Sidecar/Attestia.Sidecar.csproj --no-restore
+          dotnet build tests/Attestia.Tests/Attestia.Tests.csproj --no-restore
+
+      - name: Test
+        run: dotnet test tests/Attestia.Tests/Attestia.Tests.csproj --no-build --verbosity normal

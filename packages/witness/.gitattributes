@@ -1,0 +1,12 @@
+# Golden fixtures must preserve exact bytes (LF line endings)
+# Changing line endings would break cryptographic verification
+tests/fixtures/golden/*.json binary
+tests/fixtures/golden/*.jsonl binary
+
+# Python files can use platform line endings
+*.py text eol=lf
+
+# Markdown and other text files
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf

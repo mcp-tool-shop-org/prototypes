@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:RunForgeDesktop.ViewModels"
+             x:Class="RunForgeDesktop.Controls.ActivityStrip"
+             x:DataType="vm:ActivityStripViewModel"
+             HorizontalOptions="Fill"
+             VerticalOptions="Center">
+
+    <!-- Compact status indicators for TitleBar -->
+    <HorizontalStackLayout Spacing="16" VerticalOptions="Center" HorizontalOptions="Center">
+
+        <!-- CPU Slots -->
+        <HorizontalStackLayout Spacing="6" VerticalOptions="Center">
+            <Label Text="CPU"
+                   FontSize="11"
+                   VerticalOptions="Center"
+                   TextColor="#9CA3AF" />
+            <HorizontalStackLayout Spacing="3" VerticalOptions="Center"
+                                   BindableLayout.ItemsSource="{Binding CpuSlots}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="vm:SlotIndicatorModel">
+                        <BoxView WidthRequest="8"
+                                 HeightRequest="8"
+                                 CornerRadius="4"
+                                 Color="{Binding IsFilled, Converter={StaticResource SlotFilledToColorConverter}}" />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </HorizontalStackLayout>
+        </HorizontalStackLayout>
+
+        <!-- GPU Slots (if configured) -->
+        <HorizontalStackLayout Spacing="6"
+                               VerticalOptions="Center"
+                               IsVisible="{Binding HasGpuSlots}">
+            <Label Text="GPU"
+                   FontSize="11"
+                   VerticalOptions="Center"
+                   TextColor="#FBBF24" />
+            <HorizontalStackLayout Spacing="3" VerticalOptions="Center"
+                                   BindableLayout.ItemsSource="{Binding GpuSlots}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="vm:SlotIndicatorModel">
+                        <BoxView WidthRequest="8"
+                                 HeightRequest="8"
+                                 CornerRadius="4"
+                                 Color="{Binding IsFilled, Converter={StaticResource SlotFilledToColorConverter}}" />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </HorizontalStackLayout>
+        </HorizontalStackLayout>
+
+        <!-- Queue count -->
+        <Label Text="{Binding QueueCountText}"
+               FontSize="11"
+               VerticalOptions="Center"
+               TextColor="#FBBF24"
+               IsVisible="{Binding ShowQueueCount}" />
+
+        <!-- System state -->
+        <HorizontalStackLayout Spacing="4" VerticalOptions="Center">
+            <BoxView WidthRequest="8"
+                     HeightRequest="8"
+                     CornerRadius="4"
+                     Color="{Binding SystemStateColor}" />
+            <Label Text="{Binding SystemStateText}"
+                   FontSize="11"
+                   VerticalOptions="Center"
+                   TextColor="#9CA3AF" />
+        </HorizontalStackLayout>
+
+    </HorizontalStackLayout>
+</ContentView>

@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="RunForgeDesktop.Views.HelpPage"
+             Title="Help &amp; Troubleshooting"
+             BackgroundColor="{AppThemeBinding Light=#F5F7FA, Dark=#121317}">
+
+    <ScrollView Padding="32,24">
+        <VerticalStackLayout Spacing="24" MaximumWidthRequest="800">
+
+            <!-- Header -->
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Help Center"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light=#1A1A2E, Dark=#FFFFFF}" />
+                <Label Text="Guides, troubleshooting, and answers to common questions"
+                       FontSize="16"
+                       TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}" />
+            </VerticalStackLayout>
+
+            <!-- Quick Start Card -->
+            <Border BackgroundColor="{AppThemeBinding Light=#EEF2FF, Dark=#1E1B4B}"
+                    Stroke="{AppThemeBinding Light=#C7D2FE, Dark=#3730A3}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="24">
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="⚡ Quick Start"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#4338CA, Dark=#A5B4FC}" />
+
+                    <Label TextColor="{AppThemeBinding Light=#4338CA, Dark=#C7D2FE}"
+                           FontSize="14"
+                           LineHeight="1.6">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="1. " FontAttributes="Bold" />
+                                <Span Text="Go to " />
+                                <Span Text="Dashboard" FontAttributes="Bold" />
+                                <Span Text=" → " />
+                                <Span Text="Select Workspace" FontAttributes="Bold" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label TextColor="{AppThemeBinding Light=#4338CA, Dark=#C7D2FE}"
+                           FontSize="14"
+                           LineHeight="1.6">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="2. " FontAttributes="Bold" />
+                                <Span Text="Go to " />
+                                <Span Text="Runs" FontAttributes="Bold" />
+                                <Span Text=" tab → " />
+                                <Span Text="Train" FontAttributes="Bold" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label TextColor="{AppThemeBinding Light=#4338CA, Dark=#C7D2FE}"
+                           FontSize="14"
+                           LineHeight="1.6">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="3. " FontAttributes="Bold" />
+                                <Span Text="Watch your model train in real-time!" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Troubleshooting Wizard -->
+            <Border BackgroundColor="{AppThemeBinding Light=#FEF2F2, Dark=#1C1917}"
+                    Stroke="{AppThemeBinding Light=#FECACA, Dark=#44403C}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="24">
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="🔧 Troubleshooting"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#DC2626, Dark=#FCA5A5}" />
+
+                    <Label Text="Having issues? Select your problem below:"
+                           FontSize="14"
+                           TextColor="{AppThemeBinding Light=#7F1D1D, Dark=#FECACA}" />
+
+                    <!-- Problem: Python not found -->
+                    <toolkit:Expander>
+                        <toolkit:Expander.Header>
+                            <Border BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#292524}"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 8"
+                                    Padding="16,12">
+                                <HorizontalStackLayout Spacing="12">
+                                    <Label Text="▶" FontSize="12" TextColor="{AppThemeBinding Light=#DC2626, Dark=#FCA5A5}" VerticalOptions="Center" />
+                                    <Label Text="Python not found or invalid"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#7F1D1D, Dark=#FECACA}"
+                                           VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                            </Border>
+                        </toolkit:Expander.Header>
+                        <toolkit:Expander.Content>
+                            <Border BackgroundColor="{AppThemeBinding Light=#FFF7ED, Dark=#1C1917}"
+                                    StrokeThickness="0"
+                                    Padding="16" Margin="0,4,0,0">
+                                <VerticalStackLayout Spacing="8">
+                                    <Label Text="Solution:" FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light=#9A3412, Dark=#FDBA74}" />
+                                    <Label Text="1. Install Python 3.10+ from python.org" FontSize="13" TextColor="{AppThemeBinding Light=#78350F, Dark=#FED7AA}" />
+                                    <Label Text="2. Go to Dashboard → Diagnostics → Settings" FontSize="13" TextColor="{AppThemeBinding Light=#78350F, Dark=#FED7AA}" />
+                                    <Label Text="3. Click 'Auto-detect' or manually browse to python.exe" FontSize="13" TextColor="{AppThemeBinding Light=#78350F, Dark=#FED7AA}" />
+                                    <Label Text="4. Click 'Validate' to confirm it works" FontSize="13" TextColor="{AppThemeBinding Light=#78350F, Dark=#FED7AA}" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </toolkit:Expander.Content>
+                    </toolkit:Expander>
+
+                    <!-- Problem: Training fails immediately -->
+                    <toolkit:Expander>
+                        <toolkit:Expander.Header>
+                            <Border BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#292524}"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 8"
+                                    Padding="16,12">
+                                <HorizontalStackLayout Spacing="12">
+                                    <Label Text="▶" FontSize="12" TextColor="{AppThemeBinding Light=#DC2626, Dark=#FCA5A5}" VerticalOptions="Center" />
+                                    <Label Text="Training fails immediately"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#7F1D1D, Dark=#FECACA}"
+                                           VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                            </Border>
+                        </toolkit:Expander.Header>
+                        <toolkit:Expander.Content>
+                            <Border BackgroundColor="{AppThemeBinding Light=#FFF7ED, Dark=#1C1917}"
+                                    StrokeThickness="0"
+                                    Padding="16" Margin="0,4,0,0">
+                                <VerticalStackLayout Spacing="8">
+                                    <Label Text="Check these:" FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light=#9A3412, Dark=#FDBA74}" />
+                                    <Label Text="• Is your dataset file a valid CSV?" FontSize="13" TextColor="{AppThemeBinding Light=#78350F, Dark=#FED7AA}" />
+                                    <Label Text="• Does the label column exist in your data?" FontSize="13" TextColor="{AppThemeBinding Light=#78350F, Dark=#FED7AA}" />
+                                    <Label Text="• Check the Logs folder for error details" FontSize="13" TextColor="{AppThemeBinding Light=#78350F, Dark=#FED7AA}" />
+                                    <Label Text="• Try running with CPU instead of GPU" FontSize="13" TextColor="{AppThemeBinding Light=#78350F, Dark=#FED7AA}" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </toolkit:Expander.Content>
+                    </toolkit:Expander>
+
+                    <!-- Problem: GPU not detected -->
+                    <toolkit:Expander>
+                        <toolkit:Expander.Header>
+                            <Border BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#292524}"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 8"
+                                    Padding="16,12">
+                                <HorizontalStackLayout Spacing="12">
+                                    <Label Text="▶" FontSize="12" TextColor="{AppThemeBinding Light=#DC2626, Dark=#FCA5A5}" VerticalOptions="Center" />
+                                    <Label Text="GPU not detected / CUDA error"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#7F1D1D, Dark=#FECACA}"
+                                           VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                            </Border>
+                        </toolkit:Expander.Header>
+                        <toolkit:Expander.Content>
+                            <Border BackgroundColor="{AppThemeBinding Light=#FFF7ED, Dark=#1C1917}"
+                                    StrokeThickness="0"
+                                    Padding="16" Margin="0,4,0,0">
+                                <VerticalStackLayout Spacing="8">
+                                    <Label Text="Solution:" FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light=#9A3412, Dark=#FDBA74}" />
+                                    <Label Text="1. Ensure you have an NVIDIA GPU" FontSize="13" TextColor="{AppThemeBinding Light=#78350F, Dark=#FED7AA}" />
+                                    <Label Text="2. Install latest NVIDIA drivers" FontSize="13" TextColor="{AppThemeBinding Light=#78350F, Dark=#FED7AA}" />
+                                    <Label Text="3. Install PyTorch with CUDA: pip install torch --index-url https://download.pytorch.org/whl/cu121" FontSize="13" TextColor="{AppThemeBinding Light=#78350F, Dark=#FED7AA}" />
+                                    <Label Text="4. As a fallback, use CPU device in settings" FontSize="13" TextColor="{AppThemeBinding Light=#78350F, Dark=#FED7AA}" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </toolkit:Expander.Content>
+                    </toolkit:Expander>
+
+                    <!-- Problem: App crashes -->
+                    <toolkit:Expander>
+                        <toolkit:Expander.Header>
+                            <Border BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#292524}"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 8"
+                                    Padding="16,12">
+                                <HorizontalStackLayout Spacing="12">
+                                    <Label Text="▶" FontSize="12" TextColor="{AppThemeBinding Light=#DC2626, Dark=#FCA5A5}" VerticalOptions="Center" />
+                                    <Label Text="App crashes or won't start"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#7F1D1D, Dark=#FECACA}"
+                                           VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                            </Border>
+                        </toolkit:Expander.Header>
+                        <toolkit:Expander.Content>
+                            <Border BackgroundColor="{AppThemeBinding Light=#FFF7ED, Dark=#1C1917}"
+                                    StrokeThickness="0"
+                                    Padding="16" Margin="0,4,0,0">
+                                <VerticalStackLayout Spacing="8">
+                                    <Label Text="Try these steps:" FontAttributes="Bold" FontSize="14" TextColor="{AppThemeBinding Light=#9A3412, Dark=#FDBA74}" />
+                                    <Label Text="1. Check %LOCALAPPDATA%\RunForge\CrashLogs for details" FontSize="13" TextColor="{AppThemeBinding Light=#78350F, Dark=#FED7AA}" />
+                                    <Label Text="2. Delete %LOCALAPPDATA%\RunForge\settings.json to reset" FontSize="13" TextColor="{AppThemeBinding Light=#78350F, Dark=#FED7AA}" />
+                                    <Label Text="3. Reinstall the app from the latest release" FontSize="13" TextColor="{AppThemeBinding Light=#78350F, Dark=#FED7AA}" />
+                                    <Label Text="4. Report the issue on GitHub (link below)" FontSize="13" TextColor="{AppThemeBinding Light=#78350F, Dark=#FED7AA}" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </toolkit:Expander.Content>
+                    </toolkit:Expander>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- FAQ Section -->
+            <Border BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E2028}"
+                    Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#2D3748}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="24">
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="❓ Frequently Asked Questions"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#1F2937, Dark=#F3F4F6}" />
+
+                    <!-- FAQ 1 -->
+                    <toolkit:Expander>
+                        <toolkit:Expander.Header>
+                            <Border BackgroundColor="{AppThemeBinding Light=#F9FAFB, Dark=#1E2028}"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 8"
+                                    Padding="16,12">
+                                <HorizontalStackLayout Spacing="12">
+                                    <Label Text="▶" FontSize="12" TextColor="{AppThemeBinding Light=#6366F1, Dark=#818CF8}" VerticalOptions="Center" />
+                                    <Label Text="What is a workspace?"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#1F2937, Dark=#F3F4F6}"
+                                           VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                            </Border>
+                        </toolkit:Expander.Header>
+                        <toolkit:Expander.Content>
+                            <Border BackgroundColor="{AppThemeBinding Light=#F3F4F6, Dark=#0F172A}"
+                                    StrokeThickness="0"
+                                    Padding="16" Margin="0,4,0,0">
+                                <Label Text="A workspace is a folder on your computer where RunForge stores all your training experiments. Each experiment (called a 'run') has its own subfolder with configuration files, logs, and outputs. Choose any folder you like - RunForge will create the necessary structure automatically."
+                                       FontSize="13"
+                                       TextColor="{AppThemeBinding Light=#4B5563, Dark=#D1D5DB}"
+                                       LineHeight="1.5" />
+                            </Border>
+                        </toolkit:Expander.Content>
+                    </toolkit:Expander>
+
+                    <!-- FAQ 2 -->
+                    <toolkit:Expander>
+                        <toolkit:Expander.Header>
+                            <Border BackgroundColor="{AppThemeBinding Light=#F9FAFB, Dark=#1E2028}"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 8"
+                                    Padding="16,12">
+                                <HorizontalStackLayout Spacing="12">
+                                    <Label Text="▶" FontSize="12" TextColor="{AppThemeBinding Light=#6366F1, Dark=#818CF8}" VerticalOptions="Center" />
+                                    <Label Text="What data formats are supported?"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#1F2937, Dark=#F3F4F6}"
+                                           VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                            </Border>
+                        </toolkit:Expander.Header>
+                        <toolkit:Expander.Content>
+                            <Border BackgroundColor="{AppThemeBinding Light=#F3F4F6, Dark=#0F172A}"
+                                    StrokeThickness="0"
+                                    Padding="16" Margin="0,4,0,0">
+                                <Label Text="Currently, RunForge supports CSV files for tabular data. Your CSV should have headers in the first row, with one column designated as the 'label' (what you want to predict). All other columns are treated as features (inputs)."
+                                       FontSize="13"
+                                       TextColor="{AppThemeBinding Light=#4B5563, Dark=#D1D5DB}"
+                                       LineHeight="1.5" />
+                            </Border>
+                        </toolkit:Expander.Content>
+                    </toolkit:Expander>
+
+                    <!-- FAQ 3 -->
+                    <toolkit:Expander>
+                        <toolkit:Expander.Header>
+                            <Border BackgroundColor="{AppThemeBinding Light=#F9FAFB, Dark=#1E2028}"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 8"
+                                    Padding="16,12">
+                                <HorizontalStackLayout Spacing="12">
+                                    <Label Text="▶" FontSize="12" TextColor="{AppThemeBinding Light=#6366F1, Dark=#818CF8}" VerticalOptions="Center" />
+                                    <Label Text="How do I know if training is working?"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#1F2937, Dark=#F3F4F6}"
+                                           VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                            </Border>
+                        </toolkit:Expander.Header>
+                        <toolkit:Expander.Content>
+                            <Border BackgroundColor="{AppThemeBinding Light=#F3F4F6, Dark=#0F172A}"
+                                    StrokeThickness="0"
+                                    Padding="16" Margin="0,4,0,0">
+                                <Label Text="Watch the loss value during training - it should generally decrease over time. A good training run shows a smooth downward curve. If loss goes up, stays flat, or jumps around wildly, try adjusting your learning rate (usually making it smaller helps)."
+                                       FontSize="13"
+                                       TextColor="{AppThemeBinding Light=#4B5563, Dark=#D1D5DB}"
+                                       LineHeight="1.5" />
+                            </Border>
+                        </toolkit:Expander.Content>
+                    </toolkit:Expander>
+
+                    <!-- FAQ 4 -->
+                    <toolkit:Expander>
+                        <toolkit:Expander.Header>
+                            <Border BackgroundColor="{AppThemeBinding Light=#F9FAFB, Dark=#1E2028}"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 8"
+                                    Padding="16,12">
+                                <HorizontalStackLayout Spacing="12">
+                                    <Label Text="▶" FontSize="12" TextColor="{AppThemeBinding Light=#6366F1, Dark=#818CF8}" VerticalOptions="Center" />
+                                    <Label Text="Can I use this without a GPU?"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#1F2937, Dark=#F3F4F6}"
+                                           VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                            </Border>
+                        </toolkit:Expander.Header>
+                        <toolkit:Expander.Content>
+                            <Border BackgroundColor="{AppThemeBinding Light=#F3F4F6, Dark=#0F172A}"
+                                    StrokeThickness="0"
+                                    Padding="16" Margin="0,4,0,0">
+                                <Label Text="Yes! Set the device to 'CPU' in Settings or when creating a run. CPU training is slower than GPU but works perfectly fine for smaller datasets and simpler models. It's a great way to get started."
+                                       FontSize="13"
+                                       TextColor="{AppThemeBinding Light=#4B5563, Dark=#D1D5DB}"
+                                       LineHeight="1.5" />
+                            </Border>
+                        </toolkit:Expander.Content>
+                    </toolkit:Expander>
+
+                    <!-- FAQ 5 -->
+                    <toolkit:Expander>
+                        <toolkit:Expander.Header>
+                            <Border BackgroundColor="{AppThemeBinding Light=#F9FAFB, Dark=#1E2028}"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 8"
+                                    Padding="16,12">
+                                <HorizontalStackLayout Spacing="12">
+                                    <Label Text="▶" FontSize="12" TextColor="{AppThemeBinding Light=#6366F1, Dark=#818CF8}" VerticalOptions="Center" />
+                                    <Label Text="Where are my trained models saved?"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#1F2937, Dark=#F3F4F6}"
+                                           VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                            </Border>
+                        </toolkit:Expander.Header>
+                        <toolkit:Expander.Content>
+                            <Border BackgroundColor="{AppThemeBinding Light=#F3F4F6, Dark=#0F172A}"
+                                    StrokeThickness="0"
+                                    Padding="16" Margin="0,4,0,0">
+                                <Label Text="Each training run creates a folder in your workspace under .ml/runs/. Inside you'll find the model file, training logs, configuration, and any artifacts. Use 'Open Output Folder' on the run page to quickly access these files."
+                                       FontSize="13"
+                                       TextColor="{AppThemeBinding Light=#4B5563, Dark=#D1D5DB}"
+                                       LineHeight="1.5" />
+                            </Border>
+                        </toolkit:Expander.Content>
+                    </toolkit:Expander>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Requirements -->
+            <Border BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E2028}"
+                    Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#2D3748}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="24">
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="📋 Requirements"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#1F2937, Dark=#F3F4F6}" />
+
+                    <VerticalStackLayout Spacing="8" Margin="8,0,0,0">
+                        <Label Text="• Windows 10 (version 1809+) or Windows 11"
+                               FontSize="14"
+                               TextColor="{AppThemeBinding Light=#4B5563, Dark=#D1D5DB}" />
+                        <Label Text="• Python 3.10 or newer"
+                               FontSize="14"
+                               TextColor="{AppThemeBinding Light=#4B5563, Dark=#D1D5DB}" />
+                        <Label Text="• PyTorch (pip install torch)"
+                               FontSize="14"
+                               TextColor="{AppThemeBinding Light=#4B5563, Dark=#D1D5DB}" />
+                        <Label Text="• Optional: NVIDIA GPU with CUDA for faster training"
+                               FontSize="14"
+                               TextColor="{AppThemeBinding Light=#4B5563, Dark=#D1D5DB}" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Get Help / Report Issues -->
+            <Border BackgroundColor="{AppThemeBinding Light=#F0FDF4, Dark=#14532D}"
+                    Stroke="{AppThemeBinding Light=#BBF7D0, Dark=#166534}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="24">
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="🆘 Need More Help?"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#166534, Dark=#86EFAC}" />
+
+                    <Label Text="If you can't find an answer here:"
+                           FontSize="14"
+                           TextColor="{AppThemeBinding Light=#15803D, Dark=#BBF7D0}" />
+
+                    <VerticalStackLayout Spacing="12" Margin="8,0,0,0">
+                        <Label FontSize="14" TextColor="{AppThemeBinding Light=#15803D, Dark=#BBF7D0}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="• " />
+                                    <Span Text="Report a bug: " FontAttributes="Bold" />
+                                    <Span Text="github.com/mcp-tool-shop-org/runforge-desktop/issues" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label FontSize="14" TextColor="{AppThemeBinding Light=#15803D, Dark=#BBF7D0}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="• " />
+                                    <Span Text="Check existing issues: " FontAttributes="Bold" />
+                                    <Span Text="Someone may have already solved your problem" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label FontSize="14" TextColor="{AppThemeBinding Light=#15803D, Dark=#BBF7D0}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="• " />
+                                    <Span Text="Include Diagnostics: " FontAttributes="Bold" />
+                                    <Span Text="Dashboard → Diagnostics → Copy All" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Footer -->
+            <VerticalStackLayout Spacing="8" Margin="0,16,0,0">
+                <Label Text="RunForge Desktop v0.9.0-rc.1"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light=#9CA3AF, Dark=#6B7280}"
+                       HorizontalOptions="Center" />
+                <Label Text="Made with ♥ for the ML community"
+                       FontSize="12"
+                       TextColor="{AppThemeBinding Light=#9CA3AF, Dark=#6B7280}"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

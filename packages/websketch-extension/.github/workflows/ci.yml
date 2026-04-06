@@ -1,0 +1,160 @@
+name: CI - Build & Validate Extension
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'package.json'
+      - '.github/workflows/**'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-validate:
+    name: Build and Validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm run test:run
+
+      - name: Check for placeholder tests
+        run: |
+          if grep -rn "expect(true)\.toBe(true)\|expect(1 + 1)\.toBe(2)\|it('placeholder'" tests/ src/__tests__/ 2>/dev/null; then
+            echo "::error::Placeholder tests detected. Replace with real assertions or use it.skip() with a tracking issue."
+            exit 1
+          fi
+
+      - name: Build extension
+        run: node build.js --allow-missing
+
+      - name: Validate build artifacts
+        run: |
+          echo "Validating extension artifacts..."
+
+          # Check manifest exists
+          if [ ! -f dist/manifest.json ]; then
+            echo "manifest.json missing"
+            exit 1
+          fi
+          echo "manifest.json exists"
+
+          # Check bundles exist
+          if [ ! -f dist/content.js ]; then
+            echo "content.js missing"
+            exit 1
+          fi
+          echo "content.js exists"
+
+          if [ ! -f dist/popup.js ]; then
+            echo "popup.js missing"
+            exit 1
+          fi
+          echo "popup.js exists"
+
+          # Check popup HTML exists
+          if [ ! -f dist/popup.html ]; then
+            echo "popup.html missing"
+            exit 1
+          fi
+          echo "popup.html exists"
+
+          # Check icons (warn if missing, don't fail)
+          if [ ! -d dist/icons ]; then
+            echo "icons directory missing (expected for full release)"
+          else
+            echo "icons directory exists"
+          fi
+
+          echo "All critical artifacts validated"
+
+      - name: Package extension
+        run: |
+          cd dist
+          zip -r ../websketch-extension.zip .
+          cd ..
+          ls -lh websketch-extension.zip
+
+      - name: Upload extension artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: websketch-extension
+          path: websketch-extension.zip
+          retention-days: 30
+
+      - name: Upload dist directory
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 7
+
+  audit:
+    name: npm audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+
+  secret-scan:
+    name: Secret Scanning
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Scan for secrets
+        run: |
+          echo "Scanning for potential secrets..."
+          ! grep -R --line-number -I -E "API_KEY|SECRET|PRIVATE_KEY|BEGIN RSA PRIVATE KEY|password.*=|token.*=" . \
+            --exclude-dir=.git \
+            --exclude-dir=node_modules \
+            --exclude-dir=dist \
+            --exclude=*.lock \
+            || echo "Found potential secrets - please review"

@@ -1,0 +1,65 @@
+# Attestia Desktop
+
+> Financial intent verification for Windows — WinUI 3 app and .NET SDK for blockchain attestation and reconciliation
+
+## Overview
+
+Attestia Desktop verifies financial intent before it hits the chain. Instead of auditing after the fact, transactions are approved structurally — with typed intents, cryptographic proofs, and deterministic reconciliation. This repo contains the WinUI 3 desktop app and three standalone .NET libraries.
+
+## Quick Start
+
+```
+git clone https://github.com/mcp-tool-shop-org/Attestia-Desktop.git
+cd Attestia-Desktop
+dotnet restore
+dotnet build
+dotnet test
+```
+
+Prerequisites: .NET 9.0 SDK, Node.js 20+ (for the Attestia backend), Windows 10 1809+.
+
+## NuGet Packages
+
+- `Attestia.Core` — Domain models, enums, shared types for intent verification and attestation
+- `Attestia.Client` — HTTP client SDK with typed clients for Intents, Proofs, Reconciliation, Compliance, Events
+- `Attestia.Sidecar` — Node.js sidecar process management (spawn, health checks, auto-restart, graceful shutdown)
+
+## API Entry Points
+
+```csharp
+// Verify an intent
+using Attestia.Client;
+var client = new AttestiaClient(options);
+var result = await client.Intents.VerifyAsync(intent);
+
+// Manage the Node.js backend
+using Attestia.Sidecar;
+await using var sidecar = new SidecarProcess(options);
+await sidecar.StartAsync();
+```
+
+## Architecture
+
+```
+Attestia.App (WinUI 3)    → UI layer
+Attestia.Client            → HTTP SDK with typed API clients
+Attestia.Core              → Domain models, enums, shared types
+Attestia.Sidecar           → Node.js backend lifecycle management
+```
+
+## Constraints
+
+- Windows only (WinUI 3)
+- Requires .NET 9.0 and Node.js 20+
+- The Attestia TypeScript backend must be running (managed by Sidecar or manually)
+- Intent verification is structural, not heuristic — all transitions are typed
+
+## Links
+
+- Repository: https://github.com/mcp-tool-shop-org/Attestia-Desktop
+- Backend (TypeScript): https://github.com/mcp-tool-shop-org/Attestia
+- Issues: https://github.com/mcp-tool-shop-org/Attestia-Desktop/issues
+
+## License
+
+MIT

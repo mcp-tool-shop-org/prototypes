@@ -1,0 +1,42 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "If the Bash output indicates a build, test, or deploy result (look for 'PASS', 'FAIL', 'error', 'success', 'npm test', 'pytest', 'cargo test', 'tsc', 'dotnet build'), call copilot.timeline_event with the appropriate type (build_success, build_failure, test_pass, test_fail, bash_success, or bash_failure) and a brief summary. If it is not a build/test event, do nothing."
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Call copilot.timeline_event with type 'file_write', a brief summary of what was written (under 80 chars), and the file path in the files array."
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Call copilot.timeline_event with type 'file_edit', a brief summary of what was changed (under 80 chars), and the file path in the files array."
+          }
+        ]
+      },
+      {
+        "matcher": "TodoWrite",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Call copilot.timeline_event with type 'todo_update' and a brief summary of the todo state change (e.g. 'Marked task X completed', 'Added 3 tasks'). Do not include the full todo list."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "format": "zip-meta-map",
+  "version": "0.2",
+  "generated_by": "zip-meta-map/0.2.0a0",
+  "profile": "python_cli",
+  "start_here": [
+    "README.md",
+    "src/tiny_cli/main.py",
+    "pyproject.toml"
+  ],
+  "ignore": [
+    "__pycache__/**",
+    "*.pyc",
+    ".venv/**",
+    "venv/**",
+    "*.egg-info/**",
+    "dist/**",
+    "build/**",
+    ".git/**",
+    ".pytest_cache/**",
+    ".mypy_cache/**",
+    ".tox/**"
+  ],
+  "files": [
+    {
+      "path": "pyproject.toml",
+      "size_bytes": 122,
+      "sha256": "a80f50669efacc95ac7eb2d259e6ad986ca06747495a6b74ea7214893cb0784b",
+      "role": "config",
+      "confidence": 0.95,
+      "reason": "Python project configuration",
+      "excerpt": "[project]\nname = \"tiny-cli\"\nversion = \"0.1.0\"\ndependencies = []\n\n[project.scripts]\ntiny-cli = \"tiny_cli.main:main\""
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 57,
+      "sha256": "7495a0f0bc6b7156464f095a4656df55260bb74a50a4c4dcc23b7dd3747efc19",
+      "role": "doc",
+      "confidence": 0.95,
+      "reason": "README is primary documentation",
+      "excerpt": "# tiny-cli\n\nA tiny CLI tool for testing zip-meta-map."
+    },
+    {
+      "path": "src/tiny_cli/__init__.py",
+      "size_bytes": 17,
+      "sha256": "27d9331845c9890e11e56ea09cd52d19fda5562558ef99662728e63931d4e9d4",
+      "role": "public_api",
+      "confidence": 0.7,
+      "reason": "'__init__.py' is typically a public API surface"
+    },
+    {
+      "path": "src/tiny_cli/main.py",
+      "size_bytes": 101,
+      "sha256": "e7825444dc5fd4c506874dcb20e51e8fa51067001ec0b3c4958bbbb0a8a93c11",
+      "role": "entrypoint",
+      "confidence": 0.95,
+      "reason": "matches profile entrypoint pattern 'src/*/main.py'",
+      "excerpt": "\"\"\"Entry point.\"\"\"\n\n\ndef main():\n    print(\"hello\")\n\n\nif __name__ == \"__main__\":"
+    },
+    {
+      "path": "tests/test_main.py",
+      "size_bytes": 73,
+      "sha256": "2e53515000a9c9a76e7d819db5cdc387e9b925ea9913eaa353a0264852dd2624",
+      "role": "test",
+      "confidence": 0.85,
+      "reason": "test file"
+    }
+  ],
+  "plans": {
+    "overview": {
+      "description": "Quick orientation \u2014 what is this tool and how is it structured?",
+      "steps": [
+        "READ README.md for project purpose and usage",
+        "READ pyproject.toml for dependencies and entry points",
+        "READ entrypoint file to understand CLI structure",
+        "LIST src/ directory structure for module layout"
+      ],
+      "budget_bytes": 8192,
+      "stop_after": [
+        "README.md",
+        "pyproject.toml",
+        "src/*/cli.py",
+        "src/*/main.py"
+      ],
+      "max_total_bytes": 32768
+    },
+    "debug": {
+      "description": "Find and fix a bug",
+      "steps": [
+        "READ entrypoint file for control flow",
+        "LIST tests/ to understand coverage",
+        "SCAN src/ for error handling patterns (try/except, raise)",
+        "CHECK pyproject.toml for dependency versions"
+      ],
+      "budget_bytes": 16384,
+      "max_total_bytes": 65536
+    },
+    "add_feature": {
+      "description": "Understand where to add new functionality",
+      "steps": [
+        "READ README.md for project context",
+        "READ entrypoint to understand CLI structure and subcommands",
+        "LIST src/ modules to find related code",
+        "READ tests/ for test patterns to follow"
+      ],
+      "budget_bytes": 12288,
+      "max_total_bytes": 49152
+    },
+    "security_review": {
+      "description": "Identify security-sensitive code paths",
+      "steps": [
+        "SCAN for subprocess, eval, exec, os.system, shlex calls",
+        "CHECK for hardcoded secrets, tokens, or credentials",
+        "REVIEW dependency list in pyproject.toml for known-vulnerable packages",
+        "SCAN for file I/O operations on user-supplied paths (path traversal)"
+      ],
+      "budget_bytes": 16384,
+      "max_total_bytes": 65536
+    },
+    "deep_dive": {
+      "description": "Read all source modules to understand full implementation",
+      "steps": [
+        "READ start_here files for orientation",
+        "READ each source module in dependency order (imports first)",
+        "READ tests to understand expected behavior",
+        "SUMMARIZE_THEN_CHOOSE_NEXT: after each chunk, decide if more detail is needed"
+      ],
+      "budget_bytes": 32768,
+      "max_total_bytes": 131072
+    }
+  },
+  "modules": [
+    {
+      "path": ".",
+      "file_count": 2,
+      "total_bytes": 179,
+      "primary_roles": [
+        "config",
+        "doc"
+      ],
+      "key_files": [
+        "pyproject.toml",
+        "README.md"
+      ],
+      "summary": "Contains configuration, documentation"
+    },
+    {
+      "path": "src/tiny_cli",
+      "file_count": 2,
+      "total_bytes": 118,
+      "primary_roles": [
+        "public_api",
+        "entrypoint"
+      ],
+      "key_files": [
+        "src/tiny_cli/__init__.py",
+        "src/tiny_cli/main.py"
+      ],
+      "summary": "Contains public API surface, entry point; entry: main.py"
+    }
+  ],
+  "capabilities": [
+    "excerpts",
+    "modules"
+  ]
+}

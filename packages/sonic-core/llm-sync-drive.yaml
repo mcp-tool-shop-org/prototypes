@@ -1,0 +1,11 @@
+repo_path: .
+auth_mode: adc
+credentials_path: credentials.json
+token_path: token.json
+drive_folder_id: 1ESh9yCwoXQboSNDgK7PHvfMUBwYi98Ld
+drive_filename: llms.txt
+project_description: Sonic Core - TypeScript audio engine with MCP server for AI-driven
+  playback control
+debounce_seconds: 5.0
+max_file_bytes: 100000
+drive_file_id: 18_MOjXUsgG2lW2U5IiDRJI7Hd5MrD-z-

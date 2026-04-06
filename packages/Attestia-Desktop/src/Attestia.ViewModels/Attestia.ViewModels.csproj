@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Description>Attestia ViewModels — MVVM presentation layer</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Attestia.Core\Attestia.Core.csproj" />
+    <ProjectReference Include="..\Attestia.Client\Attestia.Client.csproj" />
+    <ProjectReference Include="..\Attestia.Sidecar\Attestia.Sidecar.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+
+</Project>

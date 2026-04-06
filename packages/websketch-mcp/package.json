@@ -1,0 +1,63 @@
+{
+  "name": "@mcptoolshop/websketch-mcp",
+  "version": "1.0.1",
+  "description": "MCP server exposing WebSketch IR capture, diff, and render tools",
+  "author": "mcp-tool-shop <64996768+mcp-tool-shop@users.noreply.github.com>",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "websketch-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcp-tool-shop-org/websketch-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mcp-tool-shop-org/websketch-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "websketch",
+    "ui-capture",
+    "llm-tools"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "postbuild": "node ./scripts/add-shebang.js",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/**/*.ts --max-warnings 0",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run typecheck && npm run test:run && npm run build"
+  },
+  "dependencies": {
+    "@mcptoolshop/websketch-ir": "^2.0.0",
+    "@modelcontextprotocol/sdk": "^1.27.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "@vitest/coverage-v8": "^1.2.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.2.0"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/websketch-mcp#readme"
+}

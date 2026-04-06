@@ -1,0 +1,28 @@
+name: Bug report
+description: Report a reproducible bug in Witness.
+labels: [bug]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What happened vs what you expected.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Repro steps
+      description: Step-by-step reproduction (commands, inputs).
+      placeholder: |
+        1) ...
+        2) ...
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: OS, version, commit hash/tag, Python/.NET versions.
+    validations:
+      required: true

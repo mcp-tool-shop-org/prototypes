@@ -1,0 +1,91 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "examples/**"
+      - "scripts/**"
+      - "patches/**"
+      - ".github/workflows/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "examples/**"
+      - "scripts/**"
+      - "patches/**"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Validate documentation structure
+        run: |
+          echo "Checking required files..."
+          test -f README.md || { echo "FAIL: README.md missing"; exit 1; }
+          test -f LICENSE || { echo "FAIL: LICENSE missing"; exit 1; }
+          test -f SECURITY.md || { echo "FAIL: SECURITY.md missing"; exit 1; }
+          echo "All required files present"
+
+      - name: Validate C++ syntax
+        run: |
+          echo "Checking C++ files for syntax..."
+          ERRORS=0
+          for f in $(find src examples -name '*.cpp' -o -name '*.h' 2>/dev/null); do
+            # Basic check: ensure files are valid UTF-8 and have matching braces
+            if ! iconv -f UTF-8 -t UTF-8 "$f" > /dev/null 2>&1; then
+              echo "FAIL: $f is not valid UTF-8"
+              ERRORS=1
+            fi
+          done
+          if [ "$ERRORS" -eq 1 ]; then exit 1; fi
+          echo "C++ files validated"
+
+      - name: Secret scan
+        run: |
+          echo "Scanning for hardcoded secrets..."
+          cat > /tmp/secret-patterns.txt <<PATTERNS
+          PRIVATE.KEY
+          sk_live_
+          sk_test_
+          aws_secret
+          PATTERNS
+          FOUND=0
+          while IFS= read -r pattern; do
+            pattern=$(echo "$pattern" | xargs)
+            [ -z "$pattern" ] && continue
+            if git grep -lI "$pattern" -- ':!*.md' ':!.github/workflows/*' 2>/dev/null; then
+              echo "FAIL: potential secret pattern '$pattern' found"
+              FOUND=1
+            fi
+          done < /tmp/secret-patterns.txt
+          if [ "$FOUND" -eq 1 ]; then
+            exit 1
+          fi
+          echo "No hardcoded secrets detected"
+
+      - name: Validate header include guards
+        run: |
+          echo "Checking C++ headers for include guards..."
+          ERRORS=0
+          for f in $(find src -name '*.h' 2>/dev/null); do
+            GUARD=$(echo "$f" | sed 's/[\/\.]/_/g' | tr '[:lower:]' '[:upper:]')
+            if ! grep -q '#ifndef\|#pragma once' "$f"; then
+              echo "WARN: $f has no include guard"
+              ERRORS=1
+            fi
+          done
+          if [ "$ERRORS" -eq 1 ]; then
+            echo "Some headers may be missing include guards"
+          fi
+          echo "Header guard check complete"

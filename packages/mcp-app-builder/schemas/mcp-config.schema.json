@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://mcp-tool-shop.dev/schemas/mcp-config.schema.json",
+  "title": "MCP Server Configuration",
+  "description": "Configuration file for MCP (Model Context Protocol) servers",
+  "type": "object",
+  "required": ["name", "version"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the MCP server",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version of the server",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.-]+)?(\\+[a-zA-Z0-9.-]+)?$"
+    },
+    "description": {
+      "type": "string",
+      "description": "A brief description of what this server does",
+      "maxLength": 500
+    },
+    "author": {
+      "type": "string",
+      "description": "Author name or organization"
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX license identifier",
+      "examples": ["MIT", "Apache-2.0", "GPL-3.0"]
+    },
+    "repository": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to the source repository"
+    },
+    "capabilities": {
+      "type": "object",
+      "description": "Server capability declarations",
+      "properties": {
+        "tools": {
+          "type": "boolean",
+          "default": true
+        },
+        "resources": {
+          "type": "boolean",
+          "default": false
+        },
+        "prompts": {
+          "type": "boolean",
+          "default": false
+        },
+        "logging": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "transport": {
+      "type": "object",
+      "description": "Transport configuration",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["stdio", "http", "websocket"],
+          "default": "stdio"
+        },
+        "options": {
+          "type": "object",
+          "properties": {
+            "port": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 65535
+            },
+            "host": {
+              "type": "string",
+              "default": "localhost"
+            },
+            "path": {
+              "type": "string"
+            },
+            "tls": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        }
+      }
+    },
+    "tools": {
+      "type": "string",
+      "description": "Path to tools definition file",
+      "default": "./mcp-tools.json"
+    }
+  },
+  "additionalProperties": false
+}

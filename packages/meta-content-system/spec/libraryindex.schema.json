@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "generatedUtc": "ISO-8601",
+  "items": [
+    "CodeItem"
+  ],
+  "stats": {
+    "totalItems": "int?",
+    "languages": "string[]?"
+  }
+}

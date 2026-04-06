@@ -1,0 +1,75 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.0.0
+MinimumVisualStudioVersion = 10.0.40219.1
+
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{75842D42-CBB9-4F67-A6A7-82CA2076C037}"
+EndProject
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attestia.Core", "src\Attestia.Core\Attestia.Core.csproj", "{23C8BABF-B4EC-409F-B35B-B45806110F11}"
+EndProject
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attestia.Client", "src\Attestia.Client\Attestia.Client.csproj", "{4EEA8446-EA7E-4E58-BF4D-C7EB174F9DE0}"
+EndProject
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attestia.Sidecar", "src\Attestia.Sidecar\Attestia.Sidecar.csproj", "{EE56FE59-1B26-4F13-99B1-6B3455420B5D}"
+EndProject
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attestia.ViewModels", "src\Attestia.ViewModels\Attestia.ViewModels.csproj", "{BF8C8385-E959-4231-A73A-6F2DDBDF60FF}"
+EndProject
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attestia.App", "src\Attestia.App\Attestia.App.csproj", "{BC546548-32FC-42AD-A350-E9EE664C0396}"
+EndProject
+
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
+EndProject
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attestia.Tests", "tests\Attestia.Tests\Attestia.Tests.csproj", "{D4E5F6A7-B8C9-0123-4567-89ABCDEF0123}"
+EndProject
+
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23C8BABF-B4EC-409F-B35B-B45806110F11}.Debug|x64.ActiveCfg = Debug|AnyCPU
+		{23C8BABF-B4EC-409F-B35B-B45806110F11}.Debug|x64.Build.0 = Debug|AnyCPU
+		{23C8BABF-B4EC-409F-B35B-B45806110F11}.Release|x64.ActiveCfg = Release|AnyCPU
+		{23C8BABF-B4EC-409F-B35B-B45806110F11}.Release|x64.Build.0 = Release|AnyCPU
+		{4EEA8446-EA7E-4E58-BF4D-C7EB174F9DE0}.Debug|x64.ActiveCfg = Debug|AnyCPU
+		{4EEA8446-EA7E-4E58-BF4D-C7EB174F9DE0}.Debug|x64.Build.0 = Debug|AnyCPU
+		{4EEA8446-EA7E-4E58-BF4D-C7EB174F9DE0}.Release|x64.ActiveCfg = Release|AnyCPU
+		{4EEA8446-EA7E-4E58-BF4D-C7EB174F9DE0}.Release|x64.Build.0 = Release|AnyCPU
+		{EE56FE59-1B26-4F13-99B1-6B3455420B5D}.Debug|x64.ActiveCfg = Debug|AnyCPU
+		{EE56FE59-1B26-4F13-99B1-6B3455420B5D}.Debug|x64.Build.0 = Debug|AnyCPU
+		{EE56FE59-1B26-4F13-99B1-6B3455420B5D}.Release|x64.ActiveCfg = Release|AnyCPU
+		{EE56FE59-1B26-4F13-99B1-6B3455420B5D}.Release|x64.Build.0 = Release|AnyCPU
+		{BF8C8385-E959-4231-A73A-6F2DDBDF60FF}.Debug|x64.ActiveCfg = Debug|AnyCPU
+		{BF8C8385-E959-4231-A73A-6F2DDBDF60FF}.Debug|x64.Build.0 = Debug|AnyCPU
+		{BF8C8385-E959-4231-A73A-6F2DDBDF60FF}.Release|x64.ActiveCfg = Release|AnyCPU
+		{BF8C8385-E959-4231-A73A-6F2DDBDF60FF}.Release|x64.Build.0 = Release|AnyCPU
+		{BC546548-32FC-42AD-A350-E9EE664C0396}.Debug|x64.ActiveCfg = Debug|x64
+		{BC546548-32FC-42AD-A350-E9EE664C0396}.Debug|x64.Build.0 = Debug|x64
+		{BC546548-32FC-42AD-A350-E9EE664C0396}.Debug|x64.Deploy.0 = Debug|x64
+		{BC546548-32FC-42AD-A350-E9EE664C0396}.Release|x64.ActiveCfg = Release|x64
+		{BC546548-32FC-42AD-A350-E9EE664C0396}.Release|x64.Build.0 = Release|x64
+		{BC546548-32FC-42AD-A350-E9EE664C0396}.Release|x64.Deploy.0 = Release|x64
+		{D4E5F6A7-B8C9-0123-4567-89ABCDEF0123}.Debug|x64.ActiveCfg = Debug|AnyCPU
+		{D4E5F6A7-B8C9-0123-4567-89ABCDEF0123}.Debug|x64.Build.0 = Debug|AnyCPU
+		{D4E5F6A7-B8C9-0123-4567-89ABCDEF0123}.Release|x64.ActiveCfg = Release|AnyCPU
+		{D4E5F6A7-B8C9-0123-4567-89ABCDEF0123}.Release|x64.Build.0 = Release|AnyCPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{23C8BABF-B4EC-409F-B35B-B45806110F11} = {75842D42-CBB9-4F67-A6A7-82CA2076C037}
+		{4EEA8446-EA7E-4E58-BF4D-C7EB174F9DE0} = {75842D42-CBB9-4F67-A6A7-82CA2076C037}
+		{EE56FE59-1B26-4F13-99B1-6B3455420B5D} = {75842D42-CBB9-4F67-A6A7-82CA2076C037}
+		{BF8C8385-E959-4231-A73A-6F2DDBDF60FF} = {75842D42-CBB9-4F67-A6A7-82CA2076C037}
+		{BC546548-32FC-42AD-A350-E9EE664C0396} = {75842D42-CBB9-4F67-A6A7-82CA2076C037}
+		{D4E5F6A7-B8C9-0123-4567-89ABCDEF0123} = {A1B2C3D4-E5F6-7890-ABCD-EF1234567890}
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

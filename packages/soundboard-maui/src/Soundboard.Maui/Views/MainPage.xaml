@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Soundboard.Maui.Views.MainPage"
+    Title="Soundboard">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="About" Clicked="OnAboutClicked"
+                     AutomationProperties.Name="About this app" />
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+
+        <!-- Main UI -->
+        <ScrollView>
+            <VerticalStackLayout Spacing="14" Padding="24,20" MaximumWidthRequest="600"
+                                 HorizontalOptions="Center">
+
+                <!-- Status -->
+                <VerticalStackLayout Spacing="2" HorizontalOptions="Start"
+                                     AutomationProperties.Name="Connection status">
+                    <HorizontalStackLayout Spacing="6">
+                        <BoxView
+                            WidthRequest="8"
+                            HeightRequest="8"
+                            CornerRadius="4"
+                            Color="{Binding StatusColor}"
+                            VerticalOptions="Center" />
+                        <Label
+                            Text="{Binding Status}"
+                            FontSize="12"
+                            TextColor="{AppThemeBinding Light=#555555, Dark=#BBBBBB}" />
+                    </HorizontalStackLayout>
+                    <Label
+                        Text="Tap to reconnect"
+                        IsVisible="{Binding ShowRetryHint}"
+                        FontSize="11"
+                        TextColor="{AppThemeBinding Light=#999999, Dark=#777777}"
+                        TextDecorations="Underline"
+                        AutomationProperties.Name="Reconnect to voice engine">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RetryConnectCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </VerticalStackLayout>
+
+                <!-- Text -->
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Text" FontSize="14" FontAttributes="Bold" />
+                    <Editor
+                        x:Name="TextEditor"
+                        Placeholder="Type anything you want to hear spoken..."
+                        Text="{Binding Text}"
+                        AutoSize="TextChanges"
+                        HeightRequest="120"
+                        FontSize="15"
+                        AutomationProperties.Name="Text to speak" />
+                    <Label
+                        Text="{Binding HintText}"
+                        IsVisible="{Binding ShowHint}"
+                        FontSize="12"
+                        TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}"
+                        FontAttributes="Italic" />
+
+                    <!-- Try these examples -->
+                    <VerticalStackLayout Spacing="6" IsVisible="{Binding ShowExamples}">
+                        <Label
+                            Text="Try:"
+                            FontSize="12"
+                            FontAttributes="Bold"
+                            TextColor="{AppThemeBinding Light=#888888, Dark=#999999}" />
+                        <FlexLayout Wrap="Wrap" Direction="Row" AlignItems="Start" JustifyContent="Start">
+                            <Button
+                                Text="Welcome to the future of voice."
+                                Command="{Binding SetExampleCommand}"
+                                CommandParameter="Welcome to the future of voice."
+                                FontSize="12"
+                                HeightRequest="32"
+                                Padding="12,0"
+                                Margin="0,0,6,6"
+                                CornerRadius="16"
+                                BackgroundColor="{AppThemeBinding Light=#F0F0F0, Dark=#333333}"
+                                TextColor="{AppThemeBinding Light=#333333, Dark=#DDDDDD}"
+                                BorderWidth="0"
+                                AutomationProperties.Name="Example: Welcome to the future of voice" />
+                            <Button
+                                Text="Make it dramatic."
+                                Command="{Binding SetExampleCommand}"
+                                CommandParameter="Make it dramatic."
+                                FontSize="12"
+                                HeightRequest="32"
+                                Padding="12,0"
+                                Margin="0,0,6,6"
+                                CornerRadius="16"
+                                BackgroundColor="{AppThemeBinding Light=#F0F0F0, Dark=#333333}"
+                                TextColor="{AppThemeBinding Light=#333333, Dark=#DDDDDD}"
+                                BorderWidth="0"
+                                AutomationProperties.Name="Example: Make it dramatic" />
+                            <Button
+                                Text="Say this like you mean it."
+                                Command="{Binding SetExampleCommand}"
+                                CommandParameter="Say this like you mean it."
+                                FontSize="12"
+                                HeightRequest="32"
+                                Padding="12,0"
+                                Margin="0,0,6,6"
+                                CornerRadius="16"
+                                BackgroundColor="{AppThemeBinding Light=#F0F0F0, Dark=#333333}"
+                                TextColor="{AppThemeBinding Light=#333333, Dark=#DDDDDD}"
+                                BorderWidth="0"
+                                AutomationProperties.Name="Example: Say this like you mean it" />
+                        </FlexLayout>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+
+                <!-- Style -->
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Style" FontSize="14" FontAttributes="Bold" />
+                    <Picker
+                        Title="{Binding StylePickerTitle}"
+                        ItemsSource="{Binding Presets}"
+                        SelectedItem="{Binding SelectedPreset}"
+                        IsEnabled="{Binding PickersEnabled}"
+                        HorizontalOptions="Fill"
+                        AutomationProperties.Name="Voice style" />
+                </VerticalStackLayout>
+
+                <!-- Voice -->
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Voice" FontSize="14" FontAttributes="Bold" />
+                    <Picker
+                        Title="{Binding VoicePickerTitle}"
+                        ItemsSource="{Binding Voices}"
+                        SelectedItem="{Binding SelectedVoice}"
+                        IsEnabled="{Binding PickersEnabled}"
+                        HorizontalOptions="Fill"
+                        AutomationProperties.Name="Voice selection" />
+                </VerticalStackLayout>
+
+                <!-- Actions -->
+                <Grid ColumnDefinitions="2*,*" ColumnSpacing="10">
+                    <Button
+                        x:Name="SpeakButton"
+                        Grid.Column="0"
+                        Text="&#x25B6;  Speak"
+                        Command="{Binding SpeakCommand}"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        HeightRequest="48"
+                        BackgroundColor="{AppThemeBinding Light=#512BD4, Dark=#7C4DFF}"
+                        TextColor="White"
+                        HorizontalOptions="Fill"
+                        AutomationProperties.Name="Speak text aloud" />
+                    <Button
+                        x:Name="StopButton"
+                        Grid.Column="1"
+                        Text="&#x25A0;  Stop"
+                        Command="{Binding StopCommand}"
+                        FontSize="14"
+                        HeightRequest="48"
+                        BackgroundColor="Transparent"
+                        BorderColor="{AppThemeBinding Light=#CCCCCC, Dark=#555555}"
+                        BorderWidth="1"
+                        TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}"
+                        HorizontalOptions="Fill"
+                        AutomationProperties.Name="Stop speaking" />
+                </Grid>
+
+                <Label
+                    Text="{Binding SpeakHintText}"
+                    IsVisible="{Binding ShowSpeakHint}"
+                    FontSize="12"
+                    TextColor="{AppThemeBinding Light=#999999, Dark=#777777}"
+                    HorizontalTextAlignment="Center" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Welcome overlay (first-run only) -->
+        <Grid
+            IsVisible="{Binding ShowWelcome}"
+            BackgroundColor="{AppThemeBinding Light=White, Dark=Black}"
+            Opacity="0.95"
+            InputTransparent="False">
+
+            <Border
+                StrokeShape="RoundRectangle 12"
+                Stroke="{AppThemeBinding Light=#DDDDDD, Dark=#333333}"
+                BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}"
+                MaximumWidthRequest="420"
+                Padding="32"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+
+                <VerticalStackLayout Spacing="20">
+                    <Label
+                        Text="Welcome &#x2014; let&#x2019;s hear something cool"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="Center" />
+                    <Label
+                        Text="Type a line, pick a style, and press Speak."
+                        FontSize="15"
+                        TextColor="{AppThemeBinding Light=#555555, Dark=#BBBBBB}"
+                        HorizontalTextAlignment="Center" />
+                    <Border
+                        StrokeShape="RoundRectangle 8"
+                        Stroke="{AppThemeBinding Light=#E0E0E0, Dark=#444444}"
+                        BackgroundColor="{AppThemeBinding Light=#F8F8F8, Dark=#2A2A2A}"
+                        Padding="16">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Try this first:" FontSize="12" FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#888888, Dark=#999999}" />
+                            <Label Text="&#x201C;Welcome to the future of voice.&#x201D;"
+                                   FontSize="16" FontAttributes="Italic" HorizontalTextAlignment="Center" />
+                            <Label Text="You can change this anytime." FontSize="11"
+                                   TextColor="{AppThemeBinding Light=#AAAAAA, Dark=#777777}"
+                                   HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Button
+                        Text="Speak"
+                        Command="{Binding WelcomeSpeakCommand}"
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        HeightRequest="52"
+                        BackgroundColor="{AppThemeBinding Light=#512BD4, Dark=#7C4DFF}"
+                        TextColor="White"
+                        HorizontalOptions="Fill"
+                        AutomationProperties.Name="Speak the welcome phrase" />
+                    <Label
+                        Text="Skip"
+                        FontSize="13"
+                        TextColor="{AppThemeBinding Light=#999999, Dark=#777777}"
+                        TextDecorations="Underline"
+                        HorizontalTextAlignment="Center"
+                        AutomationProperties.Name="Skip welcome and go to main screen">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DismissWelcomeCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </VerticalStackLayout>
+
+            </Border>
+
+        </Grid>
+
+    </Grid>
+</ContentPage>

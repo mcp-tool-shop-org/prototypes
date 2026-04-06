@@ -1,0 +1,194 @@
+{
+  "name": "mcp-app-builder",
+  "displayName": "MCP App Builder",
+  "description": "Build MCP servers with interactive UI components",
+  "version": "1.2.0",
+  "publisher": "mcp-tool-shop",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/mcp-app-builder"
+  },
+  "bugs": {
+    "url": "https://github.com/mcp-tool-shop-org/mcp-app-builder/issues"
+  },
+  "homepage": "https://mcp-tool-shop-org.github.io/mcp-app-builder/",
+  "icon": "media/icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Programming Languages",
+    "Snippets"
+  ],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "llm",
+    "tools"
+  ],
+  "activationEvents": [
+    "onCommand:mcp-app-builder.newServer",
+    "onCommand:mcp-app-builder.openPlayground",
+    "workspaceContains:**/mcp.json"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "mcp-app-builder.newServer",
+        "title": "MCP: New Server",
+        "category": "MCP"
+      },
+      {
+        "command": "mcp-app-builder.validateSchema",
+        "title": "MCP: Validate Schema",
+        "category": "MCP"
+      },
+      {
+        "command": "mcp-app-builder.generateTypes",
+        "title": "MCP: Generate Types",
+        "category": "MCP"
+      },
+      {
+        "command": "mcp-app-builder.testServer",
+        "title": "MCP: Test Server",
+        "category": "MCP"
+      },
+      {
+        "command": "mcp-app-builder.openDashboard",
+        "title": "MCP: Open Dashboard",
+        "category": "MCP"
+      },
+      {
+        "command": "mcp-app-builder.openPlayground",
+        "title": "MCP: Tool Playground",
+        "category": "MCP"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "mcp-app-builder.newServer",
+        "key": "ctrl+alt+n",
+        "mac": "cmd+alt+n"
+      },
+      {
+        "command": "mcp-app-builder.validateSchema",
+        "key": "ctrl+alt+v",
+        "mac": "cmd+alt+v",
+        "when": "workspaceFolderCount > 0"
+      },
+      {
+        "command": "mcp-app-builder.openPlayground",
+        "key": "ctrl+alt+p",
+        "mac": "cmd+alt+p",
+        "when": "workspaceFolderCount > 0"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "mcp-app-builder.newServer",
+          "when": "true"
+        },
+        {
+          "command": "mcp-app-builder.validateSchema",
+          "when": "workspaceFolderCount > 0"
+        },
+        {
+          "command": "mcp-app-builder.generateTypes",
+          "when": "workspaceFolderCount > 0"
+        },
+        {
+          "command": "mcp-app-builder.testServer",
+          "when": "workspaceFolderCount > 0"
+        },
+        {
+          "command": "mcp-app-builder.openDashboard",
+          "when": "workspaceFolderCount > 0"
+        },
+        {
+          "command": "mcp-app-builder.openPlayground",
+          "when": "workspaceFolderCount > 0"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "MCP App Builder",
+      "properties": {
+        "mcp-app-builder.defaultTemplate": {
+          "type": "string",
+          "default": "basic",
+          "enum": [
+            "basic",
+            "with-ui",
+            "full"
+          ],
+          "description": "Default template for new MCP servers"
+        },
+        "mcp-app-builder.autoValidate": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically validate schemas on save"
+        },
+        "mcp-app-builder.testPort": {
+          "type": "number",
+          "default": 3000,
+          "description": "Port for the MCP test server"
+        }
+      }
+    },
+    "jsonValidation": [
+      {
+        "fileMatch": "mcp.json",
+        "url": "./schemas/mcp-config.schema.json"
+      },
+      {
+        "fileMatch": "mcp-tools.json",
+        "url": "./schemas/mcp-tools.schema.json"
+      }
+    ],
+    "languages": [
+      {
+        "id": "mcp-json",
+        "aliases": [
+          "MCP Configuration"
+        ],
+        "filenames": [
+          "mcp.json",
+          "mcp-tools.json"
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "compile": "tsc -p ./",
+    "lint": "eslint src --ext ts",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "verify": "npm run compile && npm run lint && npm test -- --run && npm run build",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "@vscode/vsce": "^2.22.0",
+    "esbuild": "^0.24.2",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3",
+    "@vitest/coverage-v8": "^1.2.0",
+    "vitest": "^1.2.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.22.4"
+  }
+}

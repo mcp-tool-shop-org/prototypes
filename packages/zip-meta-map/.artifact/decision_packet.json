@@ -1,0 +1,60 @@
+{
+  "repo_name": "zip-meta-map",
+  "tier": "Creator",
+  "format_candidates": [
+    "C7_theme_palette",
+    "C9_template_pack"
+  ],
+  "constraints": [
+    "monospace-only",
+    "uses-two-opposing-forces"
+  ],
+  "must_include": [
+    "Curator decision system; local Ollama model; deterministic fallback mechanism",
+    "Repo-specific context based on artifact's unique features",
+    "Deterministic hash from the repo name and date"
+  ],
+  "ban_list": [
+    "D3_debug_tree",
+    "uses-real-invariant"
+  ],
+  "freshness_payload": {
+    "weird_detail": "zip-meta-map generates a deterministic metadata layer that answers three questions for AI agents",
+    "recent_change": "Promoted to v1.0.0 — production-ready release",
+    "sharp_edge": "- **No telemetry.** No network calls except to local Ollama."
+  },
+  "selected_hooks": [
+    {
+      "atom_id": "repo_tagline:26879373eee5",
+      "role": "name_hook"
+    },
+    {
+      "atom_id": "invariant:1e4f3f2268b3",
+      "role": "invariant_hook"
+    }
+  ],
+  "callouts": {
+    "veto": "Avoid using D3_debug_tree and constraints like uses-real-invariant or signal-proof as they are overused.",
+    "twist": "The selected format C7_theme_palette leverages the repo's unique feature of generating deterministic metadata for ZIP archives and project directories",
+    "pick": "C7_theme_palette is chosen because it aligns well with the repo's goal to provide a guided, LLM-friendly metadata bundle and uses monospace-only constraint to emphasize code clarity.",
+    "risk": ""
+  },
+  "driver_meta": {
+    "host": "http://127.0.0.1:11434",
+    "model": "qwen2.5:14b",
+    "mode": "ollama",
+    "timestamp": "2026-03-03T15:23:46.537Z"
+  },
+  "season": "none",
+  "org_bans_applied": [
+    "D3_debug_tree",
+    "uses-real-invariant",
+    "black-and-white",
+    "signal-proof"
+  ],
+  "org_gap_bias": [
+    "prefer Exec tier (at 4%, target ~10%)",
+    "13 unique formats used across 24 decisions"
+  ],
+  "signature_move": "card_back_pattern"
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSketch Capture</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 400px;
+        min-height: 300px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        padding: 16px;
+        background: #f8f9fa;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+
+      h1 {
+        font-size: 18px;
+        font-weight: 600;
+        color: #1a202c;
+      }
+
+      .settings-link {
+        font-size: 13px;
+        color: #64748b;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .settings-link:hover {
+        color: #2563eb;
+      }
+
+      button#capture-btn {
+        width: 100%;
+        padding: 12px;
+        background: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      button#capture-btn:hover:not(:disabled) {
+        background: #1d4ed8;
+      }
+
+      button#capture-btn:disabled {
+        background: #94a3b8;
+        cursor: not-allowed;
+      }
+
+      .status {
+        margin-top: 12px;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 13px;
+        text-align: center;
+      }
+
+      .status.success {
+        background: #d1fae5;
+        color: #065f46;
+      }
+
+      .status.error {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+
+      .status.warning {
+        background: #fef3c7;
+        color: #92400e;
+      }
+
+      #output {
+        margin-top: 12px;
+        padding: 12px;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        max-height: 200px;
+        overflow: auto;
+        font-family: 'Courier New', monospace;
+        font-size: 11px;
+        line-height: 1.4;
+        color: #1a202c;
+      }
+
+      #output:empty {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>WebSketch Capture</h1>
+      <a id="settings-link" class="settings-link" href="#">Settings</a>
+    </div>
+    <button id="capture-btn">Capture Current Page</button>
+    <div id="status" class="status"></div>
+    <pre id="output"></pre>
+    <script src="popup.js"></script>
+  </body>
+</html>

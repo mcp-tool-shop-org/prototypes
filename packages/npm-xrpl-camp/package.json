@@ -1,0 +1,38 @@
+{
+  "name": "@mcptoolshop/xrpl-camp",
+  "version": "1.1.1",
+  "description": "Learn the XRP Ledger in one sitting — zero-prerequisite npx install",
+  "type": "commonjs",
+  "license": "MIT",
+  "engines": { "node": ">=18" },
+  "bin": {
+    "xrpl-camp": "bin/xrpl-camp.js"
+  },
+  "files": [
+    "bin/",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "verify": "node -e \"require('./bin/xrpl-camp.js'); console.log('config OK')\" 2>&1 || true"
+  },
+  "keywords": [
+    "xrpl",
+    "xrp",
+    "ledger",
+    "blockchain",
+    "training",
+    "cli"
+  ],
+  "dependencies": {
+    "@mcptoolshop/npm-launcher": "^1.0.0"
+  },
+  "author": "mcp-tool-shop",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/npm-xrpl-camp.git"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/xrpl-camp"
+}

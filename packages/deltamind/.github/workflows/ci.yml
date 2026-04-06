@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/**"
+      - "package.json"
+      - "package-lock.json"
+      - "tsconfig.base.json"
+      - ".github/workflows/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "packages/**"
+      - "package.json"
+      - "package-lock.json"
+      - "tsconfig.base.json"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['20']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build core
+        run: npm run build -w packages/core
+
+      - name: Build cli
+        run: npm run build -w packages/cli
+
+      - name: Test core
+        run: npm test -w packages/core
+
+      - name: Test cli
+        working-directory: packages/cli
+        run: node --import tsx --test test/changed.test.ts test/explain.test.ts test/export.test.ts test/inspect.test.ts test/io.test.ts test/replay.test.ts test/save-resume.test.ts test/suggest-memory.test.ts
+
+      - name: Secret scan
+        run: |
+          echo "Scanning for hardcoded secrets..."
+          cat > /tmp/secret-patterns.txt <<PATTERNS
+          PRIVATE.KEY
+          sk_live_
+          sk_test_
+          aws_secret
+          PATTERNS
+          FOUND=0
+          while IFS= read -r pattern; do
+            pattern=$(echo "$pattern" | xargs)
+            [ -z "$pattern" ] && continue
+            if git grep -lI "$pattern" -- ':!*.md' ':!.github/workflows/*' ':!node_modules' 2>/dev/null; then
+              echo "FAIL: potential secret pattern '$pattern' found"
+              FOUND=1
+            fi
+          done < /tmp/secret-patterns.txt
+          if [ "$FOUND" -eq 1 ]; then exit 1; fi
+          echo "No hardcoded secrets detected"

@@ -1,0 +1,54 @@
+name: Publish to NuGet
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: nuget
+    permissions:
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v4
+
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore
+        run: |
+          dotnet restore src/Attestia.Core/Attestia.Core.csproj
+          dotnet restore src/Attestia.Client/Attestia.Client.csproj
+          dotnet restore src/Attestia.Sidecar/Attestia.Sidecar.csproj
+
+      - name: Build
+        run: |
+          dotnet build src/Attestia.Core/Attestia.Core.csproj --configuration Release --no-restore
+          dotnet build src/Attestia.Client/Attestia.Client.csproj --configuration Release --no-restore
+          dotnet build src/Attestia.Sidecar/Attestia.Sidecar.csproj --configuration Release --no-restore
+
+      - name: Pack Attestia.Core
+        run: dotnet pack src/Attestia.Core/Attestia.Core.csproj --configuration Release --no-build --output ./nupkg
+
+      - name: Pack Attestia.Client
+        run: dotnet pack src/Attestia.Client/Attestia.Client.csproj --configuration Release --no-build --output ./nupkg
+
+      - name: Pack Attestia.Sidecar
+        run: dotnet pack src/Attestia.Sidecar/Attestia.Sidecar.csproj --configuration Release --no-build --output ./nupkg
+
+      - name: Login to NuGet (Trusted Publishing)
+        uses: nuget/login@d22cc5f58ff5b88bf9bd452535b4335137e24544 # v1
+        id: nuget-login
+        with:
+          user: mcp-tool-shop
+
+      - name: Push to NuGet
+        run: dotnet nuget push ./nupkg/*.nupkg --api-key "${{ steps.nuget-login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate

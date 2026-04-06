@@ -1,0 +1,34 @@
+[
+  {
+    "id": "py-fizzbuzz",
+    "language": "python",
+    "difficulty": 2,
+    "title": "FizzBuzz",
+    "topics": [
+      "loops",
+      "modulo",
+      "print"
+    ],
+    "code": "for i in range(1, 101):\n    out = \"Fizz\" * (i % 3 == 0) + \"Buzz\" * (i % 5 == 0)\n    print(out or i)\n",
+    "explain": [
+      "Use modulo to detect multiples.",
+      "String multiplication is a neat Python trick."
+    ]
+  },
+  {
+    "id": "py-typing",
+    "language": "python",
+    "difficulty": 3,
+    "title": "Typed function",
+    "topics": [
+      "typing",
+      "functions",
+      "guards"
+    ],
+    "code": "from typing import Iterable\n\ndef first_or_none(xs: Iterable[int]) -> int | None:\n    for x in xs:\n        return x\n    return None\n",
+    "explain": [
+      "Types help communicate intent.",
+      "Return early for the first match."
+    ]
+  }
+]

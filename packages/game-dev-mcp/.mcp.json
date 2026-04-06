@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "gamedev": {
+      "command": "npx",
+      "args": ["@mcptoolshop/game-dev-mcp"],
+      "env": {}
+    }
+  }
+}

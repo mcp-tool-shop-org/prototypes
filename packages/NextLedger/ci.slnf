@@ -1,0 +1,13 @@
+{
+  "solution": {
+    "path": "NextLedger.sln",
+    "projects": [
+      "src\\NextLedger.Domain\\NextLedger.Domain.csproj",
+      "src\\NextLedger.Application\\NextLedger.Application.csproj",
+      "src\\NextLedger.Infrastructure\\NextLedger.Infrastructure.csproj",
+      "tests\\NextLedger.Domain.Tests\\NextLedger.Domain.Tests.csproj",
+      "tests\\NextLedger.Application.Tests\\NextLedger.Application.Tests.csproj",
+      "tests\\NextLedger.Infrastructure.Tests\\NextLedger.Infrastructure.Tests.csproj"
+    ]
+  }
+}

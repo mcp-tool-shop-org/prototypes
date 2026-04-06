@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Attestia.App.Pages.EventsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:models="using:Attestia.Core.Models"
+    Loaded="Page_Loaded">
+
+    <Grid Padding="32,28,32,32" RowSpacing="20" MaxWidth="1100">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Spacing="4">
+                <TextBlock Text="Event Ledger" Style="{StaticResource AttestiaPageTitleStyle}" />
+                <TextBlock Text="Append-only audit trail of every system action. Records cannot be modified or deleted."
+                           FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8"
+                        VerticalAlignment="Top">
+                <Button Content="Export Event Ledger" Click="Export_Click" />
+                <Button Content="Recalculate State" Click="Refresh_Click"
+                        FontSize="12" Padding="8,4" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Stream filter -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="8">
+            <TextBlock Text="Stream:" VerticalAlignment="Center" FontSize="13"
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+            <TextBox x:Name="StreamFilterBox" PlaceholderText="All streams" Width="240" />
+            <Button Content="Apply Stream Filter" Click="ApplyFilter_Click" FontSize="12" Padding="8,4" />
+        </StackPanel>
+
+        <!-- Empty state -->
+        <Grid Grid.Row="2" x:Name="EmptyState" Visibility="Collapsed"
+              HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Spacing="12" MaxWidth="420" HorizontalAlignment="Center">
+                <FontIcon Glyph="&#xE81C;" FontSize="48"
+                          Foreground="{ThemeResource TextFillColorTertiaryBrush}" HorizontalAlignment="Center" />
+                <TextBlock Text="No events recorded" FontSize="18" FontWeight="SemiBold"
+                           HorizontalAlignment="Center" />
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" FontSize="13" LineHeight="20"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                           Text="Events are automatically recorded as you use the system. Each intent declaration, reconciliation, and attestation creates a permanent, append-only event entry." />
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" FontSize="13"
+                           Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                           Text="Start by declaring an intent — events will appear here automatically." />
+            </StackPanel>
+        </Grid>
+
+        <!-- Event list -->
+        <ListView Grid.Row="2" x:Name="EventsList"
+                  SelectionMode="None"
+                  ItemsSource="{x:Bind ViewModel.Events, Mode=OneWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:StoredEvent">
+                    <Grid Padding="16" Margin="0,0,0,6"
+                          CornerRadius="8"
+                          Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                          BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                          BorderThickness="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Event type + source badge -->
+                        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="8">
+                            <TextBlock Text="{x:Bind Event.Type}" FontWeight="SemiBold" />
+                            <Border Padding="6,2" CornerRadius="4"
+                                    Background="{ThemeResource AccentFillColorDefaultBrush}">
+                                <TextBlock Text="{x:Bind Event.Metadata.Source}" FontSize="11"
+                                           Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}" />
+                            </Border>
+                        </StackPanel>
+
+                        <!-- Position -->
+                        <TextBlock Grid.Row="0" Grid.Column="1"
+                                   Text="{x:Bind GlobalPosition}" FontSize="11"
+                                   Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
+
+                        <!-- Stream + version -->
+                        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal"
+                                    Spacing="12" Margin="0,4,0,0">
+                            <TextBlock FontSize="12"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}">
+                                <Run Text="Stream:" />
+                                <Run Text="{x:Bind StreamId}" FontFamily="Cascadia Mono, Consolas" />
+                            </TextBlock>
+                            <TextBlock FontSize="12"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}">
+                                <Run Text="v" />
+                                <Run Text="{x:Bind Version}" />
+                            </TextBlock>
+                        </StackPanel>
+
+                        <!-- Timestamp + hash -->
+                        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal"
+                                    Spacing="12" Margin="0,2,0,0">
+                            <TextBlock Text="{x:Bind AppendedAt}" FontSize="11"
+                                       Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
+                            <Border Padding="4,2" CornerRadius="3"
+                                    Background="{StaticResource AttestiaHashBackgroundBrush}">
+                                <TextBlock Text="{x:Bind Hash}" FontSize="11" FontFamily="Cascadia Mono, Consolas"
+                                           CharacterSpacing="-10"
+                                           TextTrimming="CharacterEllipsis" MaxWidth="280"
+                                           Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Load more / Status -->
+        <StackPanel Grid.Row="3" Spacing="8">
+            <Button x:Name="LoadMoreBtn" Content="Load Earlier Events" Click="LoadMore_Click"
+                    Visibility="Collapsed" FontSize="12" Padding="8,4" />
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <ProgressRing x:Name="LoadingRing" IsActive="False" Width="20" Height="20" />
+                <TextBlock x:Name="ErrorText" FontSize="13"
+                           Foreground="{ThemeResource SystemFillColorCautionBrush}"
+                           VerticalAlignment="Center" />
+                <Button x:Name="RetryBtn" Content="Reattempt Connection" Click="Refresh_Click"
+                        Visibility="Collapsed" FontSize="12" Padding="8,4" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

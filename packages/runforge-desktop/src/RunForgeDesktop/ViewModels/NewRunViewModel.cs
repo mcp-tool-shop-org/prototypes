@@ -1,0 +1,242 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using RunForgeDesktop.Core;
+using RunForgeDesktop.Core.Models;
+using RunForgeDesktop.Core.Services;
+
+namespace RunForgeDesktop.ViewModels;
+
+public partial class NewRunViewModel : ObservableObject
+{
+    private readonly IRunnerService _runnerService;
+    private readonly IWorkspaceService _workspaceService;
+
+    public NewRunViewModel(IRunnerService runnerService, IWorkspaceService workspaceService)
+    {
+        _runnerService = runnerService;
+        _workspaceService = workspaceService;
+
+        // Detect GPU availability
+        DetectGpu();
+    }
+
+    private void DetectGpu()
+    {
+        // Simple GPU detection - in production, would use CUDA/DirectX queries
+        // Check for NVIDIA GPU via environment or registry
+        try
+        {
+            var cudaPath = Environment.GetEnvironmentVariable("CUDA_PATH");
+            GpuAvailable = !string.IsNullOrEmpty(cudaPath);
+            if (GpuAvailable)
+            {
+                // Extract version hint from CUDA path
+                var cudaVersion = Path.GetFileName(cudaPath ?? "");
+                GpuName = $"CUDA GPU ({cudaVersion})";
+            }
+            else
+            {
+                GpuName = "";
+                GpuUnavailableReason = ErrorMessages.Gpu.NotAvailable;
+            }
+        }
+        catch
+        {
+            GpuAvailable = false;
+            GpuName = "";
+            GpuUnavailableReason = ErrorMessages.Gpu.NotAvailable;
+        }
+
+        UseGpu = GpuAvailable;
+    }
+
+    [ObservableProperty]
+    private string _runName = "";
+
+    [ObservableProperty]
+    private string _selectedPreset = "Quick Test (10 epochs)";
+
+    [ObservableProperty]
+    private string _datasetPath = "";
+
+    [ObservableProperty]
+    private bool _useGpu = true;
+
+    [ObservableProperty]
+    private bool _gpuAvailable = true;
+
+    [ObservableProperty]
+    private string _gpuName = "";
+
+    [ObservableProperty]
+    private string _gpuUnavailableReason = "";
+
+    [ObservableProperty]
+    private bool _isCreating;
+
+    [ObservableProperty]
+    private string? _errorMessage;
+
+    // === ADVANCED SETTINGS ===
+
+    [ObservableProperty]
+    private bool _showAdvanced;
+
+    [ObservableProperty]
+    private int _epochs = 10;
+
+    [ObservableProperty]
+    private int _batchSize = 64;
+
+    [ObservableProperty]
+    private double _learningRate = 0.001;
+
+    [ObservableProperty]
+    private int _numSamples = 5000;
+
+    [ObservableProperty]
+    private string _selectedOptimizer = "Adam";
+
+    [ObservableProperty]
+    private string _selectedScheduler = "StepLR";
+
+    public string[] AvailableOptimizers { get; } = ["Adam", "AdamW", "SGD", "RMSprop"];
+
+    public string[] AvailableSchedulers { get; } = ["None", "StepLR", "CosineAnnealing", "OneCycleLR"];
+
+    /// <summary>
+    /// Helper text for device selection based on availability.
+    /// </summary>
+    public string DeviceHelperText => GpuAvailable
+        ? $"GPU detected: {GpuName}"
+        : GpuUnavailableReason;
+
+    /// <summary>
+    /// Helper text for dataset field - always visible to clarify optional behavior.
+    /// </summary>
+    public string DatasetHelperText => string.IsNullOrEmpty(DatasetPath)
+        ? "Leave empty to use built-in simulation data."
+        : $"Using: {Path.GetFileName(DatasetPath)}";
+
+    /// <summary>
+    /// Path to current workspace for display.
+    /// </summary>
+    public string? WorkspacePath => _workspaceService.CurrentWorkspacePath;
+
+    /// <summary>
+    /// Short workspace name for display.
+    /// </summary>
+    public string WorkspaceDisplayName => HasWorkspace
+        ? Path.GetFileName(_workspaceService.CurrentWorkspacePath!) ?? "Workspace"
+        : "";
+
+    /// <summary>
+    /// Can the form be submitted?
+    /// </summary>
+    public bool CanSubmit => HasWorkspace && !IsCreating && !string.IsNullOrWhiteSpace(RunName);
+
+    public string[] AvailablePresets { get; } =
+    [
+        "Quick Test (10 epochs)",
+        "Standard (50 epochs)",
+        "Extended (100 epochs)",
+        "Custom"
+    ];
+
+    public bool HasWorkspace => !string.IsNullOrEmpty(_workspaceService.CurrentWorkspacePath);
+
+    partial void OnDatasetPathChanged(string value)
+    {
+        OnPropertyChanged(nameof(DatasetHelperText));
+    }
+
+    [RelayCommand]
+    private void ToggleAdvanced()
+    {
+        ShowAdvanced = !ShowAdvanced;
+    }
+
+    [RelayCommand]
+    private async Task BrowseDataset()
+    {
+        try
+        {
+            var result = await FilePicker.PickAsync(new PickOptions
+            {
+                PickerTitle = "Select Dataset"
+            });
+
+            if (result != null)
+            {
+                DatasetPath = result.FullPath;
+            }
+        }
+        catch
+        {
+            // User cancelled
+        }
+    }
+
+    [RelayCommand]
+    private async Task StartTraining()
+    {
+        if (string.IsNullOrWhiteSpace(RunName))
+        {
+            ErrorMessage = ErrorMessages.Validation.RunNameRequired;
+            return;
+        }
+
+        if (!HasWorkspace)
+        {
+            ErrorMessage = ErrorMessages.Workspace.NotSelected;
+            return;
+        }
+
+        // Check for existing active run
+        if (await _runnerService.HasActiveRunAsync())
+        {
+            ErrorMessage = ErrorMessages.Runner.AlreadyRunning;
+            return;
+        }
+
+        // Disable button immediately for feedback
+        IsCreating = true;
+        ErrorMessage = null;
+
+        try
+        {
+            var device = UseGpu ? Core.Models.DeviceType.GPU : Core.Models.DeviceType.CPU;
+
+            var config = new Core.Models.TrainingConfig
+            {
+                Epochs = Epochs,
+                BatchSize = BatchSize,
+                LearningRate = LearningRate,
+                NumSamples = NumSamples,
+                Optimizer = SelectedOptimizer,
+                Scheduler = SelectedScheduler
+            };
+
+            // Create the run manifest
+            var manifest = await _runnerService.CreateRunAsync(
+                RunName,
+                SelectedPreset,
+                DatasetPath,
+                device,
+                config);
+
+            // Navigate immediately - motion = confidence
+            // The live view will show "Starting..." state while runner spawns
+            await Shell.Current.GoToAsync($"rundetail?runId={manifest.RunId}");
+
+            // Start training in background after navigation
+            _ = _runnerService.StartRunAsync(manifest.RunId);
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ErrorMessages.FromException(ex, "run creation");
+            IsCreating = false;
+        }
+        // Note: Don't reset IsCreating on success - we've navigated away
+    }
+}

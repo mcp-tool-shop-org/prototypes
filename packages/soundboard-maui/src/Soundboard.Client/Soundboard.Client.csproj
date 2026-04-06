@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Version>1.2.2</Version>
+
+    <!-- NuGet SDK metadata -->
+    <PackageId>Soundboard.Client</PackageId>
+    <Description>Streaming TTS client SDK for voice engines implementing the Soundboard API contract. Zero UI dependencies.</Description>
+    <Authors>mcp-tool-shop</Authors>
+    <RepositoryUrl>https://github.com/mcp-tool-shop-org/soundboard-maui</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/mcp-tool-shop-org/soundboard-maui</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>tts;speech;streaming;voice;sdk;soundboard</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\docs\sdk-readme.md" Pack="true" PackagePath="README.md" />
+    <None Include="..\..\assets\icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" Condition="'$(TargetFramework)' == 'net8.0'" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" Condition="'$(TargetFramework)' == 'net9.0'" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0-preview.1.25080.5" Condition="'$(TargetFramework)' == 'net10.0'" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Soundboard.Client.Tests" />
+  </ItemGroup>
+
+</Project>

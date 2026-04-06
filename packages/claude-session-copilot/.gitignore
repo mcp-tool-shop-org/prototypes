@@ -1,0 +1,9 @@
+node_modules/
+build/
+*.tsbuildinfo
+.env
+*.log
+site/.astro/
+site/dist/
+site/node_modules/
+.polyglot-cache.json

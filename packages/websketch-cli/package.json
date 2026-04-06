@@ -1,0 +1,70 @@
+{
+  "name": "@mcptoolshop/websketch",
+  "version": "1.0.1",
+  "description": "CLI for WebSketch IR - render, diff, and fingerprint web UI captures",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "websketch": "dist/index.js"
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "HANDBOOK.md",
+    "CHANGELOG.md",
+    "logo.png",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "postbuild": "node scripts/add-shebang.js",
+    "dev": "tsc --watch",
+    "clean": "rimraf dist",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/**/*.ts --max-warnings 0",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "validate": "npm run typecheck && npm run lint && npm run build && npm run test:run",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "keywords": [
+    "websketch",
+    "cli",
+    "ui-testing",
+    "web-scraping",
+    "ascii-art",
+    "diff",
+    "fingerprint"
+  ],
+  "author": "MCP Tool Shop",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcp-tool-shop-org/websketch-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mcp-tool-shop-org/websketch-cli/issues"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/websketch-cli#readme",
+  "dependencies": {
+    "@mcptoolshop/websketch-ir": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@vitest/coverage-v8": "^1.1.0",
+    "eslint": "^8.56.0",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}

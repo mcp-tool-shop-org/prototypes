@@ -1,0 +1,523 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WebSketch &mdash; Web pages as LLM-ready trees</title>
+  <meta name="description" content="Turn any web page into a structured semantic tree that LLMs can actually understand. 200 tokens instead of 50,000." />
+  <link rel="icon" type="image/png" href={`${base}logo.png`} />
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131a;
+      --surface-hover: #1a1a24;
+      --border: #1e1e2a;
+      --text: #e4e4e7;
+      --text-dim: #71717a;
+      --text-mid: #a1a1aa;
+      --accent: #4a90d9;
+      --accent-soft: #4a90d915;
+      --accent-glow: #4a90d920;
+      --green: #4ade80;
+      --red: #f87171;
+      --yellow: #fbbf24;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', monospace;
+      background: var(--surface);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 4rem 1.5rem 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .hero img {
+      width: 300px;
+      max-width: 80%;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 40px var(--accent-glow));
+    }
+    .hero h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 span { color: var(--accent); }
+    .tagline {
+      font-size: 1.15rem;
+      color: var(--text-mid);
+      max-width: 620px;
+      margin: 0 auto 1.5rem;
+    }
+    .hero-stat {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      margin-bottom: 2rem;
+    }
+    .hero-stat strong { color: var(--green); font-weight: 700; }
+
+    .install-block {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .install-cmd {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1.25rem;
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color 0.2s;
+      position: relative;
+    }
+    .install-cmd:hover { border-color: var(--accent); }
+    .install-cmd .hint {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      display: block;
+      margin-top: 0.25rem;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px #0004; text-decoration: none; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-outline { border: 1px solid var(--border); color: var(--text); }
+    .btn-outline:hover { border-color: var(--accent); }
+
+    /* Sections */
+    .section-title {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .section-subtitle {
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    /* Problem/Solution comparison */
+    .comparison {
+      max-width: 860px;
+      margin: 0 auto 3.5rem;
+      padding: 0 1.5rem;
+    }
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .comp-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    .comp-card h3 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .comp-bad h3 { color: var(--red); }
+    .comp-good h3 { color: var(--green); }
+    .comp-card pre {
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+      font-size: 0.72rem;
+      line-height: 1.45;
+      color: var(--text-dim);
+      white-space: pre;
+      overflow-x: auto;
+    }
+    .comp-card .stat {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+    .comp-card .stat strong { color: var(--text); }
+
+    /* Tree preview */
+    .tree-preview {
+      max-width: 700px;
+      margin: 0 auto 3.5rem;
+      padding: 0 1.5rem;
+    }
+    .tree-preview .tab-bar {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+    }
+    .tree-preview .tab {
+      padding: 0.5rem 1.25rem;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      border-bottom: 2px solid transparent;
+      cursor: default;
+    }
+    .tree-preview .tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .tree-content {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+      padding: 1.25rem;
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+      font-size: 0.72rem;
+      line-height: 1.5;
+      overflow-x: auto;
+      color: var(--text-dim);
+      white-space: pre;
+    }
+    .tree-content .role { color: var(--accent); font-weight: 600; }
+    .tree-content .inter { color: var(--yellow); }
+    .tree-content .label { color: var(--green); }
+    .tree-content .semantic { color: #c084fc; }
+    .tree-content .flag { color: #fb923c; }
+
+    /* How it works */
+    .how-it-works {
+      max-width: 700px;
+      margin: 0 auto 3.5rem;
+      padding: 0 1.5rem;
+    }
+    .step {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      align-items: flex-start;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+    .step-text { font-size: 0.95rem; }
+    .step-text strong { color: var(--text); }
+    .step-text span { color: var(--text-dim); }
+
+    /* Feature cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      max-width: 860px;
+      margin: 0 auto 3.5rem;
+      padding: 0 1.5rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card h3 { font-size: 0.95rem; margin-bottom: 0.4rem; }
+    .card p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+
+    /* Use cases */
+    .use-cases {
+      max-width: 700px;
+      margin: 0 auto 3.5rem;
+      padding: 0 1.5rem;
+    }
+    .use-case {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s;
+    }
+    .use-case:hover { border-color: var(--accent); }
+    .use-case h3 { font-size: 0.95rem; margin-bottom: 0.35rem; color: var(--text); }
+    .use-case p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+
+    /* Ecosystem */
+    .ecosystem {
+      max-width: 700px;
+      margin: 0 auto 3.5rem;
+      padding: 0 1.5rem;
+    }
+    .eco-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .eco-item:last-child { border-bottom: none; }
+    .eco-name { font-weight: 600; }
+    .eco-role { color: var(--text-dim); font-size: 0.8rem; }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 700px) {
+      .hero { padding: 2.5rem 1rem 1.5rem; }
+      .hero img { width: 220px; }
+      .hero h1 { font-size: 1.75rem; }
+      .tagline { font-size: 1rem; }
+      .comparison-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <img src={`${base}logo.png`} alt="WebSketch" />
+    <h1>Web pages as <span>LLM-ready trees</span></h1>
+    <p class="tagline">Turn any web page into a clean semantic tree with 23 UI primitives. Paste it into ChatGPT, Claude, Gemini &mdash; any text model.</p>
+    <div class="hero-stat">
+      <strong>200&ndash;800 tokens</strong> instead of 50,000+ from raw HTML
+    </div>
+
+    <div class="install-block">
+      <div class="install-cmd" onclick="navigator.clipboard.writeText('ext install mcptoolshop.websketch-vscode'); this.querySelector('.hint').textContent = 'Copied!'">
+        ext install mcptoolshop.websketch-vscode
+        <span class="hint">click to copy</span>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <a href="https://marketplace.visualstudio.com/items?itemName=mcptoolshop.websketch-vscode" class="btn btn-primary">VS Code Marketplace</a>
+      <a href="https://github.com/mcp-tool-shop-org/websketch-vscode" class="btn btn-outline">GitHub</a>
+      <a href="https://www.npmjs.com/package/@mcptoolshop/websketch-ir" class="btn btn-outline">websketch-ir on npm</a>
+    </div>
+  </section>
+
+  <!-- Problem vs Solution -->
+  <h2 class="section-title">The Problem</h2>
+  <p class="section-subtitle">LLMs can't understand web pages. Your current options all sacrifice something critical.</p>
+  <div class="comparison">
+    <div class="comparison-grid">
+      <div class="comp-card comp-bad">
+        <h3>Raw HTML</h3>
+<pre>&lt;div class="sc-bdnxRM jJFqsI"&gt;
+  &lt;div class="sc-gsnTZi ldBRFW"&gt;
+    &lt;a href="/products" class="sc-dkzDqf
+      iVowMh nav-link active"&gt;
+      &lt;span class="link-text"&gt;Products
+      &lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+        <div class="stat"><strong>50,000+ tokens</strong> of noise per page</div>
+      </div>
+      <div class="comp-card comp-good">
+        <h3>WebSketch</h3>
+<pre><span class="role">NAV</span>
+<span class="inter">*</span><span class="role">LINK</span> <span class="label">"Products"</span>
+<span class="inter">*</span><span class="role">LINK</span> <span class="label">"Pricing"</span>
+<span class="inter">*</span><span class="role">LINK</span> <span class="label">"Docs"</span>
+<span class="inter">*</span><span class="role">BUTTON</span> <span class="semantic">&lt;search&gt;</span> <span class="label">"Search..."</span></pre>
+        <div class="stat"><strong>200&ndash;800 tokens</strong> of pure signal</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LLM Tree preview -->
+  <h2 class="section-title">LLM-Ready Output</h2>
+  <p class="section-subtitle">Copy the tree. Paste into any LLM. It just works.</p>
+  <div class="tree-preview">
+    <div class="tab-bar">
+      <div class="tab active">LLM</div>
+      <div class="tab">ASCII</div>
+      <div class="tab">Tree</div>
+      <div class="tab">JSON</div>
+    </div>
+    <div class="tree-content"><span class="role">PAGE</span>
+├─ <span class="role">HEADER</span> <span class="flag">{'{'+'sticky}'}</span>
+│  ├─ <span class="inter">*</span><span class="role">LINK</span> <span class="label">"Home"</span>
+│  ├─ <span class="inter">*</span><span class="role">LINK</span> <span class="label">"Products"</span>
+│  └─ <span class="inter">*</span><span class="role">INPUT</span> <span class="semantic">&lt;search&gt;</span> <span class="label">"Search..."</span>
+├─ <span class="role">SECTION</span> <span class="semantic">&lt;main&gt;</span>
+│  ├─ <span class="role">TEXT</span> <span class="semantic">&lt;h1&gt;</span> <span class="label">"Welcome to Acme"</span>
+│  ├─ <span class="role">TEXT</span> <span class="label">"Build faster with our platform..."</span>
+│  └─ <span class="inter">*</span><span class="role">BUTTON</span> <span class="label">"Get Started"</span>
+├─ <span class="role">LIST</span> (3 items)
+│  ├─ <span class="role">CARD</span>
+│  │  ├─ <span class="role">IMAGE</span> <span class="label">"Feature icon"</span>
+│  │  └─ <span class="role">TEXT</span> <span class="label">"Real-time sync"</span>
+│  ├─ <span class="role">CARD</span> ...
+│  └─ <span class="role">CARD</span> ...
+└─ <span class="role">FOOTER</span>
+   ├─ <span class="inter">*</span><span class="role">LINK</span> <span class="label">"Terms"</span>
+   └─ <span class="role">TEXT</span> <span class="label">"&copy; 2026 Acme Inc."</span></div>
+  </div>
+
+  <!-- How it works -->
+  <h2 class="section-title">How It Works</h2>
+  <p class="section-subtitle">From URL to LLM prompt in four steps.</p>
+  <div class="how-it-works">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Enter a URL</strong> <span>&mdash; via Command Palette, clipboard, or programmatically</span></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Headless capture</strong> <span>&mdash; uses your system Chrome/Edge, no bundled browser download</span></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>5-tier DOM classification</strong> <span>&mdash; ARIA roles &rarr; HTML tags &rarr; class heuristics &rarr; structural analysis &rarr; fallback</span></div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text"><strong>Copy for LLM</strong> <span>&mdash; one click to clipboard, paste into any model</span></div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <h2 class="section-title">Features</h2>
+  <p class="section-subtitle">Everything an LLM needs. Nothing it doesn't.</p>
+  <div class="cards">
+    <div class="card">
+      <h3>23 Semantic Roles</h3>
+      <p>Fixed vocabulary &mdash; BUTTON, NAV, CARD, LIST, INPUT, MODAL, and more. The same roles across every website.</p>
+    </div>
+    <div class="card">
+      <h3>Text Labels</h3>
+      <p>Every link, button, heading, and input includes its visible text. The LLM reads <code>"Sign up free"</code>, not a class name.</p>
+    </div>
+    <div class="card">
+      <h3>Interactive Markers</h3>
+      <p><code>*</code> prefix on every clickable/typeable element. The LLM can enumerate every possible user action on the page.</p>
+    </div>
+    <div class="card">
+      <h3>Semantic Hints</h3>
+      <p><code>&lt;h1&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;search&gt;</code>, <code>&lt;aside&gt;</code> &mdash; HTML5 and ARIA meaning preserved in the tree.</p>
+    </div>
+    <div class="card">
+      <h3>Smart Pruning</h3>
+      <p>Empty wrappers, invisible spacers, hollow chains &mdash; all removed. Only meaningful nodes survive to the output.</p>
+    </div>
+    <div class="card">
+      <h3>No Bundled Browser</h3>
+      <p>Uses <code>puppeteer-core</code> with your system Chrome or Edge. No 200MB download.</p>
+    </div>
+  </div>
+
+  <!-- Use cases -->
+  <h2 class="section-title">Use Cases</h2>
+  <p class="section-subtitle">For prompt engineers, developers, and AI agents.</p>
+  <div class="use-cases">
+    <div class="use-case">
+      <h3>Prompt Engineering</h3>
+      <p>Paste the tree into any LLM to describe layout, compare pages, or understand what a user can do &mdash; all in a few hundred tokens.</p>
+    </div>
+    <div class="use-case">
+      <h3>Test Generation</h3>
+      <p>Every interactive element is a named test target. <code>*BUTTON "Submit"</code>, <code>*INPUT &lt;email&gt; "Enter email"</code> &mdash; map directly to test assertions.</p>
+    </div>
+    <div class="use-case">
+      <h3>Component Scaffolding</h3>
+      <p>The tree maps to component hierarchies. <code>HEADER &gt; NAV &gt; LIST &gt; LINK</code> becomes React/Vue/Svelte structure with one prompt.</p>
+    </div>
+    <div class="use-case">
+      <h3>AI Agent Tooling</h3>
+      <p>Use <a href="https://github.com/mcp-tool-shop-org/websketch-mcp">websketch-mcp</a> to give your agent the ability to capture and reason about any web page.</p>
+    </div>
+  </div>
+
+  <!-- Ecosystem -->
+  <h2 class="section-title">Ecosystem</h2>
+  <p class="section-subtitle">One grammar. Multiple tools. Interchangeable output.</p>
+  <div class="ecosystem">
+    <div class="eco-item">
+      <a href="https://github.com/mcp-tool-shop-org/websketch-ir" class="eco-name">websketch-ir</a>
+      <span class="eco-role">Core grammar, validation, rendering, diffing</span>
+    </div>
+    <div class="eco-item">
+      <span class="eco-name" style="color: var(--accent);">websketch-vscode</span>
+      <span class="eco-role">VS Code extension (this project)</span>
+    </div>
+    <div class="eco-item">
+      <a href="https://github.com/mcp-tool-shop-org/websketch-cli" class="eco-name">websketch-cli</a>
+      <span class="eco-role">Command-line capture</span>
+    </div>
+    <div class="eco-item">
+      <a href="https://github.com/mcp-tool-shop-org/websketch-extension" class="eco-name">websketch-extension</a>
+      <span class="eco-role">Chrome extension</span>
+    </div>
+    <div class="eco-item">
+      <a href="https://github.com/mcp-tool-shop-org/websketch-mcp" class="eco-name">websketch-mcp</a>
+      <span class="eco-role">MCP server for LLM agents</span>
+    </div>
+  </div>
+
+  <footer>
+    MIT License &middot; Part of <a href="https://mcptoolshop.com">MCP Tool Shop</a>
+  </footer>
+
+</body>
+</html>

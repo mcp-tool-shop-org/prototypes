@@ -1,0 +1,46 @@
+{
+  "name": "@soundweave/playback-engine",
+  "version": "1.1.0",
+  "description": "Real-time playback, mixing, and effects for SoundWeave",
+  "license": "MIT",
+  "author": "mcp-tool-shop-org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/soundweave.git",
+    "directory": "packages/playback-engine"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "dev": "tsc --build --watch",
+    "test": "vitest run",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@soundweave/schema": "workspace:*",
+    "@soundweave/audio-engine": "workspace:*",
+    "@soundweave/clip-engine": "workspace:*",
+    "@soundweave/instrument-rack": "workspace:*",
+    "@soundweave/scene-mapper": "workspace:*"
+  },
+  "devDependencies": {
+    "@soundweave/test-kit": "workspace:*",
+    "typescript": "^5.8.0",
+    "vitest": "^3.2.0"
+  }
+}

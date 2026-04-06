@@ -1,0 +1,3 @@
+"""cts — Claude Toolstack CLI client."""
+
+__version__ = "1.0.2"

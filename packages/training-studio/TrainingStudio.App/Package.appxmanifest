@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  IgnorableNamespaces="uap rescap mp">
+
+  <!--
+    IMPORTANT: Replace these placeholder values before Store submission:
+    - Identity Name: Get from Partner Center after app registration
+    - Publisher: Get from Partner Center (CN=...)
+    - PhoneProductId: Get from Partner Center
+  -->
+
+  <Identity
+    Name="MCPToolShop.TrainingStudio"
+    Publisher="CN=PLACEHOLDER_REPLACE_WITH_PARTNER_CENTER_VALUE"
+    Version="1.0.0.0" />
+
+  <mp:PhoneIdentity PhoneProductId="PLACEHOLDER-GUID-FROM-PARTNER-CENTER" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>Training Studio</DisplayName>
+    <PublisherDisplayName>MCP Tool Shop</PublisherDisplayName>
+    <Logo>Resources\AppIcon\appicon.png</Logo>
+    <Description>TensorFlow.js-powered ML bundle validation tool with security-first design and zero code execution.</Description>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17763.0" MaxVersionTested="10.0.22621.0" />
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.22621.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="en-us"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="$targetentrypoint$">
+
+      <uap:VisualElements
+        DisplayName="Training Studio"
+        Description="ML bundle validation tool with security-first design"
+        BackgroundColor="#512BD4"
+        Square150x150Logo="Resources\AppIcon\appicon.png"
+        Square44x44Logo="Resources\AppIcon\appicon.png">
+        <uap:DefaultTile Wide310x150Logo="Resources\AppIcon\appicon.png" Square71x71Logo="Resources\AppIcon\appicon.png" Square310x310Logo="Resources\AppIcon\appicon.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo"/>
+            <uap:ShowOn Tile="wide310x150Logo"/>
+            <uap:ShowOn Tile="square310x310Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+        <uap:SplashScreen Image="Resources\Splash\splash.png" BackgroundColor="#512BD4"/>
+      </uap:VisualElements>
+
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <!-- No special capabilities needed - runs entirely local -->
+    <Capability Name="internetClient" />
+  </Capabilities>
+
+</Package>

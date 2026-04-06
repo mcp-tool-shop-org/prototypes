@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Attestia.App.Pages.DeclareIntentPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer>
+        <StackPanel Padding="32,28,32,32" Spacing="20" MaxWidth="640">
+            <!-- Back + header -->
+            <StackPanel Orientation="Horizontal" Spacing="12">
+                <Button Content="Back" Click="Back_Click" />
+                <FontIcon Glyph="&#xE8A1;" FontSize="22"
+                          Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                          VerticalAlignment="Center" />
+                <TextBlock Text="Declare Intent" Style="{StaticResource AttestiaPageTitleStyle}"
+                           VerticalAlignment="Center" />
+            </StackPanel>
+
+            <TextBlock Text="Record a financial action before it happens on-chain. This creates an auditable starting point for the intent lifecycle."
+                       FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                       TextWrapping="Wrap" LineHeight="20" />
+
+            <!-- Form -->
+            <Grid Padding="20" CornerRadius="8"
+                  Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                  BorderThickness="1">
+                <StackPanel Spacing="12">
+                    <StackPanel Spacing="4">
+                        <TextBox x:Name="IntentIdBox" Header="Intent ID" PlaceholderText="Auto-generated if empty" />
+                        <TextBlock Text="Leave blank to auto-generate a unique identifier."
+                                   FontSize="11" Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
+                    </StackPanel>
+
+                    <ComboBox x:Name="KindCombo" Header="Kind" PlaceholderText="Select kind"
+                              Width="200" SelectedIndex="0">
+                        <ComboBoxItem Content="transfer" />
+                        <ComboBoxItem Content="payment" />
+                        <ComboBoxItem Content="swap" />
+                        <ComboBoxItem Content="stake" />
+                        <ComboBoxItem Content="other" />
+                    </ComboBox>
+
+                    <TextBox x:Name="DescriptionBox" Header="Description"
+                             PlaceholderText="Describe the intent"
+                             TextWrapping="Wrap" AcceptsReturn="False" Height="80" />
+
+                    <!-- Advanced parameters (collapsed by default) -->
+                    <ToggleButton x:Name="ShowAdvancedToggle" Content="Show transaction parameters"
+                                  FontSize="12" Padding="8,4"
+                                  Checked="ShowAdvanced_Toggled" Unchecked="ShowAdvanced_Toggled" />
+
+                    <StackPanel x:Name="AdvancedFieldsPanel" Visibility="Collapsed" Spacing="12">
+                        <TextBox x:Name="FromBox" Header="From Address"
+                                 PlaceholderText="0x..." />
+
+                        <TextBox x:Name="ToBox" Header="To Address"
+                                 PlaceholderText="0x..." />
+
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBox x:Name="AmountBox" Header="Amount"
+                                     PlaceholderText="100.00" Width="200" />
+                            <ComboBox x:Name="CurrencyCombo" Header="Currency"
+                                      Width="120" SelectedIndex="0">
+                                <ComboBoxItem Content="USD" />
+                                <ComboBoxItem Content="EUR" />
+                                <ComboBoxItem Content="ETH" />
+                                <ComboBoxItem Content="BTC" />
+                            </ComboBox>
+                        </StackPanel>
+
+                        <TextBox x:Name="ChainIdBox" Header="Chain ID"
+                                 PlaceholderText="e.g. evm:1" />
+                    </StackPanel>
+
+                    <Button Content="Declare Intent" Click="Declare_Click"
+                            Style="{ThemeResource AccentButtonStyle}"
+                            HorizontalAlignment="Left" Margin="0,8,0,0" />
+                </StackPanel>
+            </Grid>
+
+            <!-- Success with next steps -->
+            <Grid x:Name="SuccessPanel" Visibility="Collapsed" Padding="20" CornerRadius="8"
+                  Background="{ThemeResource SystemFillColorSuccessBackgroundBrush}"
+                  BorderBrush="{ThemeResource SystemFillColorSuccessBrush}"
+                  BorderThickness="1">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="Intent declared successfully" FontWeight="SemiBold" FontSize="14" />
+                    <Border Padding="6,3" CornerRadius="4"
+                            Background="{StaticResource AttestiaHashBackgroundBrush}" HorizontalAlignment="Left">
+                        <TextBlock x:Name="DeclaredIdText" Style="{StaticResource AttestiaHashStyle}" FontSize="13" />
+                    </Border>
+                    <TextBlock Text="Next step: Review and approve this intent to proceed with execution."
+                               FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,4,0,0">
+                        <Button Content="Review Intent" Click="ViewDeclared_Click"
+                                Style="{ThemeResource AccentButtonStyle}" />
+                        <Button Content="Declare Another" Click="DeclareAnother_Click"
+                                FontSize="12" Padding="8,4" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+            <!-- Loading / Error -->
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <ProgressRing x:Name="LoadingRing" IsActive="False" Width="20" Height="20" />
+                <TextBlock x:Name="ErrorText" FontSize="13"
+                           Foreground="{ThemeResource SystemFillColorCautionBrush}" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

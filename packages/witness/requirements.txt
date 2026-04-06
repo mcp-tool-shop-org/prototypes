@@ -1,0 +1,2 @@
+# Runtime dependencies for fixture verification
+cryptography>=41.0.0

@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/soundboard-cli/soundboard-cli.csproj" />
+    <Project Path="src/Soundboard.Client/Soundboard.Client.csproj" />
+    <Project Path="src/Soundboard.Maui.Audio/Soundboard.Maui.Audio.csproj" />
+    <Project Path="src/Soundboard.Maui/Soundboard.Maui.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Soundboard.Client.Tests/Soundboard.Client.Tests.csproj" />
+    <Project Path="tests/Soundboard.IntegrationTests/Soundboard.IntegrationTests.csproj" />
+  </Folder>
+</Solution>

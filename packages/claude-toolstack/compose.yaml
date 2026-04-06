@@ -1,0 +1,325 @@
+# Claude Toolstack — Docker Compose
+# Resource-governed tool farm for Claude Code + large repo workflows.
+#
+# Host prerequisites:
+#   - cgroup v2 active (default Ubuntu 21.10+, Fedora 31+)
+#   - systemd slices installed (see systemd/ directory)
+#   - /workspace/repos populated with org/repo trees
+#   - .env file created from .env.example
+#
+# Usage:
+#   docker compose up -d --build
+#   docker compose logs -f gateway
+
+services:
+  # ----------------------------------------------------------------
+  # Docker Socket Proxy — gateway never touches raw socket
+  # Exec-only model: gateway can inspect + exec into known containers.
+  # Cannot create containers, pull images, or mount volumes.
+  # ----------------------------------------------------------------
+  dockerproxy:
+    image: tecnativa/docker-socket-proxy:latest
+    container_name: claude-dockerproxy
+    environment:
+      # Allow only what gateway needs for exec + inspect:
+      - CONTAINERS=1  # GET /containers, /containers/{id}/json
+      - EXEC=1        # POST /containers/{id}/exec, POST /exec/{id}/start
+      - POST=1        # Required for exec create/start
+      - LOGS=1        # GET /containers/{id}/logs
+      - INFO=1        # GET /info (used by cts doctor)
+      - PING=1        # GET /_ping (health checks)
+      # Explicitly deny higher-risk surfaces:
+      - IMAGES=0
+      - BUILD=0
+      - NETWORKS=0
+      - SERVICES=0
+      - TASKS=0
+      - SWARM=0
+      - NODES=0
+      - VOLUMES=0
+      - PLUGINS=0
+      - EVENTS=0
+      - SYSTEM=0
+      - AUTH=0
+      - SECRETS=0
+      - CONFIGS=0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks: [tools-net]
+    cgroup_parent: "claude-gw.slice"
+    restart: unless-stopped
+
+  # ----------------------------------------------------------------
+  # Gateway — thin FastAPI service, 6 endpoints + hardening
+  # Contains ripgrep locally; delegates ctags/builds via docker exec.
+  # ----------------------------------------------------------------
+  gateway:
+    build: ./gateway
+    container_name: claude-gateway
+    env_file: .env
+    volumes:
+      - type: bind
+        source: /workspace/repos
+        target: /repos
+        read_only: true
+      - type: bind
+        source: ./repos.yaml
+        target: /app/repos.yaml
+        read_only: true
+      - type: volume
+        source: gw-cache
+        target: /cache
+      - type: volume
+        source: gw-audit
+        target: /audit
+    ports:
+      - "127.0.0.1:8088:8088"
+    networks: [tools-net]
+    mem_limit: 1g
+    cpus: "2"
+    cgroup_parent: "claude-gw.slice"
+    restart: unless-stopped
+    depends_on:
+      - dockerproxy
+
+  # ----------------------------------------------------------------
+  # Toolstack CLI — run cts commands inside the Docker stack
+  # Usage: docker compose run --rm toolstack cts doctor
+  #        or use scripts/cts-docker wrapper
+  # ----------------------------------------------------------------
+  toolstack:
+    build: .
+    container_name: claude-toolstack
+    profiles: [cli]
+    env_file: .env
+    environment:
+      - DOCKER_HOST=tcp://dockerproxy:2375
+    volumes:
+      - type: bind
+        source: /workspace/repos
+        target: /repos
+        read_only: true
+      - type: volume
+        source: gw-cache
+        target: /cache
+    networks: [tools-net]
+    cgroup_parent: "claude-gw.slice"
+    depends_on:
+      - dockerproxy
+
+  # ----------------------------------------------------------------
+  # Indexer — universal-ctags, generates tags into shared cache volume
+  # ----------------------------------------------------------------
+  ctags:
+    image: universalctags/ctags:latest
+    container_name: claude-ctags
+    init: true
+    entrypoint: ["/bin/sh", "-c"]
+    command: ["echo 'ctags container ready'; sleep infinity"]
+    volumes:
+      - type: bind
+        source: /workspace/repos
+        target: /repos
+        read_only: true
+      - type: volume
+        source: gw-cache
+        target: /gwcache
+    networks: [tools-net]
+    mem_limit: 4g
+    cpus: "4"
+    cgroup_parent: "claude-index.slice"
+    restart: unless-stopped
+
+  # ----------------------------------------------------------------
+  # Build runner — generic toolchain container for test/build/lint
+  # Mount repos read-write (builds may write artifacts).
+  # ----------------------------------------------------------------
+  build:
+    image: ubuntu:24.04
+    container_name: claude-build
+    init: true
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      apt-get update -qq &&
+      apt-get install -y -qq --no-install-recommends
+        curl git ca-certificates build-essential &&
+      echo 'build runner ready' &&
+      sleep infinity
+    volumes:
+      - type: bind
+        source: /workspace/repos
+        target: /repos
+      - type: volume
+        source: build-cache
+        target: /var/cache/build
+    networks: [tools-net]
+    mem_limit: 12g
+    cpus: "8"
+    cgroup_parent: "claude-build.slice"
+    tmpfs:
+      - /tmp:size=2g,mode=1777
+    restart: unless-stopped
+
+  # ----------------------------------------------------------------
+  # LSP services (opt-in via: docker compose --profile lsp up -d)
+  # Each gets its own cache volume and runs in claude-lsp.slice.
+  # ----------------------------------------------------------------
+  clangd:
+    image: silkeh/clangd:latest
+    container_name: claude-clangd
+    init: true
+    profiles: [lsp]
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      mkdir -p /cache/clangd &&
+      echo 'clangd container ready' &&
+      sleep infinity
+    volumes:
+      - type: bind
+        source: /workspace/repos
+        target: /repos
+        read_only: true
+      - type: volume
+        source: clangd-cache
+        target: /cache
+    networks: [tools-net]
+    mem_limit: 10g
+    cpus: "6"
+    cgroup_parent: "claude-lsp.slice"
+    restart: unless-stopped
+
+  rust-analyzer:
+    image: rust:latest
+    container_name: claude-rust-analyzer
+    init: true
+    profiles: [lsp]
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      rustup component add rust-analyzer 2>/dev/null || true;
+      echo 'rust-analyzer container ready';
+      sleep infinity
+    volumes:
+      - type: bind
+        source: /workspace/repos
+        target: /repos
+        read_only: true
+      - type: volume
+        source: ra-cache
+        target: /cache
+    networks: [tools-net]
+    mem_limit: 6g
+    cpus: "4"
+    cgroup_parent: "claude-lsp.slice"
+    restart: unless-stopped
+
+  tsserver:
+    image: node:20
+    container_name: claude-tsserver
+    init: true
+    profiles: [lsp]
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      npm i -g typescript 2>/dev/null;
+      echo 'tsserver container ready';
+      sleep infinity
+    volumes:
+      - type: bind
+        source: /workspace/repos
+        target: /repos
+        read_only: true
+      - type: volume
+        source: ts-cache
+        target: /cache
+    networks: [tools-net]
+    mem_limit: 4g
+    cpus: "4"
+    cgroup_parent: "claude-lsp.slice"
+    restart: unless-stopped
+
+  pylsp:
+    image: python:3.12-slim
+    container_name: claude-pylsp
+    init: true
+    profiles: [lsp]
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      pip install -q python-lsp-server 2>/dev/null;
+      echo 'pylsp container ready';
+      sleep infinity
+    volumes:
+      - type: bind
+        source: /workspace/repos
+        target: /repos
+        read_only: true
+      - type: volume
+        source: pylsp-cache
+        target: /cache
+    networks: [tools-net]
+    mem_limit: 4g
+    cpus: "4"
+    cgroup_parent: "claude-lsp.slice"
+    restart: unless-stopped
+
+  gopls:
+    image: golang:1.22
+    container_name: claude-gopls
+    init: true
+    profiles: [lsp]
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      go install golang.org/x/tools/gopls@latest 2>/dev/null;
+      echo 'gopls container ready';
+      sleep infinity
+    volumes:
+      - type: bind
+        source: /workspace/repos
+        target: /repos
+        read_only: true
+      - type: volume
+        source: gopls-cache
+        target: /cache
+    networks: [tools-net]
+    mem_limit: 4g
+    cpus: "4"
+    cgroup_parent: "claude-lsp.slice"
+    restart: unless-stopped
+
+  # ----------------------------------------------------------------
+  # Reverse proxy (opt-in via: docker compose --profile remote up -d)
+  # Terminates TLS/mTLS and forwards to gateway on tools-net.
+  # ----------------------------------------------------------------
+  proxy:
+    image: nginx:alpine
+    container_name: claude-proxy
+    profiles: [remote]
+    volumes:
+      - type: bind
+        source: ./nginx
+        target: /etc/nginx/conf.d
+        read_only: true
+      # Mount certs for mTLS (create certs/ directory with server.crt, server.key, ca.crt)
+      # - type: bind
+      #   source: ./certs
+      #   target: /etc/nginx/certs
+      #   read_only: true
+    ports:
+      - "0.0.0.0:8443:8443"
+    networks: [tools-net]
+    mem_limit: 256m
+    cpus: "1"
+    restart: unless-stopped
+    depends_on:
+      - gateway
+
+networks:
+  tools-net: {}
+
+volumes:
+  gw-cache: {}
+  gw-audit: {}
+  build-cache: {}
+  clangd-cache: {}
+  ra-cache: {}
+  ts-cache: {}
+  pylsp-cache: {}
+  gopls-cache: {}

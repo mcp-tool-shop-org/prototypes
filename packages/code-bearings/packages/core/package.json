@@ -1,0 +1,58 @@
+{
+  "name": "@code-bearings/core",
+  "version": "1.0.0",
+  "description": "Code Bearings core — source-grounded extraction, graph, review, and rendering logic",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./graph": "./dist/graph/index.js",
+    "./indexer": "./dist/indexer/index.js",
+    "./review": "./dist/review/index.js",
+    "./cards": "./dist/cards/index.js",
+    "./evidence": "./dist/evidence/index.js",
+    "./rendering": "./dist/rendering/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "lint": "tsc --noEmit",
+    "verify": "npm run lint && npm test"
+  },
+  "keywords": [
+    "code-review",
+    "code-bearings",
+    "static-analysis",
+    "module-cards",
+    "change-brief",
+    "code-graph",
+    "typescript"
+  ],
+  "author": "mcp-tool-shop",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/code-bearings.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/code-bearings#readme",
+  "dependencies": {
+    "better-sqlite3": "^11.0.0",
+    "ts-morph": "^25.0.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
+}

@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "*.js"
+      - "*.json"
+      - "test/**"
+      - ".github/workflows/**"
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "*.js"
+      - "*.json"
+      - "test/**"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x]
+
+    steps:
+    - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Run tests
+      run: npm test
+
+    - name: Verify capabilities
+      run: node prov-engine.js describe
+
+    - name: Test digest method
+      run: |
+        echo '{"value":"test"}' > test.json
+        node prov-engine.js digest test.json
+
+    - name: Test wrap method
+      run: |
+        echo '{"data":"payload"}' > payload.json
+        node prov-engine.js wrap payload.json

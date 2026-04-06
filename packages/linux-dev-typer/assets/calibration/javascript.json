@@ -1,0 +1,407 @@
+[
+  {
+    "Id": "cal-js-d1-001",
+    "Language": "javascript",
+    "Difficulty": 1,
+    "Title": "Const declaration",
+    "Code": "const name = \"Alice\";\n",
+    "Topics": ["const", "string"],
+    "Explain": ["Declares a constant variable holding a string value."]
+  },
+  {
+    "Id": "cal-js-d1-002",
+    "Language": "javascript",
+    "Difficulty": 1,
+    "Title": "Let with number",
+    "Code": "let count = 42;\ncount += 1;\n",
+    "Topics": ["let", "arithmetic"],
+    "Explain": ["Declares a mutable variable and increments it by one."]
+  },
+  {
+    "Id": "cal-js-d1-003",
+    "Language": "javascript",
+    "Difficulty": 1,
+    "Title": "Boolean flag",
+    "Code": "const isReady = true;\nconst isComplete = false;\n",
+    "Topics": ["const", "boolean"],
+    "Explain": ["Declares two boolean constants representing state flags."]
+  },
+  {
+    "Id": "cal-js-d1-004",
+    "Language": "javascript",
+    "Difficulty": 1,
+    "Title": "Template literal",
+    "Code": "const user = \"Bob\";\nconst greeting = `Hello, ${user}!`;\n",
+    "Topics": ["template literal", "string interpolation"],
+    "Explain": ["Uses a template literal to embed a variable inside a string."]
+  },
+  {
+    "Id": "cal-js-d1-005",
+    "Language": "javascript",
+    "Difficulty": 1,
+    "Title": "Array literal",
+    "Code": "const colors = [\"red\", \"green\", \"blue\"];\nconst first = colors[0];\n",
+    "Topics": ["array", "indexing"],
+    "Explain": ["Creates an array of strings and accesses the first element by index."]
+  },
+  {
+    "Id": "cal-js-d1-006",
+    "Language": "javascript",
+    "Difficulty": 1,
+    "Title": "Object literal",
+    "Code": "const point = { x: 10, y: 20 };\nconst sum = point.x + point.y;\n",
+    "Topics": ["object", "property access"],
+    "Explain": ["Creates a simple object with two numeric properties and sums them."]
+  },
+  {
+    "Id": "cal-js-d2-001",
+    "Language": "javascript",
+    "Difficulty": 2,
+    "Title": "Simple function",
+    "Code": "function add(a, b) {\n  return a + b;\n}\n\nconst result = add(3, 5);\nconsole.log(result);\n",
+    "Topics": ["function", "return", "invocation"],
+    "Explain": [
+      "Defines a function that returns the sum of two parameters.",
+      "Calls the function and logs the result to the console."
+    ]
+  },
+  {
+    "Id": "cal-js-d2-002",
+    "Language": "javascript",
+    "Difficulty": 2,
+    "Title": "If-else check",
+    "Code": "function isEven(n) {\n  if (n % 2 === 0) {\n    return true;\n  } else {\n    return false;\n  }\n}\n",
+    "Topics": ["function", "conditional", "modulo"],
+    "Explain": [
+      "Defines a function that checks whether a number is even.",
+      "Uses the modulo operator and strict equality inside an if-else block."
+    ]
+  },
+  {
+    "Id": "cal-js-d2-003",
+    "Language": "javascript",
+    "Difficulty": 2,
+    "Title": "For loop sum",
+    "Code": "function sumRange(n) {\n  let total = 0;\n  for (let i = 1; i <= n; i++) {\n    total += i;\n  }\n  return total;\n}\n",
+    "Topics": ["function", "for loop", "accumulator"],
+    "Explain": [
+      "Sums all integers from 1 to n using a for loop.",
+      "An accumulator variable collects the running total."
+    ]
+  },
+  {
+    "Id": "cal-js-d2-004",
+    "Language": "javascript",
+    "Difficulty": 2,
+    "Title": "String method chain",
+    "Code": "function normalize(input) {\n  const trimmed = input.trim();\n  const lower = trimmed.toLowerCase();\n  return lower;\n}\n\nconsole.log(normalize(\"  Hello World  \"));\n",
+    "Topics": ["string methods", "trim", "toLowerCase"],
+    "Explain": [
+      "Trims whitespace and converts a string to lowercase.",
+      "Demonstrates chaining common string transformation methods."
+    ]
+  },
+  {
+    "Id": "cal-js-d2-005",
+    "Language": "javascript",
+    "Difficulty": 2,
+    "Title": "While loop countdown",
+    "Code": "function countdown(start) {\n  let n = start;\n  while (n > 0) {\n    console.log(n);\n    n--;\n  }\n  console.log(\"Go!\");\n}\n",
+    "Topics": ["while loop", "decrement", "console.log"],
+    "Explain": [
+      "Counts down from a starting number to 1 using a while loop.",
+      "Prints each number and then prints Go when the loop ends."
+    ]
+  },
+  {
+    "Id": "cal-js-d3-001",
+    "Language": "javascript",
+    "Difficulty": 3,
+    "Title": "Array map and filter",
+    "Code": "const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];\n\nconst evenDoubled = numbers\n  .filter((n) => n % 2 === 0)\n  .map((n) => n * 2);\n\nconsole.log(evenDoubled);\n",
+    "Topics": ["array methods", "filter", "map", "arrow function"],
+    "Explain": [
+      "Filters an array to keep only even numbers.",
+      "Maps over the filtered results to double each value.",
+      "Demonstrates chaining array methods with arrow functions."
+    ]
+  },
+  {
+    "Id": "cal-js-d3-002",
+    "Language": "javascript",
+    "Difficulty": 3,
+    "Title": "Reduce to object",
+    "Code": "const fruits = [\"apple\", \"banana\", \"apple\", \"cherry\", \"banana\", \"apple\"];\n\nconst counts = fruits.reduce((acc, fruit) => {\n  acc[fruit] = (acc[fruit] || 0) + 1;\n  return acc;\n}, {});\n\nconsole.log(counts);\n",
+    "Topics": ["reduce", "object", "accumulator"],
+    "Explain": [
+      "Uses reduce to count occurrences of each fruit in an array.",
+      "The accumulator is an object where keys are fruit names and values are counts."
+    ]
+  },
+  {
+    "Id": "cal-js-d3-003",
+    "Language": "javascript",
+    "Difficulty": 3,
+    "Title": "Spread and rest",
+    "Code": "function mergeDefaults(defaults, ...overrides) {\n  let result = { ...defaults };\n  for (const obj of overrides) {\n    result = { ...result, ...obj };\n  }\n  return result;\n}\n\nconst config = mergeDefaults(\n  { theme: \"light\", lang: \"en\" },\n  { theme: \"dark\" },\n  { lang: \"fr\", debug: true }\n);\n",
+    "Topics": ["spread", "rest parameters", "object merge"],
+    "Explain": [
+      "Merges a defaults object with any number of override objects.",
+      "Uses rest parameters to collect overrides and spread to merge them."
+    ]
+  },
+  {
+    "Id": "cal-js-d3-004",
+    "Language": "javascript",
+    "Difficulty": 3,
+    "Title": "Ternary and nullish coalescing",
+    "Code": "function formatUser(user) {\n  const displayName = user.name ?? \"Anonymous\";\n  const role = user.isAdmin ? \"Admin\" : \"Member\";\n  const badge = user.verified ? \" [verified]\" : \"\";\n  return `${displayName} (${role})${badge}`;\n}\n\nconst output = formatUser({ name: null, isAdmin: false, verified: true });\nconsole.log(output);\n",
+    "Topics": ["ternary", "nullish coalescing", "template literal"],
+    "Explain": [
+      "Formats a user object into a display string.",
+      "Uses nullish coalescing for defaults and ternary for conditional labels."
+    ]
+  },
+  {
+    "Id": "cal-js-d3-005",
+    "Language": "javascript",
+    "Difficulty": 3,
+    "Title": "Closure counter",
+    "Code": "function createCounter(start = 0) {\n  let value = start;\n  return {\n    increment() { value++; },\n    decrement() { value--; },\n    get() { return value; },\n  };\n}\n\nconst counter = createCounter(10);\ncounter.increment();\ncounter.increment();\nconsole.log(counter.get());\n",
+    "Topics": ["closure", "encapsulation", "default parameter"],
+    "Explain": [
+      "Creates a counter object that closes over a private value variable.",
+      "The returned methods can read and modify the enclosed state."
+    ]
+  },
+  {
+    "Id": "cal-js-d4-001",
+    "Language": "javascript",
+    "Difficulty": 4,
+    "Title": "Class with inheritance",
+    "Code": "class Shape {\n  constructor(name) {\n    this.name = name;\n  }\n\n  area() {\n    throw new Error(`area() not implemented for ${this.name}`);\n  }\n}\n\nclass Circle extends Shape {\n  constructor(radius) {\n    super(\"Circle\");\n    this.radius = radius;\n  }\n\n  area() {\n    return Math.PI * this.radius ** 2;\n  }\n}\n\nconst c = new Circle(5);\nconsole.log(c.area().toFixed(2));\n",
+    "Topics": ["class", "inheritance", "super", "method override"],
+    "Explain": [
+      "Defines a base Shape class with an abstract-like area method.",
+      "Circle extends Shape and provides a concrete area implementation.",
+      "Demonstrates constructor chaining with super."
+    ]
+  },
+  {
+    "Id": "cal-js-d4-002",
+    "Language": "javascript",
+    "Difficulty": 4,
+    "Title": "Promise chain",
+    "Code": "function fetchUser(id) {\n  return new Promise((resolve, reject) => {\n    setTimeout(() => {\n      if (id > 0) {\n        resolve({ id, name: `User_${id}` });\n      } else {\n        reject(new Error(\"Invalid user ID\"));\n      }\n    }, 100);\n  });\n}\n\nfetchUser(1)\n  .then((user) => {\n    console.log(`Found: ${user.name}`);\n    return fetchUser(user.id + 1);\n  })\n  .then((next) => console.log(`Next: ${next.name}`))\n  .catch((err) => console.error(err.message));\n",
+    "Topics": ["Promise", "then", "catch", "setTimeout"],
+    "Explain": [
+      "Creates a promise-based function that simulates an async lookup.",
+      "Chains two sequential lookups using .then and handles errors with .catch."
+    ]
+  },
+  {
+    "Id": "cal-js-d4-003",
+    "Language": "javascript",
+    "Difficulty": 4,
+    "Title": "Destructuring and defaults",
+    "Code": "function createServer({\n  host = \"localhost\",\n  port = 3000,\n  ssl = false,\n  routes = [],\n} = {}) {\n  const protocol = ssl ? \"https\" : \"http\";\n  const base = `${protocol}://${host}:${port}`;\n\n  return {\n    base,\n    listen() {\n      console.log(`Listening on ${base}`);\n      routes.forEach((r) => {\n        console.log(`  ${r.method} ${r.path}`);\n      });\n    },\n  };\n}\n\nconst app = createServer({ port: 8080, routes: [{ method: \"GET\", path: \"/\" }] });\napp.listen();\n",
+    "Topics": ["destructuring", "default parameters", "template literal", "forEach"],
+    "Explain": [
+      "Uses parameter destructuring with defaults to configure a server.",
+      "Returns an object with a listen method that logs the server address and routes."
+    ]
+  },
+  {
+    "Id": "cal-js-d4-004",
+    "Language": "javascript",
+    "Difficulty": 4,
+    "Title": "Map and Set usage",
+    "Code": "function findDuplicates(items) {\n  const seen = new Set();\n  const duplicates = new Map();\n\n  for (const item of items) {\n    if (seen.has(item)) {\n      const count = duplicates.get(item) || 1;\n      duplicates.set(item, count + 1);\n    } else {\n      seen.add(item);\n    }\n  }\n\n  return [...duplicates.entries()].map(([value, count]) => ({\n    value,\n    occurrences: count + 1,\n  }));\n}\n\nconsole.log(findDuplicates([1, 2, 3, 2, 4, 3, 2]));\n",
+    "Topics": ["Set", "Map", "for-of", "destructuring"],
+    "Explain": [
+      "Uses a Set to track seen items and a Map to count duplicates.",
+      "Converts Map entries into an array of objects with occurrence counts."
+    ]
+  },
+  {
+    "Id": "cal-js-d4-005",
+    "Language": "javascript",
+    "Difficulty": 4,
+    "Title": "Iterator protocol",
+    "Code": "class Range {\n  constructor(start, end, step = 1) {\n    this.start = start;\n    this.end = end;\n    this.step = step;\n  }\n\n  [Symbol.iterator]() {\n    let current = this.start;\n    const { end, step } = this;\n    return {\n      next() {\n        if (current <= end) {\n          const value = current;\n          current += step;\n          return { value, done: false };\n        }\n        return { done: true };\n      },\n    };\n  }\n}\n\nfor (const n of new Range(0, 10, 3)) {\n  console.log(n);\n}\n",
+    "Topics": ["Symbol.iterator", "iterator protocol", "class", "for-of"],
+    "Explain": [
+      "Implements the iterable protocol by defining Symbol.iterator on a class.",
+      "The returned iterator yields values from start to end with a given step."
+    ]
+  },
+  {
+    "Id": "cal-js-d5-001",
+    "Language": "javascript",
+    "Difficulty": 5,
+    "Title": "Async/await with error handling",
+    "Code": "async function fetchWithRetry(url, retries = 3, delay = 1000) {\n  for (let attempt = 1; attempt <= retries; attempt++) {\n    try {\n      const response = await fetch(url);\n      if (!response.ok) {\n        throw new Error(`HTTP ${response.status}`);\n      }\n      return await response.json();\n    } catch (err) {\n      console.warn(`Attempt ${attempt} failed: ${err.message}`);\n      if (attempt === retries) {\n        throw new Error(`All ${retries} attempts failed for ${url}`);\n      }\n      await new Promise((r) => setTimeout(r, delay * attempt));\n    }\n  }\n}\n\nasync function main() {\n  try {\n    const data = await fetchWithRetry(\"https://api.example.com/data\");\n    console.log(data);\n  } catch (err) {\n    console.error(err.message);\n  }\n}\n",
+    "Topics": ["async/await", "retry", "error handling", "exponential backoff"],
+    "Explain": [
+      "Implements a fetch wrapper with configurable retry logic.",
+      "Uses exponential backoff by multiplying delay by the attempt number.",
+      "Rethrows after exhausting all retries."
+    ]
+  },
+  {
+    "Id": "cal-js-d5-002",
+    "Language": "javascript",
+    "Difficulty": 5,
+    "Title": "Generator function",
+    "Code": "function* fibonacci() {\n  let a = 0;\n  let b = 1;\n  while (true) {\n    yield a;\n    [a, b] = [b, a + b];\n  }\n}\n\nfunction* take(iterable, count) {\n  let i = 0;\n  for (const value of iterable) {\n    if (i >= count) return;\n    yield value;\n    i++;\n  }\n}\n\nfunction* map(iterable, fn) {\n  for (const value of iterable) {\n    yield fn(value);\n  }\n}\n\nconst squares = map(take(fibonacci(), 10), (n) => n ** 2);\nconsole.log([...squares]);\n",
+    "Topics": ["generator", "yield", "lazy evaluation", "composition"],
+    "Explain": [
+      "Defines an infinite Fibonacci generator.",
+      "Composes take and map generators for lazy sequence processing.",
+      "Only materializes values when spread into an array."
+    ]
+  },
+  {
+    "Id": "cal-js-d5-003",
+    "Language": "javascript",
+    "Difficulty": 5,
+    "Title": "Complex closure with memoization",
+    "Code": "function memoize(fn, keyResolver = (...args) => JSON.stringify(args)) {\n  const cache = new Map();\n\n  function memoized(...args) {\n    const key = keyResolver(...args);\n    if (cache.has(key)) {\n      return cache.get(key);\n    }\n    const result = fn.apply(this, args);\n    cache.set(key, result);\n    return result;\n  }\n\n  memoized.cache = cache;\n  memoized.clear = () => cache.clear();\n\n  return memoized;\n}\n\nconst expensiveCalc = memoize((n) => {\n  console.log(`Computing for ${n}...`);\n  return Array.from({ length: n }, (_, i) => i + 1).reduce((a, b) => a + b, 0);\n});\n\nconsole.log(expensiveCalc(100));\nconsole.log(expensiveCalc(100));\n",
+    "Topics": ["memoization", "closure", "Map", "higher-order function"],
+    "Explain": [
+      "Creates a generic memoization wrapper using closures and a Map cache.",
+      "Supports a custom key resolver and exposes cache management methods.",
+      "The second call returns the cached result without recomputing."
+    ]
+  },
+  {
+    "Id": "cal-js-d5-004",
+    "Language": "javascript",
+    "Difficulty": 5,
+    "Title": "Event emitter implementation",
+    "Code": "class EventEmitter {\n  constructor() {\n    this.listeners = new Map();\n  }\n\n  on(event, callback) {\n    if (!this.listeners.has(event)) {\n      this.listeners.set(event, []);\n    }\n    this.listeners.get(event).push({ callback, once: false });\n    return this;\n  }\n\n  once(event, callback) {\n    if (!this.listeners.has(event)) {\n      this.listeners.set(event, []);\n    }\n    this.listeners.get(event).push({ callback, once: true });\n    return this;\n  }\n\n  emit(event, ...args) {\n    const handlers = this.listeners.get(event) || [];\n    handlers.forEach((h) => h.callback(...args));\n    this.listeners.set(\n      event,\n      handlers.filter((h) => !h.once)\n    );\n    return handlers.length > 0;\n  }\n\n  off(event, callback) {\n    const handlers = this.listeners.get(event) || [];\n    this.listeners.set(\n      event,\n      handlers.filter((h) => h.callback !== callback)\n    );\n    return this;\n  }\n}\n",
+    "Topics": ["class", "Map", "event pattern", "fluent API"],
+    "Explain": [
+      "Implements a custom event emitter with on, once, emit, and off methods.",
+      "Uses a Map to store arrays of listener objects with a once flag.",
+      "Supports method chaining via returning this."
+    ]
+  },
+  {
+    "Id": "cal-js-d5-005",
+    "Language": "javascript",
+    "Difficulty": 5,
+    "Title": "Async generator pipeline",
+    "Code": "async function* readChunks(source, chunkSize = 3) {\n  for (let i = 0; i < source.length; i += chunkSize) {\n    await new Promise((r) => setTimeout(r, 10));\n    yield source.slice(i, i + chunkSize);\n  }\n}\n\nasync function* transform(chunks, fn) {\n  for await (const chunk of chunks) {\n    yield chunk.map(fn);\n  }\n}\n\nasync function collect(asyncIter) {\n  const results = [];\n  for await (const item of asyncIter) {\n    results.push(...item);\n  }\n  return results;\n}\n\nasync function main() {\n  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];\n  const pipeline = transform(readChunks(data, 3), (n) => n * 10);\n  const output = await collect(pipeline);\n  console.log(output);\n}\n\nmain();\n",
+    "Topics": ["async generator", "for-await-of", "pipeline", "chunking"],
+    "Explain": [
+      "Builds an async processing pipeline using async generators.",
+      "readChunks yields array slices with simulated async delay.",
+      "transform applies a mapping function to each chunk, and collect gathers all results."
+    ]
+  },
+  {
+    "Id": "cal-js-d6-001",
+    "Language": "javascript",
+    "Difficulty": 6,
+    "Title": "Proxy-based validation",
+    "Code": "function createValidatedObject(schema) {\n  const store = {};\n\n  return new Proxy(store, {\n    set(target, prop, value) {\n      const validator = schema[prop];\n      if (!validator) {\n        throw new Error(`Unknown property: ${prop}`);\n      }\n      const { type, required, validate } = validator;\n      if (value === undefined && required) {\n        throw new Error(`${prop} is required`);\n      }\n      if (typeof value !== type) {\n        throw new TypeError(`${prop} must be ${type}, got ${typeof value}`);\n      }\n      if (validate && !validate(value)) {\n        throw new RangeError(`${prop} failed custom validation`);\n      }\n      target[prop] = value;\n      return true;\n    },\n    get(target, prop) {\n      if (prop === \"toJSON\") {\n        return () => ({ ...target });\n      }\n      return target[prop];\n    },\n    deleteProperty(target, prop) {\n      if (schema[prop]?.required) {\n        throw new Error(`Cannot delete required property: ${prop}`);\n      }\n      delete target[prop];\n      return true;\n    },\n  });\n}\n\nconst user = createValidatedObject({\n  name: { type: \"string\", required: true },\n  age: { type: \"number\", required: false, validate: (v) => v >= 0 && v < 150 },\n});\n\nuser.name = \"Alice\";\nuser.age = 30;\nconsole.log(user.toJSON());\n",
+    "Topics": ["Proxy", "validation", "trap handlers", "schema"],
+    "Explain": [
+      "Uses a Proxy to intercept set, get, and deleteProperty operations.",
+      "Validates types and custom constraints on assignment.",
+      "Prevents deletion of required properties."
+    ]
+  },
+  {
+    "Id": "cal-js-d6-002",
+    "Language": "javascript",
+    "Difficulty": 6,
+    "Title": "Symbol-based private state",
+    "Code": "const _state = Symbol(\"state\");\nconst _dispatch = Symbol(\"dispatch\");\n\nclass Store {\n  constructor(reducer, initialState) {\n    this[_state] = initialState;\n    this[_dispatch] = reducer;\n    this.subscribers = new Set();\n  }\n\n  getState() {\n    return Object.freeze({ ...this[_state] });\n  }\n\n  dispatch(action) {\n    const prev = this[_state];\n    this[_state] = this[_dispatch](prev, action);\n    if (prev !== this[_state]) {\n      this.subscribers.forEach((fn) => {\n        try {\n          fn(this.getState());\n        } catch (err) {\n          console.error(\"Subscriber error:\", err);\n        }\n      });\n    }\n  }\n\n  subscribe(fn) {\n    this.subscribers.add(fn);\n    return () => this.subscribers.delete(fn);\n  }\n}\n\nconst reducer = (state, action) => {\n  switch (action.type) {\n    case \"INCREMENT\":\n      return { ...state, count: state.count + (action.payload || 1) };\n    case \"RESET\":\n      return { ...state, count: 0 };\n    default:\n      return state;\n  }\n};\n\nconst store = new Store(reducer, { count: 0 });\nconst unsub = store.subscribe((s) => console.log(\"State:\", s));\nstore.dispatch({ type: \"INCREMENT\", payload: 5 });\nstore.dispatch({ type: \"INCREMENT\" });\nunsub();\n",
+    "Topics": ["Symbol", "state management", "observer pattern", "Object.freeze"],
+    "Explain": [
+      "Uses Symbol keys to hide internal state and reducer from external access.",
+      "Implements a Redux-like store with dispatch, subscribe, and unsubscribe.",
+      "Freezes returned state to prevent direct mutation."
+    ]
+  },
+  {
+    "Id": "cal-js-d6-003",
+    "Language": "javascript",
+    "Difficulty": 6,
+    "Title": "Promise.allSettled with concurrency",
+    "Code": "async function mapWithConcurrency(items, fn, concurrency = 3) {\n  const results = new Array(items.length);\n  let index = 0;\n\n  async function worker() {\n    while (index < items.length) {\n      const currentIndex = index++;\n      try {\n        results[currentIndex] = {\n          status: \"fulfilled\",\n          value: await fn(items[currentIndex], currentIndex),\n        };\n      } catch (err) {\n        results[currentIndex] = {\n          status: \"rejected\",\n          reason: err,\n        };\n      }\n    }\n  }\n\n  const workers = Array.from(\n    { length: Math.min(concurrency, items.length) },\n    () => worker()\n  );\n  await Promise.all(workers);\n\n  return results;\n}\n\nasync function main() {\n  const urls = Array.from({ length: 10 }, (_, i) => `item-${i}`);\n\n  const results = await mapWithConcurrency(\n    urls,\n    async (item, idx) => {\n      await new Promise((r) => setTimeout(r, Math.random() * 100));\n      if (idx === 5) throw new Error(\"Simulated failure\");\n      return `Processed: ${item}`;\n    },\n    3\n  );\n\n  results.forEach((r, i) => {\n    const msg = r.status === \"fulfilled\" ? r.value : r.reason.message;\n    console.log(`[${i}] ${r.status}: ${msg}`);\n  });\n}\n\nmain();\n",
+    "Topics": ["concurrency", "Promise.all", "worker pool", "error isolation"],
+    "Explain": [
+      "Implements a concurrency-limited async map using a worker pool pattern.",
+      "Each worker grabs the next available index in a while loop.",
+      "Errors are captured per-item so one failure does not abort the batch."
+    ]
+  },
+  {
+    "Id": "cal-js-d6-004",
+    "Language": "javascript",
+    "Difficulty": 6,
+    "Title": "WeakRef and FinalizationRegistry",
+    "Code": "class Cache {\n  constructor() {\n    this.refs = new Map();\n    this.registry = new FinalizationRegistry((key) => {\n      const ref = this.refs.get(key);\n      if (ref && ref.deref() === undefined) {\n        this.refs.delete(key);\n        console.log(`Cache entry '${key}' was garbage collected`);\n      }\n    });\n  }\n\n  set(key, value) {\n    const wrapped = { value };\n    this.refs.set(key, new WeakRef(wrapped));\n    this.registry.register(wrapped, key);\n    return wrapped;\n  }\n\n  get(key) {\n    const ref = this.refs.get(key);\n    if (!ref) return undefined;\n    const obj = ref.deref();\n    if (obj === undefined) {\n      this.refs.delete(key);\n      return undefined;\n    }\n    return obj.value;\n  }\n\n  has(key) {\n    return this.get(key) !== undefined;\n  }\n\n  get size() {\n    let count = 0;\n    for (const [key, ref] of this.refs) {\n      if (ref.deref() !== undefined) count++;\n      else this.refs.delete(key);\n    }\n    return count;\n  }\n}\n",
+    "Topics": ["WeakRef", "FinalizationRegistry", "cache", "garbage collection"],
+    "Explain": [
+      "Builds a cache that holds weak references to values, allowing garbage collection.",
+      "FinalizationRegistry cleans up Map entries when objects are collected.",
+      "The size getter prunes stale entries on access."
+    ]
+  },
+  {
+    "Id": "cal-js-d6-005",
+    "Language": "javascript",
+    "Difficulty": 6,
+    "Title": "AbortController and async race",
+    "Code": "function withTimeout(promise, ms, message = \"Operation timed out\") {\n  const controller = new AbortController();\n\n  const timeout = new Promise((_, reject) => {\n    const id = setTimeout(() => {\n      controller.abort();\n      reject(new Error(message));\n    }, ms);\n    promise.finally(() => clearTimeout(id));\n  });\n\n  return {\n    promise: Promise.race([promise, timeout]),\n    abort: () => controller.abort(),\n    signal: controller.signal,\n  };\n}\n\nasync function fetchData(signal) {\n  const steps = [\"connecting\", \"authenticating\", \"downloading\"];\n  for (const step of steps) {\n    if (signal.aborted) throw new Error(\"Aborted\");\n    console.log(step);\n    await new Promise((r) => setTimeout(r, 200));\n  }\n  return { data: \"complete\" };\n}\n\nasync function main() {\n  const { promise, signal } = withTimeout(\n    fetchData(new AbortController().signal),\n    500,\n    \"Fetch timed out\"\n  );\n  try {\n    const result = await promise;\n    console.log(result);\n  } catch (err) {\n    console.error(err.message);\n  }\n}\n\nmain();\n",
+    "Topics": ["AbortController", "Promise.race", "timeout", "cancellation"],
+    "Explain": [
+      "Wraps any promise with a timeout using Promise.race and AbortController.",
+      "Returns the abort function and signal for external cancellation.",
+      "Cleans up the timeout if the original promise resolves first."
+    ]
+  },
+  {
+    "Id": "cal-js-d7-001",
+    "Language": "javascript",
+    "Difficulty": 7,
+    "Title": "Async middleware pipeline",
+    "Code": "class Pipeline {\n  constructor() {\n    this.middlewares = [];\n  }\n\n  use(fn) {\n    this.middlewares.push(fn);\n    return this;\n  }\n\n  async execute(context) {\n    let index = -1;\n\n    const dispatch = async (i) => {\n      if (i <= index) {\n        throw new Error(\"next() called multiple times\");\n      }\n      index = i;\n\n      if (i >= this.middlewares.length) {\n        return;\n      }\n\n      const middleware = this.middlewares[i];\n      await middleware(context, async () => {\n        await dispatch(i + 1);\n      });\n    };\n\n    try {\n      await dispatch(0);\n    } catch (err) {\n      context.error = err;\n      throw err;\n    }\n\n    return context;\n  }\n}\n\nconst pipeline = new Pipeline();\n\npipeline\n  .use(async (ctx, next) => {\n    ctx.log = [];\n    ctx.log.push(\"start:auth\");\n    ctx.user = { id: 1, role: \"admin\" };\n    await next();\n    ctx.log.push(\"end:auth\");\n  })\n  .use(async (ctx, next) => {\n    ctx.log.push(\"start:validate\");\n    if (!ctx.body) {\n      ctx.body = { validated: true };\n    }\n    await next();\n    ctx.log.push(\"end:validate\");\n  })\n  .use(async (ctx, next) => {\n    ctx.log.push(\"start:handler\");\n    ctx.result = {\n      user: ctx.user,\n      body: ctx.body,\n      timestamp: Date.now(),\n    };\n    await next();\n    ctx.log.push(\"end:handler\");\n  });\n\npipeline.execute({}).then((ctx) => {\n  console.log(\"Log:\", ctx.log);\n  console.log(\"Result:\", ctx.result);\n});\n",
+    "Topics": ["middleware", "async/await", "composition", "Koa-style pipeline"],
+    "Explain": [
+      "Implements a Koa-style async middleware pipeline with next() dispatch.",
+      "Each middleware can run code before and after calling next.",
+      "Guards against calling next() multiple times with an index check."
+    ]
+  },
+  {
+    "Id": "cal-js-d7-002",
+    "Language": "javascript",
+    "Difficulty": 7,
+    "Title": "Reactive observable system",
+    "Code": "class Observable {\n  constructor(subscribeFn) {\n    this._subscribe = subscribeFn;\n  }\n\n  subscribe(observer) {\n    const safeObserver = {\n      next: (v) => observer.next?.(v),\n      error: (e) => observer.error?.(e),\n      complete: () => observer.complete?.(),\n    };\n    const teardown = this._subscribe(safeObserver);\n    return {\n      unsubscribe: typeof teardown === \"function\" ? teardown : () => {},\n    };\n  }\n\n  pipe(...operators) {\n    return operators.reduce((source, op) => op(source), this);\n  }\n\n  static from(iterable) {\n    return new Observable((observer) => {\n      try {\n        for (const item of iterable) {\n          observer.next(item);\n        }\n        observer.complete();\n      } catch (err) {\n        observer.error(err);\n      }\n    });\n  }\n\n  static interval(ms) {\n    return new Observable((observer) => {\n      let count = 0;\n      const id = setInterval(() => observer.next(count++), ms);\n      return () => clearInterval(id);\n    });\n  }\n}\n\nfunction map(fn) {\n  return (source) =>\n    new Observable((observer) => {\n      return source.subscribe({\n        next: (v) => observer.next(fn(v)),\n        error: (e) => observer.error(e),\n        complete: () => observer.complete(),\n      }).unsubscribe;\n    });\n}\n\nfunction filter(predicate) {\n  return (source) =>\n    new Observable((observer) => {\n      return source.subscribe({\n        next: (v) => predicate(v) && observer.next(v),\n        error: (e) => observer.error(e),\n        complete: () => observer.complete(),\n      }).unsubscribe;\n    });\n}\n\nfunction take(count) {\n  return (source) =>\n    new Observable((observer) => {\n      let taken = 0;\n      const sub = source.subscribe({\n        next: (v) => {\n          if (taken < count) {\n            observer.next(v);\n            taken++;\n            if (taken >= count) {\n              observer.complete();\n              sub.unsubscribe();\n            }\n          }\n        },\n        error: (e) => observer.error(e),\n        complete: () => observer.complete(),\n      });\n      return () => sub.unsubscribe();\n    });\n}\n\nconst sub = Observable.interval(100)\n  .pipe(\n    filter((n) => n % 2 === 0),\n    map((n) => n * 10),\n    take(5)\n  )\n  .subscribe({\n    next: (v) => console.log(\"Value:\", v),\n    complete: () => console.log(\"Done\"),\n  });\n",
+    "Topics": ["Observable", "reactive", "operator composition", "teardown"],
+    "Explain": [
+      "Implements a minimal RxJS-style Observable with subscribe, pipe, from, and interval.",
+      "Operators map, filter, and take are higher-order functions returning new Observables.",
+      "Each operator properly forwards error and complete signals and returns teardown logic."
+    ]
+  },
+  {
+    "Id": "cal-js-d7-003",
+    "Language": "javascript",
+    "Difficulty": 7,
+    "Title": "Dependency injection container",
+    "Code": "class Container {\n  constructor() {\n    this.registrations = new Map();\n    this.singletons = new Map();\n    this.resolving = new Set();\n  }\n\n  register(name, factory, { singleton = false, dependencies = [] } = {}) {\n    this.registrations.set(name, { factory, singleton, dependencies });\n    return this;\n  }\n\n  resolve(name) {\n    if (this.singletons.has(name)) {\n      return this.singletons.get(name);\n    }\n\n    const registration = this.registrations.get(name);\n    if (!registration) {\n      throw new Error(`No registration found for '${name}'`);\n    }\n\n    if (this.resolving.has(name)) {\n      throw new Error(\n        `Circular dependency detected: ${[...this.resolving, name].join(\" -> \")}`\n      );\n    }\n\n    this.resolving.add(name);\n\n    try {\n      const deps = registration.dependencies.map((dep) => this.resolve(dep));\n      const instance = registration.factory(...deps);\n\n      if (registration.singleton) {\n        this.singletons.set(name, instance);\n      }\n\n      return instance;\n    } finally {\n      this.resolving.delete(name);\n    }\n  }\n\n  createScope() {\n    const scoped = new Container();\n    scoped.registrations = new Map(this.registrations);\n    scoped.singletons = new Map(this.singletons);\n    return scoped;\n  }\n}\n\nconst container = new Container();\n\ncontainer.register(\"config\", () => ({\n  dbUrl: \"postgres://localhost:5432/app\",\n  cacheTimeout: 3000,\n}), { singleton: true });\n\ncontainer.register(\"logger\", () => ({\n  info: (msg) => console.log(`[INFO] ${msg}`),\n  error: (msg) => console.error(`[ERROR] ${msg}`),\n}), { singleton: true });\n\ncontainer.register(\n  \"database\",\n  (config, logger) => {\n    logger.info(`Connecting to ${config.dbUrl}`);\n    return {\n      query: (sql) => {\n        logger.info(`Executing: ${sql}`);\n        return [{ id: 1, name: \"test\" }];\n      },\n    };\n  },\n  { singleton: true, dependencies: [\"config\", \"logger\"] }\n);\n\ncontainer.register(\n  \"userService\",\n  (db, logger) => ({\n    getUser: (id) => {\n      logger.info(`Fetching user ${id}`);\n      return db.query(`SELECT * FROM users WHERE id = ${id}`);\n    },\n  }),\n  { dependencies: [\"database\", \"logger\"] }\n);\n\nconst userService = container.resolve(\"userService\");\nconsole.log(userService.getUser(42));\n",
+    "Topics": ["dependency injection", "IoC container", "singleton", "circular dependency detection"],
+    "Explain": [
+      "Implements a dependency injection container with factory registration.",
+      "Supports singleton lifetime, dependency resolution, and circular dependency detection.",
+      "createScope produces a child container that inherits registrations."
+    ]
+  }
+]

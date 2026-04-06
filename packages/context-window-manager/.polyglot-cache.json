@@ -1,0 +1,1895 @@
+{
+  "version": 1,
+  "entries": {
+    "317b0b3101a2ab97": {
+      "translation": "**LLMセッションにおける、KVキャッシュ永続化による損失のないコンテキスト復元**",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "fb6c4a6c12a0dd5f": {
+      "translation": "これは何ですか？",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "63edd0f877ded895": {
+      "translation": "Context Window Manager (CWM) は、LLMアプリケーションにおける**コンテキスト枯渇問題**を解決するMCPサーバーです。コンテキストが上限に達して会話履歴が失われる代わりに、CWMを使用すると、以下のことが可能になります。",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "66bdd71b1497f8e0": {
+      "translation": "- 現在のコンテキストを永続ストレージに**保存**\n- 後で、情報損失なしに**復元**\n- 異なる会話の**ブランチ**を試すために、コンテキストを複製\n- 最後に中断した場所から**再開**",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "7fbb5507441d9f39": {
+      "translation": "要約やRAGアプローチとは異なり、CWMは実際のKVキャッシュテンソルを保持するため、**真に損失のない復元**を実現します。",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "2fee4ce31f4e8dc1": {
+      "translation": "仕組み",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "7fe9937b1ce79ed2": {
+      "translation": "CWMは、以下の技術を活用します。\n- セッション分離のための、**vLLMのプレフィックスキャッシュ**（`cache_salt`を使用）\n- 階層型KVキャッシュストレージのための**LMCache**（GPU → CPU → ディスク → Redis）\n- Claude Codeやその他のMCPクライアントとのシームレスな統合のための**MCPプロトコル**",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "d182d24c54cc50a7": {
+      "translation": "クイックスタート",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "651b78d8c0ebde91": {
+      "translation": "前提条件",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "2ada5e6538565829": {
+      "translation": "- Python 3.11+\n- プレフィックスキャッシュが有効になっているvLLMサーバー\n- vLLMと連携するように構成されたLMCache",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "d88005a6cdf9c925": {
+      "translation": "インストール",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "c184f48f73a05ae0": {
+      "translation": "設定",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "1f217b0bf280ab0a": {
+      "translation": "Claude Codeの設定ファイル（`.claude/settings.json`）に追加します。",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "5a1bcd947bd94196": {
+      "translation": "使い方",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "fc8e4bf84165ea76": {
+      "translation": "機能",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "95f675ec42192abb": {
+      "translation": "主要な操作",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "67731479bd4e364b": {
+      "translation": "説明",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "69e70b451ff65bf9": {
+      "translation": "------",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "651826877e732548": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "e76dda190cd229b8": {
+      "translation": "セッションのコンテキストをストレージに保存",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "be66901ca47eb57f": {
+      "translation": "保存されたコンテキストを復元",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "d253b7c7c62cb2b4": {
+      "translation": "利用可能なコンテキストウィンドウの一覧表示",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "0395a25402b50d0d": {
+      "translation": "セッション/ウィンドウの詳細情報を取得",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "4cdc3b5b1e805fa5": {
+      "translation": "コンテキストを複製して、異なる会話の展開を試す",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "2eed63012f0e7f48": {
+      "translation": "保存されたコンテキストウィンドウを削除",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "8febc4f2b02fe34d": {
+      "translation": "ストレージの階層",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "1fc24f30ab3af7e2": {
+      "translation": "CWMは、ストレージを自動的に階層間で管理します。",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "4501632c7098386e": {
+      "translation": "1. **CPUメモリ** - 高速だが、容量が限られている\n2. **ディスク** - 大容量で、圧縮されている\n3. **Redis** - 分散型で、インスタンス間で共有される",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "f65751954b5e2612": {
+      "translation": "セッションの分離",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "193c3919d76b5fd4": {
+      "translation": "各セッションには、一意の`cache_salt`が割り当てられ、以下のことが保証されます。\n- セッション間のデータ漏洩がない\n- タイミング攻撃からの保護\n- コンテキストの明確な分離",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "80f80f9b2d0ddf56": {
+      "translation": "ドキュメント",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "9534531ac4a933ab": {
+      "translation": "ドキュメント",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "52494e60f0fbc76b": {
+      "translation": "----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "7e997f2ad6e32606": {
+      "translation": "開始方法とワークフロー",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "4c20f80adb41b8e7": {
+      "translation": "完全なAPIリファレンス",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "0aa3b870ac0c1d15": {
+      "translation": "アーキテクチャの詳細",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "8dd5ea20de3fcdef": {
+      "translation": "セキュリティに関する考慮事項",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "8116c6005bf99d12": {
+      "translation": "エラーの種類と対処方法",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "00a01c1f9b6b7476": {
+      "translation": "開発段階とマイルストーン",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "c0a982401d04462d": {
+      "translation": "開発ガイドライン",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "64a656d26ea70681": {
+      "translation": "要件",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "0d7550a8104f2372": {
+      "translation": "vLLMサーバーの設定",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "6df5071911fea806": {
+      "translation": "LMCache環境",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "5d5ad8a86ff28f36": {
+      "translation": "開発",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "ed464198ce2dc2d2": {
+      "translation": "詳細なガイドラインについては、[CONTRIBUTING.md](docs/CONTRIBUTING.md) を参照してください。",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "ed1fecfaeab8bc26": {
+      "translation": "ロードマップ",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "13c42bc1db591010": {
+      "translation": "- [x] 段階0：ドキュメントとアーキテクチャ\n- [x] 段階1：コアインフラストラクチャ\n- [x] 段階2：MCPサーバーシェル\n- [x] 段階3：保存機能の実装\n- [x] 段階4：復元機能の実装\n- [x] 段階5：高度な機能（複製、自動保存）\n- [x] 段階6：本番環境での安定化\n- [x] 段階7：統合と改善",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "07faf825c29aa10a": {
+      "translation": "詳細は、[ROADMAP.md](docs/ROADMAP.md) を参照してください。",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "08ea9dfbe36d981b": {
+      "translation": "ライセンス",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "de62a908ee81dab8": {
+      "translation": "MITライセンス - 詳細については、[LICENSE](LICENSE) を参照してください。",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "e125600089b68cca": {
+      "translation": "謝辞",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "65da9d927c56a3ae": {
+      "translation": "- [vLLM](https://github.com/vllm-project/vllm) - 高スループットLLMサーバー\n- [LMCache](https://github.com/LMCache/LMCache) - KVキャッシュ永続化レイヤー\n- [Model Context Protocol](https://modelcontextprotocol.io/) - 統合標準\n- [Recursive Language Models](https://arxiv.org/abs/2512.24601) - コンテキスト管理のインスピレーション",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "8105677e590065e2": {
+      "translation": "ステータス",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "cd0b9cba52adfa49": {
+      "translation": "**ベータ版 (v0.6.4)** - 本番環境での利用を想定した改善が完了しました。CI環境を統合し、ワークフローを2つにまとめました。366個のテストが正常に完了しました。",
+      "model": "translategemma:12b",
+      "timestamp": 1772033953314
+    },
+    "745c4cc602d2e026": {
+      "translation": "**通过 KV 缓存持久化实现 LLM 会话的无损上下文恢复**",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "302a89c031e1b99b": {
+      "translation": "这是什么？",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "7a21e21447c97bef": {
+      "translation": "Context Window Manager (CWM) 是一个 MCP 服务器，用于解决 LLM 应用中的 **上下文耗尽问题**。 与传统方法不同，当上下文达到上限时，CWM 不会丢失您的对话历史，而是允许您：",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "3d5206098481b9e3": {
+      "translation": "- **冻结**当前的上下文并将其保存到持久存储中\n- 稍后以零信息损失的方式**恢复**它\n- **克隆**上下文以探索不同的对话分支\n- 准确地**恢复**到您上次离开的位置",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "bdb7c623acdea531": {
+      "translation": "与摘要或 RAG 方法不同，CWM 保留了实际的 KV 缓存张量，从而实现**真正的、无损的恢复**。",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "96fff1a6471ac37c": {
+      "translation": "工作原理",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "baf59f138663ecfc": {
+      "translation": "CWM 利用：\n- **vLLM 的前缀缓存**，使用 `cache_salt` 实现会话隔离\n- **LMCache** 用于分层 KV 缓存存储（GPU → CPU → 磁盘 → Redis）\n- **MCP 协议**，实现与 Claude Code 和其他 MCP 客户端的无缝集成",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "3e6394397900eaa1": {
+      "translation": "快速入门",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "f6c30ea5bc48fbb7": {
+      "translation": "先决条件",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "17cbb653d63fe70a": {
+      "translation": "- Python 3.11+\n- 启用了前缀缓存的 vLLM 服务器\n- 已配置为与 vLLM 集成的 LMCache",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "108c3bdaeaac02ca": {
+      "translation": "安装",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "f485b61099d5d966": {
+      "translation": "配置",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "3018164adbccacad": {
+      "translation": "将以下内容添加到您的 Claude Code 设置 (`.claude/settings.json`)：",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "0701e0fdda9d1418": {
+      "translation": "用法",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "c6c20d03bfc6bd19": {
+      "translation": "功能",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "c00d72dff5e91474": {
+      "translation": "核心操作",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "601d6e570e22e932": {
+      "translation": "描述",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "7b7596c3d1d0c899": {
+      "translation": "------",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "dd5b28ff24f8cbdb": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "d4d514dbaa5adc85": {
+      "translation": "将会话上下文快照保存到存储",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "d55154dab9684ec3": {
+      "translation": "从已保存的窗口恢复上下文",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "188b8d1f6a0bf7ad": {
+      "translation": "列出可用的上下文窗口",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "d7a079714c917295": {
+      "translation": "获取有关会话/窗口的详细信息",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "33d5107fa444a79f": {
+      "translation": "克隆上下文以进行探索",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "397a50ac156a0569": {
+      "translation": "删除已保存的窗口",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "12981a60f9074380": {
+      "translation": "存储层级",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "3bc330409f3adb62": {
+      "translation": "CWM 自动管理不同层级的存储：",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "1a411b8629e7357e": {
+      "translation": "1. **CPU 内存** - 速度快，容量有限\n2. **磁盘** - 容量大，已压缩\n3. **Redis** - 分布式，在多个实例之间共享",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "dd0b965c4e9ccfc5": {
+      "translation": "会话隔离",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "6a09dff2205ea2c1": {
+      "translation": "每个会话都分配一个唯一的 `cache_salt`，以确保：\n- 没有跨会话的数据泄露\n- 防止时间攻击\n- 上下文的清晰分离",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "250492556e6757d7": {
+      "translation": "文档",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "b5a9b6513b5608f3": {
+      "translation": "文档",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "7bc35c26567fc0cb": {
+      "translation": "----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "4acccb406df0865a": {
+      "translation": "入门和工作流程",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "f4229ac343c19768": {
+      "translation": "完整的 API 参考",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "81376bc61f47f3b6": {
+      "translation": "技术架构深入分析",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "ae11e40d4b1b0162": {
+      "translation": "安全注意事项",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "21bb626ae59e0e87": {
+      "translation": "错误分类和处理",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "97de35939fd65601": {
+      "translation": "开发阶段和里程碑",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "45896678d68efc12": {
+      "translation": "开发指南",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "b4ca1bd2135384dc": {
+      "translation": "要求",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "ae2e0514f014a029": {
+      "translation": "vLLM 服务器配置",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "7e887f3b5f7ef66d": {
+      "translation": "LMCache 环境",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "97f802ddcc5bda79": {
+      "translation": "开发",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "6ab7be34c7890db0": {
+      "translation": "有关详细指南，请参阅 [CONTRIBUTING.md](docs/CONTRIBUTING.md)。",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "5258a1a1aff817f8": {
+      "translation": "路线图",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "f313c61599588d0b": {
+      "translation": "- [x] 阶段 0：文档和架构\n- [x] 阶段 1：核心基础设施\n- [x] 阶段 2：MCP 服务器 Shell\n- [x] 阶段 3：冻结实现\n- [x] 阶段 4：恢复实现\n- [x] 阶段 5：高级功能（克隆、自动冻结）\n- [x] 阶段 6：生产环境优化\n- [x] 阶段 7：集成和完善",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "7fd9807ea5e4a914": {
+      "translation": "有关详细信息，请参阅 [ROADMAP.md](docs/ROADMAP.md)。",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "1fb815b9a436fadb": {
+      "translation": "许可证",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "be168ec8897724d8": {
+      "translation": "MIT 许可证 - 详情请参阅 [LICENSE](LICENSE)。",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "cfad298df606f4c8": {
+      "translation": "鸣谢",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "fb10a1341aa4903d": {
+      "translation": "- [vLLM](https://github.com/vllm-project/vllm) - 高吞吐量 LLM 服务\n- [LMCache](https://github.com/LMCache/LMCache) - KV 缓存持久化层\n- [Model Context Protocol](https://modelcontextprotocol.io/) - 集成标准\n- [Recursive Language Models](https://arxiv.org/abs/2512.24601) - 上下文管理的灵感来源",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "32267c3a5dcfbc50": {
+      "translation": "状态",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "626d9c82815b9f0c": {
+      "translation": "**Beta 版本 (v0.6.4)** - 生产环境优化工作已完成。持续集成 (CI) 已整合 (2 个工作流程)。 366 个测试通过。",
+      "model": "translategemma:12b",
+      "timestamp": 1772033982623
+    },
+    "5fd4161848374e74": {
+      "translation": "**Restauración de contexto sin pérdidas para sesiones de LLM mediante la persistencia de la caché KV**",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014698
+    },
+    "1676e9ca02607edc": {
+      "translation": "¿Qué es esto?",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014698
+    },
+    "13c21ca3318dbeef": {
+      "translation": "Context Window Manager (CWM) es un servidor MCP que resuelve el **problema de agotamiento del contexto** en aplicaciones de LLM. En lugar de perder el historial de la conversación cuando el contexto se llena, CWM le permite:",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014698
+    },
+    "698eed6b23ee12c6": {
+      "translation": "- **Congelar** el contexto actual y almacenarlo de forma persistente.\n- **Descongelarlo** más tarde sin pérdida de información.\n- **Clonar** contextos para explorar diferentes ramas de la conversación.\n- **Reanudar** exactamente donde lo dejó.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014698
+    },
+    "b756f0b42660b928": {
+      "translation": "A diferencia de los enfoques de resumen o RAG, CWM conserva los tensores de la caché KV reales, lo que le brinda una **restauración verdadera y sin pérdidas**.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014698
+    },
+    "130a763c03e14db5": {
+      "translation": "Cómo funciona",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014698
+    },
+    "b360e779b598e6d0": {
+      "translation": "CWM utiliza:\n- El **almacenamiento en caché de prefijos de vLLM** con `cache_salt` para el aislamiento de sesiones.\n- **LMCache** para el almacenamiento de la caché KV en niveles (GPU → CPU → Disco → Redis).\n- El **protocolo MCP** para una integración perfecta con Claude Code y otros clientes MCP.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014698
+    },
+    "785321ff8279266b": {
+      "translation": "Comienzo rápido",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014698
+    },
+    "c8d1eb8a11343ac4": {
+      "translation": "Requisitos previos",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "7ad1c46c66069382": {
+      "translation": "- Python 3.11+\n- Servidor vLLM con el almacenamiento en caché de prefijos habilitado.\n- LMCache configurado con vLLM.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "c9f8b84d688aa64b": {
+      "translation": "Instalación",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "9489401db048958d": {
+      "translation": "Configuración",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "360bedf80bed979c": {
+      "translation": "Agregue lo siguiente a la configuración de Claude Code (`.claude/settings.json`):",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "ef34faaf2d434dc4": {
+      "translation": "Uso",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "422fb4b958d31758": {
+      "translation": "Características",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "f8613a6de2e42a98": {
+      "translation": "Operaciones principales",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "a0102622d03d4c0f": {
+      "translation": "Descripción",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "4110d0f8faecdeab": {
+      "translation": "------",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "184e6ce2c9237895": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "59322f8ac30d91b8": {
+      "translation": "Congelar el contexto de la sesión y almacenarlo.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "1b868880ee700f09": {
+      "translation": "Restaurar el contexto desde una ventana guardada.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "d11999411ef72656": {
+      "translation": "Listar las ventanas de contexto disponibles.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "36dd9dc8653eab0e": {
+      "translation": "Obtener información detallada de la sesión/ventana.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "a9a0c9fcb8744446": {
+      "translation": "Crear una rama de contexto para su exploración.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "6bab43c22ef25b25": {
+      "translation": "Eliminar una ventana guardada.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "f724779bb4b9fbb1": {
+      "translation": "Niveles de almacenamiento",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "6ff4ce14fcf227d9": {
+      "translation": "CWM gestiona automáticamente el almacenamiento en diferentes niveles:",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "670e7076a12a818c": {
+      "translation": "1. **Memoria de la CPU**: Rápida, capacidad limitada.\n2. **Disco**: Gran capacidad, comprimido.\n3. **Redis**: Distribuido, compartido entre instancias.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "afc09b3f0f143f12": {
+      "translation": "Aislamiento de sesiones",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "26c69ced1cafcfd1": {
+      "translation": "Cada sesión recibe un `cache_salt` único, lo que garantiza:\n- Sin fuga de datos entre sesiones.\n- Protección contra ataques de sincronización.\n- Separación limpia de contextos.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "00cab4713b0edf9d": {
+      "translation": "Documentación",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "6a8844036324be82": {
+      "translation": "Documento",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "7566658296739da2": {
+      "translation": "----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "8b86795f58a9657a": {
+      "translation": "Comienzo y flujos de trabajo",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "c2d90d934a9e77c9": {
+      "translation": "Referencia completa de la API.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "ea22dd0aa389ebe0": {
+      "translation": "Análisis profundo de la arquitectura técnica.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "e580a94880367f98": {
+      "translation": "Consideraciones de seguridad.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "01d50ba58e25ad95": {
+      "translation": "Taxonomía y manejo de errores.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "252eae9a16c8c9b5": {
+      "translation": "Fases y hitos de desarrollo.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "752d1da42c11ad99": {
+      "translation": "Directrices de desarrollo.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "e6fdcd94a8c0ff6f": {
+      "translation": "Requisitos",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "29e23a249dc150c5": {
+      "translation": "Configuración del servidor vLLM",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "ccdf2194e97d586a": {
+      "translation": "Entorno LMCache",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "d8f95608a506567a": {
+      "translation": "Desarrollo",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "a1a55dee1e71f8ff": {
+      "translation": "Consulte [CONTRIBUTING.md](docs/CONTRIBUTING.md) para obtener pautas detalladas.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "0eabacbefdcaca40": {
+      "translation": "Hoja de ruta",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "37698cf341a16d7f": {
+      "translation": "- [x] Fase 0: Documentación y arquitectura.\n- [x] Fase 1: Infraestructura central.\n- [x] Fase 2: Shell del servidor MCP.\n- [x] Fase 3: Implementación de congelación.\n- [x] Fase 4: Implementación de descongelación.\n- [x] Fase 5: Características avanzadas (clonación, congelación automática).\n- [x] Fase 6: Endurecimiento para producción.\n- [x] Fase 7: Integración y pulido.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "ab8b5070f1657458": {
+      "translation": "Consulte [ROADMAP.md](docs/ROADMAP.md) para obtener más detalles.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "9572f74b6d3f62b1": {
+      "translation": "Licencia",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "984ad966d182e4b1": {
+      "translation": "Licencia MIT: consulte [LICENSE](LICENSE) para obtener más detalles.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "8d50e4ef29d73d48": {
+      "translation": "Agradecimientos",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "1f98fe237f441d64": {
+      "translation": "- [vLLM](https://github.com/vllm-project/vllm): Servicio de LLM de alto rendimiento.\n- [LMCache](https://github.com/LMCache/LMCache): Capa de persistencia de caché KV.\n- [Model Context Protocol](https://modelcontextprotocol.io/): Estándar de integración.\n- [Recursive Language Models](https://arxiv.org/abs/2512.24601): Inspiración para la gestión de contextos.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "bc143d1ce1653d6a": {
+      "translation": "Estado",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "920b0a82e96fdded": {
+      "translation": "**Beta (v0.6.4)**: Se ha completado la optimización para producción. El sistema de integración continua (CI) se ha consolidado (2 flujos de trabajo). Se han superado 366 pruebas.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034014699
+    },
+    "6015f5e5e5b01c0f": {
+      "translation": "**Restauration contextuelle sans perte pour les sessions LLM grâce à la persistance du cache KV**",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "2b0c331122d037a3": {
+      "translation": "Qu'est-ce que c'est ?",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "ffac0fd4b15d2f4d": {
+      "translation": "Context Window Manager (CWM) est un serveur MCP qui résout le **problème de saturation du contexte** dans les applications LLM. Au lieu de perdre l'historique de votre conversation lorsque le contexte est plein, CWM vous permet de :",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "e0ec55cd16f017a6": {
+      "translation": "- **\"Geler\"** votre contexte actuel et de le stocker de manière persistante.\n- de le **\"dégeler\"** ultérieurement sans aucune perte d'information.\n- de **\"cloner\"** des contextes pour explorer différentes branches de conversation.\n- de **reprendre** exactement là où vous vous étiez arrêté.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "8b993c760fd555ac": {
+      "translation": "Contrairement aux approches de résumé ou de RAG, CWM conserve les tenseurs de cache KV réels, ce qui vous offre une **restauration véritablement sans perte**.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "bd900f2b327065ec": {
+      "translation": "Comment ça marche",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "6fe716eed2176bfb": {
+      "translation": "CWM utilise :\n- le **prefix caching de vLLM** avec `cache_salt` pour l'isolation des sessions.\n- **LMCache** pour le stockage hiérarchique du cache KV (GPU → CPU → Disque → Redis).\n- le **protocole MCP** pour une intégration transparente avec Claude Code et d'autres clients MCP.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "caef1b750e85e405": {
+      "translation": "Démarrage rapide",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "de5ffc5e5ee34cae": {
+      "translation": "Prérequis",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "3a8e602b01729897": {
+      "translation": "- Python 3.11+\n- Serveur vLLM avec le prefix caching activé.\n- LMCache configuré avec vLLM.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "4077bbda21e83042": {
+      "translation": "Installation",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "b34ee5ed97e49101": {
+      "translation": "Configuration",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "7d5b5521cdf9ccb8": {
+      "translation": "Ajoutez ceci à vos paramètres de Claude Code (`.claude/settings.json`) :",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "35b366dd8551138a": {
+      "translation": "Utilisation",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "9244388ee3d9cea2": {
+      "translation": "Fonctionnalités",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "7faef419d90990b9": {
+      "translation": "Opérations principales",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "9a51c5b4f05710c0": {
+      "translation": "Description",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "86d5118e773cafab": {
+      "translation": "------",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "42738f280dbf39b2": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "688192360a88c9a4": {
+      "translation": "Enregistrer le contexte de la session dans le stockage.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "213f3faae641c8c3": {
+      "translation": "Restaurer le contexte à partir d'une fenêtre enregistrée.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "40d782962f79e0e4": {
+      "translation": "Lister les fenêtres de contexte disponibles.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "8b8734f7fbf63e84": {
+      "translation": "Obtenir des informations détaillées sur la session/la fenêtre.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "1277ab6dbf29b7ef": {
+      "translation": "Créer une branche de contexte pour l'exploration.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "a5b45dad0a18ef96": {
+      "translation": "Supprimer une fenêtre enregistrée.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "e0f7e1798f6e133a": {
+      "translation": "Niveaux de stockage",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "55b4303caa1b360a": {
+      "translation": "CWM gère automatiquement le stockage entre les différents niveaux :",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "29b352f0f35d813b": {
+      "translation": "1. **Mémoire CPU** - Rapide, capacité limitée.\n2. **Disque** - Grande capacité, compressé.\n3. **Redis** - Distribué, partagé entre les instances.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "48b37b7f5cdd3cdf": {
+      "translation": "Isolation des sessions",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "df75ff38318ec2b3": {
+      "translation": "Chaque session reçoit un `cache_salt` unique, ce qui garantit :\n- Absence de fuite de données entre les sessions.\n- Protection contre les attaques par temporisation.\n- Séparation claire des contextes.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "dd09f1b81c3f6ef5": {
+      "translation": "Documentation",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "65959cae6e85c0ef": {
+      "translation": "Documentation",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "6b553dd92e93e2b8": {
+      "translation": "----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "0da3e388acd6d279": {
+      "translation": "Démarrage et flux de travail",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "74cadf1a6f133bdf": {
+      "translation": "Référence complète de l'API.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "2cfe6b6d0dea17fc": {
+      "translation": "Analyse approfondie de l'architecture technique.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "2c487f26f27e6aaf": {
+      "translation": "Considérations de sécurité.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "e143ad6869390a7c": {
+      "translation": "Taxonomie et gestion des erreurs.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "e4564fced2c631bd": {
+      "translation": "Phases et jalons du développement.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "e7aa01d541822f52": {
+      "translation": "Directives de développement.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "21d1297fb198dd4b": {
+      "translation": "Exigences",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "0eff17f1ab985087": {
+      "translation": "Configuration du serveur vLLM",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "7d194cd7eb49128e": {
+      "translation": "Environnement LMCache",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "45ec9a968ad0c8d2": {
+      "translation": "Développement",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "39809136460dfd4b": {
+      "translation": "Consultez [CONTRIBUTING.md](docs/CONTRIBUTING.md) pour obtenir des directives détaillées.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "f3bdf3e19b6de6f1": {
+      "translation": "Feuille de route",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "6331fe38527697d8": {
+      "translation": "- [x] Phase 0 : Documentation et architecture\n- [x] Phase 1 : Infrastructure de base\n- [x] Phase 2 : Shell du serveur MCP\n- [x] Phase 3 : Implémentation de la \"gelée\"\n- [x] Phase 4 : Implémentation de la \"décongélation\"\n- [x] Phase 5 : Fonctionnalités avancées (clonage, \"gel\" automatique)\n- [x] Phase 6 : Renforcement pour la production\n- [x] Phase 7 : Intégration et perfectionnement",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "44d25931e57b0b52": {
+      "translation": "Consultez [ROADMAP.md](docs/ROADMAP.md) pour plus de détails.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "0174ffc9d6992c72": {
+      "translation": "Licence",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "60b8ad29c167ded3": {
+      "translation": "Licence MIT - consultez [LICENSE](LICENSE) pour plus de détails.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "ea45e755a92f90e0": {
+      "translation": "Remerciements",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "174b8df74651d1f5": {
+      "translation": "- [vLLM](https://github.com/vllm-project/vllm) - Service LLM à haut débit.\n- [LMCache](https://github.com/LMCache/LMCache) - Couche de persistance du cache KV.\n- [Model Context Protocol](https://modelcontextprotocol.io/) - Standard d'intégration.\n- [Recursive Language Models](https://arxiv.org/abs/2512.24601) - Source d'inspiration pour la gestion du contexte.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "a28b1903efedd58a": {
+      "translation": "Statut",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "7c82f9bc3d4b76e9": {
+      "translation": "**Version bêta (v0.6.4)** - Finalisation des optimisations pour la production. Intégration continue consolidée (2 flux de travail). 366 tests réussis.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034047745
+    },
+    "9d227b8f2ee16421": {
+      "translation": "**एलएलएम सत्रों के लिए बिना किसी डेटा हानि के संदर्भ को पुनर्स्थापित करना (Lossless context restoration for LLM sessions)**",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "9ebc208790846714": {
+      "translation": "यह क्या है?",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "8a4886823a35d935": {
+      "translation": "कॉन्टेक्स्ट विंडो मैनेजर (CWM) एक एमसीपी सर्वर है जो एलएलएम अनुप्रयोगों में \"**संदर्भ की कमी की समस्या**\" को हल करता है। जब संदर्भ भर जाता है, तो आपके वार्तालाप इतिहास को खोने के बजाय, CWM आपको निम्नलिखित करने की अनुमति देता है:",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "832bc5ac3e22cc30": {
+      "translation": "- अपने वर्तमान संदर्भ को स्थायी भंडारण में **फ्रीज** करें।\n- बिना किसी डेटा हानि के इसे बाद में **डी-फ्रीज** करें।\n- विभिन्न वार्तालाप शाखाओं का पता लगाने के लिए संदर्भों को **क्लोन** करें।\n- ठीक उसी स्थान से **फिर से शुरू** करें जहां आपने छोड़ा था।",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "b9990c5a3a1de2f9": {
+      "translation": "सारांश या RAG दृष्टिकोण के विपरीत, CWM वास्तविक KV कैश टेन्सर को संरक्षित करता है, जिससे आपको **वास्तविक, बिना किसी डेटा हानि के पुनर्स्थापन** मिलता है।",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "7573acd26640d31a": {
+      "translation": "यह कैसे काम करता है",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "5c7df13dec99013c": {
+      "translation": "CWM निम्नलिखित का उपयोग करता है:\n- सत्र अलगाव के लिए `cache_salt` के साथ **vLLM की उपसर्ग कैशिंग**।\n- GPU → CPU → डिस्क → Redis तक स्तरीय KV कैश भंडारण के लिए **LMCache**।\n- क्लाउड कोड और अन्य एमसीपी क्लाइंट के साथ सहज एकीकरण के लिए **MCP प्रोटोकॉल**।",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "abb619d8b0588257": {
+      "translation": "शुरुआत कैसे करें",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "0bcf8688c5bc5719": {
+      "translation": "आवश्यकताएं",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "28d937e7523879cd": {
+      "translation": "- Python 3.11+\n- उपसर्ग कैशिंग सक्षम vLLM सर्वर\n- vLLM के साथ कॉन्फ़िगर किया गया LMCache",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "ed383afd27175535": {
+      "translation": "स्थापना",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "5073e935ef64949d": {
+      "translation": "कॉन्फ़िगरेशन",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "2c05a55f6b856017": {
+      "translation": "अपने क्लाउड कोड सेटिंग्स (`.claude/settings.json`) में जोड़ें:",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "98a2f8cba1b36eff": {
+      "translation": "उपयोग",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "d0bfd0df3ecd0d7f": {
+      "translation": "विशेषताएं",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "2539ca82438cc896": {
+      "translation": "मुख्य कार्य",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "b8423b5b4842cbda": {
+      "translation": "विवरण",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "1cb2d43271f2ec1d": {
+      "translation": "------",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "bc35e1f9228e8622": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "e769af4d58e196f9": {
+      "translation": "भंडारण में सत्र संदर्भ को फ्रीज करें।",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "9395f84884ea5c1b": {
+      "translation": "सहेजे गए विंडो से संदर्भ को पुनर्स्थापित करें।",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "0fb4625f89d8f03c": {
+      "translation": "उपलब्ध संदर्भ विंडो की सूची प्राप्त करें।",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "35c191134c59185a": {
+      "translation": "सत्र/विंडो के बारे में विस्तृत जानकारी प्राप्त करें।",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "96bba53368b5522d": {
+      "translation": "अन्वेषण के लिए एक संदर्भ को ब्रांच करें।",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "465b5ab962c1c464": {
+      "translation": "सहेजी गई विंडो को हटाएं।",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "f211f843f64ff3d8": {
+      "translation": "भंडारण स्तर",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "44b39769913a2cf8": {
+      "translation": "CWM स्वचालित रूप से सभी स्तरों में भंडारण का प्रबंधन करता है:",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "e1a39e9d5d619273": {
+      "translation": "1. **सीपीयू मेमोरी** - तेज़, सीमित क्षमता।\n2. **डिस्क** - बड़ी क्षमता, संपीड़ित।\n3. **Redis** - वितरित, विभिन्न इंस्टेंस में साझा।",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "e79242161fe57ae9": {
+      "translation": "सत्र अलगाव",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "41b4b102f1ebb2d7": {
+      "translation": "प्रत्येक सत्र को एक अद्वितीय `cache_salt` मिलता है, जो यह सुनिश्चित करता है:\n- क्रॉस-सेशन डेटा का कोई रिसाव नहीं।\n- टाइमिंग हमलों से सुरक्षा।\n- संदर्भों का स्पष्ट अलगाव।",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "e0513a26e56e1df3": {
+      "translation": "दस्तावेज़",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "fc547e3694d376ce": {
+      "translation": "दस्तावेज़",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "3b88b43261c1c270": {
+      "translation": "----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "5dda3e18caa45817": {
+      "translation": "शुरुआत और कार्यप्रवाह",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "17108f28b0d19e84": {
+      "translation": "पूर्ण एपीआई संदर्भ",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "8a4bb1de75f543d6": {
+      "translation": "तकनीकी आर्किटेक्चर का विस्तृत विवरण",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "f769bf97e05c7f07": {
+      "translation": "सुरक्षा संबंधी विचार",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "e72962974c4c66ca": {
+      "translation": "त्रुटि वर्गीकरण और प्रबंधन",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "e9cccd32e0b3d4fe": {
+      "translation": "विकास चरण और मील के पत्थर",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "23b03a815322461b": {
+      "translation": "विकास दिशानिर्देश",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "1960f0711b88c994": {
+      "translation": "आवश्यकताएं",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "a5681e45c9eddbd0": {
+      "translation": "vLLM सर्वर कॉन्फ़िगरेशन",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "36be9aab5f6f05e6": {
+      "translation": "LMCache वातावरण",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "b0d946e24da0e7ee": {
+      "translation": "विकास",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "fa5e242d9099f7e0": {
+      "translation": "विस्तृत दिशानिर्देशों के लिए [CONTRIBUTING.md](docs/CONTRIBUTING.md) देखें।",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "ac58455a234d919e": {
+      "translation": "रोडमैप",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "df013204c9efa0e4": {
+      "translation": "- [x] चरण 0: दस्तावेज़ और आर्किटेक्चर\n- [x] चरण 1: मुख्य बुनियादी ढांचा\n- [x] चरण 2: एमसीपी सर्वर शेल\n- [x] चरण 3: फ्रीज कार्यान्वयन\n- [x] चरण 4: डी-फ्रीज कार्यान्वयन\n- [x] चरण 5: उन्नत विशेषताएं (क्लोन, ऑटो-फ्रीज)\n- [x] चरण 6: उत्पादन हार्डनिंग\n- [x] चरण 7: एकीकरण और पॉलिश",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "89227b3dd314a5df": {
+      "translation": "विस्तृत जानकारी के लिए [ROADMAP.md](docs/ROADMAP.md) देखें।",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "cfbc372f8058f151": {
+      "translation": "लाइसेंस",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "a4478193141ce6f6": {
+      "translation": "MIT लाइसेंस - विवरण के लिए [LICENSE](LICENSE) देखें।",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "d22a52a528e19591": {
+      "translation": "स्वीकृतियां",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "f41dd7eb04b94ede": {
+      "translation": "- [vLLM](https://github.com/vllm-project/vllm) - उच्च-थ्रूपुट एलएलएम सेवा\n- [LMCache](https://github.com/LMCache/LMCache) - KV कैश दृढ़ता परत\n- [Model Context Protocol](https://modelcontextprotocol.io/) - एकीकरण मानक\n- [Recursive Language Models](https://arxiv.org/abs/2512.24601) - संदर्भ प्रबंधन के लिए प्रेरणा",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "eaa53e354428ae45": {
+      "translation": "स्थिति",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "08891fcd8137cf35": {
+      "translation": "**बीटा (v0.6.4)** - उत्पादन के लिए तैयारी पूरी। निरंतर एकीकरण (CI) को समेकित किया गया (2 कार्यप्रवाह)। 366 परीक्षण सफल हुए।",
+      "model": "translategemma:12b",
+      "timestamp": 1772034079652
+    },
+    "9ce2babbce40a3f4": {
+      "translation": "**Ripristino del contesto senza perdita di dati per le sessioni dei modelli linguistici di grandi dimensioni (LLM) tramite la persistenza della cache KV**",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "09306f752490f8bf": {
+      "translation": "Cos'è?",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "5400cd05ee43775c": {
+      "translation": "Context Window Manager (CWM) è un server MCP che risolve il **problema dell'esaurimento del contesto** nelle applicazioni LLM. Invece di perdere la cronologia della conversazione quando il contesto si riempie, CWM permette di:",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "54679b9677b6759b": {
+      "translation": "- **Congelare** il contesto corrente e salvarlo in uno spazio di archiviazione persistente.\n- **Ripristinarlo** successivamente senza alcuna perdita di informazioni.\n- **Clonare** i contesti per esplorare diversi rami di conversazione.\n- **Riprendere** esattamente da dove ci si era interrotti.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "7479a8dd354b7d30": {
+      "translation": "A differenza degli approcci di riepilogo o RAG, CWM preserva i tensori effettivi della cache KV, offrendo un **ripristino completo e senza perdita di dati**.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "b525d724f397f28f": {
+      "translation": "Come funziona",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "94c9298d22187626": {
+      "translation": "CWM utilizza:\n- La **cache di prefisso di vLLM** con `cache_salt` per l'isolamento delle sessioni.\n- **LMCache** per l'archiviazione a livelli della cache KV (GPU → CPU → Disco → Redis).\n- Il **protocollo MCP** per una perfetta integrazione con Claude Code e altri client MCP.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "d7e9780fb2074bec": {
+      "translation": "Guida rapida",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "3e5f69f44cfdfdb0": {
+      "translation": "Prerequisiti",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "a9907d2d4ee3200b": {
+      "translation": "- Python 3.11+\n- Server vLLM con la cache di prefisso abilitata.\n- LMCache configurato con vLLM.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "7b0c73c0f5463dff": {
+      "translation": "Installazione",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "e63ed43ff97b4dc9": {
+      "translation": "Configurazione",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "741783fb036a06f9": {
+      "translation": "Aggiungere le impostazioni a Claude Code (`.claude/settings.json`):",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "dce66a0db971cc12": {
+      "translation": "Utilizzo",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "bd2eda68a403934d": {
+      "translation": "Funzionalità",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "891a5be64c95cc5e": {
+      "translation": "Operazioni principali",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "3af38881e7f28db0": {
+      "translation": "Descrizione",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "a8e2cbb75c81ee97": {
+      "translation": "------",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "5acc6809afb159f0": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "0128498c7c7d4e47": {
+      "translation": "Congelare il contesto della sessione e salvarlo nell'archiviazione.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "a6285a5b1aff5c57": {
+      "translation": "Ripristinare il contesto da una finestra salvata.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "ce504e0f894c5093": {
+      "translation": "Elencare le finestre di contesto disponibili.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "7ccfedcfcef57c9b": {
+      "translation": "Ottenere informazioni dettagliate sulla sessione/finestra.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "5b7f55bd8397aa3b": {
+      "translation": "Creare una copia del contesto per l'esplorazione.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "13899723aa2721b9": {
+      "translation": "Rimuovere una finestra salvata.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "f3e38b3be660a2c1": {
+      "translation": "Livelli di archiviazione",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "6644295d769acecf": {
+      "translation": "CWM gestisce automaticamente l'archiviazione tra i diversi livelli:",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "b13e50f1eee42992": {
+      "translation": "1. **Memoria CPU** - Veloce, capacità limitata.\n2. **Disco** - Grande capacità, compressa.\n3. **Redis** - Distribuita, condivisa tra le istanze.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "4f97cb7d6f208580": {
+      "translation": "Isolamento delle sessioni",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "768f28432afb4dc2": {
+      "translation": "Ogni sessione riceve un `cache_salt` univoco, garantendo:\n- Nessuna perdita di dati tra le sessioni.\n- Protezione contro attacchi basati sui tempi.\n- Una chiara separazione dei contesti.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "2cebf666d270d0e8": {
+      "translation": "Documentazione",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "ad2f9dd03bf3716c": {
+      "translation": "Documento",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "db5b48a0e074d983": {
+      "translation": "----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "45efc44862ee22af": {
+      "translation": "Guida introduttiva e flussi di lavoro.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "366a2dd8de1cb83d": {
+      "translation": "Riferimento completo dell'API.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "5aacf11dbb2c5be9": {
+      "translation": "Analisi approfondita dell'architettura tecnica.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "28619917ee417463": {
+      "translation": "Considerazioni sulla sicurezza.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "cdc671bea9cfc353": {
+      "translation": "Tassonomia degli errori e gestione.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "f9e81ca2ac855234": {
+      "translation": "Fasi e traguardi di sviluppo.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "dcf8be756c171701": {
+      "translation": "Linee guida per lo sviluppo.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "c6432f90e01826d3": {
+      "translation": "Requisiti",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "98b19b66f1ef00c2": {
+      "translation": "Configurazione del server vLLM",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "6b3e30a973519192": {
+      "translation": "Ambiente LMCache",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "47278e1de195e17c": {
+      "translation": "Sviluppo",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "234bde05f9cf9df1": {
+      "translation": "Consultare [CONTRIBUTING.md](docs/CONTRIBUTING.md) per linee guida dettagliate.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "1f1b978b8cfb32bc": {
+      "translation": "Roadmap",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "a564be00d4e37f8a": {
+      "translation": "- [x] Fase 0: Documentazione e Architettura\n- [x] Fase 1: Infrastruttura di base\n- [x] Fase 2: Shell del server MCP\n- [x] Fase 3: Implementazione del congelamento\n- [x] Fase 4: Implementazione dello scongelamento\n- [x] Fase 5: Funzionalità avanzate (clonazione, congelamento automatico)\n- [x] Fase 6: Ottimizzazione per la produzione\n- [x] Fase 7: Integrazione e rifinitura",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "30027919860f3c87": {
+      "translation": "Consultare [ROADMAP.md](docs/ROADMAP.md) per i dettagli.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "0870aa1dcfea97cc": {
+      "translation": "Licenza",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "a28d550df9487a4e": {
+      "translation": "Licenza MIT - vedere [LICENSE](LICENSE) per i dettagli.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "4dbb1d6d4469666b": {
+      "translation": "Ringraziamenti",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "2bf72456d4072cd3": {
+      "translation": "- [vLLM](https://github.com/vllm-project/vllm) - Servizio LLM ad alta velocità.\n- [LMCache](https://github.com/LMCache/LMCache) - Livello di persistenza della cache KV.\n- [Model Context Protocol](https://modelcontextprotocol.io/) - Standard di integrazione.\n- [Recursive Language Models](https://arxiv.org/abs/2512.24601) - Fonte di ispirazione per la gestione del contesto.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "dcc569eca4c93eef": {
+      "translation": "Stato",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "bb1c558d4cc4a42f": {
+      "translation": "**Beta (versione 0.6.4)** - Completata la fase di ottimizzazione per la produzione. Integrazione continua consolidata (2 flussi di lavoro). 366 test superati.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034112154
+    },
+    "25abcce348371323": {
+      "translation": "**Restauração de contexto sem perdas para sessões de LLM por meio da persistência do cache KV**",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "8ca3a83271cb9c56": {
+      "translation": "O que é isso?",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "2e305103fe195a92": {
+      "translation": "O Context Window Manager (CWM) é um servidor MCP que resolve o **problema de esgotamento do contexto** em aplicações de LLM. Em vez de perder o histórico da sua conversa quando o contexto se esgota, o CWM permite que você:",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "cddc5f7732eedbaa": {
+      "translation": "- **Congelar** o contexto atual para armazenamento persistente\n- **Descongelar** posteriormente, sem perda de informações\n- **Clonar** contextos para explorar diferentes ramificações da conversa\n- **Retomar** exatamente de onde você parou",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "3edc8a6de2165265": {
+      "translation": "Ao contrário de abordagens de sumarização ou RAG, o CWM preserva os tensores reais do cache KV, proporcionando uma **restauração verdadeira e sem perdas**.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "3786fdf0aaf7a7c2": {
+      "translation": "Como funciona",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "134a911818051102": {
+      "translation": "O CWM utiliza:\n- **O cache de prefixo do vLLM** com `cache_salt` para isolamento de sessões\n- **LMCache** para armazenamento em camadas do cache KV (GPU → CPU → Disco → Redis)\n- **Protocolo MCP** para integração perfeita com Claude Code e outros clientes MCP",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "c88bcdb0dd505b6b": {
+      "translation": "Início rápido",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "b0b778d66fad6c3e": {
+      "translation": "Pré-requisitos",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "72e36bbd96d5d3a9": {
+      "translation": "- Python 3.11+\n- Servidor vLLM com cache de prefixo habilitado\n- LMCache configurado com o vLLM",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "eb9ad24c5bdd2790": {
+      "translation": "Instalação",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "a0b286f09c8f5b2f": {
+      "translation": "Configuração",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "702c0525796a2a83": {
+      "translation": "Adicione às configurações do seu Claude Code (`.claude/settings.json`):",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "2dc7b1f6ea4a38fe": {
+      "translation": "Uso",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "6fbe4c0ef1edf268": {
+      "translation": "Funcionalidades",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "31efc21c6d785713": {
+      "translation": "Operações principais",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "4fe83802bbc45fcc": {
+      "translation": "Descrição",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "93982127e708d976": {
+      "translation": "------",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "7561209f94247c19": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "32041d56cea75b78": {
+      "translation": "Congelar o contexto da sessão para armazenamento",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "1c0d7d55c2272065": {
+      "translation": "Restaurar o contexto de uma janela salva",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "e1180cf24880a433": {
+      "translation": "Listar janelas de contexto disponíveis",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "074f2b8edfd947fb": {
+      "translation": "Obter informações detalhadas da sessão/janela",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "bee6b14411352096": {
+      "translation": "Criar uma ramificação do contexto para exploração",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "0141a3a9cc633c3d": {
+      "translation": "Remover uma janela salva",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "8fb3ac67ad7bdd7a": {
+      "translation": "Camadas de armazenamento",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "94715d7891a364f9": {
+      "translation": "O CWM gerencia automaticamente o armazenamento em diferentes camadas:",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "1a6ac00e630ad8ee": {
+      "translation": "1. **Memória da CPU** - Rápida, capacidade limitada\n2. **Disco** - Grande capacidade, compactado\n3. **Redis** - Distribuído, compartilhado entre instâncias",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "7f3aabce28979671": {
+      "translation": "Isolamento de sessões",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "cd9b5039e19b9651": {
+      "translation": "Cada sessão recebe um `cache_salt` único, garantindo:\n- Ausência de vazamento de dados entre sessões\n- Proteção contra ataques de temporização\n- Separação limpa de contextos",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "5da143a95bd4adb3": {
+      "translation": "Documentação",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "9c0e0444f517fb53": {
+      "translation": "Documento",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "f5f497abcadce090": {
+      "translation": "----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "5cf5c8e8e2c1859e": {
+      "translation": "Começando e fluxos de trabalho",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "9984b6866d9616fd": {
+      "translation": "Referência completa da API",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "767cf9d7ddcd36cf": {
+      "translation": "Análise aprofundada da arquitetura técnica",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "c7a924c7674ee851": {
+      "translation": "Considerações de segurança",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "eb5b90045ff4bc39": {
+      "translation": "Taxonomia e tratamento de erros",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "076359f77439d2de": {
+      "translation": "Fases e marcos de desenvolvimento",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "ed0473d84aad6596": {
+      "translation": "Diretrizes de desenvolvimento",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "50763a2dcc8127ff": {
+      "translation": "Requisitos",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "e26a9578ac6272c6": {
+      "translation": "Configuração do servidor vLLM",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "89229d434d6b0e7b": {
+      "translation": "Ambiente LMCache",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "f18755710a900a8b": {
+      "translation": "Desenvolvimento",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "20716deeb98fce31": {
+      "translation": "Consulte [CONTRIBUTING.md](docs/CONTRIBUTING.md) para obter diretrizes detalhadas.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "0ed6044025007822": {
+      "translation": "Roteiro",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "d92c8560826dfac5": {
+      "translation": "- [x] Fase 0: Documentação e Arquitetura\n- [x] Fase 1: Infraestrutura principal\n- [x] Fase 2: Shell do servidor MCP\n- [x] Fase 3: Implementação de congelamento\n- [x] Fase 4: Implementação de descongelamento\n- [x] Fase 5: Recursos avançados (clonagem, congelamento automático)\n- [x] Fase 6: Reforço para produção\n- [x] Fase 7: Integração e polimento",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "84732a3a254e10bf": {
+      "translation": "Consulte [ROADMAP.md](docs/ROADMAP.md) para obter detalhes.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "2aca9b0e72841008": {
+      "translation": "Licença",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "609864a3ab9f7ca2": {
+      "translation": "Licença MIT - consulte [LICENSE](LICENSE) para obter detalhes.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "b054b877a06fba69": {
+      "translation": "Agradecimentos",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "f58e7e217b1ce113": {
+      "translation": "- [vLLM](https://github.com/vllm-project/vllm) - Serviço de LLM de alto desempenho\n- [LMCache](https://github.com/LMCache/LMCache) - Camada de persistência do cache KV\n- [Model Context Protocol](https://modelcontextprotocol.io/) - Padrão de integração\n- [Recursive Language Models](https://arxiv.org/abs/2512.24601) - Inspiração para gerenciamento de contexto",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "7531057f66c85d76": {
+      "translation": "Status",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    },
+    "9c613c6fbdba0f8f": {
+      "translation": "**Beta (v0.6.4)** - Finalização do processo de otimização para produção. Integração contínua consolidada (2 fluxos de trabalho). 366 testes aprovados.",
+      "model": "translategemma:12b",
+      "timestamp": 1772034142302
+    }
+  }
+}

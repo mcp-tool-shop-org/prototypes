@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:RunForgeDesktop.ViewModels"
+             x:Class="RunForgeDesktop.Views.WorkspaceDashboardPage"
+             x:DataType="vm:WorkspaceDashboardViewModel"
+             Title="Dashboard"
+             BackgroundColor="{AppThemeBinding Light=#F5F7FA, Dark=#121317}">
+
+    <ScrollView>
+        <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="32,24">
+
+            <!-- Row 0: Header -->
+            <Grid Grid.Row="0" Margin="0,0,0,32">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="RunForge"
+                           FontSize="32"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#1A1A2E, Dark=#FFFFFF}" />
+                    <Label Text="ML Experiment Tracker"
+                           FontSize="15"
+                           TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Row 1: Workspace Card -->
+            <Border Grid.Row="1"
+                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E2028}"
+                    Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#2D3748}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="24"
+                    Margin="0,0,0,24">
+
+                <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="20">
+                    <!-- Section header with icon -->
+                    <HorizontalStackLayout Grid.Row="0" Spacing="12">
+                        <Border BackgroundColor="{AppThemeBinding Light=#EEF2FF, Dark=#312E81}"
+                                StrokeThickness="0"
+                                WidthRequest="40"
+                                HeightRequest="40"
+                                StrokeShape="RoundRectangle 8">
+                            <Label Text="📁"
+                                   FontSize="18"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout VerticalOptions="Center">
+                            <Label Text="Workspace"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}" />
+                            <Label Text="Your ML experiment directory"
+                                   FontSize="12"
+                                   TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}" />
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+
+                    <!-- Workspace path display -->
+                    <Grid Grid.Row="1">
+                        <!-- When workspace IS set -->
+                        <Border IsVisible="{Binding HasWorkspace}"
+                                BackgroundColor="{AppThemeBinding Light=#F8FAFC, Dark=#0F172A}"
+                                Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1E293B}"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 8"
+                                Padding="16">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                    <Label Text="{Binding WorkspacePath}"
+                                           FontSize="13"
+                                           FontFamily="Consolas"
+                                           TextColor="{AppThemeBinding Light=#334155, Dark=#CBD5E1}"
+                                           LineBreakMode="MiddleTruncation" />
+                                    <HorizontalStackLayout Spacing="6">
+                                        <Border BackgroundColor="{AppThemeBinding Light=#DCFCE7, Dark=#14532D}"
+                                                StrokeThickness="0"
+                                                Padding="6,2"
+                                                StrokeShape="RoundRectangle 4">
+                                            <Label Text="Connected"
+                                                   FontSize="11"
+                                                   TextColor="{AppThemeBinding Light=#166534, Dark=#86EFAC}" />
+                                        </Border>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                                <Label Grid.Column="1"
+                                       Text="✓"
+                                       FontSize="20"
+                                       TextColor="{AppThemeBinding Light=#22C55E, Dark=#4ADE80}"
+                                       VerticalOptions="Center" />
+                            </Grid>
+                        </Border>
+
+                        <!-- When workspace NOT set -->
+                        <Border IsVisible="{Binding HasWorkspace, Converter={StaticResource InverseBoolConverter}}"
+                                BackgroundColor="{AppThemeBinding Light=#FFFBEB, Dark=#1C1917}"
+                                Stroke="{AppThemeBinding Light=#FDE68A, Dark=#44403C}"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 8"
+                                Padding="16">
+                            <HorizontalStackLayout Spacing="12">
+                                <Label Text="⚠"
+                                       FontSize="20"
+                                       TextColor="{AppThemeBinding Light=#D97706, Dark=#FBBF24}"
+                                       VerticalOptions="Center" />
+                                <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                                    <Label Text="No workspace selected"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#92400E, Dark=#FCD34D}" />
+                                    <Label Text="Select any folder to use as your experiment directory."
+                                           FontSize="12"
+                                           TextColor="{AppThemeBinding Light=#B45309, Dark=#F59E0B}" />
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <!-- Action buttons -->
+                    <HorizontalStackLayout Grid.Row="2" Spacing="12">
+                        <Button Text="{Binding HasWorkspace, Converter={StaticResource BoolToStringConverter}, ConverterParameter='Change|Select Workspace'}"
+                                Command="{Binding SelectWorkspaceCommand}"
+                                BackgroundColor="{AppThemeBinding Light=#4F46E5, Dark=#6366F1}"
+                                TextColor="White"
+                                CornerRadius="8"
+                                Padding="24,14"
+                                FontSize="14"
+                                FontAttributes="Bold" />
+
+                        <Button Text="Browse Runs"
+                                Command="{Binding BrowseRunsCommand}"
+                                IsVisible="{Binding HasWorkspace}"
+                                BackgroundColor="Transparent"
+                                BorderColor="{AppThemeBinding Light=#E2E8F0, Dark=#374151}"
+                                BorderWidth="1"
+                                TextColor="{AppThemeBinding Light=#374151, Dark=#E5E7EB}"
+                                CornerRadius="8"
+                                Padding="24,14"
+                                FontSize="14" />
+                    </HorizontalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- Row 2: Quick Stats Cards -->
+            <Grid Grid.Row="2"
+                  ColumnDefinitions="*,*,*"
+                  ColumnSpacing="16"
+                  Margin="0,0,0,24"
+                  IsVisible="{Binding HasWorkspace}">
+
+                <!-- Runs count card -->
+                <Border Grid.Column="0"
+                        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E2028}"
+                        Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#2D3748}"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 12"
+                        Padding="20">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Total Runs"
+                               FontSize="12"
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}" />
+                        <Label Text="—"
+                               FontSize="28"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Active jobs card -->
+                <Border Grid.Column="1"
+                        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E2028}"
+                        Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#2D3748}"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 12"
+                        Padding="20">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Active Jobs"
+                               FontSize="12"
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}" />
+                        <HorizontalStackLayout Spacing="8">
+                            <Label Text="0"
+                                   FontSize="28"
+                                   FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}" />
+                            <Border BackgroundColor="{AppThemeBinding Light=#DCFCE7, Dark=#14532D}"
+                                    StrokeThickness="0"
+                                    Padding="8,4"
+                                    StrokeShape="RoundRectangle 4"
+                                    VerticalOptions="Center">
+                                <Label Text="Idle"
+                                       FontSize="11"
+                                       TextColor="{AppThemeBinding Light=#166534, Dark=#86EFAC}" />
+                            </Border>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Queue card -->
+                <Border Grid.Column="2"
+                        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E2028}"
+                        Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#2D3748}"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 12"
+                        Padding="20">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Queued"
+                               FontSize="12"
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}" />
+                        <Label Text="0"
+                               FontSize="28"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#1E293B, Dark=#F1F5F9}" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- Footer -->
+            <VerticalStackLayout Grid.Row="3" VerticalOptions="End" Spacing="8">
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="16">
+                    <Button Text="Diagnostics"
+                            Command="{Binding OpenDiagnosticsCommand}"
+                            BackgroundColor="Transparent"
+                            TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"
+                            FontSize="12"
+                            Padding="8,4" />
+                </HorizontalStackLayout>
+                <Label x:Name="BuildStampLabel"
+                       HorizontalOptions="Center"
+                       FontSize="11"
+                       TextColor="{AppThemeBinding Light=#CBD5E1, Dark=#475569}" />
+            </VerticalStackLayout>
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

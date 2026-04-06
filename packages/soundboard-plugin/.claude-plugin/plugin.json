@@ -1,0 +1,13 @@
+{
+  "name": "soundboard",
+  "version": "1.0.0",
+  "description": "Voice synthesis for Claude Code. Speak code walkthroughs, get audio notifications on build/test results, and add context-aware TTS to your development workflow.",
+  "author": {
+    "name": "mcp-tool-shop",
+    "email": "64996768+mcp-tool-shop@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/soundboard-plugin",
+  "repository": "https://github.com/mcp-tool-shop-org/soundboard-plugin",
+  "license": "MIT",
+  "keywords": ["voice", "tts", "audio", "soundboard", "accessibility", "narration", "sonification"]
+}

@@ -1,0 +1,184 @@
+{
+  "name": "code-bearings",
+  "displayName": "Code Bearings",
+  "description": "Source-grounded review, learning, and control for modern codebases. Get your bearings back in your code.",
+  "version": "1.0.2",
+  "type": "module",
+  "publisher": "mcp-tool-shop",
+  "icon": "icon.png",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/code-bearings.git",
+    "directory": "packages/vscode"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/code-bearings#readme",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Visualization"
+  ],
+  "keywords": [
+    "code-review",
+    "code-bearings",
+    "static-analysis",
+    "module-cards",
+    "change-brief"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "codeBearings.analyze",
+        "title": "Code Bearings: Analyze Project"
+      },
+      {
+        "command": "codeBearings.review",
+        "title": "Code Bearings: Review Changes"
+      },
+      {
+        "command": "codeBearings.reviewBranch",
+        "title": "Code Bearings: Review Branch"
+      },
+      {
+        "command": "codeBearings.moduleCard",
+        "title": "Code Bearings: Show Module Card"
+      },
+      {
+        "command": "codeBearings.functionCard",
+        "title": "Code Bearings: Show Function Card"
+      },
+      {
+        "command": "codeBearings.overview",
+        "title": "Code Bearings: System Overview"
+      },
+      {
+        "command": "codeBearings.focusModule",
+        "title": "Code Bearings: Focus Module"
+      },
+      {
+        "command": "codeBearings.refreshModules",
+        "title": "Code Bearings: Refresh Modules",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "codeBearings.refreshReview",
+        "title": "Code Bearings: Refresh Review",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "codeBearings.showSymbolDetail",
+        "title": "Code Bearings: Show Symbol Detail"
+      },
+      {
+        "command": "codeBearings.refreshAll",
+        "title": "Code Bearings: Refresh All",
+        "icon": "$(sync)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "codeBearings",
+          "title": "Code Bearings",
+          "icon": "$(telescope)"
+        }
+      ]
+    },
+    "views": {
+      "codeBearings": [
+        {
+          "id": "codeBearings.modules",
+          "name": "Modules"
+        },
+        {
+          "id": "codeBearings.reviewBrief",
+          "name": "Review Brief"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "codeBearings.modules",
+        "contents": "No modules indexed yet.\n[Analyze Project](command:codeBearings.analyze)\nGet your bearings back in your code."
+      },
+      {
+        "view": "codeBearings.reviewBrief",
+        "contents": "No review active.\n[Review Changes](command:codeBearings.review)\nStay oriented in AI-shaped code."
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "codeBearings.refreshModules",
+          "when": "view == codeBearings.modules",
+          "group": "navigation"
+        },
+        {
+          "command": "codeBearings.refreshReview",
+          "when": "view == codeBearings.reviewBrief",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Code Bearings",
+      "properties": {
+        "codeBearings.dbPath": {
+          "type": "string",
+          "default": ".code-bearings/bearings.db",
+          "description": "Path to the bearings database (relative to workspace root)"
+        },
+        "codeBearings.autoAnalyze": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically re-analyze on file save"
+        },
+        "codeBearings.cursorContext.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show contextual intelligence at cursor position (status bar, hover, decorations)"
+        },
+        "codeBearings.cursorContext.codeLensEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show CodeLens annotations on changed symbols during review"
+        },
+        "codeBearings.cursorContext.gutterEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show gutter decorations on changed lines during review"
+        },
+        "codeBearings.reviewMode": {
+          "type": "string",
+          "default": "general",
+          "enum": [
+            "general",
+            "bug-hunter",
+            "learning",
+            "architecture",
+            "exploration"
+          ],
+          "description": "Default review mode lens"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "tsc --noEmit",
+    "verify": "npm run lint",
+    "package": "vsce package --no-dependencies"
+  },
+  "dependencies": {
+    "@code-bearings/core": "1.0.0"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "best_epoch": 3,
+  "best_val_loss": 0.2,
+  "final_train_loss": 0.2,
+  "final_train_accuracy": 0.92,
+  "total_epochs": 3,
+  "early_stopped": false,
+  "training_duration_ms": 3000
+}

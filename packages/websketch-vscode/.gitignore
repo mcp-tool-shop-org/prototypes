@@ -1,0 +1,9 @@
+node_modules/
+*.tgz
+.DS_Store
+Thumbs.db
+docs/.astro/
+docs/dist/
+site/.astro/
+site/dist/
+*.vsix

@@ -1,0 +1,317 @@
+[
+  {
+    "Id": "cal-go-d1-001",
+    "Language": "go",
+    "Difficulty": 1,
+    "Title": "Package Declaration",
+    "Code": "package main\n",
+    "Topics": ["package"],
+    "Explain": ["Every Go file starts with a package declaration."]
+  },
+  {
+    "Id": "cal-go-d1-002",
+    "Language": "go",
+    "Difficulty": 1,
+    "Title": "Variable Declaration",
+    "Code": "var name string = \"hello\"\nvar count int = 42\n",
+    "Topics": ["variables", "types"],
+    "Explain": ["Declare typed variables with var keyword and initial values."]
+  },
+  {
+    "Id": "cal-go-d1-003",
+    "Language": "go",
+    "Difficulty": 1,
+    "Title": "Short Variable Declaration",
+    "Code": "x := 10\ny := 3.14\nz := true\n",
+    "Topics": ["variables", "short-declaration"],
+    "Explain": ["Short declaration infers the type from the right-hand side."]
+  },
+  {
+    "Id": "cal-go-d1-004",
+    "Language": "go",
+    "Difficulty": 1,
+    "Title": "Constant Declaration",
+    "Code": "const Pi = 3.14159\nconst MaxRetries = 5\n",
+    "Topics": ["constants"],
+    "Explain": ["Constants are immutable values known at compile time."]
+  },
+  {
+    "Id": "cal-go-d1-005",
+    "Language": "go",
+    "Difficulty": 1,
+    "Title": "Import Statement",
+    "Code": "import (\n\t\"fmt\"\n\t\"os\"\n)\n",
+    "Topics": ["imports"],
+    "Explain": ["Grouped imports use parentheses to list multiple packages."]
+  },
+  {
+    "Id": "cal-go-d1-006",
+    "Language": "go",
+    "Difficulty": 1,
+    "Title": "Multiple Assignment",
+    "Code": "a, b := 1, 2\na, b = b, a\n",
+    "Topics": ["variables", "assignment"],
+    "Explain": ["Go supports multiple assignment and easy value swapping."]
+  },
+  {
+    "Id": "cal-go-d2-001",
+    "Language": "go",
+    "Difficulty": 2,
+    "Title": "Hello World Function",
+    "Code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tfmt.Println(\"Hello, World!\")\n}\n",
+    "Topics": ["functions", "fmt"],
+    "Explain": ["The main function is the entry point of a Go program.", "fmt.Println writes to standard output with a newline."]
+  },
+  {
+    "Id": "cal-go-d2-002",
+    "Language": "go",
+    "Difficulty": 2,
+    "Title": "Simple If-Else",
+    "Code": "func sign(n int) string {\n\tif n > 0 {\n\t\treturn \"positive\"\n\t} else if n < 0 {\n\t\treturn \"negative\"\n\t}\n\treturn \"zero\"\n}\n",
+    "Topics": ["if-else", "functions"],
+    "Explain": ["If-else chains test conditions in order.", "The final return acts as the default case."]
+  },
+  {
+    "Id": "cal-go-d2-003",
+    "Language": "go",
+    "Difficulty": 2,
+    "Title": "Basic For Loop",
+    "Code": "func sum(n int) int {\n\ttotal := 0\n\tfor i := 1; i <= n; i++ {\n\t\ttotal += i\n\t}\n\treturn total\n}\n",
+    "Topics": ["loops", "functions"],
+    "Explain": ["Go has only one loop keyword: for.", "The three-component form mirrors C-style for loops."]
+  },
+  {
+    "Id": "cal-go-d2-004",
+    "Language": "go",
+    "Difficulty": 2,
+    "Title": "Function With Multiple Returns",
+    "Code": "func divide(a, b float64) (float64, error) {\n\tif b == 0 {\n\t\treturn 0, fmt.Errorf(\"division by zero\")\n\t}\n\treturn a / b, nil\n}\n",
+    "Topics": ["functions", "errors", "multiple-return"],
+    "Explain": ["Go functions can return multiple values.", "Returning an error as the last value is idiomatic Go."]
+  },
+  {
+    "Id": "cal-go-d2-005",
+    "Language": "go",
+    "Difficulty": 2,
+    "Title": "Switch Statement",
+    "Code": "func dayType(day string) string {\n\tswitch day {\n\tcase \"Saturday\", \"Sunday\":\n\t\treturn \"weekend\"\n\tdefault:\n\t\treturn \"weekday\"\n\t}\n}\n",
+    "Topics": ["switch", "functions"],
+    "Explain": ["Switch cases in Go do not fall through by default.", "Multiple values can share a single case."]
+  },
+  {
+    "Id": "cal-go-d3-001",
+    "Language": "go",
+    "Difficulty": 3,
+    "Title": "Slice Filter",
+    "Code": "func filter(nums []int, pred func(int) bool) []int {\n\tvar result []int\n\tfor _, n := range nums {\n\t\tif pred(n) {\n\t\t\tresult = append(result, n)\n\t\t}\n\t}\n\treturn result\n}\n",
+    "Topics": ["slices", "functions", "closures", "range"],
+    "Explain": ["Higher-order functions accept other functions as parameters.", "append grows a slice dynamically.", "range iterates over slices returning index and value."]
+  },
+  {
+    "Id": "cal-go-d3-002",
+    "Language": "go",
+    "Difficulty": 3,
+    "Title": "Read File Lines",
+    "Code": "func readLines(path string) ([]string, error) {\n\tf, err := os.Open(path)\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\tdefer f.Close()\n\n\tvar lines []string\n\tscanner := bufio.NewScanner(f)\n\tfor scanner.Scan() {\n\t\tlines = append(lines, scanner.Text())\n\t}\n\treturn lines, scanner.Err()\n}\n",
+    "Topics": ["io", "error-handling", "defer", "scanner"],
+    "Explain": ["defer ensures the file is closed when the function exits.", "bufio.Scanner reads input line by line.", "Errors are propagated up to the caller."]
+  },
+  {
+    "Id": "cal-go-d3-003",
+    "Language": "go",
+    "Difficulty": 3,
+    "Title": "Map Word Count",
+    "Code": "func wordCount(s string) map[string]int {\n\tcounts := make(map[string]int)\n\twords := strings.Fields(s)\n\tfor _, w := range words {\n\t\tcounts[strings.ToLower(w)]++\n\t}\n\treturn counts\n}\n",
+    "Topics": ["maps", "strings", "range"],
+    "Explain": ["make initializes a map ready for use.", "strings.Fields splits on whitespace.", "Map values default to zero, so ++ works on first access."]
+  },
+  {
+    "Id": "cal-go-d3-004",
+    "Language": "go",
+    "Difficulty": 3,
+    "Title": "Fibonacci With Loop",
+    "Code": "func fibonacci(n int) []int {\n\tif n <= 0 {\n\t\treturn nil\n\t}\n\tfibs := make([]int, n)\n\tfibs[0] = 0\n\tif n > 1 {\n\t\tfibs[1] = 1\n\t}\n\tfor i := 2; i < n; i++ {\n\t\tfibs[i] = fibs[i-1] + fibs[i-2]\n\t}\n\treturn fibs\n}\n",
+    "Topics": ["slices", "loops", "algorithms"],
+    "Explain": ["make with a length pre-allocates the slice.", "Guard clauses handle edge cases early.", "Iterative approach avoids recursion overhead."]
+  },
+  {
+    "Id": "cal-go-d3-005",
+    "Language": "go",
+    "Difficulty": 3,
+    "Title": "Error Wrapping",
+    "Code": "func loadConfig(path string) (*Config, error) {\n\tdata, err := os.ReadFile(path)\n\tif err != nil {\n\t\treturn nil, fmt.Errorf(\"loadConfig: %w\", err)\n\t}\n\tvar cfg Config\n\tif err := json.Unmarshal(data, &cfg); err != nil {\n\t\treturn nil, fmt.Errorf(\"loadConfig parse: %w\", err)\n\t}\n\treturn &cfg, nil\n}\n",
+    "Topics": ["error-handling", "json", "wrapping"],
+    "Explain": ["The %w verb wraps errors preserving the original for errors.Is/As.", "Each failure point adds context before returning.", "json.Unmarshal decodes JSON into a struct pointer."]
+  },
+  {
+    "Id": "cal-go-d4-001",
+    "Language": "go",
+    "Difficulty": 4,
+    "Title": "Struct With Methods",
+    "Code": "type Stack struct {\n\titems []int\n}\n\nfunc (s *Stack) Push(val int) {\n\ts.items = append(s.items, val)\n}\n\nfunc (s *Stack) Pop() (int, bool) {\n\tif len(s.items) == 0 {\n\t\treturn 0, false\n\t}\n\tn := len(s.items) - 1\n\tval := s.items[n]\n\ts.items = s.items[:n]\n\treturn val, true\n}\n\nfunc (s *Stack) Len() int {\n\treturn len(s.items)\n}\n",
+    "Topics": ["structs", "methods", "pointer-receiver"],
+    "Explain": ["Pointer receivers allow methods to mutate the struct.", "Pop returns a bool to indicate success without panicking.", "Slice reslicing with [:n] removes the last element efficiently."]
+  },
+  {
+    "Id": "cal-go-d4-002",
+    "Language": "go",
+    "Difficulty": 4,
+    "Title": "Sorted Insert",
+    "Code": "func sortedInsert(sorted []int, val int) []int {\n\tidx := sort.SearchInts(sorted, val)\n\tsorted = append(sorted, 0)\n\tcopy(sorted[idx+1:], sorted[idx:])\n\tsorted[idx] = val\n\treturn sorted\n}\n\nfunc mergeSorted(a, b []int) []int {\n\tresult := make([]int, 0, len(a)+len(b))\n\ti, j := 0, 0\n\tfor i < len(a) && j < len(b) {\n\t\tif a[i] <= b[j] {\n\t\t\tresult = append(result, a[i])\n\t\t\ti++\n\t\t} else {\n\t\t\tresult = append(result, b[j])\n\t\t\tj++\n\t\t}\n\t}\n\tresult = append(result, a[i:]...)\n\tresult = append(result, b[j:]...)\n\treturn result\n}\n",
+    "Topics": ["slices", "sorting", "algorithms"],
+    "Explain": ["sort.SearchInts performs binary search on a sorted slice.", "copy shifts elements right to make room for insertion.", "Merge uses two pointers to combine sorted slices in O(n)."]
+  },
+  {
+    "Id": "cal-go-d4-003",
+    "Language": "go",
+    "Difficulty": 4,
+    "Title": "JSON Struct Tags",
+    "Code": "type User struct {\n\tID        int       `json:\"id\"`\n\tName      string    `json:\"name\"`\n\tEmail     string    `json:\"email\"`\n\tCreatedAt time.Time `json:\"created_at\"`\n}\n\nfunc parseUsers(data []byte) ([]User, error) {\n\tvar users []User\n\tif err := json.Unmarshal(data, &users); err != nil {\n\t\treturn nil, fmt.Errorf(\"parseUsers: %w\", err)\n\t}\n\tfor i, u := range users {\n\t\tif u.Name == \"\" {\n\t\t\treturn nil, fmt.Errorf(\"user %d: missing name\", i)\n\t\t}\n\t}\n\treturn users, nil\n}\n",
+    "Topics": ["structs", "json", "tags", "validation"],
+    "Explain": ["Struct tags control JSON field names during marshal/unmarshal.", "Validation after parsing catches missing required fields.", "Error messages include the index for easier debugging."]
+  },
+  {
+    "Id": "cal-go-d4-004",
+    "Language": "go",
+    "Difficulty": 4,
+    "Title": "String Builder",
+    "Code": "func joinWithSep(parts []string, sep string) string {\n\tif len(parts) == 0 {\n\t\treturn \"\"\n\t}\n\tvar b strings.Builder\n\tfor i, p := range parts {\n\t\tif i > 0 {\n\t\t\tb.WriteString(sep)\n\t\t}\n\t\tb.WriteString(p)\n\t}\n\treturn b.String()\n}\n\nfunc repeatStr(s string, n int) string {\n\tvar b strings.Builder\n\tb.Grow(len(s) * n)\n\tfor i := 0; i < n; i++ {\n\t\tb.WriteString(s)\n\t}\n\treturn b.String()\n}\n",
+    "Topics": ["strings", "builder", "performance"],
+    "Explain": ["strings.Builder avoids repeated allocations from string concat.", "Grow pre-allocates buffer capacity when the size is known.", "Separators are added before elements starting from the second."]
+  },
+  {
+    "Id": "cal-go-d4-005",
+    "Language": "go",
+    "Difficulty": 4,
+    "Title": "Custom Sort Interface",
+    "Code": "type Employee struct {\n\tName   string\n\tSalary float64\n}\n\ntype BySalary []Employee\n\nfunc (s BySalary) Len() int           { return len(s) }\nfunc (s BySalary) Less(i, j int) bool  { return s[i].Salary < s[j].Salary }\nfunc (s BySalary) Swap(i, j int)       { s[i], s[j] = s[j], s[i] }\n\nfunc topEarners(employees []Employee, n int) []Employee {\n\tsorted := make([]Employee, len(employees))\n\tcopy(sorted, employees)\n\tsort.Sort(sort.Reverse(BySalary(sorted)))\n\tif n > len(sorted) {\n\t\tn = len(sorted)\n\t}\n\treturn sorted[:n]\n}\n",
+    "Topics": ["interfaces", "sorting", "structs"],
+    "Explain": ["The sort.Interface requires Len, Less, and Swap methods.", "sort.Reverse wraps an interface to invert the ordering.", "Copying before sorting preserves the original slice."]
+  },
+  {
+    "Id": "cal-go-d5-001",
+    "Language": "go",
+    "Difficulty": 5,
+    "Title": "Interface Polymorphism",
+    "Code": "type Shape interface {\n\tArea() float64\n\tPerimeter() float64\n}\n\ntype Circle struct {\n\tRadius float64\n}\n\nfunc (c Circle) Area() float64      { return math.Pi * c.Radius * c.Radius }\nfunc (c Circle) Perimeter() float64  { return 2 * math.Pi * c.Radius }\n\ntype Rectangle struct {\n\tWidth, Height float64\n}\n\nfunc (r Rectangle) Area() float64      { return r.Width * r.Height }\nfunc (r Rectangle) Perimeter() float64 { return 2 * (r.Width + r.Height) }\n\nfunc totalArea(shapes []Shape) float64 {\n\tvar total float64\n\tfor _, s := range shapes {\n\t\ttotal += s.Area()\n\t}\n\treturn total\n}\n",
+    "Topics": ["interfaces", "polymorphism", "structs", "methods"],
+    "Explain": ["Interfaces define behavior contracts without implementation.", "Types satisfy interfaces implicitly by implementing all methods.", "A slice of interfaces can hold any conforming concrete type."]
+  },
+  {
+    "Id": "cal-go-d5-002",
+    "Language": "go",
+    "Difficulty": 5,
+    "Title": "Goroutine Fan-Out",
+    "Code": "func fetchAll(urls []string) []string {\n\tresults := make([]string, len(urls))\n\tvar wg sync.WaitGroup\n\n\tfor i, url := range urls {\n\t\twg.Add(1)\n\t\tgo func(idx int, u string) {\n\t\t\tdefer wg.Done()\n\t\t\tresp, err := http.Get(u)\n\t\t\tif err != nil {\n\t\t\t\tresults[idx] = fmt.Sprintf(\"error: %v\", err)\n\t\t\t\treturn\n\t\t\t}\n\t\t\tdefer resp.Body.Close()\n\t\t\tbody, _ := io.ReadAll(resp.Body)\n\t\t\tresults[idx] = string(body)\n\t\t}(i, url)\n\t}\n\n\twg.Wait()\n\treturn results\n}\n",
+    "Topics": ["goroutines", "sync", "waitgroup", "http"],
+    "Explain": ["WaitGroup coordinates completion of multiple goroutines.", "Each goroutine writes to its own index avoiding data races.", "defer wg.Done ensures the counter decrements even on early return."]
+  },
+  {
+    "Id": "cal-go-d5-003",
+    "Language": "go",
+    "Difficulty": 5,
+    "Title": "Channel Pipeline",
+    "Code": "func generate(nums ...int) <-chan int {\n\tout := make(chan int)\n\tgo func() {\n\t\tfor _, n := range nums {\n\t\t\tout <- n\n\t\t}\n\t\tclose(out)\n\t}()\n\treturn out\n}\n\nfunc square(in <-chan int) <-chan int {\n\tout := make(chan int)\n\tgo func() {\n\t\tfor n := range in {\n\t\t\tout <- n * n\n\t\t}\n\t\tclose(out)\n\t}()\n\treturn out\n}\n\nfunc collect(in <-chan int) []int {\n\tvar result []int\n\tfor n := range in {\n\t\tresult = append(result, n)\n\t}\n\treturn result\n}\n",
+    "Topics": ["channels", "goroutines", "pipeline"],
+    "Explain": ["Directional channel types enforce send-only or receive-only.", "Closing a channel signals no more values will be sent.", "Pipelines compose stages where each reads from the previous."]
+  },
+  {
+    "Id": "cal-go-d5-004",
+    "Language": "go",
+    "Difficulty": 5,
+    "Title": "Context Timeout",
+    "Code": "func fetchWithTimeout(url string, timeout time.Duration) ([]byte, error) {\n\tctx, cancel := context.WithTimeout(context.Background(), timeout)\n\tdefer cancel()\n\n\treq, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)\n\tif err != nil {\n\t\treturn nil, fmt.Errorf(\"create request: %w\", err)\n\t}\n\n\tresp, err := http.DefaultClient.Do(req)\n\tif err != nil {\n\t\treturn nil, fmt.Errorf(\"fetch: %w\", err)\n\t}\n\tdefer resp.Body.Close()\n\n\tif resp.StatusCode != http.StatusOK {\n\t\treturn nil, fmt.Errorf(\"status %d\", resp.StatusCode)\n\t}\n\treturn io.ReadAll(resp.Body)\n}\n",
+    "Topics": ["context", "timeout", "http", "error-handling"],
+    "Explain": ["context.WithTimeout cancels the request after the deadline.", "defer cancel releases resources even if the request completes early.", "NewRequestWithContext binds the context to the HTTP lifecycle."]
+  },
+  {
+    "Id": "cal-go-d5-005",
+    "Language": "go",
+    "Difficulty": 5,
+    "Title": "Generic Map Function",
+    "Code": "func Map[T any, U any](items []T, fn func(T) U) []U {\n\tresult := make([]U, len(items))\n\tfor i, item := range items {\n\t\tresult[i] = fn(item)\n\t}\n\treturn result\n}\n\nfunc Filter[T any](items []T, pred func(T) bool) []T {\n\tvar result []T\n\tfor _, item := range items {\n\t\tif pred(item) {\n\t\t\tresult = append(result, item)\n\t\t}\n\t}\n\treturn result\n}\n\nfunc Reduce[T any, U any](items []T, init U, fn func(U, T) U) U {\n\tacc := init\n\tfor _, item := range items {\n\t\tacc = fn(acc, item)\n\t}\n\treturn acc\n}\n",
+    "Topics": ["generics", "type-parameters", "functional"],
+    "Explain": ["Type parameters with any constraint accept all types.", "Map transforms each element, Filter selects, Reduce aggregates.", "Pre-allocating with make avoids repeated append growth in Map."]
+  },
+  {
+    "Id": "cal-go-d6-001",
+    "Language": "go",
+    "Difficulty": 6,
+    "Title": "Worker Pool",
+    "Code": "type Job struct {\n\tID   int\n\tData string\n}\n\ntype Result struct {\n\tJobID int\n\tValue string\n\tErr   error\n}\n\nfunc workerPool(jobs []Job, workers int) []Result {\n\tjobCh := make(chan Job, len(jobs))\n\tresCh := make(chan Result, len(jobs))\n\n\tvar wg sync.WaitGroup\n\tfor w := 0; w < workers; w++ {\n\t\twg.Add(1)\n\t\tgo func() {\n\t\t\tdefer wg.Done()\n\t\t\tfor job := range jobCh {\n\t\t\t\tval, err := process(job)\n\t\t\t\tresCh <- Result{JobID: job.ID, Value: val, Err: err}\n\t\t\t}\n\t\t}()\n\t}\n\n\tfor _, j := range jobs {\n\t\tjobCh <- j\n\t}\n\tclose(jobCh)\n\n\twg.Wait()\n\tclose(resCh)\n\n\tvar results []Result\n\tfor r := range resCh {\n\t\tresults = append(results, r)\n\t}\n\treturn results\n}\n",
+    "Topics": ["goroutines", "channels", "worker-pool", "sync"],
+    "Explain": ["Buffered channels decouple producers from consumers.", "Workers range over jobCh and stop when it is closed.", "WaitGroup ensures all workers finish before closing resCh."]
+  },
+  {
+    "Id": "cal-go-d6-002",
+    "Language": "go",
+    "Difficulty": 6,
+    "Title": "Select With Timeout",
+    "Code": "func fanIn(ctx context.Context, channels ...<-chan string) <-chan string {\n\tout := make(chan string)\n\tvar wg sync.WaitGroup\n\n\tfor _, ch := range channels {\n\t\twg.Add(1)\n\t\tgo func(c <-chan string) {\n\t\t\tdefer wg.Done()\n\t\t\tfor {\n\t\t\t\tselect {\n\t\t\t\tcase val, ok := <-c:\n\t\t\t\t\tif !ok {\n\t\t\t\t\t\treturn\n\t\t\t\t\t}\n\t\t\t\t\tselect {\n\t\t\t\t\tcase out <- val:\n\t\t\t\t\tcase <-ctx.Done():\n\t\t\t\t\t\treturn\n\t\t\t\t\t}\n\t\t\t\tcase <-ctx.Done():\n\t\t\t\t\treturn\n\t\t\t\t}\n\t\t\t}\n\t\t}(ch)\n\t}\n\n\tgo func() {\n\t\twg.Wait()\n\t\tclose(out)\n\t}()\n\n\treturn out\n}\n",
+    "Topics": ["select", "channels", "context", "fan-in"],
+    "Explain": ["select multiplexes multiple channel operations.", "Nested select prevents blocking on a full output channel.", "Context cancellation provides graceful shutdown of all goroutines."]
+  },
+  {
+    "Id": "cal-go-d6-003",
+    "Language": "go",
+    "Difficulty": 6,
+    "Title": "Rate Limiter",
+    "Code": "type RateLimiter struct {\n\tmu       sync.Mutex\n\ttokens   float64\n\tmax      float64\n\trefill   float64\n\tlastTime time.Time\n}\n\nfunc NewRateLimiter(rps float64, burst int) *RateLimiter {\n\treturn &RateLimiter{\n\t\ttokens:   float64(burst),\n\t\tmax:      float64(burst),\n\t\trefill:   rps,\n\t\tlastTime: time.Now(),\n\t}\n}\n\nfunc (r *RateLimiter) Allow() bool {\n\tr.mu.Lock()\n\tdefer r.mu.Unlock()\n\n\tnow := time.Now()\n\telapsed := now.Sub(r.lastTime).Seconds()\n\tr.tokens += elapsed * r.refill\n\tif r.tokens > r.max {\n\t\tr.tokens = r.max\n\t}\n\tr.lastTime = now\n\n\tif r.tokens >= 1 {\n\t\tr.tokens--\n\t\treturn true\n\t}\n\treturn false\n}\n",
+    "Topics": ["concurrency", "mutex", "rate-limiting", "time"],
+    "Explain": ["Token bucket algorithm refills tokens based on elapsed time.", "Mutex protects shared state from concurrent access.", "Burst capacity allows short bursts above the steady rate."]
+  },
+  {
+    "Id": "cal-go-d6-004",
+    "Language": "go",
+    "Difficulty": 6,
+    "Title": "Concurrent Cache",
+    "Code": "type Cache struct {\n\tmu    sync.RWMutex\n\tstore map[string]cacheEntry\n\tttl   time.Duration\n}\n\ntype cacheEntry struct {\n\tvalue     interface{}\n\texpiresAt time.Time\n}\n\nfunc NewCache(ttl time.Duration) *Cache {\n\treturn &Cache{\n\t\tstore: make(map[string]cacheEntry),\n\t\tttl:   ttl,\n\t}\n}\n\nfunc (c *Cache) Get(key string) (interface{}, bool) {\n\tc.mu.RLock()\n\tdefer c.mu.RUnlock()\n\tentry, ok := c.store[key]\n\tif !ok || time.Now().After(entry.expiresAt) {\n\t\treturn nil, false\n\t}\n\treturn entry.value, true\n}\n\nfunc (c *Cache) Set(key string, value interface{}) {\n\tc.mu.Lock()\n\tdefer c.mu.Unlock()\n\tc.store[key] = cacheEntry{\n\t\tvalue:     value,\n\t\texpiresAt: time.Now().Add(c.ttl),\n\t}\n}\n",
+    "Topics": ["concurrency", "rwmutex", "cache", "ttl"],
+    "Explain": ["RWMutex allows concurrent reads but exclusive writes.", "TTL expiration is checked lazily on each Get call.", "interface{} allows storing any value type in the cache."]
+  },
+  {
+    "Id": "cal-go-d6-005",
+    "Language": "go",
+    "Difficulty": 6,
+    "Title": "HTTP Middleware Chain",
+    "Code": "type Middleware func(http.Handler) http.Handler\n\nfunc Chain(middlewares ...Middleware) Middleware {\n\treturn func(next http.Handler) http.Handler {\n\t\tfor i := len(middlewares) - 1; i >= 0; i-- {\n\t\t\tnext = middlewares[i](next)\n\t\t}\n\t\treturn next\n\t}\n}\n\nfunc Logger(next http.Handler) http.Handler {\n\treturn http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {\n\t\tstart := time.Now()\n\t\tnext.ServeHTTP(w, r)\n\t\tlog.Printf(\"%s %s %v\", r.Method, r.URL.Path, time.Since(start))\n\t})\n}\n\nfunc Recover(next http.Handler) http.Handler {\n\treturn http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {\n\t\tdefer func() {\n\t\t\tif err := recover(); err != nil {\n\t\t\t\thttp.Error(w, \"Internal Server Error\", 500)\n\t\t\t\tlog.Printf(\"panic: %v\", err)\n\t\t\t}\n\t\t}()\n\t\tnext.ServeHTTP(w, r)\n\t})\n}\n",
+    "Topics": ["http", "middleware", "closures", "recover"],
+    "Explain": ["Middleware wraps handlers to add cross-cutting behavior.", "Chain applies middlewares in reverse so the first listed runs first.", "recover inside defer catches panics and returns a 500 response."]
+  },
+  {
+    "Id": "cal-go-d7-001",
+    "Language": "go",
+    "Difficulty": 7,
+    "Title": "Graceful Server Shutdown",
+    "Code": "func runServer(addr string, handler http.Handler) error {\n\tsrv := &http.Server{\n\t\tAddr:         addr,\n\t\tHandler:      handler,\n\t\tReadTimeout:  10 * time.Second,\n\t\tWriteTimeout: 30 * time.Second,\n\t\tIdleTimeout:  60 * time.Second,\n\t}\n\n\terrCh := make(chan error, 1)\n\tgo func() {\n\t\tif err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {\n\t\t\terrCh <- fmt.Errorf(\"listen: %w\", err)\n\t\t}\n\t}()\n\n\tquit := make(chan os.Signal, 1)\n\tsignal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)\n\n\tselect {\n\tcase err := <-errCh:\n\t\treturn err\n\tcase sig := <-quit:\n\t\tlog.Printf(\"received signal %v, shutting down\", sig)\n\t}\n\n\tctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)\n\tdefer cancel()\n\n\tif err := srv.Shutdown(ctx); err != nil {\n\t\treturn fmt.Errorf(\"shutdown: %w\", err)\n\t}\n\tlog.Println(\"server stopped gracefully\")\n\treturn nil\n}\n",
+    "Topics": ["http", "signals", "context", "graceful-shutdown", "concurrency"],
+    "Explain": ["signal.Notify captures OS signals for controlled shutdown.", "select waits for either a server error or a shutdown signal.", "Shutdown drains active connections within the timeout deadline.", "ErrServerClosed is expected after Shutdown and is not a real error."]
+  },
+  {
+    "Id": "cal-go-d7-002",
+    "Language": "go",
+    "Difficulty": 7,
+    "Title": "Retry With Backoff",
+    "Code": "type RetryConfig struct {\n\tMaxAttempts int\n\tBaseDelay   time.Duration\n\tMaxDelay    time.Duration\n\tMultiplier  float64\n}\n\nfunc RetryWithBackoff(ctx context.Context, cfg RetryConfig, fn func() error) error {\n\tvar lastErr error\n\tdelay := cfg.BaseDelay\n\n\tfor attempt := 0; attempt < cfg.MaxAttempts; attempt++ {\n\t\tif err := fn(); err != nil {\n\t\t\tlastErr = err\n\n\t\t\tif attempt == cfg.MaxAttempts-1 {\n\t\t\t\tbreak\n\t\t\t}\n\n\t\t\tjitter := time.Duration(rand.Int63n(int64(delay / 2)))\n\t\t\twait := delay + jitter\n\n\t\t\tselect {\n\t\t\tcase <-time.After(wait):\n\t\t\tcase <-ctx.Done():\n\t\t\t\treturn fmt.Errorf(\"retry cancelled: %w\", ctx.Err())\n\t\t\t}\n\n\t\t\tdelay = time.Duration(float64(delay) * cfg.Multiplier)\n\t\t\tif delay > cfg.MaxDelay {\n\t\t\t\tdelay = cfg.MaxDelay\n\t\t\t}\n\t\t} else {\n\t\t\treturn nil\n\t\t}\n\t}\n\treturn fmt.Errorf(\"all %d attempts failed: %w\", cfg.MaxAttempts, lastErr)\n}\n",
+    "Topics": ["retry", "backoff", "context", "concurrency", "error-handling"],
+    "Explain": ["Exponential backoff increases delay between retries.", "Jitter prevents thundering herd when many clients retry.", "Context cancellation allows callers to abort the retry loop.", "The last error is wrapped to preserve the failure chain."]
+  },
+  {
+    "Id": "cal-go-d7-003",
+    "Language": "go",
+    "Difficulty": 7,
+    "Title": "Concurrent Pipeline With Error Group",
+    "Code": "func processPipeline(ctx context.Context, inputs []string) ([]Result, error) {\n\tg, ctx := errgroup.WithContext(ctx)\n\n\trawCh := make(chan string, len(inputs))\n\tparsedCh := make(chan Parsed, len(inputs))\n\tresultCh := make(chan Result, len(inputs))\n\n\tg.Go(func() error {\n\t\tdefer close(rawCh)\n\t\tfor _, input := range inputs {\n\t\t\tselect {\n\t\t\tcase rawCh <- input:\n\t\t\tcase <-ctx.Done():\n\t\t\t\treturn ctx.Err()\n\t\t\t}\n\t\t}\n\t\treturn nil\n\t})\n\n\tfor w := 0; w < 4; w++ {\n\t\tg.Go(func() error {\n\t\t\tfor raw := range rawCh {\n\t\t\t\tp, err := parse(raw)\n\t\t\t\tif err != nil {\n\t\t\t\t\treturn fmt.Errorf(\"parse %q: %w\", raw, err)\n\t\t\t\t}\n\t\t\t\tselect {\n\t\t\t\tcase parsedCh <- p:\n\t\t\t\tcase <-ctx.Done():\n\t\t\t\t\treturn ctx.Err()\n\t\t\t\t}\n\t\t\t}\n\t\t\treturn nil\n\t\t})\n\t}\n\n\tgo func() {\n\t\tg.Wait()\n\t\tclose(parsedCh)\n\t}()\n\n\tvar results []Result\n\tfor p := range parsedCh {\n\t\tr, err := transform(p)\n\t\tif err != nil {\n\t\t\treturn nil, fmt.Errorf(\"transform: %w\", err)\n\t\t}\n\t\tresults = append(results, r)\n\t}\n\n\tif err := g.Wait(); err != nil {\n\t\treturn nil, err\n\t}\n\treturn results, nil\n}\n",
+    "Topics": ["errgroup", "pipeline", "concurrency", "channels", "context"],
+    "Explain": ["errgroup cancels sibling goroutines on first error.", "Multiple parse workers fan out from a shared input channel.", "Select on ctx.Done prevents goroutine leaks on cancellation.", "Two-stage pipeline separates parsing from transformation."]
+  },
+  {
+    "Id": "cal-go-d7-004",
+    "Language": "go",
+    "Difficulty": 7,
+    "Title": "Circuit Breaker",
+    "Code": "type CircuitBreaker struct {\n\tmu           sync.Mutex\n\tfailures     int\n\tthreshold    int\n\tresetTimeout time.Duration\n\tlastFailure  time.Time\n\tstate        string\n}\n\nfunc NewCircuitBreaker(threshold int, timeout time.Duration) *CircuitBreaker {\n\treturn &CircuitBreaker{\n\t\tthreshold:    threshold,\n\t\tresetTimeout: timeout,\n\t\tstate:        \"closed\",\n\t}\n}\n\nfunc (cb *CircuitBreaker) Execute(fn func() error) error {\n\tcb.mu.Lock()\n\tif cb.state == \"open\" {\n\t\tif time.Since(cb.lastFailure) > cb.resetTimeout {\n\t\t\tcb.state = \"half-open\"\n\t\t} else {\n\t\t\tcb.mu.Unlock()\n\t\t\treturn fmt.Errorf(\"circuit breaker open\")\n\t\t}\n\t}\n\tcb.mu.Unlock()\n\n\terr := fn()\n\n\tcb.mu.Lock()\n\tdefer cb.mu.Unlock()\n\tif err != nil {\n\t\tcb.failures++\n\t\tcb.lastFailure = time.Now()\n\t\tif cb.failures >= cb.threshold {\n\t\t\tcb.state = \"open\"\n\t\t}\n\t\treturn err\n\t}\n\tcb.failures = 0\n\tcb.state = \"closed\"\n\treturn nil\n}\n",
+    "Topics": ["concurrency", "mutex", "circuit-breaker", "resilience", "error-handling"],
+    "Explain": ["Circuit breaker transitions through closed, open, and half-open states.", "Open state fast-fails without calling the underlying function.", "Half-open allows a single probe to test if the service recovered.", "Mutex is released before calling fn to avoid holding locks during IO."]
+  }
+]

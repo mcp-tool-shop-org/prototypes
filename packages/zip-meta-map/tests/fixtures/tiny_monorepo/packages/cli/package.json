@@ -1,0 +1,8 @@
+{
+  "name": "@tiny/cli",
+  "version": "1.0.0",
+  "bin": "cli.js",
+  "dependencies": {
+    "@tiny/core": "workspace:*"
+  }
+}

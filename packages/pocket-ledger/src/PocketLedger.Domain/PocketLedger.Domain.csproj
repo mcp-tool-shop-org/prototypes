@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>PocketLedger.Domain</RootNamespace>
+    <AssemblyName>PocketLedger.Domain</AssemblyName>
+    <Description>Core domain entities, value objects, and business rules for PocketLedger</Description>
+  </PropertyGroup>
+
+</Project>

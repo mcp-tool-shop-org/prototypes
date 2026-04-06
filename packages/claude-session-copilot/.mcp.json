@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "session-copilot": {
+      "command": "npx",
+      "args": ["-y", "@mcptoolshop/claude-session-copilot"],
+      "env": {}
+    }
+  }
+}

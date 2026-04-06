@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Attestia.App.Pages.ReconciliationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Loaded="Page_Loaded">
+
+    <ScrollViewer>
+        <StackPanel Padding="32,28,32,32" Spacing="20" MaxWidth="1100">
+            <!-- Header -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Spacing="4">
+                    <TextBlock Text="Attestation" Style="{StaticResource AttestiaPageTitleStyle}" />
+                    <TextBlock Text="Cryptographically record approved intent."
+                               FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                </StackPanel>
+                <Button Grid.Column="1" Content="Recalculate State" Click="Refresh_Click"
+                        FontSize="12" Padding="8,4" VerticalAlignment="Top" />
+            </Grid>
+
+            <!-- Empty state -->
+            <Grid x:Name="EmptyState" Visibility="Collapsed"
+                  HorizontalAlignment="Center" Padding="0,32,0,0">
+                <StackPanel Spacing="12" MaxWidth="420" HorizontalAlignment="Center">
+                    <FontIcon Glyph="&#xE9D5;" FontSize="48"
+                              Foreground="{ThemeResource TextFillColorTertiaryBrush}" HorizontalAlignment="Center" />
+                    <TextBlock Text="No attestation records" FontSize="18" FontWeight="SemiBold"
+                               HorizontalAlignment="Center" />
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" FontSize="13" LineHeight="20"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               Text="Attestation records are created when you run a reconciliation. Each record cryptographically proves that your intents, ledger, and on-chain activity are consistent." />
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" FontSize="13"
+                               Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                               Text="Declare some intents first, then run a reconciliation to generate your first attestation." />
+                </StackPanel>
+            </Grid>
+
+            <!-- Attestation list -->
+            <StackPanel x:Name="AttestationsListPanel" Spacing="8">
+                <TextBlock Text="Attestation Records" Style="{StaticResource AttestiaSectionHeadingStyle}" />
+                <TextBlock Text="Why this matters: Each attestation record is a cryptographic snapshot proving that your declared intents, internal ledger, and on-chain activity are consistent at a point in time. These records are the primary evidence for auditors."
+                           FontSize="11" Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                           TextWrapping="Wrap" FontStyle="Italic" LineHeight="16" />
+                <ListView x:Name="AttestationsList" SelectionMode="Single"
+                          SelectionChanged="Attestation_Selected"
+                          ItemsSource="{x:Bind ViewModel.Attestations, Mode=OneWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="16" Margin="0,0,0,6"
+                                  CornerRadius="8"
+                                  Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                  BorderThickness="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0"
+                                           Text="{Binding Id}" FontWeight="SemiBold"
+                                           TextTrimming="CharacterEllipsis" />
+                                <Border Grid.Row="0" Grid.Column="1" Padding="6,2" CornerRadius="4"
+                                        Background="{ThemeResource SubtleFillColorSecondaryBrush}">
+                                    <TextBlock Text="{Binding AllReconciled}" FontSize="11" />
+                                </Border>
+
+                                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal"
+                                            Spacing="12" Margin="0,6,0,0">
+                                    <TextBlock FontSize="11"
+                                               Foreground="{ThemeResource TextFillColorTertiaryBrush}">
+                                        <Run Text="Attested: " />
+                                        <Run Text="{Binding AttestedAt}" />
+                                    </TextBlock>
+                                    <Border Padding="4,2" CornerRadius="3"
+                                            Background="{StaticResource AttestiaHashBackgroundBrush}">
+                                        <TextBlock FontSize="11" FontFamily="Cascadia Mono, Consolas"
+                                                   CharacterSpacing="-10"
+                                                   TextTrimming="CharacterEllipsis" MaxWidth="300"
+                                                   Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                                                   Text="{Binding ReportHash}" />
+                                    </Border>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+
+            <!-- Summary panel (shown when attestation selected) -->
+            <StackPanel x:Name="SummaryPanel" Visibility="Collapsed" Spacing="8">
+                <TextBlock Text="Summary" Style="{StaticResource AttestiaSectionHeadingStyle}" />
+                <Grid Padding="20" CornerRadius="8"
+                      Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                      BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                      BorderThickness="1" ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Spacing="4">
+                        <TextBlock Text="Intents" FontSize="12"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="SumIntents" Text="—" FontSize="24" Style="{StaticResource AttestiaNumericStyle}" HorizontalTextAlignment="Left" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Spacing="4">
+                        <TextBlock Text="Matched" FontSize="12"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="SumMatched" Text="—" FontSize="24" Style="{StaticResource AttestiaNumericStyle}" HorizontalTextAlignment="Left" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Spacing="4">
+                        <TextBlock Text="Mismatched" FontSize="12"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="SumMismatched" Text="—" FontSize="24" Style="{StaticResource AttestiaNumericStyle}" HorizontalTextAlignment="Left" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="3" Spacing="4">
+                        <TextBlock Text="Missing" FontSize="12"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="SumMissing" Text="—" FontSize="24" Style="{StaticResource AttestiaNumericStyle}" HorizontalTextAlignment="Left" />
+                    </StackPanel>
+                </Grid>
+
+                <!-- Reconciliation details toggle -->
+                <ToggleButton x:Name="ShowReconciliationDetails" Content="Show reconciliation details"
+                              FontSize="12" Padding="8,4"
+                              Checked="ShowReconDetails_Toggled" Unchecked="ShowReconDetails_Toggled" />
+
+                <!-- Discrepancies (hidden behind toggle) -->
+                <StackPanel x:Name="DiscrepanciesPanel" Visibility="Collapsed" Spacing="4">
+                    <TextBlock Text="Discrepancies" FontSize="14" FontWeight="SemiBold"
+                               Foreground="{ThemeResource SystemFillColorCautionBrush}" />
+                    <ItemsControl x:Name="DiscrepanciesList">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" FontSize="12"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           Margin="0,2,0,0" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Quick navigation -->
+            <StackPanel x:Name="QuickNavPanel" Visibility="Collapsed" Spacing="8">
+                <TextBlock Text="Continue your workflow" FontSize="14" FontWeight="SemiBold"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button Content="Verify Integrity Proofs" Click="GoToProofs_Click"
+                            FontSize="12" Padding="8,4" />
+                    <Button Content="Generate Compliance Report" Click="GoToCompliance_Click"
+                            FontSize="12" Padding="8,4" />
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Loading / Error -->
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <ProgressRing x:Name="LoadingRing" IsActive="False" Width="20" Height="20" />
+                <TextBlock x:Name="ErrorText" FontSize="13"
+                           Foreground="{ThemeResource SystemFillColorCautionBrush}" />
+                <Button x:Name="RetryBtn" Content="Reattempt Connection" Click="Refresh_Click"
+                        Visibility="Collapsed" FontSize="12" Padding="8,4" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

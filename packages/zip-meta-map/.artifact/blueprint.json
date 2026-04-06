@@ -1,0 +1,82 @@
+{
+  "repo_name": "zip-meta-map",
+  "generated_at": "2026-03-03T15:23:46.817Z",
+  "version": "0.0.0",
+  "driver_mode": "ollama",
+  "pick": {
+    "tier": "Creator",
+    "format": "C7_theme_palette",
+    "format_hint": "Theme palette — colors, fonts, spacing tokens",
+    "alternates": [
+      "C9_template_pack"
+    ],
+    "season": null,
+    "signature_move": "card_back_pattern"
+  },
+  "constraints": [
+    "monospace-only",
+    "uses-two-opposing-forces"
+  ],
+  "hooks": [
+    {
+      "role": "name_hook",
+      "atom_id": "repo_tagline:26879373eee5",
+      "value": "Generate machine-readable metadata manifests for ZIP archives and project directories",
+      "source": "pyproject.toml:8"
+    },
+    {
+      "role": "invariant_hook",
+      "atom_id": "invariant:1e4f3f2268b3",
+      "value": "chunker.py    # deterministic text chunking",
+      "source": "README.md:187"
+    }
+  ],
+  "must_include": [
+    "Curator decision system; local Ollama model; deterministic fallback mechanism",
+    "Repo-specific context based on artifact's unique features",
+    "Deterministic hash from the repo name and date"
+  ],
+  "freshness": {
+    "weird_detail": "zip-meta-map generates a deterministic metadata layer that answers three questions for AI agents",
+    "recent_change": "Promoted to v1.0.0 — production-ready release",
+    "sharp_edge": "- **No telemetry.** No network calls except to local Ollama."
+  },
+  "ban_list": [
+    "D3_debug_tree",
+    "uses-real-invariant"
+  ],
+  "org_curation": {
+    "bans_applied": [
+      "D3_debug_tree",
+      "uses-real-invariant",
+      "black-and-white",
+      "signal-proof"
+    ],
+    "gap_bias": [
+      "prefer Exec tier (at 4%, target ~10%)",
+      "13 unique formats used across 24 decisions"
+    ]
+  },
+  "web_recommendations": null,
+  "callouts": {
+    "veto": "Avoid using D3_debug_tree and constraints like uses-real-invariant or signal-proof as they are overused.",
+    "twist": "The selected format C7_theme_palette leverages the repo's unique feature of generating deterministic metadata for ZIP archives and project directories",
+    "pick": "C7_theme_palette is chosen because it aligns well with the repo's goal to provide a guided, LLM-friendly metadata bundle and uses monospace-only constraint to emphasize code clarity.",
+    "risk": ""
+  },
+  "missing_inputs": [],
+  "provenance": {
+    "decision_packet": ".artifact/decision_packet.json",
+    "decision_packet_sha256": "81ae90e64661bda466941b996a12f2b9078b91b338c6bbbc53520ebeceab3838",
+    "truth_bundle_sha256": "59a65f723ce0c8aa7b772ad321bfcaf2f489f07e058822df14fcf177f763e080",
+    "web_brief_sha256": "d246e2af5165ca4adeb147e192c50cb403425d98d219056639479ca5a3abc097",
+    "truth_atoms_count": 33,
+    "driver_mode": "ollama",
+    "model": "qwen2.5:14b",
+    "host": "http://127.0.0.1:11434",
+    "org_ledger": false,
+    "web_brief": true,
+    "version": "0.0.0",
+    "quality_gates_passed": true
+  }
+}

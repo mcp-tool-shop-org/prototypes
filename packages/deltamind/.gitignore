@@ -1,0 +1,9 @@
+node_modules/
+dist/
+coverage/
+*.tgz
+.DS_Store
+site/.astro/
+site/dist/
+site/node_modules/
+.polyglot-cache.json

@@ -1,0 +1,29 @@
+{
+  "name": "@sonic-core/service",
+  "version": "1.0.1",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "sonic-core": "./dist/bin.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "@sonic-core/engine": "1.0.0",
+    "@sonic-core/types": "1.0.0",
+    "fastmcp": "^3.34.0",
+    "zod": "^4.3.6"
+  },
+  "scripts": {
+    "build": "npx tsc -b",
+    "clean": "rm -rf dist *.tsbuildinfo"
+  }
+}

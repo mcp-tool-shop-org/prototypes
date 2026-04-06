@@ -1,0 +1,16 @@
+{
+  "id": "string",
+  "language": "string",
+  "source": "builtin|corpus|user",
+  "origin": "string?",
+  "title": "string",
+  "code": "string",
+  "metrics": {
+    "lines": "int",
+    "characters": "int",
+    "symbolDensity": "float",
+    "maxIndentDepth": "int"
+  },
+  "concepts": "string[]?",
+  "createdUtc": "ISO-8601"
+}

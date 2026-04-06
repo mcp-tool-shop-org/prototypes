@@ -1,0 +1,40 @@
+name: Receipt Release
+
+on:
+  workflow_call:
+    inputs:
+      upload_artifact:
+        type: boolean
+        default: true
+        description: Upload receipt artifacts
+      output_dir:
+        type: string
+        default: receipts
+        description: Output directory for receipts
+
+jobs:
+  receipt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - uses: pnpm/action-setup@02f6c237bd2518259fed6c71566509edfb3f2b74 # v4
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+
+      - name: Generate release receipt
+        run: npx rf make release --from github --output ${{ inputs.output_dir }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: inputs.upload_artifact
+        with:
+          name: release-receipts
+          path: ${{ inputs.output_dir }}/

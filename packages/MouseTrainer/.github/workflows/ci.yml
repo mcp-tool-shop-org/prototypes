@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "**/*.csproj"
+      - "**/*.sln"
+      - ".github/workflows/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "**/*.csproj"
+      - "**/*.sln"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Restore libraries
+        run: |
+          dotnet restore src/MouseTrainer.Domain/MouseTrainer.Domain.csproj
+          dotnet restore src/MouseTrainer.Simulation/MouseTrainer.Simulation.csproj
+          dotnet restore src/MouseTrainer.Audio/MouseTrainer.Audio.csproj
+          dotnet restore tests/MouseTrainer.Tests/MouseTrainer.Tests.csproj
+
+      - name: Build
+        run: |
+          dotnet build src/MouseTrainer.Domain/MouseTrainer.Domain.csproj --configuration Release --no-restore
+          dotnet build src/MouseTrainer.Simulation/MouseTrainer.Simulation.csproj --configuration Release --no-restore
+          dotnet build src/MouseTrainer.Audio/MouseTrainer.Audio.csproj --configuration Release --no-restore
+          dotnet build tests/MouseTrainer.Tests/MouseTrainer.Tests.csproj --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test tests/MouseTrainer.Tests/MouseTrainer.Tests.csproj --configuration Release --no-build --verbosity normal

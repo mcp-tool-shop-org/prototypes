@@ -1,0 +1,23 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "mcp-aside-local",
+  "description": "Local marketplace for the mcp-aside plugin",
+  "owner": {
+    "name": "mcp-tool-shop",
+    "email": "64996768+mcp-tool-shop@users.noreply.github.com"
+  },
+  "plugins": [
+    {
+      "name": "mcp-aside",
+      "description": "Interjection inbox for Claude Code. Capture side-thoughts, blockers, and observations mid-task without losing focus.",
+      "version": "0.1.2",
+      "source": "./",
+      "author": {
+        "name": "mcp-tool-shop",
+        "email": "64996768+mcp-tool-shop@users.noreply.github.com"
+      },
+      "category": "productivity",
+      "license": "MIT"
+    }
+  ]
+}

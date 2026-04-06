@@ -1,0 +1,89 @@
+[project]
+name = "voice-soundboard"
+version = "3.0.1"
+description = "Text-to-speech for AI agents and developers. Compiler → Graph → Engine architecture."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "mcp-tool-shop", email = "64996768+mcp-tool-shop@users.noreply.github.com"}
+]
+keywords = [
+    "tts",
+    "text-to-speech",
+    "ai",
+    "voice",
+    "speech",
+    "audio",
+]
+
+dependencies = [
+    "numpy>=1.24.0",
+    "soundfile>=0.12.1",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+kokoro = [
+    "kokoro-onnx>=0.4.0",
+    "onnxruntime>=1.16.0",
+]
+piper = [
+    "piper-tts>=1.2.0",
+]
+websocket = [
+    "websockets>=12.0",
+]
+openai = [
+    "openai>=1.0.0",
+]
+coqui = [
+    "TTS>=0.21.0",
+]
+cloning = [
+    "resemblyzer>=0.1.1",
+]
+elevenlabs = [
+    "elevenlabs>=1.0.0",
+]
+azure = [
+    "azure-cognitiveservices-speech>=1.35.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0",
+    "hypothesis>=6.100.0",
+    "ruff>=0.3",
+    "pip-audit>=2.7.0",
+]
+all = [
+    "kokoro-onnx>=0.4.0",
+    "onnxruntime>=1.16.0",
+    "piper-tts>=1.2.0",
+    "websockets>=12.0",
+    "openai>=1.0.0",
+    "TTS>=0.21.0",
+    "resemblyzer>=0.1.1",
+    "elevenlabs>=1.0.0",
+    "azure-cognitiveservices-speech>=1.35.0",
+]
+
+[project.scripts]
+voice-soundboard = "voice_soundboard.adapters.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/mcp-tool-shop-org/voice-soundboard"
+Repository = "https://github.com/mcp-tool-shop-org/voice-soundboard"
+Issues = "https://github.com/mcp-tool-shop-org/voice-soundboard/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["voice_soundboard"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

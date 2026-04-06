@@ -1,0 +1,125 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "spec/**"
+      - "tools/**"
+      - "examples/**"
+      - "ruff.toml"
+      - ".github/workflows/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "spec/**"
+      - "tools/**"
+      - "examples/**"
+      - "ruff.toml"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install tools
+        run: pip install ruff mypy
+
+      - name: Ruff lint
+        run: ruff check tools/python/
+
+      - name: Mypy type check
+        run: mypy tools/python/prov_validator.py --ignore-missing-imports
+
+      - name: Verify validator runs
+        run: python tools/python/prov_validator.py --help
+
+      - name: List known methods
+        run: python tools/python/prov_validator.py list-methods
+
+      - name: Run test vector - integrity.digest.sha256
+        run: python tools/python/prov_validator.py check-vector integrity.digest.sha256
+
+      - name: Run test vector - adapter.wrap.envelope_v0_1
+        run: python tools/python/prov_validator.py check-vector adapter.wrap.envelope_v0_1
+
+  security-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Secret scan
+        run: |
+          echo "Scanning for hardcoded secrets..."
+          # Patterns file avoids self-matching in this workflow
+          cat > /tmp/secret-patterns.txt <<PATTERNS
+          PRIVATE.KEY
+          sk_live_
+          sk_test_
+          aws_secret
+          PATTERNS
+          FOUND=0
+          while IFS= read -r pattern; do
+            pattern=$(echo "$pattern" | xargs)
+            [ -z "$pattern" ] && continue
+            if git grep -lI "$pattern" -- ':!*.md' ':!.github/workflows/*' 2>/dev/null; then
+              echo "FAIL: potential secret pattern '$pattern' found"
+              FOUND=1
+            fi
+          done < /tmp/secret-patterns.txt
+          if [ "$FOUND" -eq 1 ]; then
+            exit 1
+          fi
+          echo "No hardcoded secrets detected"
+
+  spec-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JSON schemas
+        run: |
+          python3 -c "
+          import json, sys
+          from pathlib import Path
+
+          schemas = sorted(Path('spec/schemas').glob('*.json'))
+          for schema_file in schemas:
+              try:
+                  with open(schema_file) as f:
+                      json.load(f)
+                  print(f'  {schema_file.name}')
+              except json.JSONDecodeError as e:
+                  print(f'FAIL {schema_file.name}: {e}')
+                  sys.exit(1)
+          print(f'All {len(schemas)} schemas valid')
+          "
+
+      - name: Validate methods catalog
+        run: |
+          python3 -c "
+          import json
+          with open('spec/methods.json') as f:
+              methods = json.load(f)
+          count = len(methods.get('methods', []))
+          print(f'methods.json: {count} methods')
+          "

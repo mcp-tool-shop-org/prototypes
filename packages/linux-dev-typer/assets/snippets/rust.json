@@ -1,0 +1,18 @@
+[
+  {
+    "id": "rs-match",
+    "language": "rust",
+    "difficulty": 4,
+    "title": "Match + Result",
+    "topics": [
+      "match",
+      "result",
+      "parse"
+    ],
+    "code": "fn parse_port(s: &str) -> Result<u16, String> {\n    match s.parse::<u16>() {\n        Ok(p) => Ok(p),\n        Err(e) => Err(format!(\"invalid port: {e}\")),\n    }\n}\n",
+    "explain": [
+      "Result forces explicit error handling.",
+      "Practice turbofish, braces, and macros."
+    ]
+  }
+]

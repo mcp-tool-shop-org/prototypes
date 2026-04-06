@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'agents/**'
+      - 'skills/**'
+      - '.claude-plugin/**'
+      - '.mcp.json'
+      - '.github/workflows/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'agents/**'
+      - 'skills/**'
+      - '.claude-plugin/**'
+      - '.mcp.json'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JSON files
+        run: |
+          echo "Validating JSON files..."
+          failed=0
+          while IFS= read -r f; do
+            if python3 -m json.tool "$f" > /dev/null 2>&1; then
+              echo "OK: $f"
+            else
+              echo "FAIL: $f"
+              failed=1
+            fi
+          done < <(find . -name "*.json" -not -path "./.git/*")
+          if [ "$failed" -eq 1 ]; then
+            echo "::error::One or more JSON files are invalid"
+            exit 1
+          fi
+
+      - name: Check plugin structure
+        run: |
+          echo "Checking required files..."
+          missing=0
+          for f in README.md LICENSE .claude-plugin/plugin.json .mcp.json; do
+            if [ -f "$f" ]; then
+              echo "OK: $f"
+            else
+              echo "MISSING: $f"
+              missing=1
+            fi
+          done
+          echo ""
+          echo "Skills: $(find skills -name '*.md' 2>/dev/null | wc -l)"
+          echo "Agents: $(find agents -name '*.md' 2>/dev/null | wc -l)"
+          if [ "$missing" -eq 1 ]; then
+            echo "::error::Required plugin files are missing"
+            exit 1
+          fi

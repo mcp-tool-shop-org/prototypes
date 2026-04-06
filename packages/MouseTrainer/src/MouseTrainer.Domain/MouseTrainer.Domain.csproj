@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- No extra dependencies — Domain is the leaf. -->
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>CS1591</NoWarn>
+
+    <!-- NuGet package metadata -->
+    <PackageId>MouseTrainer.Domain</PackageId>
+    <Version>1.1.4</Version>
+    <Description>Deterministic xorshift32 RNG, FNV-1a hashing, game event system, and run identity primitives. Platform-stable, zero dependencies, suitable for any deterministic simulation or benchmarking scenario.</Description>
+    <Authors>mcp-tool-shop</Authors>
+    <Company>MCP Tool Shop</Company>
+    <Copyright>Copyright (c) 2025-2026 MCP Tool Shop</Copyright>
+    <PackageProjectUrl>https://github.com/mcp-tool-shop-org/MouseTrainer</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mcp-tool-shop-org/MouseTrainer</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>deterministic;rng;xorshift;simulation;game;hashing;fnv1a</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>

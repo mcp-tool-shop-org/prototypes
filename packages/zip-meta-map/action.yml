@@ -1,0 +1,160 @@
+name: 'zip-meta-map'
+description: 'Generate machine-readable metadata manifests for project directories and ZIP archives'
+author: 'mcp-tool-shop'
+
+branding:
+  icon: 'map'
+  color: 'blue'
+
+inputs:
+  path:
+    description: 'Path to the directory or ZIP to analyze'
+    required: true
+  profile:
+    description: 'Force a specific profile (auto-detect if not set)'
+    required: false
+    default: ''
+  policy:
+    description: 'Path to a META_ZIP_POLICY.json file'
+    required: false
+    default: ''
+  output-dir:
+    description: 'Output directory for generated files'
+    required: false
+    default: '.zip-meta-map'
+  python-version:
+    description: 'Python version to use'
+    required: false
+    default: '3.12'
+  version:
+    description: 'zip-meta-map version to install (default: latest)'
+    required: false
+    default: ''
+  summary:
+    description: 'Write a step summary to GITHUB_STEP_SUMMARY'
+    required: false
+    default: 'true'
+  report:
+    description: 'Generate a detailed markdown report'
+    required: false
+    default: 'false'
+  pr-comment:
+    description: 'Post step summary as a PR comment (requires pull_request trigger and pull-requests: write permission)'
+    required: false
+    default: 'false'
+
+outputs:
+  index-path:
+    description: 'Path to the generated META_ZIP_INDEX.json'
+    value: ${{ steps.build.outputs.index-path }}
+  front-path:
+    description: 'Path to the generated META_ZIP_FRONT.md'
+    value: ${{ steps.build.outputs.front-path }}
+  report-path:
+    description: 'Path to the generated META_ZIP_REPORT.md (if report enabled)'
+    value: ${{ steps.build.outputs.report-path }}
+  profile:
+    description: 'Detected or forced profile name'
+    value: ${{ steps.build.outputs.profile }}
+  file-count:
+    description: 'Number of files indexed'
+    value: ${{ steps.build.outputs.file-count }}
+  warnings-count:
+    description: 'Number of warnings generated'
+    value: ${{ steps.build.outputs.warnings-count }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install zip-meta-map
+      shell: bash
+      run: |
+        if [ -n "${{ inputs.version }}" ]; then
+          pip install "zip-meta-map==${{ inputs.version }}"
+        else
+          pip install zip-meta-map
+        fi
+
+    - name: Build metadata
+      id: build
+      shell: bash
+      run: |
+        ARGS="build ${{ inputs.path }} -o ${{ inputs.output-dir }}"
+
+        if [ -n "${{ inputs.profile }}" ]; then
+          ARGS="$ARGS --profile ${{ inputs.profile }}"
+        fi
+
+        if [ -n "${{ inputs.policy }}" ]; then
+          ARGS="$ARGS --policy ${{ inputs.policy }}"
+        fi
+
+        if [ "${{ inputs.summary }}" = "true" ]; then
+          ARGS="$ARGS --summary"
+        fi
+
+        if [ "${{ inputs.report }}" = "true" ]; then
+          ARGS="$ARGS --report md"
+        fi
+
+        zip-meta-map $ARGS
+
+        # Set outputs from the generated index
+        INDEX_PATH="${{ inputs.output-dir }}/META_ZIP_INDEX.json"
+        FRONT_PATH="${{ inputs.output-dir }}/META_ZIP_FRONT.md"
+        REPORT_PATH="${{ inputs.output-dir }}/META_ZIP_REPORT.md"
+
+        echo "index-path=$INDEX_PATH" >> "$GITHUB_OUTPUT"
+        echo "front-path=$FRONT_PATH" >> "$GITHUB_OUTPUT"
+
+        if [ -f "$REPORT_PATH" ]; then
+          echo "report-path=$REPORT_PATH" >> "$GITHUB_OUTPUT"
+        fi
+
+        # Extract metadata from the index JSON
+        PROFILE=$(python3 -c "import json; d=json.load(open('$INDEX_PATH')); print(d['profile'])")
+        FILE_COUNT=$(python3 -c "import json; d=json.load(open('$INDEX_PATH')); print(len(d['files']))")
+        WARNINGS=$(python3 -c "import json; d=json.load(open('$INDEX_PATH')); print(len(d.get('warnings', [])))")
+
+        echo "profile=$PROFILE" >> "$GITHUB_OUTPUT"
+        echo "file-count=$FILE_COUNT" >> "$GITHUB_OUTPUT"
+        echo "warnings-count=$WARNINGS" >> "$GITHUB_OUTPUT"
+
+    - name: Post PR comment
+      if: ${{ inputs.pr-comment == 'true' && github.event_name == 'pull_request' }}
+      id: pr-comment
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        # Skip fork PRs — token lacks write permissions on forks
+        if [ "${{ github.event.pull_request.head.repo.fork }}" = "true" ]; then
+          echo "::notice::Skipping PR comment on fork PR (insufficient permissions)"
+          exit 0
+        fi
+
+        # Verify gh CLI is available
+        if ! command -v gh &> /dev/null; then
+          echo "::warning::gh CLI not found — skipping PR comment. Install gh or use actions/checkout which bundles it."
+          exit 0
+        fi
+
+        INDEX_PATH="${{ inputs.output-dir }}/META_ZIP_INDEX.json"
+        PROJECT_NAME=$(basename "${{ inputs.path }}")
+        [ -z "$PROJECT_NAME" ] && PROJECT_NAME="project"
+
+        COMMENT_BODY=$(python3 -c "
+        import json
+        from zip_meta_map.report import build_step_summary
+        index = json.load(open('${INDEX_PATH}'))
+        print(build_step_summary(index, '${PROJECT_NAME}'))
+        ")
+
+        MARKER='<!-- zip-meta-map-pr-comment -->'
+        gh pr comment "${{ github.event.pull_request.number }}" --body "${MARKER}
+        ${COMMENT_BODY}"

@@ -1,0 +1,52 @@
+name: Publish to NuGet
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: nuget
+    permissions:
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+            10.0.x
+
+      - name: Restore
+        run: |
+          dotnet restore src/Soundboard.Client/Soundboard.Client.csproj
+          dotnet restore src/Soundboard.Maui.Audio/Soundboard.Maui.Audio.csproj
+
+      - name: Build
+        run: |
+          dotnet build src/Soundboard.Client/Soundboard.Client.csproj --configuration Release --no-restore
+          dotnet build src/Soundboard.Maui.Audio/Soundboard.Maui.Audio.csproj --configuration Release --no-restore
+
+      - name: Pack Soundboard.Client
+        run: dotnet pack src/Soundboard.Client/Soundboard.Client.csproj --configuration Release --no-build --output ./nupkg
+
+      - name: Pack Soundboard.Maui.Audio
+        run: dotnet pack src/Soundboard.Maui.Audio/Soundboard.Maui.Audio.csproj --configuration Release --no-build --output ./nupkg
+
+      - name: Login to NuGet (Trusted Publishing)
+        uses: nuget/login@v1
+        id: nuget-login
+        with:
+          user: mcp-tool-shop
+
+      - name: Push to NuGet
+        run: dotnet nuget push ./nupkg/*.nupkg --api-key "${{ steps.nuget-login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate

@@ -1,0 +1,175 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://mcp-tool-shop.dev/schemas/mcp-tools.schema.json",
+  "title": "MCP Tools Definition",
+  "description": "Tool definitions for MCP servers",
+  "type": "object",
+  "required": ["tools"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "tools": {
+      "type": "array",
+      "description": "Array of tool definitions",
+      "items": {
+        "$ref": "#/$defs/tool"
+      }
+    }
+  },
+  "$defs": {
+    "tool": {
+      "type": "object",
+      "required": ["name", "description", "parameters"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Unique identifier for the tool",
+          "pattern": "^[a-z][a-zA-Z0-9_]*$",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of what the tool does",
+          "minLength": 10,
+          "maxLength": 1000
+        },
+        "parameters": {
+          "type": "array",
+          "description": "Input parameters for the tool",
+          "items": {
+            "$ref": "#/$defs/parameter"
+          }
+        },
+        "returns": {
+          "type": "object",
+          "description": "Description of the return value",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["text", "json", "image", "resource", "ui"]
+            },
+            "description": {
+              "type": "string"
+            }
+          },
+          "required": ["type", "description"]
+        },
+        "examples": {
+          "type": "array",
+          "description": "Usage examples",
+          "items": {
+            "$ref": "#/$defs/example"
+          }
+        },
+        "ui": {
+          "$ref": "#/$defs/uiConfig",
+          "description": "MCP Apps UI configuration for this tool"
+        }
+      },
+      "additionalProperties": false
+    },
+    "parameter": {
+      "type": "object",
+      "required": ["name", "type", "description"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-zA-Z0-9_]*$"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["string", "number", "boolean", "array", "object"]
+        },
+        "description": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean",
+          "default": false
+        },
+        "default": {},
+        "enum": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "items": {
+          "$ref": "#/$defs/parameter",
+          "description": "For array types, describes the item type"
+        },
+        "properties": {
+          "type": "object",
+          "description": "For object types, describes the properties",
+          "additionalProperties": {
+            "$ref": "#/$defs/parameter"
+          }
+        },
+        "validation": {
+          "type": "object",
+          "properties": {
+            "min": { "type": "number" },
+            "max": { "type": "number" },
+            "minLength": { "type": "integer" },
+            "maxLength": { "type": "integer" },
+            "pattern": { "type": "string" },
+            "format": {
+              "type": "string",
+              "enum": ["email", "uri", "date", "date-time", "uuid"]
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "example": {
+      "type": "object",
+      "required": ["input", "output"],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "input": {
+          "type": "object"
+        },
+        "output": {}
+      }
+    },
+    "uiConfig": {
+      "type": "object",
+      "description": "MCP Apps UI configuration",
+      "properties": {
+        "resultType": {
+          "type": "string",
+          "enum": ["text", "table", "chart", "form", "card", "custom"],
+          "default": "text"
+        },
+        "inputForm": {
+          "type": "object",
+          "properties": {
+            "layout": {
+              "type": "string",
+              "enum": ["vertical", "horizontal", "grid"],
+              "default": "vertical"
+            },
+            "submitLabel": {
+              "type": "string",
+              "default": "Run"
+            }
+          }
+        },
+        "resultDisplay": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "refreshable": { "type": "boolean" },
+            "expandable": { "type": "boolean" }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

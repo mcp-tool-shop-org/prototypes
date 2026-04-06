@@ -1,0 +1,87 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag (e.g., v0.1.0)'
+        required: true
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-publish:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+          dotnet-quality: 'preview'
+
+      - name: Install MAUI workloads
+        run: dotnet workload install maui
+
+      - name: Restore (Windows target)
+        run: |
+          dotnet restore ControlRoom.App/ControlRoom.App.csproj `
+            -p:TargetFramework=net10.0-windows10.0.19041.0 `
+            -p:RuntimeIdentifier=win-x64 `
+            -p:UseMonoRuntime=false
+
+      - name: Publish Windows x64
+        run: |
+          dotnet publish ControlRoom.App/ControlRoom.App.csproj `
+            --configuration Release `
+            -p:TargetFramework=net10.0-windows10.0.19041.0 `
+            --runtime win-x64 `
+            --self-contained true `
+            -p:UseMonoRuntime=false `
+            --output ./publish/win-x64
+
+      - name: Create ZIP artifact
+        run: |
+          Compress-Archive -Path ./publish/win-x64/* -DestinationPath ./publish/ControlRoom-win-x64.zip
+
+      - name: Determine version
+        id: version
+        run: |
+          if ("${{ github.event.inputs.version }}" -ne "") {
+            echo "version=${{ github.event.inputs.version }}" >> $env:GITHUB_OUTPUT
+          } else {
+            echo "version=${{ github.ref_name }}" >> $env:GITHUB_OUTPUT
+          }
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: Control Room ${{ steps.version.outputs.version }}
+          draft: false
+          prerelease: ${{ contains(steps.version.outputs.version, '-') }}
+          files: |
+            ./publish/ControlRoom-win-x64.zip
+          body: |
+            ## Control Room ${{ steps.version.outputs.version }}
+
+            ### Installation
+            1. Download `ControlRoom-win-x64.zip`
+            2. Extract to a folder
+            3. Run `ControlRoom.App.exe`
+
+            ### What's New
+            See [CHANGELOG.md](https://github.com/mcp-tool-shop-org/control-room/blob/main/CHANGELOG.md) for details.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

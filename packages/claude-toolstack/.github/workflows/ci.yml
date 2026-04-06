@@ -1,0 +1,243 @@
+name: CI
+
+on:
+  push:
+    paths:
+      - 'gateway/**'
+      - 'cts/**'
+      - 'tests/**'
+      - 'scripts/**'
+      - 'pyproject.toml'
+      - 'compose.yaml'
+      - '.github/workflows/**'
+  pull_request:
+    paths:
+      - 'gateway/**'
+      - 'cts/**'
+      - 'tests/**'
+      - 'scripts/**'
+      - 'pyproject.toml'
+      - 'compose.yaml'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install -r gateway/requirements.txt
+          pip install ruff mypy types-PyYAML pytest
+
+      - name: Ruff lint
+        run: ruff check gateway/ cts/
+
+      - name: Ruff format check
+        run: ruff format --check gateway/ cts/
+
+      - name: Mypy type check
+        run: mypy gateway/main.py --ignore-missing-imports --no-error-summary || true
+
+      - name: Verify CLI installs
+        run: |
+          pip install -e .
+          cts --version
+          cts --help
+
+      - name: Run unit tests with coverage
+        run: |
+          pip install pytest-cov
+          python -m pytest tests/ -v --cov=cts --cov-report=xml --cov-report=term-missing
+
+      - name: Upload coverage
+        if: always()
+        uses: codecov/codecov-action@v4
+        with:
+          file: coverage.xml
+          fail_ci_if_error: false
+
+  container-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build gateway container
+        run: docker build -t claude-gateway:ci ./gateway
+
+      - name: Verify container starts
+        run: |
+          docker run -d --name gw-test \
+            -e API_KEY=ci-test-key \
+            -e ALLOWED_REPOS='*' \
+            -e ALLOWED_CONTAINERS=claude-ctags,claude-build \
+            -e REPO_ROOT=/repos \
+            -e CACHE_ROOT=/cache \
+            -e AUDIT_LOG_PATH=/tmp/audit.jsonl \
+            -p 127.0.0.1:8088:8088 \
+            claude-gateway:ci
+
+          # Wait for startup with retry
+          for i in 1 2 3 4 5; do
+            if curl -sS -o /dev/null -w "" http://127.0.0.1:8088/v1/status 2>/dev/null; then
+              break
+            fi
+            echo "Waiting for gateway... attempt $i"
+            sleep 2
+          done
+
+          # Health check
+          STATUS=$(curl -sS -o /dev/null -w "%{http_code}" \
+            -H "x-api-key: ci-test-key" \
+            http://127.0.0.1:8088/v1/status)
+          echo "Status endpoint returned: $STATUS"
+          [ "$STATUS" = "200" ] || exit 1
+
+          # Auth enforcement
+          BAD=$(curl -sS -o /dev/null -w "%{http_code}" \
+            -H "x-api-key: wrong" \
+            http://127.0.0.1:8088/v1/status)
+          echo "Bad key returned: $BAD"
+          [ "$BAD" = "401" ] || exit 1
+
+          # Metrics endpoint
+          METRICS=$(curl -sS -o /dev/null -w "%{http_code}" \
+            -H "x-api-key: ci-test-key" \
+            http://127.0.0.1:8088/v1/metrics)
+          echo "Metrics endpoint returned: $METRICS"
+          [ "$METRICS" = "200" ] || exit 1
+
+          # Request-ID propagation
+          RID=$(curl -sS -D- -o /dev/null \
+            -H "x-api-key: ci-test-key" \
+            -H "X-Request-ID: ci-test-rid-001" \
+            http://127.0.0.1:8088/v1/status 2>&1 \
+            | grep -i 'x-request-id' | tr -d '\r')
+          echo "Request-ID header: $RID"
+          echo "$RID" | grep -q "ci-test-rid-001" || exit 1
+
+      - name: Container logs
+        if: failure()
+        run: docker logs gw-test
+
+  sidecar-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install cts
+        run: pip install -e .
+
+      - name: Generate test sidecar artifact
+        run: python scripts/gen_test_sidecar.py ci-artifact.json
+
+      - name: Validate sidecar envelope
+        run: cts sidecar validate ci-artifact.json
+
+      - name: Secrets scan (fail on findings)
+        run: cts sidecar secrets-scan ci-artifact.json --fail --report
+
+      - name: Summarize artifact
+        run: cts sidecar summarize ci-artifact.json --format markdown
+
+      - name: Post PR comment with summary
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/pr_comment_sidecar.py ci-artifact.json
+
+      - name: Upload sidecar artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sidecar-evidence-${{ github.sha }}
+          path: ci-artifact.json
+          retention-days: 30
+
+  policy-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate compose structure
+        run: |
+          cp .env.example .env
+          docker compose config --quiet
+
+      - name: Check docker socket proxy settings
+        run: |
+          # Verify dangerous endpoints are denied
+          for EP in IMAGES SERVICES SYSTEM NETWORKS VOLUMES AUTH; do
+            VAL=$(grep -A25 'dockerproxy:' compose.yaml | grep "$EP=" | head -1 | sed 's/.*=//;s/[^0-9]//g')
+            if [ "$VAL" != "0" ]; then
+              echo "FAIL: $EP should be 0, got '$VAL'"
+              exit 1
+            fi
+            echo "OK: $EP=0"
+          done
+
+      - name: Check gateway binds to loopback
+        run: |
+          if grep -q '0.0.0.0:8088' compose.yaml; then
+            echo "FAIL: Gateway must bind to 127.0.0.1, not 0.0.0.0"
+            exit 1
+          fi
+          echo "OK: Gateway bound to loopback"
+
+      - name: Validate systemd slice units
+        run: |
+          for f in systemd/claude-*.slice; do
+            if ! grep -q 'MemoryAccounting=yes' "$f"; then
+              echo "FAIL: $f missing MemoryAccounting"
+              exit 1
+            fi
+            if ! grep -q 'MemoryHigh=' "$f"; then
+              echo "FAIL: $f missing MemoryHigh"
+              exit 1
+            fi
+            echo "OK: $f"
+          done
+
+      - name: Verify sidecar schema version is pinned
+        run: |
+          # Ensure BUNDLE_SCHEMA_VERSION is defined and is an integer
+          VERSION=$(python3 -c "
+          import ast, sys
+          with open('cts/schema.py') as f:
+              tree = ast.parse(f.read())
+          for node in ast.walk(tree):
+              if isinstance(node, ast.Assign):
+                  for t in node.targets:
+                      if isinstance(t, ast.Name) and t.id == 'BUNDLE_SCHEMA_VERSION':
+                          if isinstance(node.value, ast.Constant) and isinstance(node.value.value, int):
+                              print(node.value.value)
+                              sys.exit(0)
+          print('NOT_FOUND', file=sys.stderr)
+          sys.exit(1)
+          ")
+          echo "OK: BUNDLE_SCHEMA_VERSION=$VERSION"
+
+      - name: Verify secrets patterns cover critical types
+        run: |
+          # Ensure the secrets scanner covers minimum required patterns
+          for PATTERN in "GitHub Token" "AWS Access Key" "Private Key Block" "Generic Secret"; do
+            if ! grep -q "$PATTERN" cts/sidecar.py; then
+              echo "FAIL: secrets scanner missing pattern: $PATTERN"
+              exit 1
+            fi
+            echo "OK: $PATTERN pattern present"
+          done

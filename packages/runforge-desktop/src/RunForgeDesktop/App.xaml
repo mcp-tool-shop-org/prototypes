@@ -1,0 +1,58 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:RunForgeDesktop"
+             xmlns:converters="clr-namespace:RunForgeDesktop.Converters"
+             x:Class="RunForgeDesktop.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Original styles (legacy, will migrate) -->
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+
+                <!-- Theme system: Light + Dark color definitions -->
+                <ResourceDictionary Source="Resources/Themes/Colors.Light.xaml" />
+                <ResourceDictionary Source="Resources/Themes/Colors.Dark.xaml" />
+                <ResourceDictionary Source="Resources/Themes/Controls.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- ═══════════════════════════════════════════════════════════════
+                 VALUE CONVERTERS
+                 ═══════════════════════════════════════════════════════════════ -->
+
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converters:StringToBoolConverter x:Key="StringToBoolConverter" />
+            <converters:IntToInverseBoolConverter x:Key="IntToInverseBoolConverter" />
+            <converters:SuccessToColorConverter x:Key="SuccessToColorConverter" />
+            <converters:EnumToIntConverter x:Key="EnumToIntConverter" />
+            <converters:ObjectToBoolConverter x:Key="ObjectToBoolConverter" />
+            <converters:ObjectToInverseBoolConverter x:Key="ObjectToInverseBoolConverter" />
+            <converters:PercentToWidthConverter x:Key="PercentToWidthConverter" />
+            <converters:PositiveToColorConverter x:Key="PositiveToColorConverter" />
+            <converters:ArtifactStatusToColorConverter x:Key="ArtifactStatusToColorConverter" />
+            <converters:ArtifactStatusToTextColorConverter x:Key="ArtifactStatusToTextColorConverter" />
+            <converters:LogStatusToColorConverter x:Key="LogStatusToColorConverter" />
+            <converters:MilestoneToColorConverter x:Key="MilestoneToColorConverter" />
+            <converters:MilestoneToFontConverter x:Key="MilestoneToFontConverter" />
+            <converters:BoolToColorConverter x:Key="BoolToColorConverter" />
+            <converters:StringNotNullConverter x:Key="StringNotNullConverter" />
+            <converters:StringEqualsConverter x:Key="StringEqualsConverter" />
+            <converters:StatusToColorConverter x:Key="StatusToColorConverter" />
+            <converters:SeverityToColorConverter x:Key="SeverityToColorConverter" />
+            <converters:SeverityToTextColorConverter x:Key="SeverityToTextColorConverter" />
+            <converters:SeverityToIconConverter x:Key="SeverityToIconConverter" />
+            <converters:BoolToFontAttributeConverter x:Key="BoolToFontAttributeConverter" />
+            <converters:IntToBoolConverter x:Key="IntToBoolConverter" />
+
+            <!-- Visual Activity System Converters -->
+            <converters:SlotFilledToColorConverter x:Key="SlotFilledToColorConverter" />
+            <converters:RunDisplayStateToColorConverter x:Key="RunDisplayStateToColorConverter" />
+            <converters:ActivitySystemStateToColorConverter x:Key="ActivitySystemStateToColorConverter" />
+            <converters:BoolToStringConverter x:Key="BoolToStringConverter" />
+            <converters:ColorToBackgroundConverter x:Key="ColorToBackgroundConverter" />
+            <converters:LossToHeightConverter x:Key="LossToHeightConverter" />
+            <converters:IntToProgressConverter x:Key="IntToProgressConverter" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

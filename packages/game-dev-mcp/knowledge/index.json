@@ -1,0 +1,91 @@
+{
+  "version": "0.1.0",
+  "description": "UE5 Knowledge Library for game-dev-mcp — tutorials, API references, and patterns",
+  "categories": [
+    {
+      "id": "getting-started",
+      "title": "Getting Started",
+      "articles": ["01-setup", "02-first-commands", "03-project-structure"]
+    },
+    {
+      "id": "actors",
+      "title": "Actors",
+      "articles": ["spawning-actors", "transforms-and-movement", "actor-types-reference", "components"]
+    },
+    {
+      "id": "assets",
+      "title": "Assets",
+      "articles": ["content-browser-basics", "asset-search-patterns", "importing-assets"]
+    },
+    {
+      "id": "blueprints",
+      "title": "Blueprints",
+      "articles": ["blueprint-basics", "creating-blueprints", "adding-components"]
+    },
+    {
+      "id": "levels",
+      "title": "Levels",
+      "articles": ["level-management", "world-composition"]
+    },
+    {
+      "id": "materials",
+      "title": "Materials",
+      "articles": ["material-basics", "material-instances"]
+    },
+    {
+      "id": "lighting",
+      "title": "Lighting",
+      "articles": ["light-types", "lighting-workflow"]
+    },
+    {
+      "id": "physics",
+      "title": "Physics",
+      "articles": ["physics-and-collisions"]
+    },
+    {
+      "id": "audio",
+      "title": "Audio",
+      "articles": ["audio-integration"]
+    },
+    {
+      "id": "animation",
+      "title": "Animation",
+      "articles": ["animation-basics"]
+    },
+    {
+      "id": "vfx",
+      "title": "Visual Effects",
+      "articles": ["vfx-basics"]
+    },
+    {
+      "id": "rendering",
+      "title": "Rendering",
+      "articles": ["nanite-and-lumen"]
+    },
+    {
+      "id": "ai",
+      "title": "AI & Navigation",
+      "articles": ["ai-and-navigation"]
+    },
+    {
+      "id": "cinematics",
+      "title": "Cinematics",
+      "articles": ["sequencer"]
+    },
+    {
+      "id": "virtual-assistant",
+      "title": "Virtual Assistant",
+      "articles": ["designing-virtual-assistants", "llm-integration"]
+    },
+    {
+      "id": "api-reference",
+      "title": "API Reference",
+      "articles": ["remote-control-api", "editor-actor-subsystem", "editor-asset-library", "gameplay-statics"]
+    },
+    {
+      "id": "patterns",
+      "title": "Patterns",
+      "articles": ["common-workflows", "error-handling", "performance-tips"]
+    }
+  ]
+}

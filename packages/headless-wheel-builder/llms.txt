@@ -1,0 +1,36 @@
+# Headless Wheel Builder
+
+> Universal Python wheel builder with release management, dependency analysis, and CI/CD automation.
+
+## Purpose
+HWB builds Python wheels from local paths, git URLs, or tarballs with venv or Docker isolation. Beyond building, it manages release approval workflows, analyzes dependency graphs for license compliance, orchestrates multi-repo pipelines, and drives GitHub operations (releases, PRs, issues) entirely from the CLI.
+
+## Quickstart
+```bash
+pip install headless-wheel-builder
+hwb build                        # build from current directory
+hwb build https://github.com/user/repo@v2.0.0 --isolation docker
+```
+
+## Key Commands
+- `hwb build [source] [--python 3.12] [--isolation docker]` -- build wheels
+- `hwb publish` -- publish to PyPI/registries (supports OIDC Trusted Publishers)
+- `hwb release create/submit/approve/publish` -- draft release with approval workflow
+- `hwb deps tree <pkg>` / `hwb deps licenses <pkg> --check` -- dependency analysis
+- `hwb pipeline run <pipeline.yml> [--stage build]` -- CI/CD orchestration
+- `hwb github release/pr/issue/workflow` -- headless GitHub operations
+- `hwb actions generate ./project` -- generate GitHub Actions workflow
+- `hwb multirepo build/sync/release` -- coordinate across repositories
+- `hwb security audit/sbom/licenses` -- vulnerability scanning, SBOM generation
+- `hwb metrics show/export/trends` -- build performance analytics
+- `hwb cache stats/list/prune` -- artifact cache management
+
+## Constraints
+- Python 3.10+ required; Docker optional (needed for manylinux builds)
+- uv recommended but optional (10-100x faster isolation)
+- Configuration lives in `[tool.hwb]` section of `pyproject.toml`
+- Approval templates: simple, two-stage, enterprise (QA -> Security -> Release)
+
+## Links
+- Repo: https://github.com/mcp-tool-shop/headless-wheel-builder
+- PyPI: https://pypi.org/project/headless-wheel-builder/

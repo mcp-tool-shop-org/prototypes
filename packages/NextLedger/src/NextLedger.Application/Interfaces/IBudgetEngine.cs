@@ -1,0 +1,181 @@
+using NextLedger.Application.DTOs;
+
+namespace NextLedger.Application.Interfaces;
+
+/// <summary>
+/// Single orchestration entry point for budgeting operations.
+/// Phase 2 introduces the contract; implementation lands in a later commit.
+/// </summary>
+public interface IBudgetEngine
+{
+    // --- Read models (UI support) ---
+
+    Task<IReadOnlyList<AccountDto>> GetActiveAccountsAsync(CancellationToken ct = default);
+
+    Task<IReadOnlyList<AccountDto>> GetAllAccountsAsync(CancellationToken ct = default);
+
+    Task<IReadOnlyList<EnvelopeDto>> GetActiveEnvelopesAsync(int year, int month, CancellationToken ct = default);
+
+    Task<IReadOnlyList<Domain.Entities.Envelope>> GetAllEnvelopesAsync(CancellationToken ct = default);
+
+    Task<IReadOnlyList<string>> GetEnvelopeGroupNamesAsync(CancellationToken ct = default);
+
+    /// <summary>
+    /// Returns a lightweight snapshot (totals/ready-to-assign) for the period.
+    /// </summary>
+    Task<BudgetSnapshotDto> GetSnapshotAsync(int year, int month, CancellationToken ct = default);
+
+    /// <summary>
+    /// Returns the full budget summary (includes envelope balances) for the period.
+    /// </summary>
+    Task<BudgetSummaryDto> GetBudgetSummaryAsync(int year, int month, CancellationToken ct = default);
+
+    /// <summary>
+    /// Sets an envelope's allocation to an absolute amount for the period.
+    /// </summary>
+    Task<BudgetOperationResult> SetEnvelopeAllocationAsync(
+        AllocateToEnvelopeRequest request,
+        int year,
+        int month,
+        CancellationToken ct = default);
+
+    /// <summary>
+    /// Adjusts an envelope's allocation by a delta (positive or negative).
+    /// </summary>
+    Task<BudgetOperationResult> AdjustEnvelopeAllocationAsync(
+        AdjustEnvelopeAllocationRequest request,
+        int year,
+        int month,
+        CancellationToken ct = default);
+
+    Task<BudgetOperationResult> MoveAsync(
+        MoveMoneyRequest request,
+        int year,
+        int month,
+        CancellationToken ct = default);
+
+    /// <summary>
+    /// Sets or updates an envelope savings goal.
+    /// </summary>
+    Task<BudgetOperationResult> SetGoalAsync(SetGoalRequest request, CancellationToken ct = default);
+
+    /// <summary>
+    /// Auto-assigns ReadyToAssign toward envelope goals.
+    /// </summary>
+    Task<BudgetOperationResult> AutoAssignToGoalsAsync(
+        AutoAssignToGoalsRequest request,
+        int year,
+        int month,
+        CancellationToken ct = default);
+
+    Task<BudgetOperationResult> RecalculateAsync(int year, int month, CancellationToken ct = default);
+
+    Task<BudgetOperationResult> RolloverAsync(int year, int month, CancellationToken ct = default);
+
+    // --- Transactions (Phase 4) ---
+
+    Task<BudgetOperationResult<TransactionDto>> CreateOutflowAsync(CreateOutflowRequest request, CancellationToken ct = default);
+
+    Task<BudgetOperationResult<TransactionDto>> CreateInflowAsync(CreateInflowRequest request, CancellationToken ct = default);
+
+    Task<BudgetOperationResult<TransferResultDto>> CreateTransferAsync(CreateTransferRequest request, CancellationToken ct = default);
+
+    Task<BudgetOperationResult<TransactionDto>> UpdateTransactionAsync(UpdateTransactionRequest request, CancellationToken ct = default);
+
+    Task<BudgetOperationResult> DeleteTransactionAsync(Guid transactionId, CancellationToken ct = default);
+
+    Task<BudgetOperationResult> MarkTransactionClearedAsync(Guid transactionId, CancellationToken ct = default);
+
+    Task<BudgetOperationResult> MarkTransactionUnclearedAsync(Guid transactionId, CancellationToken ct = default);
+
+    Task<IReadOnlyList<TransactionDto>> GetAccountTransactionsAsync(Guid accountId, int year, int month, CancellationToken ct = default);
+
+    Task<IReadOnlyList<TransactionDto>> GetUnassignedTransactionsAsync(CancellationToken ct = default);
+
+    // --- Reconciliation (Phase 4) ---
+
+    Task<BudgetOperationResult<ReconcileAccountResultDto>> ReconcileAccountAsync(ReconcileAccountRequest request, CancellationToken ct = default);
+
+    // --- Import (Phase 4) ---
+
+    Task<BudgetOperationResult<CsvImportPreviewResultDto>> PreviewCsvImportAsync(CsvImportPreviewRequest request, CancellationToken ct = default);
+
+    Task<BudgetOperationResult<CsvImportCommitResultDto>> CommitCsvImportAsync(CsvImportCommitRequest request, CancellationToken ct = default);
+
+    // --- Account Management (Phase 7) ---
+
+    Task<Domain.Entities.Account> CreateAccountAsync(CreateAccountRequest request, CancellationToken ct = default);
+
+    Task<Domain.Entities.Account> UpdateAccountAsync(UpdateAccountRequest request, CancellationToken ct = default);
+
+    Task CloseAccountAsync(Guid accountId, CancellationToken ct = default);
+
+    Task ReopenAccountAsync(Guid accountId, CancellationToken ct = default);
+
+    // --- Envelope Management (Phase 7) ---
+
+    Task<Domain.Entities.Envelope> CreateEnvelopeAsync(string name, string? groupName, string? color, CancellationToken ct = default);
+
+    Task<Domain.Entities.Envelope> UpdateEnvelopeAsync(UpdateEnvelopeRequest request, CancellationToken ct = default);
+
+    Task ArchiveEnvelopeAsync(Guid envelopeId, CancellationToken ct = default);
+
+    Task UnarchiveEnvelopeAsync(Guid envelopeId, CancellationToken ct = default);
+
+    // --- XRPL External Ledger (Phase 7 - Observation Layer) ---
+
+    /// <summary>
+    /// Tracks an XRPL address as a read-only external account.
+    /// NextLedger observes this account but cannot execute transactions.
+    /// </summary>
+    Task<Domain.Entities.Account> TrackXrplAddressAsync(TrackXrplAddressRequest request, CancellationToken ct = default);
+
+    /// <summary>
+    /// Gets all active XRPL external ledger accounts.
+    /// </summary>
+    Task<IReadOnlyList<AccountDto>> GetXrplAccountsAsync(CancellationToken ct = default);
+
+    /// <summary>
+    /// Syncs an XRPL account balance from the on-chain state.
+    /// </summary>
+    Task<XrplAccountInfoResult> SyncXrplAccountAsync(Guid accountId, CancellationToken ct = default);
+
+    /// <summary>
+    /// Gets the current XRPL network status and connectivity.
+    /// </summary>
+    Task<XrplNetworkStatus> GetXrplNetworkStatusAsync(CancellationToken ct = default);
+
+    /// <summary>
+    /// Calculates the reserve requirement for an XRPL account.
+    /// </summary>
+    Task<XrplReserveInfo> GetXrplReserveInfoAsync(int ownerCount, CancellationToken ct = default);
+
+    // --- XRPL Interpretation Layer (Phase 7) ---
+
+    /// <summary>
+    /// Gets transaction history for an XRPL account. Read-only, no editing.
+    /// </summary>
+    Task<XrplTransactionHistoryResult> GetXrplTransactionHistoryAsync(
+        Guid accountId,
+        int limit = 20,
+        string? marker = null,
+        CancellationToken ct = default);
+
+    /// <summary>
+    /// Gets the balance change explanation between the last two syncs.
+    /// "My XRP balance changed — explain it to me."
+    /// </summary>
+    Task<XrplBalanceChangeDto?> GetXrplBalanceChangeAsync(Guid accountId, CancellationToken ct = default);
+
+    /// <summary>
+    /// Gets reconciliation status comparing NextLedger's cache vs on-chain balance.
+    /// "Does NextLedger agree with XRPL?"
+    /// </summary>
+    Task<XrplReconciliationDto> GetXrplReconciliationAsync(Guid accountId, CancellationToken ct = default);
+
+    /// <summary>
+    /// Gets account summary including XRP external accounts for net worth calculation.
+    /// XRP is marked as external and non-spendable from the app.
+    /// </summary>
+    Task<AccountsSummaryDto> GetAccountsSummaryAsync(CancellationToken ct = default);
+}

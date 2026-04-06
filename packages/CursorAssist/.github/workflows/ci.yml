@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'tools/**'
+      - '**/*.csproj'
+      - '**/*.sln'
+      - '**/*.slnf'
+      - '.github/workflows/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'tools/**'
+      - '**/*.csproj'
+      - '**/*.sln'
+      - '**/*.slnf'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore ci.slnf
+
+      - name: Build
+        run: dotnet build ci.slnf --configuration Release --no-restore
+
+      - name: Test (CursorAssist)
+        run: dotnet test tests/CursorAssist.Tests/CursorAssist.Tests.csproj --configuration Release --no-build --verbosity normal
+
+      - name: Test (MouseTrainer)
+        run: dotnet test tests/MouseTrainer.Tests/MouseTrainer.Tests.csproj --configuration Release --no-build --verbosity normal

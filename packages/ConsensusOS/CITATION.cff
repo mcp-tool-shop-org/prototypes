@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+title: ConsensusOS
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - name: MCP Tool Shop
+    website: https://github.com/mcp-tool-shop-org
+repository-code: https://github.com/mcp-tool-shop-org/ConsensusOS
+url: https://github.com/mcp-tool-shop-org/ConsensusOS
+abstract: >-
+  Modular, zero-dependency control plane for multi-chain
+  consensus governance. Plugin-based architecture with
+  fail-closed invariants and deterministic replay.
+keywords:
+  - consensus
+  - multi-chain
+  - governance
+  - plugin-architecture
+  - deterministic-replay
+license: MIT
+version: 1.0.0
+date-released: '2026-02-14'

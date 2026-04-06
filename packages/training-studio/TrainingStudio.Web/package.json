@@ -1,0 +1,75 @@
+{
+  "name": "@mikeyfrilot/training-studio",
+  "version": "1.0.4",
+  "description": "ML bundle validation tool with security-first design, pure validation (no code execution), and comprehensive testing",
+  "keywords": [
+    "bundle-validation",
+    "machine-learning",
+    "data-validation",
+    "ml-tools",
+    "validation-tool",
+    "cli",
+    "typescript",
+    "nodejs"
+  ],
+  "author": {
+    "name": "MCP Tool Shop",
+    "url": "https://github.com/mcp-tool-shop-org"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/training-studio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mcp-tool-shop-org/training-studio/issues"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/training-studio#readme",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "training-studio": "./dist/cli/validate.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/types/bundle.d.ts",
+      "import": "./dist/types/bundle.js"
+    },
+    "./validator": {
+      "types": "./dist/validation/bundle-validator.d.ts",
+      "import": "./dist/validation/bundle-validator.js"
+    }
+  },
+  "files": [
+    "dist/**/*",
+    "!dist/**/*.test.d.ts",
+    "!dist/**/*.test.js"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "build:cli": "tsc -p tsconfig.cli.json",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "validate": "npx tsx src/cli/validate.ts",
+    "prepublishOnly": "npm run build:cli"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "jsdom": "^27.4.0",
+    "tsx": "^4.19.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4",
+    "vitest": "^4.0.18"
+  },
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.22.0",
+    "chart.js": "^4.5.1"
+  }
+}

@@ -1,0 +1,86 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows10.0.22621.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <WindowsSdkPackageVersion>10.0.22621.48</WindowsSdkPackageVersion>
+    <RootNamespace>Attestia.App</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>x64</Platforms>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <UseWinUI>true</UseWinUI>
+    <Description>Attestia Desktop — Financial truth infrastructure for Windows</Description>
+  </PropertyGroup>
+
+  <!-- Debug: Unpackaged deployment (framework-dependent for faster dev iteration) -->
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <WindowsPackageType>None</WindowsPackageType>
+    <WindowsAppSDKSelfContained>false</WindowsAppSDKSelfContained>
+    <EnableMsixTooling>false</EnableMsixTooling>
+    <GeneratePriFileDuringBuild>false</GeneratePriFileDuringBuild>
+    <AppxGeneratePriEnabled>false</AppxGeneratePriEnabled>
+    <MrtCoreGenerateBundlePri>false</MrtCoreGenerateBundlePri>
+    <DisableMrtResourceGeneration>true</DisableMrtResourceGeneration>
+    <DisableMsixProjectCapabilityAddedByProject>true</DisableMsixProjectCapabilityAddedByProject>
+  </PropertyGroup>
+
+  <!-- Release: MSIX packaged deployment for Store -->
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <WindowsPackageType>MSIX</WindowsPackageType>
+    <EnableMsixTooling>true</EnableMsixTooling>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
+    <GenerateAppInstallerFile>false</GenerateAppInstallerFile>
+    <AppxAutoIncrementPackageRevision>true</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Never</AppxBundle>
+    <AppxPackageDir>..\..\AppPackages\</AppxPackageDir>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Attestia.Core\Attestia.Core.csproj" />
+    <ProjectReference Include="..\Attestia.Client\Attestia.Client.csproj" />
+    <ProjectReference Include="..\Attestia.Sidecar\Attestia.Sidecar.csproj" />
+    <ProjectReference Include="..\Attestia.ViewModels\Attestia.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.WindowsAppSDK" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" />
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Microsoft.Extensions.Logging" />
+    <PackageReference Include="Serilog" />
+    <PackageReference Include="Serilog.Extensions.Logging" />
+    <PackageReference Include="Serilog.Sinks.File" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <!-- Skip MRT output groups in Debug CLI builds -->
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <ComputeAllOutputGroupsDependsOn></ComputeAllOutputGroupsDependsOn>
+    <AllOutputGroupsDependsOn></AllOutputGroupsDependsOn>
+  </PropertyGroup>
+
+  <!-- Bundle Node.js assets if they exist -->
+  <ItemGroup Condition="Exists('..\..\assets\node\node.exe')">
+    <Content Include="..\..\assets\node\**\*" Link="assets\node\%(RecursiveDir)%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

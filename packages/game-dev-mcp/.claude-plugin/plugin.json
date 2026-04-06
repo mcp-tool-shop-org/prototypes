@@ -1,0 +1,13 @@
+{
+  "name": "game-dev-mcp",
+  "version": "0.1.0",
+  "description": "Talk to your game engine from Claude Code. Spawn actors, build levels, tweak properties — all through natural conversation.",
+  "author": {
+    "name": "mcp-tool-shop",
+    "email": "64996768+mcp-tool-shop@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/game-dev-mcp",
+  "repository": "https://github.com/mcp-tool-shop-org/game-dev-mcp",
+  "license": "MIT",
+  "keywords": ["unreal-engine", "ue5", "game-development", "game-engine", "level-design"]
+}

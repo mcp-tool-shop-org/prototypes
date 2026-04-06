@@ -1,0 +1,9 @@
+{
+  "features": ["x1", "x2"],
+  "label": "y",
+  "normalization": null,
+  "label_info": {
+    "type": "classification",
+    "numClasses": 2
+  }
+}

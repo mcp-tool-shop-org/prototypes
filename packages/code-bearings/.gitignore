@@ -1,0 +1,11 @@
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+*.vsix
+.code-bearings/
+*.db
+site/.astro/
+site/dist/
+site/node_modules/
+.polyglot-cache.json

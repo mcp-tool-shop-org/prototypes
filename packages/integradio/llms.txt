@@ -1,0 +1,102 @@
+# Integradio
+
+> Vector-embedded Gradio components for semantic codebase navigation
+
+## Overview
+
+Integradio extends Gradio with semantic search capabilities powered by embeddings. Components carry vector representations that make them discoverable by intent rather than by ID or label alone.
+
+## Quick Start
+
+```bash
+pip install integradio
+ollama pull nomic-embed-text
+```
+
+```python
+import gradio as gr
+from integradio import SemanticBlocks, semantic
+
+with SemanticBlocks() as demo:
+    query = semantic(
+        gr.Textbox(label="Search Query"),
+        intent="user enters search terms"
+    )
+
+    search_btn = semantic(
+        gr.Button("Search"),
+        intent="triggers the search operation"
+    )
+
+    results = semantic(
+        gr.Markdown(),
+        intent="displays search results"
+    )
+
+    search_btn.click(fn=search, inputs=query, outputs=results)
+
+# Components are now searchable by semantic intent
+results = demo.search("user input")  # Finds the Textbox
+demo.launch()
+```
+
+## Core API
+
+### SemanticBlocks(**kwargs)
+Extended `gr.Blocks` with registry and embedder integration.
+- `db_path`: SQLite path (None = in-memory)
+- `cache_dir`: Embedding cache directory
+- `ollama_url`: Ollama server URL (default: http://localhost:11434)
+- `embed_model`: Embedding model (default: nomic-embed-text)
+
+### semantic(component, intent)
+Wrap any Gradio component with semantic intent.
+- `component`: Any Gradio component
+- `intent`: Natural language description of component purpose
+- Returns: The wrapped component (unchanged behavior)
+
+### demo.search(query, top_k=5)
+Find components by semantic intent.
+- `query`: Natural language search
+- `top_k`: Maximum results
+- Returns: List of matching components with scores
+
+### demo.summary()
+Get registry summary of all semantic components.
+
+### demo.get_dataflow()
+Extract dataflow graph from event listeners.
+- Returns: Mermaid diagram of component connections
+
+## Key Features
+
+- Non-invasive component wrapping
+- Semantic search via Ollama/nomic-embed-text
+- Automatic dataflow extraction
+- Multiple visualization formats (Mermaid, D3.js, ASCII)
+- 10 pre-built page templates
+- FastAPI integration
+
+## Page Templates
+
+Pre-built semantic page layouts:
+- Dashboard
+- Form
+- Search
+- Gallery
+- Chat
+- Settings
+- Analytics
+- Documentation
+- Wizard
+- Kanban
+
+## Links
+
+- Repository: https://github.com/mcp-tool-shop/integradio
+- Documentation: https://github.com/mcp-tool-shop/integradio#readme
+- Issues: https://github.com/mcp-tool-shop/integradio/issues
+
+## License
+
+MIT License

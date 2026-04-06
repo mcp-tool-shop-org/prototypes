@@ -1,0 +1,219 @@
+name: Corpus Report
+
+on:
+  workflow_dispatch:
+    inputs:
+      artifact_name:
+        description: 'Artifact name pattern to download (default: latest sidecar)'
+        required: false
+        default: 'sidecar-evidence-*'
+      emit_tuning:
+        description: 'Generate tuning recommendations (true/false)'
+        required: false
+        default: 'true'
+      evaluate_baseline:
+        description: 'Path to baseline corpus for evaluation (empty = skip)'
+        required: false
+        default: ''
+      run_experiment:
+        description: 'Run A/B experiment pipeline (true/false)'
+        required: false
+        default: 'false'
+      experiment_id:
+        description: 'Experiment ID (auto-generated if empty)'
+        required: false
+        default: ''
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  corpus-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install cts
+        run: pip install -e .
+
+      - name: Generate test sidecar artifact
+        run: |
+          # Produce a fresh sidecar from the current codebase
+          mkdir -p artifacts
+          python scripts/gen_test_sidecar.py artifacts/ci-artifact.json
+
+      - name: Ingest corpus
+        run: |
+          cts corpus ingest artifacts/ \
+            --out corpus.jsonl \
+            --include-passes
+
+      - name: Generate markdown report
+        run: |
+          cts corpus report corpus.jsonl \
+            --format markdown \
+            --out report.md
+
+      - name: Generate JSON report
+        run: |
+          cts corpus report corpus.jsonl \
+            --format json \
+            --out report.json
+
+      - name: Print report summary
+        run: |
+          cts corpus report corpus.jsonl --format text
+
+      # --- Tuning pipeline (opt-in via inputs) ---
+
+      - name: Generate tuning recommendations
+        if: inputs.emit_tuning == 'true'
+        run: |
+          cts corpus report corpus.jsonl \
+            --format json \
+            --emit-tuning tuning.json
+
+          echo "--- Tuning recommendations ---"
+          cat tuning.json | python -m json.tool | head -60
+
+      - name: Generate patch plan (dry-run)
+        if: inputs.emit_tuning == 'true'
+        run: |
+          cts corpus patch tuning.json \
+            --repos-yaml repos.yaml \
+            --format text
+
+          cts corpus patch tuning.json \
+            --repos-yaml repos.yaml \
+            --format json \
+            --out patch-plan.json
+
+          cts corpus patch tuning.json \
+            --repos-yaml repos.yaml \
+            --format diff \
+            --out tuning.diff
+
+      - name: Preview apply (dry-run)
+        if: inputs.emit_tuning == 'true'
+        run: |
+          cts corpus apply tuning.json \
+            --repos-yaml repos.yaml \
+            --dry-run
+
+      # --- Evaluation (opt-in via baseline path) ---
+
+      - name: Evaluate tuning impact
+        if: inputs.evaluate_baseline != ''
+        run: |
+          cts corpus evaluate \
+            "${{ inputs.evaluate_baseline }}" \
+            corpus.jsonl \
+            --format text
+
+          cts corpus evaluate \
+            "${{ inputs.evaluate_baseline }}" \
+            corpus.jsonl \
+            --format json \
+            --out evaluation.json
+
+          cts corpus evaluate \
+            "${{ inputs.evaluate_baseline }}" \
+            corpus.jsonl \
+            --format markdown \
+            --out evaluation.md
+
+      # --- Experiment pipeline (opt-in) ---
+
+      - name: Init experiment
+        if: inputs.run_experiment == 'true' && inputs.emit_tuning == 'true'
+        run: |
+          EXP_ID="${{ inputs.experiment_id }}"
+          if [ -z "$EXP_ID" ]; then
+            cts corpus experiment init --out experiment.json
+          else
+            cts corpus experiment init \
+              --id "$EXP_ID" \
+              --out experiment.json
+          fi
+          echo "--- Experiment envelope ---"
+          cat experiment.json | python -m json.tool | head -30
+
+      - name: Propose variants
+        if: inputs.run_experiment == 'true' && inputs.emit_tuning == 'true'
+        run: |
+          mkdir -p experiment
+          cts corpus experiment propose \
+            --corpus tuning.json \
+            --repos-yaml repos.yaml \
+            --experiment experiment.json \
+            --out-dir experiment/
+
+      - name: Experiment summary
+        if: inputs.run_experiment == 'true' && inputs.emit_tuning == 'true'
+        run: |
+          echo "--- Experiment artifacts ---"
+          ls -la experiment/
+          echo ""
+          echo "--- Variant A tuning ---"
+          cat experiment/tuning_A.json | python -m json.tool | head -20
+          echo ""
+          echo "--- Variant B tuning ---"
+          cat experiment/tuning_B.json | python -m json.tool | head -20
+
+      # --- Archive + Dashboard (runs after experiment pipeline) ---
+
+      - name: Archive experiment to registry
+        if: inputs.run_experiment == 'true' && inputs.emit_tuning == 'true'
+        run: |
+          if [ -f experiment.json ] && [ -f experiment/result.json ]; then
+            cts corpus experiment archive \
+              --experiment experiment.json \
+              --result experiment/result.json \
+              --root experiments/
+            echo "--- Archived experiment ---"
+            ls -la experiments/ || true
+          else
+            echo "Skipping archive: no experiment or result files"
+          fi
+
+      - name: Generate trend dashboard
+        if: inputs.run_experiment == 'true'
+        run: |
+          cts corpus experiment trend \
+            --root experiments/ \
+            --format markdown \
+            --out trend.md
+
+          cts corpus experiment trend \
+            --root experiments/ \
+            --format json \
+            --out trend.json
+
+          echo "--- Trend Dashboard ---"
+          cat trend.md || true
+
+      - name: Upload corpus artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: corpus-report-${{ github.sha }}
+          path: |
+            corpus.jsonl
+            corpus_passes.jsonl
+            report.md
+            report.json
+            tuning.json
+            patch-plan.json
+            tuning.diff
+            evaluation.json
+            evaluation.md
+            experiment.json
+            experiment/
+            trend.md
+            trend.json
+          retention-days: 90

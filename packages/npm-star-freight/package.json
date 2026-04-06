@@ -1,0 +1,41 @@
+{
+  "name": "@mcptoolshop/star-freight",
+  "version": "1.0.5",
+  "description": "Space merchant RPG CLI — zero-prerequisite npx install",
+  "type": "commonjs",
+  "license": "MIT",
+  "author": "mcp-tool-shop",
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "star-freight": "bin/star-freight.js"
+  },
+  "files": [
+    "bin/",
+    "README*.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "verify": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@mcptoolshop/npm-launcher": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/npm-star-freight.git"
+  },
+  "keywords": [
+    "game",
+    "trading",
+    "space",
+    "merchant",
+    "rpg",
+    "cli",
+    "terminal",
+    "sci-fi"
+  ]
+}

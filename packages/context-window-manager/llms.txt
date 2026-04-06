@@ -1,0 +1,44 @@
+# Context Window Manager
+
+> Lossless context restoration for LLM sessions via KV cache persistence.
+
+## Purpose
+CWM is an MCP server that solves context exhaustion in LLM applications. It freezes KV cache tensors to persistent storage and thaws them back with zero information loss. Unlike summarization or RAG, it preserves actual KV cache state using vLLM prefix caching and LMCache tiered storage.
+
+## Quickstart
+```bash
+pip install context-window-manager
+```
+Add to `.claude/settings.json`:
+```json
+{
+  "mcpServers": {
+    "context-window-manager": {
+      "command": "python",
+      "args": ["-m", "context_window_manager"],
+      "env": { "CWM_VLLM_URL": "http://localhost:8000" }
+    }
+  }
+}
+```
+
+## Key MCP Tools
+- `window_freeze <session_id> <name>` -- snapshot session context to storage
+- `window_thaw <name>` -- restore context from a saved window
+- `window_list` -- list all saved context windows
+- `window_status <name>` -- detailed session/window info
+- `window_clone <source> <new_name>` -- branch a context for exploration
+- `window_delete <name>` -- remove a saved window
+- `auto_freeze_config` -- configure automatic freezing thresholds
+- `auto_freeze_check` -- trigger auto-freeze if thresholds exceeded
+
+## Constraints
+- Requires vLLM server with `--enable-prefix-caching` and LMCache connector
+- Requires LMCache environment (`LMCACHE_USE_EXPERIMENTAL=True`, `LMCACHE_LOCAL_CPU=True`)
+- Python 3.11+ required
+- Storage tiers: CPU memory -> Disk -> Redis (auto-managed)
+- Each session isolated via unique `cache_salt`; no cross-session data leakage
+
+## Links
+- Repo: https://github.com/mcp-tool-shop-org/context-window-manager
+- PyPI: https://pypi.org/project/context-window-manager/

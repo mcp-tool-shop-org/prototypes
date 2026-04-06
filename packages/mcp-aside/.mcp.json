@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "mcp-aside": {
+      "command": "npx",
+      "args": ["-y", "@mcptoolshop/mcp-aside"],
+      "env": {}
+    }
+  }
+}

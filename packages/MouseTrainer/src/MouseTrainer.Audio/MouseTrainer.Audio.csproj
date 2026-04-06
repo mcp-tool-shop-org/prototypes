@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>CS1591</NoWarn>
+
+    <!-- NuGet package metadata -->
+    <PackageId>MouseTrainer.Audio</PackageId>
+    <Version>1.1.4</Version>
+    <Description>Deterministic audio cue system for event-driven sound effects. Volume and pitch jitter via xorshift32 RNG, rate limiting, asset verification, and one-shot or looped playback.</Description>
+    <Authors>mcp-tool-shop</Authors>
+    <Company>MCP Tool Shop</Company>
+    <Copyright>Copyright (c) 2025-2026 MCP Tool Shop</Copyright>
+    <PackageProjectUrl>https://github.com/mcp-tool-shop-org/MouseTrainer</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mcp-tool-shop-org/MouseTrainer</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>audio;cues;deterministic;game;sound-effects;events</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MouseTrainer.Domain\MouseTrainer.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

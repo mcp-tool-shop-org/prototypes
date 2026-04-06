@@ -1,0 +1,16 @@
+bin/
+obj/
+.vs/
+.idea/
+*.user
+*.suo
+*.log
+*.zip
+site/.astro/
+site/node_modules/
+site/dist/
+node_modules/
+coverage/
+TestResults/
+nupkg/
+.polyglot-cache.json

@@ -1,0 +1,39 @@
+[project]
+name = "voice-soundboard-plugin"
+version = "1.1.3"
+description = "Claude Code plugin for voice synthesis via voice-soundboard"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "mcp-tool-shop", email = "64996768+mcp-tool-shop@users.noreply.github.com" },
+]
+keywords = ["voice", "tts", "audio", "mcp", "claude-code", "soundboard"]
+
+dependencies = [
+    "mcp>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/mcp-tool-shop-org/soundboard-plugin"
+Repository = "https://github.com/mcp-tool-shop-org/soundboard-plugin.git"
+Issues = "https://github.com/mcp-tool-shop-org/soundboard-plugin/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.3",
+    "pip-audit>=2.7.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["voice_soundboard_plugin"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

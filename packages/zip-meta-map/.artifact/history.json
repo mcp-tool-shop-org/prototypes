@@ -1,0 +1,21 @@
+{
+  "entries": [
+    {
+      "repo_name": "zip-meta-map",
+      "tier": "Creator",
+      "formats": [
+        "C7_theme_palette",
+        "C9_template_pack"
+      ],
+      "constraints": [
+        "monospace-only",
+        "uses-two-opposing-forces"
+      ],
+      "atom_ids_used": [
+        "repo_tagline:26879373eee5",
+        "invariant:1e4f3f2268b3"
+      ],
+      "timestamp": "2026-03-03T15:23:46.537Z"
+    }
+  ]
+}

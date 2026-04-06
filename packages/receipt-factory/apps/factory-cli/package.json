@@ -1,0 +1,58 @@
+{
+  "name": "@receipt-factory/cli",
+  "version": "1.7.3",
+  "description": "The rf command — create, render, and verify receipts",
+  "type": "module",
+  "main": "dist/cli.js",
+  "bin": {
+    "rf": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist *.tsbuildinfo",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@receipt-factory/core": "workspace:*",
+    "@receipt-factory/render": "workspace:*",
+    "@receipt-factory/verify": "workspace:*",
+    "@receipt-factory/adapter-github": "workspace:*",
+    "@receipt-factory/pipeline-ci": "workspace:*",
+    "@receipt-factory/pipeline-release": "workspace:*",
+    "@receipt-factory/pipeline-registry-sync": "workspace:*",
+    "@receipt-factory/pipeline-security-audit": "workspace:*",
+    "@receipt-factory/pipeline-sbom": "workspace:*",
+    "@receipt-factory/sign": "workspace:*",
+    "@receipt-factory/evidence": "workspace:*",
+    "@receipt-factory/index": "workspace:*",
+    "@receipt-factory/policy": "workspace:*",
+    "@receipt-factory/bundle": "workspace:*",
+    "commander": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "author": "mcp-tool-shop <64996768+mcp-tool-shop@users.noreply.github.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/receipt-factory.git",
+    "directory": "apps/factory-cli"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}

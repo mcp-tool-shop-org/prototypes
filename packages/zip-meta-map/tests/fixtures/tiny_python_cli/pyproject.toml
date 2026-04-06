@@ -1,0 +1,7 @@
+[project]
+name = "tiny-cli"
+version = "0.1.0"
+dependencies = []
+
+[project.scripts]
+tiny-cli = "tiny_cli.main:main"

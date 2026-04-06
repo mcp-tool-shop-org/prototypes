@@ -1,0 +1,23 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "game-dev-mcp-local",
+  "description": "Local marketplace for the game-dev-mcp plugin",
+  "owner": {
+    "name": "mcp-tool-shop",
+    "email": "64996768+mcp-tool-shop@users.noreply.github.com"
+  },
+  "plugins": [
+    {
+      "name": "game-dev-mcp",
+      "description": "Talk to your game engine from Claude Code. Spawn actors, build levels, tweak properties — all through natural conversation.",
+      "version": "0.1.0",
+      "source": "./",
+      "author": {
+        "name": "mcp-tool-shop",
+        "email": "64996768+mcp-tool-shop@users.noreply.github.com"
+      },
+      "category": "productivity",
+      "license": "MIT"
+    }
+  ]
+}

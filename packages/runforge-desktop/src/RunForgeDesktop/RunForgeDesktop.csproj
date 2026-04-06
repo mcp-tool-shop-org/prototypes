@@ -1,0 +1,90 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Windows-only for v0.1 -->
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+
+    <OutputType>Exe</OutputType>
+    <RootNamespace>RunForgeDesktop</RootNamespace>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <!-- Display name -->
+    <ApplicationTitle>RunForge Desktop</ApplicationTitle>
+
+    <!-- App Identifier -->
+    <ApplicationId>com.mcptoolshop.runforgedesktop</ApplicationId>
+
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+
+    <!-- Version info for assembly -->
+    <Version>1.0.0</Version>
+    <FileVersion>1.0.0.0</FileVersion>
+    <InformationalVersion>1.0.0</InformationalVersion>
+
+    <!-- MSIX Packaging -->
+    <WindowsPackageType>MSIX</WindowsPackageType>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+
+    <!-- Assembly info -->
+    <Authors>mcp-tool-shop</Authors>
+    <Company>mcp-tool-shop</Company>
+    <Product>RunForge Desktop</Product>
+    <Description>Windows-native ML experiment tracker</Description>
+    <Copyright>Copyright (c) 2026 mcp-tool-shop</Copyright>
+    <RepositoryUrl>https://github.com/mcp-tool-shop-org/runforge-desktop</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- App Icon -->
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#1E3A5F" />
+
+    <!-- Splash Screen -->
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#1E3A5F" BaseSize="128,128" />
+
+    <!-- Images -->
+    <MauiImage Include="Resources\Images\*" />
+    <MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+
+    <!-- Custom Fonts -->
+    <MauiFont Include="Resources\Fonts\*" />
+
+    <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+    <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <!-- Legacy pages excluded from v1.0.0 -->
+  <!-- These were part of the original "read-only inspection" flow. -->
+  <!-- Enable with LEGACY_INSPECTION compile flag if needed. -->
+  <ItemGroup>
+    <Compile Remove="Legacy\**\*.cs" />
+    <MauiXaml Remove="Legacy\**\*.xaml" />
+    <None Include="Legacy\**\*" />
+  </ItemGroup>
+
+  <!-- RootPage disabled - Shell cannot be embedded in ContentView -->
+  <ItemGroup>
+    <Compile Remove="RootPage.xaml.cs" />
+    <MauiXaml Remove="RootPage.xaml" />
+    <None Include="RootPage.xaml" />
+    <None Include="RootPage.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Maui" Version="14.0.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.30" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0-*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RunForgeDesktop.Core\RunForgeDesktop.Core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,64 @@
+{
+  "name": "@mcptoolshop/claude-session-copilot",
+  "version": "1.0.1",
+  "description": "Session copilot for Claude Code. Captures decisions, timelines, and patterns across sessions.",
+  "type": "module",
+  "main": "./build/index.js",
+  "bin": {
+    "claude-session-copilot": "./build/index.js"
+  },
+  "files": [
+    "build",
+    "skills",
+    ".claude-plugin",
+    ".mcp.json",
+    "hooks.json",
+    "CLAUDE.md",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "logo.png"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node ./build/index.js",
+    "test": "node --import tsx --test --test-concurrency 1 tests/*.test.ts",
+    "lint": "tsc --noEmit",
+    "verify": "npm run build && npm run test && echo 'All checks passed'"
+  },
+  "license": "MIT",
+  "author": "mcp-tool-shop <64996768+mcp-tool-shop@users.noreply.github.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/claude-session-copilot.git"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/claude-session-copilot#readme",
+  "bugs": {
+    "url": "https://github.com/mcp-tool-shop-org/claude-session-copilot/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "claude-code",
+    "session",
+    "copilot",
+    "decisions",
+    "timeline",
+    "context",
+    "continuity",
+    "model-context-protocol"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.7.0"
+  }
+}

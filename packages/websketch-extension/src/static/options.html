@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSketch Settings</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 400px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        padding: 24px;
+        background: #f8f9fa;
+      }
+
+      h1 {
+        font-size: 18px;
+        font-weight: 600;
+        color: #1a202c;
+        margin-bottom: 20px;
+      }
+
+      .field {
+        margin-bottom: 16px;
+      }
+
+      label {
+        display: block;
+        font-size: 13px;
+        font-weight: 500;
+        color: #475569;
+        margin-bottom: 4px;
+      }
+
+      input[type='number'] {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        font-size: 14px;
+        color: #1a202c;
+        background: white;
+      }
+
+      input[type='number']:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+      }
+
+      .hint {
+        font-size: 11px;
+        color: #94a3b8;
+        margin-top: 2px;
+      }
+
+      .actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 20px;
+      }
+
+      button {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      #save-btn {
+        background: #2563eb;
+        color: white;
+      }
+
+      #save-btn:hover {
+        background: #1d4ed8;
+      }
+
+      #reset-btn {
+        background: #e2e8f0;
+        color: #475569;
+      }
+
+      #reset-btn:hover {
+        background: #cbd5e1;
+      }
+
+      .toast {
+        position: fixed;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%) translateY(40px);
+        background: #065f46;
+        color: white;
+        padding: 8px 20px;
+        border-radius: 6px;
+        font-size: 13px;
+        opacity: 0;
+        transition:
+          transform 0.2s,
+          opacity 0.2s;
+        pointer-events: none;
+      }
+
+      .toast.visible {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WebSketch Settings</h1>
+
+    <div class="field">
+      <label for="maxDepth">Max Depth</label>
+      <input type="number" id="maxDepth" min="1" max="200" />
+      <div class="hint">Maximum DOM tree depth to capture (default: 50)</div>
+    </div>
+
+    <div class="field">
+      <label for="maxNodes">Max Nodes</label>
+      <input type="number" id="maxNodes" min="100" max="100000" />
+      <div class="hint">Maximum number of DOM nodes to capture (default: 10,000)</div>
+    </div>
+
+    <div class="field">
+      <label for="maxStringLength">Max String Length</label>
+      <input type="number" id="maxStringLength" min="100" max="100000" />
+      <div class="hint">Maximum text content length per node (default: 10,000)</div>
+    </div>
+
+    <div class="actions">
+      <button id="save-btn">Save</button>
+      <button id="reset-btn">Reset Defaults</button>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="options.js"></script>
+  </body>
+</html>

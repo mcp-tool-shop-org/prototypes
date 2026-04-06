@@ -1,0 +1,7 @@
+node_modules/
+build/
+*.tgz
+site/.astro/
+site/dist/
+site/node_modules/
+.polyglot-cache.json

@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Docker
+.docker/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets — never commit
+.env
+*.key
+*.pem
+certs/
+
+# Logs
+*.log
+audit/
+
+# Experiment artifacts (Phase 4.1/4.2 A/B data)
+artifacts/
+
+# Semantic index stores
+gw-cache/
+
+# Polyglot cache
+.polyglot-cache.json
+
+# Site build artifacts
+site/.astro/
+site/dist/
+site/node_modules/
+
+# Build output
+dist/
+*.whl

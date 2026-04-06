@@ -1,0 +1,398 @@
+[
+  {
+    "Id": "cal-py-d1-001",
+    "Language": "python",
+    "Difficulty": 1,
+    "Title": "Hello World",
+    "Code": "print(\"Hello, World!\")\n",
+    "Topics": ["print", "strings"],
+    "Explain": [
+      "The simplest Python program.",
+      "print() writes text to standard output."
+    ]
+  },
+  {
+    "Id": "cal-py-d1-002",
+    "Language": "python",
+    "Difficulty": 1,
+    "Title": "Variable Assignment",
+    "Code": "name = \"Alice\"\nage = 30\nprint(name, age)\n",
+    "Topics": ["variables", "assignment", "print"],
+    "Explain": [
+      "Variables store values for later use.",
+      "print() can take multiple arguments separated by commas."
+    ]
+  },
+  {
+    "Id": "cal-py-d1-003",
+    "Language": "python",
+    "Difficulty": 1,
+    "Title": "Basic Arithmetic",
+    "Code": "x = 10\ny = 3\ntotal = x + y\nprint(total)\n",
+    "Topics": ["arithmetic", "variables", "print"],
+    "Explain": [
+      "Arithmetic operators work on numeric types.",
+      "The result is stored in a new variable."
+    ]
+  },
+  {
+    "Id": "cal-py-d1-004",
+    "Language": "python",
+    "Difficulty": 1,
+    "Title": "String Formatting",
+    "Code": "lang = \"Python\"\nversion = 3.12\nprint(f\"{lang} {version}\")\n",
+    "Topics": ["f-strings", "formatting", "print"],
+    "Explain": [
+      "f-strings embed expressions inside braces.",
+      "They are the modern way to format strings in Python."
+    ]
+  },
+  {
+    "Id": "cal-py-d1-005",
+    "Language": "python",
+    "Difficulty": 1,
+    "Title": "List Creation",
+    "Code": "fruits = [\"apple\", \"banana\", \"cherry\"]\nprint(len(fruits))\nprint(fruits[0])\n",
+    "Topics": ["lists", "indexing", "len"],
+    "Explain": [
+      "Lists are ordered, mutable collections.",
+      "Indexing starts at 0 in Python."
+    ]
+  },
+  {
+    "Id": "cal-py-d2-001",
+    "Language": "python",
+    "Difficulty": 2,
+    "Title": "Simple Function",
+    "Code": "def greet(name):\n    message = f\"Hello, {name}!\"\n    return message\n\nresult = greet(\"Alice\")\nprint(result)\n",
+    "Topics": ["functions", "return", "f-strings"],
+    "Explain": [
+      "Functions encapsulate reusable logic.",
+      "The return statement sends a value back to the caller."
+    ]
+  },
+  {
+    "Id": "cal-py-d2-002",
+    "Language": "python",
+    "Difficulty": 2,
+    "Title": "Even or Odd",
+    "Code": "def is_even(n):\n    if n % 2 == 0:\n        return True\n    else:\n        return False\n\nfor i in range(5):\n    print(i, is_even(i))\n",
+    "Topics": ["functions", "if-else", "modulo", "loops"],
+    "Explain": [
+      "The modulo operator returns the remainder of division.",
+      "A number is even when it divides by 2 with no remainder."
+    ]
+  },
+  {
+    "Id": "cal-py-d2-003",
+    "Language": "python",
+    "Difficulty": 2,
+    "Title": "Dictionary Lookup",
+    "Code": "scores = {\"Alice\": 95, \"Bob\": 82, \"Carol\": 91}\n\nname = \"Bob\"\nif name in scores:\n    print(f\"{name}: {scores[name]}\")\nelse:\n    print(\"Not found\")\n",
+    "Topics": ["dictionaries", "if-else", "membership"],
+    "Explain": [
+      "Dictionaries map keys to values.",
+      "The 'in' operator checks for key existence."
+    ]
+  },
+  {
+    "Id": "cal-py-d2-004",
+    "Language": "python",
+    "Difficulty": 2,
+    "Title": "Sum of List",
+    "Code": "def sum_list(numbers):\n    total = 0\n    for n in numbers:\n        total += n\n    return total\n\nvalues = [10, 20, 30, 40]\nprint(sum_list(values))\n",
+    "Topics": ["functions", "loops", "accumulator"],
+    "Explain": [
+      "The accumulator pattern builds up a result incrementally.",
+      "Each iteration adds the current element to the running total."
+    ]
+  },
+  {
+    "Id": "cal-py-d2-005",
+    "Language": "python",
+    "Difficulty": 2,
+    "Title": "Max Value",
+    "Code": "def find_max(items):\n    best = items[0]\n    for item in items[1:]:\n        if item > best:\n            best = item\n    return best\n\nprint(find_max([3, 7, 2, 9, 4]))\n",
+    "Topics": ["functions", "loops", "comparison", "slicing"],
+    "Explain": [
+      "Track the best candidate seen so far.",
+      "Slicing with [1:] skips the first element."
+    ]
+  },
+  {
+    "Id": "cal-py-d3-001",
+    "Language": "python",
+    "Difficulty": 3,
+    "Title": "Fibonacci Sequence",
+    "Code": "def fibonacci(n):\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    seq = [0, 1]\n    for _ in range(2, n):\n        seq.append(seq[-1] + seq[-2])\n    return seq\n\nfor val in fibonacci(10):\n    print(val, end=\" \")\nprint()\n",
+    "Topics": ["functions", "loops", "lists", "sequences"],
+    "Explain": [
+      "Each Fibonacci number is the sum of the two before it.",
+      "Guard clauses handle edge cases early."
+    ]
+  },
+  {
+    "Id": "cal-py-d3-002",
+    "Language": "python",
+    "Difficulty": 3,
+    "Title": "Word Counter",
+    "Code": "def count_words(text):\n    counts = {}\n    for word in text.lower().split():\n        if word in counts:\n            counts[word] += 1\n        else:\n            counts[word] = 1\n    return counts\n\nsample = \"the cat sat on the mat the cat\"\nfor word, n in count_words(sample).items():\n    print(f\"{word}: {n}\")\n",
+    "Topics": ["dictionaries", "loops", "strings", "counting"],
+    "Explain": [
+      "Split text into words and tally each occurrence.",
+      "Lowercasing ensures case-insensitive matching."
+    ]
+  },
+  {
+    "Id": "cal-py-d3-003",
+    "Language": "python",
+    "Difficulty": 3,
+    "Title": "File Line Reader",
+    "Code": "import os\n\ndef read_lines(path):\n    if not os.path.exists(path):\n        return []\n    lines = []\n    with open(path, \"r\") as f:\n        for line in f:\n            stripped = line.strip()\n            if stripped:\n                lines.append(stripped)\n    return lines\n\nfor line in read_lines(\"data.txt\"):\n    print(line)\n",
+    "Topics": ["file-io", "context-manager", "loops", "os"],
+    "Explain": [
+      "The with statement ensures the file is properly closed.",
+      "strip() removes leading and trailing whitespace."
+    ]
+  },
+  {
+    "Id": "cal-py-d3-004",
+    "Language": "python",
+    "Difficulty": 3,
+    "Title": "Binary Search",
+    "Code": "def binary_search(arr, target):\n    lo, hi = 0, len(arr) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1\n\nnums = [1, 3, 5, 7, 9, 11, 13]\nprint(binary_search(nums, 7))\n",
+    "Topics": ["algorithms", "search", "loops", "functions"],
+    "Explain": [
+      "Binary search halves the search space each iteration.",
+      "The input array must be sorted for this to work."
+    ]
+  },
+  {
+    "Id": "cal-py-d3-005",
+    "Language": "python",
+    "Difficulty": 3,
+    "Title": "Matrix Transpose",
+    "Code": "def transpose(matrix):\n    rows = len(matrix)\n    cols = len(matrix[0])\n    result = []\n    for c in range(cols):\n        row = []\n        for r in range(rows):\n            row.append(matrix[r][c])\n        result.append(row)\n    return result\n\nm = [[1, 2, 3], [4, 5, 6]]\nfor row in transpose(m):\n    print(row)\n",
+    "Topics": ["nested-loops", "lists", "matrix", "functions"],
+    "Explain": [
+      "Transposing swaps rows and columns.",
+      "Nested loops iterate over each column then each row."
+    ]
+  },
+  {
+    "Id": "cal-py-d4-001",
+    "Language": "python",
+    "Difficulty": 4,
+    "Title": "Stack Class",
+    "Code": "class Stack:\n    def __init__(self):\n        self._items = []\n\n    def push(self, item):\n        self._items.append(item)\n\n    def pop(self):\n        if self.is_empty():\n            raise IndexError(\"pop from empty stack\")\n        return self._items.pop()\n\n    def peek(self):\n        if self.is_empty():\n            raise IndexError(\"peek at empty stack\")\n        return self._items[-1]\n\n    def is_empty(self):\n        return len(self._items) == 0\n\n    def __len__(self):\n        return len(self._items)\n",
+    "Topics": ["classes", "dunder-methods", "exceptions", "encapsulation"],
+    "Explain": [
+      "A stack follows last-in first-out ordering.",
+      "Dunder methods like __len__ integrate with built-in functions."
+    ]
+  },
+  {
+    "Id": "cal-py-d4-002",
+    "Language": "python",
+    "Difficulty": 4,
+    "Title": "Safe JSON Loader",
+    "Code": "import json\nimport os\n\ndef load_config(path, defaults=None):\n    if defaults is None:\n        defaults = {}\n    try:\n        if not os.path.isfile(path):\n            return defaults\n        with open(path, \"r\") as f:\n            data = json.load(f)\n        if not isinstance(data, dict):\n            return defaults\n        return {**defaults, **data}\n    except (json.JSONDecodeError, OSError) as e:\n        print(f\"Warning: {e}\")\n        return defaults\n\nconfig = load_config(\"settings.json\", {\"theme\": \"dark\", \"font_size\": 14})\nfor key, value in config.items():\n    print(f\"{key} = {value}\")\n",
+    "Topics": ["json", "try-except", "file-io", "dict-merge"],
+    "Explain": [
+      "Merging with {**defaults, **data} lets file values override defaults.",
+      "Multiple exception types can be caught in a single except clause."
+    ]
+  },
+  {
+    "Id": "cal-py-d4-003",
+    "Language": "python",
+    "Difficulty": 4,
+    "Title": "List Comprehension Filter",
+    "Code": "def process_records(records):\n    valid = [\n        {\"name\": r[\"name\"], \"score\": r[\"score\"]}\n        for r in records\n        if isinstance(r.get(\"score\"), (int, float))\n        and r[\"score\"] >= 0\n    ]\n    if not valid:\n        return []\n    avg = sum(r[\"score\"] for r in valid) / len(valid)\n    return [\n        {**r, \"above_avg\": r[\"score\"] > avg}\n        for r in valid\n    ]\n\ndata = [\n    {\"name\": \"Alice\", \"score\": 88},\n    {\"name\": \"Bob\", \"score\": -5},\n    {\"name\": \"Carol\", \"score\": 95},\n    {\"name\": \"Dave\", \"score\": None},\n]\nfor entry in process_records(data):\n    print(entry)\n",
+    "Topics": ["list-comprehension", "dict-spread", "filtering", "validation"],
+    "Explain": [
+      "List comprehensions with conditions filter and transform in one pass.",
+      "Dict spread with {**r, key: val} adds fields to a copy."
+    ]
+  },
+  {
+    "Id": "cal-py-d4-004",
+    "Language": "python",
+    "Difficulty": 4,
+    "Title": "Dataclass with Validation",
+    "Code": "from dataclasses import dataclass, field\n\n@dataclass\nclass Temperature:\n    celsius: float\n    label: str = \"\"\n    _history: list = field(default_factory=list, repr=False)\n\n    def __post_init__(self):\n        if self.celsius < -273.15:\n            raise ValueError(\"Below absolute zero\")\n        self._history.append(self.celsius)\n\n    @property\n    def fahrenheit(self):\n        return self.celsius * 9 / 5 + 32\n\n    def update(self, new_celsius):\n        if new_celsius < -273.15:\n            raise ValueError(\"Below absolute zero\")\n        self.celsius = new_celsius\n        self._history.append(new_celsius)\n",
+    "Topics": ["dataclasses", "properties", "validation", "decorators"],
+    "Explain": [
+      "__post_init__ runs after the generated __init__ for extra validation.",
+      "Properties provide computed attributes with a clean interface."
+    ]
+  },
+  {
+    "Id": "cal-py-d4-005",
+    "Language": "python",
+    "Difficulty": 4,
+    "Title": "Recursive Tree Traversal",
+    "Code": "class TreeNode:\n    def __init__(self, value, children=None):\n        self.value = value\n        self.children = children or []\n\ndef collect_values(node, depth=0):\n    results = [(node.value, depth)]\n    for child in node.children:\n        results.extend(collect_values(child, depth + 1))\n    return results\n\nroot = TreeNode(\"a\", [\n    TreeNode(\"b\", [TreeNode(\"d\"), TreeNode(\"e\")]),\n    TreeNode(\"c\", [TreeNode(\"f\")]),\n])\nfor value, level in collect_values(root):\n    indent = \"  \" * level\n    print(f\"{indent}{value}\")\n",
+    "Topics": ["recursion", "classes", "trees", "depth-first"],
+    "Explain": [
+      "Recursive traversal visits each node then its children.",
+      "The depth parameter tracks nesting level for indentation."
+    ]
+  },
+  {
+    "Id": "cal-py-d5-001",
+    "Language": "python",
+    "Difficulty": 5,
+    "Title": "Retry Decorator",
+    "Code": "import functools\nimport time\n\ndef retry(max_attempts=3, delay=1.0, backoff=2.0, exceptions=(Exception,)):\n    def decorator(func):\n        @functools.wraps(func)\n        def wrapper(*args, **kwargs):\n            current_delay = delay\n            last_exc = None\n            for attempt in range(1, max_attempts + 1):\n                try:\n                    return func(*args, **kwargs)\n                except exceptions as e:\n                    last_exc = e\n                    if attempt < max_attempts:\n                        time.sleep(current_delay)\n                        current_delay *= backoff\n            raise last_exc\n        return wrapper\n    return decorator\n\n@retry(max_attempts=3, delay=0.5, exceptions=(ConnectionError,))\ndef fetch_data(url):\n    raise ConnectionError(f\"Failed to reach {url}\")\n",
+    "Topics": ["decorators", "closures", "exception-handling", "backoff"],
+    "Explain": [
+      "A parameterized decorator returns the actual decorator function.",
+      "Exponential backoff multiplies the delay after each failure."
+    ]
+  },
+  {
+    "Id": "cal-py-d5-002",
+    "Language": "python",
+    "Difficulty": 5,
+    "Title": "Generator Pipeline",
+    "Code": "import os\n\ndef read_lines(path):\n    with open(path, \"r\") as f:\n        for line in f:\n            yield line.rstrip(\"\\n\")\n\ndef filter_nonempty(lines):\n    for line in lines:\n        if line.strip():\n            yield line\n\ndef parse_csv_rows(lines, delimiter=\",\"):\n    for line in lines:\n        fields = [f.strip() for f in line.split(delimiter)]\n        if len(fields) >= 2:\n            yield {\"key\": fields[0], \"value\": fields[1]}\n\ndef build_pipeline(path):\n    lines = read_lines(path)\n    nonempty = filter_nonempty(lines)\n    records = parse_csv_rows(nonempty)\n    return records\n\nif os.path.exists(\"data.csv\"):\n    for record in build_pipeline(\"data.csv\"):\n        print(f\"{record['key']}: {record['value']}\")\n",
+    "Topics": ["generators", "pipelines", "file-io", "lazy-evaluation"],
+    "Explain": [
+      "Generators yield items lazily, using constant memory.",
+      "Chaining generators creates a composable data pipeline."
+    ]
+  },
+  {
+    "Id": "cal-py-d5-003",
+    "Language": "python",
+    "Difficulty": 5,
+    "Title": "LRU Cache Implementation",
+    "Code": "from collections import OrderedDict\n\nclass LRUCache:\n    def __init__(self, capacity):\n        self._capacity = capacity\n        self._cache = OrderedDict()\n\n    def get(self, key):\n        if key not in self._cache:\n            return None\n        self._cache.move_to_end(key)\n        return self._cache[key]\n\n    def put(self, key, value):\n        if key in self._cache:\n            self._cache.move_to_end(key)\n            self._cache[key] = value\n        else:\n            if len(self._cache) >= self._capacity:\n                self._cache.popitem(last=False)\n            self._cache[key] = value\n\n    def __contains__(self, key):\n        return key in self._cache\n\n    def __repr__(self):\n        items = \", \".join(f\"{k}={v}\" for k, v in self._cache.items())\n        return f\"LRUCache({items})\"\n",
+    "Topics": ["classes", "OrderedDict", "caching", "dunder-methods"],
+    "Explain": [
+      "OrderedDict.move_to_end marks a key as recently used.",
+      "popitem(last=False) evicts the least recently used entry."
+    ]
+  },
+  {
+    "Id": "cal-py-d5-004",
+    "Language": "python",
+    "Difficulty": 5,
+    "Title": "Async HTTP Fetcher",
+    "Code": "import asyncio\nfrom typing import Optional\n\nclass FetchResult:\n    def __init__(self, url: str, status: int, body: str):\n        self.url = url\n        self.status = status\n        self.body = body\n\nasync def fetch_url(url: str, timeout: float = 5.0) -> Optional[FetchResult]:\n    try:\n        reader, writer = await asyncio.wait_for(\n            asyncio.open_connection(\"example.com\", 80),\n            timeout=timeout,\n        )\n        request = f\"GET / HTTP/1.0\\r\\nHost: example.com\\r\\n\\r\\n\"\n        writer.write(request.encode())\n        await writer.drain()\n        data = await asyncio.wait_for(reader.read(4096), timeout=timeout)\n        writer.close()\n        return FetchResult(url, 200, data.decode(errors=\"replace\"))\n    except (asyncio.TimeoutError, OSError) as e:\n        print(f\"Error fetching {url}: {e}\")\n        return None\n",
+    "Topics": ["async", "typing", "networking", "error-handling"],
+    "Explain": [
+      "asyncio.wait_for adds a timeout to any awaitable.",
+      "writer.drain() ensures buffered data is actually sent."
+    ]
+  },
+  {
+    "Id": "cal-py-d5-005",
+    "Language": "python",
+    "Difficulty": 5,
+    "Title": "Event Emitter",
+    "Code": "from collections import defaultdict\nfrom typing import Callable, Any\nimport functools\n\nclass EventEmitter:\n    def __init__(self):\n        self._handlers: dict[str, list[Callable]] = defaultdict(list)\n\n    def on(self, event: str, handler: Callable) -> None:\n        self._handlers[event].append(handler)\n\n    def off(self, event: str, handler: Callable) -> None:\n        handlers = self._handlers.get(event, [])\n        self._handlers[event] = [h for h in handlers if h is not handler]\n\n    def emit(self, event: str, *args: Any, **kwargs: Any) -> None:\n        for handler in self._handlers.get(event, []):\n            handler(*args, **kwargs)\n\n    def once(self, event: str, handler: Callable) -> None:\n        @functools.wraps(handler)\n        def wrapper(*args, **kwargs):\n            self.off(event, wrapper)\n            handler(*args, **kwargs)\n        self.on(event, wrapper)\n",
+    "Topics": ["classes", "callbacks", "defaultdict", "closures"],
+    "Explain": [
+      "defaultdict(list) avoids KeyError for unregistered events.",
+      "once() wraps the handler to auto-remove itself after firing."
+    ]
+  },
+  {
+    "Id": "cal-py-d6-001",
+    "Language": "python",
+    "Difficulty": 6,
+    "Title": "Context Manager for Timing",
+    "Code": "import time\nfrom contextlib import contextmanager\nfrom typing import Generator\nfrom dataclasses import dataclass, field\n\n@dataclass\nclass TimingResult:\n    label: str\n    elapsed: float = 0.0\n    children: list[\"TimingResult\"] = field(default_factory=list)\n\n_stack: list[TimingResult] = []\n\n@contextmanager\ndef timed(label: str) -> Generator[TimingResult, None, None]:\n    result = TimingResult(label=label)\n    if _stack:\n        _stack[-1].children.append(result)\n    _stack.append(result)\n    start = time.perf_counter()\n    try:\n        yield result\n    finally:\n        result.elapsed = time.perf_counter() - start\n        _stack.pop()\n\ndef format_timing(result: TimingResult, indent: int = 0) -> str:\n    prefix = \"  \" * indent\n    lines = [f\"{prefix}{result.label}: {result.elapsed:.4f}s\"]\n    for child in result.children:\n        lines.append(format_timing(child, indent + 1))\n    return \"\\n\".join(lines)\n",
+    "Topics": ["context-managers", "contextlib", "dataclasses", "recursion", "timing"],
+    "Explain": [
+      "contextmanager turns a generator function into a context manager.",
+      "A stack tracks nested timing scopes for hierarchical reporting."
+    ]
+  },
+  {
+    "Id": "cal-py-d6-002",
+    "Language": "python",
+    "Difficulty": 6,
+    "Title": "Registry Metaclass",
+    "Code": "from typing import ClassVar\n\nclass RegistryMeta(type):\n    _registry: ClassVar[dict[str, type]] = {}\n\n    def __new__(mcs, name, bases, namespace):\n        cls = super().__new__(mcs, name, bases, namespace)\n        if bases:\n            key = namespace.get(\"registry_key\", name.lower())\n            mcs._registry[key] = cls\n        return cls\n\n    @classmethod\n    def get(mcs, key: str):\n        if key not in mcs._registry:\n            raise KeyError(f\"Unknown type: {key!r}\")\n        return mcs._registry[key]\n\n    @classmethod\n    def all_keys(mcs) -> list[str]:\n        return list(mcs._registry.keys())\n\nclass Serializer(metaclass=RegistryMeta):\n    def serialize(self, data):\n        raise NotImplementedError\n\nclass JsonSerializer(Serializer):\n    registry_key = \"json\"\n\n    def serialize(self, data):\n        import json\n        return json.dumps(data, indent=2)\n\nclass CsvSerializer(Serializer):\n    registry_key = \"csv\"\n\n    def serialize(self, data):\n        if not data:\n            return \"\"\n        headers = list(data[0].keys())\n        lines = [\",\".join(headers)]\n        for row in data:\n            lines.append(\",\".join(str(row.get(h, \"\")) for h in headers))\n        return \"\\n\".join(lines)\n",
+    "Topics": ["metaclasses", "registry-pattern", "inheritance", "ClassVar"],
+    "Explain": [
+      "A metaclass __new__ fires when any class using it is defined.",
+      "The registry pattern maps string keys to concrete implementations."
+    ]
+  },
+  {
+    "Id": "cal-py-d6-003",
+    "Language": "python",
+    "Difficulty": 6,
+    "Title": "Descriptor Protocol",
+    "Code": "from typing import Any, Optional\n\nclass Validated:\n    def __init__(self, min_val: float = float(\"-inf\"), max_val: float = float(\"inf\")):\n        self.min_val = min_val\n        self.max_val = max_val\n        self.attr_name: Optional[str] = None\n\n    def __set_name__(self, owner: type, name: str) -> None:\n        self.attr_name = f\"_{name}\"\n\n    def __get__(self, obj: Any, objtype: type = None) -> Any:\n        if obj is None:\n            return self\n        return getattr(obj, self.attr_name, None)\n\n    def __set__(self, obj: Any, value: float) -> None:\n        if not isinstance(value, (int, float)):\n            raise TypeError(f\"{self.attr_name}: expected number, got {type(value).__name__}\")\n        if not (self.min_val <= value <= self.max_val):\n            raise ValueError(f\"{self.attr_name}: {value} not in [{self.min_val}, {self.max_val}]\")\n        setattr(obj, self.attr_name, value)\n\nclass Sensor:\n    temperature = Validated(min_val=-40.0, max_val=125.0)\n    humidity = Validated(min_val=0.0, max_val=100.0)\n\n    def __init__(self, temperature: float, humidity: float):\n        self.temperature = temperature\n        self.humidity = humidity\n\n    def __repr__(self) -> str:\n        return f\"Sensor(temp={self.temperature}, hum={self.humidity})\"\n",
+    "Topics": ["descriptors", "validation", "dunder-methods", "typing"],
+    "Explain": [
+      "Descriptors intercept attribute access via __get__ and __set__.",
+      "__set_name__ is called automatically when the class is created."
+    ]
+  },
+  {
+    "Id": "cal-py-d6-004",
+    "Language": "python",
+    "Difficulty": 6,
+    "Title": "Async Semaphore Rate Limiter",
+    "Code": "import asyncio\nimport time\nfrom typing import Any, Callable, Coroutine\nfrom dataclasses import dataclass, field\n\n@dataclass\nclass RateLimitStats:\n    total: int = 0\n    succeeded: int = 0\n    failed: int = 0\n    durations: list[float] = field(default_factory=list)\n\n    @property\n    def avg_duration(self) -> float:\n        return sum(self.durations) / len(self.durations) if self.durations else 0.0\n\nclass RateLimiter:\n    def __init__(self, max_concurrent: int = 5, delay: float = 0.1):\n        self._sem = asyncio.Semaphore(max_concurrent)\n        self._delay = delay\n        self.stats = RateLimitStats()\n\n    async def execute(self, coro_fn: Callable[..., Coroutine], *args: Any) -> Any:\n        async with self._sem:\n            self.stats.total += 1\n            start = time.monotonic()\n            try:\n                result = await coro_fn(*args)\n                self.stats.succeeded += 1\n                return result\n            except Exception:\n                self.stats.failed += 1\n                raise\n            finally:\n                self.stats.durations.append(time.monotonic() - start)\n                await asyncio.sleep(self._delay)\n",
+    "Topics": ["async", "semaphore", "dataclasses", "rate-limiting", "typing"],
+    "Explain": [
+      "asyncio.Semaphore limits how many coroutines run concurrently.",
+      "The finally block ensures delay and timing happen even on failure."
+    ]
+  },
+  {
+    "Id": "cal-py-d6-005",
+    "Language": "python",
+    "Difficulty": 6,
+    "Title": "Plugin Loader with Protocol",
+    "Code": "from typing import Protocol, runtime_checkable, Any\nimport importlib\nimport os\n\n@runtime_checkable\nclass Plugin(Protocol):\n    name: str\n    version: str\n\n    def activate(self, config: dict[str, Any]) -> None: ...\n    def deactivate(self) -> None: ...\n\nclass PluginManager:\n    def __init__(self):\n        self._plugins: dict[str, Plugin] = {}\n\n    def load_from_module(self, module_path: str) -> None:\n        try:\n            module = importlib.import_module(module_path)\n        except ImportError as e:\n            raise RuntimeError(f\"Cannot load module: {module_path}\") from e\n        for attr_name in dir(module):\n            attr = getattr(module, attr_name)\n            if isinstance(attr, type) and issubclass(attr, Plugin) and attr is not Plugin:\n                instance = attr()\n                if isinstance(instance, Plugin):\n                    self._plugins[instance.name] = instance\n\n    def activate_all(self, config: dict[str, Any]) -> list[str]:\n        activated = []\n        for name, plugin in self._plugins.items():\n            try:\n                plugin.activate(config)\n                activated.append(name)\n            except Exception as e:\n                print(f\"Failed to activate {name}: {e}\")\n        return activated\n\n    def deactivate_all(self) -> None:\n        for plugin in self._plugins.values():\n            try:\n                plugin.deactivate()\n            except Exception:\n                pass\n",
+    "Topics": ["protocols", "importlib", "plugin-pattern", "typing", "error-handling"],
+    "Explain": [
+      "runtime_checkable allows isinstance() checks against Protocols.",
+      "importlib.import_module dynamically loads modules by name."
+    ]
+  },
+  {
+    "Id": "cal-py-d7-001",
+    "Language": "python",
+    "Difficulty": 7,
+    "Title": "AST-Based Code Analyzer",
+    "Code": "import ast\nfrom dataclasses import dataclass, field\nfrom typing import Optional\n\n@dataclass\nclass FunctionInfo:\n    name: str\n    lineno: int\n    args: list[str]\n    returns: Optional[str]\n    complexity: int = 1\n    nested_functions: list[\"FunctionInfo\"] = field(default_factory=list)\n\nclass ComplexityVisitor(ast.NodeVisitor):\n    def __init__(self):\n        self._stack: list[FunctionInfo] = []\n        self.functions: list[FunctionInfo] = []\n\n    def _current(self) -> Optional[FunctionInfo]:\n        return self._stack[-1] if self._stack else None\n\n    def visit_FunctionDef(self, node: ast.FunctionDef) -> None:\n        args = [a.arg for a in node.args.args]\n        returns = None\n        if node.returns:\n            returns = ast.dump(node.returns)\n        info = FunctionInfo(\n            name=node.name,\n            lineno=node.lineno,\n            args=args,\n            returns=returns,\n        )\n        parent = self._current()\n        if parent:\n            parent.nested_functions.append(info)\n        else:\n            self.functions.append(info)\n        self._stack.append(info)\n        self.generic_visit(node)\n        self._stack.pop()\n\n    def visit_If(self, node: ast.If) -> None:\n        current = self._current()\n        if current:\n            current.complexity += 1\n            current.complexity += len(node.orelse) if isinstance(node.orelse, list) and any(\n                isinstance(n, ast.If) for n in node.orelse\n            ) else 0\n        self.generic_visit(node)\n\n    def visit_For(self, node: ast.For) -> None:\n        current = self._current()\n        if current:\n            current.complexity += 1\n        self.generic_visit(node)\n\n    def visit_While(self, node: ast.While) -> None:\n        current = self._current()\n        if current:\n            current.complexity += 1\n        self.generic_visit(node)\n\n    def visit_ExceptHandler(self, node: ast.ExceptHandler) -> None:\n        current = self._current()\n        if current:\n            current.complexity += 1\n        self.generic_visit(node)\n\ndef analyze_source(source: str) -> list[FunctionInfo]:\n    tree = ast.parse(source)\n    visitor = ComplexityVisitor()\n    visitor.visit(tree)\n    return visitor.functions\n\ndef format_report(functions: list[FunctionInfo], indent: int = 0) -> str:\n    lines = []\n    for fn in functions:\n        prefix = \"  \" * indent\n        sig = f\"{fn.name}({', '.join(fn.args)})\"\n        lines.append(f\"{prefix}{sig} [line {fn.lineno}, complexity {fn.complexity}]\")\n        if fn.nested_functions:\n            lines.append(format_report(fn.nested_functions, indent + 1))\n    return \"\\n\".join(lines)\n",
+    "Topics": ["ast", "visitor-pattern", "dataclasses", "recursion", "static-analysis"],
+    "Explain": [
+      "ast.NodeVisitor dispatches to visit_* methods by node type.",
+      "Cyclomatic complexity increments for each branching construct."
+    ]
+  },
+  {
+    "Id": "cal-py-d7-002",
+    "Language": "python",
+    "Difficulty": 7,
+    "Title": "Dependency Injection Container",
+    "Code": "import inspect\nfrom typing import Any, Callable, TypeVar, get_type_hints\nfrom dataclasses import dataclass, field\nfrom enum import Enum, auto\n\nT = TypeVar(\"T\")\n\nclass Lifetime(Enum):\n    TRANSIENT = auto()\n    SINGLETON = auto()\n\n@dataclass\nclass Registration:\n    factory: Callable[..., Any]\n    lifetime: Lifetime\n    instance: Any = None\n\nclass Container:\n    def __init__(self):\n        self._registry: dict[type, Registration] = {}\n        self._resolving: set[type] = set()\n\n    def register(self, interface: type, factory: Callable[..., Any],\n                 lifetime: Lifetime = Lifetime.TRANSIENT) -> None:\n        self._registry[interface] = Registration(factory=factory, lifetime=lifetime)\n\n    def register_singleton(self, interface: type, factory: Callable[..., Any]) -> None:\n        self.register(interface, factory, Lifetime.SINGLETON)\n\n    def resolve(self, interface: type[T]) -> T:\n        if interface not in self._registry:\n            raise KeyError(f\"No registration for {interface.__name__}\")\n        reg = self._registry[interface]\n        if reg.lifetime == Lifetime.SINGLETON and reg.instance is not None:\n            return reg.instance\n        if interface in self._resolving:\n            cycle = \" -> \".join(t.__name__ for t in self._resolving)\n            raise RecursionError(f\"Circular dependency: {cycle} -> {interface.__name__}\")\n        self._resolving.add(interface)\n        try:\n            hints = get_type_hints(reg.factory)\n            sig = inspect.signature(reg.factory)\n            kwargs = {}\n            for param_name, param in sig.parameters.items():\n                if param_name == \"self\":\n                    continue\n                param_type = hints.get(param_name)\n                if param_type and param_type in self._registry:\n                    kwargs[param_name] = self.resolve(param_type)\n            instance = reg.factory(**kwargs)\n            if reg.lifetime == Lifetime.SINGLETON:\n                reg.instance = instance\n            return instance\n        finally:\n            self._resolving.discard(interface)\n\n    def create_scope(self) -> \"Container\":\n        child = Container()\n        child._registry = {\n            k: Registration(factory=v.factory, lifetime=v.lifetime,\n                            instance=v.instance if v.lifetime == Lifetime.SINGLETON else None)\n            for k, v in self._registry.items()\n        }\n        return child\n",
+    "Topics": ["dependency-injection", "inspect", "typing", "generics", "design-patterns"],
+    "Explain": [
+      "get_type_hints resolves constructor parameter types for auto-wiring.",
+      "Circular dependency detection uses a set of types currently being resolved."
+    ]
+  },
+  {
+    "Id": "cal-py-d7-003",
+    "Language": "python",
+    "Difficulty": 7,
+    "Title": "Middleware Pipeline",
+    "Code": "from typing import Any, Callable, Awaitable\nfrom dataclasses import dataclass, field\nimport asyncio\n\n@dataclass\nclass Request:\n    method: str\n    path: str\n    headers: dict[str, str] = field(default_factory=dict)\n    body: bytes = b\"\"\n    state: dict[str, Any] = field(default_factory=dict)\n\n@dataclass\nclass Response:\n    status: int = 200\n    headers: dict[str, str] = field(default_factory=dict)\n    body: bytes = b\"\"\n\nNextFn = Callable[[Request], Awaitable[Response]]\nMiddleware = Callable[[Request, NextFn], Awaitable[Response]]\n\nclass Pipeline:\n    def __init__(self):\n        self._middlewares: list[Middleware] = []\n        self._handler: NextFn | None = None\n\n    def use(self, middleware: Middleware) -> \"Pipeline\":\n        self._middlewares.append(middleware)\n        return self\n\n    def set_handler(self, handler: NextFn) -> None:\n        self._handler = handler\n\n    def _build_chain(self) -> NextFn:\n        if self._handler is None:\n            raise RuntimeError(\"No handler registered\")\n        chain: NextFn = self._handler\n        for mw in reversed(self._middlewares):\n            outer_chain = chain\n            def make_next(m: Middleware, nxt: NextFn) -> NextFn:\n                async def call(req: Request) -> Response:\n                    return await m(req, nxt)\n                return call\n            chain = make_next(mw, outer_chain)\n        return chain\n\n    async def handle(self, request: Request) -> Response:\n        chain = self._build_chain()\n        return await chain(request)\n\nasync def logging_middleware(req: Request, next_fn: NextFn) -> Response:\n    print(f\"-> {req.method} {req.path}\")\n    resp = await next_fn(req)\n    print(f\"<- {resp.status}\")\n    return resp\n\nasync def auth_middleware(req: Request, next_fn: NextFn) -> Response:\n    token = req.headers.get(\"authorization\", \"\")\n    if not token.startswith(\"Bearer \"):\n        return Response(status=401, body=b\"Unauthorized\")\n    req.state[\"user\"] = token[7:]\n    return await next_fn(req)\n\nasync def default_handler(req: Request) -> Response:\n    user = req.state.get(\"user\", \"anonymous\")\n    body = f\"Hello, {user}! Path: {req.path}\".encode()\n    return Response(status=200, body=body)\n",
+    "Topics": ["async", "middleware", "closures", "pipeline-pattern", "dataclasses"],
+    "Explain": [
+      "The chain is built in reverse so the first middleware added runs first.",
+      "make_next captures the correct closure variables to avoid late binding."
+    ]
+  }
+]

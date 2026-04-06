@@ -1,0 +1,23 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "soundboard-local",
+  "description": "Local marketplace for the soundboard voice plugin",
+  "owner": {
+    "name": "mcp-tool-shop",
+    "email": "64996768+mcp-tool-shop@users.noreply.github.com"
+  },
+  "plugins": [
+    {
+      "name": "soundboard",
+      "description": "Voice synthesis for Claude Code. Speak code walkthroughs, get audio notifications on build/test results, and add context-aware TTS to your workflow.",
+      "version": "1.0.0",
+      "source": "./",
+      "author": {
+        "name": "mcp-tool-shop",
+        "email": "64996768+mcp-tool-shop@users.noreply.github.com"
+      },
+      "category": "productivity",
+      "license": "MIT"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+[project]
+name = "flexiflow"
+version = "1.0.1"
+description = "A small async component engine with events, state machines, and a minimal CLI."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+  {name = "mcp-tool-shop", email = "64996768+mcp-tool-shop@users.noreply.github.com"},
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Framework :: AsyncIO",
+  "Topic :: Software Development :: Libraries :: Application Frameworks",
+  "Typing :: Typed",
+]
+dependencies = ["PyYAML>=6.0"]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "pytest-asyncio>=0.23",
+  "coverage>=7.0",
+]
+reload = ["watchfiles>=0.21"]
+api = ["fastapi>=0.110", "uvicorn>=0.27"]
+
+[project.urls]
+Homepage = "https://github.com/mcp-tool-shop-org/flexiflow"
+Repository = "https://github.com/mcp-tool-shop-org/flexiflow"
+Issues = "https://github.com/mcp-tool-shop-org/flexiflow/issues"
+Documentation = "https://github.com/mcp-tool-shop-org/flexiflow#readme"
+
+[project.scripts]
+flexiflow = "flexiflow.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["flexiflow*"]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

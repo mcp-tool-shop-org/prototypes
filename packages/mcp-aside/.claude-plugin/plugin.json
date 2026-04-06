@@ -1,0 +1,13 @@
+{
+  "name": "mcp-aside",
+  "version": "0.1.2",
+  "description": "Interjection inbox for Claude Code. Capture side-thoughts, blockers, and observations mid-task without losing your train of thought.",
+  "author": {
+    "name": "mcp-tool-shop",
+    "email": "64996768+mcp-tool-shop@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/mcp-aside",
+  "repository": "https://github.com/mcp-tool-shop-org/mcp-aside",
+  "license": "MIT",
+  "keywords": ["aside", "interjection", "inbox", "guardrails", "notifications", "side-thoughts", "claude-code"]
+}

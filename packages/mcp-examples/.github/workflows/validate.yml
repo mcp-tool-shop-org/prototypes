@@ -1,0 +1,183 @@
+name: Validate Examples
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "hello-tools/**"
+      - "hello-filesystem/**"
+      - ".github/workflows/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "hello-tools/**"
+      - "hello-filesystem/**"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Secret scan
+        run: |
+          echo "Scanning for hardcoded secrets..."
+          cat > /tmp/secret-patterns.txt <<PATTERNS
+          PRIVATE.KEY
+          sk_live_
+          sk_test_
+          aws_secret
+          PATTERNS
+          FOUND=0
+          while IFS= read -r pattern; do
+            pattern=$(echo "$pattern" | xargs)
+            [ -z "$pattern" ] && continue
+            if git grep -lI "$pattern" -- ':!*.md' ':!.github/workflows/*' 2>/dev/null; then
+              echo "FAIL: potential secret pattern '$pattern' found"
+              FOUND=1
+            fi
+          done < /tmp/secret-patterns.txt
+          if [ "$FOUND" -eq 1 ]; then
+            exit 1
+          fi
+          echo "No hardcoded secrets detected"
+
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install pyyaml httpx
+
+      - name: Validate mcp.yaml schemas
+        run: |
+          python -c "
+          import yaml
+          import sys
+          from pathlib import Path
+
+          examples = ['hello-tools', 'hello-filesystem']
+
+          for example in examples:
+              config_path = Path(example) / 'mcp.yaml'
+              with open(config_path) as f:
+                  config = yaml.safe_load(f)
+
+              # Check required fields
+              assert 'schema_version' in config, f'{example}: Missing schema_version'
+              assert 'registry' in config, f'{example}: Missing registry'
+              assert 'ref' in config['registry'], f'{example}: Missing registry.ref'
+
+              # Fail if pinned to main (not reproducible)
+              ref = config['registry']['ref']
+              if ref == 'main':
+                  print(f'ERROR: {example}/mcp.yaml registry.ref is \"main\" - pin to a tagged release')
+                  sys.exit(1)
+
+              print(f'✓ {example}/mcp.yaml valid (ref: {ref})')
+          "
+
+      - name: Test echo tool
+        working-directory: hello-tools
+        run: |
+          python -m tools.echo.main "CI test"
+          python -m tools.echo.main --uppercase "ci test"
+
+      - name: Test http-get stub mode
+        working-directory: hello-tools
+        run: |
+          python -m tools.http_get.main https://example.com | grep -q "STUB MODE"
+
+      - name: Test http-get real mode
+        working-directory: hello-tools
+        env:
+          ALLOW_NETWORK: "1"
+        run: |
+          python -m tools.http_get.main https://httpbin.org/get | grep -q "REAL MODE"
+
+      # hello-filesystem tests
+      - name: Test file_write stub mode
+        working-directory: hello-filesystem
+        run: |
+          python -m tools.file_write.main test.txt "content" | grep -q "STUB MODE"
+
+      - name: Test file_write sandbox mode
+        working-directory: hello-filesystem
+        env:
+          ALLOW_WRITE: "1"
+        run: |
+          python -m tools.file_write.main test.txt "sandbox content" | grep -q "SANDBOX MODE"
+          test -f sandbox/test.txt
+          rm sandbox/test.txt
+
+      - name: Test file_write path traversal (unix)
+        working-directory: hello-filesystem
+        env:
+          ALLOW_WRITE: "1"
+        run: |
+          python -m tools.file_write.main "../../../evil.txt" "unix traversal"
+          test -f sandbox/evil.txt
+          rm sandbox/evil.txt
+
+      - name: Test file_write path traversal (windows backslash)
+        working-directory: hello-filesystem
+        env:
+          ALLOW_WRITE: "1"
+        run: |
+          python -m tools.file_write.main '..\..\..\..\win.txt' "windows traversal"
+          test -f sandbox/win.txt
+          rm sandbox/win.txt
+
+      - name: Test file_write path traversal (url-encoded)
+        working-directory: hello-filesystem
+        env:
+          ALLOW_WRITE: "1"
+        run: |
+          python -m tools.file_write.main '%2e%2e%2f%2e%2e%2fencoded.txt' "url encoded"
+          test -f sandbox/encoded.txt
+          rm sandbox/encoded.txt
+
+      - name: Test file_write path traversal (drive letter)
+        working-directory: hello-filesystem
+        env:
+          ALLOW_WRITE: "1"
+        run: |
+          python -m tools.file_write.main 'C:\Windows\System32\evil.txt' "drive letter"
+          test -f sandbox/evil.txt
+          rm sandbox/evil.txt
+
+      - name: Test file_write path traversal (UNC path)
+        working-directory: hello-filesystem
+        env:
+          ALLOW_WRITE: "1"
+        run: |
+          python -m tools.file_write.main '\\server\share\unc.txt' "unc path"
+          test -f sandbox/unc.txt
+          rm sandbox/unc.txt
+
+      - name: Test file_write symlink escape blocked
+        working-directory: hello-filesystem
+        env:
+          ALLOW_WRITE: "1"
+        run: |
+          # Create a symlink inside sandbox pointing outside
+          mkdir -p sandbox
+          ln -sf /tmp sandbox/escape_link || true
+          # Try to write through symlink - should be blocked or write to sandbox
+          output=$(python -m tools.file_write.main "escape_link/pwned.txt" "symlink escape")
+          # Verify /tmp/pwned.txt was NOT created
+          test ! -f /tmp/pwned.txt
+          # Clean up
+          rm -f sandbox/escape_link

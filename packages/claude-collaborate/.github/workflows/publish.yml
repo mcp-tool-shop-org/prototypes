@@ -1,0 +1,176 @@
+name: Release Claude Collaborate
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., 1.0.0)'
+        required: true
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install aiohttp
+
+      - name: Run checks
+        run: |
+          pip install -r requirements-dev.txt
+          ruff check server.py ws_bridge.py tests/
+          mypy server.py ws_bridge.py --ignore-missing-imports
+          pytest tests/ -v
+
+      - name: Validate Structure
+        run: |
+          set -e
+          echo "Validating Claude Collaborate structure..."
+          test -f index.html && echo "  ✓ index.html"
+          test -f server.py && echo "  ✓ server.py"
+          test -f whiteboard.html && echo "  ✓ whiteboard.html"
+          test -f code-playground.html && echo "  ✓ code-playground.html"
+          test -f chess.html && echo "  ✓ chess.html"
+          test -f capture-viewer.html && echo "  ✓ capture-viewer.html"
+          test -f github-toolkit.html && echo "  ✓ github-toolkit.html"
+          test -f ws_bridge.py && echo "  ✓ ws_bridge.py"
+          test -f template.html && echo "  ✓ template.html"
+          test -f environments.json && echo "  ✓ environments.json"
+          test -f collaborate-base.css && echo "  ✓ collaborate-base.css"
+          echo "All required files present!"
+
+      - name: Create Release Package
+        run: |
+          VERSION=${{ github.event.inputs.version || github.ref_name }}
+          VERSION=${VERSION#v}  # Strip v prefix if from tag
+          mkdir -p dist
+
+          # Create release archive
+          tar -czvf dist/claude-collaborate-${VERSION}.tar.gz \
+            --exclude='*.pyc' \
+            --exclude='__pycache__' \
+            --exclude='*.jsonl' \
+            *.html \
+            *.py \
+            *.css \
+            *.json \
+            adventures/ \
+            requirements.txt \
+            llms.txt \
+            README.md \
+            README.*.md \
+            CHANGELOG.md \
+            SECURITY.md \
+            LICENSE
+
+          echo "Created dist/claude-collaborate-${VERSION}.tar.gz"
+          ls -la dist/
+
+      - name: Generate Release Notes
+        run: |
+          VERSION=${{ github.event.inputs.version || github.ref_name }}
+          VERSION=${VERSION#v}
+
+          cat << 'RELEASE_EOF' > release_notes.md
+          # Claude Collaborate v${VERSION}
+
+          > **Where Human Creativity Meets AI Intelligence**
+
+          Claude Collaborate is a unified sandbox environment for real-time human-AI collaboration.
+
+          ## Highlights
+
+          - **7 Integrated Environments** - Whiteboard, Code Workshop, Chess, Creative Lab, and more
+          - **Real-time WebSocket Bridge** - Instant communication with Claude Code
+          - **Collapsible Communication Panel** - Maximizes your workspace
+          - **Optional Voice Integration** - Works with voice-soundboard for TTS
+
+          ## Quick Start
+
+          ```bash
+          # Install dependencies
+          pip install aiohttp
+
+          # Start the server
+          python server.py
+
+          # Open in browser
+          # http://localhost:8877
+          ```
+
+          ## Environments Included
+
+          | Environment | Description |
+          |-------------|-------------|
+          | Whiteboard | Drawing and brainstorming canvas |
+          | Code Workshop | Live HTML/CSS/JS editor |
+          | Chess Workshop | Strategy analysis board |
+          | Creative Lab | Interactive experiments |
+          | Capture Viewer | Screenshots and recordings |
+          | GitHub Toolkit | README and marketing generators |
+
+          ## For Claude Code Integration
+
+          ```bash
+          # Read messages from UI
+          curl http://localhost:8877/api/ws/messages
+
+          # Send response to browser
+          curl -X POST http://localhost:8877/api/ws/respond \
+            -H "Content-Type: application/json" \
+            -d '{"content": "Hello from Claude!"}'
+          ```
+
+          ---
+
+          *Built with love for human-AI collaboration*
+          RELEASE_EOF
+
+          # Replace version placeholder
+          sed -i "s/\${VERSION}/${VERSION}/g" release_notes.md
+          cat release_notes.md
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "Claude Collaborate v${{ github.event.inputs.version || github.ref_name }}"
+          body_path: release_notes.md
+          draft: false
+          prerelease: false
+          files: |
+            dist/claude-collaborate-*.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Job Summary
+        run: |
+          VERSION=${{ github.event.inputs.version || github.ref_name }}
+          VERSION=${VERSION#v}
+
+          echo "## Claude Collaborate v${VERSION} Released!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Quick Start" >> $GITHUB_STEP_SUMMARY
+          echo '```bash' >> $GITHUB_STEP_SUMMARY
+          echo 'pip install aiohttp' >> $GITHUB_STEP_SUMMARY
+          echo 'python server.py' >> $GITHUB_STEP_SUMMARY
+          echo '# http://localhost:8877' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,173 @@
+{
+  "name": "vscode-voice-soundboard",
+  "displayName": "Voice Soundboard",
+  "description": "TTS synthesis with 48 voices, presets, and multi-speaker dialogue — powered by MCP Voice Soundboard",
+  "version": "1.0.2",
+  "publisher": "mcp-tool-shop",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/vscode-voice-soundboard"
+  },
+  "bugs": {
+    "url": "https://github.com/mcp-tool-shop-org/vscode-voice-soundboard/issues"
+  },
+  "homepage": "https://mcptoolshop.com/tools/mcp-voice-soundboard/",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "voice",
+    "tts",
+    "text-to-speech",
+    "soundboard",
+    "mcp",
+    "speech-synthesis",
+    "dialogue",
+    "accessibility"
+  ],
+  "icon": "media/icon.png",
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "voice-soundboard",
+          "title": "Voice Soundboard",
+          "icon": "media/sidebar-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "voice-soundboard": [
+        {
+          "type": "webview",
+          "id": "voiceSoundboard.sidebar",
+          "name": "Soundboard"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "voiceSoundboard.speak",
+        "title": "Speak Text...",
+        "category": "Voice Soundboard"
+      },
+      {
+        "command": "voiceSoundboard.speakSelection",
+        "title": "Speak Selection",
+        "category": "Voice Soundboard"
+      },
+      {
+        "command": "voiceSoundboard.stop",
+        "title": "Stop Speaking",
+        "category": "Voice Soundboard"
+      },
+      {
+        "command": "voiceSoundboard.setVoice",
+        "title": "Change Voice",
+        "category": "Voice Soundboard"
+      },
+      {
+        "command": "voiceSoundboard.togglePanel",
+        "title": "Toggle Soundboard Panel",
+        "category": "Voice Soundboard"
+      },
+      {
+        "command": "voiceSoundboard.exportDialogue",
+        "title": "Export Dialogue as WebVTT",
+        "category": "Voice Soundboard"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "voiceSoundboard.speakSelection",
+        "key": "ctrl+shift+s",
+        "when": "editorHasSelection"
+      }
+    ],
+    "configuration": {
+      "title": "Voice Soundboard",
+      "properties": {
+        "voiceSoundboard.defaultVoice": {
+          "type": "string",
+          "default": "bm_george",
+          "description": "Default voice ID (e.g., bm_george, af_jessica)"
+        },
+        "voiceSoundboard.speed": {
+          "type": "number",
+          "default": 1,
+          "minimum": 0.5,
+          "maximum": 2,
+          "description": "Speech speed multiplier"
+        },
+        "voiceSoundboard.backend": {
+          "type": "string",
+          "enum": [
+            "python",
+            "http",
+            "mock"
+          ],
+          "default": "python",
+          "description": "TTS backend: python (local Kokoro, free), http (OpenAI/ElevenLabs), mock (silent)",
+          "enumDescriptions": [
+            "Local Kokoro TTS via Python (free, requires pip install)",
+            "Cloud TTS via OpenAI, ElevenLabs, or Azure (requires API key)",
+            "Silent mock audio for testing"
+          ]
+        },
+        "voiceSoundboard.autoStart": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto-start MCP server when extension activates"
+        },
+        "voiceSoundboard.format": {
+          "type": "string",
+          "enum": [
+            "wav",
+            "mp3",
+            "ogg"
+          ],
+          "default": "wav",
+          "description": "Audio output format"
+        },
+        "voiceSoundboard.openaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API key for cloud TTS (http backend). Leave empty to use local Python backend.",
+          "markdownDescription": "OpenAI API key for cloud TTS (`http` backend). Leave empty to use local Python/Kokoro backend."
+        },
+        "voiceSoundboard.pythonPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to Python executable (auto-detected if empty)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "test": "vitest run",
+    "lint": "tsc --noEmit",
+    "package": "vsce package",
+    "publish": "vsce publish",
+    "verify": "npm test && npm run lint && npm run build && npx vsce package --no-dependencies"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.26.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "@vscode/vsce": "^3.0.0",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}

@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:RunForgeDesktop.ViewModels"
+             xmlns:models="clr-namespace:RunForgeDesktop.Core.Models;assembly=RunForgeDesktop.Core"
+             xmlns:controls="clr-namespace:RunForgeDesktop.Controls"
+             x:Class="RunForgeDesktop.Views.RunsListPage"
+             x:DataType="vm:RunsListViewModel"
+             Title="Runs">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,*,Auto" Padding="16">
+
+        <!-- Header with workspace path -->
+        <VerticalStackLayout Grid.Row="0" Spacing="4" Margin="0,0,0,16">
+            <Label Text="Workspace"
+                   FontSize="12"
+                   TextColor="{AppThemeBinding Light=#666666, Dark=#999999}" />
+            <Label Text="{Binding WorkspacePath, TargetNullValue='No workspace selected'}"
+                   FontSize="14"
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Light=#333333, Dark=#CCCCCC}"
+                   LineBreakMode="MiddleTruncation" />
+        </VerticalStackLayout>
+
+        <!-- Search and filters -->
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="12" Margin="0,0,0,16">
+            <SearchBar Grid.Column="0"
+                       Placeholder="Search runs..."
+                       Text="{Binding SearchText}"
+                       BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#2A2A2A}" />
+
+            <Picker Grid.Column="1"
+                    Title="Status"
+                    SelectedIndex="{Binding StatusFilter, Converter={StaticResource EnumToIntConverter}}"
+                    WidthRequest="120">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>All</x:String>
+                        <x:String>Succeeded</x:String>
+                        <x:String>Failed</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Button Grid.Column="2"
+                    Text="{Binding IsMultiSelectMode, Converter={StaticResource InverseBoolConverter}, ConverterParameter='Select,Done'}"
+                    Command="{Binding ToggleMultiSelectModeCommand}"
+                    BackgroundColor="Transparent"
+                    TextColor="{AppThemeBinding Light=#1E3A5F, Dark=#4A7BA7}"
+                    FontSize="13"
+                    Padding="12,8"
+                    ToolTipProperties.Text="Toggle multi-select mode to compare runs" />
+
+            <Button Grid.Column="3"
+                    Text="Refresh"
+                    Command="{Binding RefreshRunsCommand}"
+                    BackgroundColor="{AppThemeBinding Light=#1E3A5F, Dark=#4A7BA7}"
+                    TextColor="White"
+                    CornerRadius="4"
+                    Padding="16,8"
+                    ToolTipProperties.Text="Reload runs from disk, bypassing cache" />
+        </Grid>
+
+        <!-- System Status Panel (Visual Activity System) -->
+        <controls:SystemStatusPanel Grid.Row="2"
+                                     SystemState="{Binding SystemState}"
+                                     StatusReason="{Binding StatusReason}"
+                                     RunningCount="{Binding RunningCount}"
+                                     QueuedCount="{Binding ActivityQueuedCount}"
+                                     GpuRunningCount="{Binding GpuRunningCount}" />
+
+        <!-- GPU Queue Card (Visual Activity System) -->
+        <controls:GpuQueueCard Grid.Row="3"
+                               IsVisible="{Binding ShowGpuQueueCard}"
+                               ActiveGpuSlots="{Binding GpuRunningCount}"
+                               TotalGpuSlots="{Binding TotalGpuSlots}"
+                               QueuedGpuCount="{Binding QueuedGpuCount}" />
+
+        <!-- Multi-select action bar -->
+        <Frame Grid.Row="4"
+               IsVisible="{Binding ShowActionBar}"
+               BackgroundColor="{AppThemeBinding Light=#E3F2FD, Dark=#1A237E}"
+               BorderColor="{AppThemeBinding Light=#90CAF9, Dark=#3F51B5}"
+               CornerRadius="8"
+               Padding="12"
+               Margin="0,0,0,12">
+            <Grid ColumnDefinitions="Auto,*,Auto,Auto,Auto">
+                <!-- Selection count -->
+                <Label Grid.Column="0"
+                       Text="{Binding SelectedCount, StringFormat='{0} selected'}"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light=#1565C0, Dark=#90CAF9}"
+                       VerticalOptions="Center" />
+
+                <!-- Selection hint -->
+                <Label Grid.Column="1"
+                       Text="{Binding SelectionHint}"
+                       FontSize="12"
+                       TextColor="{AppThemeBinding Light=#1976D2, Dark=#64B5F6}"
+                       VerticalOptions="Center"
+                       Margin="16,0,0,0"
+                       IsVisible="{Binding SelectionHint, Converter={StaticResource StringToBoolConverter}}" />
+
+                <!-- Compare button -->
+                <Button Grid.Column="2"
+                        Text="Compare"
+                        Command="{Binding CompareSelectedRunsCommand}"
+                        BackgroundColor="{AppThemeBinding Light=#FF9800, Dark=#E65100}"
+                        TextColor="White"
+                        CornerRadius="4"
+                        Padding="16,8"
+                        IsEnabled="{Binding CanCompareSelected}"
+                        Opacity="{Binding CanCompareSelected, Converter={StaticResource ObjectToBoolConverter}, ConverterParameter=1.0, FallbackValue=0.5}"
+                        ToolTipProperties.Text="Compare the two selected runs" />
+
+                <!-- Clear selection -->
+                <Button Grid.Column="3"
+                        Text="Clear"
+                        Command="{Binding ClearSelectionCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="{AppThemeBinding Light=#1565C0, Dark=#90CAF9}"
+                        FontSize="13"
+                        Padding="12,8"
+                        Margin="8,0,0,0" />
+
+                <!-- Exit multi-select -->
+                <Button Grid.Column="4"
+                        Text="✕"
+                        Command="{Binding ExitMultiSelectModeCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="{AppThemeBinding Light=#1565C0, Dark=#90CAF9}"
+                        FontSize="16"
+                        Padding="8,4"
+                        WidthRequest="36" />
+            </Grid>
+        </Frame>
+
+        <!-- Runs list -->
+        <Frame Grid.Row="5"
+               BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+               BorderColor="{AppThemeBinding Light=#E0E0E0, Dark=#404040}"
+               CornerRadius="8"
+               Padding="0">
+
+            <Grid>
+                <!-- Loading indicator -->
+                <ActivityIndicator IsRunning="{Binding IsLoading}"
+                                   IsVisible="{Binding IsLoading}"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   Color="{AppThemeBinding Light=#1E3A5F, Dark=#4A7BA7}" />
+
+                <!-- Error message -->
+                <VerticalStackLayout IsVisible="{Binding ErrorMessage, Converter={StaticResource StringToBoolConverter}}"
+                                     VerticalOptions="Center"
+                                     HorizontalOptions="Center"
+                                     Spacing="8">
+                    <Label Text="Error loading runs"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{AppThemeBinding Light=#C62828, Dark=#EF5350}" />
+                    <Label Text="{Binding ErrorMessage}"
+                           FontSize="14"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{AppThemeBinding Light=#666666, Dark=#999999}"
+                           MaximumWidthRequest="400" />
+                </VerticalStackLayout>
+
+                <!-- Empty state -->
+                <Frame IsVisible="{Binding FilteredRunCount, Converter={StaticResource IntToInverseBoolConverter}}"
+                       BackgroundColor="Transparent"
+                       BorderColor="Transparent"
+                       Padding="24"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center">
+                    <VerticalStackLayout Spacing="16" MaximumWidthRequest="400">
+                        <Label Text="No runs found in this workspace"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"
+                               TextColor="{AppThemeBinding Light=#333333, Dark=#CCCCCC}" />
+
+                        <Label Text="{Binding WorkspacePath}"
+                               FontSize="12"
+                               FontFamily="Consolas"
+                               HorizontalTextAlignment="Center"
+                               TextColor="{AppThemeBinding Light=#888888, Dark=#777777}"
+                               LineBreakMode="MiddleTruncation" />
+
+                        <Label Text="Runs are created when you train models using RunForge CLI or VS Code extension."
+                               FontSize="13"
+                               HorizontalTextAlignment="Center"
+                               TextColor="{AppThemeBinding Light=#666666, Dark=#999999}" />
+
+                        <Button Text="Open Workspace Folder"
+                                Command="{Binding OpenWorkspaceFolderCommand}"
+                                BackgroundColor="Transparent"
+                                TextColor="{AppThemeBinding Light=#1E3A5F, Dark=#4A7BA7}"
+                                BorderColor="{AppThemeBinding Light=#1E3A5F, Dark=#4A7BA7}"
+                                BorderWidth="1"
+                                CornerRadius="4"
+                                Padding="16,8"
+                                HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Runs collection view - Single select mode -->
+                <CollectionView x:Name="SingleSelectList"
+                                ItemsSource="{Binding Runs}"
+                                SelectedItem="{Binding SelectedRun}"
+                                SelectionMode="Single"
+                                IsVisible="{Binding IsMultiSelectMode, Converter={StaticResource InverseBoolConverter}}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:RunIndexEntry">
+                            <Frame Margin="8,4" Padding="0" CornerRadius="4"
+                                   BackgroundColor="{AppThemeBinding Light=#FAFAFA, Dark=#2A2A2A}"
+                                   BorderColor="{AppThemeBinding Light=#E0E0E0, Dark=#404040}">
+                                <Grid ColumnDefinitions="4,*">
+                                    <!-- Progress edge indicator (4px left edge) - Visual Activity System -->
+                                    <BoxView Grid.Column="0"
+                                             WidthRequest="4"
+                                             VerticalOptions="Fill"
+                                             Color="{Binding Status, Converter={StaticResource StatusToColorConverter}}" />
+
+                                    <!-- Run content -->
+                                    <Grid Grid.Column="1" Padding="12" ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                                        <!-- Run info -->
+                                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                            <Label Text="{Binding Name}"
+                                                   FontSize="14"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{AppThemeBinding Light=#333333, Dark=#EEEEEE}" />
+                                            <HorizontalStackLayout Spacing="16">
+                                                <Label Text="{Binding RunId}"
+                                                       FontSize="12"
+                                                       TextColor="{AppThemeBinding Light=#666666, Dark=#999999}" />
+                                                <Label Text="{Binding PresetId}"
+                                                       FontSize="12"
+                                                       TextColor="{AppThemeBinding Light=#1E3A5F, Dark=#4A7BA7}" />
+                                            </HorizontalStackLayout>
+                                        </VerticalStackLayout>
+
+                                        <!-- Created at + device -->
+                                        <VerticalStackLayout Grid.Column="1" Spacing="4" HorizontalOptions="End">
+                                            <Label Text="{Binding CreatedAt, StringFormat='{0:g}'}"
+                                                   FontSize="12"
+                                                   TextColor="{AppThemeBinding Light=#666666, Dark=#999999}"
+                                                   HorizontalTextAlignment="End" />
+                                            <Label Text="{Binding Summary.Device}"
+                                                   FontSize="12"
+                                                   TextColor="{AppThemeBinding Light=#888888, Dark=#777777}"
+                                                   HorizontalTextAlignment="End" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Runs collection view - Multi-select mode -->
+                <CollectionView x:Name="MultiSelectList"
+                                ItemsSource="{Binding Runs}"
+                                SelectedItems="{Binding SelectedRuns}"
+                                SelectionMode="Multiple"
+                                SelectionChanged="OnMultiSelectionChanged"
+                                IsVisible="{Binding IsMultiSelectMode}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:RunIndexEntry">
+                            <Frame Margin="8,4" Padding="0" CornerRadius="4"
+                                   BackgroundColor="{AppThemeBinding Light=#FAFAFA, Dark=#2A2A2A}"
+                                   BorderColor="{AppThemeBinding Light=#E0E0E0, Dark=#404040}">
+                                <Grid ColumnDefinitions="4,*">
+                                    <!-- Progress edge indicator (4px left edge) - Visual Activity System -->
+                                    <BoxView Grid.Column="0"
+                                             WidthRequest="4"
+                                             VerticalOptions="Fill"
+                                             Color="{Binding Status, Converter={StaticResource StatusToColorConverter}}" />
+
+                                    <!-- Run content -->
+                                    <Grid Grid.Column="1" Padding="12" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                                        <!-- Checkbox visual (the CollectionView handles selection) -->
+                                        <Frame Grid.Column="0"
+                                               WidthRequest="20"
+                                               HeightRequest="20"
+                                               CornerRadius="4"
+                                               Padding="0"
+                                               HasShadow="False"
+                                               BackgroundColor="{AppThemeBinding Light=#E0E0E0, Dark=#404040}"
+                                               BorderColor="{AppThemeBinding Light=#BDBDBD, Dark=#616161}"
+                                               VerticalOptions="Center">
+                                            <Label Text="✓"
+                                                   FontSize="12"
+                                                   TextColor="{AppThemeBinding Light=#1565C0, Dark=#90CAF9}"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center" />
+                                        </Frame>
+
+                                        <!-- Run info -->
+                                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                            <Label Text="{Binding Name}"
+                                                   FontSize="14"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{AppThemeBinding Light=#333333, Dark=#EEEEEE}" />
+                                            <HorizontalStackLayout Spacing="16">
+                                                <Label Text="{Binding RunId}"
+                                                       FontSize="12"
+                                                       TextColor="{AppThemeBinding Light=#666666, Dark=#999999}" />
+                                                <Label Text="{Binding PresetId}"
+                                                       FontSize="12"
+                                                       TextColor="{AppThemeBinding Light=#1E3A5F, Dark=#4A7BA7}" />
+                                            </HorizontalStackLayout>
+                                        </VerticalStackLayout>
+
+                                        <!-- Created at + device -->
+                                        <VerticalStackLayout Grid.Column="2" Spacing="4" HorizontalOptions="End">
+                                            <Label Text="{Binding CreatedAt, StringFormat='{0:g}'}"
+                                                   FontSize="12"
+                                                   TextColor="{AppThemeBinding Light=#666666, Dark=#999999}"
+                                                   HorizontalTextAlignment="End" />
+                                            <Label Text="{Binding Summary.Device}"
+                                                   FontSize="12"
+                                                   TextColor="{AppThemeBinding Light=#888888, Dark=#777777}"
+                                                   HorizontalTextAlignment="End" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Frame>
+
+        <!-- Footer with counts -->
+        <HorizontalStackLayout Grid.Row="6"
+                               Margin="0,8,0,0"
+                               HorizontalOptions="Center"
+                               Spacing="12">
+            <Label FontSize="12"
+                   TextColor="{AppThemeBinding Light=#666666, Dark=#999999}">
+                <Label.Text>
+                    <MultiBinding StringFormat="Showing {0} of {1} runs">
+                        <Binding Path="FilteredRunCount" />
+                        <Binding Path="TotalRunCount" />
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
+
+            <!-- Cache indicator (subtle) -->
+            <Label Text="(cached)"
+                   FontSize="11"
+                   TextColor="{AppThemeBinding Light=#888888, Dark=#666666}"
+                   IsVisible="{Binding IsFromCache}"
+                   ToolTipProperties.Text="Data loaded from cache. Click Refresh to reload from disk." />
+
+            <!-- Filtering indicator -->
+            <ActivityIndicator IsRunning="{Binding IsFiltering}"
+                               IsVisible="{Binding IsFiltering}"
+                               WidthRequest="12"
+                               HeightRequest="12"
+                               Color="{AppThemeBinding Light=#1E3A5F, Dark=#4A7BA7}" />
+        </HorizontalStackLayout>
+
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Override Directory.Build.props TFM — MAUI needs the platform suffix -->
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>MouseTrainer.MauiHost</RootNamespace>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+
+    <!-- Keep this host intentionally tiny: no XAML compilation tricks, no extra packages -->
+    <ApplicationTitle>Mouse Trainer (Deterministic Host)</ApplicationTitle>
+    <ApplicationId>com.mcptoolshop.mousetrainer</ApplicationId>
+    <ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <NoWarn>$(NoWarn);CA1051;CA1001</NoWarn>
+    <WindowsPackageType>None</WindowsPackageType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MouseTrainer.Domain\MouseTrainer.Domain.csproj" />
+    <ProjectReference Include="..\MouseTrainer.Simulation\MouseTrainer.Simulation.csproj" />
+    <ProjectReference Include="..\MouseTrainer.Audio\MouseTrainer.Audio.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.1" />
+    <PackageReference Include="Plugin.Maui.Audio" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#1B1E28" />
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#1B1E28" BaseSize="128,128" />
+    <MauiImage Include="Resources\Images\*.*" />
+    <MauiFont Include="Resources\Fonts\*.*" />
+    <MauiAsset Include="Resources\Raw\**\*.*" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+</Project>

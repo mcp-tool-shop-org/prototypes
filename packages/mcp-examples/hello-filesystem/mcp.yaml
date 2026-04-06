@@ -1,0 +1,12 @@
+schema_version: "0.1"
+name: "hello-filesystem"
+
+registry:
+  source: "https://github.com/mcp-tool-shop-org/mcp-tool-registry"
+  ref: "v0.1.0"
+
+tools:
+  - file_write
+
+run:
+  safe_by_default: true

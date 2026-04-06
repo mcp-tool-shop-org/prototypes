@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>CS1591</NoWarn>
+
+    <!-- NuGet package metadata -->
+    <PackageId>LinuxDevTyper.Core</PackageId>
+    <Version>1.0.4</Version>
+    <Description>Portable typing practice engine with Elo-inspired rating, adaptive difficulty, weakness heatmaps, fatigue detection, session planning, and micro-drills. Zero UI dependencies — all platform services via interfaces.</Description>
+    <Authors>mcp-tool-shop</Authors>
+    <Company>MCP Tool Shop</Company>
+    <Copyright>Copyright (c) 2025-2026 MCP Tool Shop</Copyright>
+    <PackageProjectUrl>https://github.com/mcp-tool-shop-org/linux-dev-typer</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mcp-tool-shop-org/linux-dev-typer</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>typing;practice;elo;adaptive;fatigue;drills;training</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="LinuxDevTyper.Core.Tests" />
+  </ItemGroup>
+</Project>

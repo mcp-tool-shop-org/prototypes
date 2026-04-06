@@ -1,0 +1,13 @@
+{
+  "name": "session-copilot",
+  "version": "0.1.0",
+  "description": "Session copilot for Claude Code. Captures decisions, timelines, and patterns across sessions. Makes context recoverable after /compact.",
+  "author": {
+    "name": "mcp-tool-shop",
+    "email": "64996768+mcp-tool-shop@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/claude-session-copilot",
+  "repository": "https://github.com/mcp-tool-shop-org/claude-session-copilot",
+  "license": "MIT",
+  "keywords": ["session", "copilot", "decisions", "timeline", "context", "continuity", "handoff", "claude-code"]
+}

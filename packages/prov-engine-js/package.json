@@ -1,0 +1,40 @@
+{
+  "name": "@mcptoolshop/prov-engine-js",
+  "version": "1.0.1",
+  "description": "Minimal Node.js provenance engine for prov-spec interop",
+  "type": "module",
+  "main": "prov-engine.js",
+  "bin": {
+    "prov-engine": "./prov-engine.js"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "keywords": [
+    "provenance",
+    "prov-spec",
+    "sha256",
+    "canonical-json",
+    "integrity",
+    "interop",
+    "conformance",
+    "zero-dependency"
+  ],
+  "author": "mcp-tool-shop <64996768+mcp-tool-shop@users.noreply.github.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/mcp-tool-shop-org/prov-engine-js#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcp-tool-shop-org/prov-engine-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mcp-tool-shop-org/prov-engine-js/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}

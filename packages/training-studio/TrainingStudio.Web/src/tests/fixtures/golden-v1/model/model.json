@@ -1,0 +1,13 @@
+{
+  "modelTopology": {
+    "class_name": "Sequential",
+    "config": {
+      "name": "golden_model",
+      "layers": []
+    }
+  },
+  "weightsManifest": [{
+    "paths": ["weights.bin"],
+    "weights": []
+  }]
+}

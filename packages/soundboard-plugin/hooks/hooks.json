@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "If the Bash output indicates a completed build, test run, or deployment (look for patterns like 'BUILD SUCCESS', 'FAILED', 'passed', 'error', 'npm test', 'pytest', 'cargo build', 'dotnet build', 'make', 'gradle'), call the voice.workflow_notify tool with the appropriate event_type and a brief message summarising the result. If the output is not a build/test/deploy event, do nothing and produce no output."
+          }
+        ]
+      }
+    ]
+  }
+}

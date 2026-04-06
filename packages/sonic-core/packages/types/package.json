@@ -1,0 +1,20 @@
+{
+  "name": "@sonic-core/types",
+  "version": "1.0.1",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "npx tsc -b",
+    "clean": "rm -rf dist *.tsbuildinfo"
+  }
+}

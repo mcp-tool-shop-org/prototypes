@@ -1,0 +1,126 @@
+<p align="center">
+  <a href="README.ja.md">日本語</a> | <a href="README.zh.md">中文</a> | <a href="README.es.md">Español</a> | <a href="README.fr.md">Français</a> | <a href="README.hi.md">हिन्दी</a> | <a href="README.it.md">Italiano</a> | <a href="README.pt-BR.md">Português (BR)</a>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mcp-tool-shop-org/brand/main/logos/mcp-voice-engine/readme.png" alt="MCP Voice Engine" width="400" />
+</p>
+
+<p align="center">
+  <a href="https://github.com/mcp-tool-shop-org/mcp-voice-engine/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/mcp-tool-shop-org/mcp-voice-engine/ci.yml?branch=main&style=flat-square&label=CI" alt="CI"></a>
+  <img src="https://img.shields.io/badge/node-%E2%89%A520-339933?style=flat-square&logo=node.js&logoColor=white" alt="Node.js 20+">
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/mcp-tool-shop-org/mcp-voice-engine?style=flat-square" alt="License"></a>
+  <a href="https://mcp-tool-shop-org.github.io/mcp-voice-engine/"><img src="https://img.shields.io/badge/Landing_Page-live-blue?style=flat-square" alt="Landing Page"></a>
+</p>
+
+# MCP Voice Engine
+
+> Part of [MCP Tool Shop](https://mcptoolshop.com)
+
+Deterministic, streaming-first prosody engine for expressive voice synthesis, pitch control, and real-time voice transformation.
+
+## Why this exists
+
+Most voice DSP systems fail in two places: **stability** (warble, jitter, note flutter) and **reproducibility** ("it only happens sometimes"). MCP Voice Engine is built to be musical, causal, and deterministic—so it behaves like software, not folklore.
+
+## What you can build with it
+
+*   **Real-time voice stylization** for games and interactive apps (stable targets, expressive controls)
+*   **Streaming voice pipelines** (servers, bots, live processing)
+*   **DAW / toolchain integration** (deterministic pitch targets, consistent render behavior)
+*   **Web Audio demos** (AudioWorklet-ready architecture)
+
+## Quickstart
+
+```bash
+npm i
+npm run build
+npm test
+```
+
+## Core capabilities
+
+### Deterministic output
+Same input + config (and chunking policy) produces the same output, with regression protection via hash-based tests.
+
+### Streaming-first runtime
+Stateful, causal processing designed for low latency. No retroactive edits. Snapshot/restore supported for persistence and resumability.
+
+### Expressive prosody controls
+Event-driven accents and boundary tones let you shape cadence and intonation intentionally—without destabilizing pitch targets.
+
+### Meaning tests (semantic guardrails)
+The test suite enforces communicative behavior, including:
+*   **accent locality** (no "smear")
+*   **question vs statement boundaries** (rise vs fall)
+*   **post-focus compression** (focus has consequences)
+*   **deterministic event ordering**
+*   **style monotonicity** (expressive > neutral > flat without increasing instability)
+
+## Documentation
+
+Primary docs live in [packages/voice-engine-dsp/docs/](packages/voice-engine-dsp/docs/).
+
+### Key documents
+
+*   [Streaming Architecture](packages/voice-engine-dsp/docs/STREAMING_ARCHITECTURE.md)
+*   [Meaning Contract](packages/voice-engine-dsp/docs/MEANING_CONTRACT.md)
+*   [Debugging Guide](packages/voice-engine-dsp/docs/DEBUGGING.md)
+*   [Reference Handbook](Reference_Handbook.md)
+
+### Repository structure
+
+```
+packages/
+├── voice-engine-core/   # Shared types, schemas, config, prosody interfaces
+└── voice-engine-dsp/    # Core DSP engine, streaming autotune, adapters, tests
+```
+
+## Running the test suites
+
+```bash
+npm test
+```
+
+Or run specific suites:
+
+```bash
+npm run test:meaning
+npm run test:determinism
+npm run bench:rtf
+npm run smoke
+```
+
+## Support
+
+- **Questions / help:** [Discussions](https://github.com/mcp-tool-shop-org/mcp-voice-engine/discussions)
+- **Bug reports:** [Issues](https://github.com/mcp-tool-shop-org/mcp-voice-engine/issues)
+
+## Security & Data Scope
+
+| Aspect | Detail |
+|--------|--------|
+| **Data touched** | In-memory float arrays (audio samples). Configuration objects for pitch/prosody parameters |
+| **Data NOT touched** | No file system writes. No network. No telemetry. No analytics. No user data |
+| **Permissions** | None — pure computation library with no I/O side effects |
+| **Network** | None — fully offline, no listeners or egress |
+| **Telemetry** | None collected or sent |
+
+See [SECURITY.md](SECURITY.md) for vulnerability reporting.
+
+## Scorecard
+
+| Category | Score |
+|----------|-------|
+| A. Security | 10 |
+| B. Error Handling | 10 |
+| C. Operator Docs | 10 |
+| D. Shipping Hygiene | 10 |
+| E. Identity (soft) | 10 |
+| **Overall** | **50/50** |
+
+> Full audit: [SHIP_GATE.md](SHIP_GATE.md) · [SCORECARD.md](SCORECARD.md)
+
+## License
+
+MIT

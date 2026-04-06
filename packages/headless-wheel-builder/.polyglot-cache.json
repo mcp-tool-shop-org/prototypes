@@ -1,0 +1,2070 @@
+{
+  "version": 1,
+  "entries": {
+    "fff10161027fe596": {
+      "translation": "汎用的な、ヘッドレスのPython wheelビルダで、GitHub連携、リリース管理、および完全なCI/CDパイプラインの自動化機能を統合しています。 wheelのビルド、承認ワークフローによるリリース管理、依存関係の分析、および複数のリポジトリを対象とした操作を、Web UIに触れることなく実行できます。",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "880b69a38e62fb58": {
+      "translation": "[MCP Tool Shop](https://mcp-tool-shop.github.io/)の一部です。これは、邪魔にならない実用的な開発ツールです。",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "f864813809ec8db4": {
+      "translation": "ヘッドレスwheelビルダの利点",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "09436496d9850751": {
+      "translation": "多くのPythonビルドツールは`python -m build`で終わります。ヘッドレスwheelビルダは、承認ワークフローによるドラフトリリース、ライセンスコンプライアンスを含む依存関係分析、複数リポジトリの連携、およびレジストリへの公開など、さらに多くの機能を提供します。これらはすべて、単一のCLIから実行できます。PythonパッケージのCI/CDパイプラインを実行している場合、これは複数のスクリプトを1つのツールに置き換えることができます。",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "fc0bff3d517efe9d": {
+      "translation": "v0.3.0の主な変更点",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "6c0ffb1b855cee25": {
+      "translation": "- **リリース管理**: 複数段階の承認ワークフローによるドラフトリリース\n- **依存関係分析**: ライセンスコンプライアンスチェックを含む完全な依存関係グラフ\n- **CI/CDパイプライン**: ビルドからリリースまでのパイプラインのオーケストレーション\n- **複数リポジトリ操作**: 複数のリポジトリにまたがるビルドの連携\n- **通知**: Slack、Discord、およびwebhook連携\n- **セキュリティスキャン**: SBOM（ソフトウェア部品構成表）の生成、ライセンス監査、脆弱性チェック\n- **メトリクスと分析**: ビルドパフォーマンスの追跡とレポート\n- **アーティファクトキャッシュ**: レジストリ連携を含むLRUキャッシュ",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "fc8e4bf84165ea76": {
+      "translation": "機能",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "8efc9cf1ae468c47": {
+      "translation": "コアビルド機能",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "4ed44ef33518db9f": {
+      "translation": "- **どこからでもビルド**: ローカルパス、git URL（ブランチ/タグ付き）、tarball\n- **ビルドの分離**: venv（uv搭載、10～100倍高速）、またはDocker（manylinux/musllinux）\n- **マルチプラットフォーム**: Python 3.10～3.14、Linux/macOS/Windows向けのビルドマトリックス\n- **公開**: PyPI Trusted Publishers (OIDC)、DevPi、Artifactory、S3",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "d16c700097029012": {
+      "translation": "リリース管理",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "727fc042d5790a61": {
+      "translation": "- **ドラフトリリース**: 公開前にリリースを作成、レビュー、承認\n- **承認ワークフロー**: シンプル、2段階、またはエンタープライズ（QA → セキュリティ → リリース）\n- **ロールバック**: 公開されたリリースの簡単な復元\n- **変更ログの生成**: Conventional Commitsから自動生成",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "23d834108a715c07": {
+      "translation": "DevOps & CI/CD",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "2cf7af35442590c9": {
+      "translation": "- **パイプラインオーケストレーション**: ビルド → テスト → リリース → 公開の連携\n- **GitHub Actionsジェネレーター**: 最適化されたCIワークフローの作成\n- **複数リポジトリ操作**: 複数のリポジトリにまたがるリリースの連携\n- **アーティファクトキャッシュ**: インテリジェントなキャッシュによるビルド時間の短縮",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "2c701995ca78f1c9": {
+      "translation": "分析とセキュリティ",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "3f4fb267f9f98795": {
+      "translation": "- **依存関係グラフ**: パッケージの依存関係を可視化および分析\n- **ライセンスコンプライアンス**: 許可的なプロジェクトにおけるGPLの検出、不明なライセンスの検出\n- **セキュリティスキャン**: 脆弱性の検出、SBOMの生成\n- **メトリクスダッシュボード**: ビルド時間、成功率、キャッシュヒット率の追跡",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "542a12a4988ea687": {
+      "translation": "連携機能",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "ff30e160b8df9f5b": {
+      "translation": "- **通知**: Slack、Discord、Microsoft Teams、カスタムwebhook\n- **ヘッドレスGitHub**: リリース、プルリクエスト、課題、ワークフロー - すべてスクリプトで制御可能\n- **レジストリサポート**: PyPI、TestPyPI、プライベートレジストリ、S3",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "d88005a6cdf9c925": {
+      "translation": "インストール",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "d182d24c54cc50a7": {
+      "translation": "クイックスタート",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "1407e40dda2351d9": {
+      "translation": "wheelのビルド",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "42ca7124c00324c2": {
+      "translation": "依存関係分析",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "c3f77aa3acd8773c": {
+      "translation": "パイプラインの自動化",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "41a06ab123a98da8": {
+      "translation": "通知",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "0c61b0324c3ba1f7": {
+      "translation": "セキュリティスキャン",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "8e97c02875d62f52": {
+      "translation": "複数リポジトリ操作",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "8bf7a4aea0895cb4": {
+      "translation": "メトリクスと分析",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "f59927e9265e3df2": {
+      "translation": "キャッシュ管理",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "e011cccdb9b108ec": {
+      "translation": "ヘッドレスGitHub操作",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "c7290eb27a3d3f9c": {
+      "translation": "Python API",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "c184f48f73a05ae0": {
+      "translation": "設定",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "9400dd514d5d52cc": {
+      "translation": "`pyproject.toml`で設定します。",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "9fcac926276efe13": {
+      "translation": "CLIコマンド",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "377d830094c5bc2a": {
+      "translation": "コマンド",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "67731479bd4e364b": {
+      "translation": "説明",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "2a56d6ea96d9fd14": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "651826877e732548": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "b908443d363dbb70": {
+      "translation": "ソースからwheelをビルド",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "08883122b93d88b6": {
+      "translation": "PyPI/レジストリに公開",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "e95979ef367f79aa": {
+      "translation": "プロジェクトの設定を分析",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "63f2d3a07689ec84": {
+      "translation": "GitHubの操作（リリース、プルリクエスト、課題）",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "696f6fa7cc86772b": {
+      "translation": "ドラフトリリース管理",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "a2a1f100406c866a": {
+      "translation": "CI/CDパイプラインのオーケストレーション",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "f6efd425c875ef9b": {
+      "translation": "依存関係グラフの分析",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "2fac23977d380e79": {
+      "translation": "GitHub Actionsジェネレーター",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "579429ecf3ef191a": {
+      "translation": "複数リポジトリの操作",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "b01c29188e7287f9": {
+      "translation": "通知管理",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "31b98354f32731f1": {
+      "translation": "セキュリティスキャン",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "c5ab75b34356783d": {
+      "translation": "ビルドのメトリクスと分析",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "a48f5954bd8b81e9": {
+      "translation": "成果物のキャッシュ管理",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "dc32072f5e161ee0": {
+      "translation": "変更履歴の生成",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "64a656d26ea70681": {
+      "translation": "要件",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "7b3841a2b23eee8c": {
+      "translation": "- Python 3.10以降\n- Git（Gitソースコードのサポート用）\n- Docker（オプション、manylinuxビルド用）\n- uv（オプション、より高速なビルド用）",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "80f80f9b2d0ddf56": {
+      "translation": "ドキュメント",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "e4f335d7b98fb2df": {
+      "translation": "詳細なドキュメントは[docs/](docs/)ディレクトリをご覧ください。",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "eafd4f0f6435b370": {
+      "translation": "- [ROADMAP.md](docs/ROADMAP.md) - 開発段階とマイルストーン\n- [ARCHITECTURE.md](docs/ARCHITECTURE.md) - システム設計とコンポーネント\n- [API.md](docs/API.md) - CLIおよびPython APIリファレンス\n- [SECURITY.md](docs/SECURITY.md) - セキュリティモデルとベストプラクティス\n- [PUBLISHING.md](docs/PUBLISHING.md) - レジストリへの公開ワークフロー\n- [ISOLATION.md](docs/ISOLATION.md) - ビルドの分離戦略\n- [VERSIONING.md](docs/VERSIONING.md) - セマンティックバージョニングと変更履歴\n- [CONTRIBUTING.md](docs/CONTRIBUTING.md) - 開発ガイドライン",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "08ea9dfbe36d981b": {
+      "translation": "ライセンス",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "20813a7cbb78a856": {
+      "translation": "MITライセンス -- 詳細については[LICENSE](LICENSE)をご覧ください。",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "bd927c669c7a0d9c": {
+      "translation": "貢献",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "c8b2e6ba6c451bb8": {
+      "translation": "貢献は大歓迎です！ガイドラインについては[CONTRIBUTING.md](docs/CONTRIBUTING.md)をご覧ください。",
+      "model": "translategemma:12b",
+      "timestamp": 1772036355072
+    },
+    "68c414a3be87409b": {
+      "translation": "一个通用的、无界面的 Python wheel 构建工具，集成了 GitHub 操作、发布管理以及完整的 CI/CD 流水线自动化功能。它可以构建 wheel 文件，通过审批流程管理发布，分析依赖关系，并协调多个仓库的操作——所有这些都可以在不使用 Web 界面的情况下完成。",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "fcdf1991297598f2": {
+      "translation": "它是 [MCP Tool Shop](https://mcp-tool-shop.github.io/) 的一部分，提供实用且不干扰开发的工具。",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "81ac9daae9917a36": {
+      "translation": "为什么选择无界面 wheel 构建工具？",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "2c654ed30be4213c": {
+      "translation": "大多数 Python 构建工具都止步于 `python -m build`。无界面 wheel 构建工具可以做得更多：它可以创建带有审批流程的草稿版本，进行依赖分析（包括许可证合规性），协调多个仓库的操作，并通过单个命令行界面进行注册发布。如果您为 Python 包运行 CI/CD 流水线，那么它可以用一个工具替换掉一系列脚本。",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "3d5b2ac673f8d95b": {
+      "translation": "v0.3.0 的新功能",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "60dba78f6945186f": {
+      "translation": "- **发布管理：** 创建带有多阶段审批流程的草稿版本。\n- **依赖分析：** 完整的依赖关系图，并进行许可证合规性检查。\n- **CI/CD 流水线：** 构建到发布的流水线编排。\n- **多仓库操作：** 协调跨仓库的构建。\n- **通知：** Slack、Discord 和 webhook 集成。\n- **安全扫描：** SBOM（软件物料清单）生成、许可证审计、漏洞检查。\n- **指标与分析：** 构建性能跟踪和报告。\n- **工件缓存：** LRU（最近最少使用）缓存，并与注册表集成。",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "c6c20d03bfc6bd19": {
+      "translation": "功能",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "d82fa3d17660d302": {
+      "translation": "核心构建",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "14de68caaf742632": {
+      "translation": "- **从任何地方构建：** 本地路径、Git URL（包含分支/标签）、tarball 文件。\n- **构建隔离：** venv（基于 uv，速度可达 10-100 倍），或 Docker（manylinux/musllinux）。\n- **多平台：** 构建矩阵，支持 Python 3.10-3.14，Linux/macOS/Windows。\n- **发布：** PyPI 信任发布者（OIDC）、DevPi、Artifactory、S3。",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "85e77eb772412d5e": {
+      "translation": "发布管理",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "fb94153aa14c29b7": {
+      "translation": "- **草稿版本：** 创建、审查和批准发布版本，然后再发布。\n- **审批流程：** 简单、两阶段，或企业级（QA → 安全 → 发布）。\n- **回滚支持：** 轻松回滚已发布的版本。\n- **变更日志生成：** 从 Conventional Commits 自动生成。",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "74ebfb2f93822f6c": {
+      "translation": "DevOps & CI/CD",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "d76ff5236a719e27": {
+      "translation": "- **流水线编排：** 链接构建 → 测试 → 发布 → 发布。\n- **GitHub Actions 生成器：** 创建优化的 CI 工作流。\n- **多仓库操作：** 协调跨仓库的发布。\n- **工件缓存：** 通过智能缓存减少构建时间。",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "49f6c84df84d0f37": {
+      "translation": "分析与安全",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "54f6f247ac68c491": {
+      "translation": "- **依赖关系图：** 可视化和分析包的依赖关系。\n- **许可证合规性：** 检测项目中是否存在 GPL 许可证，以及识别未知的许可证。\n- **安全扫描：** 漏洞检测、SBOM 生成。\n- **指标仪表板：** 跟踪构建时间、成功率、缓存命中率。",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "493914dbc31e82ac": {
+      "translation": "集成",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "1c65c9a812287622": {
+      "translation": "- **通知：** Slack、Discord、Microsoft Teams、自定义 webhook。\n- **无界面 GitHub：** 发布、拉取请求、问题、工作流——完全可脚本化。\n- **注册表支持：** PyPI、TestPyPI、私有注册表、S3。",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "108c3bdaeaac02ca": {
+      "translation": "安装",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "3e6394397900eaa1": {
+      "translation": "快速开始",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "75555de59de78fba": {
+      "translation": "构建 Wheel 文件",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "a1c58385e9636dc1": {
+      "translation": "依赖分析",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "c9313420036610be": {
+      "translation": "流水线自动化",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "dc4d0c3e4782f943": {
+      "translation": "通知",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "cc89d1c1fcc6aceb": {
+      "translation": "安全扫描",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "0f5a604ae1651549": {
+      "translation": "多仓库操作",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "d76251ccb61b4e8b": {
+      "translation": "指标与分析",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "0bfc049ac651de59": {
+      "translation": "缓存管理",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "d3b260d1a9fd59af": {
+      "translation": "无界面 GitHub 操作",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "d51a5ff269e298b0": {
+      "translation": "Python API",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "f485b61099d5d966": {
+      "translation": "配置",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "a26b5aebaaa1c833": {
+      "translation": "在 `pyproject.toml` 文件中进行配置：",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "11666bfd46dec570": {
+      "translation": "命令行",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "ac280590ce6877ab": {
+      "translation": "命令",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "601d6e570e22e932": {
+      "translation": "描述",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "3c50ad19fc6c359b": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "dd5b28ff24f8cbdb": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "3a3cd0329774e1a6": {
+      "translation": "从源代码构建 wheel 文件",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "4afc86bbcb054537": {
+      "translation": "发布到 PyPI/注册表",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "dbf3590faab84904": {
+      "translation": "分析项目配置",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "6fb26784416501a9": {
+      "translation": "GitHub 操作（发布、拉取请求、问题）",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "5070840c8bc88321": {
+      "translation": "草稿发布管理",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "46cbe0a9b8062487": {
+      "translation": "CI/CD 流水线编排",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "9b7160436a04f8bf": {
+      "translation": "依赖关系图分析",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "02ce9f16dabe31c3": {
+      "translation": "GitHub Actions 生成器",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "513be49ae2b41748": {
+      "translation": "多仓库操作",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "20e1944db311a331": {
+      "translation": "通知管理",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "b954f25057f7bc4a": {
+      "translation": "安全扫描",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "590ebe00a5e1159d": {
+      "translation": "构建指标与分析",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "58413f812cdcc9ac": {
+      "translation": "构建产物缓存管理",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "a4706e28b6cffcab": {
+      "translation": "变更日志生成",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "b4ca1bd2135384dc": {
+      "translation": "需求",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "08f7d0af959f4ed2": {
+      "translation": "- Python 3.10+\n- Git（用于支持 Git 源代码）\n- Docker（可选，用于构建 manylinux 镜像）\n- uv（可选，用于加速构建）",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "250492556e6757d7": {
+      "translation": "文档",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "5d7f7b80f38f15c2": {
+      "translation": "请参阅 [docs/](docs/) 目录中的详细文档：",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "6077a6d26b0063d7": {
+      "translation": "- [ROADMAP.md](docs/ROADMAP.md) - 开发阶段和里程碑\n- [ARCHITECTURE.md](docs/ARCHITECTURE.md) - 系统设计和组件\n- [API.md](docs/API.md) - CLI 和 Python API 参考\n- [SECURITY.md](docs/SECURITY.md) - 安全模型和最佳实践\n- [PUBLISHING.md](docs/PUBLISHING.md) - 注册表发布工作流程\n- [ISOLATION.md](docs/ISOLATION.md) - 构建隔离策略\n- [VERSIONING.md](docs/VERSIONING.md) - 语义版本控制和变更日志\n- [CONTRIBUTING.md](docs/CONTRIBUTING.md) - 开发指南",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "1fb815b9a436fadb": {
+      "translation": "许可证",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "5a355fe74519a353": {
+      "translation": "MIT 许可证，详情请参阅 [LICENSE](LICENSE)。",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "f24c2aff2448e6af": {
+      "translation": "贡献",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "070ad0964d06b9a8": {
+      "translation": "欢迎贡献！请参阅 [CONTRIBUTING.md](docs/CONTRIBUTING.md) 了解指南。",
+      "model": "translategemma:12b",
+      "timestamp": 1772036392260
+    },
+    "bb3dcf3d5fca0eb5": {
+      "translation": "Un constructor de paquetes (wheels) de Python universal y sin interfaz gráfica, con operaciones integradas de GitHub, gestión de versiones y automatización completa de la canalización de CI/CD. Cree paquetes, gestione las versiones con flujos de trabajo de aprobación, analice las dependencias y coordine operaciones en múltiples repositorios, todo ello sin necesidad de interactuar con la interfaz web.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "d593c35c8952f62f": {
+      "translation": "Parte de [MCP Tool Shop](https://mcp-tool-shop.github.io/) – herramientas prácticas para desarrolladores que no se interponen en su camino.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "6120e35e0faa51f4": {
+      "translation": "¿Por qué un constructor de paquetes sin interfaz gráfica?",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "8a4bda09f511b0f6": {
+      "translation": "La mayoría de las herramientas de construcción de Python se detienen en `python -m build`. El constructor de paquetes sin interfaz gráfica va más allá: crea versiones preliminares con flujos de trabajo de aprobación, análisis de dependencias con verificación de cumplimiento de licencias, coordinación entre múltiples repositorios y publicación en registros, todo ello desde una única línea de comandos. Si utiliza canalizaciones de CI/CD para paquetes de Python, esta herramienta reemplaza una serie de scripts con una única herramienta.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "ca9dc5528736aacf": {
+      "translation": "Novedades en la versión 0.3.0",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "c4339879f6ba698d": {
+      "translation": "- **Gestión de versiones**: Creación de versiones preliminares con flujos de trabajo de aprobación de múltiples etapas.\n- **Análisis de dependencias**: Gráfico completo de dependencias con verificación de cumplimiento de licencias.\n- **Canalizaciones de CI/CD**: Orquestación de la canalización de construcción a versión.\n- **Operaciones en múltiples repositorios**: Coordinación de compilaciones en diferentes repositorios.\n- **Notificaciones**: Integraciones con Slack, Discord y webhooks.\n- **Análisis de seguridad**: Generación de SBOM (Software Bill of Materials), auditorías de licencias y verificación de vulnerabilidades.\n- **Métricas y análisis**: Seguimiento y generación de informes sobre el rendimiento de las compilaciones.\n- **Almacenamiento en caché de artefactos**: Caché LRU (Least Recently Used) con integración con el registro.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "422fb4b958d31758": {
+      "translation": "Características",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "8171b4cdbeda930c": {
+      "translation": "Construcción básica",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "d3d4f83928f222a5": {
+      "translation": "- **Construcción desde cualquier lugar**: Rutas locales, URL de Git (con rama/etiqueta), archivos tar.\n- **Aislamiento de la construcción**: Entorno virtual (venv, potenciado por uv, hasta 100 veces más rápido) o Docker (manylinux/musllinux).\n- **Multiplataforma**: Matriz de compilación para Python 3.10-3.14, Linux/macOS/Windows.\n- **Publicación**: Publicadores de confianza de PyPI (OIDC), DevPi, Artifactory, S3.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "4fc3a39e7b476287": {
+      "translation": "Gestión de versiones",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "f22f13f885ac801e": {
+      "translation": "- **Creación de versiones preliminares**: Cree, revise y apruebe las versiones antes de publicarlas.\n- **Flujos de trabajo de aprobación**: Sencillos, de dos etapas o empresariales (QA → Seguridad → Versión).\n- **Soporte para reversión**: Revierte fácilmente las versiones publicadas.\n- **Generación de changelog**: Generación automática a partir de commits convencionales.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "475af8827746cd7e": {
+      "translation": "DevOps y CI/CD",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "edd5037bb30a0512": {
+      "translation": "- **Orquestación de canalizaciones**: Encadena la construcción, las pruebas, la versión y la publicación.\n- **Generador de acciones de GitHub**: Crea flujos de trabajo de CI optimizados.\n- **Operaciones en múltiples repositorios**: Coordina las versiones en diferentes repositorios.\n- **Almacenamiento en caché de artefactos**: Reduce los tiempos de compilación con un almacenamiento en caché inteligente.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "09b3ca3a38249d5f": {
+      "translation": "Análisis y seguridad",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "ed87cde0ede48ac2": {
+      "translation": "- **Gráficos de dependencias**: Visualice y analice las dependencias de los paquetes.\n- **Cumplimiento de licencias**: Detecte licencias GPL en proyectos permisivos y licencias desconocidas.\n- **Análisis de seguridad**: Detección de vulnerabilidades, generación de SBOM.\n- **Panel de métricas**: Realice un seguimiento de los tiempos de compilación, las tasas de éxito y los aciertos en la caché.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "426064e8af26fa74": {
+      "translation": "Integraciones",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "7b10569bb7752c8e": {
+      "translation": "- **Notificaciones**: Slack, Discord, Microsoft Teams, webhooks personalizados.\n- **GitHub sin interfaz gráfica**: Versiones, solicitudes de extracción (PR), problemas, flujos de trabajo: todo se puede controlar mediante scripts.\n- **Soporte para registros**: PyPI, TestPyPI, registros privados, S3.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "c9f8b84d688aa64b": {
+      "translation": "Instalación",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "785321ff8279266b": {
+      "translation": "Guía de inicio rápido",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "8d2636d492247854": {
+      "translation": "Construcción de paquetes",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "a1fde7a07b0e7644": {
+      "translation": "Análisis de dependencias",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "d6ebac82e0c3f3a8": {
+      "translation": "Automatización de canalizaciones",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "f9dd8f5a620d5af9": {
+      "translation": "Notificaciones",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "a60eca367219d431": {
+      "translation": "Análisis de seguridad",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "a267dba073f0e54e": {
+      "translation": "Operaciones en múltiples repositorios",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "c4006302406000ab": {
+      "translation": "Métricas y análisis",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "1594a4c4d6c1587b": {
+      "translation": "Gestión de caché",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "5f55fdd65b32a356": {
+      "translation": "Operaciones de GitHub sin interfaz gráfica",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "a2cdfccee7ac1f91": {
+      "translation": "API de Python",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "9489401db048958d": {
+      "translation": "Configuración",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "6c3859dd60e203ca": {
+      "translation": "Configure en `pyproject.toml`:",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "7eb53d7ed5d3f657": {
+      "translation": "Comandos de la línea de comandos",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "c6098ef36396741e": {
+      "translation": "Comando",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "a0102622d03d4c0f": {
+      "translation": "Descripción",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "f2088caa76d4a948": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "184e6ce2c9237895": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "42a4d5657b197e67": {
+      "translation": "Construye paquetes a partir del código fuente.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "0cb68aff638db66f": {
+      "translation": "Publica en PyPI/registros.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "d843cb5e58686558": {
+      "translation": "Analiza la configuración del proyecto.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "12ab8f9beb7be1f2": {
+      "translation": "Operaciones de GitHub (lanzamientos, solicitudes de extracción, incidencias)",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "4f4a8ac625939c68": {
+      "translation": "Gestión de lanzamientos (borrador)",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "6fdd08a3bc0a1d37": {
+      "translation": "Orquestación de la canalización CI/CD",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "b2d3e074de0615c3": {
+      "translation": "Análisis del grafo de dependencias",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "feb5617f3dbc1a4f": {
+      "translation": "Generador de GitHub Actions",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "2bebee707969c56b": {
+      "translation": "Operaciones con múltiples repositorios",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "8c55ed64dc8f48b9": {
+      "translation": "Gestión de notificaciones",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "d8a4a34a8abd50d1": {
+      "translation": "Análisis de seguridad",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "2c7b51e6cba502ca": {
+      "translation": "Métricas y análisis de compilación",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "1f2393119620286e": {
+      "translation": "Gestión de la caché de artefactos",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "bb8ed025267c4d7a": {
+      "translation": "Generación de registros de cambios",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "e6fdcd94a8c0ff6f": {
+      "translation": "Requisitos",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "414c77d6b5baa812": {
+      "translation": "- Python 3.10+\n- Git (para soporte de código fuente Git)\n- Docker (opcional, para compilaciones manylinux)\n- uv (opcional, para compilaciones más rápidas)",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "00cab4713b0edf9d": {
+      "translation": "Documentación",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "cf449d2fb65a1584": {
+      "translation": "Consulte el directorio [docs/](docs/) para obtener documentación completa:",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "49a5d3061c63d22e": {
+      "translation": "- [ROADMAP.md](docs/ROADMAP.md) - Fases y hitos de desarrollo\n- [ARCHITECTURE.md](docs/ARCHITECTURE.md) - Diseño y componentes del sistema\n- [API.md](docs/API.md) - Referencia de la API de la línea de comandos y de Python\n- [SECURITY.md](docs/SECURITY.md) - Modelo de seguridad y mejores prácticas\n- [PUBLISHING.md](docs/PUBLISHING.md) - Flujos de trabajo de publicación en el registro\n- [ISOLATION.md](docs/ISOLATION.md) - Estrategias de aislamiento de la compilación\n- [VERSIONING.md](docs/VERSIONING.md) - Versionado semántico y registro de cambios\n- [CONTRIBUTING.md](docs/CONTRIBUTING.md) - Directrices de desarrollo",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "9572f74b6d3f62b1": {
+      "translation": "Licencia",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "c5520b3cfa4c3066": {
+      "translation": "Licencia MIT. Consulte [LICENSE](LICENSE) para obtener más detalles.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "7bdc45e8ddfa02fc": {
+      "translation": "Contribuciones",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "2161ac76607156d9": {
+      "translation": "¡Las contribuciones son bienvenidas! Consulte [CONTRIBUTING.md](docs/CONTRIBUTING.md) para obtener las directrices.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036435456
+    },
+    "abbcce1f03753cce": {
+      "translation": "Un outil universel de création de paquets Python (wheels) sans interface graphique, intégrant les opérations GitHub, la gestion des versions et l'automatisation complète des pipelines CI/CD. Créez des paquets, gérez les versions avec des flux d'approbation, analysez les dépendances et coordonnez les opérations sur plusieurs dépôts, le tout sans utiliser l'interface web.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479692
+    },
+    "0b9f19f0cfbee8dc": {
+      "translation": "Fait partie de [MCP Tool Shop](https://mcp-tool-shop.github.io/) -- des outils pratiques pour les développeurs qui ne vous gênent pas.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479692
+    },
+    "5af18064670dddee": {
+      "translation": "Pourquoi un créateur de paquets sans interface graphique ?",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479692
+    },
+    "eabd322de32487c3": {
+      "translation": "La plupart des outils de création de paquets Python s'arrêtent à `python -m build`. Le créateur de paquets sans interface graphique va plus loin : il permet de créer des versions préliminaires avec des flux d'approbation, d'analyser les dépendances avec vérification de la conformité aux licences, de coordonner les opérations sur plusieurs dépôts et de publier sur les registres, le tout depuis une seule interface en ligne de commande. Si vous utilisez des pipelines CI/CD pour les paquets Python, cet outil remplace un ensemble de scripts par un seul outil.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479692
+    },
+    "9af2d3e8a1222a05": {
+      "translation": "Nouveautés de la version 0.3.0",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479692
+    },
+    "f1df44db3837be5e": {
+      "translation": "- **Gestion des versions**: Création de versions préliminaires avec des flux d'approbation en plusieurs étapes.\n- **Analyse des dépendances**: Graphe complet des dépendances avec vérification de la conformité aux licences.\n- **Pipelines CI/CD**: Orchestration des pipelines de création à publication.\n- **Opérations sur plusieurs dépôts**: Coordination des créations entre les dépôts.\n- **Notifications**: Intégrations Slack, Discord et webhooks.\n- **Analyse de sécurité**: Génération de SBOM (Software Bill of Materials), audits de licences, vérification des vulnérabilités.\n- **Métriques et analyses**: Suivi et rapports sur les performances des créations.\n- **Mise en cache des artefacts**: Cache LRU (Least Recently Used) avec intégration au registre.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479692
+    },
+    "9244388ee3d9cea2": {
+      "translation": "Fonctionnalités",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479692
+    },
+    "b87a5ab754672266": {
+      "translation": "Création de paquets",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479692
+    },
+    "675bb0ae69c1f380": {
+      "translation": "- **Création depuis n'importe où**: Chemins locaux, URL Git (avec branche/tag), archives tar.\n- **Isolation de la création**: Environnements virtuels (basés sur `uv`, 10 à 100 fois plus rapides) ou Docker (manylinux/musllinux).\n- **Multiplateforme**: Matrice de création pour Python 3.10 à 3.14, Linux/macOS/Windows.\n- **Publication**: PyPI Trusted Publishers (OIDC), DevPi, Artifactory, S3.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479692
+    },
+    "23a8a700116b567b": {
+      "translation": "Gestion des versions",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "86397abe0fc33a1b": {
+      "translation": "- **Création de versions préliminaires**: Création, examen et approbation des versions avant la publication.\n- **Flux d'approbation**: Simples, en deux étapes, ou pour les entreprises (QA → Sécurité → Publication).\n- **Prise en charge du retour en arrière**: Possibilité de revenir facilement aux versions précédemment publiées.\n- **Génération de changelog**: Génération automatique à partir des commits conformes aux conventions.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479692
+    },
+    "40975391b14a3e56": {
+      "translation": "DevOps et CI/CD",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "7bc4b4f0ff16bf11": {
+      "translation": "- **Orchestration des pipelines**: Chaînage de la création, des tests, de la publication et de la mise en ligne.\n- **Générateur de workflows GitHub Actions**: Création de workflows CI optimisés.\n- **Opérations sur plusieurs dépôts**: Coordination des publications entre les dépôts.\n- **Mise en cache des artefacts**: Réduction des temps de création grâce à une mise en cache intelligente.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "5a6f9fd4a44e9d92": {
+      "translation": "Analyse et sécurité",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "1e3c9a11d66a602d": {
+      "translation": "- **Graphes de dépendances**: Visualisation et analyse des dépendances des paquets.\n- **Conformité aux licences**: Détection de GPL dans les projets permissifs, licences inconnues.\n- **Analyse de sécurité**: Détection des vulnérabilités, génération de SBOM.\n- **Tableau de bord des métriques**: Suivi des temps de création, des taux de succès et des taux de succès de la mise en cache.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "4a6c4429ea5117fc": {
+      "translation": "Intégrations",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "bc56c1bda4ffde72": {
+      "translation": "- **Notifications**: Slack, Discord, Microsoft Teams, webhooks personnalisés.\n- **GitHub sans interface graphique**: Publications, demandes de tirage (PR), problèmes, workflows, entièrement scriptables.\n- **Prise en charge des registres**: PyPI, TestPyPI, registres privés, S3.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "4077bbda21e83042": {
+      "translation": "Installation",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "caef1b750e85e405": {
+      "translation": "Premiers pas",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "b73c77e8ea6763a8": {
+      "translation": "Création de paquets",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "293e000c63c8c1b3": {
+      "translation": "Analyse des dépendances",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "0e7c1ee2775b6011": {
+      "translation": "Automatisation des pipelines",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "3d7885e0aeac7771": {
+      "translation": "Notifications",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "251b9bcd8716a167": {
+      "translation": "Analyse de sécurité",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "954da10493061dcc": {
+      "translation": "Opérations sur plusieurs dépôts",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "1d9d4bc49031acd2": {
+      "translation": "Métriques et analyses",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "27b37e0d43ad2691": {
+      "translation": "Gestion du cache",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "f130af04362f8273": {
+      "translation": "Opérations GitHub sans interface graphique",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "f3f2a3914f92bb58": {
+      "translation": "API Python",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "b34ee5ed97e49101": {
+      "translation": "Configuration",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "2d2714e4ba125ce4": {
+      "translation": "Configuration dans `pyproject.toml` :",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "03208393eebfb583": {
+      "translation": "Commandes de l'interface en ligne de commande",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "38ea467b84937d7f": {
+      "translation": "Commande",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "9a51c5b4f05710c0": {
+      "translation": "Description",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "9c7087410e6c6801": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "42738f280dbf39b2": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "63b560789306bd6f": {
+      "translation": "Création de paquets à partir du code source",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "317f823923d11b9f": {
+      "translation": "Publication sur PyPI/registres",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "d54be1e1795a3a3c": {
+      "translation": "Analyse de la configuration du projet",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "6a2b8d92a5dfc202": {
+      "translation": "Opérations GitHub (versions, demandes de tirage, problèmes)",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "be7ca8b731d1089a": {
+      "translation": "Gestion des versions (en projet)",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "cdd97db570c60cf3": {
+      "translation": "Orchestration des pipelines CI/CD",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "2f4294b0c372fa91": {
+      "translation": "Analyse du graphe des dépendances",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "7b8a77c249cfc06f": {
+      "translation": "Générateur de GitHub Actions",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "bd122c51a89f6fe3": {
+      "translation": "Opérations sur plusieurs dépôts",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "0484f12a32bf9c08": {
+      "translation": "Gestion des notifications",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "e279761339efe6ae": {
+      "translation": "Analyse de sécurité",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "5e423263a71aa287": {
+      "translation": "Métriques et analyses de construction",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "e97ff6cb84373b7a": {
+      "translation": "Gestion du cache des artefacts",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "3e5fe992924de647": {
+      "translation": "Génération du journal des modifications",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "21d1297fb198dd4b": {
+      "translation": "Prérequis",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "08f1ea6d1fba031e": {
+      "translation": "- Python 3.10+\n- Git (pour la prise en charge des sources Git)\n- Docker (facultatif, pour les constructions manylinux)\n- uv (facultatif, pour des constructions plus rapides)",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "dd09f1b81c3f6ef5": {
+      "translation": "Documentation",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "fea980d54daa6d81": {
+      "translation": "Consultez le répertoire [docs/](docs/) pour une documentation complète :",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "700d46e314f83d97": {
+      "translation": "- [ROADMAP.md](docs/ROADMAP.md) - Phases et jalons du développement\n- [ARCHITECTURE.md](docs/ARCHITECTURE.md) - Conception et composants du système\n- [API.md](docs/API.md) - Référence de l'API CLI et Python\n- [SECURITY.md](docs/SECURITY.md) - Modèle de sécurité et bonnes pratiques\n- [PUBLISHING.md](docs/PUBLISHING.md) - Flux de publication dans les registres\n- [ISOLATION.md](docs/ISOLATION.md) - Stratégies d'isolation des constructions\n- [VERSIONING.md](docs/VERSIONING.md) - Versionnement sémantique et journal des modifications\n- [CONTRIBUTING.md](docs/CONTRIBUTING.md) - Directives de développement",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "0174ffc9d6992c72": {
+      "translation": "Licence",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "a55249991c2ec6af": {
+      "translation": "Licence MIT -- voir [LICENSE](LICENSE) pour les détails.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "262cf60b803dacd5": {
+      "translation": "Contributions",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "772d6673a05c25d3": {
+      "translation": "Les contributions sont les bienvenues ! Consultez [CONTRIBUTING.md](docs/CONTRIBUTING.md) pour connaître les directives.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036479693
+    },
+    "41046e92f3ae659a": {
+      "translation": "एक सार्वभौमिक, हेडलेस पायथन व्हील बिल्डर जिसमें एकीकृत गिटहब संचालन, रिलीज़ प्रबंधन और पूर्ण CI/CD पाइपलाइन स्वचालन शामिल है। व्हील बनाएं, अनुमोदन वर्कफ़्लो के साथ रिलीज़ प्रबंधित करें, निर्भरताओं का विश्लेषण करें और मल्टी-रिपॉजिटरी संचालन को व्यवस्थित करें - यह सब वेब यूआई को छुए बिना।",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "9a402a3c94b468d0": {
+      "translation": "[MCP टूल शॉप](https://mcp-tool-shop.github.io/) का हिस्सा - व्यावहारिक डेवलपर उपकरण जो आपके रास्ते में नहीं आते।",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "13cb28678cdee723": {
+      "translation": "हेडलेस व्हील बिल्डर क्यों?",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "31f050645c62e428": {
+      "translation": "अधिकांश पायथन बिल्ड टूल `python -m build` पर रुक जाते हैं। हेडलेस व्हील बिल्डर आगे बढ़ता है: अनुमोदन वर्कफ़्लो के साथ ड्राफ्ट रिलीज़, लाइसेंस अनुपालन के साथ निर्भरता विश्लेषण, मल्टी-रिपो समन्वय और रजिस्ट्री प्रकाशन - यह सब एक ही CLI से। यदि आप पायथन पैकेजों के लिए CI/CD पाइपलाइन चलाते हैं, तो यह स्क्रिप्ट के एक संयोजन को एक उपकरण से बदल देता है।",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "07ae5a2cb11e4896": {
+      "translation": "v0.3.0 में नया क्या है",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "7b5e2db96c5d3603": {
+      "translation": "- **रिलीज़ प्रबंधन**: मल्टी-स्टेज अनुमोदन वर्कफ़्लो के साथ ड्राफ्ट रिलीज़\n- **निर्भरता विश्लेषण**: लाइसेंस अनुपालन जांच के साथ पूर्ण निर्भरता ग्राफ\n- **CI/CD पाइपलाइन**: बिल्ड-टू-रिलीज़ पाइपलाइन ऑर्केस्ट्रेशन\n- **मल्टी-रिपो संचालन**: रिपॉजिटरी में बिल्ड का समन्वय\n- **अधिसूचनाएं**: स्लैक, डिस्कॉर्ड और वेबहुक एकीकरण\n- **सुरक्षा स्कैनिंग**: SBOM (सॉफ्टवेयर बिल ऑफ मैटेरियल्स) पीढ़ी, लाइसेंस ऑडिट, भेद्यता जांच\n- **मेट्रिक्स और एनालिटिक्स**: बिल्ड प्रदर्शन ट्रैकिंग और रिपोर्टिंग\n- **आर्टिफैक्ट कैशिंग**: रजिस्ट्री एकीकरण के साथ LRU (लीस्ट रिसेंटली यूज्ड) कैश",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "d0bfd0df3ecd0d7f": {
+      "translation": "विशेषताएं",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "f39a39272671cda9": {
+      "translation": "कोर बिल्डिंग",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "a390cb7be1a4cc39": {
+      "translation": "- **कहीं से भी बनाएं**: स्थानीय पथ, गिट URL (शाखा/टैग के साथ), टारबॉल\n- **बिल्ड अलगाव**: venv (uv-संचालित, 10-100 गुना तेज) या डॉकर (manylinux/musllinux)\n- **मल्टी-प्लेटफॉर्म**: Python 3.10-3.14, Linux/macOS/Windows के लिए बिल्ड मैट्रिक्स\n- **पब्लिशिंग**: PyPI विश्वसनीय प्रकाशक (OIDC), DevPi, आर्टिफैक्टरी, S3",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "d4f1cb62c794728b": {
+      "translation": "रिलीज़ प्रबंधन",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "646fdac44da2ee26": {
+      "translation": "- **ड्राफ्ट रिलीज़**: प्रकाशित करने से पहले रिलीज़ बनाएं, समीक्षा करें और अनुमोदित करें\n- **अनुमोदन वर्कफ़्लो**: सरल, दो-स्टेज या एंटरप्राइज़ (QA → सुरक्षा → रिलीज़)\n- **रोलबैक समर्थन**: प्रकाशित रिलीज़ को आसानी से वापस करें\n- **चेंजलॉग पीढ़ी**: पारंपरिक कमिट से स्वचालित रूप से उत्पन्न करें",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "fec999b03ad959bb": {
+      "translation": "डेवऑप्स और CI/CD",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "5da0a9cb1bd2d78a": {
+      "translation": "- **पाइपलाइन ऑर्केस्ट्रेशन**: बिल्ड → टेस्ट → रिलीज़ → पब्लिश श्रृंखला बनाएं\n- **गिटहब एक्शन जेनरेटर**: अनुकूलित CI वर्कफ़्लो बनाएं\n- **मल्टी-रिपो संचालन**: रिपॉजिटरी में रिलीज़ का समन्वय करें\n- **आर्टिफैक्ट कैशिंग**: बुद्धिमान कैशिंग के साथ बिल्ड समय कम करें",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "05556246e499de75": {
+      "translation": "विश्लेषण और सुरक्षा",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "e5f0a358ef7001fd": {
+      "translation": "- **निर्भरता ग्राफ**: पैकेज निर्भरताओं को विज़ुअलाइज़ और विश्लेषण करें\n- **लाइसेंस अनुपालन**: अनुमत परियोजनाओं में GPL का पता लगाएं, अज्ञात लाइसेंस\n- **सुरक्षा स्कैनिंग**: भेद्यता का पता लगाना, SBOM पीढ़ी\n- **मेट्रिक्स डैशबोर्ड**: बिल्ड समय, सफलता दर, कैश हिट को ट्रैक करें",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "b65bae8359898c27": {
+      "translation": "एकीकरण",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "3b72fca7bea4216b": {
+      "translation": "- **अधिसूचनाएं**: स्लैक, डिस्कॉर्ड, माइक्रोसॉफ्ट टीम्स, कस्टम वेबहुक\n- **हेडलेस गिटहब**: रिलीज़, PR (पुल रिक्वेस्ट), इश्यू, वर्कफ़्लो - पूरी तरह से स्क्रिप्ट करने योग्य\n- **रजिस्ट्री समर्थन**: PyPI, TestPyPI, निजी रजिस्ट्री, S3",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "ed383afd27175535": {
+      "translation": "स्थापना",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "abb619d8b0588257": {
+      "translation": "शुरुआत कैसे करें",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "aafd712ae3491fcc": {
+      "translation": "व्हील बनाएं",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "10eace135e983a67": {
+      "translation": "निर्भरता विश्लेषण",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "891bdd7ad5c3eb08": {
+      "translation": "पाइपलाइन स्वचालन",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "b6df1322504f8cfa": {
+      "translation": "अधिसूचनाएं",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "49518f02088bb4ef": {
+      "translation": "सुरक्षा स्कैनिंग",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "c350632ab5f6bd57": {
+      "translation": "मल्टी-रिपो संचालन",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "f3a1b1019e0259cc": {
+      "translation": "मेट्रिक्स और एनालिटिक्स",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "94ceb95b0a124550": {
+      "translation": "कैश प्रबंधन",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "4d883786ea4d1443": {
+      "translation": "हेडलेस गिटहब संचालन",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "49426304b377f228": {
+      "translation": "पायथन एपीआई",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "5073e935ef64949d": {
+      "translation": "कॉन्फ़िगरेशन",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "5ccdf498753cbaf7": {
+      "translation": "`pyproject.toml` में कॉन्फ़िगर करें:",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "f1a4256cb2f0d7fe": {
+      "translation": "CLI कमांड",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "30e4c5d85406a4a4": {
+      "translation": "कमांड",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "b8423b5b4842cbda": {
+      "translation": "विवरण",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "1a20fc4dc8ce3304": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "bc35e1f9228e8622": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "053597637283e0db": {
+      "translation": "स्रोत से व्हील बनाएं",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "66267734c5925d91": {
+      "translation": "PyPI/रजिस्ट्री पर प्रकाशित करें",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "3a9474f1c4714e96": {
+      "translation": "परियोजना कॉन्फ़िगरेशन का विश्लेषण करें",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "8c39877d5414681d": {
+      "translation": "GitHub संचालन (रिलीज़, पुल रिक्वेस्ट, मुद्दे)",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "63c58f7ac7fe97c1": {
+      "translation": "प्रारंभिक रिलीज़ प्रबंधन",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "f6680432af64f953": {
+      "translation": "सीआई/सीडी पाइपलाइन का समन्वय",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "bdcd82ac5364ed9b": {
+      "translation": "निर्भरता ग्राफ विश्लेषण",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "a5186a2492ac92fb": {
+      "translation": "GitHub एक्शन जेनरेटर",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "38011fdc7bff04bd": {
+      "translation": "मल्टी-रिपॉजिटरी संचालन",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "27c9d2b686cd2dea": {
+      "translation": "अधिसूचना प्रबंधन",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "cdc46aa5f8a2eb6d": {
+      "translation": "सुरक्षा स्कैनिंग",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "66f886bb6d57ff5e": {
+      "translation": "बिल्ड मेट्रिक्स और विश्लेषण",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "3778477965df31ab": {
+      "translation": "आर्टिफैक्ट कैश प्रबंधन",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "25f7975282e87cb8": {
+      "translation": "चेंजलॉग जनरेशन",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "1960f0711b88c994": {
+      "translation": "आवश्यकताएं",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "072f721e66849189": {
+      "translation": "- पायथन 3.10+\n- गिट (गिट स्रोत समर्थन के लिए)\n- डॉकर (वैकल्पिक, manylinux बिल्ड के लिए)\n- यूवी (वैकल्पिक, तेज़ बिल्ड के लिए)",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "e0513a26e56e1df3": {
+      "translation": "दस्तावेज़",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "0d342326b9dacf81": {
+      "translation": "विस्तृत दस्तावेज़ के लिए [docs/](docs/) निर्देशिका देखें:",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "79df608d14ba51ec": {
+      "translation": "- [ROADMAP.md](docs/ROADMAP.md) - विकास चरण और मील के पत्थर\n- [ARCHITECTURE.md](docs/ARCHITECTURE.md) - सिस्टम डिज़ाइन और घटक\n- [API.md](docs/API.md) - सीएलआई और पायथन एपीआई संदर्भ\n- [SECURITY.md](docs/SECURITY.md) - सुरक्षा मॉडल और सर्वोत्तम अभ्यास\n- [PUBLISHING.md](docs/PUBLISHING.md) - रजिस्ट्री प्रकाशन कार्यप्रवाह\n- [ISOLATION.md](docs/ISOLATION.md) - बिल्ड आइसोलेशन रणनीतियाँ\n- [VERSIONING.md](docs/VERSIONING.md) - सिमेंटिक वर्जनिंग और चेंजलॉग\n- [CONTRIBUTING.md](docs/CONTRIBUTING.md) - विकास दिशानिर्देश",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "cfbc372f8058f151": {
+      "translation": "लाइसेंस",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "de70ff4541864a86": {
+      "translation": "एमआईटी लाइसेंस -- विवरण के लिए [LICENSE](LICENSE) देखें।",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "4e8133210bd702a6": {
+      "translation": "योगदान",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "27873f1ce698a066": {
+      "translation": "योगदान का स्वागत है! दिशानिर्देशों के लिए [CONTRIBUTING.md](docs/CONTRIBUTING.md) देखें।",
+      "model": "translategemma:12b",
+      "timestamp": 1772036522141
+    },
+    "6dae47410892980c": {
+      "translation": "Un costruttore di pacchetti Python universale e senza interfaccia grafica, con integrazione di GitHub, gestione delle release e automazione completa della pipeline CI/CD. Crea pacchetti, gestisci le release con flussi di approvazione, analizza le dipendenze e coordina le operazioni su più repository, il tutto senza dover interagire con l'interfaccia web.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566327
+    },
+    "89a939f299bb4173": {
+      "translation": "Parte di [MCP Tool Shop](https://mcp-tool-shop.github.io/) -- strumenti pratici per sviluppatori che non ti ostacolano.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566327
+    },
+    "52ab36e489742156": {
+      "translation": "Perché un costruttore di pacchetti senza interfaccia grafica?",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566327
+    },
+    "b24e2f901a0ca29b": {
+      "translation": "La maggior parte degli strumenti di build Python si fermano a `python -m build`. Questo costruttore di pacchetti va oltre: permette di creare bozze di release con flussi di approvazione, analisi delle dipendenze con verifica della conformità delle licenze, coordinamento tra più repository e pubblicazione sui registri, il tutto da un'unica interfaccia a riga di comando. Se utilizzi pipeline CI/CD per pacchetti Python, questo strumento sostituisce una serie di script con un'unica soluzione.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566327
+    },
+    "e9be6440a0bce459": {
+      "translation": "Novità nella versione 0.3.0",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566327
+    },
+    "4faf269e347a5f22": {
+      "translation": "- **Gestione delle release**: Creazione di bozze di release con flussi di approvazione a più stadi.\n- **Analisi delle dipendenze**: Grafico completo delle dipendenze con verifica della conformità delle licenze.\n- **Pipeline CI/CD**: Orchestrazione della pipeline di build-to-release.\n- **Operazioni su più repository**: Coordinamento delle build tra i repository.\n- **Notifiche**: Integrazioni con Slack, Discord e webhook.\n- **Analisi della sicurezza**: Generazione di SBOM (Software Bill of Materials), audit delle licenze, controlli delle vulnerabilità.\n- **Metriche e analisi**: Monitoraggio e reportistica delle prestazioni delle build.\n- **Caching degli artefatti**: Cache LRU (Least Recently Used) con integrazione con i registri.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566327
+    },
+    "bd2eda68a403934d": {
+      "translation": "Funzionalità",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566327
+    },
+    "d410c7091095038b": {
+      "translation": "Costruzione di base",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566327
+    },
+    "e1df38a1f29956ba": {
+      "translation": "- **Costruisci da qualsiasi posizione**: Percorsi locali, URL Git (con branch/tag), archivi tar.\n- **Isolamento della build**: venv (basato su uv, da 10 a 100 volte più veloce) o Docker (manylinux/musllinux).\n- **Multi-piattaforma**: Matrice di build per Python 3.10-3.14, Linux/macOS/Windows.\n- **Pubblicazione**: PyPI Trusted Publishers (OIDC), DevPi, Artifactory, S3.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566327
+    },
+    "99965d82a9911afa": {
+      "translation": "Gestione delle release",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "5e4159194cdb5054": {
+      "translation": "- **Bozze di release**: Crea, rivedi e approva le release prima della pubblicazione.\n- **Flussi di approvazione**: Semplici, a due stadi o per aziende (QA → Sicurezza → Release).\n- **Supporto per il rollback**: Ripristina facilmente le release pubblicate.\n- **Generazione del changelog**: Genera automaticamente a partire dai commit convenzionali.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566327
+    },
+    "38fdab6ed9e12849": {
+      "translation": "DevOps e CI/CD",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "3e4f6921a18880be": {
+      "translation": "- **Orchestrazione delle pipeline**: Collega build → test → release → pubblicazione.\n- **Generatore di GitHub Actions**: Crea flussi di lavoro CI ottimizzati.\n- **Operazioni su più repository**: Coordina le release tra i repository.\n- **Caching degli artefatti**: Riduci i tempi di build con un caching intelligente.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "8b912d21990d86db": {
+      "translation": "Analisi e sicurezza",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "c235730eeec52e42": {
+      "translation": "- **Grafici delle dipendenze**: Visualizza e analizza le dipendenze dei pacchetti.\n- **Conformità delle licenze**: Rileva la presenza di licenze GPL in progetti permissivi, licenze sconosciute.\n- **Analisi della sicurezza**: Rilevamento delle vulnerabilità, generazione di SBOM.\n- **Dashboard delle metriche**: Monitora i tempi di build, i tassi di successo, i colpi di cache.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "3a281b72ae33cf60": {
+      "translation": "Integrazioni",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "98e6d4ee1522c779": {
+      "translation": "- **Notifiche**: Slack, Discord, Microsoft Teams, webhook personalizzati.\n- **GitHub senza interfaccia grafica**: Release, PR, issue, workflow: completamente scriptabili.\n- **Supporto per i registri**: PyPI, TestPyPI, registri privati, S3.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "7b0c73c0f5463dff": {
+      "translation": "Installazione",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "d7e9780fb2074bec": {
+      "translation": "Guida rapida",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "37545709bca0d128": {
+      "translation": "Costruisci pacchetti",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "06f9b54f4f0044c8": {
+      "translation": "Analisi delle dipendenze",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "9f80b925916339ca": {
+      "translation": "Automazione delle pipeline",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "3f3f1b893a8b38d9": {
+      "translation": "Notifiche",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "04dcc4d82e0f97ac": {
+      "translation": "Analisi della sicurezza",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "f14cc5475a9f430d": {
+      "translation": "Operazioni su più repository",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "4222aa79c7a0444c": {
+      "translation": "Metriche e analisi",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "54f60fbf7be635bf": {
+      "translation": "Gestione della cache",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "12b37914a3ea355a": {
+      "translation": "Operazioni di GitHub senza interfaccia grafica",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "130db2c930f35a20": {
+      "translation": "API Python",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "e63ed43ff97b4dc9": {
+      "translation": "Configurazione",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "ae80e7dbf9685106": {
+      "translation": "Configura in `pyproject.toml`:",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "c718b447beb74ab2": {
+      "translation": "Comandi della riga di comando",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "db315579460c4d77": {
+      "translation": "Comando",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "3af38881e7f28db0": {
+      "translation": "Descrizione",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "859008cc19c8d7e4": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "5acc6809afb159f0": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "1039426dc4116f40": {
+      "translation": "Costruisci pacchetti a partire dal codice sorgente.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "30755d94a5654308": {
+      "translation": "Pubblica sui registri PyPI/altri registri.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "f4b2d0b14ea71e69": {
+      "translation": "Analizza la configurazione del progetto.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "caed3ea6c064a880": {
+      "translation": "Operazioni su GitHub (versioni, richieste di pull, segnalazioni di problemi)",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "607fcaecfea20b04": {
+      "translation": "Gestione delle versioni (bozze)",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "18bf2551b9f7e25a": {
+      "translation": "Orchestrazione della pipeline CI/CD",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "b51238ccbe8064ba": {
+      "translation": "Analisi del grafo delle dipendenze",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "67897047852ce253": {
+      "translation": "Generatore di GitHub Actions",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "9f4cc54a5929a9ca": {
+      "translation": "Operazioni su più repository",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "9609c8c9d35d18ee": {
+      "translation": "Gestione delle notifiche",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "8d52ea4fee4fe47b": {
+      "translation": "Analisi della sicurezza",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "ecb1c61f868fde92": {
+      "translation": "Metriche e analisi delle build",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "f93cfb99761ef9df": {
+      "translation": "Gestione della cache degli artefatti",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "4cc73754bcd593eb": {
+      "translation": "Generazione del changelog",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "c6432f90e01826d3": {
+      "translation": "Requisiti",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "a122faaad1c76ccb": {
+      "translation": "- Python 3.10+\n- Git (per il supporto del codice sorgente Git)\n- Docker (opzionale, per le build manylinux)\n- uv (opzionale, per build più veloci)",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "2cebf666d270d0e8": {
+      "translation": "Documentazione",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "fd5100201f75e975": {
+      "translation": "Consultare la directory [docs/](docs/) per una documentazione completa:",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "c8b54e5f9fb6abdb": {
+      "translation": "- [ROADMAP.md](docs/ROADMAP.md) - Fasi di sviluppo e obiettivi\n- [ARCHITECTURE.md](docs/ARCHITECTURE.md) - Progettazione del sistema e componenti\n- [API.md](docs/API.md) - Riferimento dell'API CLI e Python\n- [SECURITY.md](docs/SECURITY.md) - Modello di sicurezza e buone pratiche\n- [PUBLISHING.md](docs/PUBLISHING.md) - Flussi di pubblicazione nel registro\n- [ISOLATION.md](docs/ISOLATION.md) - Strategie di isolamento delle build\n- [VERSIONING.md](docs/VERSIONING.md) - Versioning semantico e changelog\n- [CONTRIBUTING.md](docs/CONTRIBUTING.md) - Linee guida per lo sviluppo",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "0870aa1dcfea97cc": {
+      "translation": "Licenza",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "1a8b1aac4b18c61f": {
+      "translation": "Licenza MIT -- vedere [LICENSE](LICENSE) per i dettagli.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "137a2378c67aaccf": {
+      "translation": "Contributi",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "6c5a27f2001ec33c": {
+      "translation": "I contributi sono benvenuti! Consultare [CONTRIBUTING.md](docs/CONTRIBUTING.md) per le linee guida.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036566328
+    },
+    "d59b4b4725f1a718": {
+      "translation": "Um construtor universal de pacotes Python (wheels) que funciona sem interface gráfica, com integração com o GitHub, gerenciamento de lançamentos e automação completa de pipelines de CI/CD. Crie pacotes, gerencie lançamentos com fluxos de aprovação, analise dependências e coordene operações em vários repositórios — tudo isso sem precisar usar a interface web.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "d0ce359b4a18ddcc": {
+      "translation": "Parte da [MCP Tool Shop](https://mcp-tool-shop.github.io/) -- ferramentas práticas para desenvolvedores que não atrapalham o seu fluxo de trabalho.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "1357c7f6e3a2f33f": {
+      "translation": "Por que um construtor de pacotes sem interface gráfica?",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "351177b964518970": {
+      "translation": "A maioria das ferramentas de construção do Python para apenas `python -m build`. O construtor de pacotes sem interface gráfica vai além: permite criar versões de lançamento com fluxos de aprovação, análise de dependências com verificação de conformidade de licenças, coordenação entre vários repositórios e publicação em registros — tudo a partir de uma única linha de comando. Se você usa pipelines de CI/CD para pacotes Python, esta ferramenta substitui um conjunto de scripts por uma única ferramenta.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "066040eaf10cda26": {
+      "translation": "O que há de novo na versão 0.3.0",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "376b99623b845019": {
+      "translation": "- **Gerenciamento de Lançamentos**: Criação de versões de lançamento com fluxos de aprovação em várias etapas.\n- **Análise de Dependências**: Gráfico completo de dependências com verificação de conformidade de licenças.\n- **Pipelines de CI/CD**: Orquestração de pipelines de construção para lançamento.\n- **Operações em Vários Repositórios**: Coordenação de construções entre repositórios.\n- **Notificações**: Integrações com Slack, Discord e webhooks.\n- **Análise de Segurança**: Geração de SBOM (Software Bill of Materials), auditoria de licenças, verificação de vulnerabilidades.\n- **Métricas e Análises**: Rastreamento e relatórios de desempenho da construção.\n- **Cache de Artefatos**: Cache LRU com integração com registros.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "6fbe4c0ef1edf268": {
+      "translation": "Recursos",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "7880370dd3ea3289": {
+      "translation": "Construção Central",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "7bdf23b60f853247": {
+      "translation": "- **Construção de qualquer lugar**: Caminhos locais, URLs do Git (com branch/tag), arquivos tarball.\n- **Isolamento da construção**: venv (impulsionado por uv, 10 a 100 vezes mais rápido) ou Docker (manylinux/musllinux).\n- **Multiplataforma**: Matriz de construção para Python 3.10-3.14, Linux/macOS/Windows.\n- **Publicação**: PyPI Trusted Publishers (OIDC), DevPi, Artifactory, S3.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "7191e9bbbb3ec339": {
+      "translation": "Gerenciamento de Lançamentos",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "9a746abb40498214": {
+      "translation": "- **Criação de versões de lançamento**: Crie, revise e aprove versões antes de publicá-las.\n- **Fluxos de aprovação**: Simples, de duas etapas ou corporativos (QA → Segurança → Lançamento).\n- **Suporte para reversão**: Reverter facilmente versões publicadas.\n- **Geração de changelog**: Geração automática a partir de commits convencionais.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "3fd72342db90a3a3": {
+      "translation": "DevOps e CI/CD",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "01caed046a780554": {
+      "translation": "- **Orquestração de pipelines**: Crie uma sequência de construção → teste → lançamento → publicação.\n- **Gerador de ações do GitHub**: Crie fluxos de CI otimizados.\n- **Operações em vários repositórios**: Coordene lançamentos entre repositórios.\n- **Cache de artefatos**: Reduza os tempos de construção com cache inteligente.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "c51a9a99516daa53": {
+      "translation": "Análise e Segurança",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "acc4237902e3fa66": {
+      "translation": "- **Gráficos de dependências**: Visualize e analise as dependências dos pacotes.\n- **Conformidade de licenças**: Detecte GPL em projetos permissivos, licenças desconhecidas.\n- **Análise de segurança**: Detecção de vulnerabilidades, geração de SBOM.\n- **Painel de métricas**: Acompanhe os tempos de construção, as taxas de sucesso e os acertos do cache.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "44124fe7d3a6c212": {
+      "translation": "Integrações",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "c81ef2039a7dd62f": {
+      "translation": "- **Notificações**: Slack, Discord, Microsoft Teams, webhooks personalizados.\n- **GitHub sem interface gráfica**: Lançamentos, PRs, issues, fluxos de trabalho — totalmente scriptáveis.\n- **Suporte a registros**: PyPI, TestPyPI, registros privados, S3.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "eb9ad24c5bdd2790": {
+      "translation": "Instalação",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "c88bcdb0dd505b6b": {
+      "translation": "Início Rápido",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "6b6afad02677c505": {
+      "translation": "Construir Pacotes",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "bb53655e80d83a42": {
+      "translation": "Análise de Dependências",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "ed712ff945a4f163": {
+      "translation": "Automação de Pipelines",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "5aa4eba020cb489f": {
+      "translation": "Notificações",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "8b5cbe507ed99ef8": {
+      "translation": "Análise de Segurança",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "9438881a4ea0249f": {
+      "translation": "Operações em Vários Repositórios",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "7a93d7a60409ebff": {
+      "translation": "Métricas e Análises",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "908858acdb826a01": {
+      "translation": "Gerenciamento de Cache",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "e0ef0389e4ce280b": {
+      "translation": "Operações do GitHub sem Interface Gráfica",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "e09dd1d8649f5648": {
+      "translation": "API Python",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "a0b286f09c8f5b2f": {
+      "translation": "Configuração",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "7822d5d76a8ce11c": {
+      "translation": "Configure em `pyproject.toml`:",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "ae820a4378256a08": {
+      "translation": "Comandos da Linha de Comando",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "d1e1550c54676195": {
+      "translation": "Comando",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610138
+    },
+    "4fe83802bbc45fcc": {
+      "translation": "Descrição",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "eeb243aa53a24f8e": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "7561209f94247c19": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "a92c4467c8f5e42d": {
+      "translation": "Construir pacotes a partir do código-fonte",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "1d464d41828e5f62": {
+      "translation": "Publicar no PyPI/registros",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "7bea6d0f463814a0": {
+      "translation": "Analisar a configuração do projeto",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "d5d3e816a4e178ed": {
+      "translation": "Operações do GitHub (lançamentos, solicitações de alteração, problemas)",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "50cb4d64e10a32f1": {
+      "translation": "Gerenciamento de lançamentos (em rascunho)",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "912cf204e2882b2d": {
+      "translation": "Orquestração do pipeline de CI/CD",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "d195ab371bc86e96": {
+      "translation": "Análise do grafo de dependências",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "0430bd7127854cb4": {
+      "translation": "Gerador de GitHub Actions",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "2d2f652d3e52401a": {
+      "translation": "Operações com múltiplos repositórios",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "50b12433b39d7658": {
+      "translation": "Gerenciamento de notificações",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "794187ed7288062e": {
+      "translation": "Análise de segurança",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "5d307eeef561a011": {
+      "translation": "Métricas e análises de construção",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "dc91865471b65abf": {
+      "translation": "Gerenciamento do cache de artefatos",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "218d8ec2c4a184e3": {
+      "translation": "Geração de changelog",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "50763a2dcc8127ff": {
+      "translation": "Requisitos",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "5d3e187a755074c2": {
+      "translation": "- Python 3.10+\n- Git (para suporte a fontes Git)\n- Docker (opcional, para compilações manylinux)\n- uv (opcional, para compilações mais rápidas)",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "5da143a95bd4adb3": {
+      "translation": "Documentação",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "493f3beace438572": {
+      "translation": "Consulte o diretório [docs/](docs/) para documentação completa:",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "830d1bb5a8c04f1d": {
+      "translation": "- [ROADMAP.md](docs/ROADMAP.md) - Fases e marcos de desenvolvimento\n- [ARCHITECTURE.md](docs/ARCHITECTURE.md) - Design e componentes do sistema\n- [API.md](docs/API.md) - Referência da API da linha de comando e da API Python\n- [SECURITY.md](docs/SECURITY.md) - Modelo de segurança e melhores práticas\n- [PUBLISHING.md](docs/PUBLISHING.md) - Fluxos de trabalho de publicação no registro\n- [ISOLATION.md](docs/ISOLATION.md) - Estratégias de isolamento da construção\n- [VERSIONING.md](docs/VERSIONING.md) - Versionamento semântico e changelog\n- [CONTRIBUTING.md](docs/CONTRIBUTING.md) - Diretrizes de desenvolvimento",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "2aca9b0e72841008": {
+      "translation": "Licença",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "d673fbd8076d8fc5": {
+      "translation": "Licença MIT -- veja [LICENSE](LICENSE) para detalhes.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "f6c8880997fa829d": {
+      "translation": "Contribuições",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    },
+    "c195d2f40a3964a8": {
+      "translation": "Contribuições são bem-vindas! Consulte [CONTRIBUTING.md](docs/CONTRIBUTING.md) para diretrizes.",
+      "model": "translategemma:12b",
+      "timestamp": 1772036610139
+    }
+  }
+}

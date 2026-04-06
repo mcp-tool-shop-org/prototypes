@@ -1,0 +1,66 @@
+[
+  {
+    "id": "whiteboard",
+    "name": "Whiteboard",
+    "url": "whiteboard.html",
+    "icon": "palette",
+    "description": "Drawing and brainstorming canvas",
+    "gradient": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+  },
+  {
+    "id": "code-playground",
+    "name": "Code Workshop",
+    "url": "code-playground.html",
+    "icon": "code",
+    "description": "HTML/CSS/JS editor with live preview",
+    "gradient": "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"
+  },
+  {
+    "id": "chess",
+    "name": "Chess Workshop",
+    "url": "chess.html",
+    "icon": "chess",
+    "description": "Strategy and tactics playground",
+    "gradient": "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"
+  },
+  {
+    "id": "capture-viewer",
+    "name": "Capture Viewer",
+    "url": "capture-viewer.html",
+    "icon": "camera",
+    "description": "Screenshots and recordings viewer",
+    "gradient": "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
+  },
+  {
+    "id": "github-toolkit",
+    "name": "GitHub Toolkit",
+    "url": "github-toolkit.html",
+    "icon": "github",
+    "description": "README and marketing generators",
+    "gradient": "linear-gradient(135deg, #fa709a 0%, #fee140 100%)"
+  },
+  {
+    "id": "template",
+    "name": "Add Environment",
+    "url": "template.html",
+    "icon": "plus-circle",
+    "description": "Starter template for creating new environments",
+    "gradient": "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)"
+  },
+  {
+    "id": "adventures",
+    "name": "Creative Lab",
+    "url": "adventures/index.html",
+    "icon": "flask",
+    "description": "Interactive experiments and explorations",
+    "gradient": "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)"
+  },
+  {
+    "id": "voice-studio",
+    "name": "Voice Studio",
+    "url": "#voice-studio",
+    "icon": "mic",
+    "description": "Voice synthesis and TTS integration (requires external voice-soundboard setup)",
+    "gradient": "linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)"
+  }
+]

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MouseTrainer.MauiHost.MainPage"
+             Title="Mouse Trainer">
+    <Grid RowDefinitions="*,Auto" Padding="0" RowSpacing="0">
+
+        <!-- Game surface: full canvas, pointer events + renderer -->
+        <Border x:Name="GameSurface"
+                Grid.Row="0"
+                Stroke="Transparent"
+                StrokeThickness="0"
+                BackgroundColor="#0D0F14"
+                Padding="0">
+            <GraphicsView x:Name="OverlayView" />
+        </Border>
+
+        <!-- Log (compact, collapsible later) -->
+        <ScrollView Grid.Row="1" HeightRequest="80" BackgroundColor="#111318">
+            <Label x:Name="LogLabel" FontFamily="Consolas" FontSize="11"
+                   TextColor="#8A8" LineBreakMode="WordWrap" Padding="8,4" />
+        </ScrollView>
+    </Grid>
+</ContentPage>

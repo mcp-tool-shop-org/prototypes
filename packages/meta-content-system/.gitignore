@@ -1,0 +1,15 @@
+bin/
+obj/
+.vs/
+.idea/
+*.user
+*.suo
+*.log
+.DS_Store
+
+# Site (Astro)
+site/.astro/
+site/node_modules/
+
+# Polyglot cache
+.polyglot-cache.json

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrainingStudio.App.MainPage"
+             Title="Training Studio"
+             SemanticProperties.Description="Training Studio main application window for ML bundle validation">
+
+    <HybridWebView x:Name="hybridWebView"
+                   RawMessageReceived="OnHybridMessage"
+                   HorizontalOptions="Fill"
+                   VerticalOptions="Fill"
+                   SemanticProperties.Description="Web-based training interface for loading datasets, configuring models, training, and exporting ML bundles"
+                   AutomationProperties.Name="Training Studio Web Interface"
+                   AutomationProperties.HelpText="Use keyboard navigation within the web interface. Tab to move between controls." />
+
+</ContentPage>

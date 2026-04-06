@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'tools/**'
+      - '*.sln'
+      - '.github/workflows/ci.yml'
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'tools/**'
+      - '*.sln'
+      - '.github/workflows/ci.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+          dotnet-quality: 'preview'
+
+      - name: Restore
+        run: dotnet restore tests/MouseTrainer.Tests/MouseTrainer.Tests.csproj
+
+      - name: Build libraries
+        run: |
+          dotnet build src/MouseTrainer.Domain/MouseTrainer.Domain.csproj -c Release --no-restore
+          dotnet build src/MouseTrainer.Simulation/MouseTrainer.Simulation.csproj -c Release --no-restore
+          dotnet build src/MouseTrainer.Audio/MouseTrainer.Audio.csproj -c Release --no-restore
+
+      - name: Build AudioGen tool
+        run: dotnet build tools/MouseTrainer.AudioGen/MouseTrainer.AudioGen.csproj -c Release
+
+      - name: Run tests
+        run: dotnet test tests/MouseTrainer.Tests/MouseTrainer.Tests.csproj -c Release --no-restore -v normal

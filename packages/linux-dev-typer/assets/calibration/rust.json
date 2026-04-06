@@ -1,0 +1,299 @@
+[
+  {
+    "Id": "cal-rs-d1-001",
+    "Language": "rust",
+    "Difficulty": 1,
+    "Title": "integer binding",
+    "Code": "let x: i32 = 42;\n",
+    "Topics": ["let", "type annotation"],
+    "Explain": ["Binds integer 42 to x with explicit i32 type."]
+  },
+  {
+    "Id": "cal-rs-d1-002",
+    "Language": "rust",
+    "Difficulty": 1,
+    "Title": "mutable string",
+    "Code": "let mut name = String::from(\"Rust\");\nname.push_str(\" lang\");\n",
+    "Topics": ["mut", "String", "push_str"],
+    "Explain": ["Creates a mutable String and appends to it."]
+  },
+  {
+    "Id": "cal-rs-d1-003",
+    "Language": "rust",
+    "Difficulty": 1,
+    "Title": "boolean expression",
+    "Code": "let is_valid = x > 0 && x < 100;\n",
+    "Topics": ["let", "boolean", "logical operators"],
+    "Explain": ["Binds a boolean from a compound comparison."]
+  },
+  {
+    "Id": "cal-rs-d1-004",
+    "Language": "rust",
+    "Difficulty": 1,
+    "Title": "tuple destructure",
+    "Code": "let (a, b, c) = (1, 2.0, \"three\");\nprintln!(\"{a} {b} {c}\");\n",
+    "Topics": ["tuple", "destructuring", "println"],
+    "Explain": ["Destructures a tuple into three bindings and prints them."]
+  },
+  {
+    "Id": "cal-rs-d1-005",
+    "Language": "rust",
+    "Difficulty": 1,
+    "Title": "array slice",
+    "Code": "let nums = [1, 2, 3, 4, 5];\nlet mid = &nums[1..4];\n",
+    "Topics": ["array", "slice", "range"],
+    "Explain": ["Creates an array and takes a slice of elements 1 through 3."]
+  },
+  {
+    "Id": "cal-rs-d2-001",
+    "Language": "rust",
+    "Difficulty": 2,
+    "Title": "simple add function",
+    "Code": "fn add(a: i32, b: i32) -> i32 {\n    a + b\n}\n\nfn main() {\n    let sum = add(3, 4);\n    println!(\"sum = {sum}\");\n}\n",
+    "Topics": ["fn", "return", "expression"],
+    "Explain": ["Defines a function returning the sum of two integers.", "Rust functions return the last expression without semicolon."]
+  },
+  {
+    "Id": "cal-rs-d2-002",
+    "Language": "rust",
+    "Difficulty": 2,
+    "Title": "basic match on integer",
+    "Code": "fn classify(n: i32) -> &'static str {\n    match n {\n        0 => \"zero\",\n        1..=9 => \"small\",\n        _ => \"large\",\n    }\n}\n",
+    "Topics": ["match", "range pattern", "static str"],
+    "Explain": ["Match expression with range pattern and wildcard arm."]
+  },
+  {
+    "Id": "cal-rs-d2-003",
+    "Language": "rust",
+    "Difficulty": 2,
+    "Title": "if let option",
+    "Code": "fn greet(name: Option<&str>) {\n    if let Some(n) = name {\n        println!(\"Hello, {n}!\");\n    } else {\n        println!(\"Hello, stranger!\");\n    }\n}\n",
+    "Topics": ["if let", "Option", "pattern matching"],
+    "Explain": ["Uses if let to unwrap an Option with a fallback branch."]
+  },
+  {
+    "Id": "cal-rs-d2-004",
+    "Language": "rust",
+    "Difficulty": 2,
+    "Title": "for loop with range",
+    "Code": "fn sum_range(start: i32, end: i32) -> i32 {\n    let mut total = 0;\n    for i in start..=end {\n        total += i;\n    }\n    total\n}\n",
+    "Topics": ["for", "range", "mut", "accumulator"],
+    "Explain": ["Sums integers in an inclusive range using a mutable accumulator."]
+  },
+  {
+    "Id": "cal-rs-d2-005",
+    "Language": "rust",
+    "Difficulty": 2,
+    "Title": "string reference parameter",
+    "Code": "fn first_word(s: &str) -> &str {\n    let bytes = s.as_bytes();\n    for (i, &b) in bytes.iter().enumerate() {\n        if b == b' ' {\n            return &s[..i];\n        }\n    }\n    s\n}\n",
+    "Topics": ["references", "str", "byte literal", "enumerate"],
+    "Explain": ["Returns a slice of the first word by scanning for a space byte."]
+  },
+  {
+    "Id": "cal-rs-d3-001",
+    "Language": "rust",
+    "Difficulty": 3,
+    "Title": "vector filter and collect",
+    "Code": "fn evens(nums: &[i32]) -> Vec<i32> {\n    nums.iter()\n        .filter(|&&n| n % 2 == 0)\n        .copied()\n        .collect()\n}\n\nfn main() {\n    let data = vec![1, 2, 3, 4, 5, 6];\n    let result = evens(&data);\n    println!(\"{result:?}\");\n}\n",
+    "Topics": ["iter", "filter", "collect", "Vec"],
+    "Explain": ["Filters even numbers from a slice using iterator adaptors.", "Double reference in filter closure comes from iter() on a slice."]
+  },
+  {
+    "Id": "cal-rs-d3-002",
+    "Language": "rust",
+    "Difficulty": 3,
+    "Title": "option chaining with map",
+    "Code": "fn parse_and_double(s: &str) -> Option<i32> {\n    s.parse::<i32>().ok().map(|n| n * 2)\n}\n\nfn main() {\n    let result = parse_and_double(\"21\");\n    match result {\n        Some(v) => println!(\"got {v}\"),\n        None => println!(\"parse failed\"),\n    }\n}\n",
+    "Topics": ["Option", "map", "parse", "turbofish"],
+    "Explain": ["Chains parse into Option via ok(), then doubles with map."]
+  },
+  {
+    "Id": "cal-rs-d3-003",
+    "Language": "rust",
+    "Difficulty": 3,
+    "Title": "while let with pop",
+    "Code": "fn drain_stack(stack: &mut Vec<i32>) -> i32 {\n    let mut sum = 0;\n    while let Some(val) = stack.pop() {\n        if val < 0 {\n            continue;\n        }\n        sum += val;\n    }\n    sum\n}\n\nfn main() {\n    let mut s = vec![1, -2, 3, 4];\n    println!(\"{}\", drain_stack(&mut s));\n}\n",
+    "Topics": ["while let", "Vec", "pop", "continue"],
+    "Explain": ["Drains a vector stack, summing only positive values."]
+  },
+  {
+    "Id": "cal-rs-d3-004",
+    "Language": "rust",
+    "Difficulty": 3,
+    "Title": "enum with data",
+    "Code": "enum Shape {\n    Circle(f64),\n    Rectangle(f64, f64),\n}\n\nfn area(s: &Shape) -> f64 {\n    match s {\n        Shape::Circle(r) => std::f64::consts::PI * r * r,\n        Shape::Rectangle(w, h) => w * h,\n    }\n}\n",
+    "Topics": ["enum", "match", "f64", "std::f64::consts"],
+    "Explain": ["Defines a data-carrying enum and computes area via pattern match."]
+  },
+  {
+    "Id": "cal-rs-d3-005",
+    "Language": "rust",
+    "Difficulty": 3,
+    "Title": "result with question mark",
+    "Code": "use std::fs;\nuse std::io;\n\nfn read_first_line(path: &str) -> io::Result<String> {\n    let content = fs::read_to_string(path)?;\n    let line = content\n        .lines()\n        .next()\n        .unwrap_or(\"\")\n        .to_string();\n    Ok(line)\n}\n",
+    "Topics": ["Result", "?", "io", "fs", "lines"],
+    "Explain": ["Uses the ? operator to propagate IO errors concisely."]
+  },
+  {
+    "Id": "cal-rs-d4-001",
+    "Language": "rust",
+    "Difficulty": 4,
+    "Title": "struct with impl methods",
+    "Code": "struct Counter {\n    count: u32,\n    limit: u32,\n}\n\nimpl Counter {\n    fn new(limit: u32) -> Self {\n        Self { count: 0, limit }\n    }\n\n    fn increment(&mut self) -> bool {\n        if self.count < self.limit {\n            self.count += 1;\n            true\n        } else {\n            false\n        }\n    }\n\n    fn value(&self) -> u32 {\n        self.count\n    }\n}\n",
+    "Topics": ["struct", "impl", "Self", "&mut self", "&self"],
+    "Explain": ["Defines a Counter struct with constructor and methods.", "Self is an alias for the implementing type."]
+  },
+  {
+    "Id": "cal-rs-d4-002",
+    "Language": "rust",
+    "Difficulty": 4,
+    "Title": "iterator chain with fold",
+    "Code": "fn word_lengths(text: &str) -> Vec<(String, usize)> {\n    text.split_whitespace()\n        .map(|w| {\n            let clean: String = w.chars()\n                .filter(|c| c.is_alphanumeric())\n                .collect();\n            let len = clean.len();\n            (clean, len)\n        })\n        .filter(|(w, _)| !w.is_empty())\n        .collect()\n}\n\nfn main() {\n    let pairs = word_lengths(\"Hello, world! Rust is great.\");\n    for (word, len) in &pairs {\n        println!(\"{word}: {len}\");\n    }\n}\n",
+    "Topics": ["split_whitespace", "map", "filter", "chars", "collect"],
+    "Explain": ["Chains iterator adaptors to extract cleaned words with their lengths."]
+  },
+  {
+    "Id": "cal-rs-d4-003",
+    "Language": "rust",
+    "Difficulty": 4,
+    "Title": "hashmap word frequency",
+    "Code": "use std::collections::HashMap;\n\nfn word_freq(text: &str) -> HashMap<String, usize> {\n    let mut freq = HashMap::new();\n    for word in text.split_whitespace() {\n        let key = word.to_lowercase();\n        *freq.entry(key).or_insert(0) += 1;\n    }\n    freq\n}\n\nfn main() {\n    let counts = word_freq(\"the cat sat on the mat\");\n    for (word, count) in &counts {\n        println!(\"{word}: {count}\");\n    }\n}\n",
+    "Topics": ["HashMap", "entry", "or_insert", "dereference"],
+    "Explain": ["Builds a word frequency map using the entry API.", "The * dereference lets us modify the value in-place."]
+  },
+  {
+    "Id": "cal-rs-d4-004",
+    "Language": "rust",
+    "Difficulty": 4,
+    "Title": "implement Display trait",
+    "Code": "use std::fmt;\n\nstruct Point {\n    x: f64,\n    y: f64,\n}\n\nimpl fmt::Display for Point {\n    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {\n        write!(f, \"({:.2}, {:.2})\", self.x, self.y)\n    }\n}\n\nfn main() {\n    let p = Point { x: 3.14159, y: 2.71828 };\n    println!(\"point = {p}\");\n}\n",
+    "Topics": ["Display", "trait impl", "fmt", "write!", "Formatter"],
+    "Explain": ["Implements Display to customize how Point prints.", "The {:.2} format specifier rounds to two decimal places."]
+  },
+  {
+    "Id": "cal-rs-d4-005",
+    "Language": "rust",
+    "Difficulty": 4,
+    "Title": "custom iterator",
+    "Code": "struct Fibonacci {\n    a: u64,\n    b: u64,\n}\n\nimpl Fibonacci {\n    fn new() -> Self {\n        Self { a: 0, b: 1 }\n    }\n}\n\nimpl Iterator for Fibonacci {\n    type Item = u64;\n\n    fn next(&mut self) -> Option<Self::Item> {\n        let current = self.a;\n        self.a = self.b;\n        self.b = current + self.b;\n        Some(current)\n    }\n}\n",
+    "Topics": ["Iterator", "trait impl", "associated type", "Option"],
+    "Explain": ["Implements Iterator for an infinite Fibonacci sequence.", "Associated type Item defines what next() yields."]
+  },
+  {
+    "Id": "cal-rs-d5-001",
+    "Language": "rust",
+    "Difficulty": 5,
+    "Title": "generic min function with trait bound",
+    "Code": "fn min_of_three<T: PartialOrd>(a: T, b: T, c: T) -> T {\n    if a <= b {\n        if a <= c {\n            a\n        } else {\n            c\n        }\n    } else if b <= c {\n        b\n    } else {\n        c\n    }\n}\n\nfn main() {\n    println!(\"{}\", min_of_three(3, 1, 2));\n    println!(\"{}\", min_of_three(1.5, 0.5, 2.5));\n    println!(\"{}\", min_of_three(\"c\", \"a\", \"b\"));\n}\n",
+    "Topics": ["generics", "trait bounds", "PartialOrd"],
+    "Explain": ["A generic function constrained by PartialOrd works for ints, floats, and strs."]
+  },
+  {
+    "Id": "cal-rs-d5-002",
+    "Language": "rust",
+    "Difficulty": 5,
+    "Title": "enum with nested match",
+    "Code": "enum Expr {\n    Num(f64),\n    Add(Box<Expr>, Box<Expr>),\n    Mul(Box<Expr>, Box<Expr>),\n    Neg(Box<Expr>),\n}\n\nfn eval(expr: &Expr) -> f64 {\n    match expr {\n        Expr::Num(n) => *n,\n        Expr::Add(lhs, rhs) => eval(lhs) + eval(rhs),\n        Expr::Mul(lhs, rhs) => eval(lhs) * eval(rhs),\n        Expr::Neg(inner) => -eval(inner),\n    }\n}\n\nfn main() {\n    let tree = Expr::Add(\n        Box::new(Expr::Num(1.0)),\n        Box::new(Expr::Mul(\n            Box::new(Expr::Num(2.0)),\n            Box::new(Expr::Neg(Box::new(Expr::Num(3.0)))),\n        )),\n    );\n    println!(\"{}\", eval(&tree));\n}\n",
+    "Topics": ["enum", "Box", "recursion", "match", "expression tree"],
+    "Explain": ["Recursive evaluation of a boxed expression tree.", "Box enables recursive enum variants by providing heap indirection."]
+  },
+  {
+    "Id": "cal-rs-d5-003",
+    "Language": "rust",
+    "Difficulty": 5,
+    "Title": "trait with default method",
+    "Code": "trait Summary {\n    fn title(&self) -> &str;\n    fn author(&self) -> &str;\n\n    fn summarize(&self) -> String {\n        format!(\"{} by {}\", self.title(), self.author())\n    }\n}\n\nstruct Article {\n    headline: String,\n    writer: String,\n    body: String,\n}\n\nimpl Summary for Article {\n    fn title(&self) -> &str {\n        &self.headline\n    }\n\n    fn author(&self) -> &str {\n        &self.writer\n    }\n}\n",
+    "Topics": ["trait", "default method", "format!", "impl"],
+    "Explain": ["Trait with a default summarize method that delegates to required methods.", "Implementors only need to provide title and author."]
+  },
+  {
+    "Id": "cal-rs-d5-004",
+    "Language": "rust",
+    "Difficulty": 5,
+    "Title": "generic stack with peek",
+    "Code": "struct Stack<T> {\n    elements: Vec<T>,\n}\n\nimpl<T> Stack<T> {\n    fn new() -> Self {\n        Self { elements: Vec::new() }\n    }\n\n    fn push(&mut self, item: T) {\n        self.elements.push(item);\n    }\n\n    fn pop(&mut self) -> Option<T> {\n        self.elements.pop()\n    }\n\n    fn peek(&self) -> Option<&T> {\n        self.elements.last()\n    }\n\n    fn is_empty(&self) -> bool {\n        self.elements.is_empty()\n    }\n\n    fn len(&self) -> usize {\n        self.elements.len()\n    }\n}\n",
+    "Topics": ["generics", "struct", "impl", "Option", "Vec"],
+    "Explain": ["A generic stack wrapping Vec with standard push/pop/peek operations.", "peek returns Option<&T> to avoid moving the value out."]
+  },
+  {
+    "Id": "cal-rs-d5-005",
+    "Language": "rust",
+    "Difficulty": 5,
+    "Title": "complex pattern matching on result",
+    "Code": "use std::num::ParseIntError;\n\n#[derive(Debug)]\nenum AppError {\n    Parse(ParseIntError),\n    OutOfRange(i32),\n    Empty,\n}\n\nfn parse_port(input: &str) -> Result<u16, AppError> {\n    let trimmed = input.trim();\n    if trimmed.is_empty() {\n        return Err(AppError::Empty);\n    }\n    let n: i32 = trimmed.parse().map_err(AppError::Parse)?;\n    match n {\n        1..=65535 => Ok(n as u16),\n        _ => Err(AppError::OutOfRange(n)),\n    }\n}\n\nfn main() {\n    for input in [\"8080\", \"\", \"abc\", \"99999\"] {\n        match parse_port(input) {\n            Ok(port) => println!(\"port: {port}\"),\n            Err(AppError::Empty) => println!(\"empty input\"),\n            Err(AppError::Parse(e)) => println!(\"parse error: {e}\"),\n            Err(AppError::OutOfRange(n)) => println!(\"out of range: {n}\"),\n        }\n    }\n}\n",
+    "Topics": ["Result", "custom error enum", "map_err", "pattern matching"],
+    "Explain": ["Custom error enum with From-like wrapping via map_err.", "Each error variant is matched exhaustively in the caller."]
+  },
+  {
+    "Id": "cal-rs-d6-001",
+    "Language": "rust",
+    "Difficulty": 6,
+    "Title": "lifetime in struct and method",
+    "Code": "struct Excerpt<'a> {\n    text: &'a str,\n    start: usize,\n    end: usize,\n}\n\nimpl<'a> Excerpt<'a> {\n    fn new(text: &'a str, start: usize, end: usize) -> Self {\n        let end = end.min(text.len());\n        let start = start.min(end);\n        Self { text, start, end }\n    }\n\n    fn content(&self) -> &str {\n        &self.text[self.start..self.end]\n    }\n\n    fn is_empty(&self) -> bool {\n        self.start == self.end\n    }\n\n    fn overlaps(&self, other: &Excerpt<'_>) -> bool {\n        std::ptr::eq(self.text, other.text)\n            && self.start < other.end\n            && other.start < self.end\n    }\n}\n",
+    "Topics": ["lifetimes", "struct", "impl", "str slice", "ptr::eq"],
+    "Explain": ["Struct borrowing a string slice with an explicit lifetime.", "The overlaps method uses pointer equality to check same source."]
+  },
+  {
+    "Id": "cal-rs-d6-002",
+    "Language": "rust",
+    "Difficulty": 6,
+    "Title": "closure capturing and higher-order function",
+    "Code": "fn apply_pipeline<T, F>(items: Vec<T>, stages: &[F]) -> Vec<T>\nwhere\n    T: Clone,\n    F: Fn(&T) -> bool,\n{\n    let mut result = items;\n    for stage in stages {\n        result = result\n            .into_iter()\n            .filter(|item| stage(item))\n            .collect();\n    }\n    result\n}\n\nfn main() {\n    let numbers: Vec<i32> = (1..=50).collect();\n    let threshold = 10;\n    let stages: Vec<Box<dyn Fn(&i32) -> bool>> = vec![\n        Box::new(|n| n % 2 == 0),\n        Box::new(move |n| *n > threshold),\n        Box::new(|n| *n < 40),\n    ];\n    let result = apply_pipeline(numbers, &stages);\n    println!(\"{result:?}\");\n}\n",
+    "Topics": ["closures", "Fn trait", "Box<dyn>", "generics", "move"],
+    "Explain": ["Applies a sequence of filter closures as a pipeline.", "Box<dyn Fn> enables heterogeneous closure storage in a Vec."]
+  },
+  {
+    "Id": "cal-rs-d6-003",
+    "Language": "rust",
+    "Difficulty": 6,
+    "Title": "complex trait bounds with where clause",
+    "Code": "use std::fmt;\nuse std::str::FromStr;\n\nfn parse_list<T>(input: &str, sep: char) -> Result<Vec<T>, String>\nwhere\n    T: FromStr + fmt::Debug,\n    T::Err: fmt::Display,\n{\n    let mut results = Vec::new();\n    for (i, part) in input.split(sep).enumerate() {\n        let trimmed = part.trim();\n        if trimmed.is_empty() {\n            continue;\n        }\n        match trimmed.parse::<T>() {\n            Ok(val) => results.push(val),\n            Err(e) => {\n                return Err(format!(\n                    \"field {i}: cannot parse '{trimmed}': {e}\"\n                ));\n            }\n        }\n    }\n    Ok(results)\n}\n\nfn main() {\n    let ints: Result<Vec<i32>, _> = parse_list(\"1, 2, 3, 4\", ',');\n    let floats: Result<Vec<f64>, _> = parse_list(\"1.5; 2.7; 3.9\", ';');\n    println!(\"{ints:?}\");\n    println!(\"{floats:?}\");\n}\n",
+    "Topics": ["where clause", "FromStr", "associated type", "Display", "Debug"],
+    "Explain": ["Generic parser with multiple trait bounds including on the associated Err type.", "Where clause keeps the signature readable with complex bounds."]
+  },
+  {
+    "Id": "cal-rs-d6-004",
+    "Language": "rust",
+    "Difficulty": 6,
+    "Title": "builder pattern with chaining",
+    "Code": "struct Config {\n    host: String,\n    port: u16,\n    workers: usize,\n    tls: bool,\n}\n\nstruct ConfigBuilder {\n    host: String,\n    port: u16,\n    workers: usize,\n    tls: bool,\n}\n\nimpl ConfigBuilder {\n    fn new() -> Self {\n        Self {\n            host: \"localhost\".to_string(),\n            port: 8080,\n            workers: 4,\n            tls: false,\n        }\n    }\n\n    fn host(mut self, host: &str) -> Self {\n        self.host = host.to_string();\n        self\n    }\n\n    fn port(mut self, port: u16) -> Self {\n        self.port = port;\n        self\n    }\n\n    fn workers(mut self, n: usize) -> Self {\n        self.workers = n;\n        self\n    }\n\n    fn tls(mut self, enabled: bool) -> Self {\n        self.tls = enabled;\n        self\n    }\n\n    fn build(self) -> Config {\n        Config {\n            host: self.host,\n            port: self.port,\n            workers: self.workers,\n            tls: self.tls,\n        }\n    }\n}\n",
+    "Topics": ["builder pattern", "method chaining", "mut self", "ownership"],
+    "Explain": ["Builder pattern consuming self for fluent chaining.", "Each setter takes and returns ownership for ergonomic method chaining."]
+  },
+  {
+    "Id": "cal-rs-d6-005",
+    "Language": "rust",
+    "Difficulty": 6,
+    "Title": "impl trait in return position with closures",
+    "Code": "fn make_adder(base: i32) -> impl Fn(i32) -> i32 {\n    move |x| base + x\n}\n\nfn make_chain(\n    f: impl Fn(i32) -> i32,\n    g: impl Fn(i32) -> i32,\n) -> impl Fn(i32) -> i32 {\n    move |x| g(f(x))\n}\n\nfn apply_n(\n    f: &dyn Fn(i32) -> i32,\n    mut val: i32,\n    n: usize,\n) -> i32 {\n    for _ in 0..n {\n        val = f(val);\n    }\n    val\n}\n\nfn main() {\n    let add5 = make_adder(5);\n    let double_add5 = make_chain(add5, |x| x * 2);\n    let result = apply_n(&double_add5, 1, 3);\n    println!(\"{result}\");\n}\n",
+    "Topics": ["impl Trait", "closures", "move", "dyn Fn", "composition"],
+    "Explain": ["Demonstrates impl Trait in argument and return positions.", "make_chain composes two closures into one, capturing both by move."]
+  },
+  {
+    "Id": "cal-rs-d7-001",
+    "Language": "rust",
+    "Difficulty": 7,
+    "Title": "recursive json-like value with nested matching",
+    "Code": "#[derive(Debug, Clone)]\nenum Value {\n    Null,\n    Bool(bool),\n    Num(f64),\n    Str(String),\n    Array(Vec<Value>),\n    Object(Vec<(String, Value)>),\n}\n\nimpl Value {\n    fn get(&self, path: &[&str]) -> Option<&Value> {\n        match (self, path.split_first()) {\n            (_, None) => Some(self),\n            (Value::Object(entries), Some((key, rest))) => {\n                for (k, v) in entries {\n                    if k == key {\n                        return v.get(rest);\n                    }\n                }\n                None\n            }\n            (Value::Array(items), Some((idx_str, rest))) => {\n                if let Ok(idx) = idx_str.parse::<usize>() {\n                    if let Some(item) = items.get(idx) {\n                        return item.get(rest);\n                    }\n                }\n                None\n            }\n            _ => None,\n        }\n    }\n\n    fn is_truthy(&self) -> bool {\n        match self {\n            Value::Null => false,\n            Value::Bool(b) => *b,\n            Value::Num(n) => *n != 0.0,\n            Value::Str(s) => !s.is_empty(),\n            Value::Array(a) => !a.is_empty(),\n            Value::Object(o) => !o.is_empty(),\n        }\n    }\n}\n",
+    "Topics": ["recursive enum", "nested match", "split_first", "if let", "Option"],
+    "Explain": ["Navigates a JSON-like tree by path using nested pattern matching.", "split_first decomposes the path slice for recursive descent."]
+  },
+  {
+    "Id": "cal-rs-d7-002",
+    "Language": "rust",
+    "Difficulty": 7,
+    "Title": "state machine with generic transitions",
+    "Code": "struct Machine<S> {\n    state: S,\n}\n\nstruct Idle;\nstruct Running {\n    task: String,\n}\nstruct Finished {\n    result: String,\n}\n\nimpl Machine<Idle> {\n    fn new() -> Self {\n        Machine { state: Idle }\n    }\n\n    fn start(self, task: &str) -> Machine<Running> {\n        Machine {\n            state: Running {\n                task: task.to_string(),\n            },\n        }\n    }\n}\n\nimpl Machine<Running> {\n    fn complete(self) -> Machine<Finished> {\n        let result = format!(\"done: {}\", self.state.task);\n        Machine {\n            state: Finished { result },\n        }\n    }\n\n    fn cancel(self) -> Machine<Idle> {\n        Machine { state: Idle }\n    }\n}\n\nimpl Machine<Finished> {\n    fn result(&self) -> &str {\n        &self.state.result\n    }\n\n    fn reset(self) -> Machine<Idle> {\n        Machine { state: Idle }\n    }\n}\n\nfn main() {\n    let m = Machine::new();\n    let m = m.start(\"compile\");\n    let m = m.complete();\n    println!(\"{}\", m.result());\n    let _m = m.reset();\n}\n",
+    "Topics": ["typestate pattern", "generics", "ownership", "zero-sized types"],
+    "Explain": ["Typestate pattern encodes valid transitions at compile time.", "Invalid transitions like idle.complete() are compilation errors."]
+  },
+  {
+    "Id": "cal-rs-d7-003",
+    "Language": "rust",
+    "Difficulty": 7,
+    "Title": "nested option/result chain with custom errors",
+    "Code": "use std::collections::HashMap;\nuse std::fmt;\n\n#[derive(Debug)]\nenum LookupError {\n    SectionMissing(String),\n    KeyMissing { section: String, key: String },\n    ParseFailed { key: String, raw: String },\n}\n\nimpl fmt::Display for LookupError {\n    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {\n        match self {\n            LookupError::SectionMissing(s) => {\n                write!(f, \"section not found: {s}\")\n            }\n            LookupError::KeyMissing { section, key } => {\n                write!(f, \"key '{key}' not in [{section}]\")\n            }\n            LookupError::ParseFailed { key, raw } => {\n                write!(f, \"cannot parse '{raw}' for key '{key}'\")\n            }\n        }\n    }\n}\n\ntype Config = HashMap<String, HashMap<String, String>>;\n\nfn get_typed<T: std::str::FromStr>(\n    config: &Config,\n    section: &str,\n    key: &str,\n) -> Result<T, LookupError> {\n    let sec = config\n        .get(section)\n        .ok_or_else(|| LookupError::SectionMissing(section.to_string()))?;\n    let raw = sec.get(key).ok_or_else(|| LookupError::KeyMissing {\n        section: section.to_string(),\n        key: key.to_string(),\n    })?;\n    raw.parse::<T>().map_err(|_| LookupError::ParseFailed {\n        key: key.to_string(),\n        raw: raw.clone(),\n    })\n}\n",
+    "Topics": ["custom error", "Display", "HashMap", "generics", "FromStr", "?", "ok_or_else"],
+    "Explain": ["Typed config lookup with precise error reporting at each failure point.", "ok_or_else converts Option to Result with a lazily constructed error."]
+  }
+]

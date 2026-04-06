@@ -1,0 +1,91 @@
+{
+  "bundle_version": "0.1",
+  "bundle_id": "00000000-0000-4000-8000-000000000001",
+  "run_id": "00000000-0000-4000-8000-000000000001",
+  "bundle_digest": "719823b86e10fe388aa8a9b14cb135624e73c253dc69f5065f78871403c3df3f",
+  "schema_uri": "https://github.com/mcp-tool-shop/training-studio/blob/main/bundle.schema.json",
+  "schema_version": "0.1",
+  "created_utc": "2024-01-01T00:00:00.000Z",
+  "app": {
+    "name": "Training Studio",
+    "version": "0.1.0"
+  },
+  "backend": {
+    "tfjs_version": "4.22.0",
+    "backend": "cpu"
+  },
+  "dataset": {
+    "dataset_id": "golden0001",
+    "source_file": "golden.csv",
+    "total_rows": 100,
+    "train_rows": 80,
+    "val_rows": 20,
+    "features": ["x1", "x2"],
+    "label": "y",
+    "split_seed": 42,
+    "train_indices_hash": "0000000000000000",
+    "val_indices_hash": "0000000000000000",
+    "normalization": null
+  },
+  "model": {
+    "preset": "mlp-classifier",
+    "input_shape": 2,
+    "output_shape": 2,
+    "task_type": "classification",
+    "num_classes": 2,
+    "layer_config": [],
+    "total_params": 0,
+    "trainable_params": 0
+  },
+  "training": {
+    "hyperparams": {
+      "epochs": 3,
+      "batch_size": 32,
+      "learning_rate": 0.001,
+      "optimizer": "adam",
+      "early_stopping": false,
+      "patience": 5
+    },
+    "epochs_completed": 3,
+    "epochs_requested": 3,
+    "early_stopped": false,
+    "best_epoch": 3,
+    "final_metrics": {
+      "train_loss": 0.2,
+      "train_accuracy": 0.92
+    },
+    "duration_ms": 3000
+  },
+  "artifacts": [
+    {
+      "path": "config/run_config.json",
+      "sha256": "ae5eca0136ba71775cd4552813a9d64aa992c81c6e19dddc473db4b8199ca901",
+      "size_bytes": 139
+    },
+    {
+      "path": "data/schema.json",
+      "sha256": "5afe14baea8df0d9d96756b205f9c79d3725920231940233417b4d38ee1337d3",
+      "size_bytes": 154
+    },
+    {
+      "path": "metrics/metrics.jsonl",
+      "sha256": "8fff11a08bd4db690e9047820a777dcfdf30dc583a4685b856c777817bd60691",
+      "size_bytes": 179
+    },
+    {
+      "path": "metrics/summary.json",
+      "sha256": "851df1ebd2e5cde7345defec71981c7b0e46c67e5c45c031bd73694d98600307",
+      "size_bytes": 193
+    },
+    {
+      "path": "model/model.json",
+      "sha256": "52c2b401364e3484a9fa10bb010235a419995b64f0cee6cd75dd416856236b15",
+      "size_bytes": 223
+    },
+    {
+      "path": "model/weights.bin",
+      "sha256": "18b1cb9d01d1298fb45e2ca9a181a08134c08d7722c88c3348a11ff2171da6cc",
+      "size_bytes": 6
+    }
+  ]
+}

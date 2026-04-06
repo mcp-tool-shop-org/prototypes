@@ -1,0 +1,40 @@
+{
+  "name": "@mcptoolshop/saints-mile",
+  "version": "1.0.2",
+  "description": "A frontier JRPG for the adults who loved those games first — zero-prerequisite npx install",
+  "type": "commonjs",
+  "license": "MIT",
+  "author": "mcp-tool-shop",
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "saints-mile": "bin/saints-mile.js"
+  },
+  "files": [
+    "bin/",
+    "README*.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "verify": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@mcptoolshop/npm-launcher": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/npm-saints-mile.git"
+  },
+  "keywords": [
+    "game",
+    "jrpg",
+    "rpg",
+    "frontier",
+    "terminal",
+    "tui",
+    "cli"
+  ]
+}

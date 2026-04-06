@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="456" height="456" viewBox="0 0 456 456" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <!-- RF logo with ascending bars representing run metrics -->
+
+    <!-- R letter stylized -->
+    <path d="M 100,120 L 100,336 L 140,336 L 140,256 L 180,336 L 228,336 L 178,246
+             C 210,238 230,208 230,170 C 230,126 198,120 160,120 L 100,120 Z
+             M 140,156 L 160,156 C 180,156 190,164 190,180 C 190,196 180,206 160,206 L 140,206 Z"
+          fill="#FFFFFF"/>
+
+    <!-- F letter -->
+    <path d="M 248,120 L 248,336 L 288,336 L 288,246 L 350,246 L 350,210 L 288,210 L 288,156 L 356,156 L 356,120 Z"
+          fill="#FFFFFF"/>
+
+    <!-- Ascending bars (representing metrics/runs) -->
+    <rect x="280" y="290" width="24" height="46" rx="4" fill="#4CAF50"/>
+    <rect x="312" y="270" width="24" height="66" rx="4" fill="#4CAF50"/>
+    <rect x="344" y="250" width="24" height="86" rx="4" fill="#4CAF50"/>
+</svg>

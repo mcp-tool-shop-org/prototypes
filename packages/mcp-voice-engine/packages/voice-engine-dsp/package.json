@@ -1,0 +1,39 @@
+{
+  "name": "@mcptoolshop/voice-engine-dsp",
+  "version": "1.0.0",
+  "description": "DSP utilities for MCP Voice Engine — pitch analysis, prosody, and audio processing",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "files": [
+    "dist/src",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcp-tool-shop-org/mcp-voice-engine.git"
+  },
+  "keywords": [
+    "voice",
+    "prosody",
+    "autotune",
+    "streaming",
+    "dsp",
+    "mcp"
+  ],
+  "author": "MCP Voice Engine Maintainers",
+  "license": "MIT",
+  "scripts": {
+    "test": "npx vitest run",
+    "test:meaning": "npx vitest run test/streaming_golden.test.ts",
+    "test:determinism": "npx vitest run test/determinism_matrix.test.ts",
+    "bench:rtf": "npx vitest run test/rtf_benchmark.test.ts",
+    "smoke": "npx tsx tools/smoke-cli.ts"
+  },
+  "dependencies": {
+    "@mcptoolshop/voice-engine-core": "1.0.0"
+  }
+}

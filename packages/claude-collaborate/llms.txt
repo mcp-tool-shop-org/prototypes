@@ -1,0 +1,166 @@
+# Claude Collaborate
+
+> Where Human Creativity Meets AI Intelligence — A unified sandbox for real-time human-AI collaboration
+
+## Overview
+
+Claude Collaborate is a unified sandbox environment for real-time human-AI collaboration. It brings together interactive workspaces, seamless communication, and creative tools in one interface — whiteboard, code editor, chess, and more.
+
+## Quick Start
+
+```bash
+git clone https://github.com/mcp-tool-shop-org/claude-collaborate.git
+cd claude-collaborate
+pip install aiohttp
+python server.py
+
+# Open http://localhost:8877
+```
+
+## Environments
+
+| Environment | Description |
+|-------------|-------------|
+| **Whiteboard** | Draw, sketch, and brainstorm visually |
+| **Code Workshop** | HTML/CSS/JS editor with live preview |
+| **Chess Workshop** | Strategy and tactics playground |
+| **Capture Viewer** | Screenshots and recordings viewer |
+| **GitHub Toolkit** | README and marketing generators |
+| **Creative Lab** | Interactive experiments |
+| **Voice Studio** | TTS integration (requires voice-soundboard) |
+| **Template/Add Environment** | Starter for creating new environments |
+
+## Architecture
+
+```
+claude-collaborate/
+├── index.html           # Main UI with environment switcher
+├── server.py            # aiohttp server
+├── ws_bridge.py         # WebSocket bridge for Claude Code
+├── whiteboard.html      # Drawing and brainstorming
+├── code-playground.html # Live HTML/CSS/JS editor
+├── chess.html           # Chess analysis board
+├── capture-viewer.html  # Screenshot/recording viewer
+├── github-toolkit.html  # README and marketing tools
+└── adventures/          # Creative Lab experiments
+```
+
+## WebSocket Protocol
+
+Real-time communication between browser and Claude Code.
+
+### Client -> Server
+
+| Type | Fields | Description |
+|------|--------|-------------|
+| user_message | content | Chat message from browser |
+| typing_start | sender | Broadcast typing indicator to other clients |
+| typing_stop | sender | End typing indicator |
+| resume | session_id, last_seen_seq | Reconnect and replay missed messages |
+| ping | (none) | Keepalive; server replies with pong |
+
+### Server -> Client
+
+| Type | Fields | Description |
+|------|--------|-------------|
+| connected | session_id, message | Welcome on connect |
+| message_received | message_id, seq, session_id | Ack after user_message persisted |
+| claude_response | content, message_id, seq | Full response from Claude Code |
+| resume_complete | session_id, replayed | Reconnection confirmed |
+| replay | (original message fields) | Missed message during reconnection |
+| typing_start / typing_stop | sender, session_id | Ephemeral typing indicators |
+| pong | (none) | Reply to ping |
+| error | message | Human-readable error |
+
+All sequenced messages carry a monotonic `seq` field and are buffered in a 500-entry ring for reconnection replay. Typing indicators are ephemeral (not sequenced or buffered).
+
+### Reconnection Protocol
+
+1. Client connects to `/ws` and receives `connected` with a `session_id`.
+2. On disconnect, client reconnects and sends: `{ "type": "resume", "session_id": "<old>", "last_seen_seq": <N> }`.
+3. Server replays all buffered messages with `seq > last_seen_seq` as `replay` type.
+4. Server sends `resume_complete` with the count of replayed messages.
+5. Clients should use exponential backoff for reconnection attempts.
+
+### Streaming Protocol
+
+Both `server.py` (via `POST /api/ws/stream`) and `ws_bridge.py` (via `post_stream`) support chunked streaming:
+
+1. Claude Code sends chunks: `POST /api/ws/stream` with `{ "message_id": "<id>", "chunk": "text fragment", "done": false }`.
+2. Server broadcasts each chunk as `stream_chunk` to all WebSocket clients with per-stream `seq`.
+3. Final call with `"done": true` assembles the full response, persists it, broadcasts `stream_end`, and records in history.
+
+## Server API (server.py — port 8877)
+
+### GET /
+Main UI with environment switcher.
+
+### GET /{file}
+Static files (whiteboard.html, chess.html, etc.).
+
+### GET /ws
+WebSocket bridge for real-time bidirectional communication.
+
+### GET /api/ws/messages
+Read pending user messages (destructive read — clears file after read).
+
+### POST /api/ws/respond
+Send response to browser. Broadcasts to all connected WebSocket clients.
+
+### GET /api/ws/status
+WebSocket bridge status (connected clients, version, timestamp).
+
+### POST /api/ws/typing
+Broadcast a typing indicator to all connected WebSocket clients.
+Body: `{ "status": "start"|"stop", "sender": "claude" }`.
+
+### POST /api/ws/stream
+Stream a chunked response to WebSocket clients in real time.
+Body: `{ "message_id": "<id>", "chunk": "text", "done": false }`.
+When `done: true`, the full response is assembled, persisted, and a `stream_end` is broadcast.
+
+### GET /api/metrics
+Server metrics: uptime, total messages received, total responses sent, total WS connections, current clients, history buffer size.
+
+### GET /api/sessions
+Active WebSocket sessions with client count and last activity.
+
+### GET /api/history?limit=N
+Non-destructive read from the message history ring buffer. Default limit: 50.
+
+### GET /health
+Server health check.
+
+### GET /adventures
+List available adventures.
+
+### GET /adventures/{filename}
+Serve a specific adventure file.
+
+## Standalone Bridge (ws_bridge.py)
+
+The standalone WebSocket bridge runs independently on port **8878** (configurable via `--port`).
+Use it when you only need the message relay without the full UI server on 8877.
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/ws` | WebSocket | Bidirectional message relay |
+| `/api/messages` | GET | Read pending user messages |
+| `/api/respond` | POST | Send a response to connected browsers |
+| `/api/history` | GET | Non-destructive message history |
+| `/health` | GET | Bridge health check |
+
+## Creative Lab (adventures/)
+
+The `adventures/` directory contains interactive experiment files served by the Creative Lab environment.
+Adventures are standalone HTML pages loaded inside the Creative Lab iframe. List available adventures via `GET /adventures`.
+
+## Links
+
+- Repository: https://github.com/mcp-tool-shop-org/claude-collaborate
+- Documentation: https://github.com/mcp-tool-shop-org/claude-collaborate#readme
+- Issues: https://github.com/mcp-tool-shop-org/claude-collaborate/issues
+
+## License
+
+MIT License

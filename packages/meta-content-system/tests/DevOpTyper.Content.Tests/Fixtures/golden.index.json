@@ -1,0 +1,55 @@
+{
+  "Version": 1,
+  "Items": [
+    {
+      "Id": "57237c9a9f1fcd30e670440d6313051e",
+      "Language": "csharp",
+      "Source": "corpus",
+      "Title": "widget.cs",
+      "Code": "namespace App;\n\npublic class Widget\n{\n    public string Name { get; set; } = \u0022\u0022;\n\n    public override string ToString()\n        =\u003E $\u0022Widget: {Name}\u0022;\n}\n",
+      "Metrics": {
+        "Lines": 10,
+        "Characters": 152,
+        "SymbolDensity": 0.1891892,
+        "MaxIndentDepth": 2
+      },
+      "Concepts": null
+    },
+    {
+      "Id": "07256cf2b0ae48b49c577c6310fe7888",
+      "Language": "javascript",
+      "Source": "corpus",
+      "Title": "tabs_and_spaces.js",
+      "Code": "function add(a, b) {\n\treturn a \u002B b;\n}\n\nconst result = add(1, 2);\nconsole.log(\u0022Result: \u0022 \u002B result);\n",
+      "Metrics": {
+        "Lines": 7,
+        "Characters": 99,
+        "SymbolDensity": 0.25316456,
+        "MaxIndentDepth": 1
+      },
+      "Concepts": null
+    },
+    {
+      "Id": "00947b0d1be7414fe99d6e0c91f14a13",
+      "Language": "python",
+      "Source": "corpus",
+      "Title": "hello.py",
+      "Code": "def greet(name):\n    print(f\u0022Hello, {name}!\u0022)\n\ngreet(\u0022World\u0022)\n",
+      "Metrics": {
+        "Lines": 5,
+        "Characters": 62,
+        "SymbolDensity": 0.28846154,
+        "MaxIndentDepth": 1
+      },
+      "Concepts": null
+    }
+  ],
+  "Stats": {
+    "TotalItems": 3,
+    "Languages": [
+      "csharp",
+      "javascript",
+      "python"
+    ]
+  }
+}

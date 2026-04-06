@@ -1,0 +1,299 @@
+[
+  {
+    "Id": "cal-cs-d1-001",
+    "Language": "csharp",
+    "Difficulty": 1,
+    "Title": "Integer Variable",
+    "Code": "int count = 42;\n",
+    "Topics": ["variables", "int"],
+    "Explain": ["Declares an integer variable named count and assigns it the value 42."]
+  },
+  {
+    "Id": "cal-cs-d1-002",
+    "Language": "csharp",
+    "Difficulty": 1,
+    "Title": "String Variable",
+    "Code": "string name = \"Alice\";\n",
+    "Topics": ["variables", "string"],
+    "Explain": ["Declares a string variable and assigns a literal value."]
+  },
+  {
+    "Id": "cal-cs-d1-003",
+    "Language": "csharp",
+    "Difficulty": 1,
+    "Title": "Boolean Expression",
+    "Code": "bool isReady = true;\nbool isValid = count > 0 && count < 100;\n",
+    "Topics": ["variables", "bool", "expressions"],
+    "Explain": ["Declares two boolean variables.", "The second uses a compound logical expression with && operator."]
+  },
+  {
+    "Id": "cal-cs-d1-004",
+    "Language": "csharp",
+    "Difficulty": 1,
+    "Title": "Array Declaration",
+    "Code": "int[] scores = { 90, 85, 72, 98 };\ndouble average = scores.Average();\n",
+    "Topics": ["arrays", "LINQ"],
+    "Explain": ["Initializes an int array with four values.", "Calls the LINQ Average extension method."]
+  },
+  {
+    "Id": "cal-cs-d1-005",
+    "Language": "csharp",
+    "Difficulty": 1,
+    "Title": "String Interpolation",
+    "Code": "string first = \"Jane\";\nstring last = \"Doe\";\nstring full = $\"{first} {last}\";\nConsole.WriteLine(full);\n",
+    "Topics": ["strings", "interpolation", "console"],
+    "Explain": ["Uses string interpolation with the $ prefix to combine first and last names.", "Writes the result to standard output."]
+  },
+  {
+    "Id": "cal-cs-d2-001",
+    "Language": "csharp",
+    "Difficulty": 2,
+    "Title": "Simple If-Else",
+    "Code": "int temperature = 30;\nstring message;\n\nif (temperature > 25)\n{\n    message = \"It is warm outside.\";\n}\nelse\n{\n    message = \"It is cool outside.\";\n}\n\nConsole.WriteLine(message);\n",
+    "Topics": ["if-else", "control-flow"],
+    "Explain": ["Checks whether the temperature exceeds 25.", "Assigns a different message depending on the branch taken."]
+  },
+  {
+    "Id": "cal-cs-d2-002",
+    "Language": "csharp",
+    "Difficulty": 2,
+    "Title": "Simple Static Method",
+    "Code": "static int Add(int a, int b)\n{\n    return a + b;\n}\n\nint result = Add(3, 7);\nConsole.WriteLine($\"Sum: {result}\");\n",
+    "Topics": ["methods", "static", "return"],
+    "Explain": ["Defines a static method that returns the sum of two integers.", "Calls the method and prints the result using string interpolation."]
+  },
+  {
+    "Id": "cal-cs-d2-003",
+    "Language": "csharp",
+    "Difficulty": 2,
+    "Title": "For Loop with Accumulator",
+    "Code": "int sum = 0;\n\nfor (int i = 1; i <= 10; i++)\n{\n    sum += i;\n}\n\nConsole.WriteLine($\"Total: {sum}\");\n",
+    "Topics": ["loops", "for", "accumulator"],
+    "Explain": ["Iterates from 1 to 10, accumulating the running total.", "Prints the final sum which equals 55."]
+  },
+  {
+    "Id": "cal-cs-d2-004",
+    "Language": "csharp",
+    "Difficulty": 2,
+    "Title": "Switch Expression",
+    "Code": "int dayOfWeek = 3;\n\nstring dayName = dayOfWeek switch\n{\n    1 => \"Monday\",\n    2 => \"Tuesday\",\n    3 => \"Wednesday\",\n    4 => \"Thursday\",\n    5 => \"Friday\",\n    _ => \"Weekend\"\n};\n\nConsole.WriteLine(dayName);\n",
+    "Topics": ["switch", "pattern-matching"],
+    "Explain": ["Uses a switch expression to map an integer to a day name.", "The discard pattern _ acts as the default case."]
+  },
+  {
+    "Id": "cal-cs-d2-005",
+    "Language": "csharp",
+    "Difficulty": 2,
+    "Title": "Null Coalescing",
+    "Code": "string? input = null;\nstring value = input ?? \"default\";\n\nint? count = null;\nint total = count ?? 0;\n\nConsole.WriteLine($\"{value}, {total}\");\n",
+    "Topics": ["nullable", "null-coalescing"],
+    "Explain": ["Uses the ?? operator to provide fallback values for nullable types.", "Both string? and int? demonstrate nullable reference and value types."]
+  },
+  {
+    "Id": "cal-cs-d3-001",
+    "Language": "csharp",
+    "Difficulty": 3,
+    "Title": "Foreach with List",
+    "Code": "var names = new List<string> { \"Alice\", \"Bob\", \"Charlie\" };\nvar upper = new List<string>();\n\nforeach (string name in names)\n{\n    if (name.Length > 3)\n    {\n        upper.Add(name.ToUpper());\n    }\n}\n\nforeach (string u in upper)\n{\n    Console.WriteLine(u);\n}\n",
+    "Topics": ["List", "foreach", "string-methods"],
+    "Explain": ["Iterates over a list of names and filters those with more than 3 characters.", "Converts matching names to uppercase and collects them in a second list."]
+  },
+  {
+    "Id": "cal-cs-d3-002",
+    "Language": "csharp",
+    "Difficulty": 3,
+    "Title": "LINQ Where and Select",
+    "Code": "int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };\n\nvar evens = numbers\n    .Where(n => n % 2 == 0)\n    .Select(n => n * n)\n    .ToArray();\n\nConsole.WriteLine(string.Join(\", \", evens));\n",
+    "Topics": ["LINQ", "Where", "Select", "lambda"],
+    "Explain": ["Filters even numbers from the array using Where.", "Squares each result with Select and materializes to an array."]
+  },
+  {
+    "Id": "cal-cs-d3-003",
+    "Language": "csharp",
+    "Difficulty": 3,
+    "Title": "Dictionary Lookup",
+    "Code": "var scores = new Dictionary<string, int>\n{\n    [\"Alice\"] = 95,\n    [\"Bob\"] = 82,\n    [\"Charlie\"] = 91\n};\n\nif (scores.TryGetValue(\"Bob\", out int score))\n{\n    Console.WriteLine($\"Bob scored {score}\");\n}\nelse\n{\n    Console.WriteLine(\"Not found\");\n}\n",
+    "Topics": ["Dictionary", "TryGetValue", "out"],
+    "Explain": ["Creates a dictionary with indexer-style initialization.", "Uses TryGetValue with an out parameter for safe lookup."]
+  },
+  {
+    "Id": "cal-cs-d3-004",
+    "Language": "csharp",
+    "Difficulty": 3,
+    "Title": "While Loop with Break",
+    "Code": "var items = new Queue<string>();\nitems.Enqueue(\"apple\");\nitems.Enqueue(\"STOP\");\nitems.Enqueue(\"banana\");\n\nwhile (items.Count > 0)\n{\n    string item = items.Dequeue();\n    if (item == \"STOP\")\n    {\n        break;\n    }\n    Console.WriteLine($\"Processing: {item}\");\n}\n",
+    "Topics": ["Queue", "while", "break"],
+    "Explain": ["Processes items from a queue until a sentinel value is encountered.", "The break statement exits the loop when STOP is found."]
+  },
+  {
+    "Id": "cal-cs-d3-005",
+    "Language": "csharp",
+    "Difficulty": 3,
+    "Title": "Try-Catch-Finally",
+    "Code": "static int SafeDivide(int a, int b)\n{\n    try\n    {\n        return a / b;\n    }\n    catch (DivideByZeroException ex)\n    {\n        Console.WriteLine($\"Error: {ex.Message}\");\n        return 0;\n    }\n    finally\n    {\n        Console.WriteLine(\"Division attempted.\");\n    }\n}\n",
+    "Topics": ["exceptions", "try-catch", "finally"],
+    "Explain": ["Wraps integer division in a try-catch to handle divide-by-zero.", "The finally block runs regardless of whether an exception occurred."]
+  },
+  {
+    "Id": "cal-cs-d4-001",
+    "Language": "csharp",
+    "Difficulty": 4,
+    "Title": "Record with Deconstruct",
+    "Code": "public record Point(double X, double Y)\n{\n    public double DistanceTo(Point other)\n    {\n        double dx = X - other.X;\n        double dy = Y - other.Y;\n        return Math.Sqrt(dx * dx + dy * dy);\n    }\n}\n\nvar a = new Point(0, 0);\nvar b = new Point(3, 4);\n\nvar (x, y) = b;\nConsole.WriteLine($\"Point: ({x}, {y})\");\nConsole.WriteLine($\"Distance: {a.DistanceTo(b):F2}\");\n",
+    "Topics": ["record", "deconstruct", "methods"],
+    "Explain": ["Defines a positional record with an instance method.", "Positional records automatically generate a Deconstruct method for tuple-style decomposition."]
+  },
+  {
+    "Id": "cal-cs-d4-002",
+    "Language": "csharp",
+    "Difficulty": 4,
+    "Title": "Class with Properties and Constructor",
+    "Code": "public class Employee\n{\n    public string Name { get; }\n    public string Department { get; set; }\n    public decimal Salary { get; private set; }\n\n    public Employee(string name, string department, decimal salary)\n    {\n        Name = name;\n        Department = department;\n        Salary = salary;\n    }\n\n    public void ApplyRaise(decimal percent)\n    {\n        Salary += Salary * (percent / 100m);\n    }\n\n    public override string ToString()\n        => $\"{Name} ({Department}): {Salary:C}\";\n}\n",
+    "Topics": ["class", "properties", "constructor", "methods"],
+    "Explain": ["Defines a class with mixed property accessibility.", "Includes a constructor, a mutation method, and an overridden ToString."]
+  },
+  {
+    "Id": "cal-cs-d4-003",
+    "Language": "csharp",
+    "Difficulty": 4,
+    "Title": "LINQ GroupBy",
+    "Code": "var orders = new List<(string Customer, string Product, decimal Price)>\n{\n    (\"Alice\", \"Widget\", 9.99m),\n    (\"Bob\", \"Gadget\", 24.50m),\n    (\"Alice\", \"Gizmo\", 14.75m),\n    (\"Bob\", \"Widget\", 9.99m),\n    (\"Charlie\", \"Gadget\", 24.50m)\n};\n\nvar summary = orders\n    .GroupBy(o => o.Customer)\n    .Select(g => new\n    {\n        Customer = g.Key,\n        Total = g.Sum(o => o.Price),\n        Count = g.Count()\n    });\n\nforeach (var s in summary)\n{\n    Console.WriteLine($\"{s.Customer}: {s.Count} items, {s.Total:C}\");\n}\n",
+    "Topics": ["LINQ", "GroupBy", "anonymous-types", "tuples"],
+    "Explain": ["Groups a list of value tuples by customer name.", "Projects each group into an anonymous type with aggregated totals."]
+  },
+  {
+    "Id": "cal-cs-d4-004",
+    "Language": "csharp",
+    "Difficulty": 4,
+    "Title": "Interface Implementation",
+    "Code": "public interface IShape\n{\n    double Area { get; }\n    string Describe();\n}\n\npublic class Circle : IShape\n{\n    public double Radius { get; }\n\n    public Circle(double radius) => Radius = radius;\n\n    public double Area => Math.PI * Radius * Radius;\n\n    public string Describe()\n        => $\"Circle with radius {Radius:F2} and area {Area:F2}\";\n}\n\nIShape shape = new Circle(5.0);\nConsole.WriteLine(shape.Describe());\n",
+    "Topics": ["interface", "class", "properties", "polymorphism"],
+    "Explain": ["Defines an interface with a property and a method.", "Circle implements the interface using expression-bodied members."]
+  },
+  {
+    "Id": "cal-cs-d4-005",
+    "Language": "csharp",
+    "Difficulty": 4,
+    "Title": "Enum with Extension Method",
+    "Code": "public enum LogLevel\n{\n    Trace,\n    Debug,\n    Info,\n    Warning,\n    Error,\n    Critical\n}\n\npublic static class LogLevelExtensions\n{\n    public static ConsoleColor ToColor(this LogLevel level) => level switch\n    {\n        LogLevel.Trace => ConsoleColor.Gray,\n        LogLevel.Debug => ConsoleColor.Cyan,\n        LogLevel.Info => ConsoleColor.White,\n        LogLevel.Warning => ConsoleColor.Yellow,\n        LogLevel.Error => ConsoleColor.Red,\n        LogLevel.Critical => ConsoleColor.DarkRed,\n        _ => ConsoleColor.White\n    };\n}\n",
+    "Topics": ["enum", "extension-method", "switch-expression"],
+    "Explain": ["Defines an enum for log severity levels.", "An extension method maps each level to a console color using a switch expression."]
+  },
+  {
+    "Id": "cal-cs-d5-001",
+    "Language": "csharp",
+    "Difficulty": 5,
+    "Title": "Generic Repository",
+    "Code": "public class Repository<T> where T : class\n{\n    private readonly List<T> _items = new();\n\n    public void Add(T item)\n    {\n        ArgumentNullException.ThrowIfNull(item);\n        _items.Add(item);\n    }\n\n    public IReadOnlyList<T> GetAll() => _items.AsReadOnly();\n\n    public T? Find(Func<T, bool> predicate)\n    {\n        foreach (T item in _items)\n        {\n            if (predicate(item))\n            {\n                return item;\n            }\n        }\n        return null;\n    }\n\n    public int RemoveWhere(Func<T, bool> predicate)\n        => _items.RemoveAll(new Predicate<T>(predicate));\n}\n",
+    "Topics": ["generics", "constraints", "Func", "Predicate"],
+    "Explain": ["A generic repository with a class constraint.", "Uses Func delegates for flexible querying and removal."]
+  },
+  {
+    "Id": "cal-cs-d5-002",
+    "Language": "csharp",
+    "Difficulty": 5,
+    "Title": "Async File Reader",
+    "Code": "public static async Task<Dictionary<string, int>> CountWordsAsync(string path)\n{\n    var counts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);\n\n    await using var stream = File.OpenRead(path);\n    using var reader = new StreamReader(stream);\n\n    string? line;\n    while ((line = await reader.ReadLineAsync()) is not null)\n    {\n        string[] words = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);\n        foreach (string word in words)\n        {\n            string clean = word.Trim('.', ',', '!', '?');\n            if (clean.Length > 0)\n            {\n                counts[clean] = counts.GetValueOrDefault(clean) + 1;\n            }\n        }\n    }\n\n    return counts;\n}\n",
+    "Topics": ["async", "await", "File", "Dictionary", "StreamReader"],
+    "Explain": ["Reads a file asynchronously line by line.", "Splits each line into words, trims punctuation, and counts occurrences in a case-insensitive dictionary."]
+  },
+  {
+    "Id": "cal-cs-d5-003",
+    "Language": "csharp",
+    "Difficulty": 5,
+    "Title": "Event Publisher",
+    "Code": "public class TemperatureSensor\n{\n    public event EventHandler<double>? TemperatureChanged;\n\n    private double _current;\n\n    public double Current\n    {\n        get => _current;\n        private set\n        {\n            if (Math.Abs(_current - value) > 0.01)\n            {\n                _current = value;\n                TemperatureChanged?.Invoke(this, value);\n            }\n        }\n    }\n\n    public void RecordReading(double temperature)\n    {\n        Current = temperature;\n    }\n}\n\nvar sensor = new TemperatureSensor();\nsensor.TemperatureChanged += (_, temp) =>\n    Console.WriteLine($\"Temperature: {temp:F1}C\");\n\nsensor.RecordReading(22.5);\nsensor.RecordReading(23.1);\n",
+    "Topics": ["events", "EventHandler", "properties", "lambda"],
+    "Explain": ["A sensor class fires an event when the temperature changes beyond a threshold.", "Subscribers attach via a lambda that prints the new reading."]
+  },
+  {
+    "Id": "cal-cs-d5-004",
+    "Language": "csharp",
+    "Difficulty": 5,
+    "Title": "Async Parallel Tasks",
+    "Code": "public static async Task<int[]> FetchAllAsync(string[] urls)\n{\n    using var client = new HttpClient();\n    client.Timeout = TimeSpan.FromSeconds(10);\n\n    var tasks = urls.Select(async url =>\n    {\n        try\n        {\n            var response = await client.GetAsync(url);\n            var content = await response.Content.ReadAsStringAsync();\n            return content.Length;\n        }\n        catch (HttpRequestException)\n        {\n            return -1;\n        }\n    });\n\n    int[] results = await Task.WhenAll(tasks);\n    return results;\n}\n",
+    "Topics": ["async", "Task.WhenAll", "HttpClient", "LINQ", "error-handling"],
+    "Explain": ["Sends HTTP requests to multiple URLs in parallel.", "Each task returns the content length or -1 on failure, collected via Task.WhenAll."]
+  },
+  {
+    "Id": "cal-cs-d5-005",
+    "Language": "csharp",
+    "Difficulty": 5,
+    "Title": "IDisposable Pattern",
+    "Code": "public class ManagedBuffer : IDisposable\n{\n    private byte[]? _buffer;\n    private bool _disposed;\n\n    public ManagedBuffer(int size)\n    {\n        _buffer = new byte[size];\n    }\n\n    public Span<byte> GetSpan()\n    {\n        ObjectDisposedException.ThrowIf(_disposed, this);\n        return _buffer.AsSpan();\n    }\n\n    public void Dispose()\n    {\n        if (!_disposed)\n        {\n            _buffer = null;\n            _disposed = true;\n        }\n        GC.SuppressFinalize(this);\n    }\n}\n",
+    "Topics": ["IDisposable", "Span", "dispose-pattern"],
+    "Explain": ["Implements IDisposable to release a byte buffer.", "Uses ObjectDisposedException.ThrowIf for guarded access after disposal."]
+  },
+  {
+    "Id": "cal-cs-d6-001",
+    "Language": "csharp",
+    "Difficulty": 6,
+    "Title": "Expression-Bodied Fluent Builder",
+    "Code": "public class QueryBuilder\n{\n    private readonly List<string> _columns = new();\n    private string _table = string.Empty;\n    private readonly List<string> _conditions = new();\n    private string? _orderBy;\n    private int? _limit;\n\n    public QueryBuilder Select(params string[] columns)\n    {\n        _columns.AddRange(columns);\n        return this;\n    }\n\n    public QueryBuilder From(string table) { _table = table; return this; }\n    public QueryBuilder Where(string condition) { _conditions.Add(condition); return this; }\n    public QueryBuilder OrderBy(string column) { _orderBy = column; return this; }\n    public QueryBuilder Limit(int count) { _limit = count; return this; }\n\n    public string Build()\n    {\n        var sb = new System.Text.StringBuilder();\n        sb.Append($\"SELECT {string.Join(\", \", _columns)} FROM {_table}\");\n\n        if (_conditions.Count > 0)\n            sb.Append($\" WHERE {string.Join(\" AND \", _conditions)}\");\n\n        if (_orderBy is not null)\n            sb.Append($\" ORDER BY {_orderBy}\");\n\n        if (_limit.HasValue)\n            sb.Append($\" LIMIT {_limit.Value}\");\n\n        return sb.ToString();\n    }\n}\n",
+    "Topics": ["fluent-api", "builder-pattern", "StringBuilder", "params"],
+    "Explain": ["A fluent query builder that chains method calls to construct a SQL string.", "Each setter method returns this to enable chaining, and Build assembles the final query."]
+  },
+  {
+    "Id": "cal-cs-d6-002",
+    "Language": "csharp",
+    "Difficulty": 6,
+    "Title": "LINQ Expression Tree",
+    "Code": "using System.Linq.Expressions;\n\npublic static class FilterBuilder\n{\n    public static Func<T, bool> BuildPredicate<T>(\n        string propertyName, object value)\n    {\n        var param = Expression.Parameter(typeof(T), \"x\");\n        var property = Expression.Property(param, propertyName);\n        var constant = Expression.Constant(value);\n        var converted = Expression.Convert(constant, property.Type);\n        var equal = Expression.Equal(property, converted);\n        var lambda = Expression.Lambda<Func<T, bool>>(equal, param);\n        return lambda.Compile();\n    }\n}\n\nvar people = new List<(string Name, int Age)>\n{\n    (\"Alice\", 30), (\"Bob\", 25), (\"Charlie\", 30)\n};\n\nvar filter = FilterBuilder.BuildPredicate<(string Name, int Age)>(\"Age\", 30);\nvar matches = people.Where(filter).ToList();\n\nforeach (var p in matches)\n{\n    Console.WriteLine(p.Name);\n}\n",
+    "Topics": ["expressions", "expression-trees", "generics", "reflection", "LINQ"],
+    "Explain": ["Dynamically builds a predicate using the System.Linq.Expressions API.", "Constructs a lambda that checks equality on a named property, then compiles it to a delegate."]
+  },
+  {
+    "Id": "cal-cs-d6-003",
+    "Language": "csharp",
+    "Difficulty": 6,
+    "Title": "Channel Producer-Consumer",
+    "Code": "using System.Threading.Channels;\n\npublic static async Task RunPipelineAsync()\n{\n    var channel = Channel.CreateBounded<int>(new BoundedChannelOptions(10)\n    {\n        FullMode = BoundedChannelFullMode.Wait\n    });\n\n    var producer = Task.Run(async () =>\n    {\n        for (int i = 0; i < 50; i++)\n        {\n            await channel.Writer.WriteAsync(i);\n            await Task.Delay(10);\n        }\n        channel.Writer.Complete();\n    });\n\n    var consumer = Task.Run(async () =>\n    {\n        await foreach (int item in channel.Reader.ReadAllAsync())\n        {\n            int squared = item * item;\n            Console.WriteLine($\"{item} => {squared}\");\n        }\n    });\n\n    await Task.WhenAll(producer, consumer);\n}\n",
+    "Topics": ["Channel", "async", "producer-consumer", "Task.Run", "IAsyncEnumerable"],
+    "Explain": ["Sets up a bounded channel for backpressure-aware producer-consumer.", "The producer writes integers, the consumer reads them asynchronously and squares each value."]
+  },
+  {
+    "Id": "cal-cs-d6-004",
+    "Language": "csharp",
+    "Difficulty": 6,
+    "Title": "Delegate Chain with Middleware",
+    "Code": "public delegate Task RequestDelegate(HttpContext context);\n\npublic class HttpContext\n{\n    public string Path { get; set; } = \"/\";\n    public int StatusCode { get; set; } = 200;\n    public Dictionary<string, string> Headers { get; } = new();\n}\n\npublic static class Pipeline\n{\n    public static RequestDelegate Build(\n        RequestDelegate handler,\n        params Func<RequestDelegate, RequestDelegate>[] middleware)\n    {\n        RequestDelegate current = handler;\n\n        for (int i = middleware.Length - 1; i >= 0; i--)\n        {\n            current = middleware[i](current);\n        }\n\n        return current;\n    }\n}\n\nvar pipeline = Pipeline.Build(\n    ctx => { ctx.StatusCode = 200; return Task.CompletedTask; },\n    next => async ctx =>\n    {\n        ctx.Headers[\"X-Request-Id\"] = Guid.NewGuid().ToString();\n        await next(ctx);\n    },\n    next => async ctx =>\n    {\n        var sw = System.Diagnostics.Stopwatch.StartNew();\n        await next(ctx);\n        Console.WriteLine($\"{ctx.Path} took {sw.ElapsedMilliseconds}ms\");\n    }\n);\n",
+    "Topics": ["delegates", "middleware", "Func", "async", "pipeline"],
+    "Explain": ["Builds a middleware pipeline by composing delegates in reverse order.", "Each middleware wraps the next delegate, enabling request/response processing patterns."]
+  },
+  {
+    "Id": "cal-cs-d6-005",
+    "Language": "csharp",
+    "Difficulty": 6,
+    "Title": "Custom LINQ Operator",
+    "Code": "public static class EnumerableExtensions\n{\n    public static IEnumerable<IReadOnlyList<T>> Batch<T>(\n        this IEnumerable<T> source, int size)\n    {\n        ArgumentOutOfRangeException.ThrowIfLessThan(size, 1);\n\n        var batch = new List<T>(size);\n\n        foreach (T item in source)\n        {\n            batch.Add(item);\n            if (batch.Count == size)\n            {\n                yield return batch.AsReadOnly();\n                batch = new List<T>(size);\n            }\n        }\n\n        if (batch.Count > 0)\n        {\n            yield return batch.AsReadOnly();\n        }\n    }\n}\n\nvar items = Enumerable.Range(1, 23);\nforeach (var group in items.Batch(5))\n{\n    Console.WriteLine($\"[{string.Join(\", \", group)}]\");\n}\n",
+    "Topics": ["extension-methods", "yield", "IEnumerable", "generics", "LINQ"],
+    "Explain": ["Implements a Batch extension method that partitions a sequence into fixed-size chunks.", "Uses yield return for lazy evaluation and emits the final partial batch."]
+  },
+  {
+    "Id": "cal-cs-d7-001",
+    "Language": "csharp",
+    "Difficulty": 7,
+    "Title": "Pattern Matching State Machine",
+    "Code": "public abstract record OrderState;\npublic record Pending(DateTime Created) : OrderState;\npublic record Confirmed(DateTime Created, string ConfirmationId) : OrderState;\npublic record Shipped(DateTime Created, string TrackingNumber) : OrderState;\npublic record Delivered(DateTime Created, DateTime DeliveredAt) : OrderState;\npublic record Cancelled(DateTime Created, string Reason) : OrderState;\n\npublic static class OrderProcessor\n{\n    public static OrderState Advance(OrderState state, string action) =>\n        (state, action) switch\n        {\n            (Pending p, \"confirm\") =>\n                new Confirmed(p.Created, Guid.NewGuid().ToString(\"N\")[..8]),\n\n            (Confirmed c, \"ship\") =>\n                new Shipped(c.Created, $\"TRK-{Random.Shared.Next(100000, 999999)}\"),\n\n            (Shipped s, \"deliver\") =>\n                new Delivered(s.Created, DateTime.UtcNow),\n\n            (Pending p, \"cancel\") =>\n                new Cancelled(p.Created, \"Customer requested cancellation\"),\n\n            (Confirmed c, \"cancel\") =>\n                new Cancelled(c.Created, \"Cancelled before shipment\"),\n\n            (Cancelled, _) =>\n                throw new InvalidOperationException(\"Cannot advance a cancelled order.\"),\n\n            (Delivered, _) =>\n                throw new InvalidOperationException(\"Order already delivered.\"),\n\n            _ => throw new InvalidOperationException(\n                $\"Invalid transition: {state.GetType().Name} + {action}\")\n        };\n\n    public static string Describe(OrderState state) => state switch\n    {\n        Pending { Created: var c } => $\"Pending since {c:g}\",\n        Confirmed { ConfirmationId: var id } => $\"Confirmed: {id}\",\n        Shipped { TrackingNumber: var tn } => $\"Shipped: {tn}\",\n        Delivered { DeliveredAt: var d } => $\"Delivered at {d:g}\",\n        Cancelled { Reason: var r } => $\"Cancelled: {r}\",\n        _ => \"Unknown state\"\n    };\n}\n",
+    "Topics": ["records", "pattern-matching", "state-machine", "switch-expression", "inheritance"],
+    "Explain": ["Models order lifecycle states as a record hierarchy.", "Uses tuple pattern matching on (state, action) to enforce valid state transitions.", "A secondary switch destructures each state for display."]
+  },
+  {
+    "Id": "cal-cs-d7-002",
+    "Language": "csharp",
+    "Difficulty": 7,
+    "Title": "Generic Pipeline with Async Transforms",
+    "Code": "public class AsyncPipeline<TIn, TOut>\n{\n    private readonly Func<TIn, CancellationToken, Task<TOut>> _execute;\n\n    private AsyncPipeline(Func<TIn, CancellationToken, Task<TOut>> execute)\n    {\n        _execute = execute;\n    }\n\n    public static AsyncPipeline<T, T> Create<T>() =>\n        new(static (input, _) => Task.FromResult(input));\n\n    public AsyncPipeline<TIn, TNext> Then<TNext>(\n        Func<TOut, CancellationToken, Task<TNext>> transform)\n    {\n        var previous = _execute;\n        return new AsyncPipeline<TIn, TNext>(async (input, ct) =>\n        {\n            ct.ThrowIfCancellationRequested();\n            TOut intermediate = await previous(input, ct);\n            return await transform(intermediate, ct);\n        });\n    }\n\n    public AsyncPipeline<TIn, TOut> WithTimeout(TimeSpan timeout)\n    {\n        var inner = _execute;\n        return new AsyncPipeline<TIn, TOut>(async (input, ct) =>\n        {\n            using var cts = CancellationTokenSource.CreateLinkedTokenSource(ct);\n            cts.CancelAfter(timeout);\n            return await inner(input, cts.Token);\n        });\n    }\n\n    public Task<TOut> ExecuteAsync(TIn input, CancellationToken ct = default)\n        => _execute(input, ct);\n}\n\nvar pipeline = AsyncPipeline<string, string>.Create<string>()\n    .Then(async (s, ct) => { await Task.Delay(10, ct); return s.Trim(); })\n    .Then(async (s, ct) => { await Task.Delay(10, ct); return s.ToUpperInvariant(); })\n    .WithTimeout(TimeSpan.FromSeconds(5));\n\nstring result = await pipeline.ExecuteAsync(\"  hello world  \");\nConsole.WriteLine(result);\n",
+    "Topics": ["generics", "async", "CancellationToken", "pipeline", "Func", "closures"],
+    "Explain": ["A type-safe async pipeline that chains transforms with cancellation support.", "Each Then call captures the previous stage in a closure, composing async functions.", "WithTimeout wraps the pipeline with a linked CancellationTokenSource."]
+  },
+  {
+    "Id": "cal-cs-d7-003",
+    "Language": "csharp",
+    "Difficulty": 7,
+    "Title": "Recursive Tree with Pattern Matching",
+    "Code": "public abstract record Expr;\npublic record Num(double Value) : Expr;\npublic record Var(string Name) : Expr;\npublic record BinOp(Expr Left, char Op, Expr Right) : Expr;\npublic record UnaryOp(char Op, Expr Operand) : Expr;\npublic record LetIn(string Name, Expr Value, Expr Body) : Expr;\n\npublic static class Evaluator\n{\n    public static double Eval(\n        Expr expr,\n        IReadOnlyDictionary<string, double> env) => expr switch\n    {\n        Num { Value: var v } => v,\n\n        Var { Name: var n } => env.TryGetValue(n, out double val)\n            ? val\n            : throw new KeyNotFoundException($\"Undefined variable: {n}\"),\n\n        BinOp { Left: var l, Op: var op, Right: var r } => op switch\n        {\n            '+' => Eval(l, env) + Eval(r, env),\n            '-' => Eval(l, env) - Eval(r, env),\n            '*' => Eval(l, env) * Eval(r, env),\n            '/' => Eval(r, env) is 0.0\n                ? throw new DivideByZeroException()\n                : Eval(l, env) / Eval(r, env),\n            _ => throw new NotSupportedException($\"Unknown operator: {op}\")\n        },\n\n        UnaryOp { Op: '-', Operand: var o } => -Eval(o, env),\n\n        LetIn { Name: var name, Value: var value, Body: var body } =>\n            Eval(body, new Dictionary<string, double>(env)\n            {\n                [name] = Eval(value, env)\n            }),\n\n        _ => throw new NotSupportedException($\"Unknown expression: {expr}\")\n    };\n}\n\n// let x = 3 in (x + 2) * -x\nvar program = new LetIn(\"x\", new Num(3),\n    new BinOp(\n        new BinOp(new Var(\"x\"), '+', new Num(2)),\n        '*',\n        new UnaryOp('-', new Var(\"x\"))));\n\nvar result = Evaluator.Eval(program, new Dictionary<string, double>());\nConsole.WriteLine($\"Result: {result}\");\n",
+    "Topics": ["records", "pattern-matching", "recursion", "expression-tree", "nested-switch"],
+    "Explain": ["Models a simple expression language with records for the AST.", "The evaluator uses deeply nested pattern matching with property patterns and nested switch expressions.", "LetIn introduces variable bindings by extending the environment dictionary."]
+  }
+]

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="80" fill="#512BD4"/>
+  <g transform="translate(100, 100)">
+    <!-- Speaker body -->
+    <path d="M40 120 L100 120 L180 50 L180 262 L100 192 L40 192 Z" fill="white"/>
+    <!-- Sound waves -->
+    <path d="M220 96 Q280 156 220 216" stroke="white" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <path d="M260 50 Q350 156 260 262" stroke="white" stroke-width="20" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

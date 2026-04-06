@@ -1,0 +1,13 @@
+{
+  "name": "ai-jam-session",
+  "version": "0.1.0",
+  "description": "AI piano player with 100-song library, teaching system, and jam sessions — plays through your speakers, no external software required.",
+  "author": {
+    "name": "mcp-tool-shop",
+    "email": "64996768+mcp-tool-shop@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/ai_jam_session",
+  "repository": "https://github.com/mcp-tool-shop-org/jam-session-plugin",
+  "license": "MIT",
+  "keywords": ["piano", "audio", "music", "mcp", "teaching", "jam-session"]
+}

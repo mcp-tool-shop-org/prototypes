@@ -1,0 +1,24 @@
+{
+  "name": "@sonic-core/engine",
+  "version": "1.0.1",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "@sonic-core/types": "1.0.0"
+  },
+  "scripts": {
+    "build": "npx tsc -b",
+    "clean": "rm -rf dist *.tsbuildinfo",
+    "test": "node --import tsx/esm --test src/**/*.test.ts"
+  }
+}

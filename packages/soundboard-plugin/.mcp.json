@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "voice-soundboard": {
+      "command": "python",
+      "args": ["-m", "voice_soundboard_plugin.bridge.stdio_bridge"],
+      "env": {
+        "PYTHONPATH": "${CLAUDE_PLUGIN_ROOT};F:/AI/voice-soundboard",
+        "VOICE_SOUNDBOARD_MODELS": "F:/AI/voice-soundboard/models"
+      },
+      "cwd": "${CLAUDE_PLUGIN_ROOT}"
+    }
+  }
+}

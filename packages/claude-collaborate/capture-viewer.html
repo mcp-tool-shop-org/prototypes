@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self' http://localhost:8080; img-src 'self' http://localhost:8877 http://localhost:8878 http://localhost:8080 blob:; media-src 'self' http://localhost:8877 http://localhost:8878 http://localhost:8080 blob:;">
+    <title>Capture Viewer</title>
+    <link rel="stylesheet" href="collaborate-base.css">
+    <style>
+        :root {
+            --bg-dark: #0d1117;
+            --bg-card: rgba(22, 27, 34, 0.95);
+            --bg-input: rgba(33, 38, 45, 0.9);
+            --border: rgba(48, 54, 61, 0.8);
+            --text: #e6edf3;
+            --text-dim: #8b949e;
+            --accent: #58a6ff;
+            --success: #3fb950;
+            --warning: #d29922;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header h1 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg-input);
+            color: var(--text);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            border-color: var(--accent);
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .main {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Sidebar - Capture List */
+        .sidebar {
+            width: 280px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sidebar-header h2 {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-dim);
+        }
+
+        .capture-count {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            background: rgba(88, 166, 255, 0.2);
+            border-radius: 10px;
+            color: var(--accent);
+        }
+
+        .capture-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px;
+        }
+
+        .capture-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 4px;
+        }
+
+        .capture-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .capture-item.active {
+            background: rgba(88, 166, 255, 0.15);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+        }
+
+        .capture-thumb {
+            width: 48px;
+            height: 36px;
+            border-radius: 4px;
+            background: var(--bg-input);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .capture-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .capture-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .capture-name {
+            font-size: 0.85rem;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .capture-meta {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        .capture-type {
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        .capture-type.screenshot {
+            background: rgba(63, 185, 80, 0.2);
+            color: var(--success);
+        }
+
+        .capture-type.recording {
+            background: rgba(210, 153, 34, 0.2);
+            color: var(--warning);
+        }
+
+        .capture-type.clipboard {
+            background: rgba(163, 113, 247, 0.2);
+            color: #a371f7;
+        }
+
+        /* Main Viewer */
+        .viewer {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #000;
+        }
+
+        .viewer-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: auto;
+        }
+
+        .viewer-content img.capture-display {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .viewer-content video {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--text-dim);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .empty-state p {
+            font-size: 0.9rem;
+            max-width: 300px;
+            line-height: 1.5;
+        }
+
+        /* Annotation canvas overlay */
+        .annotation-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .annotation-container img.capture-display {
+            display: block;
+        }
+
+        .annotation-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: crosshair;
+        }
+
+        .annotation-toolbar {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 6px;
+            z-index: 10;
+        }
+
+        .annotation-toolbar .btn {
+            padding: 6px 10px;
+            font-size: 0.75rem;
+            background: rgba(22, 27, 34, 0.9);
+        }
+
+        /* Viewer Toolbar */
+        .viewer-toolbar {
+            padding: 12px 20px;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .viewer-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .viewer-info-item {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        .viewer-info-item strong {
+            color: var(--text);
+        }
+
+        .viewer-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Zoom Controls */
+        .zoom-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 16px;
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+        }
+
+        .zoom-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: var(--bg-input);
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .zoom-btn:hover {
+            border-color: var(--accent);
+        }
+
+        .zoom-level {
+            font-size: 0.8rem;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        /* Drag and Drop Overlay */
+        .drop-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(88, 166, 255, 0.1);
+            border: 3px dashed var(--accent);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .drop-overlay.active {
+            display: flex;
+        }
+
+        .drop-message {
+            background: var(--bg-card);
+            padding: 30px 50px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .drop-message h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            gap: 8px;
+        }
+
+        .filter-btn {
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: transparent;
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent);
+            color: var(--text);
+        }
+
+        .filter-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        /* Context Menu */
+        .context-menu {
+            display: none;
+            position: fixed;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 6px;
+            min-width: 160px;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .context-menu.active {
+            display: block;
+        }
+
+        .context-item {
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .context-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .context-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 4px 0;
+        }
+
+        /* Toast notification */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .toast {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 10px 20px;
+            border-radius: 8px;
+            animation: toast-in 0.3s ease;
+        }
+
+        @keyframes toast-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Fallback file input styling */
+        .file-input-fallback {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <noscript><p style="color:#e0e0e0;text-align:center;padding:40px;font-family:system-ui">This tool requires JavaScript to run.</p></noscript>
+    <header class="header">
+        <h1>
+            <span>&#128247;</span>
+            Capture Viewer
+        </h1>
+        <div class="header-actions">
+            <button class="btn btn-primary" id="select-folder-btn" onclick="selectFolder()" aria-label="Select a folder of images">
+                &#128194; Select Folder
+            </button>
+            <input type="file" id="folder-input-fallback" class="file-input-fallback" webkitdirectory multiple accept="image/png,image/jpeg,image/gif,image/webp" aria-label="Select folder of images">
+            <button class="btn" onclick="takeScreenshot()" aria-label="Take screenshot">
+                &#128248; Screenshot
+            </button>
+            <button class="btn" onclick="openSnippingTool()" aria-label="Open snipping tool">
+                &#9986; Snip
+            </button>
+            <button class="btn" onclick="refreshCaptures()" aria-label="Refresh captures list">
+                &#8635; Refresh
+            </button>
+        </div>
+    </header>
+
+    <main class="main">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Captures</h2>
+                <span class="capture-count" id="capture-count">0</span>
+            </div>
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="screenshot">Screenshots</button>
+                <button class="filter-btn" data-filter="recording">Recordings</button>
+                <button class="filter-btn" data-filter="clipboard">Clipboard</button>
+            </div>
+            <div class="capture-list" id="capture-list">
+                <!-- Captures populated by JS -->
+            </div>
+        </aside>
+
+        <div class="viewer">
+            <div class="viewer-content" id="viewer-content">
+                <div class="empty-state">
+                    <div class="empty-state-icon">&#128247;</div>
+                    <h3>No capture selected</h3>
+                    <p>Select a folder of images, paste from clipboard, or drag files here to get started.</p>
+                </div>
+            </div>
+            <div class="viewer-toolbar" id="viewer-toolbar" style="display: none;">
+                <div class="viewer-info">
+                    <span class="viewer-info-item"><strong id="info-name">-</strong></span>
+                    <span class="viewer-info-item" id="info-size">-</span>
+                    <span class="viewer-info-item" id="info-date">-</span>
+                </div>
+                <div class="zoom-controls">
+                    <button class="zoom-btn" onclick="zoomOut()" aria-label="Zoom out">-</button>
+                    <span class="zoom-level" id="zoom-level">100%</span>
+                    <button class="zoom-btn" onclick="zoomIn()" aria-label="Zoom in">+</button>
+                    <button class="zoom-btn" onclick="resetZoom()" aria-label="Reset zoom">&#8634;</button>
+                </div>
+                <div class="viewer-actions">
+                    <button class="btn" onclick="clearAnnotations()" aria-label="Clear annotations">&#128465; Clear Draw</button>
+                    <button class="btn" onclick="copyToClipboard()">&#128203; Copy</button>
+                    <button class="btn" onclick="deleteCapture()">&#128465; Delete</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="drop-overlay" id="drop-overlay">
+        <div class="drop-message">
+            <h3>&#128206; Drop to Import</h3>
+            <p>Release to add this file to captures</p>
+        </div>
+    </div>
+
+    <div class="context-menu" id="context-menu">
+        <div class="context-item" onclick="copyToClipboard()">&#128203; Copy to Clipboard</div>
+        <div class="context-item" onclick="copyPath()">&#128196; Copy Path</div>
+        <div class="context-divider"></div>
+        <div class="context-item" onclick="renameCapture()">&#9998; Rename</div>
+        <div class="context-divider"></div>
+        <div class="context-item" onclick="deleteCapture()">&#128465; Delete</div>
+    </div>
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <script>
+        // State
+        let captures = [];
+        let selectedCapture = null;
+        let currentFilter = 'all';
+        let zoomLevel = 100;
+        const objectURLs = new Set();
+        let dirHandle = null; // File System Access API directory handle
+
+        // Annotation state
+        let annotationCanvas = null;
+        let annotationCtx = null;
+        let isDrawing = false;
+
+        // IndexedDB for persisting directory handle
+        const DB_NAME = 'capture-viewer-db';
+        const DB_STORE = 'handles';
+
+        function openDB() {
+            return new Promise((resolve, reject) => {
+                const req = indexedDB.open(DB_NAME, 1);
+                req.onupgradeneeded = () => {
+                    req.result.createObjectStore(DB_STORE);
+                };
+                req.onsuccess = () => resolve(req.result);
+                req.onerror = () => reject(req.error);
+            });
+        }
+
+        async function saveDirHandle(handle) {
+            try {
+                const db = await openDB();
+                const tx = db.transaction(DB_STORE, 'readwrite');
+                tx.objectStore(DB_STORE).put(handle, 'dirHandle');
+                await new Promise((res, rej) => { tx.oncomplete = res; tx.onerror = rej; });
+            } catch (e) {
+                console.warn('Could not save directory handle:', e);
+            }
+        }
+
+        async function loadDirHandle() {
+            try {
+                const db = await openDB();
+                const tx = db.transaction(DB_STORE, 'readonly');
+                const req = tx.objectStore(DB_STORE).get('dirHandle');
+                return new Promise((res) => {
+                    req.onsuccess = () => res(req.result || null);
+                    req.onerror = () => res(null);
+                });
+            } catch (e) {
+                return null;
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            setupEventListeners();
+            // Try to restore a saved directory handle
+            const savedHandle = await loadDirHandle();
+            if (savedHandle) {
+                try {
+                    // Verify we still have permission
+                    const perm = await savedHandle.queryPermission({ mode: 'read' });
+                    if (perm === 'granted') {
+                        dirHandle = savedHandle;
+                        await loadFromDirectory(dirHandle);
+                        return;
+                    }
+                    // If prompt needed, we need user gesture — show button state
+                } catch (e) {
+                    console.log('Saved handle expired');
+                }
+            }
+            // No saved handle or no permission — show empty state
+            renderCaptures();
+        });
+
+        function setupEventListeners() {
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentFilter = btn.dataset.filter;
+                    renderCaptures();
+                });
+            });
+
+            // Drag and drop
+            const dropOverlay = document.getElementById('drop-overlay');
+            document.body.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropOverlay.classList.add('active');
+            });
+
+            document.body.addEventListener('dragleave', (e) => {
+                if (e.target === document.body || e.target === dropOverlay) {
+                    dropOverlay.classList.remove('active');
+                }
+            });
+
+            document.body.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropOverlay.classList.remove('active');
+                handleDrop(e.dataTransfer.files);
+            });
+
+            // Context menu
+            document.addEventListener('click', () => {
+                document.getElementById('context-menu').classList.remove('active');
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Delete' && selectedCapture) {
+                    deleteCapture();
+                } else if (e.key === 'c' && e.ctrlKey && selectedCapture) {
+                    copyToClipboard();
+                }
+            });
+
+            // Clipboard paste capture
+            document.addEventListener('paste', (e) => {
+                const items = e.clipboardData && e.clipboardData.items;
+                if (!items) return;
+                for (const item of items) {
+                    if (item.type.startsWith('image/')) {
+                        e.preventDefault();
+                        const blob = item.getAsFile();
+                        if (!blob) continue;
+                        const url = URL.createObjectURL(blob);
+                        objectURLs.add(url);
+                        const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+                        const cap = {
+                            name: `clipboard-${timestamp}.png`,
+                            blobUrl: url,
+                            type: 'clipboard',
+                            size: blob.size,
+                            created: new Date().toISOString()
+                        };
+                        captures.unshift(cap);
+                        renderCaptures();
+                        selectCaptureByRef(cap);
+                        showToast('Capture added from clipboard');
+                        break;
+                    }
+                }
+            });
+
+            // Fallback file input for Firefox
+            document.getElementById('folder-input-fallback').addEventListener('change', (e) => {
+                handleFolderInputFiles(e.target.files);
+            });
+        }
+
+        // Select folder using File System Access API or fallback
+        async function selectFolder() {
+            if ('showDirectoryPicker' in window) {
+                try {
+                    dirHandle = await window.showDirectoryPicker({ mode: 'read' });
+                    await saveDirHandle(dirHandle);
+                    await loadFromDirectory(dirHandle);
+                } catch (e) {
+                    if (e.name !== 'AbortError') {
+                        console.error('Directory picker error:', e);
+                        showToast('Could not open directory');
+                    }
+                }
+            } else {
+                // Fallback for Firefox: use file input with webkitdirectory
+                document.getElementById('folder-input-fallback').click();
+            }
+        }
+
+        async function loadFromDirectory(handle) {
+            captures = [];
+            // Revoke old blob URLs
+            for (const url of objectURLs) {
+                URL.revokeObjectURL(url);
+            }
+            objectURLs.clear();
+
+            const imageExts = ['.png', '.jpg', '.jpeg', '.gif', '.webp'];
+            for await (const entry of handle.values()) {
+                if (entry.kind !== 'file') continue;
+                const name = entry.name.toLowerCase();
+                if (!imageExts.some(ext => name.endsWith(ext))) continue;
+
+                try {
+                    const file = await entry.getFile();
+                    const url = URL.createObjectURL(file);
+                    objectURLs.add(url);
+                    captures.push({
+                        name: entry.name,
+                        blobUrl: url,
+                        type: 'screenshot',
+                        size: file.size,
+                        created: file.lastModified ? new Date(file.lastModified).toISOString() : new Date().toISOString()
+                    });
+                } catch (e) {
+                    console.warn('Could not read file:', entry.name, e);
+                }
+            }
+
+            // Sort by created date, newest first
+            captures.sort((a, b) => new Date(b.created) - new Date(a.created));
+            renderCaptures();
+            if (captures.length > 0) {
+                showToast(`Loaded ${captures.length} image(s) from folder`);
+            } else {
+                showToast('No image files found in selected folder');
+            }
+        }
+
+        // Handle fallback file input (Firefox)
+        function handleFolderInputFiles(files) {
+            captures = [];
+            for (const url of objectURLs) {
+                URL.revokeObjectURL(url);
+            }
+            objectURLs.clear();
+
+            const imageExts = ['.png', '.jpg', '.jpeg', '.gif', '.webp'];
+            for (const file of files) {
+                const name = file.name.toLowerCase();
+                if (!imageExts.some(ext => name.endsWith(ext))) continue;
+                const url = URL.createObjectURL(file);
+                objectURLs.add(url);
+                captures.push({
+                    name: file.name,
+                    blobUrl: url,
+                    type: 'screenshot',
+                    size: file.size,
+                    created: file.lastModified ? new Date(file.lastModified).toISOString() : new Date().toISOString()
+                });
+            }
+
+            captures.sort((a, b) => new Date(b.created) - new Date(a.created));
+            renderCaptures();
+            if (captures.length > 0) {
+                showToast(`Loaded ${captures.length} image(s)`);
+            }
+        }
+
+        function renderCaptures() {
+            const list = document.getElementById('capture-list');
+            const filtered = currentFilter === 'all'
+                ? captures
+                : captures.filter(c => c.type === currentFilter);
+
+            document.getElementById('capture-count').textContent = filtered.length;
+
+            list.textContent = '';
+
+            if (filtered.length === 0) {
+                const empty = document.createElement('div');
+                empty.style.cssText = 'text-align: center; padding: 40px 20px; color: var(--text-dim);';
+                const icon = document.createElement('div');
+                icon.style.cssText = 'font-size: 2rem; margin-bottom: 8px;';
+                icon.textContent = '\u{1F4F7}';
+                const p1 = document.createElement('p');
+                p1.textContent = 'No captures yet';
+                const p2 = document.createElement('p');
+                p2.style.cssText = 'font-size: 0.8rem; margin-top: 8px;';
+                p2.textContent = 'Select a folder, paste an image, or drag files here';
+                empty.appendChild(icon);
+                empty.appendChild(p1);
+                empty.appendChild(p2);
+                list.appendChild(empty);
+                return;
+            }
+
+            filtered.forEach((cap, i) => {
+                const item = document.createElement('div');
+                item.className = 'capture-item' + (selectedCapture === cap ? ' active' : '');
+                item.addEventListener('click', () => selectCapture(i));
+                item.addEventListener('contextmenu', (e) => showContextMenu(e, i));
+
+                const thumb = document.createElement('div');
+                thumb.className = 'capture-thumb';
+                if (cap.blobUrl) {
+                    const img = document.createElement('img');
+                    img.src = cap.blobUrl;
+                    img.alt = cap.name;
+                    img.addEventListener('error', () => { thumb.textContent = '\u{1F5BC}'; });
+                    thumb.appendChild(img);
+                } else {
+                    thumb.textContent = cap.type === 'screenshot' ? '\u{1F5BC}' : '\u{1F3A6}';
+                }
+
+                const info = document.createElement('div');
+                info.className = 'capture-info';
+                const nameEl = document.createElement('div');
+                nameEl.className = 'capture-name';
+                nameEl.textContent = cap.name;
+                const metaEl = document.createElement('div');
+                metaEl.className = 'capture-meta';
+                metaEl.textContent = formatSize(cap.size) + ' \u2022 ' + formatDate(cap.created);
+                info.appendChild(nameEl);
+                info.appendChild(metaEl);
+
+                const typeEl = document.createElement('span');
+                typeEl.className = 'capture-type ' + cap.type;
+                typeEl.textContent = cap.type === 'screenshot' ? 'IMG' : cap.type === 'clipboard' ? 'CLIP' : 'VID';
+
+                item.appendChild(thumb);
+                item.appendChild(info);
+                item.appendChild(typeEl);
+                list.appendChild(item);
+            });
+        }
+
+        function selectCapture(index) {
+            const filtered = currentFilter === 'all'
+                ? captures
+                : captures.filter(c => c.type === currentFilter);
+
+            selectedCapture = filtered[index];
+            renderCaptures();
+            showCapture(selectedCapture);
+        }
+
+        function selectCaptureByRef(cap) {
+            selectedCapture = cap;
+            renderCaptures();
+            showCapture(cap);
+        }
+
+        function showCapture(cap) {
+            const viewer = document.getElementById('viewer-content');
+            const toolbar = document.getElementById('viewer-toolbar');
+
+            // Clean up annotation state
+            annotationCanvas = null;
+            annotationCtx = null;
+            isDrawing = false;
+
+            if (!cap) {
+                viewer.textContent = '';
+                const empty = document.createElement('div');
+                empty.className = 'empty-state';
+                const icon = document.createElement('div');
+                icon.className = 'empty-state-icon';
+                icon.textContent = '\u{1F4F7}';
+                const h3 = document.createElement('h3');
+                h3.textContent = 'No capture selected';
+                const p = document.createElement('p');
+                p.textContent = 'Select a capture from the sidebar';
+                empty.appendChild(icon);
+                empty.appendChild(h3);
+                empty.appendChild(p);
+                viewer.appendChild(empty);
+                toolbar.style.display = 'none';
+                return;
+            }
+
+            viewer.textContent = '';
+
+            if (cap.blobUrl && cap.type !== 'recording') {
+                // Create annotation container
+                const container = document.createElement('div');
+                container.className = 'annotation-container';
+
+                const img = document.createElement('img');
+                img.src = cap.blobUrl;
+                img.className = 'capture-display';
+                img.id = 'capture-image';
+                img.style.transform = 'scale(' + (zoomLevel / 100) + ')';
+                img.alt = cap.name;
+
+                container.appendChild(img);
+
+                // Set up annotation canvas after image loads
+                img.addEventListener('load', () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.className = 'annotation-canvas';
+                    canvas.width = img.naturalWidth;
+                    canvas.height = img.naturalHeight;
+                    canvas.style.width = img.offsetWidth + 'px';
+                    canvas.style.height = img.offsetHeight + 'px';
+                    canvas.setAttribute('aria-label', 'Annotation canvas - draw with mouse');
+                    container.appendChild(canvas);
+
+                    annotationCanvas = canvas;
+                    annotationCtx = canvas.getContext('2d');
+                    annotationCtx.strokeStyle = '#f85149';
+                    annotationCtx.lineWidth = 3;
+                    annotationCtx.lineCap = 'round';
+                    annotationCtx.lineJoin = 'round';
+
+                    // Drawing events
+                    canvas.addEventListener('mousedown', startDraw);
+                    canvas.addEventListener('mousemove', draw);
+                    canvas.addEventListener('mouseup', stopDraw);
+                    canvas.addEventListener('mouseleave', stopDraw);
+                    // Touch support
+                    canvas.addEventListener('touchstart', (e) => { e.preventDefault(); startDraw(touchToMouse(e)); });
+                    canvas.addEventListener('touchmove', (e) => { e.preventDefault(); draw(touchToMouse(e)); });
+                    canvas.addEventListener('touchend', (e) => { e.preventDefault(); stopDraw(); });
+                });
+
+                viewer.appendChild(container);
+            } else if (cap.blobUrl && cap.type === 'recording') {
+                const video = document.createElement('video');
+                video.src = cap.blobUrl;
+                video.controls = true;
+                video.id = 'capture-video';
+                viewer.appendChild(video);
+            } else {
+                // No blob URL available
+                const noPreview = document.createElement('div');
+                noPreview.className = 'empty-state';
+                const icon = document.createElement('div');
+                icon.className = 'empty-state-icon';
+                icon.textContent = '\u{1F5BC}';
+                const h3 = document.createElement('h3');
+                h3.textContent = cap.name;
+                const p = document.createElement('p');
+                p.textContent = 'Preview not available';
+                noPreview.appendChild(icon);
+                noPreview.appendChild(h3);
+                noPreview.appendChild(p);
+                viewer.appendChild(noPreview);
+            }
+
+            // Update info
+            document.getElementById('info-name').textContent = cap.name;
+            document.getElementById('info-size').textContent = formatSize(cap.size);
+            document.getElementById('info-date').textContent = formatDate(cap.created);
+            toolbar.style.display = 'flex';
+        }
+
+        // Annotation drawing
+        function touchToMouse(e) {
+            const touch = e.touches[0];
+            return { offsetX: touch.clientX - e.target.getBoundingClientRect().left, offsetY: touch.clientY - e.target.getBoundingClientRect().top };
+        }
+
+        function startDraw(e) {
+            if (!annotationCtx) return;
+            isDrawing = true;
+            const pos = getCanvasPos(e);
+            annotationCtx.beginPath();
+            annotationCtx.moveTo(pos.x, pos.y);
+        }
+
+        function draw(e) {
+            if (!isDrawing || !annotationCtx) return;
+            const pos = getCanvasPos(e);
+            annotationCtx.lineTo(pos.x, pos.y);
+            annotationCtx.stroke();
+        }
+
+        function stopDraw() {
+            isDrawing = false;
+        }
+
+        function getCanvasPos(e) {
+            if (!annotationCanvas) return { x: 0, y: 0 };
+            const rect = annotationCanvas.getBoundingClientRect();
+            const scaleX = annotationCanvas.width / rect.width;
+            const scaleY = annotationCanvas.height / rect.height;
+            return {
+                x: (e.offsetX || (e.clientX - rect.left)) * scaleX,
+                y: (e.offsetY || (e.clientY - rect.top)) * scaleY
+            };
+        }
+
+        function clearAnnotations() {
+            if (annotationCtx && annotationCanvas) {
+                annotationCtx.clearRect(0, 0, annotationCanvas.width, annotationCanvas.height);
+                showToast('Annotations cleared');
+            }
+        }
+
+        function showContextMenu(e, index) {
+            e.preventDefault();
+            selectCapture(index);
+
+            const menu = document.getElementById('context-menu');
+            menu.style.left = e.clientX + 'px';
+            menu.style.top = e.clientY + 'px';
+            menu.classList.add('active');
+        }
+
+        // Actions
+        async function takeScreenshot() {
+            showToast('Taking screenshot... (requires MCP server)');
+        }
+
+        function openSnippingTool() {
+            showToast('Opening Snipping Tool... (Win+Shift+S)');
+        }
+
+        async function refreshCaptures() {
+            if (dirHandle) {
+                // Re-verify permission
+                try {
+                    const perm = await dirHandle.requestPermission({ mode: 'read' });
+                    if (perm === 'granted') {
+                        await loadFromDirectory(dirHandle);
+                        return;
+                    }
+                } catch (e) {
+                    console.warn('Permission denied on refresh');
+                }
+            }
+            showToast('Select a folder first to refresh');
+        }
+
+        async function copyToClipboard() {
+            if (!selectedCapture || !selectedCapture.blobUrl) return;
+            try {
+                const response = await fetch(selectedCapture.blobUrl);
+                const blob = await response.blob();
+                await navigator.clipboard.write([
+                    new ClipboardItem({ [blob.type]: blob })
+                ]);
+                showToast('Image copied to clipboard');
+            } catch (e) {
+                // Fallback: copy name
+                try {
+                    await navigator.clipboard.writeText(selectedCapture.name);
+                    showToast('Name copied to clipboard');
+                } catch (e2) {
+                    showToast('Failed to copy to clipboard');
+                }
+            }
+        }
+
+        async function copyPath() {
+            if (!selectedCapture) return;
+            try {
+                await navigator.clipboard.writeText(selectedCapture.name);
+                showToast('Name copied');
+            } catch (e) {
+                showToast('Failed to copy');
+            }
+        }
+
+        function deleteCapture() {
+            if (!selectedCapture) return;
+            if (confirm(`Delete ${selectedCapture.name}?`)) {
+                if (selectedCapture.blobUrl && objectURLs.has(selectedCapture.blobUrl)) {
+                    URL.revokeObjectURL(selectedCapture.blobUrl);
+                    objectURLs.delete(selectedCapture.blobUrl);
+                }
+                captures = captures.filter(c => c !== selectedCapture);
+                selectedCapture = null;
+                renderCaptures();
+                showCapture(null);
+                showToast('Capture removed from list');
+            }
+        }
+
+        function renameCapture() {
+            if (!selectedCapture) return;
+            const newName = prompt('New name:', selectedCapture.name);
+            if (newName && newName !== selectedCapture.name) {
+                selectedCapture.name = newName;
+                renderCaptures();
+                showToast('Renamed');
+            }
+        }
+
+        // Zoom
+        function zoomIn() {
+            zoomLevel = Math.min(zoomLevel + 25, 300);
+            updateZoom();
+        }
+
+        function zoomOut() {
+            zoomLevel = Math.max(zoomLevel - 25, 25);
+            updateZoom();
+        }
+
+        function resetZoom() {
+            zoomLevel = 100;
+            updateZoom();
+        }
+
+        function updateZoom() {
+            document.getElementById('zoom-level').textContent = zoomLevel + '%';
+            const img = document.getElementById('capture-image');
+            if (img) {
+                img.style.transform = `scale(${zoomLevel/100})`;
+            }
+            // Also scale annotation canvas display
+            if (annotationCanvas) {
+                const container = annotationCanvas.parentElement;
+                if (container) {
+                    container.style.transform = `scale(${zoomLevel/100})`;
+                }
+            }
+        }
+
+        // Drag and drop
+        function handleDrop(files) {
+            const imageExts = ['image/png', 'image/jpeg', 'image/gif', 'image/webp'];
+            let added = 0;
+            for (const file of files) {
+                if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
+                    const url = URL.createObjectURL(file);
+                    objectURLs.add(url);
+                    const cap = {
+                        name: file.name,
+                        blobUrl: url,
+                        type: file.type.startsWith('image/') ? 'screenshot' : 'recording',
+                        size: file.size,
+                        created: new Date().toISOString()
+                    };
+                    captures.unshift(cap);
+                    added++;
+                }
+            }
+            renderCaptures();
+            if (added > 0) {
+                showToast(`Added ${added} file(s)`);
+            }
+        }
+
+        // Helpers
+        function formatSize(bytes) {
+            if (!bytes || bytes < 0) return '? B';
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+
+        function formatDate(isoString) {
+            if (!isoString) return '-';
+            const date = new Date(isoString);
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 2500);
+        }
+    </script>
+</body>
+</html>

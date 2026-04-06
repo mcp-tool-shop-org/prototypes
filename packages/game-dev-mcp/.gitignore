@@ -1,0 +1,13 @@
+node_modules/
+build/
+*.tsbuildinfo
+.game-dev-mcp/
+*.log
+.DS_Store
+Thumbs.db
+.env
+.env.*
+site/.astro/
+site/dist/
+site/node_modules/
+.polyglot-cache.json

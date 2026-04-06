@@ -1,0 +1,4 @@
+# Golden test fixtures must have exact bytes for SHA-256 verification.
+# Prevent git from converting line endings on checkout.
+TrainingStudio.Web/src/tests/fixtures/golden-v1/** binary
+TrainingStudio.Web/src/tests/fixtures/invalid-hash-mismatch/** binary

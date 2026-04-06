@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mcp-tool-shop-org/zip-meta-map/meta_zip_index.schema.json",
+  "title": "META_ZIP_INDEX",
+  "description": "Machine-readable file inventory and traversal plans for a ZIP archive or project directory.",
+  "type": "object",
+  "required": ["format", "version", "generated_by", "profile", "start_here", "ignore", "files", "plans"],
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "type": "string",
+      "const": "zip-meta-map"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$",
+      "description": "Spec version (e.g. '0.2')"
+    },
+    "generated_by": {
+      "type": "string",
+      "description": "Tool name and version (e.g. 'zip-meta-map/0.1.0')"
+    },
+    "profile": {
+      "type": "string",
+      "description": "Profile used for categorization"
+    },
+    "start_here": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Ordered list of files to read first"
+    },
+    "ignore": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Glob patterns excluded from indexing"
+    },
+    "files": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/FileEntry" },
+      "description": "Complete inventory of indexed files"
+    },
+    "plans": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/Plan" },
+      "description": "Named traversal plans"
+    },
+    "modules": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Module" },
+      "description": "Folder-level module summaries"
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Safety and integrity warnings"
+    },
+    "policy_applied": {
+      "type": "boolean",
+      "description": "Whether a META_ZIP_POLICY.json was applied"
+    },
+    "capabilities": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Feature flags indicating what optional fields are populated (e.g. chunks, excerpts, modules, risk_flags)"
+    },
+    "custom_roles": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "description": "Profile-defined custom roles: {role_name: description}"
+    }
+  },
+  "$defs": {
+    "FileEntry": {
+      "type": "object",
+      "required": ["path", "size_bytes", "sha256", "role", "confidence"],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Relative path from archive/project root"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "File size in bytes"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "SHA-256 hex digest"
+        },
+        "role": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "description": "File role — built-in (entrypoint, public_api, source, internal, config, lockfile, ci, test, fixture, doc, doc_api, doc_architecture, schema, build, script, generated, vendor, asset, data, unknown) or profile-defined custom role"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Confidence in role assignment (0.0-1.0)"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Why this role was assigned"
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Freeform tags"
+        },
+        "chunks": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Chunk" },
+          "description": "Chunk map for large files"
+        },
+        "excerpt": {
+          "type": "string",
+          "description": "Safe micro-summary (first N lines or heading section)"
+        },
+        "risk_flags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Heuristic risk signals (e.g. exec_shell, secrets_like, path_traversal)"
+        }
+      }
+    },
+    "Chunk": {
+      "type": "object",
+      "required": ["id", "start_line", "end_line", "byte_len"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable chunk identifier (hash-based)"
+        },
+        "start_line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "end_line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "byte_len": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "heading": {
+          "type": "string",
+          "description": "Nearest heading or section title (if detected)"
+        }
+      }
+    },
+    "Module": {
+      "type": "object",
+      "required": ["path", "file_count", "primary_roles"],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Directory path relative to root"
+        },
+        "file_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "primary_roles": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Most common roles in this directory"
+        },
+        "key_files": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Most important files (entrypoints, configs, READMEs)"
+        },
+        "summary": {
+          "type": "string",
+          "description": "Heuristic summary of what this module contains"
+        }
+      }
+    },
+    "Plan": {
+      "type": "object",
+      "required": ["description", "steps"],
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "steps": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "budget_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Suggested max bytes to read per step"
+        },
+        "stop_after": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Stop traversal after reading these"
+        },
+        "max_total_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Hard cap on total bytes to read across all steps"
+        }
+      }
+    }
+  }
+}

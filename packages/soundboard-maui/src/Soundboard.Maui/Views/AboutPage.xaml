@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Soundboard.Maui.Views.AboutPage"
+    Title="About Soundboard">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="24,20" MaximumWidthRequest="500"
+                             HorizontalOptions="Center" VerticalOptions="Start">
+
+            <!-- App name + version -->
+            <VerticalStackLayout Spacing="4">
+                <Label
+                    Text="Soundboard"
+                    FontSize="24"
+                    FontAttributes="Bold" />
+                <Label
+                    x:Name="VersionLabel"
+                    FontSize="13"
+                    TextColor="{AppThemeBinding Light=#888888, Dark=#999999}" />
+            </VerticalStackLayout>
+
+            <!-- Product intent -->
+            <Label
+                Text="Streaming text-to-speech, powered by your own voice engine."
+                FontSize="15"
+                TextColor="{AppThemeBinding Light=#555555, Dark=#BBBBBB}" />
+
+            <!-- Privacy -->
+            <Border
+                StrokeShape="RoundRectangle 8"
+                Stroke="{AppThemeBinding Light=#E0E0E0, Dark=#444444}"
+                BackgroundColor="{AppThemeBinding Light=#F8F8F8, Dark=#2A2A2A}"
+                Padding="16">
+                <VerticalStackLayout Spacing="8">
+                    <Label
+                        Text="Privacy"
+                        FontSize="14"
+                        FontAttributes="Bold" />
+                    <Label
+                        Text="Your text is sent to your configured voice engine for synthesis. Audio is streamed back and played locally."
+                        FontSize="13"
+                        TextColor="{AppThemeBinding Light=#555555, Dark=#BBBBBB}" />
+                    <Label
+                        Text="No personal data is collected, stored, or shared by this app."
+                        FontSize="13"
+                        TextColor="{AppThemeBinding Light=#555555, Dark=#BBBBBB}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Third-party -->
+            <VerticalStackLayout Spacing="4">
+                <Label
+                    Text="Built with"
+                    FontSize="13"
+                    FontAttributes="Bold"
+                    TextColor="{AppThemeBinding Light=#888888, Dark=#999999}" />
+                <Label
+                    Text=".NET MAUI, NAudio, Soundboard SDK"
+                    FontSize="13"
+                    TextColor="{AppThemeBinding Light=#888888, Dark=#999999}" />
+            </VerticalStackLayout>
+
+            <!-- Source -->
+            <Label
+                Text="github.com/mcp-tool-shop-org/soundboard-maui"
+                FontSize="12"
+                TextColor="{AppThemeBinding Light=#AAAAAA, Dark=#777777}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

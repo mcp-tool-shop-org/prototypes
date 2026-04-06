@@ -1,0 +1,27 @@
+# Compiled output
+llms.txt
+
+# Google OAuth tokens and config — NEVER commit these
+credentials.json
+token.json
+llm-sync-drive.yaml
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+.venv/
+
+# Site
+site/.astro/
+site/dist/
+site/node_modules/
+
+# Polyglot cache
+.polyglot-cache.json
+
+# IDE
+.vscode/
+.idea/

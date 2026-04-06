@@ -1,0 +1,23 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "session-copilot-local",
+  "description": "Local marketplace for the session copilot plugin",
+  "owner": {
+    "name": "mcp-tool-shop",
+    "email": "64996768+mcp-tool-shop@users.noreply.github.com"
+  },
+  "plugins": [
+    {
+      "name": "session-copilot",
+      "description": "Session copilot for Claude Code. Captures decisions, timelines, and patterns across sessions.",
+      "version": "0.1.0",
+      "source": "./",
+      "author": {
+        "name": "mcp-tool-shop",
+        "email": "64996768+mcp-tool-shop@users.noreply.github.com"
+      },
+      "category": "productivity",
+      "license": "MIT"
+    }
+  ]
+}

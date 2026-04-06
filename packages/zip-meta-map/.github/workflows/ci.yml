@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "pyproject.toml"
+      - "src/**"
+      - "tests/**"
+      - ".github/workflows/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "pyproject.toml"
+      - "src/**"
+      - "tests/**"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: pip install -e ".[dev]"
+
+      - name: Lint
+        run: ruff check src/ tests/
+
+      - name: Format check
+        run: ruff format --check src/ tests/
+
+      - name: Run tests
+        run: pytest tests/ -v
+
+      - name: Schema validation smoke test
+        run: |
+          zip-meta-map build tests/fixtures/tiny_python_cli -o /tmp/zmm-output
+          python -c "
+          import json, jsonschema
+          from zip_meta_map.schema import load_index_schema
+          index = json.load(open('/tmp/zmm-output/META_ZIP_INDEX.json'))
+          jsonschema.validate(index, load_index_schema())
+          print('Schema validation passed')
+          "
+
+      - name: Summary and report smoke test
+        run: |
+          zip-meta-map build tests/fixtures/tiny_python_cli -o /tmp/zmm-summary --summary --report md
+          test -f /tmp/zmm-summary/META_ZIP_INDEX.json
+          test -f /tmp/zmm-summary/META_ZIP_FRONT.md
+          test -f /tmp/zmm-summary/META_ZIP_REPORT.md
+
+      - name: Diff smoke test
+        run: |
+          zip-meta-map diff /tmp/zmm-summary/META_ZIP_INDEX.json /tmp/zmm-summary/META_ZIP_INDEX.json --exit-code
+          zip-meta-map diff /tmp/zmm-summary/META_ZIP_INDEX.json /tmp/zmm-summary/META_ZIP_INDEX.json --json | python -c "import sys,json; d=json.load(sys.stdin); assert not d['has_changes']"

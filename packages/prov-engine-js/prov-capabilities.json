@@ -1,0 +1,25 @@
+{
+  "schema": "prov-capabilities@v0.1",
+  "engine": {
+    "name": "prov-engine-js",
+    "version": "1.0.1",
+    "vendor": "prov-spec",
+    "repo": "https://github.com/mcp-tool-shop-org/prov-engine-js",
+    "license": "MIT"
+  },
+  "implements": [
+    "adapter.wrap.envelope_v0_1",
+    "integrity.digest.sha256"
+  ],
+  "optional": [],
+  "conformance_level": "fully-conformant",
+  "constraints": {
+    "canonicalization": "jcs-subset",
+    "supported_digest_algorithms": ["sha256"]
+  },
+  "test_vectors_validated": [
+    "integrity.digest.sha256",
+    "adapter.wrap.envelope_v0_1"
+  ],
+  "known_deviations": []
+}

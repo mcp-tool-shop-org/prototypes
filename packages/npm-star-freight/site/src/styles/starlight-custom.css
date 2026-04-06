@@ -1,0 +1,13 @@
+/* Starlight dark theme aligned with site-theme */
+:root {
+  --sl-color-accent-low: #451a03;
+  --sl-color-accent: #d97706;
+  --sl-color-accent-high: #fbbf24;
+}
+
+/* Dark background matching site-theme */
+:root[data-theme='dark'] {
+  --sl-color-bg: #09090b;
+  --sl-color-hairline: #27272a;
+  --sl-color-black: #09090b;
+}

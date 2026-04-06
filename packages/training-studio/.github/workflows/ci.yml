@@ -1,0 +1,112 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "TrainingStudio.Web/**"
+      - "tests/**"
+      - ".github/workflows/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "TrainingStudio.Web/**"
+      - "tests/**"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test & Validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: TrainingStudio.Web/package-lock.json
+
+      - name: Install dependencies
+        working-directory: TrainingStudio.Web
+        run: npm ci
+
+      - name: Audit dependencies
+        working-directory: TrainingStudio.Web
+        run: npm audit --audit-level=high
+
+      - name: Run tests
+        working-directory: TrainingStudio.Web
+        run: npm test
+
+      - name: Build CLI
+        working-directory: TrainingStudio.Web
+        run: npm run build:cli
+
+      - name: Validate golden bundle
+        working-directory: TrainingStudio.Web
+        run: node dist/cli/validate.js src/tests/fixtures/golden-v1
+
+      - name: Verify JSON output contract
+        working-directory: TrainingStudio.Web
+        run: |
+          node dist/cli/validate.js src/tests/fixtures/golden-v1 --json > /tmp/result.json
+
+          node -e "
+            const result = require('/tmp/result.json');
+            const required = ['ok', 'exit_code', 'bundle_id', 'bundle_digest', 'version', 'schema_uri', 'schema_version', 'errors', 'warnings', 'stats'];
+            for (const field of required) {
+              if (!(field in result)) {
+                console.error('Missing required field:', field);
+                process.exit(1);
+              }
+            }
+
+            const expectedDigest = '719823b86e10fe388aa8a9b14cb135624e73c253dc69f5065f78871403c3df3f';
+            if (result.bundle_digest !== expectedDigest) {
+              console.error('Digest mismatch! Expected:', expectedDigest, 'Got:', result.bundle_digest);
+              process.exit(1);
+            }
+
+            console.log('Contract verification passed');
+          "
+
+      - name: Verify invalid bundle detection
+        working-directory: TrainingStudio.Web
+        run: |
+          mkdir -p /tmp/invalid-bundle
+          echo "test" > /tmp/invalid-bundle/test.txt
+
+          set +e
+          node dist/cli/validate.js /tmp/invalid-bundle --json > /tmp/invalid-result.json
+          EXIT_CODE=$?
+          set -e
+
+          if [ $EXIT_CODE -ne 3 ]; then
+            echo "ERROR: Invalid bundle should exit with code 3, got $EXIT_CODE"
+            exit 1
+          fi
+
+          node -e "
+            const result = require('/tmp/invalid-result.json');
+            if (result.ok !== false) {
+              console.error('Invalid bundle should have ok=false');
+              process.exit(1);
+            }
+            if (!result.errors.some(e => e.code === 'E_NO_MANIFEST')) {
+              console.error('Should have E_NO_MANIFEST error');
+              process.exit(1);
+            }
+            console.log('Invalid bundle detection passed');
+          "

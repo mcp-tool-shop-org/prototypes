@@ -1,0 +1,81 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net10.0-windows10.0.19041.0</TargetFrameworks>
+
+		<OutputType>Exe</OutputType>
+		<RootNamespace>ControlRoom.App</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<!-- Suppress WinRT AOT warning for ObservableProperty fields — not applicable to non-AOT desktop app -->
+		<NoWarn>$(NoWarn);MVVMTK0045</NoWarn>
+
+		<!-- Enable XAML source compilation for better performance -->
+		<MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
+
+		<!-- Package metadata -->
+		<Description>Control Room Desktop Application - Local-first script execution and task management with evidence-grade observability, failure fingerprinting, and command palette.</Description>
+		<Authors>mcp-tool-shop</Authors>
+		<Company>MCP Tool Shop</Company>
+		<Copyright>Copyright (c) 2025-2026 MCP Tool Shop</Copyright>
+		<PackageProjectUrl>https://github.com/mcp-tool-shop-org/control-room</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/mcp-tool-shop-org/control-room</RepositoryUrl>
+		<PackageTags>maui;desktop;scripts;automation;observability</PackageTags>
+
+		<!-- Display name -->
+		<ApplicationTitle>Control Room</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.mikeyfrilot.controlroom</ApplicationId>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0.3</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<!-- Microsoft Store Packaging Configuration -->
+		<WindowsPackageType>MSIX</WindowsPackageType>
+		<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+		<WindowsPackageIdentityName>MikeyFrilot.ControlRoom</WindowsPackageIdentityName>
+		<WindowsPackagePublisherName>CN=mikeyfrilot</WindowsPackagePublisherName>
+		<WindowsStoreCompatible>true</WindowsStoreCompatible>
+
+		<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+		
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\ControlRoom.Application\ControlRoom.Application.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Schema.sql" />
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,313 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mcp-tool-shop/witness/schemas/testimony.schema.v0.1.json",
+  "title": "Witness Testimony Schema",
+  "description": "Schema for witness testify --format json output",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "witness_version",
+    "generated_at",
+    "source",
+    "summary",
+    "key_summary",
+    "events",
+    "findings"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1",
+      "description": "Testimony schema version"
+    },
+    "witness_version": {
+      "type": "string",
+      "description": "Witness library version that generated this testimony"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when testimony was generated"
+    },
+    "source": {
+      "type": "object",
+      "required": ["store", "store_locator", "range"],
+      "properties": {
+        "store": {
+          "type": "string",
+          "enum": ["sqlite"],
+          "description": "Storage backend type"
+        },
+        "store_locator": {
+          "type": "string",
+          "description": "Path or URI to the store"
+        },
+        "range": {
+          "type": "object",
+          "required": ["since", "until", "actor", "event_ids"],
+          "properties": {
+            "since": {
+              "type": ["string", "null"],
+              "description": "Filter: events since this timestamp"
+            },
+            "until": {
+              "type": ["string", "null"],
+              "description": "Filter: events until this timestamp"
+            },
+            "actor": {
+              "type": ["string", "null"],
+              "description": "Filter: events by actor key ID"
+            },
+            "event_ids": {
+              "type": "array",
+              "items": {"type": "string"},
+              "description": "Filter: specific event IDs"
+            }
+          }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["events_total", "crypto_verified", "crypto_failed", "with_flags", "flags_total"],
+      "properties": {
+        "events_total": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of events in testimony"
+        },
+        "crypto_verified": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Events that passed cryptographic verification"
+        },
+        "crypto_failed": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Events that failed cryptographic verification"
+        },
+        "with_flags": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Events with timeline flags"
+        },
+        "flags_total": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of flags raised"
+        }
+      }
+    },
+    "key_summary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["key_id", "first_seen", "last_seen", "rotations_out", "rotations_in", "continuity_broken", "reactivated"],
+        "properties": {
+          "key_id": {
+            "type": "string",
+            "description": "SHA-256 hash of public key bytes (hex)"
+          },
+          "first_seen": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Earliest occurred_at for this key"
+          },
+          "last_seen": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Latest occurred_at for this key"
+          },
+          "rotations_out": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Times this key was rotated away"
+          },
+          "rotations_in": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Times this key was rotated in"
+          },
+          "continuity_broken": {
+            "type": "boolean",
+            "description": "Whether continuity was broken for this key"
+          },
+          "reactivated": {
+            "type": "boolean",
+            "description": "Whether this key was reactivated after rotation"
+          }
+        }
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["event_id", "occurred_at", "actor", "action", "intent", "crypto", "flags"],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "description": "Unique event identifier"
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the event occurred"
+          },
+          "actor": {
+            "type": "object",
+            "required": ["type", "id"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["human", "system"],
+                "description": "Actor type"
+              },
+              "id": {
+                "type": "string",
+                "description": "Actor identifier (typically key ID)"
+              }
+            }
+          },
+          "action": {
+            "type": "string",
+            "description": "Action performed"
+          },
+          "intent": {
+            "type": "string",
+            "description": "Human-readable intent"
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "tool": {
+                "type": ["string", "null"],
+                "description": "Tool used"
+              },
+              "tool_version": {
+                "type": ["string", "null"],
+                "description": "Tool version"
+              },
+              "observation": {
+                "type": ["object", "null"],
+                "properties": {
+                  "source": {"type": "string"},
+                  "statement": {"type": "string"}
+                }
+              }
+            }
+          },
+          "inputs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "artifact_id": {"type": "string"},
+                "media_type": {"type": "string"},
+                "locator": {"type": ["string", "null"]},
+                "digest": {"type": "string"},
+                "size_bytes": {"type": ["integer", "null"]}
+              }
+            }
+          },
+          "outputs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "artifact_id": {"type": "string"},
+                "media_type": {"type": "string"},
+                "locator": {"type": ["string", "null"]},
+                "digest": {"type": "string"},
+                "size_bytes": {"type": ["integer", "null"]}
+              }
+            }
+          },
+          "crypto": {
+            "type": "object",
+            "required": ["status", "event_digest", "signature_ok"],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": ["VERIFIED", "FAILED_CRYPTO"],
+                "description": "Cryptographic verification status"
+              },
+              "event_digest": {
+                "type": "string",
+                "pattern": "^sha256:[a-f0-9]{64}$",
+                "description": "SHA-256 digest of canonical event"
+              },
+              "signature_ok": {
+                "type": "boolean",
+                "description": "Whether Ed25519 signature verified"
+              }
+            }
+          },
+          "flags": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Timeline flags for this event"
+          },
+          "raw_event": {
+            "type": "object",
+            "description": "Exact event JSON as stored (only present when --include-events is set)",
+            "required": ["encoding", "source", "canonical", "bytes_base64"],
+            "properties": {
+              "encoding": {
+                "type": "string",
+                "const": "application/json",
+                "description": "MIME type of the embedded content"
+              },
+              "source": {
+                "type": "string",
+                "const": "witness-store",
+                "description": "Source of the raw bytes"
+              },
+              "canonical": {
+                "type": "boolean",
+                "const": true,
+                "description": "Whether bytes are canonical per Phase 1 rules"
+              },
+              "bytes_base64": {
+                "type": "string",
+                "description": "Base64-encoded exact bytes as stored"
+              }
+            }
+          }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["flag", "count", "event_ids", "explanation"],
+        "properties": {
+          "flag": {
+            "type": "string",
+            "description": "Flag identifier"
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Number of events with this flag"
+          },
+          "event_ids": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Event IDs that raised this flag"
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Human-readable explanation of the flag"
+          }
+        }
+      }
+    },
+    "exit_code": {
+      "type": "integer",
+      "enum": [0, 2, 3],
+      "description": "Exit code: 0=clean, 2=flags, 3=crypto failure"
+    }
+  }
+}

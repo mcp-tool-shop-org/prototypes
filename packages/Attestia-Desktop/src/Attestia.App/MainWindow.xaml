@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="Attestia.App.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Attestia">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <NavigationView
+            x:Name="NavView"
+            Grid.Row="0"
+            IsBackButtonVisible="Collapsed"
+            IsSettingsVisible="True"
+            PaneDisplayMode="Left"
+            OpenPaneLength="220"
+            SelectionChanged="NavView_SelectionChanged">
+
+            <NavigationView.Header>
+                <TextBlock Text="Financial Truth Infrastructure" FontSize="11"
+                           FontFamily="Cambria" CharacterSpacing="60"
+                           Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                           Margin="0,4,0,0" />
+            </NavigationView.Header>
+
+            <NavigationView.MenuItems>
+                <!-- Primary: Lifecycle flow -->
+                <NavigationViewItem Content="System Overview" Tag="overview">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE7EF;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Intent" Tag="intents">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE8A1;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Attestation" Tag="attestation">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE9CE;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Integrity" Tag="integrity">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE72E;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Compliance" Tag="compliance">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE8A7;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+
+                <NavigationViewItemSeparator />
+
+                <!-- Secondary: System records -->
+                <NavigationViewItem Content="Event Ledger" Tag="events">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE8FD;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+
+            <!-- Page content host -->
+            <Frame x:Name="ContentFrame" />
+
+        </NavigationView>
+
+        <!-- Status bar -->
+        <Grid Grid.Row="1" Padding="16,8"
+              Background="{StaticResource AttestiaPrimaryBackgroundBrush}"
+              BorderBrush="{StaticResource AttestiaDividerBrush}"
+              BorderThickness="0,1,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="8">
+                <Ellipse x:Name="StatusIndicator" Width="8" Height="8" Fill="Gray"
+                         VerticalAlignment="Center" />
+                <TextBlock x:Name="StatusText" Text="Initializing..." FontSize="12"
+                           Foreground="{StaticResource AttestiaSecondaryTextBrush}"
+                           VerticalAlignment="Center" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="16"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Attestia Protocol v1" FontSize="10"
+                           FontFamily="Cascadia Mono, Consolas" CharacterSpacing="-10"
+                           Foreground="{StaticResource AttestiaDividerBrush}" />
+                <TextBlock x:Name="VersionText" Text="v0.1.0" FontSize="10"
+                           FontFamily="Cascadia Mono, Consolas" CharacterSpacing="-10"
+                           Foreground="{StaticResource AttestiaDividerBrush}" />
+                <TextBlock x:Name="LastVerificationText" Text="" FontSize="10"
+                           FontFamily="Cascadia Mono, Consolas" CharacterSpacing="-10"
+                           Foreground="{StaticResource AttestiaDividerBrush}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
