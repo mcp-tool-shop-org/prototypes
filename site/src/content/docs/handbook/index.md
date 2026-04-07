@@ -1,29 +1,29 @@
 ---
 title: Handbook
-description: Guide to the Prototypes Archive monorepo.
+description: Guide to the Prototypes seed vault -- 67 packages from MCP Tool Shop.
 sidebar:
   order: 0
 ---
 
-Welcome to the Prototypes Archive handbook. This is a reference guide for the consolidated monorepo containing 10 deprecated `@mcptoolshop` packages.
+Welcome to the Prototypes handbook. This is the reference guide for the seed vault -- 67 packages consolidated into a single monorepo during the April 2026 org reduction (175 to 88 repos).
 
-## What's inside
+## What is inside
 
-- **[Getting Started](/prototypes/handbook/getting-started/)** — Clone, install, and explore the monorepo
-- **[Packages](/prototypes/handbook/packages/)** — Overview of all 10 archived packages
+- **[Getting Started](/prototypes/handbook/getting-started/)** -- Clone, install, and explore the monorepo
+- **[Packages](/prototypes/handbook/packages/)** -- All 67 packages organized by category
 
 ## What is this repo?
 
-During the early development of MCP Tool Shop, a number of experimental packages were published under the `@mcptoolshop` scope on npm. As the product line matured, these prototypes were deprecated or superseded by better implementations.
+Over the course of building MCP Tool Shop, dozens of experimental tools, desktop apps, game prototypes, and developer utilities were created. When the org was cut from 175 repos to 88, every prototype that had proven a concept or taught a lesson was preserved here rather than deleted.
 
-Rather than scattering archived code across dozens of individual repositories, they have been consolidated into a single pnpm + Turborepo monorepo. The original source code, tests, and configurations are preserved as they were at the time of deprecation.
+This is not a graveyard. It is a seed vault. Some of these packages were stepping stones to products that still ship. Others were experiments that shaped what not to build.
 
 ## Why keep them?
 
-- **Historical context** — understand how ideas evolved into current products
-- **Code reuse** — patterns, utilities, and algorithms that may still be useful
-- **Learning** — see what worked, what didn't, and why things changed
+- **Revival** -- see something that should be a product? Pull it out, give it a repo, and ship it
+- **Patterns** -- reusable architectures, algorithms, and approaches across 10 domains
+- **History** -- understand how ideas evolved into the current product line
 
-These packages are not maintained. No bug fixes, security patches, or feature updates will be made.
+These packages are not actively maintained. They are preserved as they were at the time of consolidation.
 
 [Back to landing page](/prototypes/)

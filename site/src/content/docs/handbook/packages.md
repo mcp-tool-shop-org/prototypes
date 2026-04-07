@@ -1,68 +1,126 @@
 ---
 title: Packages
-description: Overview of all 10 archived packages in the Prototypes Archive.
+description: All 67 packages in the Prototypes seed vault, organized by category.
 sidebar:
   order: 2
 ---
 
-All packages were originally published under the `@mcptoolshop` scope on npm and have since been deprecated.
+All 67 packages are organized into 10 categories. Each package lives under `packages/<name>` with its original source, tests, and docs intact.
 
-## mcpt
+## Voice and Sound (8)
 
-**npm:** `@mcptoolshop/mcpt`
+| Package | Description |
+|---------|-------------|
+| voice-soundboard | TTS for AI agents -- compiler/graph/engine architecture |
+| vscode-voice-soundboard | TTS synthesis with 48 voices, presets, and multi-speaker dialogue |
+| soundboard-plugin | Claude Code plugin for voice synthesis |
+| soundboard-maui | SDK-first .NET 8+ soundboard client library |
+| mcp-voice-engine | Streaming prosody engine for expressive voice synthesis |
+| sonic-core | Audio control plane for TypeScript |
+| sonic-runtime | Native audio runtime sidecar -- C# NativeAOT over ndjson-stdio |
+| soundweave | Adaptive soundtrack studio for interactive game music |
 
-CLI for discovering and running MCP Tool Shop tools. This was the original command-line entry point for the MCP Tool Shop ecosystem before individual tools adopted their own installation workflows.
+## Developer Tools (21)
 
-## pathway
+| Package | Description |
+|---------|-------------|
+| aspire-ai | Adversarial Student-Professor Internalized Reasoning Engine |
+| brain-dev | MCP server for test generation, coverage analysis, and UX insights |
+| build-governor | Memory-aware parallel C++ build governor preventing OOM |
+| claude-collaborate | Unified sandbox for real-time human-AI collaboration |
+| claude-hook-debug | Diagnostic CLI for Claude Code hook issues |
+| claude-session-copilot | Session copilot for Claude Code -- decisions, timelines, patterns |
+| claude-toolstack | CLI client for bounded code intelligence gateway |
+| code-batch | Content-addressed batch execution engine |
+| code-bearings | Source-grounded review and control for modern codebases |
+| code-covered | Find coverage gaps and suggest missing tests |
+| context-window-manager | MCP server for lossless LLM context restoration via KV cache |
+| control-room | Turn scripts into observable, repeatable operations |
+| deltamind | Active context compaction for AI agents -- typed deltas + reconciler |
+| flexiflow | Lightweight async component engine with events and state machines |
+| headless-wheel-builder | Universal Python wheel builder with headless GitHub ops |
+| integradio | Vector-embedded Gradio components for semantic codebase nav |
+| jam-session-plugin | AI piano player with 100-song library and structured teaching |
+| mcp-app-builder | Build MCP servers with interactive UI components |
+| mcp-aside | MCP interjection inbox with TTL, rate-limit, and dedupe |
+| mcp-bouncer | Health-check MCP servers, quarantine broken ones, auto-restore |
+| mcp-examples | Example workspaces for MCP Tool Shop |
 
-**npm:** `@mcptoolshop/pathway`
+## Desktop Apps (7)
 
-Append-only journey engine where undo never erases learning. Pathway modeled user progress as an immutable log, allowing rollback without losing the record of what was tried.
+| Package | Description |
+|---------|-------------|
+| Attestia-Desktop | Financial intent verification for Windows -- WinUI 3 |
+| InControl-Desktop | Privacy-first local LLM chat -- WinUI 3, GPU-accelerated |
+| ScalarScope-Desktop | Reproducible ML scalar comparison -- .NET MAUI |
+| NextLedger | Envelope budgeting app for Windows |
+| pocket-ledger | Local-first personal finance and budget tracking |
+| runforge-desktop | Visual ML experiment tracker with live training charts |
+| studioflow | Desktop creative workspace -- Tauri v2, multi-claude proving ground |
 
-## physics-svg
+## WebSketch (4)
 
-**npm:** `@mcptoolshop/physics-svg`
+| Package | Description |
+|---------|-------------|
+| websketch-cli | CLI for WebSketch IR -- render, diff, and fingerprint web UI captures |
+| websketch-extension | Chrome extension to capture web pages as WebSketch IR |
+| websketch-vscode | VS Code extension for grammar-based IR web capture |
+| websketch-mcp | MCP server exposing WebSketch IR tools for LLM agents |
 
-Deterministic 2D physics engine with SVG rendering. A lightweight simulation engine that output physics scenes as SVG elements, useful for visualizations and interactive diagrams.
+## Mouse and Cursor (3)
 
-## ai-music-sheets
+| Package | Description |
+|---------|-------------|
+| MouseTrainer | Deterministic mouse training game -- .NET 10 MAUI |
+| DeterministicMouseTrainingEngine | Fixed-timestep simulation engine with composable blueprint mutators |
+| CursorAssist | DSP-grounded tremor compensation with velocity-adaptive smoothing |
 
-**npm:** `@mcptoolshop/ai-music-sheets`
+## Typing and Input (2)
 
-Piano sheet music in hybrid JSON + musical-language format. An experiment in representing musical notation in a format that both humans and AI models could read and write.
+| Package | Description |
+|---------|-------------|
+| linux-dev-typer | Practice typing real code from Python, Rust, JS, C#, and Java |
+| meta-content-system | Portable content pipeline for typing practice apps |
 
-## websketch-demo
+## Games and Creative (3)
 
-**npm:** `@mcptoolshop/websketch-demo`
+| Package | Description |
+|---------|-------------|
+| ConsensusOS | Modular control plane for distributed consensus systems |
+| Trace | Deterministic cursor discipline game -- .NET 10 MAUI |
+| game-dev-mcp | MCP server giving LLMs control over game engines |
 
-Interactive demo site for WebSketch IR. A companion demonstration app for the WebSketch intermediate representation, showing how web page structure could be captured and analyzed.
+## Crypto and Provenance (4)
 
-## clearance-opinion-engine
+| Package | Description |
+|---------|-------------|
+| prov-engine-js | Zero-dependency Node.js provenance engine for prov-spec |
+| prov-spec | Language-neutral specification for verifiable provenance |
+| receipt-factory | Signed, timestamped, reproducible records of what happened |
+| payroll-engine | US Payroll SaaS Engine -- ledger, payment rails, settlement |
 
-**npm:** `@mcptoolshop/clearance-opinion-engine`
+## Infrastructure (4)
 
-Deterministic name-availability and clearance-opinion engine. Given a candidate product or package name, this tool checked availability across registries and provided an automated opinion on clearance risk.
+| Package | Description |
+|---------|-------------|
+| llm-sync-drive | Compile llms.txt from a repo and sync to Google Drive |
+| training-studio | TensorFlow.js ML training that runs entirely locally |
+| witness | Local-first, append-only event journal for human-AI work |
+| zip-meta-map | Turn any ZIP or folder into an LLM-friendly metadata bundle |
 
-## nameops
+## Original Archive (10)
 
-**npm:** `@mcptoolshop/nameops`
+These were consolidated before the April 2026 reduction.
 
-Name clearance orchestrator with batch runs, publish, and PR automation. Built on top of the clearance-opinion-engine, nameops added batch processing and GitHub PR integration for name validation workflows.
-
-## mcpt-link-fresh
-
-**npm:** `@mcptoolshop/mcpt-link-fresh`
-
-Evergreen link sync and drift fixer. Scanned documentation and configuration files for stale or broken links, with automated fix suggestions.
-
-## vector-caliper
-
-**npm:** `@mcptoolshop/vector-caliper`
-
-Scientific instrument for faithful model-state visualization. A tool for inspecting and visualizing vector embeddings and model internal states during ML development.
-
-## mcpt-publishing-assets
-
-**npm:** `@mcptoolshop/mcpt-publishing-assets`
-
-Logo, icon, and image asset generation for mcpt-publishing. Automated creation of branded visual assets (logos, social cards, icons) for package publishing workflows.
+| Package | Description |
+|---------|-------------|
+| mcpt | CLI for discovering and running MCP Tool Shop tools |
+| pathway | Append-only journey engine where undo never erases learning |
+| physics-svg | Deterministic 2D physics engine with SVG rendering |
+| ai-music-sheets | Piano sheet music in hybrid JSON + musical-language format |
+| websketch-demo | Interactive demo site for WebSketch IR |
+| clearance-opinion-engine | Deterministic name-availability and clearance-opinion engine |
+| nameops | Name clearance orchestrator -- batch runs, publish, PR automation |
+| mcpt-link-fresh | Evergreen link sync and drift fixer |
+| vector-caliper | Geometrical debugger for learning dynamics |
+| mcpt-publishing-assets | Logo and icon asset generation for mcpt-publishing |

@@ -1,16 +1,17 @@
 ---
 title: Getting Started
-description: How to clone, install, and explore the Prototypes Archive.
+description: How to clone, install, and explore the Prototypes seed vault.
 sidebar:
   order: 1
 ---
 
-The Prototypes Archive is a standard pnpm + Turborepo monorepo. All 10 packages live under `packages/` and can be explored, built, or tested from the repo root.
+The Prototypes repo is a pnpm + Turborepo monorepo. All 67 packages live under `packages/` and can be explored, built, or tested from the repo root.
 
 ## Prerequisites
 
 - Node.js 20+
 - pnpm 10+ (`corepack enable` to activate)
+- .NET 8+ SDK (for C#/MAUI packages)
 
 ## Clone and install
 
@@ -26,18 +27,18 @@ pnpm install
 pnpm build
 ```
 
-This runs `turbo build` across all packages that have a build script.
+This runs `turbo build` across all packages that have a build script. C#/.NET packages need `dotnet build` run separately inside their directories.
 
 ## Explore a specific package
 
 Each package is self-contained under `packages/<name>`:
 
 ```bash
-cd packages/physics-svg
+cd packages/deltamind
 ls
 ```
 
-Most packages include their own `package.json`, `src/` directory, and (where applicable) tests.
+Most packages include their own `package.json` (or `.csproj`), `src/` directory, and tests.
 
 ## Run tests
 
@@ -45,25 +46,35 @@ Most packages include their own `package.json`, `src/` directory, and (where app
 pnpm test
 ```
 
-Note that some packages may have outdated or missing test configurations. These are archived prototypes and test infrastructure was not always complete at the time of deprecation.
+Some packages may have outdated test configurations. These are archived prototypes and test infrastructure was not always complete at the time of consolidation.
 
 ## Project structure
 
 ```
 prototypes/
   packages/
-    mcpt/
-    pathway/
-    physics-svg/
-    ai-music-sheets/
-    websketch-demo/
-    clearance-opinion-engine/
-    nameops/
-    mcpt-link-fresh/
-    vector-caliper/
-    mcpt-publishing-assets/
+    voice-soundboard/        # Voice & Sound
+    deltamind/                # Developer Tools
+    Attestia-Desktop/         # Desktop Apps
+    websketch-cli/            # WebSketch
+    MouseTrainer/             # Mouse & Cursor
+    linux-dev-typer/          # Typing & Input
+    ConsensusOS/              # Games & Creative
+    prov-engine-js/           # Crypto & Provenance
+    llm-sync-drive/           # Infrastructure
+    mcpt/                     # Original Archive
+    ... (67 packages total)
+  site/                       # Landing page + handbook
   package.json
   pnpm-workspace.yaml
   turbo.json
-  tsconfig.base.json
 ```
+
+## Reviving a package
+
+If a prototype looks like it should be a real product:
+
+1. Copy the package directory out of the monorepo
+2. Create a new repo in `mcp-tool-shop-org`
+3. Push the scaffold commit
+4. Run shipcheck and apply the full treatment
