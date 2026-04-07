@@ -1,6 +1,6 @@
 # Prototypes
 
-**74 archived packages** from [MCP Tool Shop](https://mcp-tool-shop.github.io/) — consolidated into a single monorepo during the April 2026 org reduction (175 to 88 repos).
+**67 archived packages** from [MCP Tool Shop](https://mcp-tool-shop.github.io/) — consolidated into a single monorepo during the April 2026 org reduction (175 to 88 repos).
 
 This is not a graveyard. It is a seed vault. Every package here solved a real problem, proved a concept, or taught us something that shaped the tools we ship today. Browse the source, steal patterns, revive what is useful.
 
@@ -65,20 +65,6 @@ pnpm build
 | [pocket-ledger](packages/pocket-ledger) | Local-first personal finance and budget tracking |
 | [runforge-desktop](packages/runforge-desktop) | Visual ML experiment tracker with live training charts |
 | [studioflow](packages/studioflow) | Desktop creative workspace — Tauri v2, multi-claude proving ground |
-
-### npm Wrappers (7)
-
-Zero-prerequisite `npx` launchers for binary tools. Packages still live on npm — wrappers consolidated here.
-
-| Package | Installs |
-|---------|----------|
-| [npm-escape-the-valley](packages/npm-escape-the-valley) | `npx @mcptoolshop/escape-the-valley` |
-| [npm-portlight](packages/npm-portlight) | `npx @mcptoolshop/portlight` |
-| [npm-saints-mile](packages/npm-saints-mile) | `npx @mcptoolshop/saints-mile` |
-| [npm-sovereignty](packages/npm-sovereignty) | `npx @mcptoolshop/sovereignty` |
-| [npm-star-freight](packages/npm-star-freight) | `npx @mcptoolshop/star-freight` |
-| [npm-xrpl-camp](packages/npm-xrpl-camp) | `npx @mcptoolshop/xrpl-camp` |
-| [npm-xrpl-lab](packages/npm-xrpl-lab) | `npx @mcptoolshop/xrpl-lab` |
 
 ### WebSketch (4)
 
