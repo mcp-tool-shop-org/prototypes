@@ -1,0 +1,73 @@
+{
+  "name": "@mcptoolshop/venvkit",
+  "version": "1.0.0",
+  "description": "Python virtual environment diagnostic toolkit for Windows ML workflows",
+  "author": {
+    "name": "mcp-tool-shop",
+    "email": "64996768+mcp-tool-shop@users.noreply.github.com"
+  },
+  "keywords": [
+    "python",
+    "venv",
+    "virtualenv",
+    "diagnostics",
+    "health-check",
+    "windows",
+    "ml",
+    "pytorch",
+    "environment"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/mcp-tool-shop-org/venvkit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcp-tool-shop-org/venvkit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mcp-tool-shop-org/venvkit/issues"
+  },
+  "private": false,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "venvkit-map": "./dist/map_cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "format": "eslint . --fix",
+    "audit": "npm audit",
+    "map": "node dist/map_cli.js",
+    "verify": "npm test && npm run typecheck && npm run build && npm pack --dry-run"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "@types/node": "^22.0.0",
+    "@vitest/coverage-v8": "^2.1.9",
+    "eslint": "^9.0.0",
+    "typescript": "^5.6.0",
+    "typescript-eslint": "^8.0.0",
+    "vitest": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}

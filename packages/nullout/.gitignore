@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+/dist/
+/build/
+.venv/
+.env
+.pytest_cache/
+.coverage
+htmlcov/
+reports/
+*.log
+site/.astro/
+site/dist/
+site/node_modules/
+.polyglot-cache.json

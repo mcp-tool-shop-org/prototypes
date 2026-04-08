@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "codeteam.signable.schema.v0.1.json",
+  "title": "CodeTeam Signable Payload",
+  "description": "The payload that gets signed for package attestations and approvals",
+  "type": "object",
+  "required": ["signable_version", "purpose", "package_digest", "schema_version", "claims"],
+  "additionalProperties": false,
+  "properties": {
+    "signable_version": {
+      "type": "string",
+      "description": "Signable structure version",
+      "const": "0.1"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "Purpose tag (prevents cross-protocol signature replay)",
+      "enum": ["codeteam.package_attestation", "codeteam.approval"]
+    },
+    "package_digest": {
+      "type": "string",
+      "description": "Package digest this signature covers",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "schema_version": {
+      "type": "string",
+      "description": "Schema version of the package manifest",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "claims": {
+      "type": "object",
+      "required": ["role", "scope"],
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "Role of the signer (e.g., 'maintainer', 'reviewer', 'release-signer')",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "string",
+          "description": "Scope of the signature",
+          "enum": ["package"]
+        }
+      }
+    }
+  }
+}

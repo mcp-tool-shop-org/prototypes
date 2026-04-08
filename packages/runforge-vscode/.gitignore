@@ -1,0 +1,15 @@
+node_modules/
+dist/
+*.vsix
+.vscode-test/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+
+# Test artifacts (generated locally, not committed)
+runs/
+test_datasets/
+generate_test_runs.py
+.benchmarks/
+site/.astro/

@@ -1,0 +1,981 @@
+{
+  "name": "minimal",
+  "description": "A-major pentatonic motifs — musical, cohesive, daily-driver",
+  "verbs": {
+    "intake": {
+      "type": "motif",
+      "gain": 0.55,
+      "variants": [
+        {
+          "notes": [
+            {
+              "frequency": 440,
+              "duration": 0.055,
+              "offsetMs": 0,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.25,
+              "envelope": {
+                "attack": 0.006,
+                "decay": 0.045,
+                "sustain": 0.18,
+                "release": 0.04
+              },
+              "gain": 1
+            },
+            {
+              "frequency": 554.37,
+              "duration": 0.075,
+              "offsetMs": 55,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.25,
+              "envelope": {
+                "attack": 0.006,
+                "decay": 0.045,
+                "sustain": 0.18,
+                "release": 0.04
+              },
+              "gain": 1
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 329.63,
+              "duration": 0.055,
+              "offsetMs": 0,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.25,
+              "envelope": {
+                "attack": 0.006,
+                "decay": 0.045,
+                "sustain": 0.18,
+                "release": 0.04
+              },
+              "gain": 1
+            },
+            {
+              "frequency": 440,
+              "duration": 0.075,
+              "offsetMs": 55,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.25,
+              "envelope": {
+                "attack": 0.006,
+                "decay": 0.045,
+                "sustain": 0.18,
+                "release": 0.04
+              },
+              "gain": 1
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 440,
+              "duration": 0.055,
+              "offsetMs": 0,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.25,
+              "envelope": {
+                "attack": 0.006,
+                "decay": 0.045,
+                "sustain": 0.18,
+                "release": 0.04
+              },
+              "gain": 1
+            },
+            {
+              "frequency": 493.88,
+              "duration": 0.075,
+              "offsetMs": 55,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.25,
+              "envelope": {
+                "attack": 0.006,
+                "decay": 0.045,
+                "sustain": 0.18,
+                "release": 0.04
+              },
+              "gain": 1
+            }
+          ]
+        }
+      ]
+    },
+    "transform": {
+      "type": "motif",
+      "gain": 0.52,
+      "variants": [
+        {
+          "notes": [
+            {
+              "frequency": 554.37,
+              "duration": 0.042,
+              "offsetMs": 0,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.24,
+              "envelope": {
+                "attack": 0.003,
+                "decay": 0.04,
+                "sustain": 0.12,
+                "release": 0.045
+              },
+              "gain": 1,
+              "fmRatio": 2,
+              "fmDepth": 12
+            },
+            {
+              "frequency": 493.88,
+              "duration": 0.036,
+              "offsetMs": 42,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.24,
+              "envelope": {
+                "attack": 0.003,
+                "decay": 0.04,
+                "sustain": 0.12,
+                "release": 0.045
+              },
+              "gain": 1,
+              "fmRatio": 2,
+              "fmDepth": 10
+            },
+            {
+              "frequency": 659.25,
+              "duration": 0.067,
+              "offsetMs": 78,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.24,
+              "envelope": {
+                "attack": 0.003,
+                "decay": 0.04,
+                "sustain": 0.12,
+                "release": 0.045
+              },
+              "gain": 1,
+              "fmRatio": 2,
+              "fmDepth": 8
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 493.88,
+              "duration": 0.042,
+              "offsetMs": 0,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.24,
+              "envelope": {
+                "attack": 0.003,
+                "decay": 0.04,
+                "sustain": 0.12,
+                "release": 0.045
+              },
+              "gain": 1,
+              "fmRatio": 2,
+              "fmDepth": 12
+            },
+            {
+              "frequency": 554.37,
+              "duration": 0.036,
+              "offsetMs": 42,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.24,
+              "envelope": {
+                "attack": 0.003,
+                "decay": 0.04,
+                "sustain": 0.12,
+                "release": 0.045
+              },
+              "gain": 1,
+              "fmRatio": 2,
+              "fmDepth": 10
+            },
+            {
+              "frequency": 659.25,
+              "duration": 0.067,
+              "offsetMs": 78,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.24,
+              "envelope": {
+                "attack": 0.003,
+                "decay": 0.04,
+                "sustain": 0.12,
+                "release": 0.045
+              },
+              "gain": 1,
+              "fmRatio": 2,
+              "fmDepth": 8
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 554.37,
+              "duration": 0.058,
+              "offsetMs": 0,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.24,
+              "envelope": {
+                "attack": 0.003,
+                "decay": 0.04,
+                "sustain": 0.12,
+                "release": 0.045
+              },
+              "gain": 1,
+              "fmRatio": 2,
+              "fmDepth": 12
+            },
+            {
+              "frequency": 659.25,
+              "duration": 0.087,
+              "offsetMs": 58,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.24,
+              "envelope": {
+                "attack": 0.003,
+                "decay": 0.04,
+                "sustain": 0.12,
+                "release": 0.045
+              },
+              "gain": 1,
+              "fmRatio": 2,
+              "fmDepth": 8
+            }
+          ]
+        }
+      ]
+    },
+    "commit": {
+      "type": "motif",
+      "gain": 0.6,
+      "variants": [
+        {
+          "notes": [
+            {
+              "frequency": 329.63,
+              "duration": 0.11,
+              "offsetMs": 0,
+              "waveform": "triangle",
+              "blendWaveform": "sine",
+              "blendAmount": 0.39,
+              "envelope": {
+                "attack": 0.004,
+                "decay": 0.06,
+                "sustain": 0.2,
+                "release": 0.07
+              },
+              "gain": 0.9,
+              "harmonicGain": 0.1
+            },
+            {
+              "frequency": 440,
+              "duration": 0.11,
+              "offsetMs": 0,
+              "waveform": "triangle",
+              "blendWaveform": "sine",
+              "blendAmount": 0.39,
+              "envelope": {
+                "attack": 0.004,
+                "decay": 0.06,
+                "sustain": 0.2,
+                "release": 0.07
+              },
+              "gain": 0.9,
+              "harmonicGain": 0.1
+            },
+            {
+              "frequency": 554.37,
+              "duration": 0.085,
+              "offsetMs": 55,
+              "waveform": "triangle",
+              "blendWaveform": "sine",
+              "blendAmount": 0.39,
+              "envelope": {
+                "attack": 0.003,
+                "decay": 0.04,
+                "sustain": 0.15,
+                "release": 0.06
+              },
+              "gain": 0.7,
+              "harmonicGain": 0.1
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 440,
+              "duration": 0.11,
+              "offsetMs": 0,
+              "waveform": "triangle",
+              "blendWaveform": "sine",
+              "blendAmount": 0.39,
+              "envelope": {
+                "attack": 0.004,
+                "decay": 0.06,
+                "sustain": 0.2,
+                "release": 0.07
+              },
+              "gain": 0.9,
+              "harmonicGain": 0.1
+            },
+            {
+              "frequency": 554.37,
+              "duration": 0.11,
+              "offsetMs": 0,
+              "waveform": "triangle",
+              "blendWaveform": "sine",
+              "blendAmount": 0.39,
+              "envelope": {
+                "attack": 0.004,
+                "decay": 0.06,
+                "sustain": 0.2,
+                "release": 0.07
+              },
+              "gain": 0.9,
+              "harmonicGain": 0.1
+            },
+            {
+              "frequency": 659.25,
+              "duration": 0.085,
+              "offsetMs": 55,
+              "waveform": "triangle",
+              "blendWaveform": "sine",
+              "blendAmount": 0.39,
+              "envelope": {
+                "attack": 0.003,
+                "decay": 0.04,
+                "sustain": 0.15,
+                "release": 0.06
+              },
+              "gain": 0.7,
+              "harmonicGain": 0.1
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 329.63,
+              "duration": 0.11,
+              "offsetMs": 0,
+              "waveform": "triangle",
+              "blendWaveform": "sine",
+              "blendAmount": 0.39,
+              "envelope": {
+                "attack": 0.004,
+                "decay": 0.06,
+                "sustain": 0.2,
+                "release": 0.07
+              },
+              "gain": 0.9,
+              "harmonicGain": 0.1
+            },
+            {
+              "frequency": 493.88,
+              "duration": 0.11,
+              "offsetMs": 0,
+              "waveform": "triangle",
+              "blendWaveform": "sine",
+              "blendAmount": 0.39,
+              "envelope": {
+                "attack": 0.004,
+                "decay": 0.06,
+                "sustain": 0.2,
+                "release": 0.07
+              },
+              "gain": 0.9,
+              "harmonicGain": 0.1
+            },
+            {
+              "frequency": 554.37,
+              "duration": 0.085,
+              "offsetMs": 55,
+              "waveform": "triangle",
+              "blendWaveform": "sine",
+              "blendAmount": 0.39,
+              "envelope": {
+                "attack": 0.003,
+                "decay": 0.04,
+                "sustain": 0.15,
+                "release": 0.06
+              },
+              "gain": 0.7,
+              "harmonicGain": 0.1
+            }
+          ]
+        }
+      ]
+    },
+    "navigate": {
+      "type": "motif",
+      "gain": 0.5,
+      "variants": [
+        {
+          "notes": [
+            {
+              "frequency": 493.88,
+              "duration": 0.045,
+              "offsetMs": 0,
+              "waveform": "triangle",
+              "blendWaveform": "sine",
+              "blendAmount": 0.33,
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.035,
+                "sustain": 0.1,
+                "release": 0.055
+              },
+              "gain": 1,
+              "harmonicGain": 0.1
+            },
+            {
+              "frequency": 659.25,
+              "duration": 0.095,
+              "offsetMs": 39,
+              "waveform": "triangle",
+              "blendWaveform": "sine",
+              "blendAmount": 0.33,
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.035,
+                "sustain": 0.1,
+                "release": 0.055
+              },
+              "gain": 1,
+              "harmonicGain": 0.1
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 440,
+              "duration": 0.045,
+              "offsetMs": 0,
+              "waveform": "triangle",
+              "blendWaveform": "sine",
+              "blendAmount": 0.33,
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.035,
+                "sustain": 0.1,
+                "release": 0.055
+              },
+              "gain": 1,
+              "harmonicGain": 0.1
+            },
+            {
+              "frequency": 659.25,
+              "duration": 0.095,
+              "offsetMs": 39,
+              "waveform": "triangle",
+              "blendWaveform": "sine",
+              "blendAmount": 0.33,
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.035,
+                "sustain": 0.1,
+                "release": 0.055
+              },
+              "gain": 1,
+              "harmonicGain": 0.1
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 493.88,
+              "duration": 0.045,
+              "offsetMs": 0,
+              "waveform": "triangle",
+              "blendWaveform": "sine",
+              "blendAmount": 0.33,
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.035,
+                "sustain": 0.1,
+                "release": 0.055
+              },
+              "gain": 1,
+              "harmonicGain": 0.1
+            },
+            {
+              "frequency": 554.37,
+              "duration": 0.095,
+              "offsetMs": 39,
+              "waveform": "triangle",
+              "blendWaveform": "sine",
+              "blendAmount": 0.33,
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.035,
+                "sustain": 0.1,
+                "release": 0.055
+              },
+              "gain": 1,
+              "harmonicGain": 0.1
+            }
+          ]
+        }
+      ]
+    },
+    "execute": {
+      "type": "motif",
+      "gain": 0.58,
+      "variants": [
+        {
+          "notes": [
+            {
+              "frequency": 220,
+              "duration": 0.095,
+              "offsetMs": 15,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.29,
+              "envelope": {
+                "attack": 0.001,
+                "decay": 0.038,
+                "sustain": 0.08,
+                "release": 0.035
+              },
+              "gain": 1
+            }
+          ],
+          "noiseTransient": {
+            "freqStart": 1200,
+            "freqEnd": 1800,
+            "bandwidth": 1.2,
+            "duration": 0.015,
+            "gain": 0.35
+          }
+        },
+        {
+          "notes": [
+            {
+              "frequency": 329.63,
+              "duration": 0.095,
+              "offsetMs": 15,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.29,
+              "envelope": {
+                "attack": 0.001,
+                "decay": 0.038,
+                "sustain": 0.08,
+                "release": 0.035
+              },
+              "gain": 1
+            }
+          ],
+          "noiseTransient": {
+            "freqStart": 1200,
+            "freqEnd": 1800,
+            "bandwidth": 1.2,
+            "duration": 0.015,
+            "gain": 0.35
+          }
+        },
+        {
+          "notes": [
+            {
+              "frequency": 220,
+              "duration": 0.045,
+              "offsetMs": 15,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.29,
+              "envelope": {
+                "attack": 0.001,
+                "decay": 0.038,
+                "sustain": 0.08,
+                "release": 0.035
+              },
+              "gain": 1
+            },
+            {
+              "frequency": 329.63,
+              "duration": 0.05,
+              "offsetMs": 60,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.29,
+              "envelope": {
+                "attack": 0.001,
+                "decay": 0.038,
+                "sustain": 0.08,
+                "release": 0.035
+              },
+              "gain": 1
+            }
+          ],
+          "noiseTransient": {
+            "freqStart": 1200,
+            "freqEnd": 1800,
+            "bandwidth": 1.2,
+            "duration": 0.015,
+            "gain": 0.35
+          }
+        }
+      ]
+    },
+    "move": {
+      "type": "whoosh",
+      "duration": 0.24,
+      "freqUp": [
+        700,
+        2400
+      ],
+      "freqDown": [
+        2400,
+        700
+      ],
+      "bandwidth": 0.7,
+      "envelope": {
+        "attack": 0.01,
+        "decay": 0.11,
+        "sustain": 0.1,
+        "release": 0.06
+      },
+      "gain": 0.52,
+      "anchorVariants": [
+        {
+          "notes": [
+            {
+              "frequency": 329.63,
+              "duration": 0.18,
+              "offsetMs": 20,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.3,
+              "envelope": {
+                "attack": 0.015,
+                "decay": 0.08,
+                "sustain": 0.12,
+                "release": 0.05
+              },
+              "gain": 0.45
+            },
+            {
+              "frequency": 440,
+              "duration": 0.14,
+              "offsetMs": 100,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.3,
+              "envelope": {
+                "attack": 0.01,
+                "decay": 0.06,
+                "sustain": 0.1,
+                "release": 0.04
+              },
+              "gain": 0.4
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 440,
+              "duration": 0.18,
+              "offsetMs": 20,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.3,
+              "envelope": {
+                "attack": 0.015,
+                "decay": 0.08,
+                "sustain": 0.12,
+                "release": 0.05
+              },
+              "gain": 0.45
+            },
+            {
+              "frequency": 554.37,
+              "duration": 0.14,
+              "offsetMs": 100,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.3,
+              "envelope": {
+                "attack": 0.01,
+                "decay": 0.06,
+                "sustain": 0.1,
+                "release": 0.04
+              },
+              "gain": 0.4
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 329.63,
+              "duration": 0.22,
+              "offsetMs": 20,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.3,
+              "envelope": {
+                "attack": 0.015,
+                "decay": 0.1,
+                "sustain": 0.12,
+                "release": 0.06
+              },
+              "gain": 0.45
+            }
+          ]
+        }
+      ]
+    },
+    "sync": {
+      "type": "whoosh",
+      "duration": 0.3,
+      "freqUp": [
+        500,
+        2600
+      ],
+      "freqDown": [
+        2600,
+        500
+      ],
+      "bandwidth": 0.65,
+      "envelope": {
+        "attack": 0.008,
+        "decay": 0.12,
+        "sustain": 0.16,
+        "release": 0.09
+      },
+      "gain": 0.58,
+      "anchorVariants": [
+        {
+          "notes": [
+            {
+              "frequency": 220,
+              "duration": 0.16,
+              "offsetMs": 0,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.3,
+              "envelope": {
+                "attack": 0.01,
+                "decay": 0.08,
+                "sustain": 0.14,
+                "release": 0.06
+              },
+              "gain": 0.5
+            },
+            {
+              "frequency": 329.63,
+              "duration": 0.16,
+              "offsetMs": 0,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.3,
+              "envelope": {
+                "attack": 0.01,
+                "decay": 0.08,
+                "sustain": 0.14,
+                "release": 0.06
+              },
+              "gain": 0.45
+            },
+            {
+              "frequency": 554.37,
+              "duration": 0.09,
+              "offsetMs": 160,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.25,
+              "envelope": {
+                "attack": 0.003,
+                "decay": 0.04,
+                "sustain": 0.1,
+                "release": 0.04
+              },
+              "gain": 0.35
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 329.63,
+              "duration": 0.16,
+              "offsetMs": 0,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.3,
+              "envelope": {
+                "attack": 0.01,
+                "decay": 0.08,
+                "sustain": 0.14,
+                "release": 0.06
+              },
+              "gain": 0.5
+            },
+            {
+              "frequency": 440,
+              "duration": 0.16,
+              "offsetMs": 0,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.3,
+              "envelope": {
+                "attack": 0.01,
+                "decay": 0.08,
+                "sustain": 0.14,
+                "release": 0.06
+              },
+              "gain": 0.45
+            },
+            {
+              "frequency": 554.37,
+              "duration": 0.09,
+              "offsetMs": 160,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.25,
+              "envelope": {
+                "attack": 0.003,
+                "decay": 0.04,
+                "sustain": 0.1,
+                "release": 0.04
+              },
+              "gain": 0.35
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 220,
+              "duration": 0.2,
+              "offsetMs": 0,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.3,
+              "envelope": {
+                "attack": 0.01,
+                "decay": 0.1,
+                "sustain": 0.14,
+                "release": 0.07
+              },
+              "gain": 0.5
+            },
+            {
+              "frequency": 329.63,
+              "duration": 0.2,
+              "offsetMs": 0,
+              "waveform": "sine",
+              "blendWaveform": "triangle",
+              "blendAmount": 0.3,
+              "envelope": {
+                "attack": 0.01,
+                "decay": 0.1,
+                "sustain": 0.14,
+                "release": 0.07
+              },
+              "gain": 0.45
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sessionStart": {
+    "tone1": {
+      "waveform": "sine",
+      "blendWaveform": "triangle",
+      "blendAmount": 0.25,
+      "frequency": 440,
+      "duration": 0.18,
+      "envelope": {
+        "attack": 0.01,
+        "decay": 0.08,
+        "sustain": 0.25,
+        "release": 0.06
+      },
+      "gain": 0.6,
+      "harmonicGain": 0.08
+    },
+    "tone2": {
+      "waveform": "sine",
+      "blendWaveform": "triangle",
+      "blendAmount": 0.25,
+      "frequency": 554.37,
+      "duration": 0.22,
+      "envelope": {
+        "attack": 0.01,
+        "decay": 0.1,
+        "sustain": 0.25,
+        "release": 0.08
+      },
+      "gain": 0.55,
+      "harmonicGain": 0.08
+    },
+    "staggerSeconds": 0.065
+  },
+  "sessionEnd": {
+    "tone1": {
+      "waveform": "sine",
+      "blendWaveform": "triangle",
+      "blendAmount": 0.25,
+      "frequency": 554.37,
+      "duration": 0.15,
+      "envelope": {
+        "attack": 0.01,
+        "decay": 0.08,
+        "sustain": 0.18,
+        "release": 0.04
+      },
+      "gain": 0.55
+    },
+    "tone2": {
+      "waveform": "sine",
+      "blendWaveform": "triangle",
+      "blendAmount": 0.25,
+      "frequency": 440,
+      "duration": 0.25,
+      "envelope": {
+        "attack": 0.01,
+        "decay": 0.12,
+        "sustain": 0.18,
+        "release": 0.1
+      },
+      "gain": 0.5
+    },
+    "staggerSeconds": 0.075
+  },
+  "ambient": {
+    "droneFreq": 220,
+    "droneWaveform": "sine",
+    "droneGain": 0.25,
+    "chunkDuration": 2,
+    "resolveNote1": 440,
+    "resolveNote2": 659.25,
+    "resolveWaveform": "sine",
+    "resolveDuration": 0.16,
+    "resolveGain": 0.55
+  }
+}

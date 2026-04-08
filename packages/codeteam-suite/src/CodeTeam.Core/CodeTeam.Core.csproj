@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>CodeTeam.Core</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <!-- NuGet package metadata -->
+    <PackageId>CodeTeam.Core</PackageId>
+    <Version>1.0.3</Version>
+    <Description>Domain models, verification logic, and cryptographic trust primitives for package approval and signing workflows. Includes canonical JSON serialization, quorum-based policy evaluation, and a pure-function verification engine.</Description>
+    <Authors>mcp-tool-shop</Authors>
+    <Company>MCP Tool Shop</Company>
+    <Copyright>Copyright (c) 2025-2026 MCP Tool Shop</Copyright>
+    <PackageProjectUrl>https://github.com/mcp-tool-shop-org/codeteam-suite</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mcp-tool-shop-org/codeteam-suite</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>verification;signing;cryptography;trust;packages;policy</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+  </ItemGroup>
+
+</Project>

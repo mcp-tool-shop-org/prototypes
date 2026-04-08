@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2024-01-01T00:00:00Z",
+  "organization": "mcp-tool-shop",
+  "archived": [],
+  "ecosystems": {},
+  "tools": [
+    {
+      "id": "old-tool",
+      "name": "Old Tool",
+      "description": "This tool is deprecated",
+      "repo": "https://github.com/mcp-tool-shop/old-tool",
+      "install": {
+        "type": "git",
+        "url": "https://github.com/mcp-tool-shop/old-tool",
+        "default_ref": "v1"
+      },
+      "tags": ["legacy"],
+      "defaults": {},
+      "deprecated": true,
+      "deprecation_reason": "Use minimal-tool instead"
+    }
+  ]
+}

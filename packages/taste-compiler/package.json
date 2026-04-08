@@ -1,0 +1,20 @@
+{
+  "name": "taste-compiler",
+  "private": true,
+  "description": "Compile subjective design taste into enforceable, testable, versioned artifacts",
+  "author": "mcp-tool-shop",
+  "license": "MIT",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint",
+    "clean": "pnpm -r clean"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0"
+  }
+}

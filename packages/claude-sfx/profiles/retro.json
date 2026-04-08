@@ -1,0 +1,879 @@
+{
+  "name": "retro",
+  "description": "8-bit pentatonic chirps — fun, crisp, controlled",
+  "verbs": {
+    "intake": {
+      "type": "motif",
+      "gain": 0.14,
+      "variants": [
+        {
+          "notes": [
+            {
+              "frequency": 440,
+              "duration": 0.045,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1
+            },
+            {
+              "frequency": 554.37,
+              "duration": 0.06,
+              "offsetMs": 45,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 329.63,
+              "duration": 0.045,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1
+            },
+            {
+              "frequency": 440,
+              "duration": 0.06,
+              "offsetMs": 45,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 440,
+              "duration": 0.045,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1
+            },
+            {
+              "frequency": 493.88,
+              "duration": 0.06,
+              "offsetMs": 45,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1
+            }
+          ]
+        }
+      ]
+    },
+    "transform": {
+      "type": "motif",
+      "gain": 0.13,
+      "variants": [
+        {
+          "notes": [
+            {
+              "frequency": 554.37,
+              "duration": 0.035,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1,
+              "fmRatio": 2,
+              "fmDepth": 18
+            },
+            {
+              "frequency": 493.88,
+              "duration": 0.03,
+              "offsetMs": 35,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1,
+              "fmRatio": 2,
+              "fmDepth": 15
+            },
+            {
+              "frequency": 659.25,
+              "duration": 0.055,
+              "offsetMs": 65,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1,
+              "fmRatio": 2,
+              "fmDepth": 12
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 493.88,
+              "duration": 0.035,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1,
+              "fmRatio": 2,
+              "fmDepth": 18
+            },
+            {
+              "frequency": 554.37,
+              "duration": 0.03,
+              "offsetMs": 35,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1,
+              "fmRatio": 2,
+              "fmDepth": 15
+            },
+            {
+              "frequency": 659.25,
+              "duration": 0.055,
+              "offsetMs": 65,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1,
+              "fmRatio": 2,
+              "fmDepth": 12
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 554.37,
+              "duration": 0.048,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1,
+              "fmRatio": 2,
+              "fmDepth": 18
+            },
+            {
+              "frequency": 659.25,
+              "duration": 0.072,
+              "offsetMs": 48,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1,
+              "fmRatio": 2,
+              "fmDepth": 12
+            }
+          ]
+        }
+      ]
+    },
+    "commit": {
+      "type": "motif",
+      "gain": 0.16,
+      "variants": [
+        {
+          "notes": [
+            {
+              "frequency": 329.63,
+              "duration": 0.09,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.004,
+                "decay": 0.04,
+                "sustain": 0.18,
+                "release": 0.04
+              },
+              "gain": 0.85,
+              "harmonicGain": 0.08
+            },
+            {
+              "frequency": 440,
+              "duration": 0.09,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.004,
+                "decay": 0.04,
+                "sustain": 0.18,
+                "release": 0.04
+              },
+              "gain": 0.85,
+              "harmonicGain": 0.08
+            },
+            {
+              "frequency": 554.37,
+              "duration": 0.07,
+              "offsetMs": 45,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.003,
+                "decay": 0.035,
+                "sustain": 0.12,
+                "release": 0.025
+              },
+              "gain": 0.65,
+              "harmonicGain": 0.08
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 440,
+              "duration": 0.09,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.004,
+                "decay": 0.04,
+                "sustain": 0.18,
+                "release": 0.04
+              },
+              "gain": 0.85,
+              "harmonicGain": 0.08
+            },
+            {
+              "frequency": 554.37,
+              "duration": 0.09,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.004,
+                "decay": 0.04,
+                "sustain": 0.18,
+                "release": 0.04
+              },
+              "gain": 0.85,
+              "harmonicGain": 0.08
+            },
+            {
+              "frequency": 659.25,
+              "duration": 0.07,
+              "offsetMs": 45,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.003,
+                "decay": 0.035,
+                "sustain": 0.12,
+                "release": 0.025
+              },
+              "gain": 0.65,
+              "harmonicGain": 0.08
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 329.63,
+              "duration": 0.09,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.004,
+                "decay": 0.04,
+                "sustain": 0.18,
+                "release": 0.04
+              },
+              "gain": 0.85,
+              "harmonicGain": 0.08
+            },
+            {
+              "frequency": 493.88,
+              "duration": 0.09,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.004,
+                "decay": 0.04,
+                "sustain": 0.18,
+                "release": 0.04
+              },
+              "gain": 0.85,
+              "harmonicGain": 0.08
+            },
+            {
+              "frequency": 554.37,
+              "duration": 0.07,
+              "offsetMs": 45,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.003,
+                "decay": 0.035,
+                "sustain": 0.12,
+                "release": 0.025
+              },
+              "gain": 0.65,
+              "harmonicGain": 0.08
+            }
+          ]
+        }
+      ]
+    },
+    "navigate": {
+      "type": "motif",
+      "gain": 0.12,
+      "variants": [
+        {
+          "notes": [
+            {
+              "frequency": 493.88,
+              "duration": 0.038,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1,
+              "harmonicGain": 0.08
+            },
+            {
+              "frequency": 659.25,
+              "duration": 0.078,
+              "offsetMs": 32,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1,
+              "harmonicGain": 0.08
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 440,
+              "duration": 0.038,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1,
+              "harmonicGain": 0.08
+            },
+            {
+              "frequency": 659.25,
+              "duration": 0.078,
+              "offsetMs": 32,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1,
+              "harmonicGain": 0.08
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 493.88,
+              "duration": 0.038,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1,
+              "harmonicGain": 0.08
+            },
+            {
+              "frequency": 554.37,
+              "duration": 0.078,
+              "offsetMs": 32,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1,
+              "harmonicGain": 0.08
+            }
+          ]
+        }
+      ]
+    },
+    "execute": {
+      "type": "motif",
+      "gain": 0.15,
+      "variants": [
+        {
+          "notes": [
+            {
+              "frequency": 220,
+              "duration": 0.078,
+              "offsetMs": 12,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1
+            }
+          ],
+          "noiseTransient": {
+            "freqStart": 1200,
+            "freqEnd": 1800,
+            "bandwidth": 1,
+            "duration": 0.012,
+            "gain": 0.4
+          }
+        },
+        {
+          "notes": [
+            {
+              "frequency": 329.63,
+              "duration": 0.078,
+              "offsetMs": 12,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1
+            }
+          ],
+          "noiseTransient": {
+            "freqStart": 1200,
+            "freqEnd": 1800,
+            "bandwidth": 1,
+            "duration": 0.012,
+            "gain": 0.4
+          }
+        },
+        {
+          "notes": [
+            {
+              "frequency": 220,
+              "duration": 0.038,
+              "offsetMs": 12,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1
+            },
+            {
+              "frequency": 329.63,
+              "duration": 0.042,
+              "offsetMs": 50,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.15,
+                "release": 0.02
+              },
+              "gain": 1
+            }
+          ],
+          "noiseTransient": {
+            "freqStart": 1200,
+            "freqEnd": 1800,
+            "bandwidth": 1,
+            "duration": 0.012,
+            "gain": 0.4
+          }
+        }
+      ]
+    },
+    "move": {
+      "type": "whoosh",
+      "duration": 0.19,
+      "freqUp": [
+        800,
+        2800
+      ],
+      "freqDown": [
+        2800,
+        800
+      ],
+      "bandwidth": 0.9,
+      "envelope": {
+        "attack": 0.008,
+        "decay": 0.08,
+        "sustain": 0.08,
+        "release": 0.04
+      },
+      "gain": 0.14,
+      "anchorVariants": [
+        {
+          "notes": [
+            {
+              "frequency": 329.63,
+              "duration": 0.15,
+              "offsetMs": 16,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.01,
+                "decay": 0.06,
+                "sustain": 0.1,
+                "release": 0.04
+              },
+              "gain": 0.4
+            },
+            {
+              "frequency": 440,
+              "duration": 0.11,
+              "offsetMs": 80,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.008,
+                "decay": 0.05,
+                "sustain": 0.08,
+                "release": 0.03
+              },
+              "gain": 0.35
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 440,
+              "duration": 0.15,
+              "offsetMs": 16,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.01,
+                "decay": 0.06,
+                "sustain": 0.1,
+                "release": 0.04
+              },
+              "gain": 0.4
+            },
+            {
+              "frequency": 554.37,
+              "duration": 0.11,
+              "offsetMs": 80,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.008,
+                "decay": 0.05,
+                "sustain": 0.08,
+                "release": 0.03
+              },
+              "gain": 0.35
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 329.63,
+              "duration": 0.18,
+              "offsetMs": 16,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.01,
+                "decay": 0.08,
+                "sustain": 0.1,
+                "release": 0.04
+              },
+              "gain": 0.4
+            }
+          ]
+        }
+      ]
+    },
+    "sync": {
+      "type": "whoosh",
+      "duration": 0.24,
+      "freqUp": [
+        600,
+        3000
+      ],
+      "freqDown": [
+        3000,
+        600
+      ],
+      "bandwidth": 0.75,
+      "envelope": {
+        "attack": 0.006,
+        "decay": 0.09,
+        "sustain": 0.12,
+        "release": 0.06
+      },
+      "gain": 0.15,
+      "anchorVariants": [
+        {
+          "notes": [
+            {
+              "frequency": 220,
+              "duration": 0.13,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.008,
+                "decay": 0.06,
+                "sustain": 0.12,
+                "release": 0.04
+              },
+              "gain": 0.45
+            },
+            {
+              "frequency": 329.63,
+              "duration": 0.13,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.008,
+                "decay": 0.06,
+                "sustain": 0.12,
+                "release": 0.04
+              },
+              "gain": 0.4
+            },
+            {
+              "frequency": 554.37,
+              "duration": 0.07,
+              "offsetMs": 130,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.08,
+                "release": 0.03
+              },
+              "gain": 0.3
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 329.63,
+              "duration": 0.13,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.008,
+                "decay": 0.06,
+                "sustain": 0.12,
+                "release": 0.04
+              },
+              "gain": 0.45
+            },
+            {
+              "frequency": 440,
+              "duration": 0.13,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.008,
+                "decay": 0.06,
+                "sustain": 0.12,
+                "release": 0.04
+              },
+              "gain": 0.4
+            },
+            {
+              "frequency": 554.37,
+              "duration": 0.07,
+              "offsetMs": 130,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.002,
+                "decay": 0.03,
+                "sustain": 0.08,
+                "release": 0.03
+              },
+              "gain": 0.3
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "frequency": 220,
+              "duration": 0.16,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.008,
+                "decay": 0.08,
+                "sustain": 0.12,
+                "release": 0.05
+              },
+              "gain": 0.45
+            },
+            {
+              "frequency": 329.63,
+              "duration": 0.16,
+              "offsetMs": 0,
+              "waveform": "square",
+              "envelope": {
+                "attack": 0.008,
+                "decay": 0.08,
+                "sustain": 0.12,
+                "release": 0.05
+              },
+              "gain": 0.4
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sessionStart": {
+    "tone1": {
+      "waveform": "square",
+      "frequency": 440,
+      "duration": 0.1,
+      "envelope": {
+        "attack": 0.003,
+        "decay": 0.04,
+        "sustain": 0.18,
+        "release": 0.02
+      },
+      "gain": 0.15
+    },
+    "tone2": {
+      "waveform": "square",
+      "frequency": 554.37,
+      "duration": 0.12,
+      "envelope": {
+        "attack": 0.003,
+        "decay": 0.05,
+        "sustain": 0.18,
+        "release": 0.03
+      },
+      "gain": 0.14
+    },
+    "staggerSeconds": 0.055
+  },
+  "sessionEnd": {
+    "tone1": {
+      "waveform": "square",
+      "frequency": 554.37,
+      "duration": 0.08,
+      "envelope": {
+        "attack": 0.003,
+        "decay": 0.04,
+        "sustain": 0.12,
+        "release": 0.02
+      },
+      "gain": 0.14
+    },
+    "tone2": {
+      "waveform": "square",
+      "frequency": 440,
+      "duration": 0.14,
+      "envelope": {
+        "attack": 0.003,
+        "decay": 0.06,
+        "sustain": 0.12,
+        "release": 0.04
+      },
+      "gain": 0.12
+    },
+    "staggerSeconds": 0.055
+  },
+  "ambient": {
+    "droneFreq": 220,
+    "droneWaveform": "square",
+    "droneGain": 0.06,
+    "chunkDuration": 2,
+    "resolveNote1": 440,
+    "resolveNote2": 659.25,
+    "resolveWaveform": "square",
+    "resolveDuration": 0.1,
+    "resolveGain": 0.14
+  }
+}

@@ -1,0 +1,4 @@
+maxTopLevelNavItems: 5
+maxPrimaryActionsPerScreen: 1
+maxModalDepth: 1
+maxDistinctInteractionModesPerFlow: 2

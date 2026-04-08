@@ -1,0 +1,17 @@
+{
+  "name": "core",
+  "description": "Core MCP Tool Shop utilities",
+  "rules": [
+    {
+      "ids": [
+        "file-compass",
+        "tool-compass",
+        "tool-scan",
+        "context-window-manager"
+      ]
+    }
+  ],
+  "exclude": {
+    "deprecated": true
+  }
+}

@@ -1,0 +1,80 @@
+name: Submit a Tool
+description: Submit a new tool to the MCP Tool Registry
+title: "[New Tool]: <tool-id>"
+labels: ["tool-submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for submitting a tool! Please fill out the details below.
+
+        **Note:** The process is automated. This issue will automatically open a Pull Request.
+
+  - type: input
+    id: id
+    attributes:
+      label: Tool ID
+      description: Unique identifier (kebab-case). lowercase, no spaces. e.g. `my-tool`, `weather-agent`.
+      placeholder: my-awesome-tool
+    validations:
+      required: true
+
+  - type: input
+    id: name
+    attributes:
+      label: Display Name
+      description: Human-readable name.
+      placeholder: My Awesome Tool
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: 1-2 sentences describing what the tool does.
+      placeholder: A tool that helps you simplify complex workflows...
+    validations:
+      required: true
+
+  - type: input
+    id: repo
+    attributes:
+      label: Repository URL
+      description: HTTPS URL to the source code.
+      placeholder: https://github.com/username/my-tool
+    validations:
+      required: true
+
+  - type: textarea
+    id: install
+    attributes:
+      label: Installation Instructions (JSON)
+      description: |
+        Provide the installation object as valid JSON.
+        Example: `{"npm": "@org/package"}` or `{"pip": "package-name"}`
+      placeholder: '{"npm": "my-tool"}'
+    validations:
+      required: true
+
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: Comma-separated list of tags.
+      placeholder: ai, testing, automation
+    validations:
+      required: true
+
+  - type: dropdown
+    id: bundle
+    attributes:
+      label: Suggested Bundle (Optional)
+      description: "Where does this tool fit best? (See docs/contract.md)"
+      options:
+        - none
+        - agents (Autonomous frameworks)
+        - ops (DevOps/Infra)
+        - evaluation (Benchmarking)
+    validations:
+      required: false

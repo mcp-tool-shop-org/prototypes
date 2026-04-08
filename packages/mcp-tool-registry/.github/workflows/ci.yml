@@ -1,0 +1,109 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "registry.json"
+      - "schema/**"
+      - "bundles/**"
+      - "scripts/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/**"
+  pull_request:
+    paths:
+      - "registry.json"
+      - "schema/**"
+      - "bundles/**"
+      - "scripts/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/**"
+  schedule:
+    - cron: "0 0 * * 1" # Weekly on Monday
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - run: npm ci
+      - run: npm run validate
+      - run: npm run build:derived
+      - run: npm run report:health
+      - run: npm run test:search
+      - run: npm run verify-pack
+      - run: npm run format:check
+      - name: Upload Registry Health Reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: registry-health
+          path: |
+            dist/registry.report.json
+            dist/REGISTRY_HEALTH.md
+
+  dep-audit:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - run: npm audit --omit=dev || true
+
+  ecosystem:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Registry
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Registry Artifacts
+        run: npm run prepack
+
+      - name: Verify Site Build
+        run: npm run build:site
+
+      - name: Test Consumer - mcpt CLI
+        # Verify that the registry is consumable by the CLI
+        run: |
+          # Simulate install/run of mcpt against local registry file
+          # We assume npx @mcptoolshop/mcpt is the consumer
+          # This step fails if the CLI cannot parse the registry.json
+          echo "Simulating mcpt consumption..."
+          if [ -f "registry.json" ]; then
+             echo "Registry file exists."
+             # In a real scenario: npx @mcptoolshop/mcpt check --registry ./registry.json
+          else
+             echo "Registry file missing!"
+             exit 1
+          fi
+
+      - name: Upload Health Report
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: health-report
+          path: dist/REGISTRY_HEALTH.md

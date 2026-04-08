@@ -1,0 +1,85 @@
+{
+  "profile_id": "mcp-trust",
+  "version": "0.1",
+  "title": "MCP Trust Model",
+  "description": "Client-aligned trust checks for IDE integration (VS Code, etc.)",
+  "checks": [
+    {
+      "check_id": "trust.metadata.command",
+      "title": "Command is surfaced in metadata",
+      "description": "Transport config exposes what will actually run (command, args)",
+      "severity_on_fail": "high",
+      "codes": ["MCP.TRUST.COMMAND_HIDDEN"]
+    },
+    {
+      "check_id": "trust.metadata.env",
+      "title": "Environment variables are declared",
+      "description": "Required env vars are documented (not their values)",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.TRUST.ENV_UNDECLARED"]
+    },
+    {
+      "check_id": "trust.provenance.pinned",
+      "title": "Source is pinned or verified",
+      "description": "Server reference includes hash, signature, or locked version",
+      "severity_on_fail": "high",
+      "codes": ["MCP.TRUST.UNPINNED_SOURCE"]
+    },
+    {
+      "check_id": "trust.provenance.signature",
+      "title": "Binary/package is signed",
+      "description": "Distributed artifact has verifiable signature (optional but recommended)",
+      "severity_on_fail": "low",
+      "codes": ["MCP.TRUST.UNSIGNED"]
+    },
+    {
+      "check_id": "trust.provenance.sbom",
+      "title": "SBOM available",
+      "description": "Software Bill of Materials is provided (optional)",
+      "severity_on_fail": "info",
+      "codes": ["MCP.TRUST.NO_SBOM"]
+    },
+    {
+      "check_id": "trust.firstrun.docs",
+      "title": "First-run guidance documented",
+      "description": "README guides users through safe initial setup",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.TRUST.NO_SETUP_DOCS"]
+    },
+    {
+      "check_id": "trust.firstrun.prompts",
+      "title": "Trust prompts respected",
+      "description": "Server doesn't try to bypass VS Code trust dialogs",
+      "severity_on_fail": "high",
+      "codes": ["MCP.TRUST.PROMPT_BYPASS"]
+    },
+    {
+      "check_id": "trust.scope.minimal",
+      "title": "Minimal permissions requested",
+      "description": "Server doesn't request more access than needed for its tools",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.TRUST.EXCESSIVE_SCOPE"]
+    },
+    {
+      "check_id": "trust.scope.declared",
+      "title": "Required permissions documented",
+      "description": "README lists what permissions/access the server needs",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.TRUST.SCOPE_UNDOCUMENTED"]
+    },
+    {
+      "check_id": "trust.update.channel",
+      "title": "Update mechanism is safe",
+      "description": "Auto-updates (if any) use verified sources",
+      "severity_on_fail": "high",
+      "codes": ["MCP.TRUST.UNSAFE_UPDATE"]
+    },
+    {
+      "check_id": "trust.isolation.subprocess",
+      "title": "Subprocesses are contained",
+      "description": "Child processes inherit only necessary permissions",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.TRUST.SUBPROCESS_OVERPRIVILEGED"]
+    }
+  ]
+}

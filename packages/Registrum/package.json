@@ -1,0 +1,70 @@
+{
+  "name": "@mcptoolshop/registrum",
+  "version": "1.1.1",
+  "description": "A structural registrar for maintaining legibility in evolving systems",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./persistence": {
+      "import": "./dist/persistence/index.js",
+      "types": "./dist/persistence/index.d.ts"
+    },
+    "./registry": {
+      "import": "./dist/registry/index.js",
+      "types": "./dist/registry/index.d.ts"
+    },
+    "./attestation": {
+      "import": "./dist/attestation/index.js",
+      "types": "./dist/attestation/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "invariants",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit",
+    "example:refusal": "npx tsx examples/refusal-as-success.ts"
+  },
+  "keywords": [
+    "registrar",
+    "state",
+    "transitions",
+    "invariants",
+    "deterministic"
+  ],
+  "author": "mcp-tool-shop <64996768+mcp-tool-shop@users.noreply.github.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/Registrum.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mcp-tool-shop-org/Registrum/issues"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/Registrum#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "devDependencies": {
+    "@types/node": "^25.2.1",
+    "typescript": "^5.3.0",
+    "vitest": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

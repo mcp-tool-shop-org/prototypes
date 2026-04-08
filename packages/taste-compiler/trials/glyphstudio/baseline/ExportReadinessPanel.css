@@ -1,0 +1,286 @@
+/* ── Export Readiness Panel ──
+ * Lives in the right dock. Uses GlyphStudio CSS variable system.
+ * Append to layout.css or import as a standalone sheet.
+ */
+
+.erpanel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  font-size: 11px;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.erpanel-empty {
+  color: var(--text-muted);
+  text-align: center;
+  padding: 24px 8px;
+}
+
+/* ── Overall readiness banner ── */
+
+.erpanel-overall {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.erpanel-overall-ready {
+  background: rgba(58, 201, 122, 0.12);
+  border: 1px solid rgba(58, 201, 122, 0.3);
+  color: var(--accent-success);
+}
+
+.erpanel-overall-warning {
+  background: rgba(232, 167, 68, 0.12);
+  border: 1px solid rgba(232, 167, 68, 0.3);
+  color: var(--accent-warning);
+}
+
+.erpanel-overall-blocked {
+  background: rgba(232, 84, 84, 0.12);
+  border: 1px solid rgba(232, 84, 84, 0.3);
+  color: var(--accent-error);
+}
+
+.erpanel-overall-label {
+  flex: 1;
+}
+
+.erpanel-overall-count {
+  font-size: 10px;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+/* ── Readiness indicator dots ── */
+
+.erpanel-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.erpanel-indicator-ready {
+  background: var(--accent-success);
+  color: #fff;
+}
+
+.erpanel-indicator-warning {
+  background: var(--accent-warning);
+  color: #000;
+}
+
+.erpanel-indicator-blocked {
+  background: var(--accent-error);
+  color: #fff;
+}
+
+/* ── Manifest summary grid ── */
+
+.erpanel-manifest {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.erpanel-manifest-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.erpanel-manifest-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.erpanel-manifest-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.erpanel-manifest-label {
+  font-size: 9px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.erpanel-manifest-aside {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.erpanel-aside-tag {
+  font-size: 9px;
+  padding: 1px 6px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+.erpanel-aside-tag.sketch {
+  background: rgba(212, 160, 82, 0.15);
+  color: #d4a052;
+  border: 1px solid rgba(212, 160, 82, 0.3);
+}
+
+.erpanel-aside-tag.hidden {
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+}
+
+/* ── Section headers ── */
+
+.erpanel-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.erpanel-section-header {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 0 2px;
+}
+
+/* ── Check rows ── */
+
+.erpanel-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.erpanel-check-row {
+  display: flex;
+  flex-direction: column;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.erpanel-check-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.12s;
+}
+
+.erpanel-check-header:hover {
+  background: var(--bg-panel-raised);
+}
+
+.erpanel-check-label {
+  flex: 1;
+  font-size: 11px;
+  color: var(--text-primary);
+}
+
+.erpanel-check-blocked .erpanel-check-label {
+  font-weight: 600;
+}
+
+.erpanel-chevron {
+  font-size: 9px;
+  color: var(--text-muted);
+  transition: transform 0.15s;
+  flex-shrink: 0;
+}
+
+.erpanel-chevron.open {
+  transform: rotate(90deg);
+}
+
+.erpanel-check-detail {
+  padding: 4px 6px 6px 28px;
+  font-size: 10px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Quick export ── */
+
+.erpanel-quick-export {
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-panel);
+}
+
+.erpanel-quick-buttons {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.erpanel-quick-btn {
+  flex: 1;
+  padding: 6px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--accent-primary);
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.erpanel-quick-btn:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.erpanel-quick-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.erpanel-export-status {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  color: var(--accent-primary);
+}
+
+.erpanel-export-result {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  color: var(--accent-success);
+  word-break: break-all;
+}
+
+.erpanel-export-blocked-hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  color: var(--accent-error);
+  font-style: italic;
+}

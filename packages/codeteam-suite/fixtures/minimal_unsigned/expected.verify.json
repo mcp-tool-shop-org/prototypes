@@ -1,0 +1,21 @@
+{
+  "status": "OK_UNSIGNED",
+  "exit_code": 1,
+  "summary": {
+    "artifacts_count": 1,
+    "evidence_count": 0,
+    "approvals_valid": 0,
+    "approvals_required": 1,
+    "signature_present": false,
+    "signature_valid": false,
+    "signer_id": null
+  },
+  "checks": {
+    "schema_valid": true,
+    "artifacts_valid": true,
+    "evidence_valid": true,
+    "paths_valid": true
+  },
+  "errors": [],
+  "warnings": []
+}

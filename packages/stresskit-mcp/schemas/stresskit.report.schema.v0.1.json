@@ -1,0 +1,541 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stresskit.dev/schemas/stresskit.report.schema.v0.1.json",
+  "title": "StressKit Report Schema",
+  "description": "StressKit standardized report contract (v0.1). NOTE: summary.score is best-effort and informational only; the scoring algorithm may change without a schema version bump. Consumers MUST NOT gate CI on summary.score. Overall status MUST be determined from summary.status and/or finding severities.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "generated_at", "stresskit_version", "run_id", "targets", "profiles", "summary", "runs", "findings", "metrics", "artifacts"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1",
+      "description": "Report contract version (not tool version)."
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC3339 timestamp when the report was generated."
+    },
+    "stresskit_version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "StressKit tool version that produced this report."
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "description": "Unique id for this report generation run (ULID/UUID/string)."
+    },
+    "compat": {
+      "type": "object",
+      "description": "Optional compatibility markers for contract subcomponents. Additive and informational.",
+      "additionalProperties": false,
+      "properties": {
+        "status_contract": { "type": "string", "minLength": 1 },
+        "finding_codes_contract": { "type": "string", "minLength": 1 }
+      }
+    },
+    "targets": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/Target" },
+      "description": "Targets tested (each is an MCP server instance/config)."
+    },
+    "profiles": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/ProfileRef" },
+      "description": "Profiles executed in this report."
+    },
+    "summary": {
+      "$ref": "#/$defs/Summary",
+      "description": "Overall summary across all runs."
+    },
+    "runs": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/Run" },
+      "description": "Per target × profile execution records."
+    },
+    "findings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Finding" },
+      "description": "Normalized findings (issues) produced by checks across all runs."
+    },
+    "metrics": {
+      "$ref": "#/$defs/Metrics",
+      "description": "Aggregated metrics for the report."
+    },
+    "artifacts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Artifact" },
+      "description": "Pointers to saved report artifacts (logs, repro bundles, etc.)."
+    }
+  },
+  "$defs": {
+    "ProfileRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile_id", "version"],
+      "properties": {
+        "profile_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "description": "Known StressKit profile id (e.g., mcp-core, mcp-ops, mcp-secure)."
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 16,
+          "pattern": "^[0-9]+\\.[0-9]+$",
+          "description": "Profile contract version (e.g., 0.1)."
+        }
+      }
+    },
+    "SummaryStatus": {
+      "type": "string",
+      "enum": ["PASS", "WARN", "FAIL", "ERROR"],
+      "description": "PASS: no high/critical failures. WARN: medium failures present but no high/critical. FAIL: any high/critical failure. ERROR: runner failure prevented completion."
+    },
+    "CheckStatus": {
+      "type": "string",
+      "enum": ["PASS", "FAIL", "SKIP", "ERROR"],
+      "description": "PASS/FAIL/SKIP for check outcome; ERROR means the check or harness errored."
+    },
+    "Severity": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low", "info"]
+    },
+    "TransportKind": {
+      "type": "string",
+      "enum": ["stdio", "http_sse", "http"]
+    },
+    "ArtifactKind": {
+      "type": "string",
+      "enum": ["log", "repro_bundle", "trace", "report_markdown", "junit"]
+    },
+    "Summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "score", "totals", "severity_counts", "top_failure_codes"],
+      "properties": {
+        "status": { "$ref": "#/$defs/SummaryStatus" },
+        "score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Best-effort overall health score (0-100). Informational only; algorithm may change. MUST NOT be used for gating."
+        },
+        "totals": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["runs", "checks", "passed", "failed", "skipped"],
+          "properties": {
+            "runs": { "type": "integer", "minimum": 0 },
+            "checks": { "type": "integer", "minimum": 0 },
+            "passed": { "type": "integer", "minimum": 0 },
+            "failed": { "type": "integer", "minimum": 0 },
+            "skipped": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "severity_counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["critical", "high", "medium", "low", "info"],
+          "properties": {
+            "critical": { "type": "integer", "minimum": 0 },
+            "high": { "type": "integer", "minimum": 0 },
+            "medium": { "type": "integer", "minimum": 0 },
+            "low": { "type": "integer", "minimum": 0 },
+            "info": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "top_failure_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 96,
+            "pattern": "^[A-Z0-9]+(\\.[A-Z0-9_]+)+$"
+          },
+          "description": "Ordered list of most important/impactful finding codes."
+        }
+      }
+    },
+    "Target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_id", "display_name", "transport", "identity"],
+      "properties": {
+        "target_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9._:-]+$"
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "transport": { "$ref": "#/$defs/Transport" },
+        "identity": { "$ref": "#/$defs/Identity" }
+      }
+    },
+    "Transport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": { "$ref": "#/$defs/TransportKind" },
+        "command": {
+          "type": "string",
+          "minLength": 1,
+          "description": "For stdio: executable command."
+        },
+        "args": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "For stdio: command arguments."
+        },
+        "cwd": {
+          "type": "string",
+          "minLength": 1,
+          "description": "For stdio: working directory."
+        },
+        "env_keys": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "description": "Environment variable keys used (values MUST NOT be embedded)."
+        },
+        "url": {
+          "type": "string",
+          "minLength": 1,
+          "description": "For http/http_sse: base URL."
+        },
+        "headers": {
+          "type": "object",
+          "description": "For http/http_sse: header keys used (values SHOULD be redacted elsewhere).",
+          "additionalProperties": { "type": "string" }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "kind": { "const": "stdio" } }, "required": ["kind"] },
+          "then": { "required": ["command"] }
+        },
+        {
+          "if": { "properties": { "kind": { "enum": ["http", "http_sse"] } }, "required": ["kind"] },
+          "then": { "required": ["url"] }
+        }
+      ]
+    },
+    "Identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["server_name"],
+      "properties": {
+        "server_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "server_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "build": { "$ref": "#/$defs/BuildInfo" }
+      }
+    },
+    "BuildInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "vcs": { "type": "string", "minLength": 1, "maxLength": 16 },
+        "revision": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "dirty": { "type": "boolean" }
+      }
+    },
+    "Run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["run_id", "target_id", "profile_id", "profile_version", "parameters", "status", "timing_ms", "check_results"],
+      "properties": {
+        "run_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9._:-]+$"
+        },
+        "target_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "profile_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "profile_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 16,
+          "pattern": "^[0-9]+\\.[0-9]+$"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Run parameters (escape hatch).",
+          "additionalProperties": true
+        },
+        "status": { "$ref": "#/$defs/SummaryStatus" },
+        "timing_ms": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["total"],
+          "properties": {
+            "total": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "check_results": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/CheckResult" }
+        }
+      }
+    },
+    "CheckResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["check_id", "status"],
+      "properties": {
+        "check_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "description": "Stable check identifier (e.g., core.handshake, secure.auth.gate)."
+        },
+        "status": { "$ref": "#/$defs/CheckStatus" },
+        "timing_ms": { "type": "integer", "minimum": 0 },
+        "details": {
+          "type": "object",
+          "description": "Check-specific details (escape hatch).",
+          "additionalProperties": true
+        }
+      }
+    },
+    "Finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["finding_id", "code", "title", "severity", "status", "target_id", "run_id", "evidence"],
+      "properties": {
+        "finding_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9._:-]+$"
+        },
+        "code": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 96,
+          "pattern": "^[A-Z0-9]+(\\.[A-Z0-9_]+)+$",
+          "description": "Stable, namespaced finding code (e.g., MCP.SEC.AUTH_REQUIRED). Semantics MUST NOT change within a major contract."
+        },
+        "title": { "type": "string", "minLength": 1, "maxLength": 240 },
+        "severity": { "$ref": "#/$defs/Severity" },
+        "status": {
+          "type": "string",
+          "enum": ["OPEN", "RESOLVED", "SUPPRESSED"],
+          "description": "OPEN: active issue. RESOLVED: fixed or no longer reproducible. SUPPRESSED: intentionally ignored by policy."
+        },
+        "target_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "run_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "tool": { "$ref": "#/$defs/ToolRef" },
+        "evidence": { "$ref": "#/$defs/Evidence" },
+        "repro": { "$ref": "#/$defs/Repro" },
+        "references": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Reference" }
+        }
+      }
+    },
+    "ToolRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "operation"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "operation": {
+          "type": "string",
+          "enum": ["list_tools", "invoke", "read_resource", "list_resources"],
+          "description": "Operation context for the finding."
+        },
+        "schema_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300,
+          "description": "Pointer to the tool's schema name/id used in the check."
+        }
+      }
+    },
+    "Evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["message"],
+      "properties": {
+        "message": { "type": "string", "minLength": 1, "maxLength": 2000 },
+        "observations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Observation" },
+          "description": "Key/value observations captured during the check."
+        }
+      }
+    },
+    "Observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "value"],
+      "properties": {
+        "key": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "value": {
+          "description": "Observation value. May be primitive, array, or object.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "number" },
+            { "type": "integer" },
+            { "type": "boolean" },
+            { "type": "null" },
+            { "type": "array" },
+            { "type": "object" }
+          ]
+        }
+      }
+    },
+    "Repro": {
+      "type": "object",
+      "description": "Reproduction payload for a finding. Optional but strongly recommended for failed checks.",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["invoke_tool", "list_tools", "read_resource", "custom"],
+          "description": "Kind of reproduction scenario."
+        },
+        "request": {
+          "description": "Request payload for reproduction. Shape depends on kind; may be an MCP request-like object.",
+          "oneOf": [{ "type": "object" }, { "type": "null" }]
+        },
+        "notes": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "Reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "id"],
+      "properties": {
+        "type": { "type": "string", "enum": ["check", "artifact", "doc"] },
+        "id": { "type": "string", "minLength": 1, "maxLength": 256 }
+      }
+    },
+    "Metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["latency_ms", "throughput_rps", "reliability"],
+      "properties": {
+        "latency_ms": { "$ref": "#/$defs/LatencyMetrics" },
+        "throughput_rps": { "$ref": "#/$defs/ThroughputMetrics" },
+        "reliability": { "$ref": "#/$defs/ReliabilityMetrics" },
+        "resource": { "$ref": "#/$defs/ResourceMetrics" }
+      }
+    },
+    "LatencyMetrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["overall"],
+      "properties": {
+        "overall": { "$ref": "#/$defs/LatencyStats" },
+        "by_tool": {
+          "type": "object",
+          "description": "Latency stats keyed by tool name.",
+          "additionalProperties": { "$ref": "#/$defs/LatencyStats" }
+        }
+      }
+    },
+    "LatencyStats": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["p50", "p95", "p99", "max"],
+      "properties": {
+        "p50": { "type": "number", "minimum": 0 },
+        "p95": { "type": "number", "minimum": 0 },
+        "p99": { "type": "number", "minimum": 0 },
+        "max": { "type": "number", "minimum": 0 }
+      }
+    },
+    "ThroughputMetrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["overall_avg", "overall_max"],
+      "properties": {
+        "overall_avg": { "type": "number", "minimum": 0 },
+        "overall_max": { "type": "number", "minimum": 0 }
+      }
+    },
+    "ReliabilityMetrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requests", "success", "errors", "timeouts", "cancellations", "reconnects", "server_crashes"],
+      "properties": {
+        "requests": { "type": "integer", "minimum": 0 },
+        "success": { "type": "integer", "minimum": 0 },
+        "errors": { "type": "integer", "minimum": 0 },
+        "timeouts": { "type": "integer", "minimum": 0 },
+        "cancellations": { "type": "integer", "minimum": 0 },
+        "reconnects": { "type": "integer", "minimum": 0 },
+        "server_crashes": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "ResourceMetrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "process": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "peak_rss_bytes": { "type": "integer", "minimum": 0 },
+            "peak_cpu_percent": { "type": "number", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "Artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_id", "kind", "path", "sha256", "content_type"],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9._:-]+$"
+        },
+        "kind": { "$ref": "#/$defs/ArtifactKind" },
+        "path": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "SHA-256 hex digest of the artifact bytes."
+        },
+        "content_type": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "size_bytes": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

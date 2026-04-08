@@ -1,0 +1,3 @@
+# Fixture files contain hash-verified content.
+# Line ending conversion MUST be disabled to preserve SHA256 digests.
+fixtures/** binary

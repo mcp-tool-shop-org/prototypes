@@ -1,0 +1,11 @@
+- id: calm-not-corporate
+  statement: "The product should feel calm, editorial, and deliberate"
+  rationale: "This is a ritual tool, not an admin cockpit"
+
+- id: no-fake-intelligence
+  statement: "Never imply full autonomy where the user still does the work"
+  rationale: "Trust matters more than sounding advanced"
+
+- id: focus-over-features
+  statement: "Every screen should have one clear purpose"
+  rationale: "Rituals require presence, not multitasking"

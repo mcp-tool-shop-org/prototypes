@@ -1,0 +1,13 @@
+{
+  "packVersion": "0.1.0",
+  "product": "CommandUI",
+  "target": "F:/AI/taste-compiler/trials/commandui/constrained",
+  "checkedAt": "2026-04-02T17:09:29.680Z",
+  "violations": [],
+  "summary": {
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0,
+    "passed": true
+  }
+}

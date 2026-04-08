@@ -1,0 +1,116 @@
+{
+  "packVersion": "0.1.0",
+  "product": "CommandUI",
+  "target": "F:/AI/taste-compiler/trials/commandui/baseline",
+  "checkedAt": "2026-04-02T17:09:25.580Z",
+  "violations": [
+    {
+      "id": "tok-F:\\AI\\taste-compiler\\trials\\commandui\\baseline\\CommandGuidance.css-57",
+      "severity": "error",
+      "class": "visual-token",
+      "ruleId": "TOK-001",
+      "message": "Raw hex color \"#ffd488\" used outside token system",
+      "rationale": "All colors should reference semantic token roles to maintain visual consistency",
+      "evidence": [
+        {
+          "file": "F:\\AI\\taste-compiler\\trials\\commandui\\baseline\\CommandGuidance.css",
+          "line": 57,
+          "snippet": "color: #ffd488;",
+          "value": "#ffd488"
+        }
+      ],
+      "suggestedFix": "Replace with a semantic color token"
+    },
+    {
+      "id": "tok-F:\\AI\\taste-compiler\\trials\\commandui\\baseline\\CommandGuidance.css-174",
+      "severity": "error",
+      "class": "visual-token",
+      "ruleId": "TOK-001",
+      "message": "Raw hex color \"#ffd488\" used outside token system",
+      "rationale": "All colors should reference semantic token roles to maintain visual consistency",
+      "evidence": [
+        {
+          "file": "F:\\AI\\taste-compiler\\trials\\commandui\\baseline\\CommandGuidance.css",
+          "line": 174,
+          "snippet": "color: #ffd488;",
+          "value": "#ffd488"
+        }
+      ],
+      "suggestedFix": "Replace with a semantic color token"
+    },
+    {
+      "id": "tok-F:\\AI\\taste-compiler\\trials\\commandui\\baseline\\CommandGuidance.css-247",
+      "severity": "error",
+      "class": "visual-token",
+      "ruleId": "TOK-001",
+      "message": "Raw hex color \"rgba(255, 180, 192, 0.04)\" used outside token system",
+      "rationale": "All colors should reference semantic token roles to maintain visual consistency",
+      "evidence": [
+        {
+          "file": "F:\\AI\\taste-compiler\\trials\\commandui\\baseline\\CommandGuidance.css",
+          "line": 247,
+          "snippet": "background: rgba(255, 180, 192, 0.04);",
+          "value": "rgba(255, 180, 192, 0.04)"
+        }
+      ],
+      "suggestedFix": "Replace with a semantic color token"
+    },
+    {
+      "id": "tok-F:\\AI\\taste-compiler\\trials\\commandui\\baseline\\CommandGuidance.css-251",
+      "severity": "error",
+      "class": "visual-token",
+      "ruleId": "TOK-001",
+      "message": "Raw hex color \"rgba(255, 180, 192, 0.08)\" used outside token system",
+      "rationale": "All colors should reference semantic token roles to maintain visual consistency",
+      "evidence": [
+        {
+          "file": "F:\\AI\\taste-compiler\\trials\\commandui\\baseline\\CommandGuidance.css",
+          "line": 251,
+          "snippet": "background: rgba(255, 180, 192, 0.08);",
+          "value": "rgba(255, 180, 192, 0.08)"
+        }
+      ],
+      "suggestedFix": "Replace with a semantic color token"
+    },
+    {
+      "id": "tok-F:\\AI\\taste-compiler\\trials\\commandui\\baseline\\CommandGuidance.css-255",
+      "severity": "error",
+      "class": "visual-token",
+      "ruleId": "TOK-001",
+      "message": "Raw hex color \"rgba(255, 212, 136, 0.04)\" used outside token system",
+      "rationale": "All colors should reference semantic token roles to maintain visual consistency",
+      "evidence": [
+        {
+          "file": "F:\\AI\\taste-compiler\\trials\\commandui\\baseline\\CommandGuidance.css",
+          "line": 255,
+          "snippet": "background: rgba(255, 212, 136, 0.04);",
+          "value": "rgba(255, 212, 136, 0.04)"
+        }
+      ],
+      "suggestedFix": "Replace with a semantic color token"
+    },
+    {
+      "id": "tok-F:\\AI\\taste-compiler\\trials\\commandui\\baseline\\CommandGuidance.css-259",
+      "severity": "error",
+      "class": "visual-token",
+      "ruleId": "TOK-001",
+      "message": "Raw hex color \"rgba(255, 212, 136, 0.08)\" used outside token system",
+      "rationale": "All colors should reference semantic token roles to maintain visual consistency",
+      "evidence": [
+        {
+          "file": "F:\\AI\\taste-compiler\\trials\\commandui\\baseline\\CommandGuidance.css",
+          "line": 259,
+          "snippet": "background: rgba(255, 212, 136, 0.08);",
+          "value": "rgba(255, 212, 136, 0.08)"
+        }
+      ],
+      "suggestedFix": "Replace with a semantic color token"
+    }
+  ],
+  "summary": {
+    "errors": 6,
+    "warnings": 0,
+    "infos": 0,
+    "passed": false
+  }
+}

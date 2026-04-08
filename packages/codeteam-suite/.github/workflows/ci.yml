@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.cs"
+      - "**/*.csproj"
+      - "**/*.sln"
+      - ".github/workflows/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "**/*.cs"
+      - "**/*.csproj"
+      - "**/*.sln"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore CodeTeam.sln
+
+      - name: Build
+        run: dotnet build CodeTeam.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test CodeTeam.sln --configuration Release --no-build --verbosity normal
+        env:
+          CODETEAM_CLI_PATH: ${{ github.workspace }}/src/CodeTeam.Cli/bin/Release/net8.0/codeteam

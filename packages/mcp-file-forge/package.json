@@ -1,0 +1,66 @@
+{
+  "name": "@mcptoolshop/file-forge",
+  "version": "1.0.1",
+  "description": "MCP server for file operations and project scaffolding - Windows-first, secure, sandboxed",
+  "type": "module",
+  "main": "./build/index.js",
+  "bin": {
+    "mcp-file-forge": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node ./build/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext .ts",
+    "clean": "rimraf build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "file-operations",
+    "project-scaffolding",
+    "claude",
+    "anthropic"
+  ],
+  "author": {
+    "name": "mcp-tool-shop",
+    "email": "64996768+mcp-tool-shop@users.noreply.github.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/mcp-file-forge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mcp-tool-shop-org/mcp-file-forge/issues"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/mcp-file-forge#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "build",
+    "templates"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "express": "^5.2.1",
+    "glob": "^11.0.0",
+    "minimatch": "^10.0.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.0.0",
+    "eslint": "^9.0.0",
+    "rimraf": "^6.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}

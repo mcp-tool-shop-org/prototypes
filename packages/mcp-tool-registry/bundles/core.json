@@ -1,0 +1,10 @@
+{
+  "id": "core",
+  "description": "Core MCP Tool Shop utilities",
+  "tools": [
+    "context-window-manager",
+    "file-compass",
+    "tool-compass",
+    "tool-scan"
+  ]
+}

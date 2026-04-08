@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>creatorledger</AssemblyName>
+    <RootNamespace>CreatorLedger.Cli</RootNamespace>
+
+    <!-- Not packable as NuGet (use 'dotnet publish' for distribution) -->
+    <IsPackable>false</IsPackable>
+
+    <!-- Package metadata -->
+    <Description>CreatorLedger CLI - Standalone verifier for digital asset attestation proofs with Ed25519 signatures.</Description>
+    <Authors>mcp-tool-shop</Authors>
+    <Company>MCP Tool Shop</Company>
+    <Copyright>Copyright (c) 2025-2026 MCP Tool Shop</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine" Version="2.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared.Crypto\Shared.Crypto.csproj" />
+    <ProjectReference Include="..\CreatorLedger.Application\CreatorLedger.Application.csproj" />
+  </ItemGroup>
+
+</Project>

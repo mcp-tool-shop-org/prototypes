@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>CodeTeam.Crypto</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <!-- NuGet package metadata -->
+    <PackageId>CodeTeam.Crypto</PackageId>
+    <Version>1.0.3</Version>
+    <Description>Ed25519 signature verification and SHA-256 digest computation for package signing workflows. Provides ISignatureVerifier and IDigestComputer interfaces with production and stub implementations over NSec.Cryptography.</Description>
+    <Authors>mcp-tool-shop</Authors>
+    <Company>MCP Tool Shop</Company>
+    <Copyright>Copyright (c) 2025-2026 MCP Tool Shop</Copyright>
+    <PackageProjectUrl>https://github.com/mcp-tool-shop-org/codeteam-suite</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mcp-tool-shop-org/codeteam-suite</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>ed25519;sha256;cryptography;signing;verification;nsec</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CodeTeam.Core\CodeTeam.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NSec.Cryptography" Version="24.4.0" />
+  </ItemGroup>
+
+</Project>

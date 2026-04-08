@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://codeteam.dev/schemas/seal.v0.1.json",
+  "title": "CodeTeam Seal Record",
+  "description": "An optional public timestamp seal for a package (v0.1)",
+  "type": "object",
+  "required": [
+    "type",
+    "package_digest",
+    "seal_digest",
+    "network",
+    "ts"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "seal",
+      "description": "Record type"
+    },
+    "package_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "Package digest being sealed"
+    },
+    "seal_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "Digest of seal payload (for verification)"
+    },
+    "network": {
+      "type": "string",
+      "enum": ["xrpl", "none"],
+      "description": "Seal network/provider"
+    },
+    "tx_hash": {
+      "type": "string",
+      "description": "Transaction hash on network (if applicable)"
+    },
+    "ts": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of sealing"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Network-specific metadata",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

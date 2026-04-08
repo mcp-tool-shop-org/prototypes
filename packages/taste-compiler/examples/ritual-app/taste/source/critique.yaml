@@ -1,0 +1,9 @@
+- id: crit-buttons
+  target: /ritual/new
+  note: "Too many actions competing for attention — buttons everywhere"
+  severity: important
+
+- id: crit-tone
+  target: /home
+  note: "Copy tone says \"supercharged\" — feels like a SaaS landing page, not a calm tool"
+  severity: critical

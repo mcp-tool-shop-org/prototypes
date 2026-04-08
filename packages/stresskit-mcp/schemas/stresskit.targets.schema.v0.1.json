@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stresskit.dev/schemas/targets.v0.1.json",
+  "title": "StressKit Target Configuration",
+  "description": "Configuration for MCP server targets with fingerprinting and invoke fixtures",
+  "type": "object",
+  "required": ["version", "targets"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "const": "0.1"
+    },
+    "targets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/target"
+      },
+      "minItems": 1
+    }
+  },
+  "$defs": {
+    "target": {
+      "type": "object",
+      "required": ["name", "display_name", "transport"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]*$",
+          "description": "Canonical target identifier (lowercase, no spaces)"
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable name for reports"
+        },
+        "transport": {
+          "$ref": "#/$defs/transport"
+        },
+        "env": {
+          "type": "object",
+          "additionalProperties": {"type": "string"},
+          "description": "Environment variables to set when spawning"
+        },
+        "cwd": {
+          "type": "string",
+          "description": "Working directory for stdio transports"
+        },
+        "aliases": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Other names this target is known by (for deduplication)"
+        },
+        "fixtures": {
+          "$ref": "#/$defs/fixtures"
+        },
+        "tags": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Tags for filtering (e.g., 'local', 'python', 'npx')"
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to include in --all runs"
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "minimum": 1000,
+          "default": 30000,
+          "description": "Per-target timeout override"
+        }
+      }
+    },
+    "transport": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["stdio", "http_sse", "http"]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"kind": {"const": "stdio"}}
+          },
+          "then": {
+            "required": ["command"],
+            "properties": {
+              "kind": {"const": "stdio"},
+              "command": {
+                "type": "string",
+                "description": "Command to spawn the server"
+              },
+              "args": {
+                "type": "array",
+                "items": {"type": "string"},
+                "default": [],
+                "description": "Arguments to pass to command"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {"kind": {"enum": ["http_sse", "http"]}}
+          },
+          "then": {
+            "required": ["url"],
+            "properties": {
+              "kind": {"enum": ["http_sse", "http"]},
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "description": "Server endpoint URL"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "fixtures": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "invoke_smoke": {
+          "$ref": "#/$defs/invoke_fixture",
+          "description": "Tool + args for core.invoke_smoke check"
+        },
+        "invoke_slow": {
+          "$ref": "#/$defs/invoke_fixture",
+          "description": "Tool + args for timeout/latency testing (should be slow)"
+        },
+        "invoke_error": {
+          "$ref": "#/$defs/invoke_fixture",
+          "description": "Tool + args that should trigger a controlled error"
+        }
+      }
+    },
+    "invoke_fixture": {
+      "type": "object",
+      "required": ["tool", "args"],
+      "additionalProperties": false,
+      "properties": {
+        "tool": {
+          "type": "string",
+          "description": "Tool name to invoke"
+        },
+        "args": {
+          "type": "object",
+          "description": "Arguments to pass to the tool"
+        },
+        "expected_error": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this fixture is expected to return an error"
+        },
+        "candidates": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Alternative tool names if primary doesn't exist"
+        }
+      }
+    }
+  }
+}

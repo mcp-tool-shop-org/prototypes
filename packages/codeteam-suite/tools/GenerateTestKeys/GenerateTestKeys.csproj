@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <!-- Package metadata -->
+    <Description>Utility tool for generating Ed25519 test keys for CodeTeam verification and signing tests.</Description>
+    <Authors>mcp-tool-shop</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NSec.Cryptography" Version="24.4.0" />
+  </ItemGroup>
+
+</Project>

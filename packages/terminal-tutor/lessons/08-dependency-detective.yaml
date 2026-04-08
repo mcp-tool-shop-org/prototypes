@@ -1,0 +1,171 @@
+id: dependency-detective
+title: "Dependency Detective"
+difficulty: intermediate
+estimated_minutes: 12
+goal: >
+  Diagnose and fix Python dependency problems using real pip, virtual
+  environments, and requirements files. Practice the workflow developers
+  use when installs fail or imports break.
+flavor: >
+  You cloned a project from GitHub. The README says "pip install -r
+  requirements.txt and you're good." You are not good. One app crashes
+  with ModuleNotFoundError, and you're not sure what's installed.
+  Time to sort out the dependency mess.
+
+runtime:
+  type: venv
+  python: "3.12"
+  requirements: []
+  reset: per_lesson
+  cumulative: true
+  timeout: 60
+  capabilities:
+    filesystem: workspace-only
+    network: false
+    git: false
+    python: true
+    processes: none
+    package_install: true
+    destructive: false
+
+workspace:
+  scaffold:
+    - path: requirements.txt
+      content: |
+        requests>=2.31
+        pydantic>=2.5
+
+    - path: app.py
+      content: |
+        """Simple app that fetches and validates data."""
+        import json
+        from pydantic import BaseModel
+
+        class User(BaseModel):
+            name: str
+            email: str
+            age: int
+
+        def validate_user(data: dict) -> User:
+            return User(**data)
+
+        if __name__ == "__main__":
+            test_data = {"name": "Alice", "email": "alice@example.com", "age": 30}
+            user = validate_user(test_data)
+            print(f"Valid user: {user.name} ({user.email})")
+
+    - path: broken_app.py
+      content: |
+        """App with a dependency that is not installed."""
+        import yaml  # This is NOT in requirements.txt
+
+        def load_config(path: str) -> dict:
+            with open(path) as f:
+                return yaml.safe_load(f)
+
+        if __name__ == "__main__":
+            config = load_config("config.yaml")
+            print(config)
+
+    - path: config.yaml
+      content: |
+        server:
+          host: localhost
+          port: 8080
+        database:
+          name: myapp
+
+    - path: pinned_requirements.txt
+      content: |
+        requests>=2.31
+        pydantic>=2.5
+        PyYAML>=6.0
+
+safety:
+  blocked_patterns:
+    - "rm -rf"
+    - "sudo"
+  workspace_only: true
+
+steps:
+  - id: check-empty-env
+    prompt: "Check what Python packages are currently installed in this environment."
+    check:
+      type: output_contains
+      expect:
+        - "pip"
+    hints:
+      - "pip can list all installed packages in the current environment."
+      - "Try: pip list"
+
+  - id: try-run-broken
+    prompt: "Try to run broken_app.py. What error do you get?"
+    check:
+      type: output_contains
+      expect:
+        - "ModuleNotFoundError"
+        - "yaml"
+    hints:
+      - "Just run the Python script directly."
+      - "Try: python broken_app.py"
+
+  - id: install-requirements
+    prompt: "Install the packages listed in requirements.txt."
+    check:
+      type: exit_code
+      code: 0
+    hints:
+      - "pip can install from a requirements file."
+      - "Try: pip install -r requirements.txt"
+    on_failure:
+      - pattern: "Could not find a version"
+        response: "The version specified may not be available. Try without version pins first."
+
+  - id: verify-installed
+    prompt: "Verify that pydantic is now installed and check its version."
+    check:
+      type: output_contains
+      expect:
+        - "pydantic"
+    hints:
+      - "pip show gives detailed info about a single package."
+      - "Try: pip show pydantic"
+
+  - id: run-app
+    prompt: "Run app.py to verify it works with the installed dependencies."
+    check:
+      type: output_contains
+      expect:
+        - "Valid user"
+        - "Alice"
+    hints:
+      - "Run the Python script directly."
+      - "Try: python app.py"
+
+  - id: fix-broken
+    prompt: "broken_app.py needs PyYAML. Install it and verify the app runs."
+    check:
+      type: output_contains
+      expect:
+        - "localhost"
+    hints:
+      - "Install the missing package, then run the script."
+      - "Try: pip install PyYAML && python broken_app.py"
+
+  - id: freeze-deps
+    prompt: "Freeze the current environment's packages into a list to see exactly what is installed."
+    check:
+      type: output_contains
+      expect:
+        - "pydantic"
+        - "PyYAML"
+    hints:
+      - "pip freeze outputs the exact versions of all installed packages."
+      - "Try: pip freeze"
+
+reflection: >
+  You just practiced the Python dependency debugging workflow: check what is
+  installed, read the error to identify the missing package, install from
+  requirements files, verify, and freeze. This is the same sequence used in
+  production when a deployment fails with ModuleNotFoundError — the answer
+  is almost always a missing or mismatched package in the environment.

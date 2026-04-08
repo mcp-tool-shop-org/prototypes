@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2024-01-01T00:00:00Z",
+  "organization": "mcp-tool-shop",
+  "archived": [],
+  "ecosystems": {},
+  "tools": [
+    {
+      "id": "core-tool",
+      "name": "Core Tool",
+      "description": "A core tool example",
+      "repo": "https://github.com/mcp-tool-shop/core-tool",
+      "install": {
+        "type": "git",
+        "url": "https://github.com/mcp-tool-shop/core-tool",
+        "default_ref": "v2"
+      },
+      "tags": ["core"],
+      "defaults": {}
+    },
+    {
+      "id": "other-tool",
+      "name": "Other Tool",
+      "description": "Another tool",
+      "repo": "https://github.com/mcp-tool-shop/other-tool",
+      "install": {
+        "type": "git",
+        "url": "https://github.com/mcp-tool-shop/other-tool",
+        "default_ref": "v1.5"
+      },
+      "tags": ["utility"],
+      "defaults": {}
+    }
+  ]
+}

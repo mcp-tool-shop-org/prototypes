@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "codeteam.package-digest-payload.schema.v0.1.json",
+  "title": "CodeTeam Package Digest Payload",
+  "description": "The payload used to compute the package digest",
+  "type": "object",
+  "required": ["payload_version", "manifest", "artifacts"],
+  "additionalProperties": false,
+  "properties": {
+    "payload_version": {
+      "type": "string",
+      "description": "Payload structure version",
+      "const": "0.1"
+    },
+    "manifest": {
+      "type": "object",
+      "required": ["manifest_digest"],
+      "additionalProperties": false,
+      "properties": {
+        "manifest_digest": {
+          "type": "string",
+          "description": "SHA256 digest of the manifest JSON",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "description": "Artifact digests (sorted by path)",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256", "size_bytes"],
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Normalized relative path (forward slashes)",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "description": "SHA256 digest of the artifact",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "size_bytes": {
+            "type": "string",
+            "description": "Size in bytes as string",
+            "pattern": "^[0-9]+$"
+          }
+        }
+      }
+    }
+  }
+}

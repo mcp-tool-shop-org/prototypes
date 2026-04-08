@@ -1,0 +1,185 @@
+{
+  "name": "runforge",
+  "displayName": "RunForge — ML Training from VS Code",
+  "description": "Push-button ML training with presets, indexed runs, and artifact inspection — all without leaving your editor.",
+  "version": "1.0.1",
+  "publisher": "mcp-tool-shop",
+  "author": {
+    "name": "mcp-tool-shop",
+    "email": "64996768+mcp-tool-shop@users.noreply.github.com"
+  },
+  "icon": "assets/icon.png",
+  "homepage": "https://github.com/mcp-tool-shop-org/runforge-vscode#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/runforge-vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/mcp-tool-shop-org/runforge-vscode/issues"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Machine Learning",
+    "Other"
+  ],
+  "keywords": [
+    "machine learning",
+    "ml training",
+    "scikit-learn",
+    "model training",
+    "presets",
+    "random forest",
+    "logistic regression",
+    "python",
+    "data science",
+    "artifacts"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "license": "MIT",
+  "contributes": {
+    "commands": [
+      {
+        "command": "runforge.trainStandard",
+        "title": "Train (Standard)",
+        "category": "RunForge",
+        "icon": "$(play)"
+      },
+      {
+        "command": "runforge.trainHighQuality",
+        "title": "Train (High Quality)",
+        "category": "RunForge",
+        "icon": "$(star)"
+      },
+      {
+        "command": "runforge.openRuns",
+        "title": "Open Runs",
+        "category": "RunForge",
+        "icon": "$(folder)"
+      },
+      {
+        "command": "runforge.inspectDataset",
+        "title": "Inspect Dataset",
+        "category": "RunForge",
+        "icon": "$(search)"
+      },
+      {
+        "command": "runforge.openLatestMetadata",
+        "title": "Open Latest Run Metadata",
+        "category": "RunForge",
+        "icon": "$(json)"
+      },
+      {
+        "command": "runforge.inspectArtifact",
+        "title": "Inspect Model Artifact",
+        "category": "RunForge",
+        "icon": "$(file-binary)"
+      },
+      {
+        "command": "runforge.browseRuns",
+        "title": "Browse Runs",
+        "category": "RunForge",
+        "icon": "$(list-unordered)"
+      },
+      {
+        "command": "runforge.viewMetricsV1",
+        "title": "View Latest Metrics",
+        "category": "RunForge",
+        "icon": "$(graph)"
+      },
+      {
+        "command": "runforge.viewFeatureImportance",
+        "title": "View Latest Feature Importance",
+        "category": "RunForge",
+        "icon": "$(list-ordered)"
+      },
+      {
+        "command": "runforge.viewLinearCoefficients",
+        "title": "View Latest Linear Coefficients",
+        "category": "RunForge",
+        "icon": "$(symbol-numeric)"
+      },
+      {
+        "command": "runforge.viewInterpretabilityIndex",
+        "title": "View Latest Interpretability Index",
+        "category": "RunForge",
+        "icon": "$(list-tree)"
+      },
+      {
+        "command": "runforge.exportRunMarkdown",
+        "title": "Export Latest Run as Markdown",
+        "category": "RunForge",
+        "icon": "$(markdown)"
+      }
+    ],
+    "configuration": {
+      "title": "RunForge",
+      "properties": {
+        "runforge.pythonPath": {
+          "type": "string",
+          "default": "python",
+          "description": "Path to Python executable"
+        },
+        "runforge.mlRunnerModule": {
+          "type": "string",
+          "default": "ml_runner",
+          "description": "Python module to run for training"
+        },
+        "runforge.modelFamily": {
+          "type": "string",
+          "default": "logistic_regression",
+          "enum": [
+            "logistic_regression",
+            "random_forest",
+            "linear_svc"
+          ],
+          "enumDescriptions": [
+            "Logistic Regression (default, fast, interpretable)",
+            "Random Forest (ensemble, handles non-linear patterns)",
+            "Linear SVC (support vector classifier, margin-based)"
+          ],
+          "description": "Model family to use for training (Phase 3.1)"
+        },
+        "runforge.profile": {
+          "type": "string",
+          "default": "",
+          "enum": [
+            "",
+            "default",
+            "fast",
+            "thorough"
+          ],
+          "enumDescriptions": [
+            "No profile (use preset defaults)",
+            "Default profile (no hyperparameter overrides)",
+            "Fast profile (reduced iterations for quick runs)",
+            "Thorough profile (more trees/iterations, uses RandomForest)"
+          ],
+          "description": "Training profile to use (Phase 3.2). Profiles can override model family and hyperparameters."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --minify",
+    "watch": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --sourcemap --watch",
+    "lint": "eslint src --ext ts",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
+    "verify": "npm test && npm run compile && npx vsce package --no-dependencies",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.22.0",
+    "esbuild": "^0.19.11",
+    "typescript": "^5.3.3",
+    "@vitest/coverage-v8": "^1.6.1",
+    "vitest": "^1.2.0"
+  }
+}

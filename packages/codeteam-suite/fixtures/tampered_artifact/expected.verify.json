@@ -1,0 +1,29 @@
+{
+  "status": "FAIL_INTEGRITY",
+  "exit_code": 2,
+  "summary": {
+    "artifacts_count": 1,
+    "evidence_count": 0,
+    "approvals_valid": 0,
+    "approvals_required": 1,
+    "signature_present": false,
+    "signature_valid": false,
+    "signer_id": null
+  },
+  "checks": {
+    "schema_valid": true,
+    "artifacts_valid": false,
+    "evidence_valid": true,
+    "paths_valid": true
+  },
+  "errors": [
+    {
+      "code": "SIZE_MISMATCH",
+      "message": "File size mismatch for artifacts/hello.txt",
+      "path": "artifacts/hello.txt",
+      "expected": "18",
+      "actual": "18"
+    }
+  ],
+  "warnings": []
+}

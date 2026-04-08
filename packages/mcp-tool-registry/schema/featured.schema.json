@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MCP Tool Discovery",
+  "type": "object",
+  "required": ["featured", "collections"],
+  "properties": {
+    "featured": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of tool IDs to be featured prominently"
+    },
+    "collections": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-zA-Z0-9-]+$": {
+          "type": "object",
+          "required": ["title", "description", "tools"],
+          "properties": {
+            "title": { "type": "string" },
+            "description": { "type": "string" },
+            "tools": { "type": "array", "items": { "type": "string" } }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

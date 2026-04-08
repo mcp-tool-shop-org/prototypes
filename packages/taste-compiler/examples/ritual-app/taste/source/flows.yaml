@@ -1,0 +1,26 @@
+- id: create-ritual
+  name: Create Ritual
+  steps:
+    - route: /home
+      purpose: "Starting point — see today's rituals"
+    - route: /ritual/new
+      purpose: "Define a new ritual"
+    - route: /ritual/review
+      purpose: "Review and confirm before saving"
+  invariants:
+    - "No more than one primary CTA per screen"
+    - "Save draft survives back navigation"
+    - "Never show dense admin sidebar"
+
+- id: daily-practice
+  name: Daily Practice
+  steps:
+    - route: /home
+      purpose: "See today's rituals"
+    - route: /ritual/practice
+      purpose: "Active practice session"
+    - route: /ritual/reflect
+      purpose: "Post-practice reflection"
+  invariants:
+    - "Practice screen has zero distractions"
+    - "Reflection is optional, never forced"

@@ -1,0 +1,29 @@
+{
+  "name": "@taste-compiler/cli",
+  "version": "1.0.0",
+  "description": "CLI for Taste Compiler",
+  "type": "module",
+  "bin": {
+    "taste": "dist/bin.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "lint": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@taste-compiler/core": "workspace:*",
+    "@taste-compiler/compiler": "workspace:*",
+    "@taste-compiler/check": "workspace:*",
+    "@taste-compiler/goldens": "workspace:*",
+    "@taste-compiler/adapters-web": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

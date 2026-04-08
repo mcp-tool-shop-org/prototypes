@@ -1,0 +1,272 @@
+id: python-debugging
+title: "Python Debugging"
+difficulty: intermediate
+estimated_minutes: 12
+goal: >
+  Find and fix bugs in a Python project using real tools: pytest, tracebacks,
+  print debugging, and the Python REPL — all inside an isolated virtual
+  environment with actual packages installed.
+flavor: >
+  You inherited a codebase with "passing tests" — except they don't.
+  Someone forgot an import, and there's a sorting bug hiding in the
+  data processor. Time to put on your detective hat and make the
+  test suite actually green.
+
+runtime:
+  type: venv
+  python: "3.12"
+  requirements:
+    - pytest==8.3.4
+  reset: per_lesson
+  cumulative: true
+  timeout: 30
+  capabilities:
+    filesystem: workspace-only
+    network: false
+    git: false
+    python: true
+    processes: none
+    package_install: true
+    destructive: false
+
+workspace:
+  scaffold:
+    - path: calculator.py
+      content: |
+        """Simple calculator module with bugs to find."""
+
+        def add(a: float, b: float) -> float:
+            return a + b
+
+        def subtract(a: float, b: float) -> float:
+            return a - b
+
+        def multiply(a: float, b: float) -> float:
+            return a * b
+
+        def divide(a: float, b: float) -> float:
+            return a / b
+
+        def average(numbers: list[float]) -> float:
+            """Return the average of a list of numbers."""
+            total = sum(numbers)
+            return total / len(numbers)
+
+        def percentage(value: float, total: float) -> float:
+            """Return what percentage value is of total."""
+            return (value / total) * 100
+
+    - path: data_processor.py
+      content: |
+        """Data processing module with intentional bugs."""
+
+        def parse_csv_line(line: str) -> list[str]:
+            """Parse a CSV line into fields."""
+            return line.split(",")
+
+        def clean_data(records: list[dict]) -> list[dict]:
+            """Remove records with missing 'name' or 'score' fields."""
+            cleaned = []
+            for record in records:
+                if record.get("name") and record.get("score"):
+                    record["score"] = int(record["score"])
+                    cleaned.append(record)
+            return cleaned
+
+        def top_scorers(records: list[dict], n: int = 3) -> list[dict]:
+            """Return the top N scorers from a list of records."""
+            sorted_records = sorted(records, key=lambda r: r["score"])
+            return sorted_records[:n]
+
+        def summarize(records: list[dict]) -> dict:
+            """Return summary stats for score field."""
+            scores = [r["score"] for r in records]
+            return {
+                "count": len(scores),
+                "total": sum(scores),
+                "average": sum(scores) / len(scores),
+                "highest": max(scores),
+                "lowest": min(scores),
+            }
+
+    - path: test_calculator.py
+      content: |
+        """Tests for calculator module."""
+        from calculator import add, subtract, multiply, divide, average, percentage
+
+        def test_add():
+            assert add(2, 3) == 5
+            assert add(-1, 1) == 0
+
+        def test_subtract():
+            assert subtract(5, 3) == 2
+            assert subtract(0, 5) == -5
+
+        def test_multiply():
+            assert multiply(3, 4) == 12
+            assert multiply(-2, 3) == -6
+
+        def test_divide():
+            assert divide(10, 2) == 5.0
+            assert divide(7, 2) == 3.5
+
+        def test_divide_by_zero():
+            """This should raise ZeroDivisionError."""
+            try:
+                divide(10, 0)
+                assert False, "Should have raised ZeroDivisionError"
+            except ZeroDivisionError:
+                pass
+
+        def test_average():
+            assert average([10, 20, 30]) == 20.0
+            assert average([100]) == 100.0
+
+        def test_average_empty():
+            """Bug: what happens with an empty list?"""
+            try:
+                average([])
+                assert False, "Should have raised an error"
+            except ZeroDivisionError:
+                pass
+
+        def test_percentage():
+            assert percentage(25, 100) == 25.0
+            assert percentage(1, 3) == pytest.approx(33.333, rel=1e-2)
+
+    - path: test_data_processor.py
+      content: |
+        """Tests for data processor module."""
+        from data_processor import parse_csv_line, clean_data, top_scorers, summarize
+
+        def test_parse_csv():
+            assert parse_csv_line("a,b,c") == ["a", "b", "c"]
+            assert parse_csv_line("hello") == ["hello"]
+
+        def test_clean_data():
+            records = [
+                {"name": "Alice", "score": "95"},
+                {"name": "", "score": "80"},
+                {"name": "Bob", "score": ""},
+                {"name": "Charlie", "score": "88"},
+            ]
+            result = clean_data(records)
+            assert len(result) == 2
+            assert result[0]["name"] == "Alice"
+            assert result[0]["score"] == 95
+
+        def test_top_scorers():
+            """Bug: top_scorers returns LOWEST, not highest."""
+            records = [
+                {"name": "Alice", "score": 95},
+                {"name": "Bob", "score": 70},
+                {"name": "Charlie", "score": 88},
+                {"name": "Diana", "score": 92},
+            ]
+            result = top_scorers(records, 2)
+            assert result[0]["score"] >= result[1]["score"]
+            assert result[0]["name"] == "Alice"
+
+        def test_summarize():
+            records = [
+                {"name": "Alice", "score": 95},
+                {"name": "Bob", "score": 70},
+                {"name": "Charlie", "score": 88},
+            ]
+            summary = summarize(records)
+            assert summary["count"] == 3
+            assert summary["highest"] == 95
+            assert summary["lowest"] == 70
+
+        def test_summarize_empty():
+            """Bug: what happens with empty list?"""
+            try:
+                summarize([])
+                assert False, "Should have raised an error"
+            except (ZeroDivisionError, ValueError):
+                pass
+
+safety:
+  blocked_patterns:
+    - "rm -rf"
+    - "sudo"
+    - "pip install"
+  workspace_only: true
+
+steps:
+  - id: run-tests
+    prompt: "Run the test suite with pytest. How many tests pass and how many fail?"
+    check:
+      type: output_contains
+      expect:
+        - "FAILED"
+        - "passed"
+    hints:
+      - "Run pytest from the workspace root."
+      - "Try: pytest -v"
+    on_failure:
+      - pattern: "ModuleNotFoundError"
+        response: "pytest should be installed in the venv. Make sure you're running through the tutor."
+      - pattern: "command not found"
+        response: "pytest is installed in the virtual environment. The tutor activates it for you."
+
+  - id: read-traceback
+    prompt: "One test fails because of an import error. Read the traceback to find which test file has the bug."
+    check:
+      type: output_contains
+      expect:
+        - "test_calculator.py"
+        - "NameError"
+    hints:
+      - "Look at the ERRORS section in the pytest output. Which file has an import problem?"
+      - "Try: pytest test_calculator.py -v 2>&1 | head -30"
+
+  - id: fix-import
+    prompt: "Fix the missing import in test_calculator.py — it uses pytest.approx but never imports pytest."
+    check:
+      type: file_contains
+      file_path: test_calculator.py
+      file_patterns:
+        - "import pytest"
+    hints:
+      - "Add 'import pytest' at the top of test_calculator.py."
+      - "You can use sed, or open it in any editor: echo 'import pytest' | cat - test_calculator.py > tmp && mv tmp test_calculator.py"
+
+  - id: find-sort-bug
+    prompt: "Run pytest again. One data processor test still fails. Read the failure to understand the bug."
+    check:
+      type: output_contains
+      expect:
+        - "test_top_scorers"
+        - "FAILED"
+    hints:
+      - "Run: pytest test_data_processor.py -v"
+      - "Look at the assertion error — what order are the results in?"
+
+  - id: fix-sort-bug
+    prompt: "Fix the top_scorers function in data_processor.py — it sorts ascending but should sort descending."
+    check:
+      type: file_contains
+      file_path: data_processor.py
+      file_patterns:
+        - "reverse=True"
+    hints:
+      - "The sorted() call needs reverse=True to sort highest first."
+      - "Change: sorted(records, key=lambda r: r[\"score\"]) to sorted(records, key=lambda r: r[\"score\"], reverse=True)"
+
+  - id: all-green
+    prompt: "Run the full test suite. All tests should pass now."
+    check:
+      type: output_contains
+      expect:
+        - "passed"
+    hints:
+      - "Run: pytest -v"
+      - "If tests still fail, read the traceback carefully."
+
+reflection: >
+  You just debugged real Python code using a real test runner. The workflow —
+  run tests, read tracebacks, find the root cause, fix, re-run — is the
+  standard debugging loop used in professional Python development. The key
+  skill is reading tracebacks carefully: they tell you the file, line, and
+  exact expression that failed.

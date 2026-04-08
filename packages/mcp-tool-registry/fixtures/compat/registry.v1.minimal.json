@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2024-01-01T00:00:00Z",
+  "organization": "mcp-tool-shop",
+  "archived": [],
+  "ecosystems": {},
+  "tools": [
+    {
+      "id": "minimal-tool",
+      "name": "Minimal Tool",
+      "description": "A minimal tool example",
+      "repo": "https://github.com/mcp-tool-shop/minimal-tool",
+      "install": {
+        "type": "git",
+        "url": "https://github.com/mcp-tool-shop/minimal-tool",
+        "default_ref": "main"
+      },
+      "tags": ["simple", "test"],
+      "defaults": {}
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+id: pipes-and-search
+title: "Pipes and Search"
+difficulty: beginner
+estimated_minutes: 10
+goal: >
+  Use pipes to chain commands together. Search for patterns, count matches,
+  sort results, and filter output — the core of shell data processing.
+flavor: >
+  The lead dev left a bunch of TODOs scattered through the codebase before
+  going on vacation. Your job: find them all, figure out where the mess is
+  worst, and check the server logs for anything suspicious.
+
+workspace:
+  scaffold:
+    - path: src/server.js
+      content: |
+        // TODO: add rate limiting
+        import express from 'express';
+        const app = express();
+
+        // TODO: add authentication middleware
+        app.get('/api/users', (req, res) => {
+          res.json(getUsers());
+        });
+
+        // TODO: validate request body
+        app.post('/api/users', (req, res) => {
+          const user = createUser(req.body);
+          res.status(201).json(user);
+        });
+
+        app.listen(3000);
+
+    - path: src/database.js
+      content: |
+        // TODO: add connection pooling
+        // TODO: add retry logic
+        import pg from 'pg';
+
+        const pool = new pg.Pool();
+
+        export async function getUsers() {
+          const result = await pool.query('SELECT * FROM users');
+          return result.rows;
+        }
+
+        export async function createUser(data) {
+          // TODO: sanitize input
+          const result = await pool.query(
+            'INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *',
+            [data.name, data.email]
+          );
+          return result.rows[0];
+        }
+
+    - path: src/utils.js
+      content: |
+        // TODO: add input validation
+        export function formatDate(date) {
+          return new Date(date).toISOString();
+        }
+
+        export function slugify(text) {
+          return text.toLowerCase().replace(/\s+/g, '-');
+        }
+
+    - path: logs/access.log
+      content: |
+        2026-03-28 10:01:22 GET /api/users 200 45ms
+        2026-03-28 10:01:23 POST /api/users 201 120ms
+        2026-03-28 10:02:01 GET /api/users 200 38ms
+        2026-03-28 10:02:15 GET /api/health 200 2ms
+        2026-03-28 10:03:44 POST /api/users 400 15ms
+        2026-03-28 10:04:02 GET /api/users 200 41ms
+        2026-03-28 10:04:30 GET /api/users 500 2003ms
+        2026-03-28 10:05:12 POST /api/users 201 98ms
+        2026-03-28 10:06:01 GET /api/users 200 39ms
+        2026-03-28 10:07:22 GET /api/health 200 3ms
+        2026-03-28 10:08:15 POST /api/users 400 12ms
+        2026-03-28 10:09:01 GET /api/users 200 42ms
+
+    - path: README.md
+      content: |
+        # User API
+        A REST API for user management.
+        See src/ for implementation.
+
+safety:
+  blocked_patterns:
+    - "rm -rf"
+    - "sudo"
+    - "chmod 777"
+    - "> /dev"
+  workspace_only: true
+
+steps:
+  - id: find-todos
+    prompt: "Find all TODO comments across this project's source files."
+    check:
+      type: output_contains
+      expect:
+        - "server.js"
+        - "database.js"
+        - "utils.js"
+    hints:
+      - "grep can search recursively through directories."
+      - "Try: grep -r 'TODO' src/"
+    on_failure:
+      - pattern: "command not found"
+        response: "Check your spelling — the command is 'grep'."
+      - pattern: "No such file"
+        response: "Make sure you're searching in the 'src/' directory."
+
+  - id: count-todos
+    prompt: "Count how many TODOs are in each file."
+    check:
+      type: output_contains
+      expect:
+        - "3"
+        - "1"
+    hints:
+      - "grep has a flag that counts matches per file instead of showing them."
+      - "Try: grep -rc 'TODO' src/"
+
+  - id: sort-todos
+    prompt: "Sort the TODO count so the file with the most TODOs appears first and the fewest last."
+    check:
+      type: output_ordered
+      expect_ordered:
+        - "server.js"
+        - "utils.js"
+    hints:
+      - "You can pipe grep output into sort. The sort command has flags for numeric and reverse ordering."
+      - "Try: grep -rc 'TODO' src/ | sort -t: -k2 -rn"
+
+  - id: find-errors
+    prompt: "Find all log entries that show an error (status 400 or 500) in the access log."
+    check:
+      type: output_contains
+      expect:
+        - "400"
+        - "500"
+    hints:
+      - "grep can match multiple patterns. Try searching for lines containing 400 or 500."
+      - "Try: grep -E '(400|500)' logs/access.log"
+    on_failure:
+      - pattern: "No such file"
+        response: "The log file is at logs/access.log — check the path."
+
+  - id: count-by-method
+    prompt: "Count how many GET vs POST requests are in the access log."
+    check:
+      type: output_contains
+      expect:
+        - "GET"
+        - "POST"
+    hints:
+      - "You can grep for each method and pipe to wc -l, or use a single pipeline."
+      - "Try: grep -c 'GET' logs/access.log && grep -c 'POST' logs/access.log"
+
+  - id: slow-requests
+    prompt: "Find the request that took over 1 second (look for response times in the log)."
+    check:
+      type: output_contains
+      expect:
+        - "2003ms"
+        - "500"
+    hints:
+      - "Look at the log format — response times are at the end. What number is over 1000ms?"
+      - "Try: grep -E '[0-9]{4}ms' logs/access.log"
+
+reflection: >
+  You just used the pipe pattern: grep found content, sort organized it,
+  and wc counted it. Every pipe chain follows this shape — filter, transform,
+  reduce. This is how experienced developers extract meaning from logs,
+  codebases, and data files without leaving the terminal.

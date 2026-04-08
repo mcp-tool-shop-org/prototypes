@@ -1,0 +1,149 @@
+id: git-basics
+title: "Git Basics"
+difficulty: beginner
+estimated_minutes: 12
+goal: >
+  Initialize a repository, track changes, write commits, create branches,
+  and recover from a common mistake — the essential git survival kit.
+flavor: >
+  You're starting a small project from scratch. No GitHub template,
+  no clone — just files in a folder. Time to put them under version
+  control before something goes wrong.
+
+workspace:
+  scaffold:
+    - path: index.html
+      content: |
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>My Page</title>
+        </head>
+        <body>
+          <h1>Hello World</h1>
+          <p>This is a simple web page.</p>
+        </body>
+        </html>
+
+    - path: style.css
+      content: |
+        body {
+          font-family: sans-serif;
+          margin: 2rem;
+          color: #333;
+        }
+
+        h1 {
+          color: navy;
+        }
+
+    - path: notes.txt
+      content: |
+        Project notes:
+        - Build a simple landing page
+        - Add responsive styles later
+        - Deploy to GitHub Pages
+
+safety:
+  blocked_patterns:
+    - "rm -rf"
+    - "sudo"
+    - "git push"
+    - "force"
+  workspace_only: true
+
+steps:
+  - id: init-repo
+    prompt: "Initialize a new git repository in this project."
+    check:
+      type: exit_code
+      code: 0
+    hints:
+      - "The command to create a new repository starts with 'git init'."
+      - "Try: git init"
+    on_failure:
+      - pattern: "not a git command"
+        response: "Make sure git is installed and spelled correctly."
+
+  - id: check-status
+    prompt: "Check the status of your new repository. What does git see?"
+    check:
+      type: output_contains
+      expect:
+        - "index.html"
+        - "style.css"
+        - "notes.txt"
+    hints:
+      - "git status shows what files git knows about."
+      - "Try: git status"
+
+  - id: stage-files
+    prompt: "Stage the HTML and CSS files for your first commit (but not notes.txt)."
+    check:
+      type: git_state
+      clean: false
+    hints:
+      - "git add lets you choose specific files to include in a commit."
+      - "Try: git add index.html style.css"
+
+  - id: first-commit
+    prompt: "Create your first commit with a message describing what you're adding."
+    check:
+      type: git_state
+      commit_pattern: "."
+    hints:
+      - "git commit -m lets you write a commit message inline."
+      - "Try: git commit -m \"Add landing page HTML and CSS\""
+    on_failure:
+      - pattern: "nothing to commit"
+        response: "Did you stage files with git add first? Run git status to check."
+      - pattern: "tell me who you are"
+        response: "Git needs your name and email. Run: git config user.email \"you@example.com\" && git config user.name \"Your Name\""
+
+  - id: create-branch
+    prompt: "Create a new branch called 'add-footer' and switch to it."
+    check:
+      type: git_state
+      branch: add-footer
+    hints:
+      - "You can create and switch to a branch in one command."
+      - "Try: git checkout -b add-footer"
+
+  - id: make-change
+    prompt: "Add a footer to index.html — put a <footer> tag before </body> with any text you like."
+    check:
+      type: file_contains
+      file_path: index.html
+      file_patterns:
+        - "<footer>"
+    hints:
+      - "Open the file with any editor and add a footer element."
+      - "Try: echo '<footer>Built with care</footer>' >> index.html  (note: this appends to the end)"
+
+  - id: commit-footer
+    prompt: "Stage and commit your footer change on the add-footer branch."
+    check:
+      type: git_state
+      branch: add-footer
+      commit_pattern: "."
+    hints:
+      - "Stage the changed file, then commit."
+      - "Try: git add index.html && git commit -m \"Add footer to landing page\""
+
+  - id: switch-back
+    prompt: "Switch back to the main branch. Notice the footer is gone from the file."
+    check:
+      type: git_state
+      branch: master
+    hints:
+      - "Use git checkout or git switch to move between branches."
+      - "Try: git checkout master"
+    on_failure:
+      - pattern: "did not match"
+        response: "Your default branch might be called 'main' instead of 'master'. Try: git checkout main"
+
+reflection: >
+  You just used the core git workflow: init, stage, commit, branch, switch.
+  Branches let you experiment without risking your working code. The key
+  insight is that git tracks snapshots, not diffs — when you switch branches,
+  your entire working directory changes to match that branch's last commit.

@@ -1,0 +1,15 @@
+# General Code
+* @mcp-tool-shop-org/core-maintainers
+
+# Registry Data (Highest strictness)
+registry.json @mcp-tool-shop-org/registry-owners
+
+# Schema Change
+schema/** @mcp-tool-shop-org/registry-owners
+
+# Scripts & Automation
+scripts/** @mcp-tool-shop-org/core-maintainers
+.github/** @mcp-tool-shop-org/core-maintainers
+
+# Bundles
+bundles/** @mcp-tool-shop-org/bundle-maintainers

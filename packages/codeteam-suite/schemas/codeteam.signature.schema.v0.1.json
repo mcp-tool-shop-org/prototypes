@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://codeteam.dev/schemas/signature.v0.1.json",
+  "title": "CodeTeam Final Signature Record",
+  "description": "A final signature record for a package (v0.1)",
+  "type": "object",
+  "required": [
+    "type",
+    "package_digest",
+    "signer_id",
+    "role",
+    "ts",
+    "signature"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "signature",
+      "description": "Record type"
+    },
+    "package_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "Package digest being signed"
+    },
+    "signer_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16}$",
+      "description": "Signer's key fingerprint"
+    },
+    "role": {
+      "type": "string",
+      "enum": ["release-signer"],
+      "description": "Signer role"
+    },
+    "ts": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of signing"
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9+/]+=*$",
+      "description": "Base64-encoded Ed25519 signature"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,167 @@
+{
+  "packVersion": "0.1.0",
+  "product": "GlyphStudio",
+  "target": "F:/AI/taste-compiler/trials/glyphstudio/baseline",
+  "checkedAt": "2026-04-02T17:02:55.630Z",
+  "violations": [
+    {
+      "id": "tok-F:\\AI\\taste-compiler\\trials\\glyphstudio\\baseline\\ExportReadinessPanel.css-35",
+      "severity": "error",
+      "class": "visual-token",
+      "ruleId": "TOK-001",
+      "message": "Raw hex color \"rgba(58, 201, 122, 0.12)\" used outside token system",
+      "rationale": "All colors should reference semantic token roles to maintain visual consistency",
+      "evidence": [
+        {
+          "file": "F:\\AI\\taste-compiler\\trials\\glyphstudio\\baseline\\ExportReadinessPanel.css",
+          "line": 35,
+          "snippet": "background: rgba(58, 201, 122, 0.12);",
+          "value": "rgba(58, 201, 122, 0.12)"
+        }
+      ],
+      "suggestedFix": "Replace with a semantic color token"
+    },
+    {
+      "id": "tok-F:\\AI\\taste-compiler\\trials\\glyphstudio\\baseline\\ExportReadinessPanel.css-41",
+      "severity": "error",
+      "class": "visual-token",
+      "ruleId": "TOK-001",
+      "message": "Raw hex color \"rgba(232, 167, 68, 0.12)\" used outside token system",
+      "rationale": "All colors should reference semantic token roles to maintain visual consistency",
+      "evidence": [
+        {
+          "file": "F:\\AI\\taste-compiler\\trials\\glyphstudio\\baseline\\ExportReadinessPanel.css",
+          "line": 41,
+          "snippet": "background: rgba(232, 167, 68, 0.12);",
+          "value": "rgba(232, 167, 68, 0.12)"
+        }
+      ],
+      "suggestedFix": "Replace with a semantic color token"
+    },
+    {
+      "id": "tok-F:\\AI\\taste-compiler\\trials\\glyphstudio\\baseline\\ExportReadinessPanel.css-47",
+      "severity": "error",
+      "class": "visual-token",
+      "ruleId": "TOK-001",
+      "message": "Raw hex color \"rgba(232, 84, 84, 0.12)\" used outside token system",
+      "rationale": "All colors should reference semantic token roles to maintain visual consistency",
+      "evidence": [
+        {
+          "file": "F:\\AI\\taste-compiler\\trials\\glyphstudio\\baseline\\ExportReadinessPanel.css",
+          "line": 47,
+          "snippet": "background: rgba(232, 84, 84, 0.12);",
+          "value": "rgba(232, 84, 84, 0.12)"
+        }
+      ],
+      "suggestedFix": "Replace with a semantic color token"
+    },
+    {
+      "id": "tok-F:\\AI\\taste-compiler\\trials\\glyphstudio\\baseline\\ExportReadinessPanel.css-78",
+      "severity": "error",
+      "class": "visual-token",
+      "ruleId": "TOK-001",
+      "message": "Raw hex color \"#fff\" used outside token system",
+      "rationale": "All colors should reference semantic token roles to maintain visual consistency",
+      "evidence": [
+        {
+          "file": "F:\\AI\\taste-compiler\\trials\\glyphstudio\\baseline\\ExportReadinessPanel.css",
+          "line": 78,
+          "snippet": "color: #fff;",
+          "value": "#fff"
+        }
+      ],
+      "suggestedFix": "Replace with a semantic color token"
+    },
+    {
+      "id": "tok-F:\\AI\\taste-compiler\\trials\\glyphstudio\\baseline\\ExportReadinessPanel.css-83",
+      "severity": "error",
+      "class": "visual-token",
+      "ruleId": "TOK-001",
+      "message": "Raw hex color \"#000\" used outside token system",
+      "rationale": "All colors should reference semantic token roles to maintain visual consistency",
+      "evidence": [
+        {
+          "file": "F:\\AI\\taste-compiler\\trials\\glyphstudio\\baseline\\ExportReadinessPanel.css",
+          "line": 83,
+          "snippet": "color: #000;",
+          "value": "#000"
+        }
+      ],
+      "suggestedFix": "Replace with a semantic color token"
+    },
+    {
+      "id": "tok-F:\\AI\\taste-compiler\\trials\\glyphstudio\\baseline\\ExportReadinessPanel.css-88",
+      "severity": "error",
+      "class": "visual-token",
+      "ruleId": "TOK-001",
+      "message": "Raw hex color \"#fff\" used outside token system",
+      "rationale": "All colors should reference semantic token roles to maintain visual consistency",
+      "evidence": [
+        {
+          "file": "F:\\AI\\taste-compiler\\trials\\glyphstudio\\baseline\\ExportReadinessPanel.css",
+          "line": 88,
+          "snippet": "color: #fff;",
+          "value": "#fff"
+        }
+      ],
+      "suggestedFix": "Replace with a semantic color token"
+    },
+    {
+      "id": "tok-F:\\AI\\taste-compiler\\trials\\glyphstudio\\baseline\\ExportReadinessPanel.css-144",
+      "severity": "error",
+      "class": "visual-token",
+      "ruleId": "TOK-001",
+      "message": "Raw hex color \"rgba(212, 160, 82, 0.15)\" used outside token system",
+      "rationale": "All colors should reference semantic token roles to maintain visual consistency",
+      "evidence": [
+        {
+          "file": "F:\\AI\\taste-compiler\\trials\\glyphstudio\\baseline\\ExportReadinessPanel.css",
+          "line": 144,
+          "snippet": "background: rgba(212, 160, 82, 0.15);",
+          "value": "rgba(212, 160, 82, 0.15)"
+        }
+      ],
+      "suggestedFix": "Replace with a semantic color token"
+    },
+    {
+      "id": "tok-F:\\AI\\taste-compiler\\trials\\glyphstudio\\baseline\\ExportReadinessPanel.css-145",
+      "severity": "error",
+      "class": "visual-token",
+      "ruleId": "TOK-001",
+      "message": "Raw hex color \"#d4a052\" used outside token system",
+      "rationale": "All colors should reference semantic token roles to maintain visual consistency",
+      "evidence": [
+        {
+          "file": "F:\\AI\\taste-compiler\\trials\\glyphstudio\\baseline\\ExportReadinessPanel.css",
+          "line": 145,
+          "snippet": "color: #d4a052;",
+          "value": "#d4a052"
+        }
+      ],
+      "suggestedFix": "Replace with a semantic color token"
+    },
+    {
+      "id": "tok-F:\\AI\\taste-compiler\\trials\\glyphstudio\\baseline\\ExportReadinessPanel.css-251",
+      "severity": "error",
+      "class": "visual-token",
+      "ruleId": "TOK-001",
+      "message": "Raw hex color \"#fff\" used outside token system",
+      "rationale": "All colors should reference semantic token roles to maintain visual consistency",
+      "evidence": [
+        {
+          "file": "F:\\AI\\taste-compiler\\trials\\glyphstudio\\baseline\\ExportReadinessPanel.css",
+          "line": 251,
+          "snippet": "color: #fff;",
+          "value": "#fff"
+        }
+      ],
+      "suggestedFix": "Replace with a semantic color token"
+    }
+  ],
+  "summary": {
+    "errors": 9,
+    "warnings": 0,
+    "infos": 0,
+    "passed": false
+  }
+}

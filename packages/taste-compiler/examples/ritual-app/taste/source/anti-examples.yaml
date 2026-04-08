@@ -1,0 +1,14 @@
+- id: generic-dashboard
+  uri: "ref://dashboard-01"
+  reason: "Too enterprise. Too many stat blocks. Feels managerial, not creative."
+  category: too-enterprise
+
+- id: assistant-default
+  uri: "ref://chat-ui-01"
+  reason: "Chat should not become the primary interaction mode"
+  category: too-chatty
+
+- id: gamification-overload
+  uri: "ref://gamified-01"
+  reason: "Streaks and badges feel performative, not sincere"
+  category: too-playful

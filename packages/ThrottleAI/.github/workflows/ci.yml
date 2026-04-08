@@ -1,0 +1,176 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'test/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'tsconfig.json'
+      - 'tsup.config.ts'
+      - 'vitest.config.ts'
+      - 'eslint.config.js'
+      - '.github/workflows/**'
+  pull_request:
+    branches: [main]
+    types: [opened, labeled, synchronize]
+    paths:
+      - 'src/**'
+      - 'test/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'tsconfig.json'
+      - 'tsup.config.ts'
+      - 'vitest.config.ts'
+      - 'eslint.config.js'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm exec tsc --noEmit
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build
+
+      - name: Bundle sanity — core does not pull adapters
+        run: node scripts/bundle-check.js
+
+      - name: Size guard
+        run: node scripts/size-guard.js
+
+  # Block PRs that add files > 1 MB
+  file-size:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Check for oversized files
+        run: node scripts/file-size-guard.mjs
+
+  # Canary job — smoke-tests reporter flags for vitest upgrade readiness.
+  # Manual-only; does not block PRs.
+  canary:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Test with explicit reporters
+        run: pnpm exec vitest run --reporter=default --reporter=junit --outputFile.junit=test-results.xml
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-results
+          path: test-results.xml
+
+  # Security audit — runs on push to main and manual dispatch.
+  security-audit:
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Production audit (must pass)
+        run: pnpm audit:prod
+
+      - name: Full audit (informational)
+        run: pnpm audit || true
+
+  # Compat testing — label-gated on PRs, always runs on manual dispatch.
+  test-compat:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      contains(github.event.pull_request.labels.*.name, 'compat')
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Print environment
+        run: node scripts/print-vitest-env.mjs
+
+      - name: Test (default reporter)
+        run: pnpm exec vitest run --reporter=default
+
+      - name: Test (JUnit reporter)
+        run: pnpm exec vitest run --reporter=junit --outputFile=test-results.xml
+
+      - name: Upload JUnit results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: junit-node${{ matrix.node-version }}
+          path: test-results.xml

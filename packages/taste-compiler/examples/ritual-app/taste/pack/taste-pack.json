@@ -1,0 +1,259 @@
+{
+  "schemaVersion": "0.1.0",
+  "packVersion": "0.1.0",
+  "product": {
+    "name": "Ritual",
+    "summary": "A calm, intentional daily practice app for creative professionals"
+  },
+  "provenance": {
+    "sourceHash": "e9547e8039024130",
+    "compiledAt": "2026-04-02T07:19:14.434Z",
+    "compilerVersion": "0.1.0"
+  },
+  "artifacts": {
+    "visualTokens": {
+      "colors": [
+        {
+          "role": "surface-primary",
+          "description": "Derived from principle: calm-not-corporate"
+        }
+      ],
+      "typography": [],
+      "spacing": [
+        {
+          "name": "space-xs",
+          "value": "4px"
+        },
+        {
+          "name": "space-sm",
+          "value": "8px"
+        },
+        {
+          "name": "space-md",
+          "value": "16px"
+        },
+        {
+          "name": "space-lg",
+          "value": "24px"
+        },
+        {
+          "name": "space-xl",
+          "value": "32px"
+        }
+      ],
+      "radii": [],
+      "motion": [
+        {
+          "name": "transition-default",
+          "duration": "300ms",
+          "easing": "ease-out"
+        }
+      ]
+    },
+    "componentGrammar": {
+      "allowed": [],
+      "banned": [
+        "DenseDataGrid",
+        "StatCard",
+        "KPIPanel",
+        "FloatingChatBubble",
+        "ChatWidget"
+      ],
+      "compositionRules": [
+        {
+          "id": "gram-ae-generic-dashboard",
+          "rule": "No dense data grids or KPI panels",
+          "rationale": "Too enterprise. Too many stat blocks. Feels managerial, not creative.",
+          "sourceRef": "anti-example:generic-dashboard"
+        },
+        {
+          "id": "gram-ae-assistant-default-chat",
+          "rule": "No floating chat bubbles or chat widgets",
+          "rationale": "Chat should not become the primary interaction mode",
+          "sourceRef": "anti-example:assistant-default"
+        },
+        {
+          "id": "gram-crit-crit-buttons",
+          "rule": "Card may contain at most one primary action",
+          "rationale": "Too many actions competing for attention — buttons everywhere",
+          "sourceRef": "critique:crit-buttons"
+        },
+        {
+          "id": "gram-budget-primary-actions",
+          "rule": "Max 1 primary action(s) per screen",
+          "rationale": "Complexity budget constraint",
+          "sourceRef": "budgets"
+        },
+        {
+          "id": "gram-budget-nav",
+          "rule": "Primary navigation max 5 items",
+          "rationale": "Complexity budget constraint",
+          "sourceRef": "budgets"
+        }
+      ]
+    },
+    "interactionLaws": [
+      {
+        "id": "law-destructive-confirm",
+        "law": "Destructive actions require confirmation",
+        "rationale": "Prevent accidental data loss",
+        "severity": "error"
+      },
+      {
+        "id": "law-submit-validation",
+        "law": "Form submit disabled until valid",
+        "rationale": "Prevent invalid submissions",
+        "severity": "error"
+      },
+      {
+        "id": "law-draft-preservation",
+        "law": "Draft state preserved on back navigation",
+        "rationale": "Respect user work in progress",
+        "severity": "error"
+      },
+      {
+        "id": "law-empty-state",
+        "law": "Empty states require a primary next step",
+        "rationale": "Guide users forward, never leave them stranded",
+        "severity": "warn"
+      },
+      {
+        "id": "law-flow-create-ritual-0",
+        "law": "No more than one primary CTA per screen",
+        "rationale": "Invariant from flow: Create Ritual",
+        "sourceRef": "flow:create-ritual",
+        "severity": "error"
+      },
+      {
+        "id": "law-flow-create-ritual-1",
+        "law": "Save draft survives back navigation",
+        "rationale": "Invariant from flow: Create Ritual",
+        "sourceRef": "flow:create-ritual",
+        "severity": "error"
+      },
+      {
+        "id": "law-flow-create-ritual-2",
+        "law": "Never show dense admin sidebar",
+        "rationale": "Invariant from flow: Create Ritual",
+        "sourceRef": "flow:create-ritual",
+        "severity": "error"
+      },
+      {
+        "id": "law-flow-daily-practice-0",
+        "law": "Practice screen has zero distractions",
+        "rationale": "Invariant from flow: Daily Practice",
+        "sourceRef": "flow:daily-practice",
+        "severity": "error"
+      },
+      {
+        "id": "law-flow-daily-practice-1",
+        "law": "Reflection is optional, never forced",
+        "rationale": "Invariant from flow: Daily Practice",
+        "sourceRef": "flow:daily-practice",
+        "severity": "error"
+      }
+    ],
+    "copyRules": {
+      "bannedPhrases": [
+        {
+          "phrase": "supercharged",
+          "reason": "Copy tone says \"supercharged\" — feels like a SaaS landing page, not a calm tool"
+        }
+      ],
+      "toneWords": {
+        "encouraged": [
+          "thoughtful",
+          "considered",
+          "intentional"
+        ],
+        "discouraged": [
+          "blazing fast",
+          "supercharged",
+          "revolutionary",
+          "hey there",
+          "awesome",
+          "super easy"
+        ]
+      },
+      "claimQualifiers": []
+    },
+    "complexityBudgets": {
+      "maxTopLevelNavItems": 5,
+      "maxPrimaryActionsPerScreen": 1,
+      "maxModalDepth": 1,
+      "maxDistinctInteractionModesPerFlow": 2,
+      "custom": []
+    },
+    "forbiddenPatterns": [
+      {
+        "id": "fp-dashboard-generic-dashboard",
+        "pattern": "Dense dashboard / KPI layout",
+        "reason": "Too enterprise. Too many stat blocks. Feels managerial, not creative.",
+        "sourceRef": "anti-example:generic-dashboard",
+        "severity": "error",
+        "detection": {
+          "componentNames": [
+            "DenseDataGrid",
+            "StatCard",
+            "KPIPanel",
+            "MetricsDashboard"
+          ],
+          "classPatterns": [
+            "grid-cols-4",
+            "grid-cols-5",
+            "grid-cols-6"
+          ]
+        }
+      },
+      {
+        "id": "fp-chat-assistant-default",
+        "pattern": "Chat/assistant as primary interface",
+        "reason": "Chat should not become the primary interaction mode",
+        "sourceRef": "anti-example:assistant-default",
+        "severity": "error",
+        "detection": {
+          "componentNames": [
+            "FloatingChatBubble",
+            "ChatWidget",
+            "AIAssistant"
+          ],
+          "importPatterns": [
+            "chat-bubble",
+            "chat-widget"
+          ]
+        }
+      }
+    ]
+  },
+  "goldens": [
+    {
+      "id": "create-ritual",
+      "name": "Create Ritual",
+      "routes": [
+        "/home",
+        "/ritual/new",
+        "/ritual/review"
+      ],
+      "invariants": [
+        "No more than one primary CTA per screen",
+        "Save draft survives back navigation",
+        "Never show dense admin sidebar"
+      ],
+      "notes": "Starting point — see today's rituals; Define a new ritual; Review and confirm before saving"
+    },
+    {
+      "id": "daily-practice",
+      "name": "Daily Practice",
+      "routes": [
+        "/home",
+        "/ritual/practice",
+        "/ritual/reflect"
+      ],
+      "invariants": [
+        "Practice screen has zero distractions",
+        "Reflection is optional, never forced"
+      ],
+      "notes": "See today's rituals; Active practice session; Post-practice reflection"
+    }
+  ]
+}

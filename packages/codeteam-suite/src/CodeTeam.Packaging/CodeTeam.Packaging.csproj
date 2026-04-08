@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>CodeTeam.Packaging</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <!-- NuGet package metadata -->
+    <PackageId>CodeTeam.Packaging</PackageId>
+    <Version>1.0.3</Version>
+    <Description>Package reading, loading, and verification with path-traversal protection and JSON schema validation. Provides IPackageReader abstraction for directory and archive formats.</Description>
+    <Authors>mcp-tool-shop</Authors>
+    <Company>MCP Tool Shop</Company>
+    <Copyright>Copyright (c) 2025-2026 MCP Tool Shop</Copyright>
+    <PackageProjectUrl>https://github.com/mcp-tool-shop-org/codeteam-suite</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mcp-tool-shop-org/codeteam-suite</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>packages;verification;schema;validation;security</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CodeTeam.Core\CodeTeam.Core.csproj" />
+    <ProjectReference Include="..\CodeTeam.Crypto\CodeTeam.Crypto.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JsonSchema.Net" Version="7.0.0" />
+  </ItemGroup>
+
+</Project>

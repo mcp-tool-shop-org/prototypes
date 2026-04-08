@@ -1,0 +1,21 @@
+{
+  "status": "OK_VERIFIED",
+  "exit_code": 0,
+  "summary": {
+    "artifacts_count": 1,
+    "evidence_count": 0,
+    "approvals_valid": 1,
+    "approvals_required": 1,
+    "signature_present": true,
+    "signature_valid": true,
+    "signer_id": "0000000000000002"
+  },
+  "checks": {
+    "schema_valid": true,
+    "artifacts_valid": true,
+    "evidence_valid": true,
+    "paths_valid": true
+  },
+  "errors": [],
+  "warnings": []
+}

@@ -1,0 +1,248 @@
+/* Export Readiness Panel — right-dock panel styles */
+/* All colors reference CSS variable tokens from globals.css */
+
+.export-readiness-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.export-readiness-empty {
+  color: var(--text-muted);
+  font-size: 12px;
+  padding: 16px 8px;
+  text-align: center;
+}
+
+/* Header */
+.export-readiness-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.export-readiness-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.export-readiness-subtitle {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Document summary — simple property list */
+.export-readiness-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.export-readiness-prop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  padding: 2px 0;
+}
+
+.export-readiness-prop-label {
+  color: var(--text-secondary);
+}
+
+.export-readiness-prop-value {
+  color: var(--text-primary);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Checks section */
+.export-readiness-checks-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 4px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.export-readiness-checks-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.export-readiness-run-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-panel);
+  color: var(--text-secondary);
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+
+.export-readiness-run-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-panel-raised);
+}
+
+/* Check results list */
+.export-readiness-checks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.export-readiness-checks-empty {
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 4px 0;
+  font-style: italic;
+}
+
+.export-readiness-check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 4px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  background: var(--bg-panel-raised);
+}
+
+.export-readiness-check-row:hover {
+  background: var(--bg-surface);
+}
+
+/* Severity indicators */
+.export-readiness-check-icon {
+  flex-shrink: 0;
+  width: 14px;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.export-readiness-check-icon.severity-error {
+  color: var(--accent-error);
+}
+
+.export-readiness-check-icon.severity-warning {
+  color: var(--accent-warning);
+}
+
+.export-readiness-check-icon.severity-info {
+  color: var(--accent-primary);
+}
+
+.export-readiness-check-message {
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* All-clear state */
+.export-readiness-all-clear {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 3px;
+  background: var(--bg-panel-raised);
+  font-size: 11px;
+  color: var(--accent-success);
+  font-weight: 500;
+}
+
+/* Layer inventory */
+.export-readiness-layers-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 4px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.export-readiness-layers-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.export-readiness-layer-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 6px;
+  font-size: 11px;
+}
+
+.export-readiness-layer-name {
+  color: var(--text-primary);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.export-readiness-layer-badge {
+  font-size: 9px;
+  padding: 1px 5px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.export-readiness-layer-badge.badge-visible {
+  background: var(--bg-surface);
+  color: var(--accent-success);
+}
+
+.export-readiness-layer-badge.badge-hidden {
+  background: var(--bg-surface);
+  color: var(--text-muted);
+}
+
+.export-readiness-layer-badge.badge-sketch {
+  background: var(--bg-surface);
+  color: var(--accent-warning);
+}
+
+/* Actions */
+.export-readiness-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: auto;
+}
+
+.export-readiness-go-btn {
+  width: 100%;
+  padding: 6px 12px;
+  background: var(--accent-primary);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.export-readiness-go-btn:hover {
+  background: var(--accent-hover);
+}
+
+.export-readiness-go-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}

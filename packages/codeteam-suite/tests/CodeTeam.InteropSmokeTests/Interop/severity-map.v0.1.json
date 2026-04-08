@@ -1,0 +1,22 @@
+{
+  "version": "0.1",
+  "description": "Error code to UI severity mapping - single source of truth for EDITOR_INTEGRATION.md Section 8",
+  "default": "error",
+  "map": {
+    "MISSING_FILE": "error",
+    "SIZE_MISMATCH": "error",
+    "DIGEST_MISMATCH": "error",
+    "SCHEMA_INVALID": "error",
+    "SIGNATURE_INVALID": "error",
+    "ACTOR_NOT_AUTHORIZED": "error",
+    "THRESHOLD_NOT_MET": "error",
+    "SIGNATURE_QUORUM_NOT_MET": "error",
+    "APPROVAL_QUORUM_NOT_MET": "error",
+    "SIGNATURE_NOT_ALLOWED": "error",
+    "PURPOSE_MISMATCH": "error",
+    "SIGNATURE_FORMAT_UNSUPPORTED": "error",
+
+    "LEGACY_SIGNATURE_IGNORED": "warning",
+    "DUPLICATE_SIGNER": "info"
+  }
+}

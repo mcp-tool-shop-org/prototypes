@@ -1,0 +1,119 @@
+{
+  "profile_id": "mcp-secure",
+  "version": "0.1",
+  "title": "MCP Security Posture",
+  "description": "Non-pentest security hardening checks for production readiness",
+  "checks": [
+    {
+      "check_id": "secure.auth.gate",
+      "title": "Sensitive tools require authentication",
+      "description": "Tools touching sensitive resources reject unauthenticated calls",
+      "severity_on_fail": "critical",
+      "codes": ["MCP.SEC.AUTH_REQUIRED", "MCP.SEC.UNAUTH_ALLOWED"],
+      "sensitive_tool_patterns": ["mail.*", "file.*", "db.*", "secret.*", "admin.*"]
+    },
+    {
+      "check_id": "secure.auth.token_validation",
+      "title": "Tokens are validated properly",
+      "description": "Invalid/expired/malformed tokens are rejected",
+      "severity_on_fail": "critical",
+      "codes": ["MCP.SEC.INVALID_TOKEN_ACCEPTED"]
+    },
+    {
+      "check_id": "secure.auth.passthrough_rejected",
+      "title": "Passthrough tokens rejected",
+      "description": "Tokens not intended for this server are rejected (audience check)",
+      "severity_on_fail": "high",
+      "codes": ["MCP.SEC.PASSTHROUGH_TOKEN_ACCEPTED"]
+    },
+    {
+      "check_id": "secure.fs.traversal",
+      "title": "Path traversal blocked",
+      "description": "Attempts to escape allowed directories are rejected",
+      "severity_on_fail": "critical",
+      "codes": ["MCP.SEC.PATH_TRAVERSAL"],
+      "test_vectors": ["../", "..\\", "%2e%2e/", "....//"]
+    },
+    {
+      "check_id": "secure.fs.unicode",
+      "title": "Unicode path handling safe",
+      "description": "Weird unicode doesn't bypass path checks",
+      "severity_on_fail": "high",
+      "codes": ["MCP.SEC.UNICODE_BYPASS"],
+      "test_vectors": ["..%c0%af", "..%c1%9c", "\u2024\u2024/"]
+    },
+    {
+      "check_id": "secure.fs.null_byte",
+      "title": "Null byte injection blocked",
+      "description": "Null bytes in paths don't truncate validation",
+      "severity_on_fail": "critical",
+      "codes": ["MCP.SEC.NULL_BYTE_INJECTION"],
+      "test_vectors": ["file.txt\u0000.jpg", "..%00/"]
+    },
+    {
+      "check_id": "secure.fs.symlink",
+      "title": "Symlink attacks blocked",
+      "description": "Symlinks don't escape allowed directories",
+      "severity_on_fail": "high",
+      "codes": ["MCP.SEC.SYMLINK_ESCAPE"]
+    },
+    {
+      "check_id": "secure.inject.shell",
+      "title": "Shell injection blocked",
+      "description": "Untrusted input doesn't reach shell unsanitized",
+      "severity_on_fail": "critical",
+      "codes": ["MCP.SEC.SHELL_INJECTION"],
+      "test_vectors": ["; echo pwned", "| cat /etc/passwd", "$(whoami)", "`id`"]
+    },
+    {
+      "check_id": "secure.inject.sql",
+      "title": "SQL injection blocked",
+      "description": "Database tools use parameterized queries",
+      "severity_on_fail": "critical",
+      "codes": ["MCP.SEC.SQL_INJECTION"],
+      "test_vectors": ["'; DROP TABLE users;--", "1 OR 1=1"]
+    },
+    {
+      "check_id": "secure.exfil.log_secrets",
+      "title": "Secrets not logged",
+      "description": "API keys, tokens, passwords don't appear in logs",
+      "severity_on_fail": "high",
+      "codes": ["MCP.SEC.SECRET_IN_LOG"]
+    },
+    {
+      "check_id": "secure.exfil.output_secrets",
+      "title": "Secrets not in output",
+      "description": "Tool responses don't leak credentials unexpectedly",
+      "severity_on_fail": "high",
+      "codes": ["MCP.SEC.SECRET_IN_OUTPUT"]
+    },
+    {
+      "check_id": "secure.exfil.phone_home",
+      "title": "No unexpected outbound connections",
+      "description": "Server doesn't make network calls not required by tool semantics",
+      "severity_on_fail": "high",
+      "codes": ["MCP.SEC.UNEXPECTED_OUTBOUND"]
+    },
+    {
+      "check_id": "secure.input.size_limit",
+      "title": "Input size limits enforced",
+      "description": "Oversized inputs are rejected, not processed",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.SEC.NO_SIZE_LIMIT"]
+    },
+    {
+      "check_id": "secure.input.rate_limit",
+      "title": "Rate limiting present",
+      "description": "Rapid requests are throttled (optional but recommended)",
+      "severity_on_fail": "low",
+      "codes": ["MCP.SEC.NO_RATE_LIMIT"]
+    },
+    {
+      "check_id": "secure.error.no_stack_trace",
+      "title": "Stack traces not exposed",
+      "description": "Error responses don't leak internal paths or code",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.SEC.STACK_TRACE_EXPOSED"]
+    }
+  ]
+}

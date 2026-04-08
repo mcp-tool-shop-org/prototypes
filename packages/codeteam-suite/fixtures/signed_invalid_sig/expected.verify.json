@@ -1,0 +1,26 @@
+{
+  "status": "FAIL_SIGNATURE",
+  "exit_code": 4,
+  "summary": {
+    "artifacts_count": 1,
+    "evidence_count": 0,
+    "approvals_valid": 1,
+    "approvals_required": 1,
+    "signature_present": true,
+    "signature_valid": false,
+    "signer_id": "5ce7f1664c271688"
+  },
+  "checks": {
+    "schema_valid": true,
+    "artifacts_valid": true,
+    "evidence_valid": true,
+    "paths_valid": true
+  },
+  "errors": [
+    {
+      "code": "SIGNATURE_INVALID",
+      "message": "Final signature cryptographically invalid"
+    }
+  ],
+  "warnings": []
+}

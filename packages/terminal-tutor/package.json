@@ -1,0 +1,49 @@
+{
+  "name": "terminal-tutor",
+  "version": "1.0.0",
+  "description": "Situated terminal coaching — learn by doing inside Claude Code",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "terminal-tutor": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit",
+    "verify": "npm run lint && npm run test && npm run build",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "terminal",
+    "tutor",
+    "shell",
+    "teaching",
+    "claude-code",
+    "cli"
+  ],
+  "author": "mcp-tool-shop",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/terminal-tutor.git"
+  },
+  "files": [
+    "dist",
+    "lessons",
+    "games",
+    "CHANGELOG.md"
+  ],
+  "dependencies": {
+    "yaml": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://codeteam.dev/schemas/cli.approve.v0.1.json",
+  "title": "CodeTeam CLI Approve Output",
+  "description": "JSON output schema for 'codeteam approve' command",
+  "type": "object",
+  "required": ["success", "package_path"],
+  "properties": {
+    "success": {
+      "type": "boolean",
+      "description": "Whether approval was added successfully"
+    },
+    "package_path": {
+      "type": "string",
+      "description": "Path to package"
+    },
+    "package_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "Package digest that was approved"
+    },
+    "approval": {
+      "type": "object",
+      "properties": {
+        "approver_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16}$"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "comment": {
+          "type": "string"
+        }
+      }
+    },
+    "approvals_after": {
+      "type": "object",
+      "properties": {
+        "valid": {"type": "integer", "minimum": 0},
+        "required": {"type": "integer", "minimum": 0},
+        "threshold_met": {"type": "boolean"}
+      }
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "ACTOR_NOT_AUTHORIZED",
+            "ALREADY_APPROVED",
+            "INTEGRITY_FAILED",
+            "KEY_NOT_FOUND"
+          ]
+        },
+        "message": {"type": "string"}
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

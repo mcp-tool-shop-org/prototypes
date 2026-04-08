@@ -1,0 +1,19 @@
+node_modules/
+dist/
+*.tgz
+.env
+.DS_Store
+coverage/
+*.log
+test-results.xml
+checksums.txt
+
+# Ad-hoc audit artifacts
+COMPREHENSIVE_AUDIT.md
+ENUM_SERIALIZATION_AUDIT.md
+
+# Large binary guardrails — assets belong in GitHub Releases
+*.zip
+design_src/
+site/.astro/
+site/node_modules/

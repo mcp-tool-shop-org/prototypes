@@ -1,0 +1,13 @@
+{
+  "packVersion": "0.1.0",
+  "product": "GlyphStudio",
+  "target": "F:/AI/taste-compiler/trials/glyphstudio/constrained",
+  "checkedAt": "2026-04-02T17:02:59.824Z",
+  "violations": [],
+  "summary": {
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0,
+    "passed": true
+  }
+}

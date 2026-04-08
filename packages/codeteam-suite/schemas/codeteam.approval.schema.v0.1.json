@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://codeteam.dev/schemas/approval.v0.1.json",
+  "title": "CodeTeam Approval Record",
+  "description": "A signed approval record for a package (v0.1)",
+  "type": "object",
+  "required": [
+    "type",
+    "package_digest",
+    "approver_id",
+    "ts",
+    "signature"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "approval",
+      "description": "Record type"
+    },
+    "package_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "Package digest being approved"
+    },
+    "approver_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16}$",
+      "description": "Approver's key fingerprint"
+    },
+    "ts": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of approval"
+    },
+    "comment": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional approval comment"
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9+/]+=*$",
+      "description": "Base64-encoded Ed25519 signature"
+    }
+  },
+  "additionalProperties": false
+}

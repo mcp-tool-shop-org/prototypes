@@ -1,0 +1,1930 @@
+{
+  "version": 1,
+  "entries": {
+    "b9c06d9af3dae5b8": {
+      "translation": "Dev-Op-Typer",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "26500f5c6766d0ff": {
+      "translation": "**Windows向け、開発者向けのタイピング練習アプリ。すべてのテストは実際のコードです。**",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "6f26b00f8e4c2883": {
+      "translation": "> Linux/macOS版も利用可能：[linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) (Avalonia UI)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "fc8e4bf84165ea76": {
+      "translation": "機能",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "9a9686827f10cb79": {
+      "translation": "実際のコードでの練習",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "20291a7ecc057b63": {
+      "translation": "- **Python, JavaScript, C#, Java, SQL, Bash** の実際のコードスニペットを入力\n- 文字ごとの正確性トラッキングと差分ハイライト表示\n- 厳密な記号のマッチング：`{ } [ ] ( ) < > ; : , . \" ' \\``\n- 改行とインデントが重要",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "6178f853477857d4": {
+      "translation": "アダプティブラーニング",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "fb5a98d69dd3ef69": {
+      "translation": "- あなたのスキルレベルに基づいたスマートなスニペット選択\n- 言語ごとの Eloレーティングシステム\n- セッションプランナー：目標（50%）/ レビュー（30%）/ 挑戦（20%）の組み合わせ\n- 文字ごとの間違いヒートマップと弱点トレース\n- ガイドモード：弱点に焦点を当てた選択と、マイクロドリル\n- 難易度調整（D1～D7）と、快適ゾーンの検出",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "d4c23bea2260b3f1": {
+      "translation": "ライブ統計",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "f6312e2434aae10d": {
+      "translation": "- リアルタイムのWPM（1分あたりの入力文字数）、正確性、エラー数\n- セッション完了時の振り返り情報\n- トレンド追跡：言語ごとのWPMと正確性の推移\n- 疲労検知と休憩の提案\n- 弱点パネル：文字レベルでの分析",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "90bb7e10d61b51f8": {
+      "translation": "教育とコミュニティ",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "4989d6f14e9d7f33": {
+      "translation": "- スキャフォールド：プログレッシブなコンテキストヒントと「詳細なコンテキスト」レイヤー\n- デモンストレーション：代替実装を同等のレベルで表示\n- コミュニティからのヒントと難易度評価の表示\n- 共有コンテンツパックからのガイダンス\n- 構造理解のためのスキルレイヤーパネル",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "94c2e19857c6ffc2": {
+      "translation": "コンテンツシステム",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "4f21e368d0cedbdc": {
+      "translation": "- 6つの言語で168以上のキャリブレーションスニペット\n- ユーザーのスニペットパック：JSONファイルをパックフォルダに配置\n- コードペースト：クリップボードから任意のコードを練習コンテンツとして貼り付け\n- ファイル/フォルダのインポート：ソースファイルを自動検出された言語でインデックス化\n- コンテンツ共有用の`.ldtpack`バンドルのエクスポート/インポート\n- コンテンツアドレスID（SHA-256による重複排除）",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "3067f1c6066f4f4d": {
+      "translation": "オーディオ",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "d7df5d5b10ad26ec": {
+      "translation": "- 複数のテーマを持つアンビエントサウンドスケープ\n- 機械式キーボードのクリック音（5つのテーマ、各テーマ8つのバリエーション）\n- チャンネルごとの音量コントロール（アンビエント、キーボード、UI）\n- タイトルバーからのミュート/ミュート解除",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "0e10772407e846b0": {
+      "translation": "アクセシビリティ",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "e0a57c631f25082c": {
+      "translation": "- フルキーボードナビゲーション\n- 高コントラストテーマのサポート\n- モーションの抑制オプション\n- すべてのインタラクティブ要素にAutomationPropertiesを設定",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "4ade69f3bb0a5472": {
+      "translation": "永続性",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "42b697c3e4fb81f5": {
+      "translation": "- XP、レベル、言語ごとの評価を含むプロファイル\n- セッション間で保存される設定と言語選択\n- セッション履歴（最大500件）と、毎月の圧縮\n- エンジンチューニングのための名前付きパラメータセットである練習設定",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "ea65604e8b784581": {
+      "translation": "インストール",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "decb4757048efa79": {
+      "translation": "Microsoft Store（推奨）",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "36b4a455e7911b86": {
+      "translation": "近日公開予定 — Storeの認証待ち。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "2b94530f7e3b87d7": {
+      "translation": "ソースコードからのビルド",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "1a7ac847ef3070a3": {
+      "translation": "**要件：**\n- Windows 10 バージョン 1809 以降、または Windows 11\n- .NET 10.0 SDK\n- Visual Studio 2022（Windows App SDKワークロード付き）またはCLI",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "6b9524ed0cdd35da": {
+      "translation": "ビルドされた実行ファイルを起動します。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "1d417df09230eb05": {
+      "translation": "プロジェクト構造",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "73a4a8c7ac5151bf": {
+      "translation": "キーボードショートカット",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "da995db8652c6f27": {
+      "translation": "アクション",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "9d7cee119080e668": {
+      "translation": "--------",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "399f1607fd3823b8": {
+      "translation": "Tab / Shift+Tab",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "8f1526eccdac4a37": {
+      "translation": "コントロールの移動",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "02cfba959a9f3741": {
+      "translation": "新しいテストの開始",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "68bd3318efd59deb": {
+      "translation": "Escape",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003811
+    },
+    "5a2d685bc29cda53": {
+      "translation": "現在のテストのリセット",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "e7a7d5696ec61642": {
+      "translation": "独自のコードの追加",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "949e76335bca4a4d": {
+      "translation": "独自のコードを練習する方法は3つあります。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "02eb1753555eb73a": {
+      "translation": "オプション1：コードペースト（最も簡単）",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "d71dca704c27f10e": {
+      "translation": "1. **設定**パネルを開きます（タイトルバーの⚙をクリック）。\n2. **コードペースト**までスクロールします。\n3. テキストボックスに任意のコードスニペットを貼り付けます。\n4. **追加**をクリックします。言語は自動的に検出されます。\n5. あなたのコードがすぐにスニペットのローテーションに追加されます。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "fc16617290e7a258": {
+      "translation": "オプション2：ファイルまたはフォルダのインポート",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "50aa353781b4278d": {
+      "translation": "1. **設定**を開き、**インポート**までスクロールします。\n2. 単一のソースファイルをインポートするには、**ファイルのインポート**をクリックします。プロジェクト全体をスキャンするには、**フォルダのインポート**をクリックします。\n3. アプリは、ファイル拡張子（`.py`, `.js`, `.cs`, `.java`, `.sql`, `.sh`）に基づいて自動的に言語を検出します。\n4. インポートされたコードは、コンテンツハッシュによって重複が排除されます。同じコードが2回追加されることはありません。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "2bdd5d66ba7b31a7": {
+      "translation": "オプション3：スニペットパック（JSON）の作成",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "6859b936bb544963": {
+      "translation": "練習用のスニペットのコレクションを作成する場合：",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "72fccfc2bd361c6e": {
+      "translation": "1. ユーザーのスニペットフォルダを開きます。\n```\n%LocalAppData%\\DevOpTyper\\UserSnippets\\\n```\n（または、設定画面で**スニペットフォルダを開く**をクリックします）",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "d031dab2744a2d0d": {
+      "translation": "2. 言語名にちなんだJSONファイルを作成します（例：`python.json`）。\n```json\n{\n\"language\": \"python\",\n\"snippets\": [\n{\n\"id\": \"my_list_comp\",\n\"title\": \"リスト内包表記\",\n\"difficulty\": 3,\n\"topics\": [\"リスト\", \"内包表記\"],\n\"code\": \"squares = [x**2 for x in range(10)]\\n\"\n},\n{\n\"id\": \"my_dict_comp\",\n\"title\": \"辞書内包表記\",\n\"difficulty\": 4,\n\"topics\": [\"辞書\", \"内包表記\"],\n\"code\": \"counts = {word: len(word) for word in words}\\n\"\n}\n]\n}\n```",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "81005b026c0345f5": {
+      "translation": "3. アプリを再起動します。作成したスニペットが、組み込みのスニペットとともに表示されます。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "fc3ff5a4fa2388cb": {
+      "translation": "**ヒント：**\n- `id`は、すべてのパック全体で一意である必要があります。\n- `difficulty`は、1（簡単）から7（難しい）の範囲です。\n- `code`は、`\\n`で終わる必要があります。\n- パックは、最大1レベルのサブディレクトリに整理できます。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "256928334ad17724": {
+      "translation": "コンテンツの共有",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "195f3c30561cb1b7": {
+      "translation": "カスタムスニペットを、持ち運び可能な`.ldtpack`ファイルとしてエクスポートします。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "d57429fe6d4caca5": {
+      "translation": "1. **設定**を開き、**バンドルのエクスポート**をクリックします。\n2. `.ldtpack`ファイルを他のユーザーと共有します。\n3. 相手は、**設定** → **バンドルのインポート**からインポートします。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "a90a8504bc2256e9": {
+      "translation": "ユーザーが作成したコンテンツのみが転送されます。練習履歴や設定は転送されません。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "63d652a6cb8b0bbc": {
+      "translation": "プライバシー",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "d6df9b8c12e7ea7f": {
+      "translation": "Dev-Op-Typerは完全にオフラインで使用できます。データは収集、送信、共有されません。詳細は[PRIVACY.md](PRIVACY.md)を参照してください。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "08ea9dfbe36d981b": {
+      "translation": "ライセンス",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "5e7c5653fc3efae7": {
+      "translation": "[MIT](LICENSE)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028003812
+    },
+    "834cbabc8647f2a4": {
+      "translation": "Dev-Op-Typer",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "fdb7656358be3681": {
+      "translation": "**一款面向开发者的打字练习应用程序，适用于 Windows 系统——每个练习都是真实的代码。**",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "a39bc29797cd1ee7": {
+      "translation": "> 同样适用于 Linux/macOS：[linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) (使用 Avalonia UI)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "c6c20d03bfc6bd19": {
+      "translation": "功能",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "8fe410968e1b23f3": {
+      "translation": "真实代码练习",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "66072796e116155a": {
+      "translation": "- 在 **Python、JavaScript、C#、Java、SQL 和 Bash** 中输入真实的代码片段。\n- 逐个字符跟踪准确度，并使用高亮显示差异。\n- 精确符号匹配：`{ } [ ] ( ) < > ; : , . \" ' \\``\n- 换行符和缩进很重要。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "851ec1bd670c6424": {
+      "translation": "自适应学习",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "5943413407899c79": {
+      "translation": "- 根据您的技能水平智能选择代码片段。\n- 针对每种语言的类似 Elo 评分系统。\n- 学习计划：目标 (50%) / 复习 (30%) / 挑战 (20%) 的组合。\n- 每个字符的错误热图，显示薄弱环节。\n- 引导模式：可选的、以薄弱环节为导向的选择，并提供微型练习。\n- 难度等级 (D1–D7)，并检测舒适区。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "608434d5e11c8c71": {
+      "translation": "实时统计",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "4ce3f03a71987f0a": {
+      "translation": "- 实时显示每分钟输入字数 (WPM)、准确率和错误计数。\n- 完成练习后提供回顾性分析。\n- 跟踪趋势：每种语言的滚动 WPM 和准确率。\n- 检测疲劳，并提供休息建议。\n- 显示薄弱环节面板，提供字符级别的分析。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "20fb66e1d5337f45": {
+      "translation": "教学与社区",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "6c0b3aef91d12150": {
+      "translation": "- 提示：提供逐步的上下文提示，并提供“更多上下文”的层级。\n- 演示：显示替代实现，作为同等水平的示例。\n- 社区提示：仅显示提示和难度评级。\n- 来自共享内容包的指导说明。\n- 技能层级面板，用于理解代码结构。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "89ac1b7a4e7064fe": {
+      "translation": "内容系统",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "95bd6de2838c2519": {
+      "translation": "- 包含 168 多个用于校准的代码片段，涵盖 6 种语言。\n- 用户代码片段包：将 JSON 文件放入“packs”文件夹中。\n- 粘贴代码：将任何代码从剪贴板粘贴为练习内容。\n- 导入文件/文件夹：索引源代码文件，并自动检测语言。\n- 导出/导入 `.ldtpack` 包，用于共享内容。\n- 内容寻址 ID (使用 SHA-256 进行去重)。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "bef2b229a83a6cc4": {
+      "translation": "音频",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "2b0cd30c157aa5e1": {
+      "translation": "- 包含多种主题的环境音效。\n- 机械键盘按键声音 (5 种主题，每种主题 8 种变体)。\n- 每个通道的音量控制 (环境音、键盘声音、UI)。\n- 从标题栏静音/取消静音。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "46ab0516852ee339": {
+      "translation": "辅助功能",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "7b613afc7c52afba": {
+      "translation": "- 完全支持键盘导航。\n- 支持高对比度主题。\n- 减少动画效果选项。\n- 所有交互元素的辅助属性。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "9d446db1a51356f0": {
+      "translation": "持久性",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "3c79b6148326a391": {
+      "translation": "- 包含经验值 (XP)、等级和每种语言的评级的个人资料。\n- 保存设置和语言选择，并在不同会话之间生效。\n- 会话历史记录 (最多 500 条记录)，并每月进行压缩。\n- 练习配置：命名参数集，用于调整引擎。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "ed61d0d109031128": {
+      "translation": "安装",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "930ee2ad63e2f6f5": {
+      "translation": "Microsoft Store (推荐)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "fda77a957cba5744": {
+      "translation": "即将推出 — 待 Store 认证。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "8d1b9680d04554d1": {
+      "translation": "从源代码构建",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "6d58ceb11818f4e4": {
+      "translation": "**要求：**\n- Windows 10 版本 1809 或更高版本，或 Windows 11\n- .NET 10.0 SDK\n- Visual Studio 2022 (包含 Windows App SDK 工作负载) — 或命令行工具",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "dff57284bfe7a370": {
+      "translation": "运行构建好的可执行文件：",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "ff01fb234ea9ac38": {
+      "translation": "项目结构",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "228c23cadd990f9e": {
+      "translation": "键盘快捷键",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "25682581ef1fc9db": {
+      "translation": "操作",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "15d90ade51a88a14": {
+      "translation": "--------",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "c5e4ae354d965026": {
+      "translation": "Tab / Shift+Tab",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "812d32ce774dac65": {
+      "translation": "导航控件",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "344ad6321d4bacc5": {
+      "translation": "开始新的练习",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "89016f67c43f6c1e": {
+      "translation": "Escape",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "3eaca7b622f53c32": {
+      "translation": "重置当前练习",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "a3921f654f96ecc9": {
+      "translation": "添加您自己的代码",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "1004e17307ce560c": {
+      "translation": "有三种方法可以练习您自己的代码：",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "b2293c5c589f8ba5": {
+      "translation": "选项 1：粘贴代码 (最简单)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "8bd6d4d219534940": {
+      "translation": "1. 打开 **设置** 面板 (点击标题栏中的 ⚙ 符号)\n2. 滚动到 **粘贴代码**\n3. 将任何代码片段粘贴到文本框中\n4. 点击 **添加** — 自动检测语言\n5. 您的代码会立即出现在代码片段的循环中",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "5cb239e85ed8fdc5": {
+      "translation": "选项 2：导入文件或文件夹",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "e77ad99d93c93d9d": {
+      "translation": "1. 打开 **设置** → 滚动到 **导入**\n2. 点击 **导入文件** 以添加单个源文件，或点击 **导入文件夹** 以扫描整个项目。\n3. 该应用程序会自动检测文件扩展名（`.py`, `.js`, `.cs`, `.java`, `.sql`, `.sh`）所使用的编程语言。\n4. 导入的代码会根据内容哈希进行去重，相同的代码不会被重复添加。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "d19d1a284dd365fb": {
+      "translation": "选项 3：创建代码片段包（JSON）",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "b594a12fe1e26627": {
+      "translation": "用于精心设计的练习代码片段集合：",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "9ded87e466b55193": {
+      "translation": "1. 打开您的用户代码片段文件夹：\n```\n%LocalAppData%\\DevOpTyper\\UserSnippets\\\n```\n（或者点击 **打开代码片段文件夹** 在设置中）",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "40a4c9ea2af3afc6": {
+      "translation": "2. 创建一个以编程语言命名的 JSON 文件（例如 `python.json`）：\n```json\n{\n\"language\": \"python\",\n\"snippets\": [\n{\n\"id\": \"my_list_comp\",\n\"title\": \"列表推导式\",\n\"difficulty\": 3,\n\"topics\": [\"列表\", \"推导式\"],\n\"code\": \"squares = [x**2 for x in range(10)]\\n\"\n},\n{\n\"id\": \"my_dict_comp\",\n\"title\": \"字典推导式\",\n\"difficulty\": 4,\n\"topics\": [\"字典\", \"推导式\"],\n\"code\": \"counts = {word: len(word) for word in words}\\n\"\n}\n]\n}\n```",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "c0990c8c74c7777a": {
+      "translation": "3. 重新启动应用程序 — 您的代码片段将与内置的代码片段一起显示。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "00a014aeb8a26882": {
+      "translation": "**提示：**\n- `id` 必须在所有代码片段包中是唯一的。\n- `difficulty` 的范围是 1（简单）到 7（困难）。\n- `code` 应该以 `\\n` 结尾。\n- 您可以将代码片段包组织在最多一层深度的子目录中。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "4e05ee692614981c": {
+      "translation": "内容分享",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "adffe738888dcd78": {
+      "translation": "将您的自定义代码片段导出为可移植的 `.ldtpack` 文件：",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "425e967891220d0c": {
+      "translation": "1. 打开 **设置** → 点击 **导出包**\n2. 与其他人分享 `.ldtpack` 文件。\n3. 他们可以通过 **设置** → **导入包** 来导入它。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "38a31f4a80c6763e": {
+      "translation": "只有用户创建的内容会被传输，不会包含练习历史或设置。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "68d3e59a40cf45ce": {
+      "translation": "隐私",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "993e8bb35ac9a600": {
+      "translation": "Dev-Op-Typer 完全离线运行。不会收集、传输或共享任何数据。请参阅 [PRIVACY.md](PRIVACY.md)。",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "1fb815b9a436fadb": {
+      "translation": "许可证",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "892c2aa834c19cc2": {
+      "translation": "[MIT](LICENSE)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028047476
+    },
+    "b97d0cf28c8d5952": {
+      "translation": "Dev-Op-Typer",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "bb0dbf61267f985a": {
+      "translation": "**Una aplicación de práctica de mecanografía centrada en desarrolladores para Windows: cada prueba consiste en código real.**",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "270acbbb5614b70e": {
+      "translation": "> También disponible para Linux/macOS: [linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) (Avalonia UI)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "422fb4b958d31758": {
+      "translation": "Características",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "72eb059ad0ccfc9f": {
+      "translation": "Práctica con Código Real",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "7ed2f71ad48b9dec": {
+      "translation": "- Escribe fragmentos de código reales en **Python, JavaScript, C#, Java, SQL y Bash**.\n- Seguimiento de la precisión carácter por carácter con resaltado de diferencias.\n- Coincidencia exacta de símbolos: `{ } [ ] ( ) < > ; : , . \" ' \\`.\n- Las nuevas líneas y la sangría son importantes.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "9a28f36a97c765fa": {
+      "translation": "Aprendizaje Adaptativo",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "cdc4d73159e4394d": {
+      "translation": "- Selección inteligente de fragmentos basada en tu nivel de habilidad.\n- Sistema de clasificación tipo Elo por lenguaje.\n- Planificador de sesiones: mezcla de objetivos (50%) / revisión (30%) / desafío (20%).\n- Mapa de calor de errores por carácter con trayectorias de debilidades.\n- Modo de guía: selección opcional basada en debilidades con ejercicios de práctica.\n- Escalado de dificultad (D1–D7) con detección de la zona de confort.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "0a8e433d5a82fa89": {
+      "translation": "Estadísticas en Tiempo Real",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "6054a30f20a2ac68": {
+      "translation": "- Palabras por minuto (WPM), precisión y número de errores en tiempo real.\n- Finalización de la sesión con información retrospectiva.\n- Seguimiento de tendencias: WPM y precisión por lenguaje.\n- Detección de fatiga con sugerencias de descanso.\n- Panel de puntos débiles con análisis a nivel de carácter.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "01a2f0d92a7c7024": {
+      "translation": "Enseñanza y Comunidad",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "c1b747230cec01a7": {
+      "translation": "- Pistas contextuales progresivas con capas de \"Más contexto\".\n- Demostraciones: implementaciones alternativas mostradas como opciones equivalentes.\n- Señales de la comunidad: consejos y calificaciones de dificultad (solo de visualización).\n- Notas de guía de contenido compartido.\n- Panel de capas de habilidades para una comprensión estructural.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "40f2332a2793ff0b": {
+      "translation": "Sistema de Contenido",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "f810df07a73a837d": {
+      "translation": "- Más de 168 fragmentos de calibración en 6 idiomas.\n- Paquetes de fragmentos de usuario: coloca archivos JSON en la carpeta de paquetes.\n- Pegar código: pega cualquier código desde el portapapeles como contenido de práctica.\n- Importar archivo/carpeta: indexa archivos de origen con detección automática del idioma.\n- Exportar/importar paquetes `.ldtpack` para compartir contenido.\n- Identificadores basados en el contenido (desduplicación SHA-256).",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "0bef2268cb6092d7": {
+      "translation": "Audio",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "6138039813c8ab8b": {
+      "translation": "- Paisajes sonoros ambientales con múltiples temas.\n- Sonidos de teclado mecánico (5 temas, 8 variaciones cada uno).\n- Controles de volumen por canal (ambiente, teclado, interfaz de usuario).\n- Silenciar/activar sonido desde la barra de título.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "bcc9fb7c12453eb1": {
+      "translation": "Accesibilidad",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "e1d4f417adfa6744": {
+      "translation": "- Navegación completa con el teclado.\n- Soporte para temas de alto contraste.\n- Opción de reducir el movimiento.\n- Propiedades de automatización en todos los elementos interactivos.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "67717287d9d09428": {
+      "translation": "Persistencia",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "a37e517b72c9f59c": {
+      "translation": "- Perfil con XP, niveles y calificaciones por idioma.\n- Configuración y selección de idioma guardados en cada sesión.\n- Historial de sesiones (hasta 500 registros) con compresión mensual.\n- Configuraciones de práctica: conjuntos de parámetros con nombre para el ajuste del motor.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "144b06b61516beec": {
+      "translation": "Instalación",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "c9a8ac8a2a87a54d": {
+      "translation": "Microsoft Store (recomendado)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "747535f8cc757938": {
+      "translation": "Próximamente: pendiente de certificación en la tienda.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "7ebaf4542d396b61": {
+      "translation": "Compilar desde el código fuente",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "fd57deb4c2a8a3a6": {
+      "translation": "**Requisitos:**\n- Windows 10 versión 1809+ o Windows 11.\n- .NET 10.0 SDK.\n- Visual Studio 2022 (con la carga de trabajo de Windows App SDK) o CLI.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "a9ef52d3de1f7a4a": {
+      "translation": "Ejecuta el ejecutable compilado:",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "cc290f922a5da509": {
+      "translation": "Estructura del proyecto",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "3c5fe105724424db": {
+      "translation": "Atajos de teclado",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "ebaacfef5eb96ed1": {
+      "translation": "Acción",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "eeb36bd7b5ceedf9": {
+      "translation": "--------",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "f60f911bf1e2110e": {
+      "translation": "Tab / Shift+Tab",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "40a80b6578f8c439": {
+      "translation": "Navegar controles",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "078765331a09ae09": {
+      "translation": "Iniciar nueva prueba",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "3a1e0a780bee59ae": {
+      "translation": "Escape",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "f8b5c8636bbeac5c": {
+      "translation": "Restablecer prueba actual",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "6dcb5e34ce0e18d4": {
+      "translation": "Añadir tu propio código",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "c7b32bbb5b20402c": {
+      "translation": "Hay tres formas de practicar con tu propio código:",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "0692bfbcc535deee": {
+      "translation": "Opción 1: Pegar código (la más fácil)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "5e6ce4529a7a8473": {
+      "translation": "1. Abre el panel de **Configuración** (haz clic en ⚙ en la barra de título).\n2. Desplázate hasta **Pegar código**.\n3. Pega cualquier fragmento de código en el cuadro de texto.\n4. Haz clic en **Añadir**; el idioma se detecta automáticamente.\n5. Tu código aparece inmediatamente en la rotación de fragmentos.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "c7c51cc1591cb6ec": {
+      "translation": "Opción 2: Importar un archivo o carpeta.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "a67fdf411f826939": {
+      "translation": "1. Abra **Configuración** → desplace hacia abajo hasta **Importar**.\n2. Haga clic en **Importar archivo** para agregar un solo archivo de origen, o en **Importar carpeta** para analizar un proyecto completo.\n3. La aplicación detecta automáticamente el idioma a partir de las extensiones de archivo (`.py`, `.js`, `.cs`, `.java`, `.sql`, `.sh`).\n4. El código importado se desduplica mediante un hash de contenido; el mismo código nunca se agrega dos veces.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "e6f97199b92df465": {
+      "translation": "Opción 3: Crear un paquete de fragmentos (JSON).",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "36d2e9834fa483ff": {
+      "translation": "Para conjuntos de fragmentos de práctica seleccionados:",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "8a3285fbe71d2b5f": {
+      "translation": "1. Abra la carpeta de fragmentos de usuario:\n```\n%LocalAppData%\\DevOpTyper\\UserSnippets\\\n```\n(o haga clic en **Abrir carpeta de fragmentos** en Configuración).",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "5eaa24d7e1fb77f8": {
+      "translation": "2. Cree un archivo JSON con el nombre del lenguaje (por ejemplo, `python.json`):\n```json\n{\n\"language\": \"python\",\n\"snippets\": [\n{\n\"id\": \"my_list_comp\",\n\"title\": \"Comprensión de listas\",\n\"difficulty\": 3,\n\"topics\": [\"listas\", \"comprensión\"],\n\"code\": \"squares = [x**2 for x in range(10)]\\n\"\n},\n{\n\"id\": \"my_dict_comp\",\n\"title\": \"Comprensión de diccionarios\",\n\"difficulty\": 4,\n\"topics\": [\"diccionarios\", \"comprensión\"],\n\"code\": \"counts = {word: len(word) for word in words}\\n\"\n}\n]\n}\n```",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "8317c63de057b6f7": {
+      "translation": "3. Reinicie la aplicación; sus fragmentos aparecerán junto con los integrados.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "5d8120c517acbd51": {
+      "translation": "**Consejos:**\n- `id` debe ser único en todos los paquetes.\n- `difficulty` varía de 1 (fácil) a 7 (difícil).\n- `code` debe terminar con `\\n`.\n- Puede organizar los paquetes en subdirectorios de un nivel de profundidad.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "9718f4f635e3ca29": {
+      "translation": "Compartir contenido.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "a2b037eeded4b059": {
+      "translation": "Exporte sus fragmentos personalizados como un paquete portátil `.ldtpack`:",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "67fa840177c1a316": {
+      "translation": "1. Abra **Configuración** → haga clic en **Exportar paquete**.\n2. Comparta el archivo `.ldtpack` con otros.\n3. Ellos lo importan a través de **Configuración** → **Importar paquete**.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "36a702c7eda634ba": {
+      "translation": "Solo el contenido creado por el usuario se transfiere; nunca el historial de práctica ni la configuración.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "4a21200dc8d01e4d": {
+      "translation": "Privacidad.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "c790fa701cd3a77f": {
+      "translation": "Dev-Op-Typer funciona completamente sin conexión. No se recopilan, transmiten ni comparten datos. Consulte [PRIVACY.md](PRIVACY.md).",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "9572f74b6d3f62b1": {
+      "translation": "Licencia.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "e4731ea7699353e4": {
+      "translation": "[MIT](LICENSE)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028093650
+    },
+    "feeaa29212a143a4": {
+      "translation": "Dev-Op-Typer",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141778
+    },
+    "09765d59d8ccafe7": {
+      "translation": "**Une application d'entraînement à la frappe axée sur les développeurs pour Windows — chaque test est composé de code réel.**",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141778
+    },
+    "d6428f000f6fd73d": {
+      "translation": "> Disponible également pour Linux/macOS : [linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) (Avalonia UI)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141778
+    },
+    "9244388ee3d9cea2": {
+      "translation": "Fonctionnalités",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "c2cc37b7583e1816": {
+      "translation": "Entraînement avec du code réel",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "42e8287cdcd6f5cc": {
+      "translation": "- Tapez des extraits de code réels en **Python, JavaScript, C#, Java, SQL et Bash**.\n- Suivi de la précision caractère par caractère avec mise en évidence des différences.\n- Correspondance exacte des symboles : `{ } [ ] ( ) < > ; : , . \" ' \\`.\n- Les sauts de ligne et l'indentation sont importants.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "55eb17ed12eb4f35": {
+      "translation": "Apprentissage adaptatif",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "74710829b2af4d3f": {
+      "translation": "- Sélection intelligente des extraits en fonction de votre niveau de compétence.\n- Système de notation type Elo par langage.\n- Planification des sessions : mélange cible (50 %) / révision (30 %) / défi (20 %).\n- Carte thermique des erreurs par caractère avec identification des points faibles.\n- Mode guidé : sélection axée sur les points faibles avec des exercices ciblés.\n- Échelle de difficulté (D1–D7) avec détection de la zone de confort.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "a433b7a0f4b2d139": {
+      "translation": "Statistiques en direct",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "407f8b548a171300": {
+      "translation": "- Vitesse de frappe (WPM), précision et nombre d'erreurs en temps réel.\n- Fin de session avec aperçu rétrospectif.\n- Suivi des tendances : vitesse de frappe et précision par langage.\n- Détection de la fatigue avec suggestions de pauses.\n- Panneau des points faibles avec analyse au niveau du caractère.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "b8e3ee7205145e55": {
+      "translation": "Enseignement et communauté",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "0e5c674663bcc968": {
+      "translation": "- Indices progressifs avec des niveaux de \"Plus d'informations\".\n- Démonstrations : implémentations alternatives présentées comme des alternatives équivalentes.\n- Signaux de la communauté : conseils et évaluations de difficulté affichés uniquement.\n- Notes de guidage provenant de packs de contenu partagés.\n- Panneau des niveaux de compétence pour une compréhension structurelle.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "886ab37ea01f7e68": {
+      "translation": "Système de contenu",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "9cb2a1a22aaf997d": {
+      "translation": "- Plus de 168 extraits de calibration dans 6 langages.\n- Packs d'extraits utilisateur : ajoutez des fichiers JSON dans le dossier des packs.\n- Coller du code : collez n'importe quel code à partir du presse-papiers pour l'utiliser comme contenu d'entraînement.\n- Importer un fichier/un dossier : indexez les fichiers sources avec détection automatique du langage.\n- Exporter/Importer des bundles `.ldtpack` pour partager du contenu.\n- Identifiants basés sur le contenu (déduplication SHA-256).",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "b34769f87ab1203f": {
+      "translation": "Audio",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "246bebd56bc83812": {
+      "translation": "- Paysages sonores ambiants avec plusieurs thèmes.\n- Sons de clavier mécanique (5 thèmes, 8 variations chacun).\n- Contrôles de volume par canal (ambiance, clavier, interface utilisateur).\n- Mettre en sourdine/Activer le son depuis la barre de titre.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "db6986aa712671b8": {
+      "translation": "Accessibilité",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "6cd78f062e38680a": {
+      "translation": "- Navigation complète au clavier.\n- Prise en charge des thèmes à contraste élevé.\n- Option de réduction des animations.\n- Propriétés d'accessibilité sur tous les éléments interactifs.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "2f4eb6c9688ad462": {
+      "translation": "Persistance",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "4d51845c61a9fb0c": {
+      "translation": "- Profil avec XP, niveaux et notations par langage.\n- Paramètres et sélection de la langue enregistrés entre les sessions.\n- Historique des sessions (jusqu'à 500 enregistrements) avec compression mensuelle.\n- Configurations d'entraînement : ensembles de paramètres nommés pour l'optimisation du moteur.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "6c946ac8441b05e9": {
+      "translation": "Installation",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "61ee0d7989caab2e": {
+      "translation": "Microsoft Store (recommandé)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "390d2853e802efc4": {
+      "translation": "Bientôt disponible — en attente de certification par la boutique.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "0d9b10ef745a0f71": {
+      "translation": "Compilation à partir du code source",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "f5ae8e123b727793": {
+      "translation": "**Prérequis :**\n- Windows 10 version 1809+ ou Windows 11\n- .NET 10.0 SDK\n- Visual Studio 2022 (avec la charge de travail Windows App SDK) — ou CLI",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "48e3c91301ef03c6": {
+      "translation": "Exécutez l'exécutable compilé :",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "79d1da0af5708b6a": {
+      "translation": "Structure du projet",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "30f3200107f92e91": {
+      "translation": "Raccourcis clavier",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "822c5cf9fcb5f5e3": {
+      "translation": "Action",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "f4a92f03e0709542": {
+      "translation": "--------",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "864790055d50f9a1": {
+      "translation": "Tab / Maj+Tab",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "a1597f57bc382991": {
+      "translation": "Navigation des contrôles",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "8c1af3c6db8cea4d": {
+      "translation": "Démarrer un nouveau test",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "a6def029b271d7b5": {
+      "translation": "Échap",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "353dfe8f071cec6f": {
+      "translation": "Réinitialiser le test en cours",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "c94a3a66069f5e07": {
+      "translation": "Ajouter votre propre code",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "97588730f8e926b4": {
+      "translation": "Il existe trois façons de pratiquer avec votre propre code :",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "a20b56faa8e80a0b": {
+      "translation": "Option 1 : Coller du code (la plus simple)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "2c4ac42fcc29e086": {
+      "translation": "1. Ouvrez le panneau **Paramètres** (cliquez sur ⚙ dans la barre de titre).\n2. Faites défiler jusqu'à **Coller du code**.\n3. Collez n'importe quel extrait de code dans la zone de texte.\n4. Cliquez sur **Ajouter** — le langage est détecté automatiquement.\n5. Votre code apparaît immédiatement dans la rotation des extraits.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "6f8321b4de9ad66d": {
+      "translation": "Option 2 : Importer un fichier ou un dossier.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "fc2962f979b171c2": {
+      "translation": "1. Ouvrez **Paramètres** → faites défiler jusqu'à **Importer**\n2. Cliquez sur **Importer un fichier** pour ajouter un seul fichier source, ou sur **Importer un dossier** pour analyser un projet entier.\n3. L'application détecte automatiquement la langue en fonction des extensions de fichier (`.py`, `.js`, `.cs`, `.java`, `.sql`, `.sh`).\n4. Le code importé est dédupliqué en fonction de la somme de contrôle du contenu : le même code n'est jamais ajouté deux fois.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "b3ce16703ae8b17e": {
+      "translation": "Option 3 : Créer un ensemble de snippets (JSON)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "7a2b36f974c144ba": {
+      "translation": "Pour des ensembles de snippets d'entraînement sélectionnés :",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "09c314ec7ea57e91": {
+      "translation": "1. Ouvrez le dossier de vos snippets utilisateur :\n```\n%LocalAppData%\\DevOpTyper\\UserSnippets\\\n```\n(ou cliquez sur **Ouvrir le dossier des snippets** dans les paramètres)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "c71f351fc5ba9309": {
+      "translation": "2. Créez un fichier JSON nommé d'après le langage (par exemple, `python.json`) :\n```json\n{\n\"language\": \"python\",\n\"snippets\": [\n{\n\"id\": \"my_list_comp\",\n\"title\": \"List comprehension\",\n\"difficulty\": 3,\n\"topics\": [\"lists\", \"comprehension\"],\n\"code\": \"squares = [x**2 for x in range(10)]\\n\"\n},\n{\n\"id\": \"my_dict_comp\",\n\"title\": \"Dictionary comprehension\",\n\"difficulty\": 4,\n\"topics\": [\"dicts\", \"comprehension\"],\n\"code\": \"counts = {word: len(word) for word in words}\\n\"\n}\n]\n}\n```",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "4767fdfb5d187bd5": {
+      "translation": "3. Redémarrez l'application : vos snippets apparaîtront aux côtés de ceux intégrés.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "90f8495b58a6ff54": {
+      "translation": "**Conseils :**\n- `id` doit être unique pour tous les ensembles.\n- `difficulty` varie de 1 (facile) à 7 (difficile).\n- `code` doit se terminer par `\\n`.\n- Vous pouvez organiser les ensembles dans des sous-répertoires d'un seul niveau.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "84d988bd77e16365": {
+      "translation": "Partage de contenu",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "50deb2e1b346451a": {
+      "translation": "Exportez vos snippets personnalisés sous forme de fichier `.ldtpack` portable :",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "1372116742309c59": {
+      "translation": "1. Ouvrez **Paramètres** → cliquez sur **Exporter le fichier**.\n2. Partagez le fichier `.ldtpack` avec d'autres.\n3. Ils l'importent via **Paramètres** → **Importer le fichier**.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "4662bba5b5f29beb": {
+      "translation": "Seul le contenu créé par l'utilisateur est partagé, jamais l'historique des exercices ou les paramètres.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "d67095af8f7855cb": {
+      "translation": "Confidentialité",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "83096f23e3b42d5f": {
+      "translation": "Dev-Op-Typer fonctionne entièrement hors ligne. Aucune donnée n'est collectée, transmise ou partagée. Consultez [PRIVACY.md](PRIVACY.md).",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "0174ffc9d6992c72": {
+      "translation": "Licence",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "c19c2b7dfc530297": {
+      "translation": "[MIT](LICENSE)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028141779
+    },
+    "18b8eb32ccb5a928": {
+      "translation": "देव-ऑप-टाइपर",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "2b620aec9f357c17": {
+      "translation": "विंडोज के लिए एक डेवलपर-केंद्रित टाइपिंग अभ्यास ऐप — प्रत्येक परीक्षण वास्तविक कोड पर आधारित है।",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "9e247802cdaa8284": {
+      "translation": "> लिनक्स/मैकओएस के लिए भी उपलब्ध: [linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) (एवलोनिया यूआई)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "d0bfd0df3ecd0d7f": {
+      "translation": "विशेषताएं",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "1e827fb8886f764e": {
+      "translation": "वास्तविक कोड अभ्यास",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "4f259965ad7ce0db": {
+      "translation": "- **पायथन, जावास्क्रिप्ट, सी#, जावा, एसक्यूएल और बैश** में वास्तविक कोड स्निपेट टाइप करें।\n- अक्षर-दर-अक्षर सटीकता ट्रैकिंग, जिसमें अंतर हाइलाइटिंग शामिल है।\n- सटीक प्रतीक मिलान: `{ } [ ] ( ) < > ; : , . \" ' \\`\n- नई लाइनें और इंडेंटेशन महत्वपूर्ण हैं।",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "d44b90137d0f4f0f": {
+      "translation": "अनुकूलित शिक्षण",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "2ab4b145734013ea": {
+      "translation": "- आपके कौशल स्तर के आधार पर स्मार्ट स्निपेट चयन।\n- प्रत्येक भाषा के लिए एलो-जैसे रेटिंग सिस्टम।\n- सत्र योजनाकार: लक्ष्य (50%) / समीक्षा (30%) / विस्तार (20%) का मिश्रण।\n- प्रति-अक्षर त्रुटि हीटमैप, जिसमें कमजोरियों के प्रक्षेपवक्र शामिल हैं।\n- गाइडेड मोड: कमजोरियों पर आधारित चयन, जिसमें सूक्ष्म अभ्यास शामिल हैं।\n- कठिनाई स्तर (डी1–डी7) जिसमें आराम क्षेत्र का पता लगाना शामिल है।",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "8d0d51a927385a68": {
+      "translation": "लाइव आंकड़े",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "5a81138dfced5e2e": {
+      "translation": "- वास्तविक समय में WPM (शब्द प्रति मिनट), सटीकता और त्रुटि गणना।\n- सत्र पूर्णता, जिसमें पिछली जानकारी शामिल है।\n- रुझान ट्रैकिंग: प्रति भाषा रोलिंग WPM और सटीकता।\n- थकान का पता लगाना, जिसमें ब्रेक के सुझाव शामिल हैं।\n- कमजोर बिंदुओं का पैनल, जिसमें अक्षर-स्तरीय विश्लेषण शामिल है।",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "edb1fe7b30955ea3": {
+      "translation": "शिक्षण और समुदाय",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "33177079198bff2f": {
+      "translation": "- ढाँचे: प्रगतिशील संदर्भ संकेत, जिसमें \"अधिक संदर्भ\" परतें शामिल हैं।\n- प्रदर्शन: वैकल्पिक कार्यान्वयन समान स्तर पर दिखाए जाते हैं।\n- सामुदायिक संकेत: केवल प्रदर्शन के लिए युक्तियाँ और कठिनाई रेटिंग।\n- साझा सामग्री पैकों से मार्गदर्शन नोट्स।\n- संरचनात्मक समझ के लिए कौशल परत पैनल।",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "ac4ddac4bf63333f": {
+      "translation": "सामग्री प्रणाली",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "c2c1f8f7e19f8ef0": {
+      "translation": "- 6 भाषाओं में 168+ कैलिब्रेशन स्निपेट।\n- उपयोगकर्ता स्निपेट पैक: JSON फ़ाइल को \"पैक्स\" फ़ोल्डर में डालें।\n- कोड पेस्ट करें: क्लिपबोर्ड से किसी भी कोड को अभ्यास सामग्री के रूप में पेस्ट करें।\n- फ़ाइल/फ़ोल्डर आयात करें: स्रोत फ़ाइलों को स्वचालित रूप से पता लगाए गए भाषा के साथ अनुक्रमित करें।\n- सामग्री साझा करने के लिए `.ldtpack` बंडल निर्यात/आयात करें।\n- सामग्री-आधारित आईडी (SHA-256 डुप्लिकेट)।",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "5105317b8ce7f67c": {
+      "translation": "ऑडियो",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "6cc627f2930fdca0": {
+      "translation": "- कई थीम वाले एम्बिएंट साउंडस्केप।\n- मैकेनिकल कीबोर्ड क्लिक ध्वनियाँ (5 थीम, प्रत्येक में 8 भिन्नताएं)।\n- प्रति-चैनल वॉल्यूम नियंत्रण (एम्बिएंट, कीबोर्ड, यूआई)।\n- शीर्षक बार से म्यूट/अनम्यूट।",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "9364d97dbe33b168": {
+      "translation": "पहुंच क्षमता",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "de2b009322cb1af2": {
+      "translation": "- पूर्ण कीबोर्ड नेविगेशन।\n- उच्च कंट्रास्ट थीम समर्थन।\n- गति कम करने का विकल्प।\n- सभी इंटरैक्टिव तत्वों पर ऑटोमेशन प्रॉपर्टीज।",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "a0963e6d093157e2": {
+      "translation": "स्थायित्व",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "3122d417e261d40e": {
+      "translation": "- प्रोफाइल जिसमें XP, स्तर और प्रति-भाषा रेटिंग शामिल हैं।\n- सेटिंग्स और भाषा चयन सत्रों में सहेजा जाता है।\n- सत्र इतिहास (500 रिकॉर्ड तक) जिसमें मासिक संपीड़न शामिल है।\n- अभ्यास कॉन्फ़िगरेशन: इंजन ट्यूनिंग के लिए नामित पैरामीटर सेट।",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "7670bd721a08293f": {
+      "translation": "इंस्टॉल करें",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "3b03e4364baf41cd": {
+      "translation": "Microsoft Store (अनुशंसित)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "3cc50c47306b8638": {
+      "translation": "जल्द ही उपलब्ध होगा — स्टोर प्रमाणन लंबित।",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "fd1acd7b165a2b54": {
+      "translation": "स्रोत कोड से बनाएं",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "f7fad0774f689ed3": {
+      "translation": "**आवश्यकताएं:**\n- विंडोज 10 संस्करण 1809+ या विंडोज 11\n- .NET 10.0 SDK\n- विजुअल स्टूडियो 2022 (विंडोज ऐप SDK वर्कलोड के साथ) — या CLI",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "330ec4bb3a47817a": {
+      "translation": "बिल्ड किए गए निष्पादन योग्य फ़ाइल को चलाएं:",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "d2353cadd82e82b6": {
+      "translation": "परियोजना संरचना",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "ee34f4b361bcdad8": {
+      "translation": "कीबोर्ड शॉर्टकट",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "d4f9aca2ef522ac8": {
+      "translation": "क्रिया",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "a6f6b2d3b00b064b": {
+      "translation": "--------",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "d80f0de7ed1c81f1": {
+      "translation": "टैब / शिफ्ट+टैब",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "744dc8e4feb9f2a4": {
+      "translation": "नियंत्रणों को नेविगेट करें",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "55d63a088dc855b1": {
+      "translation": "नया परीक्षण शुरू करें",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "bebebfdb0a3db44d": {
+      "translation": "एस्केप",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "20acd6329118e508": {
+      "translation": "वर्तमान परीक्षण रीसेट करें",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "e9a42a6b75d9b9be": {
+      "translation": "अपना कोड जोड़ें",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "e95f289d7d6c0951": {
+      "translation": "अपने स्वयं के कोड का अभ्यास करने के तीन तरीके हैं:",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "3988c8ec3000495d": {
+      "translation": "विकल्प 1: कोड पेस्ट करें (सबसे आसान)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "d33f125fb5da4608": {
+      "translation": "1. **सेटिंग्स** पैनल खोलें (शीर्ष बार में ⚙ पर क्लिक करें)\n2. **पेस्ट कोड** पर स्क्रॉल करें\n3. टेक्स्ट बॉक्स में कोई भी कोड स्निपेट पेस्ट करें\n4. **जोड़ें** पर क्लिक करें — भाषा स्वचालित रूप से पता चल जाएगी\n5. आपका कोड तुरंत स्निपेट रोटेशन में दिखाई देगा",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "ed9a28a2ff132086": {
+      "translation": "विकल्प 2: एक फ़ाइल या फ़ोल्डर आयात करें",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "58b1a550f0654c34": {
+      "translation": "1. **सेटिंग्स** खोलें → **इम्पोर्ट** तक स्क्रॉल करें।\n2. एक सिंगल सोर्स फ़ाइल जोड़ने के लिए **इम्पोर्ट फ़ाइल** पर क्लिक करें, या पूरे प्रोजेक्ट को स्कैन करने के लिए **इम्पोर्ट फ़ोल्डर** पर क्लिक करें।\n3. ऐप स्वचालित रूप से फ़ाइल एक्सटेंशन (`.py`, `.js`, `.cs`, `.java`, `.sql`, `.sh`) से भाषा का पता लगाता है।\n4. इम्पोर्ट किया गया कोड कंटेंट हैश के माध्यम से डुप्लिकेट किया जाता है — एक ही कोड कभी भी दो बार नहीं जोड़ा जाता है।",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "bc3c7d57bdca0a6d": {
+      "translation": "विकल्प 3: एक स्निपेट पैक (JSON) बनाएं।",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "3c6f2b8d7319b356": {
+      "translation": "अभ्यास के लिए तैयार किए गए स्निपेट के सेट के लिए:",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "3bb8c49e094052a0": {
+      "translation": "1. अपने यूजर स्निपेट फ़ोल्डर को खोलें:\n```\n%LocalAppData%\\DevOpTyper\\UserSnippets\\\n```\n(या सेटिंग्स में **स्निपेट फ़ोल्डर खोलें** पर क्लिक करें)।",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "a382c3281f8c908e": {
+      "translation": "2. भाषा के नाम से एक JSON फ़ाइल बनाएं (उदाहरण के लिए, `python.json`):\n```json\n{\n\"language\": \"python\",\n\"snippets\": [\n{\n\"id\": \"my_list_comp\",\n\"title\": \"लिस्ट कॉम्प्रिहेंशन\",\n\"difficulty\": 3,\n\"topics\": [\"लिस्ट\", \"कॉम्प्रिहेंशन\"],\n\"code\": \"squares = [x**2 for x in range(10)]\\n\"\n},\n{\n\"id\": \"my_dict_comp\",\n\"title\": \"डिक्शनरी कॉम्प्रिहेंशन\",\n\"difficulty\": 4,\n\"topics\": [\"डिक्ट\", \"कॉम्प्रिहेंशन\"],\n\"code\": \"counts = {word: len(word) for word in words}\\n\"\n}\n]\n}\n```",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "8d055079a3e9887e": {
+      "translation": "3. ऐप को पुनः आरंभ करें — आपके स्निपेट अंतर्निहित स्निपेट के साथ दिखाई देंगे।",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "3f8ff5a3ab31a74a": {
+      "translation": "**सुझाव:**\n- `id` सभी पैकों में अद्वितीय होना चाहिए।\n- `difficulty` 1 (आसान) से 7 (कठिन) तक होता है।\n- `code` `\\n` के साथ समाप्त होना चाहिए।\n- आप पैकों को एक स्तर गहरे सबडायरेक्टरी में व्यवस्थित कर सकते हैं।",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "755976643675f943": {
+      "translation": "सामग्री साझा करना",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "d2bff3a5adbb7288": {
+      "translation": "अपने कस्टम स्निपेट को एक पोर्टेबल `.ldtpack` बंडल के रूप में एक्सपोर्ट करें:",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "95b16506751c69f6": {
+      "translation": "1. **सेटिंग्स** खोलें → **बंडल एक्सपोर्ट करें** पर क्लिक करें।\n2. `.ldtpack` फ़ाइल को दूसरों के साथ साझा करें।\n3. वे इसे **सेटिंग्स** → **बंडल इम्पोर्ट करें** के माध्यम से इम्पोर्ट करते हैं।",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "06d988e2a90e7430": {
+      "translation": "केवल यूजर द्वारा बनाई गई सामग्री ही भेजी जाती है — कभी भी अभ्यास इतिहास या सेटिंग्स नहीं।",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "dcf5e52d8a8b2311": {
+      "translation": "गोपनीयता",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "ed8ebf7027af9f5d": {
+      "translation": "Dev-Op-Typer पूरी तरह से ऑफलाइन है। कोई भी डेटा एकत्र नहीं किया जाता है, प्रसारित नहीं किया जाता है, या साझा नहीं किया जाता है। [PRIVACY.md](PRIVACY.md) देखें।",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "cfbc372f8058f151": {
+      "translation": "लाइसेंस",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "69121a20c478d6f4": {
+      "translation": "[MIT](LICENSE)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028191512
+    },
+    "912fb9036cffcbe6": {
+      "translation": "Dev-Op-Typer",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "cf41f8aef11ea633": {
+      "translation": "**Un'applicazione per la pratica della digitazione focalizzata sugli sviluppatori per Windows: ogni test utilizza codice reale.**",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "25516ff21d1f68d9": {
+      "translation": "> Disponibile anche per Linux/macOS: [linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) (Avalonia UI)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "bd2eda68a403934d": {
+      "translation": "Funzionalità",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "e0b52a7af59459d6": {
+      "translation": "Pratica con codice reale",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "be7f9090c56c275b": {
+      "translation": "- Digita frammenti di codice reali in **Python, JavaScript, C#, Java, SQL e Bash**\n- Monitoraggio preciso della digitazione carattere per carattere con evidenziazione delle differenze\n- Corrispondenza esatta dei simboli: `{ } [ ] ( ) < > ; : , . \" ' \\`\n- Importanza di nuove righe e indentazione",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "76498f509e8032ca": {
+      "translation": "Apprendimento adattivo",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "478e1b45b1e79ab5": {
+      "translation": "- Selezione intelligente dei frammenti in base al tuo livello di competenza\n- Sistema di valutazione simile a Elo per ogni linguaggio\n- Pianificatore delle sessioni: mix Obiettivo (50%) / Revisione (30%) / Sfida (20%)\n- Mappa di calore degli errori per carattere con traiettorie delle debolezze\n- Modalità Guida: selezione opzionale basata sulle debolezze con esercizi mirati\n- Scala di difficoltà (D1–D7) con rilevamento della zona di comfort",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "6e59e3be1ed2b955": {
+      "translation": "Statistiche in tempo reale",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "3cb816c0c2abbfef": {
+      "translation": "- WPM (parole al minuto), precisione e numero di errori in tempo reale\n- Completamento della sessione con approfondimenti retrospettivi\n- Monitoraggio delle tendenze: WPM e precisione per linguaggio\n- Rilevamento della fatica con suggerimenti per le pause\n- Pannello delle aree deboli con analisi a livello di carattere",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "39fb0e85a267aa9d": {
+      "translation": "Insegnamento e comunità",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "7983d40b36a39c1b": {
+      "translation": "- Suggerimenti contestuali progressivi con livelli \"Più contesto\"\n- Dimostrazioni: implementazioni alternative mostrate come pari\n- Segnali della comunità: suggerimenti e valutazioni di difficoltà visualizzate\n- Note di guida dai pacchetti di contenuti condivisi\n- Pannello dei livelli di competenza per una migliore comprensione strutturale",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "60b5173c2f68cb34": {
+      "translation": "Sistema di contenuti",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "0bb28bb12efae1af": {
+      "translation": "- 168+ frammenti di calibrazione in 6 lingue\n- Pacchetti di frammenti utente: inserisci file JSON nella cartella dei pacchetti\n- Incolla codice: incolla qualsiasi codice dalla clipboard come contenuto di pratica\n- Importa file/cartella: indicizza i file sorgente con rilevamento automatico del linguaggio\n- Esporta/Importa bundle `.ldtpack` per la condivisione dei contenuti\n- ID basati sull'indirizzo dei contenuti (deduplicazione SHA-256)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "0c62ed773505c6e5": {
+      "translation": "Audio",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "11fc5cf53d2b8853": {
+      "translation": "- Paesaggi sonori ambientali con più temi\n- Suoni di tastiera meccanica (5 temi, 8 variazioni ciascuno)\n- Controlli del volume per canale (ambiente, tastiera, interfaccia utente)\n- Disattiva/attiva l'audio dalla barra del titolo",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "41165190b24f71f1": {
+      "translation": "Accessibilità",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "7d35c865d0ae22a7": {
+      "translation": "- Navigazione completa tramite tastiera\n- Supporto per temi ad alto contrasto\n- Opzione per ridurre le animazioni\n- Proprietà di accessibilità su tutti gli elementi interattivi",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "10fbf9323c0e5b30": {
+      "translation": "Persistenza",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "fc896ba6cbcb3031": {
+      "translation": "- Profilo con XP, livelli e valutazioni per linguaggio\n- Impostazioni e selezione della lingua salvate tra le sessioni\n- Cronologia delle sessioni (fino a 500 record) con compressione mensile\n- Configurazione della pratica: set di parametri denominati per la messa a punto del motore",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "ff5580523b6052cc": {
+      "translation": "Installazione",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "3c2add4f14292234": {
+      "translation": "Microsoft Store (consigliato)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "6d9ebd5eac71715e": {
+      "translation": "In arrivo: in attesa di certificazione dallo Store.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "8f77fb79d34ccba1": {
+      "translation": "Compila dal codice sorgente",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "6d20ef96e887d9e1": {
+      "translation": "**Requisiti:**\n- Windows 10 versione 1809+ o Windows 11\n- .NET 10.0 SDK\n- Visual Studio 2022 (con workload Windows App SDK) — oppure CLI",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "ada1b92eab1ff12e": {
+      "translation": "Esegui l'eseguibile compilato:",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "b114cb04f77862a6": {
+      "translation": "Struttura del progetto",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "fabc53df938cc4ae": {
+      "translation": "Scorciatoie da tastiera",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "c6c793b22a9f62b5": {
+      "translation": "Azione",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "52634ac8aa73733d": {
+      "translation": "--------",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "f7cd9a1a1ee99f97": {
+      "translation": "Tab / Shift+Tab",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "e63ffb6c8c7b4825": {
+      "translation": "Naviga tra i controlli",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "998a654ee07bcf15": {
+      "translation": "Avvia un nuovo test",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "8142e6b3481a0eff": {
+      "translation": "Escape",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "eb30df080e8f62a4": {
+      "translation": "Ripristina il test corrente",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "b27e7e62e7a5533d": {
+      "translation": "Aggiunta del tuo codice",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "18b1ce5ced8f99bf": {
+      "translation": "Ci sono tre modi per esercitarsi con il tuo codice:",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "e51d575cea63b2af": {
+      "translation": "Opzione 1: Incolla codice (il più semplice)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "1f0eafbef27b18ac": {
+      "translation": "1. Apri il pannello **Impostazioni** (clicca sull'icona ⚙ nella barra del titolo)\n2. Scorri fino a **Incolla codice**\n3. Incolla qualsiasi frammento di codice nella casella di testo\n4. Clicca su **Aggiungi** — il linguaggio viene rilevato automaticamente\n5. Il tuo codice apparirà immediatamente nella rotazione dei frammenti",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "578ac5968d8a8c02": {
+      "translation": "Opzione 2: Importa un file o una cartella",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "b7ebd627ff81a064": {
+      "translation": "1. Aprire **Impostazioni** → scorrere fino a **Importa**\n2. Cliccare su **Importa file** per aggiungere un singolo file sorgente, oppure su **Importa cartella** per analizzare un intero progetto.\n3. L'applicazione rileva automaticamente la lingua in base alle estensioni dei file (`.py`, `.js`, `.cs`, `.java`, `.sql`, `.sh`).\n4. Il codice importato viene de-duplicato tramite l'hash del contenuto: lo stesso codice non viene mai aggiunto due volte.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "303610594ab86d3d": {
+      "translation": "Opzione 3: Creare un pacchetto di snippet (JSON)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "06de7e9060fd7725": {
+      "translation": "Per set curati di snippet di esempio:",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "7c48072c837e7115": {
+      "translation": "1. Aprire la cartella degli snippet dell'utente:\n```\n%LocalAppData%\\DevOpTyper\\UserSnippets\\\n```\n(oppure cliccare su **Apri cartella degli snippet** nelle Impostazioni)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "7d25d3c8a4f5ec9d": {
+      "translation": "2. Creare un file JSON con il nome del linguaggio (ad esempio, `python.json`):\n```json\n{\n\"language\": \"python\",\n\"snippets\": [\n{\n\"id\": \"my_list_comp\",\n\"title\": \"List comprehension\",\n\"difficulty\": 3,\n\"topics\": [\"lists\", \"comprehension\"],\n\"code\": \"squares = [x**2 for x in range(10)]\\n\"\n},\n{\n\"id\": \"my_dict_comp\",\n\"title\": \"Dictionary comprehension\",\n\"difficulty\": 4,\n\"topics\": [\"dicts\", \"comprehension\"],\n\"code\": \"counts = {word: len(word) for word in words}\\n\"\n}\n]\n}\n```",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "9abb3aa8c03f1323": {
+      "translation": "3. Riavviare l'applicazione: i tuoi snippet appariranno insieme a quelli integrati.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "8e8f286072460667": {
+      "translation": "**Suggerimenti:**\n- `id` deve essere univoco in tutti i pacchetti.\n- `difficulty` varia da 1 (facile) a 7 (difficile).\n- `code` deve terminare con `\\n`.\n- È possibile organizzare i pacchetti in sottocartelle di un livello di profondità.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "03bb2af1b3106a83": {
+      "translation": "Condivisione dei contenuti",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "0b8e198a847e36c9": {
+      "translation": "Esportare i propri snippet come un pacchetto portatile `.ldtpack`:",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "465984a796b6885c": {
+      "translation": "1. Aprire **Impostazioni** → cliccare su **Esporta pacchetto**\n2. Condividere il file `.ldtpack` con altri.\n3. Loro lo importeranno tramite **Impostazioni** → **Importa pacchetto**.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "3b79adbc0c9fba01": {
+      "translation": "Solo i contenuti creati dall'utente vengono trasferiti: non vengono trasferiti la cronologia delle attività o le impostazioni.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "626ae0e23d8bd9bf": {
+      "translation": "Privacy",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "0346240a00c454a2": {
+      "translation": "Dev-Op-Typer funziona completamente offline. Nessun dato viene raccolto, trasmesso o condiviso. Consultare [PRIVACY.md](PRIVACY.md).",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "0870aa1dcfea97cc": {
+      "translation": "Licenza",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "c87c0c0fca261018": {
+      "translation": "[MIT](LICENSE)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028240391
+    },
+    "5e691e97bad0798c": {
+      "translation": "Dev-Op-Typer",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "e3a521cc0a556220": {
+      "translation": "**Um aplicativo de prática de digitação focado em desenvolvedores para Windows — cada teste é com código real.**",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "bff60e83ab50440f": {
+      "translation": "> Também disponível para Linux/macOS: [linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) (Avalonia UI)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "6fbe4c0ef1edf268": {
+      "translation": "Recursos",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "a841759b0943936f": {
+      "translation": "Prática com Código Real",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "6622bdcffe48dc19": {
+      "translation": "- Digite trechos de código reais em **Python, JavaScript, C#, Java, SQL e Bash**\n- Rastreamento da precisão caractere por caractere com destaque de diferenças\n- Correspondência exata de símbolos: `{ } [ ] ( ) < > ; : , . \" ' \\`\n- Quebras de linha e indentação são importantes",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "6393c57075d937ec": {
+      "translation": "Aprendizado Adaptativo",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "4cfa1d1152e09c3e": {
+      "translation": "- Seleção inteligente de trechos com base no seu nível de habilidade\n- Sistema de classificação tipo Elo para cada linguagem\n- Planejador de sessões: mistura de metas (50%) / revisão (30%) / desafio (20%)\n- Mapa de calor de erros por caractere com trajetórias de fraquezas\n- Modo Guiado: seleção opcional com foco em fraquezas e exercícios direcionados\n- Escalonamento de dificuldade (D1–D7) com detecção da zona de conforto",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "9cc2ff2d15cd2b58": {
+      "translation": "Estatísticas em Tempo Real",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "25d08e920bf3fab6": {
+      "translation": "- WPM (palavras por minuto), precisão e contagem de erros em tempo real\n- Conclusão da sessão com insights retrospectivos\n- Rastreamento de tendências: WPM e precisão em cada linguagem\n- Detecção de fadiga com sugestões de pausas\n- Painel de pontos fracos com análise por caractere",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "429e893cabbacdf2": {
+      "translation": "Ensino e Comunidade",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "b6c32cd0ef514213": {
+      "translation": "- Dicas: sugestões contextuais progressivas com camadas de \"Mais contexto\"\n- Demonstrações: implementações alternativas mostradas como opções equivalentes\n- Sinais da comunidade: dicas e classificações de dificuldade (apenas para exibição)\n- Notas de orientação de pacotes de conteúdo compartilhados\n- Painel de camadas de habilidades para compreensão estrutural",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "06fc41bf7cf8ba52": {
+      "translation": "Sistema de Conteúdo",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "f2d315374390634b": {
+      "translation": "- 168+ trechos de calibração em 6 linguagens\n- Pacotes de trechos do usuário: adicione arquivos JSON na pasta de pacotes\n- Colar Código: cole qualquer código da área de transferência como conteúdo de prática\n- Importar Arquivo/Pasta: indexe arquivos de origem com detecção automática da linguagem\n- Exportar/Importar pacotes `.ldtpack` para compartilhamento de conteúdo\n- IDs baseados em conteúdo (deduplicação SHA-256)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "9964de138eb08ef4": {
+      "translation": "Áudio",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "c8501d721397abfe": {
+      "translation": "- Paisagens sonoras ambientais com vários temas\n- Sons de teclado mecânico (5 temas, 8 variações cada)\n- Controles de volume por canal (ambiente, teclado, interface)\n- Mudo/Desmudo na barra de título",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "a01ed1ecb54f7567": {
+      "translation": "Acessibilidade",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "85a04fb6bc0116fb": {
+      "translation": "- Navegação completa por teclado\n- Suporte a tema de alto contraste\n- Opção de movimento reduzido\n- Propriedades de automação em todos os elementos interativos",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "f42626a74607f4fc": {
+      "translation": "Persistência",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "272fd20b05fcc40e": {
+      "translation": "- Perfil com XP, níveis e classificações por linguagem\n- Configurações e seleção de linguagem salvas em todas as sessões\n- Histórico de sessões (até 500 registros) com compressão mensal\n- Configurações de prática: conjuntos de parâmetros nomeados para ajuste do sistema",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "4898ae5813bd2bb7": {
+      "translation": "Instalação",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "c7acea773c912483": {
+      "translation": "Microsoft Store (recomendado)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "805fea65eaf7d63c": {
+      "translation": "Em breve — aguardando certificação na loja.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "d2974a7ae52252a0": {
+      "translation": "Construção a partir do código fonte",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "e8d465508cd1eec4": {
+      "translation": "**Requisitos:**\n- Windows 10 versão 1809+ ou Windows 11\n- .NET 10.0 SDK\n- Visual Studio 2022 (com workload do Windows App SDK) — ou CLI",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "86af63c14025ad6e": {
+      "translation": "Execute o executável construído:",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "0f52ed7837bd1cc9": {
+      "translation": "Estrutura do Projeto",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "753d55f329698976": {
+      "translation": "Atalhos de Teclado",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "767c2a2a1db04ae7": {
+      "translation": "Ação",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "da4f8834bba48670": {
+      "translation": "--------",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "fd860313e1369db3": {
+      "translation": "Tab / Shift+Tab",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "17d4990c83975e5c": {
+      "translation": "Navegar pelos controles",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "a6434689b8dfbbee": {
+      "translation": "Iniciar um novo teste",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "4452635079e6956f": {
+      "translation": "Escape",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "106096d736d7d1f3": {
+      "translation": "Redefinir o teste atual",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "4834b762be58b577": {
+      "translation": "Adicionando Seu Próprio Código",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "2f7da1bc1df685d7": {
+      "translation": "Existem três maneiras de praticar com seu próprio código:",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "5eea8cdf4bdabe4f": {
+      "translation": "Opção 1: Colar Código (mais fácil)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "abd7007d0ffa6d3b": {
+      "translation": "1. Abra o painel de **Configurações** (clique em ⚙ na barra de título)\n2. Role para **Colar Código**\n3. Cole qualquer trecho de código na caixa de texto\n4. Clique em **Adicionar** — a linguagem é detectada automaticamente\n5. Seu código aparecerá imediatamente na rotação de trechos",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "d3d2babdb2c5069b": {
+      "translation": "Opção 2: Importar um Arquivo ou Pasta",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "2ff5a2c00cc714cb": {
+      "translation": "1. Abra **Configurações** → role para baixo até **Importar**.\n2. Clique em **Importar Arquivo** para adicionar um único arquivo de origem, ou em **Importar Pasta** para analisar um projeto inteiro.\n3. O aplicativo detecta automaticamente a linguagem com base nas extensões dos arquivos (`.py`, `.js`, `.cs`, `.java`, `.sql`, `.sh`).\n4. O código importado é desduplicado com base no hash do conteúdo — o mesmo código nunca é adicionado duas vezes.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "881ced01604d9e27": {
+      "translation": "Opção 3: Criar um Pacote de Snippets (JSON)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "e2d28199d974a099": {
+      "translation": "Para conjuntos selecionados de exemplos de código:",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "e666d84696a120c6": {
+      "translation": "1. Abra a pasta de snippets do usuário:\n```\n%LocalAppData%\\DevOpTyper\\UserSnippets\\\n```\n(ou clique em **Abrir Pasta de Snippets** em Configurações).",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "93e8c0da27001dfd": {
+      "translation": "2. Crie um arquivo JSON com o nome da linguagem (por exemplo, `python.json`):\n```json\n{\n\"language\": \"python\",\n\"snippets\": [\n{\n\"id\": \"my_list_comp\",\n\"title\": \"List comprehension\",\n\"difficulty\": 3,\n\"topics\": [\"lists\", \"comprehension\"],\n\"code\": \"squares = [x**2 for x in range(10)]\\n\"\n},\n{\n\"id\": \"my_dict_comp\",\n\"title\": \"Dictionary comprehension\",\n\"difficulty\": 4,\n\"topics\": [\"dicts\", \"comprehension\"],\n\"code\": \"counts = {word: len(word) for word in words}\\n\"\n}\n]\n}\n```",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "14c1a8d1afe6ec05": {
+      "translation": "3. Reinicie o aplicativo — seus snippets aparecerão junto com os snippets integrados.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "8c232b33aa36f69d": {
+      "translation": "**Dicas:**\n- `id` deve ser único em todos os pacotes.\n- `difficulty` varia de 1 (fácil) a 7 (difícil).\n- `code` deve terminar com `\\n`.\n- Você pode organizar os pacotes em subdiretórios de um nível de profundidade.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "73bac8ae606dec1b": {
+      "translation": "Compartilhando Conteúdo",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "d359ab834bd445b8": {
+      "translation": "Exporte seus snippets personalizados como um pacote portátil `.ldtpack`:",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "009e45b6e22a0cd0": {
+      "translation": "1. Abra **Configurações** → clique em **Exportar Pacote**.\n2. Compartilhe o arquivo `.ldtpack` com outras pessoas.\n3. Elas podem importá-lo através de **Configurações** → **Importar Pacote**.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "63d9968f12ca0999": {
+      "translation": "Apenas o conteúdo criado pelo usuário é transferido — nunca o histórico de exercícios ou as configurações.",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "1e3e6d3b7de76f8e": {
+      "translation": "Privacidade",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "3cc9c4b78df08111": {
+      "translation": "O Dev-Op-Typer funciona totalmente offline. Nenhum dado é coletado, transmitido ou compartilhado. Consulte [PRIVACY.md](PRIVACY.md).",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "2aca9b0e72841008": {
+      "translation": "Licença",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    },
+    "8026854d56a5486a": {
+      "translation": "[MIT](LICENSE)",
+      "model": "translategemma:12b",
+      "timestamp": 1772028286922
+    }
+  }
+}

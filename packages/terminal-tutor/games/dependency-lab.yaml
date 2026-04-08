@@ -1,0 +1,257 @@
+id: dependency-lab
+title: "Dependency Lab"
+difficulty: intermediate
+estimated_minutes: 15
+mode: game
+
+goal: >
+  Stabilize a broken Python experiment by fixing imports, installing
+  missing packages, and getting the test suite green.
+
+flavor: >
+  The research team's experiment pipeline broke after a bad merge.
+  Three modules are failing, the test suite is red, and the PI
+  needs results by end of day. Fix the environment, fix the code,
+  make the tests pass.
+
+runtime:
+  type: venv
+  python: "3.12"
+  requirements: []
+  reset: per_lesson
+  cumulative: true
+  timeout: 60
+  capabilities:
+    filesystem: workspace-only
+    network: false
+    python: true
+    package_install: true
+    destructive: false
+
+game:
+  briefing: >
+    MISSION: Dependency Lab
+
+    The experiment pipeline has three modules:
+    - parser.py: reads CSV experiment data
+    - analyzer.py: computes statistics
+    - reporter.py: formats results
+
+    The test suite (test_pipeline.py) should pass with 4 green tests.
+    Right now it crashes on import. Your job:
+
+    1. Figure out what's broken
+    2. Install what's missing
+    3. Fix the code bugs
+    4. Get all tests passing
+
+  win_conditions:
+    - type: exit_code
+      description: "All tests pass"
+      code: 0
+
+  fail_conditions:
+    - type: timeout
+      value: 600
+      message: "The PI is asking for results. Time to call for backup."
+
+  scoring:
+    par_time: 240
+    hint_penalty: true
+    reset_penalty: true
+
+  replay:
+    variants: 1
+    harder_after_win: false
+
+  victory: >
+    All tests green. The pipeline is stable and the experiment data
+    is flowing again. The PI sends a relieved thumbs-up emoji.
+
+  defeat: >
+    The pipeline is still broken. The results will have to wait
+    until tomorrow.
+
+workspace:
+  scaffold:
+    - path: parser.py
+      content: |
+        """Parse CSV experiment data."""
+        import csv
+        from pathlib import Path
+
+        def parse_experiment(filepath: str) -> list[dict]:
+            """Read a CSV file and return a list of records."""
+            path = Path(filepath)
+            if not path.exists():
+                raise FileNotFoundError(f"Data file not found: {filepath}")
+            with open(path) as f:
+                reader = csv.DictReader(f)
+                return list(reader)
+
+    - path: analyzer.py
+      content: |
+        """Analyze experiment data — has a bug."""
+        from statistics import mean, stdev
+
+        def compute_stats(records: list[dict], field: str) -> dict:
+            """Compute mean and stdev for a numeric field."""
+            values = [float(r[field]) for r in records]
+            return {
+                "field": field,
+                "count": len(values),
+                "mean": round(mean(values), 2),
+                "stdev": round(stdev(values), 2) if len(values) > 1 else 0,
+                "min": min(values),
+                "max": max(values),
+            }
+
+        def find_outliers(records: list[dict], field: str, threshold: float = 2.0) -> list[dict]:
+            """Find records where field value is more than threshold stdevs from mean."""
+            values = [float(r[field]) for r in records]
+            avg = mean(values)
+            sd = stdev(values) if len(values) > 1 else 0
+            if sd == 0:
+                return []
+            # BUG: should be abs(val - avg), not val - avg
+            return [r for r in records if (float(r[field]) - avg) / sd > threshold]
+
+    - path: reporter.py
+      content: |
+        """Format experiment results — missing dependency."""
+        import yaml  # NOT INSTALLED — will crash on import
+
+        def format_report(stats: dict, outliers: list[dict]) -> str:
+            """Format stats and outliers as YAML report."""
+            report = {
+                "statistics": stats,
+                "outliers": [{"id": o.get("id", "?"), "value": float(o.get("measurement", 0))} for o in outliers],
+                "outlier_count": len(outliers),
+            }
+            return yaml.dump(report, default_flow_style=False)
+
+    - path: test_pipeline.py
+      content: |
+        """Test the experiment pipeline."""
+        import pytest
+        from parser import parse_experiment
+        from analyzer import compute_stats, find_outliers
+        from reporter import format_report
+
+        DATA_FILE = "experiment_data.csv"
+
+        def test_parse():
+            records = parse_experiment(DATA_FILE)
+            assert len(records) == 6
+            assert "measurement" in records[0]
+
+        def test_stats():
+            records = parse_experiment(DATA_FILE)
+            stats = compute_stats(records, "measurement")
+            assert stats["count"] == 6
+            assert 10 < stats["mean"] < 20
+
+        def test_outliers():
+            records = parse_experiment(DATA_FILE)
+            outliers = find_outliers(records, "measurement", threshold=1.5)
+            # Record with measurement=99.5 should be an outlier
+            assert any(float(o["measurement"]) > 50 for o in outliers)
+
+        def test_report():
+            records = parse_experiment(DATA_FILE)
+            stats = compute_stats(records, "measurement")
+            outliers = find_outliers(records, "measurement")
+            report = format_report(stats, outliers)
+            assert "statistics" in report
+            assert "outliers" in report
+
+    - path: experiment_data.csv
+      content: |
+        id,subject,measurement,condition
+        1,A,12.3,control
+        2,B,14.7,control
+        3,C,11.9,treatment
+        4,D,15.2,treatment
+        5,E,13.8,control
+        6,F,99.5,treatment
+
+    - path: requirements.txt
+      content: |
+        pytest>=8.0
+
+safety:
+  blocked_patterns:
+    - "rm -rf"
+    - "sudo"
+  workspace_only: true
+
+steps:
+  - id: run-tests-first
+    prompt: "Run the test suite. See what's broken."
+    check:
+      type: output_contains
+      expect:
+        - "ModuleNotFoundError"
+    hints:
+      - "Run pytest and read the error."
+      - "Try: pip install pytest && pytest -v"
+    on_failure:
+      - pattern: "command not found"
+        response: "Install pytest first: pip install pytest"
+
+  - id: diagnose-import
+    prompt: "The test suite crashes on import. Which module has a missing dependency?"
+    check:
+      type: output_contains
+      expect:
+        - "reporter"
+        - "yaml"
+    hints:
+      - "Read the traceback carefully. Which file fails, and what import is missing?"
+      - "Try: python -c 'import reporter'"
+
+  - id: fix-dependency
+    prompt: "Install the missing package and verify the import works."
+    check:
+      type: exit_code
+      code: 0
+    hints:
+      - "The reporter module needs PyYAML."
+      - "Try: pip install PyYAML && python -c 'import reporter; print(\"ok\")'"
+
+  - id: run-tests-again
+    prompt: "Run the tests again. How many pass now?"
+    check:
+      type: output_contains
+      expect:
+        - "passed"
+        - "failed"
+    hints:
+      - "Run: pytest -v"
+
+  - id: fix-outlier-bug
+    prompt: "The outlier test fails. Read the test and the code — find_outliers has a comparison bug."
+    check:
+      type: file_contains
+      file_path: analyzer.py
+      file_patterns:
+        - "abs("
+    hints:
+      - "The outlier detection compares (val - avg) without taking the absolute value. Negative outliers are missed."
+      - "Change: (float(r[field]) - avg) to abs(float(r[field]) - avg)"
+
+  - id: all-green
+    prompt: "Run the full test suite. All 4 tests should pass."
+    check:
+      type: output_contains
+      expect:
+        - "4 passed"
+    hints:
+      - "Run: pytest -v"
+
+reflection: >
+  You stabilized a broken Python pipeline by reading errors, installing
+  dependencies, and fixing a logic bug — the real debugging workflow.
+  The key insight: tracebacks tell you WHERE and WHAT, but understanding
+  the bug requires reading the code and thinking about WHAT SHOULD happen
+  versus WHAT DOES happen.

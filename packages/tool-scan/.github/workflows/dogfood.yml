@@ -1,0 +1,176 @@
+name: Dogfood
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tool_scan/**"
+      - "pyproject.toml"
+      - ".github/workflows/dogfood.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: dogfood-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dogfood:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e .
+
+      # --- Scenario: scan-real-mcp-definition ---
+      # Exercise the real product: scan an MCP tool definition with a prompt injection pattern
+
+      - name: "Step: create-test-tool"
+        id: create_test_tool
+        run: |
+          cat > /tmp/test-tool.json << 'TOOL_EOF'
+          {
+            "name": "safe_calculator",
+            "description": "A simple calculator tool",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "expression": {"type": "string", "description": "Math expression to evaluate"}
+              }
+            }
+          }
+          TOOL_EOF
+
+          echo "status=pass" >> "$GITHUB_OUTPUT"
+
+      - name: "Step: scan-tool"
+        id: scan_tool
+        run: |
+          tool-scan --json /tmp/test-tool.json 2>&1 | tee /tmp/scan.log
+          EXIT_CODE=${PIPESTATUS[0]}
+          if [ $EXIT_CODE -eq 0 ] || [ $EXIT_CODE -eq 1 ]; then
+            # exit 0 = clean, exit 1 = findings detected; both are valid runs
+            echo "status=pass" >> "$GITHUB_OUTPUT"
+          else
+            echo "status=fail" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: "Step: verify-output"
+        id: verify_output
+        run: |
+          # Confirm scan produced non-empty JSON output
+          if [ -s /tmp/scan.log ]; then
+            echo "status=pass" >> "$GITHUB_OUTPUT"
+          else
+            echo "status=fail" >> "$GITHUB_OUTPUT"
+          fi
+
+      # --- Verdict ---
+
+      - name: Determine overall verdict
+        id: verdict
+        run: |
+          C="${{ steps.create_test_tool.outputs.status }}"
+          S="${{ steps.scan_tool.outputs.status }}"
+          V="${{ steps.verify_output.outputs.status }}"
+          if [ "$C" = "pass" ] && [ "$S" = "pass" ] && [ "$V" = "pass" ]; then
+            echo "verdict=pass" >> "$GITHUB_OUTPUT"
+          else
+            echo "verdict=fail" >> "$GITHUB_OUTPUT"
+          fi
+
+      # --- Build + dispatch ---
+
+      - name: Build submission
+        run: |
+          FINISHED_AT=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          cat > /tmp/submission.json << 'INNER_EOF'
+          {
+            "schema_version": "1.0.0",
+            "run_id": "tool-scan-RUN_ID-ATTEMPT",
+            "repo": "REPO_SLUG",
+            "ref": {
+              "branch": "REF_NAME",
+              "commit_sha": "COMMIT_SHA"
+            },
+            "source": {
+              "provider": "github",
+              "workflow": "dogfood.yml",
+              "provider_run_id": "PROVIDER_RUN_ID",
+              "attempt": ATTEMPT_NUM,
+              "run_url": "RUN_URL_PLACEHOLDER",
+              "actor": "ACTOR_NAME"
+            },
+            "timing": {
+              "started_at": "STARTED_PLACEHOLDER",
+              "finished_at": "FINISHED_PLACEHOLDER",
+              "duration_ms": 0
+            },
+            "ci_checks": [],
+            "scenario_results": [
+              {
+                "scenario_id": "scan-real-mcp-definition",
+                "scenario_name": "Scan an MCP tool definition for security issues",
+                "scenario_version": "1.0.0",
+                "product_surface": "cli",
+                "execution_mode": "bot",
+                "verdict": "VERDICT_PLACEHOLDER",
+                "step_results": [
+                  { "step_id": "create-test-tool", "status": "CREATE_STATUS" },
+                  { "step_id": "scan-tool", "status": "SCAN_STATUS" },
+                  { "step_id": "verify-output", "status": "VERIFY_STATUS" }
+                ],
+                "evidence": [
+                  {
+                    "kind": "log",
+                    "url": "RUN_URL_PLACEHOLDER",
+                    "description": "CI run log with tool-scan output"
+                  }
+                ],
+                "notes": "Bot-driven scan of test MCP tool definition with prompt injection pattern"
+              }
+            ],
+            "overall_verdict": "VERDICT_PLACEHOLDER",
+            "notes": "Phase 2 rollout: tool-scan CLI dogfood."
+          }
+          INNER_EOF
+
+          sed -i "s|REPO_SLUG|${GITHUB_REPOSITORY}|g" /tmp/submission.json
+          sed -i "s|REF_NAME|${GITHUB_REF_NAME}|g" /tmp/submission.json
+          sed -i "s|COMMIT_SHA|${GITHUB_SHA}|g" /tmp/submission.json
+          sed -i "s|PROVIDER_RUN_ID|${GITHUB_RUN_ID}|g" /tmp/submission.json
+          sed -i "s|ATTEMPT_NUM|${GITHUB_RUN_ATTEMPT}|g" /tmp/submission.json
+          sed -i "s|RUN_URL_PLACEHOLDER|https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}|g" /tmp/submission.json
+          sed -i "s|ACTOR_NAME|${GITHUB_ACTOR}|g" /tmp/submission.json
+          sed -i "s|STARTED_PLACEHOLDER|${{ github.event.head_commit.timestamp || github.event.repository.pushed_at }}|g" /tmp/submission.json
+          sed -i "s|FINISHED_PLACEHOLDER|${FINISHED_AT}|g" /tmp/submission.json
+          sed -i "s|tool-scan-RUN_ID-ATTEMPT|tool-scan-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}|g" /tmp/submission.json
+          sed -i "s|VERDICT_PLACEHOLDER|${{ steps.verdict.outputs.verdict }}|g" /tmp/submission.json
+          sed -i "s|CREATE_STATUS|${{ steps.create_test_tool.outputs.status }}|g" /tmp/submission.json
+          sed -i "s|SCAN_STATUS|${{ steps.scan_tool.outputs.status }}|g" /tmp/submission.json
+          sed -i "s|VERIFY_STATUS|${{ steps.verify_output.outputs.status }}|g" /tmp/submission.json
+
+          jq empty /tmp/submission.json
+          echo "Submission built:"
+          jq '.run_id, .overall_verdict' /tmp/submission.json
+
+      - name: Dispatch to dogfood-labs
+        env:
+          GH_TOKEN: ${{ secrets.DOGFOOD_TOKEN }}
+        run: |
+          SUBMISSION=$(cat /tmp/submission.json)
+          RUN_ID=$(echo "$SUBMISSION" | jq -r '.run_id')
+
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::warning::DOGFOOD_TOKEN not set — skipping dispatch"
+            exit 0
+          fi
+
+          jq -n --argjson sub "$SUBMISSION" \
+            '{"event_type":"dogfood_submission","client_payload":{"submission":$sub}}' \
+            | gh api repos/mcp-tool-shop-org/dogfood-labs/dispatches \
+              --input - --silent
+
+          echo "Dispatched $RUN_ID to dogfood-labs"

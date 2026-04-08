@@ -1,0 +1,31 @@
+# See https://fly.io/docs/reference/configuration/
+app = "mcp-file-forge"
+primary_region = "iad"
+
+[build]
+
+[env]
+  PORT = "8080"
+  MCP_FILE_FORGE_ALLOWED_PATHS = "/workspace"
+  MCP_FILE_FORGE_READ_ONLY = "false"
+  NODE_ENV = "production"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[http_service.checks]]
+  grace_period = "10s"
+  interval = "30s"
+  method = "GET"
+  path = "/health"
+  timeout = "5s"
+
+[[vm]]
+  memory = "256mb"
+  cpu_kind = "shared"
+  cpus = 1

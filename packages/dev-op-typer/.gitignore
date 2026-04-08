@@ -1,0 +1,13 @@
+bin/
+obj/
+.vs/
+AppPackages/
+*.user
+*.suo
+*.cache
+*.log
+*.zip
+build_log.txt
+site/.astro/
+site/node_modules/
+site/dist/

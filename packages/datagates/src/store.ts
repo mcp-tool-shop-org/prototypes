@@ -1,0 +1,300 @@
+import Database from 'better-sqlite3';
+import type { ZonedRecord, BatchSummary, Zone, BatchMetrics } from './types.js';
+
+/**
+ * SQLite-backed zone storage.
+ * Enforces immutability of raw zone and zone promotion rules.
+ */
+export class ZoneStore {
+  private db: Database.Database;
+
+  constructor(dbPath: string = ':memory:') {
+    this.db = new Database(dbPath);
+    this.db.pragma('journal_mode = WAL');
+    this.db.pragma('foreign_keys = ON');
+    this.init();
+  }
+
+  private init(): void {
+    this.db.exec(`
+      CREATE TABLE IF NOT EXISTS records (
+        id TEXT PRIMARY KEY,
+        zone TEXT NOT NULL CHECK(zone IN ('raw','candidate','approved','quarantine')),
+        source_id TEXT NOT NULL,
+        batch_run_id TEXT NOT NULL,
+        ingest_timestamp TEXT NOT NULL,
+        raw_hash TEXT NOT NULL,
+        normalized_hash TEXT,
+        payload TEXT NOT NULL,
+        normalized_payload TEXT,
+        failures TEXT NOT NULL DEFAULT '[]',
+        confidence TEXT,
+        schema_version TEXT NOT NULL,
+        normalization_version TEXT NOT NULL,
+        gate_policy_version TEXT NOT NULL,
+        created_at TEXT NOT NULL DEFAULT (datetime('now'))
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_records_zone ON records(zone);
+      CREATE INDEX IF NOT EXISTS idx_records_batch ON records(batch_run_id);
+      CREATE INDEX IF NOT EXISTS idx_records_raw_hash ON records(raw_hash);
+      CREATE INDEX IF NOT EXISTS idx_records_normalized_hash ON records(normalized_hash);
+      CREATE INDEX IF NOT EXISTS idx_records_source ON records(source_id);
+
+      CREATE TABLE IF NOT EXISTS batch_summaries (
+        batch_run_id TEXT PRIMARY KEY,
+        timestamp TEXT NOT NULL,
+        schema_version TEXT NOT NULL,
+        normalization_version TEXT NOT NULL,
+        gate_policy_version TEXT NOT NULL,
+        rows_ingested INTEGER NOT NULL,
+        rows_passed INTEGER NOT NULL,
+        rows_quarantined INTEGER NOT NULL,
+        duplicates_detected INTEGER NOT NULL,
+        near_duplicates_detected INTEGER NOT NULL DEFAULT 0,
+        semantic_violations INTEGER NOT NULL DEFAULT 0,
+        null_rates TEXT NOT NULL,
+        avg_confidence REAL NOT NULL DEFAULT 1.0,
+        promoted INTEGER NOT NULL DEFAULT 0,
+        reject_reasons TEXT NOT NULL DEFAULT '{}',
+        verdict TEXT,
+        metrics TEXT
+      );
+
+      CREATE TABLE IF NOT EXISTS holdout_records (
+        id TEXT PRIMARY KEY,
+        normalized_hash TEXT NOT NULL,
+        payload TEXT NOT NULL
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_holdout_hash ON holdout_records(normalized_hash);
+    `);
+  }
+
+  insertRecord(record: ZonedRecord): void {
+    this.db.prepare(`
+      INSERT INTO records (
+        id, zone, source_id, batch_run_id, ingest_timestamp,
+        raw_hash, normalized_hash, payload, normalized_payload,
+        failures, confidence, schema_version, normalization_version, gate_policy_version
+      ) VALUES (
+        @id, @zone, @sourceId, @batchRunId, @ingestTimestamp,
+        @rawHash, @normalizedHash, @payload, @normalizedPayload,
+        @failures, @confidence, @schemaVersion, @normalizationVersion, @gatePolicyVersion
+      )
+    `).run({
+      id: record.id,
+      zone: record.zone,
+      sourceId: record.sourceId,
+      batchRunId: record.batchRunId,
+      ingestTimestamp: record.ingestTimestamp,
+      rawHash: record.rawHash,
+      normalizedHash: record.normalizedHash,
+      payload: JSON.stringify(record.payload),
+      normalizedPayload: record.normalizedPayload ? JSON.stringify(record.normalizedPayload) : null,
+      failures: JSON.stringify(record.failures),
+      confidence: record.confidence ? JSON.stringify(record.confidence) : null,
+      schemaVersion: record.schemaVersion,
+      normalizationVersion: record.normalizationVersion,
+      gatePolicyVersion: record.gatePolicyVersion,
+    });
+  }
+
+  insertBatch(records: ZonedRecord[]): void {
+    const insert = this.db.transaction((recs: ZonedRecord[]) => {
+      for (const r of recs) this.insertRecord(r);
+    });
+    insert(records);
+  }
+
+  saveBatchSummary(summary: BatchSummary): void {
+    this.db.prepare(`
+      INSERT OR REPLACE INTO batch_summaries (
+        batch_run_id, timestamp, schema_version, normalization_version,
+        gate_policy_version, rows_ingested, rows_passed, rows_quarantined,
+        duplicates_detected, near_duplicates_detected, semantic_violations,
+        null_rates, avg_confidence, promoted, reject_reasons,
+        verdict, metrics
+      ) VALUES (
+        @batchRunId, @timestamp, @schemaVersion, @normalizationVersion,
+        @gatePolicyVersion, @rowsIngested, @rowsPassed, @rowsQuarantined,
+        @duplicatesDetected, @nearDuplicatesDetected, @semanticViolations,
+        @nullRates, @avgConfidence, @promoted, @rejectReasons,
+        @verdict, @metrics
+      )
+    `).run({
+      batchRunId: summary.batchRunId,
+      timestamp: summary.timestamp,
+      schemaVersion: summary.schemaVersion,
+      normalizationVersion: summary.normalizationVersion,
+      gatePolicyVersion: summary.gatePolicyVersion,
+      rowsIngested: summary.rowsIngested,
+      rowsPassed: summary.rowsPassed,
+      rowsQuarantined: summary.rowsQuarantined,
+      duplicatesDetected: summary.duplicatesDetected,
+      nearDuplicatesDetected: summary.nearDuplicatesDetected,
+      semanticViolations: summary.semanticViolations,
+      nullRates: JSON.stringify(summary.nullRates),
+      avgConfidence: summary.avgConfidence,
+      promoted: summary.promoted ? 1 : 0,
+      rejectReasons: JSON.stringify(summary.rejectReasons),
+      verdict: summary.verdict ? JSON.stringify(summary.verdict) : null,
+      metrics: summary.metrics ? JSON.stringify(summary.metrics) : null,
+    });
+  }
+
+  getByZone(zone: Zone): ZonedRecord[] {
+    const rows = this.db.prepare('SELECT * FROM records WHERE zone = ?').all(zone) as any[];
+    return rows.map(deserializeRecord);
+  }
+
+  getByBatch(batchRunId: string): ZonedRecord[] {
+    const rows = this.db.prepare('SELECT * FROM records WHERE batch_run_id = ?').all(batchRunId) as any[];
+    return rows.map(deserializeRecord);
+  }
+
+  getBatchSummary(batchRunId: string): BatchSummary | null {
+    const row = this.db.prepare('SELECT * FROM batch_summaries WHERE batch_run_id = ?').get(batchRunId) as any;
+    if (!row) return null;
+    return {
+      batchRunId: row.batch_run_id,
+      timestamp: row.timestamp,
+      schemaVersion: row.schema_version,
+      normalizationVersion: row.normalization_version,
+      gatePolicyVersion: row.gate_policy_version,
+      rowsIngested: row.rows_ingested,
+      rowsPassed: row.rows_passed,
+      rowsQuarantined: row.rows_quarantined,
+      duplicatesDetected: row.duplicates_detected,
+      nearDuplicatesDetected: row.near_duplicates_detected,
+      semanticViolations: row.semantic_violations,
+      nullRates: JSON.parse(row.null_rates),
+      avgConfidence: row.avg_confidence,
+      promoted: !!row.promoted,
+      rejectReasons: JSON.parse(row.reject_reasons),
+      verdict: row.verdict ? JSON.parse(row.verdict) : null,
+      metrics: row.metrics ? JSON.parse(row.metrics) : null,
+    };
+  }
+
+  hasRawHash(rawHash: string): boolean {
+    const row = this.db.prepare('SELECT 1 FROM records WHERE raw_hash = ? LIMIT 1').get(rawHash);
+    return !!row;
+  }
+
+  hasNormalizedHash(normalizedHash: string): boolean {
+    const row = this.db.prepare('SELECT 1 FROM records WHERE normalized_hash = ? AND zone IN (\'candidate\', \'approved\') LIMIT 1').get(normalizedHash);
+    return !!row;
+  }
+
+  promoteCandidate(id: string): void {
+    const record = this.db.prepare('SELECT zone FROM records WHERE id = ?').get(id) as any;
+    if (!record) throw new Error(`Record ${id} not found`);
+    if (record.zone !== 'candidate') throw new Error(`Cannot promote from zone "${record.zone}" — only candidate records can be promoted`);
+    this.db.prepare('UPDATE records SET zone = ? WHERE id = ?').run('approved', id);
+  }
+
+  promoteBatch(batchRunId: string): number {
+    const result = this.db.prepare(
+      "UPDATE records SET zone = 'approved' WHERE batch_run_id = ? AND zone = 'candidate'"
+    ).run(batchRunId);
+    return result.changes;
+  }
+
+  // ── Holdout management ──────────────────────────────────────────────
+
+  registerHoldout(records: { id: string; normalizedHash: string; payload: Record<string, unknown> }[]): void {
+    const insert = this.db.prepare(
+      'INSERT OR IGNORE INTO holdout_records (id, normalized_hash, payload) VALUES (@id, @normalizedHash, @payload)'
+    );
+    const tx = this.db.transaction((recs: typeof records) => {
+      for (const r of recs) {
+        insert.run({ id: r.id, normalizedHash: r.normalizedHash, payload: JSON.stringify(r.payload) });
+      }
+    });
+    tx(records);
+  }
+
+  getHoldoutRecords(): { id: string; normalizedHash: string; payload: Record<string, unknown> }[] {
+    const rows = this.db.prepare('SELECT * FROM holdout_records').all() as any[];
+    return rows.map(r => ({
+      id: r.id,
+      normalizedHash: r.normalized_hash,
+      payload: JSON.parse(r.payload),
+    }));
+  }
+
+  // ── Baseline ───────────────────────────────────────────────────────
+
+  getLastPromotedMetrics(): BatchMetrics | null {
+    const row = this.db.prepare(
+      "SELECT metrics FROM batch_summaries WHERE promoted = 1 AND metrics IS NOT NULL ORDER BY timestamp DESC LIMIT 1"
+    ).get() as any;
+    if (!row?.metrics) return null;
+    return JSON.parse(row.metrics);
+  }
+
+  // ── Source-level operations ────────────────────────────────────────
+
+  quarantineBySource(batchRunId: string, sourceId: string): number {
+    const result = this.db.prepare(
+      "UPDATE records SET zone = 'quarantine' WHERE batch_run_id = ? AND source_id = ? AND zone = 'candidate'"
+    ).run(batchRunId, sourceId);
+    return result.changes;
+  }
+
+  getSourceQuarantineRates(batchRunId: string): Record<string, { total: number; quarantined: number; rate: number }> {
+    const rows = this.db.prepare(`
+      SELECT source_id,
+        COUNT(*) as total,
+        SUM(CASE WHEN zone = 'quarantine' THEN 1 ELSE 0 END) as quarantined
+      FROM records WHERE batch_run_id = ?
+      GROUP BY source_id
+    `).all(batchRunId) as any[];
+
+    const result: Record<string, { total: number; quarantined: number; rate: number }> = {};
+    for (const r of rows) {
+      result[r.source_id] = {
+        total: r.total,
+        quarantined: r.quarantined,
+        rate: r.total > 0 ? r.quarantined / r.total : 0,
+      };
+    }
+    return result;
+  }
+
+  getCandidatesForSimilarity(): { id: string; payload: Record<string, unknown> }[] {
+    const rows = this.db.prepare(
+      "SELECT id, normalized_payload FROM records WHERE zone IN ('candidate', 'approved') AND normalized_payload IS NOT NULL"
+    ).all() as any[];
+    return rows.map(r => ({ id: r.id, payload: JSON.parse(r.normalized_payload) }));
+  }
+
+  countByZone(zone: Zone): number {
+    const row = this.db.prepare('SELECT COUNT(*) as count FROM records WHERE zone = ?').get(zone) as any;
+    return row.count;
+  }
+
+  close(): void {
+    this.db.close();
+  }
+}
+
+function deserializeRecord(row: any): ZonedRecord {
+  return {
+    id: row.id,
+    zone: row.zone,
+    sourceId: row.source_id,
+    batchRunId: row.batch_run_id,
+    ingestTimestamp: row.ingest_timestamp,
+    rawHash: row.raw_hash,
+    normalizedHash: row.normalized_hash,
+    payload: JSON.parse(row.payload),
+    normalizedPayload: row.normalized_payload ? JSON.parse(row.normalized_payload) : null,
+    failures: JSON.parse(row.failures),
+    confidence: row.confidence ? JSON.parse(row.confidence) : null,
+    schemaVersion: row.schema_version,
+    normalizationVersion: row.normalization_version,
+    gatePolicyVersion: row.gate_policy_version,
+  };
+}

@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    paths:
+      - "package.json"
+      - "tsconfig.json"
+      - "src/**"
+      - "smoke.mjs"
+      - ".github/workflows/**"
+  pull_request:
+    paths:
+      - "package.json"
+      - "tsconfig.json"
+      - "src/**"
+      - "smoke.mjs"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Typecheck + Test + Registry + Smoke
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit tests (318 — 6 tools + registry)
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Registry validation + docs generation
+        run: |
+          npm run toolshop registry json
+          npm run docs:generate
+
+      - name: Smoke test (6 tools + registry, 15 tests)
+        run: npm run smoke

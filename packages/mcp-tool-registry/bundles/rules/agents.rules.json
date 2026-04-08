@@ -1,0 +1,21 @@
+{
+  "name": "agents",
+  "description": "Full agent stack: orchestration, navigation, context, and tool selection",
+  "rules": [
+    {
+      "ids": [
+        "claude-collaborate",
+        "tool-compass",
+        "file-compass",
+        "context-window-manager"
+      ]
+    },
+    {
+      "tags": ["agents"],
+      "operator": "OR"
+    }
+  ],
+  "exclude": {
+    "deprecated": true
+  }
+}

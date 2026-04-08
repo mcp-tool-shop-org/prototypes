@@ -1,0 +1,198 @@
+name: Operations
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "registry.json"
+      - "dist/**"
+      - "scripts/build-derived.mjs"
+      - "tests/site-smoke.mjs"
+      - ".github/workflows/operations.yml"
+  release:
+    types: [published]
+  issues:
+    types: [opened, edited]
+  workflow_dispatch:
+
+jobs:
+  verify:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Derived Data
+        run: npm run build:derived
+
+      - name: Smoke Test Registry Artifacts
+        run: npm run test:site
+
+  publish:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 20
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run validation
+        run: npm run validate
+
+      - name: Build derived data
+        run: npm run build:derived
+
+      - name: Build bundles
+        run: npm run bundles:build
+
+      - name: Publish to npm
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  create-submission-pr:
+    if: github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'tool-submission')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 20
+
+      - name: Parse Issue Body
+        id: parse
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            // Simple parser for the specific Issue Template structure
+            const body = context.payload.issue.body;
+
+            // Helper to extract value between headers
+            const extract = (label) => {
+              const regex = new RegExp(`### ${label}\\s+([\\s\\S]*?)(?:###|$)`);
+              const match = body.match(regex);
+              return match ? match[1].trim() : null;
+            };
+
+            const id = extract('Tool ID');
+            const name = extract('Display Name');
+            const description = extract('Description');
+            const repo = extract('Repository URL');
+            const install = extract('Installation Instructions \\(JSON\\)');
+            const tags = extract('Tags');
+            const bundle = extract('Suggested Bundle \\(Optional\\)');
+
+            if (!id || !name || !repo) {
+                core.setFailed('Missing required fields in issue body.');
+                return;
+            }
+
+            const payload = { id, name, description, repo, install, tags, bundle };
+            core.setOutput('payload', JSON.stringify(payload));
+            core.setOutput('tool_id', id);
+
+      - name: Submission Guard
+        env:
+          ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/submission-guard.mjs
+
+      - name: Create Branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "tool/${{ steps.parse.outputs.tool_id }}"
+
+      - name: Patch Registry
+        env:
+          TOOL_SUBMISSION: ${{ steps.parse.outputs.payload }}
+        run: node scripts/patch-registry.mjs
+
+      - name: Format Code (Prettier)
+        run: npm run format || true
+
+      - name: Commit Changes
+        run: |
+          git add registry.json
+          git commit -m "feat: add/update tool ${{ steps.parse.outputs.tool_id }}" || echo "No changes to commit"
+
+      - name: Push Branch
+        run: git push -f origin "tool/${{ steps.parse.outputs.tool_id }}"
+
+      - name: Create Pull Request
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            const { repo, owner } = context.repo;
+            const toolId = '${{ steps.parse.outputs.tool_id }}';
+            const head = `tool/${toolId}`;
+            const base = 'main';
+
+            // Check if PR exists
+            const existing = await github.rest.pulls.list({
+              owner, repo, head: `${owner}:${head}`, state: 'open'
+            });
+
+            let prNumber;
+
+            if (existing.data.length > 0) {
+              prNumber = existing.data[0].number;
+              console.log(`PR #${prNumber} already exists`);
+            } else {
+              const association = context.payload.issue.author_association;
+              const isNew = ['FIRST_TIMER', 'FIRST_TIME_CONTRIBUTOR', 'NONE'].includes(association);
+
+              const pr = await github.rest.pulls.create({
+                owner, repo, head, base,
+                title: `feat: add tool ${toolId}`,
+                body: `Automated PR generated from Issue #${context.issue.number}.\n\nCloses #${context.issue.number}`,
+                draft: isNew
+              });
+              prNumber = pr.data.number;
+
+              const labels = ['auto-generated', 'needs-review'];
+              if (isNew) labels.push('needs-triage');
+
+              await github.rest.issues.addLabels({
+                owner, repo,
+                issue_number: prNumber,
+                labels
+              });
+            }
+
+            // Comment on Issue
+            await github.rest.issues.createComment({
+              owner, repo, issue_number: context.issue.number,
+              body: `🚀 Automated PR created/updated: #${prNumber}\n\nThe system is now running validation checks on your submission.`
+            });

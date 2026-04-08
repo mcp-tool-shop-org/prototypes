@@ -1,0 +1,134 @@
+id: process-basics
+title: "Process Basics"
+difficulty: intermediate
+estimated_minutes: 10
+goal: >
+  Understand running processes, background jobs, and signals. Find what
+  is using a port, run commands in the background, and stop runaway processes.
+flavor: >
+  Something is eating CPU. A server crashed overnight and left nothing
+  but a log file. You need to figure out what's running, what died,
+  and why — all from the terminal.
+
+workspace:
+  scaffold:
+    - path: slow-server.sh
+      content: |
+        #!/bin/sh
+        echo "Starting slow server on port 9999..."
+        while true; do
+          echo "$(date): heartbeat" >> /tmp/server.log
+          sleep 2
+        done
+
+    - path: worker.sh
+      content: |
+        #!/bin/sh
+        echo "Worker started: PID $$"
+        for i in 1 2 3 4 5; do
+          echo "Processing batch $i..."
+          sleep 1
+        done
+        echo "Worker done."
+
+    - path: cpu-hog.sh
+      content: |
+        #!/bin/sh
+        echo "CPU hog started: PID $$"
+        while true; do
+          : # busy loop
+        done
+
+    - path: app.log
+      content: |
+        2026-03-29 10:00:01 [INFO] Server starting...
+        2026-03-29 10:00:02 [INFO] Listening on port 8080
+        2026-03-29 10:00:15 [WARN] Slow query: 2340ms
+        2026-03-29 10:01:02 [ERROR] Connection refused: database
+        2026-03-29 10:01:03 [ERROR] Connection refused: database
+        2026-03-29 10:01:30 [INFO] Database reconnected
+        2026-03-29 10:02:00 [INFO] Health check: ok
+        2026-03-29 10:05:12 [ERROR] Out of memory: heap
+        2026-03-29 10:05:12 [FATAL] Server crashed
+
+safety:
+  blocked_patterns:
+    - "rm -rf"
+    - "sudo"
+    - "kill -9 1"
+    - "killall"
+  workspace_only: true
+
+steps:
+  - id: list-processes
+    prompt: "List all running processes on this system. Find the ones using the most CPU."
+    check:
+      type: output_contains
+      expect:
+        - "PID"
+    hints:
+      - "ps shows running processes. There are flags for showing all processes with details."
+      - "Try: ps aux | head -20"
+
+  - id: run-background
+    prompt: "Run worker.sh in the background so it processes while you keep working."
+    check:
+      type: output_contains
+      expect:
+        - "Worker started"
+    hints:
+      - "The & operator runs a command in the background."
+      - "Try: sh worker.sh &"
+
+  - id: check-jobs
+    prompt: "Check what background jobs are running."
+    check:
+      type: output_contains
+      expect:
+        - "sh"
+    hints:
+      - "The jobs command shows background jobs in the current shell."
+      - "Try: jobs -l"
+    on_failure:
+      - pattern: "no current job"
+        response: "The worker may have already finished. That's fine — try running it again with sh worker.sh &"
+
+  - id: find-errors
+    prompt: "Find all ERROR and FATAL entries in app.log."
+    check:
+      type: output_contains
+      expect:
+        - "ERROR"
+        - "FATAL"
+    hints:
+      - "grep can match multiple patterns with the -E flag."
+      - "Try: grep -E '(ERROR|FATAL)' app.log"
+
+  - id: find-crash-cause
+    prompt: "What caused the server to crash? Look at the log entries right before the FATAL line."
+    check:
+      type: output_contains
+      expect:
+        - "Out of memory"
+        - "heap"
+    hints:
+      - "You can use grep with context lines to see what happened before a match."
+      - "Try: grep -B2 'FATAL' app.log"
+
+  - id: count-errors
+    prompt: "Count how many ERROR entries are in the log (not FATAL, just ERROR)."
+    check:
+      type: output_contains
+      expect:
+        - "3"
+    hints:
+      - "grep -c counts matching lines instead of showing them."
+      - "Try: grep -c 'ERROR' app.log"
+
+reflection: >
+  You just used the core process and log investigation toolkit: ps for process
+  state, background jobs with &, grep with context for log analysis. When a
+  server crashes, this is the exact sequence: check what was running, look at
+  the logs around the failure time, and identify the root cause. The -B flag
+  on grep (show lines before a match) is one of the most useful debugging
+  tools in the terminal.

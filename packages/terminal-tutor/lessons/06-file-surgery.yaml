@@ -1,0 +1,149 @@
+id: file-surgery
+title: "File Surgery"
+difficulty: intermediate
+estimated_minutes: 10
+goal: >
+  Edit files from the command line without opening an editor. Use sed for
+  targeted replacements, awk for field extraction, and diff to verify changes.
+flavor: >
+  Deployment is in 20 minutes. Three config files need changes, you need
+  a quick data pull from a CSV, and the deploy script has the wrong
+  environment. No time for an IDE — just your terminal and sed.
+
+workspace:
+  scaffold:
+    - path: config.ini
+      content: |
+        [server]
+        host = localhost
+        port = 3000
+        debug = true
+        log_level = verbose
+
+        [database]
+        host = localhost
+        port = 5432
+        name = myapp_dev
+        pool_size = 5
+
+    - path: users.csv
+      content: |
+        id,name,email,role
+        1,Alice Chen,alice@example.com,admin
+        2,Bob Martinez,bob@example.com,user
+        3,Charlie Kim,charlie@example.com,user
+        4,Diana Okafor,diana@example.com,admin
+        5,Eve Thompson,eve@example.com,user
+
+    - path: deploy.sh
+      content: |
+        #!/bin/bash
+        echo "Deploying to staging..."
+        export ENV=staging
+        export PORT=3000
+        export DEBUG=true
+        npm run build
+        npm start
+
+    - path: config.production.ini
+      content: |
+        [server]
+        host = 0.0.0.0
+        port = 8080
+        debug = false
+        log_level = error
+
+        [database]
+        host = db.production.internal
+        port = 5432
+        name = myapp_prod
+        pool_size = 20
+
+safety:
+  blocked_patterns:
+    - "rm -rf"
+    - "sudo"
+  workspace_only: true
+
+steps:
+  - id: extract-admins
+    prompt: "Extract just the names of users with the 'admin' role from users.csv."
+    check:
+      type: output_contains
+      expect:
+        - "Alice"
+        - "Diana"
+    hints:
+      - "You need to filter rows by the last field, then extract a specific column."
+      - "awk can filter rows and select fields. Fields in CSV are separated by commas."
+      - "Try: awk -F, '$4==\"admin\" {print $2}' users.csv"
+    on_failure:
+      - pattern: "command not found"
+        response: "awk is a text processing tool. It should be available on your system."
+
+  - id: change-port
+    prompt: "Change the port from 3000 to 8080 in config.ini using sed."
+    check:
+      type: file_contains
+      file_path: config.ini
+      file_patterns:
+        - "port = 8080"
+    hints:
+      - "sed can do find-and-replace on files. You need the in-place flag."
+      - "The pattern is: sed -i 's/old/new/' filename"
+      - "Try: sed -i 's/port = 3000/port = 8080/' config.ini"
+    on_failure:
+      - pattern: "invalid command"
+        response: "On macOS, sed -i requires an empty string argument: sed -i '' 's/...'"
+
+  - id: disable-debug
+    prompt: "Turn off debug mode in config.ini — change 'debug = true' to 'debug = false'."
+    check:
+      type: file_contains
+      file_path: config.ini
+      file_patterns:
+        - "debug = false"
+    hints:
+      - "Another sed replacement, same pattern as the port change."
+      - "Try: sed -i 's/debug = true/debug = false/' config.ini"
+
+  - id: compare-configs
+    prompt: "Compare config.ini to config.production.ini. What are the differences?"
+    check:
+      type: output_contains
+      expect:
+        - "host"
+        - "log_level"
+    hints:
+      - "diff compares two files and shows the differences."
+      - "Try: diff config.ini config.production.ini"
+
+  - id: count-users-by-role
+    prompt: "Count how many users have each role."
+    check:
+      type: output_contains
+      expect:
+        - "admin"
+        - "user"
+    hints:
+      - "You can extract the role column with awk, then count with sort and uniq."
+      - "Try: awk -F, 'NR>1 {print $4}' users.csv | sort | uniq -c"
+
+  - id: update-deploy
+    prompt: "In deploy.sh, change ENV=staging to ENV=production and DEBUG=true to DEBUG=false."
+    check:
+      type: file_contains
+      file_path: deploy.sh
+      file_patterns:
+        - "ENV=production"
+        - "DEBUG=false"
+    hints:
+      - "You can chain multiple sed replacements with -e flags or semicolons."
+      - "Try: sed -i 's/ENV=staging/ENV=production/;s/DEBUG=true/DEBUG=false/' deploy.sh"
+
+reflection: >
+  You just performed file surgery: extracting data with awk, making targeted
+  edits with sed, and verifying changes with diff. This is how experienced
+  developers make quick, repeatable edits across config files and data sets
+  without opening an editor. The key insight is that sed and awk treat files
+  as streams of text — every edit is a transformation you can script and repeat.

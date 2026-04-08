@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "codeteam.cli.version.schema.v0.1.json",
+  "title": "CodeTeam CLI Version Output",
+  "description": "JSON output from 'codeteam version --json'",
+  "type": "object",
+  "required": ["cli_version", "schema_version"],
+  "additionalProperties": false,
+  "properties": {
+    "cli_version": {
+      "type": "string",
+      "description": "CLI version (semver format)",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "examples": ["0.1.0", "1.0.0"]
+    },
+    "schema_version": {
+      "type": "string",
+      "description": "Supported manifest/verification schema version",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "examples": ["0.1"]
+    }
+  }
+}

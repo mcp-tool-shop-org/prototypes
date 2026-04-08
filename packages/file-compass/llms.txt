@@ -1,0 +1,100 @@
+# File Compass
+
+> Semantic file search for AI workstations using HNSW vector indexing
+
+## Overview
+
+File Compass lets you find files by describing what you're looking for instead of remembering exact filenames. It uses local embeddings (Ollama) and HNSW indexing for sub-100ms search across 10K+ files.
+
+## Quick Start
+
+```bash
+pip install file-compass
+ollama pull nomic-embed-text
+
+file-compass index -d "C:/Projects"
+file-compass search "database connection handling"
+```
+
+## MCP Server
+
+Add to `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "file-compass": {
+      "command": "python",
+      "args": ["-m", "file_compass.gateway"]
+    }
+  }
+}
+```
+
+## Core Tools
+
+### file_search(query, top_k=10, types=None)
+Semantic search with explanations.
+- `query`: Natural language description of what you're looking for
+- `top_k`: Maximum results (default 10)
+- `types`: Filter by file type (e.g., "python", "javascript")
+- Returns: Ranked files with relevance scores and explanations
+
+### file_preview(path, lines=50)
+Code preview with syntax highlighting.
+- `path`: File path to preview
+- `lines`: Number of lines to show
+- Returns: Syntax-highlighted code snippet
+
+### file_quick_search(query)
+Fast filename/symbol search (no embedding required).
+- `query`: Filename or symbol pattern
+- Returns: Matching files instantly (<10ms)
+
+### file_quick_index_build(directory)
+Build the quick search index for a directory.
+
+### file_actions(path, action)
+File context operations.
+- `action`: One of "context", "usages", "related", "history", "symbols"
+- Returns: Action-specific file information
+
+### file_index_status()
+Check index statistics and health.
+
+### file_index_scan(directories)
+Build or rebuild the full semantic index.
+
+## Key Features
+
+- HNSW indexing for O(log n) search
+- Multi-language AST chunking (Python, JS, TS, Rust, Go via tree-sitter)
+- Local embeddings via Ollama (nomic-embed-text, 768 dimensions)
+- Result explanations showing why each file matched
+- Git-aware filtering (optional)
+- Path traversal protection
+
+## Configuration
+
+Environment variables:
+- `FILE_COMPASS_DIRECTORIES`: Comma-separated directories to index
+- `FILE_COMPASS_OLLAMA_URL`: Ollama server URL (default: http://localhost:11434)
+- `FILE_COMPASS_EMBEDDING_MODEL`: Embedding model (default: nomic-embed-text)
+
+## Performance
+
+| Metric | Value |
+|--------|-------|
+| Search Latency | <100ms for 10K+ chunks |
+| Quick Search | <10ms for filename/symbol |
+| Embedding Speed | ~3-4s per chunk (local) |
+
+## Links
+
+- Repository: https://github.com/mcp-tool-shop/file-compass
+- Documentation: https://github.com/mcp-tool-shop/file-compass#readme
+- Issues: https://github.com/mcp-tool-shop/file-compass/issues
+
+## License
+
+MIT License

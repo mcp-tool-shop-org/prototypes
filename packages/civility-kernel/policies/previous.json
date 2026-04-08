@@ -1,0 +1,24 @@
+{
+  "version": "1.0",
+  "weights": {
+    "efficiency": 1,
+    "low_risk": 0.5
+  },
+  "constraints": [
+    "no_irreversible_changes",
+    {
+      "id": "max_spend_without_confirm",
+      "params": {
+        "amount": 200
+      }
+    }
+  ],
+  "contextRules": [],
+  "uncertaintyThreshold": 0.5,
+  "memory": {},
+  "calibration": {
+    "riskTolerance": 0.5,
+    "verbosity": 0.5,
+    "initiative": 0.5
+  }
+}

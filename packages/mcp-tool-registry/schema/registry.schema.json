@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MCP Tool Registry",
+  "type": "object",
+  "required": ["schema_version", "tools"],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "organization": {
+      "type": "string"
+    },
+    "archived": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "note": { "type": "string" },
+          "repo": { "type": "string", "format": "uri" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "ecosystems": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "docs": { "type": "string", "format": "uri" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "description", "repo", "install", "tags"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([-.][a-zA-Z0-9]+)*$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "repo": {
+            "type": "string",
+            "format": "uri"
+          },
+          "install": {
+            "type": "object",
+            "required": ["type", "url", "default_ref"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["git"]
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "default_ref": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "verification": {
+            "type": "string",
+            "enum": ["none", "community", "official"],
+            "description": "Validation level (default: none)"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "defaults": {
+            "type": "object",
+            "properties": {
+              "safe_run": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": true
+          },
+          "ecosystem": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "deprecated": {
+            "type": "boolean"
+          },
+          "deprecated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sunset_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deprecation_reason": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,17 @@
+# Feature-Reacher robots.txt
+# Allow search engines to index public pages
+
+User-agent: *
+Allow: /
+Allow: /landing
+Allow: /demo
+Allow: /methodology
+
+# Disallow user-specific routes
+Disallow: /history
+Disallow: /audit/
+Disallow: /compare
+Disallow: /trends
+
+# Sitemap (optional, uncomment when deployed)
+# Sitemap: https://feature-reacher.example/sitemap.xml

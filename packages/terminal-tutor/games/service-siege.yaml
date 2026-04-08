@@ -1,0 +1,303 @@
+id: service-siege
+title: "Service Siege"
+difficulty: advanced
+estimated_minutes: 15
+mode: game
+
+goal: >
+  Diagnose and restore a degrading service stack before total outage.
+  Three services, one root cause, scattered clues.
+
+flavor: >
+  The monitoring dashboard just went from green to orange to red.
+  Users are reporting timeouts. Your on-call phone is buzzing.
+  You've got a container with the service stack. Find out what
+  broke, fix it, and restore service before the page escalates.
+
+runtime:
+  type: docker
+  image: python:3.12-slim
+  requirements:
+    - flask==3.1.0
+  reset: per_lesson
+  cumulative: true
+  network: false
+  writable_paths:
+    - /workspace
+    - /tmp
+  timeout: 30
+  capabilities:
+    filesystem: full
+    network: false
+    python: true
+    processes: full
+    package_install: true
+    destructive: false
+
+game:
+  briefing: >
+    MISSION: Service Siege
+
+    Three services run behind a gateway:
+    - API Gateway (port 8080) — routes traffic
+    - User Service (port 8081) — user data
+    - Cache Layer — in-memory cache
+
+    The stack is degrading. Symptoms:
+    - User API returns errors intermittently
+    - Gateway health checks are timing out
+    - Cache hit rate dropped to zero
+
+    Find the root cause, fix it, and verify all services respond.
+    Write your findings to INCIDENT_REPORT.txt.
+
+  win_conditions:
+    - type: file_exists
+      description: "Incident report filed"
+      files:
+        - INCIDENT_REPORT.txt
+    - type: file_contains
+      description: "Root cause identified"
+      file_path: INCIDENT_REPORT.txt
+      file_patterns:
+        - "cache"
+    - type: file_contains
+      description: "Fix documented"
+      file_path: INCIDENT_REPORT.txt
+      file_patterns:
+        - "config"
+
+  fail_conditions:
+    - type: timeout
+      value: 900
+      message: "The incident escalated to management. Post-mortem time."
+
+  scoring:
+    par_time: 360
+    hint_penalty: true
+    reset_penalty: false
+
+  replay:
+    variants: 1
+    harder_after_win: false
+
+  victory: >
+    Services restored. Incident report filed. The dashboard is green
+    again and your team learns from the post-mortem. Well handled.
+
+  defeat: >
+    The outage continued. Users started tweeting. Time for the
+    post-mortem of a different kind.
+
+workspace:
+  scaffold:
+    - path: services/gateway/app.py
+      content: |
+        """API Gateway — routes requests to backend services."""
+        import os
+        import json
+        from flask import Flask, jsonify
+
+        app = Flask(__name__)
+        SERVICES = json.loads(os.environ.get("SERVICES", "{}"))
+
+        @app.route("/health")
+        def health():
+            return jsonify({"status": "ok", "service": "gateway"})
+
+        @app.route("/api/users")
+        def proxy_users():
+            user_host = SERVICES.get("user-service", "localhost:8081")
+            return jsonify({"proxy": f"http://{user_host}/users", "status": "routed"})
+
+        if __name__ == "__main__":
+            app.run(host="0.0.0.0", port=8080)
+
+    - path: services/user-service/app.py
+      content: |
+        """User Service — returns user data with caching."""
+        import os
+        import json
+        from flask import Flask, jsonify
+
+        app = Flask(__name__)
+
+        CACHE_HOST = os.environ.get("CACHE_HOST", "localhost")
+        CACHE_PORT = os.environ.get("CACHE_PORT", "6379")
+
+        USERS = [
+            {"id": 1, "name": "Alice", "role": "admin"},
+            {"id": 2, "name": "Bob", "role": "user"},
+            {"id": 3, "name": "Charlie", "role": "user"},
+        ]
+
+        @app.route("/health")
+        def health():
+            return jsonify({"status": "ok", "service": "user-service"})
+
+        @app.route("/users")
+        def get_users():
+            return jsonify(USERS)
+
+        if __name__ == "__main__":
+            app.run(host="0.0.0.0", port=8081)
+
+    - path: services/cache/README.md
+      content: |
+        # Cache Layer
+        In-memory cache service. Configuration in config.json.
+        When config.json is missing or malformed, the cache
+        fails to start and all dependent services degrade.
+
+    - path: services/cache/config.json.bak
+      content: |
+        {
+          "host": "0.0.0.0",
+          "port": 6379,
+          "max_memory": "256mb",
+          "eviction_policy": "lru"
+        }
+
+    - path: services/cache/config.json
+      content: |
+        {
+          "host": "0.0.0.0",
+          "port": 6379,
+          "max_memory": "256mb"
+          "eviction_policy": "lru"
+        }
+
+    - path: config/services.env
+      content: |
+        GATEWAY_PORT=8080
+        USER_SERVICE_PORT=8081
+        CACHE_HOST=localhost
+        CACHE_PORT=6379
+        SERVICES={"user-service":"localhost:8081","cache":"localhost:6379"}
+
+    - path: logs/gateway.log
+      content: |
+        2026-03-29 14:00:01 [INFO] Gateway started on port 8080
+        2026-03-29 14:00:15 [INFO] Health check: ok
+        2026-03-29 14:01:02 [WARN] Upstream timeout: cache (localhost:6379)
+        2026-03-29 14:01:03 [WARN] Upstream timeout: cache (localhost:6379)
+        2026-03-29 14:01:30 [ERROR] Cache connection failed: refused
+        2026-03-29 14:02:00 [WARN] Falling back to no-cache mode
+        2026-03-29 14:02:30 [ERROR] User service response slow: 5200ms
+        2026-03-29 14:03:00 [ERROR] User service response slow: 8100ms
+
+    - path: logs/user-service.log
+      content: |
+        2026-03-29 14:00:02 [INFO] User service started on port 8081
+        2026-03-29 14:00:15 [INFO] Health check: ok
+        2026-03-29 14:01:05 [WARN] Cache miss — falling back to database
+        2026-03-29 14:01:06 [WARN] Cache connection refused (localhost:6379)
+        2026-03-29 14:02:30 [ERROR] Slow response: database query took 5100ms
+        2026-03-29 14:03:00 [ERROR] Slow response: database query took 8000ms
+
+    - path: logs/cache.log
+      content: |
+        2026-03-29 14:00:00 [INFO] Cache starting...
+        2026-03-29 14:00:00 [ERROR] Failed to parse config.json: Expecting ',' delimiter: line 4 column 3
+        2026-03-29 14:00:00 [FATAL] Cache failed to start. Exiting.
+
+    - path: runbook.md
+      content: |
+        # Service Stack Runbook
+
+        ## Architecture
+        Gateway (8080) → User Service (8081) → Cache (6379)
+
+        ## Common Issues
+        - If cache is down, user service falls back to direct DB queries (slow)
+        - Gateway will timeout if user service is slow
+        - Check cache config.json if cache won't start
+
+        ## Recovery Steps
+        1. Check logs in /logs/ for each service
+        2. Identify the root cause (usually one service causes cascading failures)
+        3. Fix the issue
+        4. Verify all health endpoints respond
+
+safety:
+  blocked_patterns:
+    - "rm -rf /"
+    - "apt install"
+  workspace_only: false
+
+steps:
+  - id: check-symptoms
+    prompt: "Check the gateway logs first. What symptoms do you see?"
+    check:
+      type: output_contains
+      expect:
+        - "cache"
+        - "timeout"
+    hints:
+      - "Read the gateway log file."
+      - "Try: cat logs/gateway.log"
+
+  - id: follow-trail
+    prompt: "The gateway points to cache problems. Check the cache logs for the actual error."
+    check:
+      type: output_contains
+      expect:
+        - "Failed to parse"
+        - "config.json"
+    hints:
+      - "Read the cache service log."
+      - "Try: cat logs/cache.log"
+
+  - id: find-config-bug
+    prompt: "The cache can't parse its config. Find the syntax error in the config file."
+    check:
+      type: output_contains
+      expect:
+        - "config.json"
+    hints:
+      - "Look at the cache config file. JSON syntax errors are usually missing commas or brackets."
+      - "Try: cat services/cache/config.json"
+      - "Compare with the backup: diff services/cache/config.json services/cache/config.json.bak"
+
+  - id: fix-config
+    prompt: "Fix the JSON syntax error in the cache config. There's a backup file you can reference."
+    check:
+      type: file_contains
+      file_path: services/cache/config.json
+      file_patterns:
+        - "\"eviction_policy\""
+        - "\"max_memory\": \"256mb\","
+    hints:
+      - "The backup file has the correct JSON. You can copy it or fix the syntax manually."
+      - "Try: cp services/cache/config.json.bak services/cache/config.json"
+
+  - id: verify-cascade
+    prompt: "Trace the cascade: cache failure → user service degradation → gateway errors. Check all three log files."
+    check:
+      type: output_contains
+      expect:
+        - "Cache connection"
+        - "Slow response"
+    hints:
+      - "Read each log file and note how the failure propagated."
+      - "Try: grep -h 'ERROR\\|FATAL' logs/*.log"
+
+  - id: write-report
+    prompt: "Write an incident report. Include: root cause, affected services, and the fix."
+    check:
+      type: file_contains
+      file_path: INCIDENT_REPORT.txt
+      file_patterns:
+        - "cache"
+        - "config"
+    hints:
+      - "Create INCIDENT_REPORT.txt with your findings."
+      - "Include what broke (cache config JSON syntax), what it caused (cascade), and the fix."
+
+reflection: >
+  You just triaged a cascading service failure. The pattern is universal:
+  one small failure (a missing comma in a config file) caused a cache
+  outage, which caused slow database queries, which caused gateway
+  timeouts. In production, this cascade happens fast. The skill is
+  tracing backwards from symptoms to root cause, not forwards from
+  the first error.

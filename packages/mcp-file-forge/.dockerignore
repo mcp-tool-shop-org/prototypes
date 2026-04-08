@@ -1,0 +1,11 @@
+node_modules
+build
+.git
+.gitignore
+*.md
+docs/
+logo.png
+.env
+.env.*
+*.test.ts
+vitest.config.*

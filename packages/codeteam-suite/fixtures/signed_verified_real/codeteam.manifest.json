@@ -1,0 +1,34 @@
+{
+  "schema_version": "0.1",
+  "package_version": "1.0.0",
+  "created_at": "2025-01-30T12:00:00Z",
+  "intent": "release",
+  "workspace": {
+    "name": "signed-verified-real"
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/hello.txt",
+      "sha256": "sha256:0ed3c7013c454edad2ad38766b7b381d39aa8e4d89a79a71fd69d3031cea0b67",
+      "size_bytes": 18
+    }
+  ],
+  "evidence": [],
+  "policy": {
+    "required_approvals": 1,
+    "approver_keys": [
+      {
+        "id": "217b3c88cd316548",
+        "algorithm": "ed25519",
+        "public_key": "JUYkSXXpsWAB12mkB1o/u1s4WCqSA7NmzxThgozupeQ=",
+        "name": "Test Approver"
+      },
+      {
+        "id": "5ce7f1664c271688",
+        "algorithm": "ed25519",
+        "public_key": "NmZwa8SYNzObgeI/bvmI9dYLOOx3AOzGGe1Wvmc1KAA=",
+        "name": "Test Signer"
+      }
+    ]
+  }
+}

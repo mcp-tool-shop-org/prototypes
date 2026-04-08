@@ -1,0 +1,59 @@
+{
+  "name": "@mcptoolshop/toolshopstudio",
+  "version": "1.7.0",
+  "description": "Six MCP tools + live Registry (FFmpeg, Pandoc, FreeCAD, GDAL, OpenSCAD, Blender) — schema-first, sandboxed, observable",
+  "logo": "assets/logo.png",
+  "homepage": "https://github.com/mcp-tool-shop-org/ToolShopStudio#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcp-tool-shop-org/ToolShopStudio.git"
+  },
+  "keywords": [
+    "mcp",
+    "ffmpeg",
+    "pandoc",
+    "freecad",
+    "gdal",
+    "openscad",
+    "blender",
+    "transcoding",
+    "document-conversion",
+    "3d-modeling",
+    "geospatial",
+    "cad"
+  ],
+  "files": [
+    "dist/**",
+    "bin/**",
+    "assets/logo.png",
+    "README.md",
+    "LICENSE"
+  ],
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "docker:build": "docker build -t mcp-tool-shop-org/toolshopstudio:1.7.0-toolshop .",
+    "release": "node scripts/release.mjs",
+    "smoke": "node smoke.mjs",
+    "toolshop": "node bin/toolshop.mjs",
+    "docs:generate": "node -e \"import('./dist/registry/auto-docs.js').then(m => { const files = m.generateAllToolDocs(); console.log('Generated', files.length, 'docs:', files.join(', ')); })\""
+  },
+  "bin": {
+    "toolshop": "bin/toolshop.mjs"
+  },
+  "author": "mcp-tool-shop",
+  "license": "MIT",
+  "dependencies": {
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}

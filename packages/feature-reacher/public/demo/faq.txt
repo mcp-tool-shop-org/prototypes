@@ -1,0 +1,55 @@
+Acme Analytics - Frequently Asked Questions
+
+Q: How do I install the tracking code?
+A: Copy the tracking snippet from Settings > Install and paste it before the closing </head> tag on every page you want to track.
+
+Q: Can I track multiple websites?
+A: Yes! With Multi-property Support, you can manage unlimited websites from one account. Each property gets its own tracking ID.
+
+Q: How often does data update?
+A: Standard reports update every hour. Real-time Dashboard updates every 5 seconds for live visitor data.
+
+Q: Can I export my data?
+A: Yes, you can export to CSV, Excel, or PDF. For programmatic access, use our API with JSON responses.
+
+Q: What is Funnel Analysis?
+A: Funnel Analysis lets you track how users move through a series of steps (like signup > onboarding > first action) and identify where they drop off.
+
+Q: How do Scheduled Reports work?
+A: Set up automated reports that deliver to your inbox on a daily, weekly, or monthly basis. Configure which metrics, date ranges, and recipients in Reports > Scheduled.
+
+Q: What are Custom Alerts?
+A: Alerts notify you when metrics cross thresholds you define. For example, get notified when bounce rate exceeds 50% or when daily signups drop below average.
+
+Q: Can I share dashboards with my team?
+A: Yes! Use Team Workspaces to invite members with role-based access. You can also create Public Dashboards that anyone with the link can view (read-only).
+
+Q: What is Session Replay?
+A: Session Replay records user sessions so you can watch exactly how visitors interact with your site. Note: sensitive fields are automatically masked.
+
+Q: How do Heatmaps work?
+A: Heatmaps visualize aggregate click and scroll data, showing you which areas of your pages get the most engagement.
+
+Q: What integrations are available?
+A: We support Webhook Integrations for pushing data to external systems, plus native integrations with popular A/B Testing platforms.
+
+Q: How long is data retained?
+A: Default retention is 24 months. Enterprise plans include Data Retention Policies to customize this based on your compliance needs.
+
+Q: Is there an API?
+A: Yes, our REST API provides programmatic access to all your data. Check the API Rate Limiting Dashboard to monitor your usage.
+
+Q: Do you support SSO?
+A: Yes, Enterprise plans include SAML 2.0 SSO integration.
+
+Q: What is Cohort Analysis?
+A: Cohort Analysis groups users by a shared characteristic (like signup week) and tracks their behavior over time to identify trends.
+
+Q: Can I annotate my charts?
+A: Yes! Use Annotations to mark important events (like product launches or marketing campaigns) directly on your charts for context.
+
+Q: What are Custom Dimensions?
+A: Custom Dimensions let you define your own tracking attributes beyond the standard ones, like user plan type or feature flags.
+
+Q: How do Advanced Segments work?
+A: Create complex user segments using AND/OR logic to filter your data by any combination of properties and behaviors.

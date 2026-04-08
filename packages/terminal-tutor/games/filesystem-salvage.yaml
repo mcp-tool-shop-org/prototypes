@@ -1,0 +1,262 @@
+id: filesystem-salvage
+title: "Filesystem Salvage"
+difficulty: intermediate
+estimated_minutes: 15
+mode: game
+
+goal: >
+  Recover critical data from a damaged project archive using only terminal
+  commands. Find the missing config, locate the encrypted backup password,
+  and reconstruct the deployment manifest.
+
+flavor: >
+  The build server crashed overnight. The project repo is corrupted but
+  the filesystem is intact. Three critical files are scattered across
+  the wreckage. Your team needs them before the 9am standup.
+  No editor, no GUI — just you and the terminal.
+
+game:
+  briefing: >
+    MISSION: Filesystem Salvage
+
+    The build server /archive contains the remains of the crashed project.
+    You need to recover three things:
+
+    1. The database connection string (hidden in a config file somewhere)
+    2. The backup encryption password (buried in a log file)
+    3. A deployment manifest rebuilt from scattered service configs
+
+    Create a file called RECOVERED.txt containing all three items.
+    The clock is ticking.
+
+  win_conditions:
+    - type: file_exists
+      description: "Recovery file created"
+      files:
+        - RECOVERED.txt
+    - type: file_contains
+      description: "Database connection string recovered"
+      file_path: RECOVERED.txt
+      file_patterns:
+        - "postgres://deploy:s3cret@db.internal:5432/production"
+    - type: file_contains
+      description: "Backup encryption password recovered"
+      file_path: RECOVERED.txt
+      file_patterns:
+        - "BACKUP_KEY=xK9$mP2vL7nQ"
+    - type: file_contains
+      description: "Deployment manifest contains all three services"
+      file_path: RECOVERED.txt
+      file_patterns:
+        - "api-gateway"
+        - "user-service"
+        - "notification-service"
+
+  fail_conditions:
+    - type: timeout
+      value: 900
+      message: "Time's up. The standup started without the recovery data."
+    - type: max_commands
+      value: 100
+      message: "Too many commands. In a real incident, you need to be more targeted."
+
+  scoring:
+    par_time: 300
+    hint_penalty: true
+    reset_penalty: false
+
+  replay:
+    variants: 1
+    harder_after_win: false
+
+  victory: >
+    All three items recovered. The deployment can proceed.
+    Your team owes you a coffee.
+
+  defeat: >
+    The recovery data is still missing. The standup is going to be rough.
+
+workspace:
+  scaffold:
+    # The "wreckage" — files scattered across a messy filesystem
+    - path: archive/README.md
+      content: |
+        # Project Phoenix
+        Production deployment system.
+        Config files are in /config (if the directory survived).
+        Logs are rotated daily into /logs.
+
+    - path: archive/config/database.yml
+      content: |
+        # Database configuration
+        development:
+          host: localhost
+          port: 5432
+          name: phoenix_dev
+
+        staging:
+          host: staging-db.internal
+          port: 5432
+          name: phoenix_staging
+
+        # Production config was moved to a secure location
+        # See: archive/secure/prod.env
+
+    - path: archive/secure/prod.env
+      content: |
+        # Production secrets — DO NOT COMMIT
+        DB_HOST=db.internal
+        DB_PORT=5432
+        DB_NAME=production
+        DB_USER=deploy
+        DB_PASS=s3cret
+        DATABASE_URL=postgres://deploy:s3cret@db.internal:5432/production
+        REDIS_URL=redis://cache.internal:6379
+
+    - path: archive/logs/deploy-2026-03-28.log
+      content: |
+        2026-03-28 02:14:01 [INFO] Starting nightly backup...
+        2026-03-28 02:14:02 [INFO] Encrypting backup with key from environment
+        2026-03-28 02:14:02 [DEBUG] BACKUP_KEY=xK9$mP2vL7nQ
+        2026-03-28 02:14:05 [INFO] Backup uploaded to s3://phoenix-backups/
+        2026-03-28 02:14:06 [INFO] Backup complete. Size: 2.4GB
+        2026-03-28 03:00:01 [INFO] Starting deployment...
+        2026-03-28 03:00:15 [ERROR] Disk full on /var/data
+        2026-03-28 03:00:15 [FATAL] Deployment aborted. Server state unknown.
+
+    - path: archive/logs/access-2026-03-28.log
+      content: |
+        2026-03-28 09:01:22 GET /api/health 200 2ms
+        2026-03-28 09:02:15 POST /api/users 201 120ms
+        2026-03-28 09:03:44 GET /api/users 500 15ms
+        2026-03-28 09:04:02 GET /api/health 200 3ms
+
+    - path: archive/services/api-gateway/config.json
+      content: |
+        {
+          "name": "api-gateway",
+          "port": 8080,
+          "upstream": ["user-service", "notification-service"],
+          "healthcheck": "/health"
+        }
+
+    - path: archive/services/user-service/config.json
+      content: |
+        {
+          "name": "user-service",
+          "port": 8081,
+          "database": "postgres",
+          "healthcheck": "/api/health"
+        }
+
+    - path: archive/services/notification-service/config.json
+      content: |
+        {
+          "name": "notification-service",
+          "port": 8082,
+          "queue": "redis",
+          "healthcheck": "/status"
+        }
+
+    - path: archive/services/deprecated/old-auth/config.json
+      content: |
+        {
+          "name": "old-auth-service",
+          "port": 8090,
+          "note": "DEPRECATED - do not include in manifest"
+        }
+
+    - path: archive/notes/incident-log.md
+      content: |
+        # Incident: Build Server Crash
+        Date: 2026-03-28 03:00 UTC
+        Cause: Disk full during deployment
+        Impact: Server filesystem corrupted, deployment state unknown
+        Recovery: Manual filesystem salvage required
+
+safety:
+  blocked_patterns:
+    - "rm -rf /"
+    - "sudo"
+  workspace_only: true
+
+steps:
+  - id: explore
+    prompt: "Survey the wreckage. What directories survived in the archive?"
+    check:
+      type: output_contains
+      expect:
+        - "config"
+        - "logs"
+        - "services"
+    hints:
+      - "Start by seeing what's in the archive directory."
+      - "Try: ls archive/"
+
+  - id: find-db-config
+    prompt: "Find the database connection string. The README says config files are in /config."
+    check:
+      type: output_contains
+      expect:
+        - "postgres://"
+        - "production"
+    hints:
+      - "The database config mentions a secure location. Follow the trail."
+      - "Try: cat archive/config/database.yml — then follow the hint about prod.env"
+      - "Try: cat archive/secure/prod.env"
+
+  - id: find-backup-key
+    prompt: "Find the backup encryption password. It was logged during the nightly backup."
+    check:
+      type: output_contains
+      expect:
+        - "BACKUP_KEY"
+    hints:
+      - "Search the log files for anything related to backup or encryption."
+      - "Try: grep -r 'BACKUP_KEY' archive/logs/"
+
+  - id: find-services
+    prompt: "List the active services that should be in the deployment manifest. Ignore deprecated ones."
+    check:
+      type: output_contains
+      expect:
+        - "api-gateway"
+        - "user-service"
+        - "notification-service"
+    hints:
+      - "The service configs are in archive/services/. Look at the JSON files."
+      - "Try: grep -r '\"name\"' archive/services/ — and filter out deprecated"
+      - "Try: grep -rl '\"name\"' archive/services/ --include='*.json' | grep -v deprecated"
+
+  - id: build-recovery
+    prompt: "Create RECOVERED.txt with the database URL, backup key, and all three service names."
+    check:
+      type: file_exists
+      files:
+        - RECOVERED.txt
+    hints:
+      - "Use echo or printf to write the data to a file."
+      - "Try building it line by line with >> to append."
+      - "Example: echo 'postgres://deploy:s3cret@db.internal:5432/production' > RECOVERED.txt"
+
+  - id: verify
+    prompt: "Check your RECOVERED.txt. Does it have all the required data?"
+    check:
+      type: file_contains
+      file_path: RECOVERED.txt
+      file_patterns:
+        - "postgres://deploy:s3cret@db.internal:5432/production"
+        - "BACKUP_KEY=xK9$mP2vL7nQ"
+        - "api-gateway"
+        - "user-service"
+        - "notification-service"
+    hints:
+      - "Read the file and check it has all three items."
+      - "Try: cat RECOVERED.txt"
+
+reflection: >
+  You just did real incident recovery: explored a filesystem, followed
+  evidence trails through config files and logs, filtered signal from
+  noise, and assembled critical data under pressure. This is exactly
+  the skill set that separates someone who can navigate a terminal
+  from someone who depends on a GUI when things go wrong.

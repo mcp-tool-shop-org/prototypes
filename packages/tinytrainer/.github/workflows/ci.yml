@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "pyproject.toml"
+      - ".github/workflows/**"
+  pull_request:
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "pyproject.toml"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: pip install git+https://github.com/mcp-tool-shop-org/edgepacks.git
+      - run: pip install -e ".[dev]" build
+      - run: python -m ruff check src/ tests/
+      - run: pip install onnxscript || true
+      - run: python -m pytest tests/ -v --tb=short -m "not integration and not slow"
+      - run: python -m build

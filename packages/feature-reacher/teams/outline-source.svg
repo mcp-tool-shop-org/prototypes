@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Outline icon for Teams activity bar -->
+  <!-- Must be white on transparent -->
+  <text x="16" y="22"
+        font-family="system-ui, -apple-system, sans-serif"
+        font-size="14"
+        font-weight="700"
+        fill="white"
+        text-anchor="middle">
+    FR
+  </text>
+</svg>

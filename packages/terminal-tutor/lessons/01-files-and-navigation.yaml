@@ -1,0 +1,144 @@
+id: files-and-navigation
+title: "Files and Navigation"
+difficulty: beginner
+estimated_minutes: 8
+goal: >
+  Navigate a small project, discover its structure, and find specific content
+  using only terminal commands.
+flavor: >
+  You just joined a team. Someone hands you a project folder and says
+  "take a look around." No IDE, no docs, just your terminal. Go.
+
+workspace:
+  scaffold:
+    - path: README.md
+      content: |
+        # Weather App
+        A simple weather dashboard that fetches forecasts.
+        See src/ for the main code.
+
+    - path: src/app.js
+      content: |
+        import { fetchWeather } from './api.js';
+        import { render } from './display.js';
+
+        const city = process.argv[2] || 'London';
+        const data = await fetchWeather(city);
+        render(data);
+
+    - path: src/api.js
+      content: |
+        const API_URL = 'https://api.weather.example/v2';
+
+        export async function fetchWeather(city) {
+          const res = await fetch(`${API_URL}/forecast?city=${city}`);
+          if (!res.ok) throw new Error(`API error: ${res.status}`);
+          return res.json();
+        }
+
+    - path: src/display.js
+      content: |
+        export function render(data) {
+          console.log(`Weather for ${data.city}:`);
+          console.log(`  Temperature: ${data.temp}°C`);
+          console.log(`  Conditions: ${data.conditions}`);
+        }
+
+    - path: config/settings.json
+      content: |
+        {
+          "units": "metric",
+          "language": "en",
+          "cache_ttl": 300
+        }
+
+    - path: docs/CONTRIBUTING.md
+      content: |
+        # Contributing
+        1. Fork the repo
+        2. Create a feature branch
+        3. Submit a pull request
+
+    - path: .env.example
+      content: |
+        WEATHER_API_KEY=your-key-here
+        LOG_LEVEL=info
+
+safety:
+  blocked_patterns:
+    - "rm -rf"
+    - "sudo"
+    - "chmod 777"
+  workspace_only: true
+
+steps:
+  - id: list-top-level
+    prompt: "List the files and directories at the top level of this project."
+    check:
+      type: output_contains
+      expect:
+        - "README.md"
+        - "src"
+        - "config"
+    hints:
+      - "The most common command for listing directory contents starts with 'l'."
+      - "Try: ls"
+    on_failure:
+      - pattern: "command not found"
+        response: "Check your spelling. The command to list files is very short."
+      - pattern: "No such file"
+        response: "You might not be in the right directory. The workspace is your current location."
+
+  - id: explore-src
+    prompt: "Look inside the src/ directory. What files are there?"
+    check:
+      type: output_contains
+      expect:
+        - "app.js"
+        - "api.js"
+        - "display.js"
+    hints:
+      - "You can list a specific directory by giving its name as an argument."
+      - "Try: ls src/"
+
+  - id: read-readme
+    prompt: "Read the contents of README.md to understand what this project is."
+    check:
+      type: output_contains
+      expect:
+        - "Weather App"
+        - "forecasts"
+    hints:
+      - "There are several commands that display file contents. The most common one is named after a small animal."
+      - "Try: cat README.md"
+
+  - id: find-api-url
+    prompt: "Find which file contains the API URL this project uses."
+    check:
+      type: output_contains
+      expect:
+        - "api.js"
+        - "api.weather"
+    hints:
+      - "You need to search for text inside files. grep can search recursively."
+      - "Try: grep -r 'api.weather' ."
+    on_failure:
+      - pattern: "No such file"
+        response: "Make sure you're searching from the project root, not inside a subdirectory."
+
+  - id: show-tree
+    prompt: "Show the full directory structure of this project as a tree."
+    check:
+      type: output_contains
+      expect:
+        - "src"
+        - "config"
+        - "docs"
+    hints:
+      - "If 'tree' is available, it shows a visual directory hierarchy. If not, 'find .' also works."
+      - "Try: find . -type f | sort"
+
+reflection: >
+  You navigated a project using ls, cat, grep, and find/tree. These four
+  commands are the foundation of code exploration. Most debugging sessions
+  start exactly this way: list, read, search, map.

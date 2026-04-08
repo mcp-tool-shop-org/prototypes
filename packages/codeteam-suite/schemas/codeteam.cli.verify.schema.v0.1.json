@@ -1,0 +1,149 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://codeteam.dev/schemas/cli.verify.v0.1.json",
+  "title": "CodeTeam CLI Verify Output",
+  "description": "JSON output schema for 'codeteam verify' command",
+  "type": "object",
+  "required": ["status", "exit_code", "package_path", "summary"],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "OK_UNSIGNED",
+        "OK_VERIFIED",
+        "FAIL_INTEGRITY",
+        "FAIL_SCHEMA",
+        "FAIL_SIGNATURE",
+        "FAIL_THRESHOLD",
+        "FAIL_UNAUTHORIZED"
+      ],
+      "description": "Verification status code"
+    },
+    "exit_code": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 6,
+      "description": "CLI exit code"
+    },
+    "package_path": {
+      "type": "string",
+      "description": "Path to verified package"
+    },
+    "package_digest": {
+      "type": ["string", "null"],
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "Computed package digest (null if integrity failed)"
+    },
+    "manifest_digest": {
+      "type": ["string", "null"],
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "Computed manifest digest"
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "artifacts_count",
+        "evidence_count",
+        "approvals_valid",
+        "approvals_required",
+        "signature_present",
+        "signature_valid"
+      ],
+      "properties": {
+        "artifacts_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evidence_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "approvals_valid": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "approvals_required": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "signature_present": {
+          "type": "boolean"
+        },
+        "signature_valid": {
+          "type": "boolean"
+        },
+        "signer_id": {
+          "type": ["string", "null"],
+          "description": "Signer key ID if signed"
+        }
+      },
+      "additionalProperties": false
+    },
+    "checks": {
+      "type": "object",
+      "properties": {
+        "schema_valid": {"type": "boolean"},
+        "artifacts_valid": {"type": "boolean"},
+        "evidence_valid": {"type": "boolean"},
+        "paths_valid": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/error"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Verification timestamp"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "error": {
+      "type": "object",
+      "required": ["code", "message"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "MISSING_FILE",
+            "SIZE_MISMATCH",
+            "DIGEST_MISMATCH",
+            "SCHEMA_INVALID",
+            "SIGNATURE_INVALID",
+            "ACTOR_NOT_AUTHORIZED",
+            "THRESHOLD_NOT_MET"
+          ],
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable error message"
+        },
+        "path": {
+          "type": "string",
+          "description": "Affected file path"
+        },
+        "expected": {
+          "type": "string",
+          "description": "Expected value"
+        },
+        "actual": {
+          "type": "string",
+          "description": "Actual value"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

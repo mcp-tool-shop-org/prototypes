@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>CodeTeam.Cli</RootNamespace>
+    <AssemblyName>codeteam</AssemblyName>
+    <!-- Package metadata -->
+    <PackageId>CodeTeam</PackageId>
+    <Version>1.0.3</Version>
+    <Description>CodeTeam CLI - Package verification, approval, and signing with Ed25519 cryptographic signatures.</Description>
+    <Authors>mcp-tool-shop</Authors>
+    <Company>MCP Tool Shop</Company>
+    <Copyright>Copyright (c) 2025-2026 MCP Tool Shop</Copyright>
+    <PackageProjectUrl>https://github.com/mcp-tool-shop-org/codeteam-suite</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mcp-tool-shop-org/codeteam-suite</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>cryptography;signing;verification;packages;ed25519;cli</PackageTags>
+
+    <!-- dotnet tool configuration -->
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>codeteam</ToolCommandName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CodeTeam.Core\CodeTeam.Core.csproj" />
+    <ProjectReference Include="..\CodeTeam.Crypto\CodeTeam.Crypto.csproj" />
+    <ProjectReference Include="..\CodeTeam.Packaging\CodeTeam.Packaging.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+  </ItemGroup>
+
+</Project>

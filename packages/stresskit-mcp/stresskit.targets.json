@@ -1,0 +1,115 @@
+{
+  "$schema": "./schemas/stresskit.targets.schema.v0.1.json",
+  "version": "0.1",
+  "targets": [
+    {
+      "name": "claude-fresh",
+      "display_name": "Claude Fresh - Session Handoffs",
+      "transport": {
+        "kind": "stdio",
+        "command": "python",
+        "args": ["-m", "claude_fresh"]
+      },
+      "env": {},
+      "fixtures": {
+        "invoke_smoke": {
+          "tool": "fresh_status",
+          "args": {}
+        }
+      },
+      "tags": ["local", "python"]
+    },
+    {
+      "name": "context-bar",
+      "display_name": "Context Bar - Monitoring & Checkpoints",
+      "transport": {
+        "kind": "stdio",
+        "command": "python",
+        "args": ["F:/AI/context-bar/context_bar_server.py"]
+      },
+      "env": {},
+      "fixtures": {
+        "invoke_smoke": {
+          "tool": "context_status",
+          "args": {}
+        }
+      },
+      "tags": ["local", "python"]
+    },
+    {
+      "name": "tool-compass",
+      "display_name": "Tool Compass - Semantic Search Gateway",
+      "transport": {
+        "kind": "stdio",
+        "command": "F:/AI/mcp-tool-shop/venv/Scripts/python.exe",
+        "args": ["-u", "F:/AI/mcp-tool-shop/tool_compass/gateway.py"]
+      },
+      "env": {
+        "PYTHONPATH": "F:/AI/mcp-tool-shop"
+      },
+      "aliases": ["compass"],
+      "fixtures": {
+        "invoke_smoke": {
+          "tool": "compass",
+          "args": {"query": "list files"}
+        }
+      },
+      "tags": ["local", "python", "gateway"]
+    },
+    {
+      "name": "filesystem",
+      "display_name": "Filesystem - Anthropic MCP Server",
+      "transport": {
+        "kind": "stdio",
+        "command": "npx",
+        "args": ["-y", "@anthropic-ai/mcp-server-filesystem", "F:/AI"]
+      },
+      "env": {},
+      "fixtures": {
+        "invoke_smoke": {
+          "tool": "list_directory",
+          "args": {"path": "."}
+        }
+      },
+      "tags": ["npx", "official"]
+    },
+    {
+      "name": "voice-soundboard",
+      "display_name": "Voice Soundboard - TTS & Audio",
+      "transport": {
+        "kind": "stdio",
+        "command": "uv",
+        "args": ["--directory", "C:/Users/mikey/AI/voice-soundboard", "run", "python", "-m", "voice_soundboard.server"]
+      },
+      "env": {},
+      "fixtures": {
+        "invoke_smoke": {
+          "tool": "list_voices",
+          "args": {}
+        }
+      },
+      "tags": ["local", "python", "uv"]
+    },
+    {
+      "name": "context-window-manager",
+      "display_name": "Context Window Manager",
+      "transport": {
+        "kind": "stdio",
+        "command": "C:/Python314/python.exe",
+        "args": ["-m", "context_window_manager"]
+      },
+      "env": {
+        "PYTHONPATH": "F:/AI/context-window-manager/src",
+        "CWM_VLLM_URL": "http://localhost:8000",
+        "CWM_LOG_LEVEL": "INFO"
+      },
+      "fixtures": {
+        "invoke_smoke": {
+          "tool": "window_status",
+          "args": {}
+        }
+      },
+      "tags": ["local", "python"]
+    }
+  ]
+}

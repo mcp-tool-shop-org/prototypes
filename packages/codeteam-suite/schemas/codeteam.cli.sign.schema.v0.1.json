@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://codeteam.dev/schemas/cli.sign.v0.1.json",
+  "title": "CodeTeam CLI Sign Output",
+  "description": "JSON output schema for 'codeteam sign' command",
+  "type": "object",
+  "required": ["success", "package_path"],
+  "properties": {
+    "success": {
+      "type": "boolean",
+      "description": "Whether signing was successful"
+    },
+    "package_path": {
+      "type": "string",
+      "description": "Path to package"
+    },
+    "package_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "Package digest that was signed"
+    },
+    "signature": {
+      "type": "object",
+      "properties": {
+        "signer_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16}$"
+        },
+        "role": {
+          "type": "string",
+          "const": "release-signer"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "verification_after": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["OK_VERIFIED", "FAIL_THRESHOLD"]
+        },
+        "approvals_valid": {"type": "integer"},
+        "approvals_required": {"type": "integer"}
+      }
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "THRESHOLD_NOT_MET",
+            "ACTOR_NOT_AUTHORIZED",
+            "INTEGRITY_FAILED",
+            "KEY_NOT_FOUND",
+            "ALREADY_SIGNED"
+          ]
+        },
+        "message": {"type": "string"}
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+title: File Compass
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - name: MCP Tool Shop
+    website: https://github.com/mcp-tool-shop-org
+repository-code: https://github.com/mcp-tool-shop-org/file-compass
+url: https://github.com/mcp-tool-shop-org/file-compass
+abstract: >-
+  Semantic file search for AI workstations using HNSW vector
+  indexing and local embeddings via Ollama. Sub-100ms search
+  across large codebases with MCP server integration.
+keywords:
+  - semantic-search
+  - hnsw
+  - file-search
+  - mcp
+  - embeddings
+  - ollama
+license: MIT
+version: 0.1.1
+date-released: '2026-02-14'

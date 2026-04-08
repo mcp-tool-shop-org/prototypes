@@ -1,0 +1,97 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (without v prefix, e.g. 1.0.1)'
+        required: true
+        type: string
+
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  release:
+    runs-on: windows-latest  # Windows required for DPAPI tests in CreatorLedger
+    permissions:
+      contents: write  # For creating releases
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for SourceLink
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Extract version
+        id: version
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            VERSION="${{ inputs.version }}"
+          else
+            VERSION=${GITHUB_REF_NAME#v}
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Building version: $VERSION"
+
+      - name: Restore
+        run: dotnet restore ledger-suite.sln
+
+      - name: Build
+        run: dotnet build ledger-suite.sln -c Release --no-restore /p:Version=${{ steps.version.outputs.version }}
+
+      - name: Test
+        run: dotnet test ledger-suite.sln -c Release --no-build --verbosity normal
+
+      - name: Pack
+        run: dotnet pack ledger-suite.sln -c Release --no-build -o ./artifacts /p:Version=${{ steps.version.outputs.version }}
+
+      - name: List artifacts
+        shell: bash
+        run: ls -la ./artifacts
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages
+          path: ./artifacts/*.nupkg
+
+      - name: Upload symbol packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: symbol-packages
+          path: ./artifacts/*.snupkg
+          if-no-files-found: ignore
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            ./artifacts/*.nupkg
+            ./artifacts/*.snupkg
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push to NuGet
+        if: ${{ vars.NUGET_PUBLISH == 'true' }}
+        shell: bash
+        run: |
+          dotnet nuget push ./artifacts/*.nupkg \
+            --api-key ${{ secrets.NUGET_API_KEY }} \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate

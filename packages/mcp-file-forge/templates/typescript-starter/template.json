@@ -1,0 +1,24 @@
+{
+  "name": "typescript-starter",
+  "description": "Basic TypeScript project with Node.js",
+  "version": "1.0.0",
+  "author": "mcp-tool-shop",
+  "category": "nodejs",
+  "variables": [
+    {
+      "name": "PROJECT_NAME",
+      "description": "Name of the project",
+      "required": true
+    },
+    {
+      "name": "AUTHOR_NAME",
+      "description": "Author name",
+      "default": "Developer"
+    },
+    {
+      "name": "DESCRIPTION",
+      "description": "Project description",
+      "default": "A TypeScript project"
+    }
+  ]
+}

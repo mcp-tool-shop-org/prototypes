@@ -1,0 +1,21 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    groups:
+      all-deps:
+        patterns: ["*"]
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    groups:
+      all-actions:
+        patterns: ["*"]
+    labels:
+      - "ci"

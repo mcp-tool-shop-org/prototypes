@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+
+    <!-- Package metadata -->
+    <Description>Unit and integration tests for CodeTeam - package verification, approval workflows, and Ed25519 signing tests.</Description>
+    <Authors>mcp-tool-shop</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\CodeTeam.Core\CodeTeam.Core.csproj" />
+    <ProjectReference Include="..\..\src\CodeTeam.Crypto\CodeTeam.Crypto.csproj" />
+    <ProjectReference Include="..\..\src\CodeTeam.Packaging\CodeTeam.Packaging.csproj" />
+    <ProjectReference Include="..\..\src\CodeTeam.Cli\CodeTeam.Cli.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="xunit" Version="2.6.6" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="FluentAssertions" Version="6.12.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\fixtures\**\*" CopyToOutputDirectory="PreserveNewest" LinkBase="fixtures" />
+    <Content Include="..\..\schemas\**\*" CopyToOutputDirectory="PreserveNewest" LinkBase="schemas" />
+  </ItemGroup>
+
+</Project>

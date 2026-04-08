@@ -1,0 +1,214 @@
+/* === Command Guidance Surface === */
+
+.cmd-guidance {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px;
+}
+
+/* --- Risk row: tier badge + explanation --- */
+
+.cmd-guidance-risk-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.cmd-guidance-risk-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  padding-top: 1px;
+}
+
+/* --- Section labels --- */
+
+.cmd-guidance-section-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+/* --- Impact areas --- */
+
+.cmd-guidance-impacts {
+  display: flex;
+  flex-direction: column;
+}
+
+.cmd-guidance-impact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cmd-guidance-impact {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.cmd-guidance-impact-label {
+  font-weight: 600;
+  flex-shrink: 0;
+  min-width: 80px;
+}
+
+.cmd-guidance-impact-detail {
+  color: var(--text-muted);
+}
+
+/* Severity-based background tints using CSS variable colors with opacity */
+
+.cmd-guidance-impact--info {
+  background: color-mix(in srgb, var(--info) 8%, transparent);
+  color: var(--info);
+}
+
+.cmd-guidance-impact--info .cmd-guidance-impact-detail {
+  color: var(--text-muted);
+}
+
+.cmd-guidance-impact--warn {
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: var(--accent);
+}
+
+.cmd-guidance-impact--warn .cmd-guidance-impact-detail {
+  color: var(--text-muted);
+}
+
+.cmd-guidance-impact--danger {
+  background: color-mix(in srgb, var(--failure) 8%, transparent);
+  color: var(--failure);
+}
+
+.cmd-guidance-impact--danger .cmd-guidance-impact-detail {
+  color: var(--text-muted);
+}
+
+/* --- Expand/collapse button --- */
+
+.cmd-guidance-expand-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 0;
+  text-align: left;
+}
+
+.cmd-guidance-expand-btn:hover {
+  text-decoration: underline;
+  border-color: transparent;
+}
+
+.cmd-guidance-chevron {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid var(--accent);
+  transition: transform 0.15s ease;
+}
+
+.cmd-guidance-chevron[data-expanded="true"] {
+  transform: rotate(180deg);
+}
+
+/* --- Detail section (expanded) --- */
+
+.cmd-guidance-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+/* --- Pre-flight checks --- */
+
+.cmd-guidance-checks {
+  display: flex;
+  flex-direction: column;
+}
+
+.cmd-guidance-check-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 3px 0;
+}
+
+.cmd-guidance-check-row input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* --- Assumptions --- */
+
+.cmd-guidance-assumptions {
+  display: flex;
+  flex-direction: column;
+}
+
+.cmd-guidance-assumption-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cmd-guidance-assumption-list li {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding-left: 14px;
+  position: relative;
+}
+
+.cmd-guidance-assumption-list li::before {
+  content: "\2022"; /* bullet */
+  position: absolute;
+  left: 2px;
+  color: var(--text-muted);
+}
+
+/* --- Cautions --- */
+
+.cmd-guidance-cautions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cmd-guidance-caution {
+  font-size: 13px;
+  color: var(--failure);
+  padding: 6px 10px;
+  background: color-mix(in srgb, var(--failure) 8%, transparent);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--failure);
+}

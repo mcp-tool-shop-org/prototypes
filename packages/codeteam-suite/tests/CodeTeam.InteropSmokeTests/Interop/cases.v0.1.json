@@ -1,0 +1,57 @@
+{
+  "version": "0.1",
+  "description": "Interop smoke test cases - guards editor extension compatibility",
+  "fixture_root": "../../../../fixtures",
+  "cases": [
+    {
+      "name": "clean_unsigned",
+      "description": "Happy path - valid unsigned package with no diagnostics",
+      "fixture": "minimal_unsigned",
+      "verify_signatures": false,
+      "expect_status": "OK_UNSIGNED",
+      "expect_exit_code": 1,
+      "expect_codes": [],
+      "expect_severities": {}
+    },
+    {
+      "name": "tampered_artifact",
+      "description": "Integrity failure - artifact hash mismatch",
+      "fixture": "tampered_artifact",
+      "verify_signatures": false,
+      "expect_status": "FAIL_INTEGRITY",
+      "expect_exit_code": 2,
+      "expect_codes": ["SIZE_MISMATCH"],
+      "expect_severities": { "SIZE_MISMATCH": "error" }
+    },
+    {
+      "name": "invalid_manifest",
+      "description": "Schema failure - invalid manifest structure",
+      "fixture": "invalid_manifest",
+      "verify_signatures": false,
+      "expect_status": "FAIL_SCHEMA",
+      "expect_exit_code": 3,
+      "expect_codes": ["SCHEMA_INVALID"],
+      "expect_severities": { "SCHEMA_INVALID": "error" }
+    },
+    {
+      "name": "signed_verified",
+      "description": "Signed package with valid signature",
+      "fixture": "signed_verified_real",
+      "verify_signatures": true,
+      "expect_status": "OK_VERIFIED",
+      "expect_exit_code": 0,
+      "expect_codes": [],
+      "expect_severities": {}
+    },
+    {
+      "name": "signed_invalid_signature",
+      "description": "Signed package with cryptographically invalid signature",
+      "fixture": "signed_invalid_sig",
+      "verify_signatures": true,
+      "expect_status": "FAIL_SIGNATURE",
+      "expect_exit_code": 4,
+      "expect_codes": ["SIGNATURE_INVALID"],
+      "expect_severities": { "SIGNATURE_INVALID": "error" }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+node_modules
+dist
+*.tsbuildinfo
+.git
+.env
+.env.*
+*.log
+src/**/*.test.ts
+src/__snapshots__
+smoke.mjs
+
+# Keep assets/ in Docker image (logo, etc.)
+!assets/

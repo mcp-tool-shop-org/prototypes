@@ -1,0 +1,106 @@
+{
+  "profile_id": "mcp-ops",
+  "version": "0.1",
+  "title": "MCP Operational Readiness",
+  "description": "Verifies performance, stability, and resource behavior under load",
+  "checks": [
+    {
+      "check_id": "ops.baseline_latency",
+      "title": "Baseline latency within threshold",
+      "description": "Single-request latency under idle conditions",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.OPS.BASELINE_LATENCY_HIGH"],
+      "thresholds": {
+        "p50_max_ms": 100,
+        "p99_max_ms": 500
+      }
+    },
+    {
+      "check_id": "ops.concurrency_2",
+      "title": "Handles 2 concurrent requests",
+      "description": "Latency and error rate stable at concurrency=2",
+      "severity_on_fail": "high",
+      "codes": ["MCP.OPS.CONCURRENCY_DEGRADATION"]
+    },
+    {
+      "check_id": "ops.concurrency_8",
+      "title": "Handles 8 concurrent requests",
+      "description": "Latency and error rate stable at concurrency=8",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.OPS.CONCURRENCY_DEGRADATION"]
+    },
+    {
+      "check_id": "ops.concurrency_32",
+      "title": "Handles 32 concurrent requests",
+      "description": "Server remains responsive at higher concurrency (may degrade but not fail)",
+      "severity_on_fail": "low",
+      "codes": ["MCP.OPS.CONCURRENCY_COLLAPSE"]
+    },
+    {
+      "check_id": "ops.soak_30m",
+      "title": "30-minute soak test passes",
+      "description": "No memory leaks, crashes, or error rate increases over 30 minutes",
+      "severity_on_fail": "high",
+      "codes": ["MCP.OPS.SOAK_MEMORY_LEAK", "MCP.OPS.SOAK_ERROR_RATE_INCREASE", "MCP.OPS.SOAK_CRASH"],
+      "duration_seconds": 1800
+    },
+    {
+      "check_id": "ops.memory_ceiling",
+      "title": "Memory stays within bounds",
+      "description": "Peak RSS doesn't exceed configured ceiling",
+      "severity_on_fail": "high",
+      "codes": ["MCP.OPS.MEMORY_EXCEEDED"],
+      "thresholds": {
+        "max_rss_bytes": 536870912
+      }
+    },
+    {
+      "check_id": "ops.cpu_ceiling",
+      "title": "CPU stays within bounds",
+      "description": "Sustained CPU doesn't exceed configured ceiling",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.OPS.CPU_EXCEEDED"],
+      "thresholds": {
+        "max_cpu_percent": 200
+      }
+    },
+    {
+      "check_id": "ops.backpressure_flood",
+      "title": "Handles request flood gracefully",
+      "description": "Under burst traffic, server rejects excess rather than queuing unboundedly",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.OPS.NO_BACKPRESSURE", "MCP.OPS.QUEUE_EXPLOSION"]
+    },
+    {
+      "check_id": "ops.backpressure_sustained",
+      "title": "Handles sustained overload",
+      "description": "At sustained RPS above capacity, server remains stable",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.OPS.OVERLOAD_CRASH"]
+    },
+    {
+      "check_id": "ops.death_restart",
+      "title": "Recovers from crash",
+      "description": "After SIGKILL, server restarts cleanly without data corruption",
+      "severity_on_fail": "high",
+      "codes": ["MCP.OPS.RESTART_FAILED", "MCP.OPS.STATE_CORRUPTED"]
+    },
+    {
+      "check_id": "ops.death_midrequest",
+      "title": "Handles crash during request",
+      "description": "Client detects server death mid-request and can recover",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.OPS.MIDREQUEST_HANG"]
+    },
+    {
+      "check_id": "ops.p99_threshold",
+      "title": "P99 latency within SLA",
+      "description": "99th percentile latency stays under configured threshold",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.OPS.P99_TOO_HIGH"],
+      "thresholds": {
+        "p99_max_ms": 1000
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "evaluation",
+  "description": "Evaluation, testing, and benchmarking tools",
+  "rules": [
+    {
+      "tags": ["testing", "evaluation", "benchmark", "coverage"],
+      "operator": "OR"
+    }
+  ],
+  "exclude": {
+    "deprecated": true
+  }
+}

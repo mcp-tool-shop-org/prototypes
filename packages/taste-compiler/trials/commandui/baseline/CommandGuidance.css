@@ -1,0 +1,260 @@
+/* === Command Guidance Surface === */
+
+.cmd-guidance {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+/* Tier-specific left accent */
+.cmd-guidance--low {
+  border-left: 3px solid var(--success);
+}
+
+.cmd-guidance--medium {
+  border-left: 3px solid #ffd488;
+}
+
+.cmd-guidance--high {
+  border-left: 3px solid var(--failure);
+}
+
+/* -- Header (clickable toggle) -- */
+
+.cmd-guidance-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  background: var(--bg-card);
+  border: none;
+  border-radius: 0;
+  padding: 8px 12px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.cmd-guidance-header:hover {
+  background: var(--bg-secondary);
+  border-color: transparent;
+}
+
+.cmd-guidance-icon {
+  font-size: 14px;
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+}
+
+.cmd-guidance-icon--low {
+  color: var(--success);
+}
+
+.cmd-guidance-icon--medium {
+  color: #ffd488;
+}
+
+.cmd-guidance-icon--high {
+  color: var(--failure);
+}
+
+.cmd-guidance-title {
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.cmd-guidance-systems {
+  color: var(--text-muted);
+  font-size: 11px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.cmd-guidance-chevron {
+  color: var(--text-muted);
+  font-size: 10px;
+  flex-shrink: 0;
+  margin-left: 6px;
+}
+
+/* -- Body -- */
+
+.cmd-guidance-body {
+  padding: 10px 12px 12px;
+  background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* -- Sections -- */
+
+.cmd-guidance-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cmd-guidance-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+.cmd-guidance-text {
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+/* -- Risk signals -- */
+
+.cmd-guidance-signals {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cmd-guidance-signal {
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+}
+
+.cmd-guidance-signal-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.cmd-guidance-signal-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.cmd-guidance-consequences {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cmd-guidance-consequences li {
+  font-size: 12px;
+  color: var(--text-muted);
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.6;
+}
+
+.cmd-guidance-consequences li::before {
+  content: "\2022";
+  position: absolute;
+  left: 2px;
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+/* -- Planner flags -- */
+
+.cmd-guidance-flags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cmd-guidance-flags li {
+  font-size: 12px;
+  color: #ffd488;
+  padding: 2px 0 2px 14px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.cmd-guidance-flags li::before {
+  content: "\26A0";
+  position: absolute;
+  left: 0;
+  font-size: 11px;
+}
+
+/* -- Pre-flight checks -- */
+
+.cmd-guidance-checks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cmd-guidance-checks li {
+  font-size: 12px;
+  color: var(--text-primary);
+  padding: 3px 0 3px 20px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.cmd-guidance-checks li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 7px;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--text-muted);
+  border-radius: 2px;
+}
+
+/* -- Acknowledge -- */
+
+.cmd-guidance-ack {
+  display: flex;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.cmd-guidance-ack-btn {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 5px 14px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.cmd-guidance-ack-btn:hover {
+  border-color: var(--accent);
+}
+
+.cmd-guidance-ack-done {
+  font-size: 12px;
+  color: var(--success);
+  font-weight: 600;
+}
+
+/* -- Animation for high-risk accent pulse -- */
+
+.cmd-guidance--high .cmd-guidance-header {
+  background: rgba(255, 180, 192, 0.04);
+}
+
+.cmd-guidance--high .cmd-guidance-header:hover {
+  background: rgba(255, 180, 192, 0.08);
+}
+
+.cmd-guidance--medium .cmd-guidance-header {
+  background: rgba(255, 212, 136, 0.04);
+}
+
+.cmd-guidance--medium .cmd-guidance-header:hover {
+  background: rgba(255, 212, 136, 0.08);
+}

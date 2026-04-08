@@ -1,0 +1,26 @@
+# Smithery configuration for MCP File Forge
+# See https://smithery.ai/docs/config
+
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      allowedPaths:
+        type: string
+        description: "Comma-separated list of allowed file paths"
+        default: "."
+      readOnly:
+        type: boolean
+        description: "Run in read-only mode"
+        default: false
+    required: []
+  commandFunction: |-
+    (config) => ({
+      command: "node",
+      args: ["build/index.js"],
+      env: {
+        MCP_FILE_FORGE_ALLOWED_PATHS: config.allowedPaths || ".",
+        MCP_FILE_FORGE_READ_ONLY: String(config.readOnly || false)
+      }
+    })

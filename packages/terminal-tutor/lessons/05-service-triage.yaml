@@ -1,0 +1,203 @@
+id: service-triage
+title: "Service Triage"
+difficulty: intermediate
+estimated_minutes: 15
+goal: >
+  Investigate a misbehaving web service inside a Docker container.
+  Find the failing process, read its logs, identify the error, and
+  fix the configuration — all using standard Linux diagnostic tools.
+flavor: >
+  It's 2pm on a Tuesday. The API dashboard just turned red. Users are
+  getting 500 errors. You SSH into the server. No one left notes.
+  Figure out what broke.
+
+runtime:
+  type: docker
+  image: python:3.12-slim
+  requirements:
+    - flask==3.1.0
+  reset: per_lesson
+  cumulative: true
+  network: false
+  writable_paths:
+    - /workspace
+    - /tmp
+  timeout: 30
+  capabilities:
+    filesystem: full
+    network: false
+    git: false
+    python: true
+    processes: full
+    package_install: true
+    destructive: false
+
+workspace:
+  scaffold:
+    - path: app.py
+      content: |
+        """Simple Flask API that serves user data."""
+        import json
+        import os
+        from flask import Flask, jsonify
+
+        app = Flask(__name__)
+
+        DATA_FILE = os.environ.get("DATA_PATH", "/workspace/data/users.json")
+
+        @app.route("/health")
+        def health():
+            return jsonify({"status": "ok"})
+
+        @app.route("/api/users")
+        def get_users():
+            with open(DATA_FILE) as f:
+                users = json.load(f)
+            return jsonify(users)
+
+        @app.route("/api/users/<int:user_id>")
+        def get_user(user_id):
+            with open(DATA_FILE) as f:
+                users = json.load(f)
+            for user in users:
+                if user["id"] == user_id:
+                    return jsonify(user)
+            return jsonify({"error": "User not found"}), 404
+
+        if __name__ == "__main__":
+            port = int(os.environ.get("PORT", "5000"))
+            app.run(host="0.0.0.0", port=port, debug=False)
+
+    - path: config.env
+      content: |
+        PORT=5000
+        DATA_PATH=/workspace/data/users.json
+        LOG_LEVEL=info
+
+    - path: data/users.json
+      content: |
+        [
+          {"id": 1, "name": "Alice Chen", "role": "engineer", "active": true},
+          {"id": 2, "name": "Bob Martinez", "role": "designer", "active": true},
+          {"id": 3, "name": "Charlie Kim", "role": "manager", "active": false},
+          {"id": 4, "name": "Diana Okafor", "role": "engineer", "active": true}
+        ]
+
+    - path: start.sh
+      content: |
+        #!/bin/sh
+        # Start the API server in the background
+        export $(cat /workspace/config.env | grep -v '^#' | xargs)
+        cd /workspace
+        python app.py > /tmp/app.log 2>&1 &
+        echo $! > /tmp/app.pid
+        echo "Server started on port $PORT (PID: $(cat /tmp/app.pid))"
+
+    - path: broken-config.env
+      content: |
+        PORT=5000
+        DATA_PATH=/workspace/data/missing-file.json
+        LOG_LEVEL=debug
+
+    - path: logs/access.log
+      content: |
+        2026-03-29 10:00:01 GET /health 200 2ms
+        2026-03-29 10:00:05 GET /api/users 200 15ms
+        2026-03-29 10:00:12 GET /api/users/1 200 8ms
+        2026-03-29 10:01:30 GET /api/users 500 3ms
+        2026-03-29 10:01:31 GET /api/users 500 2ms
+        2026-03-29 10:01:45 GET /health 200 1ms
+        2026-03-29 10:02:01 GET /api/users 500 2ms
+        2026-03-29 10:02:15 GET /api/users/2 500 3ms
+        2026-03-29 10:03:00 GET /health 200 1ms
+
+safety:
+  blocked_patterns:
+    - "rm -rf /"
+    - "apt install"
+    - "curl"
+    - "wget"
+  workspace_only: false
+
+steps:
+  - id: read-logs
+    prompt: "Look at the access log. What pattern do you see in the failures?"
+    check:
+      type: output_contains
+      expect:
+        - "500"
+        - "/api/users"
+    hints:
+      - "Read the access log file to see what requests are failing."
+      - "Try: cat logs/access.log"
+
+  - id: spot-pattern
+    prompt: "Filter the log to show only the 500 errors. What endpoints are affected?"
+    check:
+      type: output_contains
+      expect:
+        - "500"
+    hints:
+      - "Use grep to filter for error status codes."
+      - "Try: grep '500' logs/access.log"
+
+  - id: start-service
+    prompt: "Start the service using the start script and check if it's running."
+    check:
+      type: output_contains
+      expect:
+        - "Server started"
+    hints:
+      - "Make the script executable and run it."
+      - "Try: chmod +x start.sh && sh start.sh"
+
+  - id: check-process
+    prompt: "Verify the server process is running. What PID is it?"
+    check:
+      type: output_contains
+      expect:
+        - "python"
+    hints:
+      - "Use ps to list running processes, or check the PID file."
+      - "Try: ps aux | grep python"
+    on_failure:
+      - pattern: "no process"
+        response: "The server may have crashed on startup. Check /tmp/app.log for errors."
+
+  - id: check-config
+    prompt: "The broken-config.env points to a missing data file. Compare it to the working config."
+    check:
+      type: output_contains
+      expect:
+        - "missing-file"
+        - "users.json"
+    hints:
+      - "Compare the two config files to spot the difference."
+      - "Try: diff config.env broken-config.env"
+
+  - id: test-healthy
+    prompt: "Test the health endpoint to confirm the server responds."
+    check:
+      type: output_contains
+      expect:
+        - "ok"
+    hints:
+      - "Use Python to make a simple HTTP request since curl may not be available."
+      - "Try: python -c \"import urllib.request; print(urllib.request.urlopen('http://localhost:5000/health').read().decode())\""
+
+  - id: find-root-cause
+    prompt: "Look at the application log to find what error occurs when the broken config is used."
+    check:
+      type: output_contains
+      expect:
+        - "app.log"
+    hints:
+      - "The start script writes logs to /tmp/app.log."
+      - "Try: cat /tmp/app.log"
+
+reflection: >
+  You just triaged a failing service using the standard ops workflow:
+  read logs, identify the failure pattern, inspect the process, compare
+  configs, test endpoints, and trace to root cause. This is the same
+  sequence site reliability engineers use when paged at 3am — logs first,
+  then process state, then configuration, then targeted testing.

@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "name": "ledger-suite",
+  "description": "Unified monorepo for cryptographic provenance ledgers — ClaimLedger and CreatorLedger"
+}

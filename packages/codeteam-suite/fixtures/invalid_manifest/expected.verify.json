@@ -1,0 +1,26 @@
+{
+  "status": "FAIL_SCHEMA",
+  "exit_code": 3,
+  "summary": {
+    "artifacts_count": 0,
+    "evidence_count": 0,
+    "approvals_valid": 0,
+    "approvals_required": 0,
+    "signature_present": false,
+    "signature_valid": false,
+    "signer_id": null
+  },
+  "checks": {
+    "schema_valid": false,
+    "artifacts_valid": false,
+    "evidence_valid": false,
+    "paths_valid": false
+  },
+  "errors": [
+    {
+      "code": "SCHEMA_INVALID",
+      "message": "Manifest schema_version must be 0.1"
+    }
+  ],
+  "warnings": []
+}

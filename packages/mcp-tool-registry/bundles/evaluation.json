@@ -1,0 +1,12 @@
+{
+  "id": "evaluation",
+  "description": "Evaluation, testing, and benchmarking tools",
+  "tools": [
+    "aspire-ai",
+    "backpropagate",
+    "brain-dev",
+    "code-covered",
+    "codeclone-suite",
+    "codecomfy-vscode"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "profile_id": "mcp-core",
+  "version": "0.1",
+  "title": "MCP Protocol Correctness",
+  "description": "Verifies protocol compliance and behavioral correctness per MCP specification",
+  "checks": [
+    {
+      "check_id": "core.handshake",
+      "title": "Initialize handshake completes",
+      "description": "Server responds to initialize with valid capabilities",
+      "severity_on_fail": "critical",
+      "codes": ["MCP.CORE.HANDSHAKE_FAILED", "MCP.CORE.HANDSHAKE_TIMEOUT"]
+    },
+    {
+      "check_id": "core.list_tools",
+      "title": "Tool listing returns valid schema",
+      "description": "tools/list returns array of tools with valid JSON Schema definitions",
+      "severity_on_fail": "high",
+      "codes": ["MCP.CORE.LIST_TOOLS_FAILED", "MCP.CORE.INVALID_TOOL_SCHEMA"]
+    },
+    {
+      "check_id": "core.list_resources",
+      "title": "Resource listing returns valid data",
+      "description": "resources/list returns properly formatted resources (if capability advertised)",
+      "severity_on_fail": "high",
+      "codes": ["MCP.CORE.LIST_RESOURCES_FAILED"]
+    },
+    {
+      "check_id": "core.list_prompts",
+      "title": "Prompt listing returns valid data",
+      "description": "prompts/list returns properly formatted prompts (if capability advertised)",
+      "severity_on_fail": "high",
+      "codes": ["MCP.CORE.LIST_PROMPTS_FAILED"]
+    },
+    {
+      "check_id": "core.schema_validation",
+      "title": "Response schemas validate",
+      "description": "All responses conform to MCP JSON-RPC schema",
+      "severity_on_fail": "high",
+      "codes": ["MCP.CORE.SCHEMA_VIOLATION"]
+    },
+    {
+      "check_id": "core.error_format",
+      "title": "Errors use JSON-RPC error format",
+      "description": "Error responses include code, message, and optional data",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.CORE.INVALID_ERROR_FORMAT"]
+    },
+    {
+      "check_id": "core.timeout_behavior",
+      "title": "Requests timeout gracefully",
+      "description": "Long-running requests can be cancelled; server doesn't hang indefinitely",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.CORE.TIMEOUT_HANG", "MCP.CORE.CANCEL_IGNORED"]
+    },
+    {
+      "check_id": "core.reconnect_stdio",
+      "title": "Stdio reconnect works cleanly",
+      "description": "After server restart, client can re-initialize without corruption",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.CORE.RECONNECT_FAILED"],
+      "transport_filter": ["stdio"]
+    },
+    {
+      "check_id": "core.reconnect_sse",
+      "title": "SSE reconnect works cleanly",
+      "description": "After connection drop, SSE client can reconnect and resume",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.CORE.SSE_RECONNECT_FAILED"],
+      "transport_filter": ["http_sse"]
+    },
+    {
+      "check_id": "core.determinism",
+      "title": "Responses are deterministic or explicitly nondeterministic",
+      "description": "Same input produces same output, or tool declares nondeterminism",
+      "severity_on_fail": "low",
+      "codes": ["MCP.CORE.UNDECLARED_NONDETERMINISM"]
+    },
+    {
+      "check_id": "core.capability_honesty",
+      "title": "Advertised capabilities match behavior",
+      "description": "Server only advertises capabilities it actually implements",
+      "severity_on_fail": "medium",
+      "codes": ["MCP.CORE.CAPABILITY_MISMATCH"]
+    }
+  ]
+}

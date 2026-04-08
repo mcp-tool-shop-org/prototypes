@@ -1,0 +1,15 @@
+{
+  "featured": ["accessibility-suite", "codeteam"],
+  "collections": {
+    "starter-pack": {
+      "title": "Starter Pack",
+      "description": "Essential tools for everyday agent operations.",
+      "tools": ["aspire-ai", "brain-dev", "file-compass"]
+    },
+    "accessibility": {
+      "title": "Accessibility",
+      "description": "Ensure your products are usable by everyone.",
+      "tools": ["accessibility-suite", "ally-demo-python"]
+    }
+  }
+}

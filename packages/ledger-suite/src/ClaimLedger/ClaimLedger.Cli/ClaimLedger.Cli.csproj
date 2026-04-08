@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>claimledger</AssemblyName>
+
+    <!-- Not packable as NuGet (use 'dotnet publish' for distribution) -->
+    <IsPackable>false</IsPackable>
+
+    <!-- Package metadata -->
+    <Description>ClaimLedger CLI - Verify, inspect, attest, cite, revoke, witness, and timestamp scientific claims with cryptographic provenance.</Description>
+    <Authors>mcp-tool-shop</Authors>
+    <Company>MCP Tool Shop</Company>
+    <Copyright>Copyright (c) 2025-2026 MCP Tool Shop</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine" Version="2.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClaimLedger.Application\ClaimLedger.Application.csproj" />
+    <ProjectReference Include="..\..\CreatorLedger\Shared.Crypto\Shared.Crypto.csproj" />
+  </ItemGroup>
+
+</Project>

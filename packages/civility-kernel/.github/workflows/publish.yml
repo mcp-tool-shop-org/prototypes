@@ -1,0 +1,37 @@
+name: Publish
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - name: Publish to npm
+        run: |
+          npm publish --provenance --access public 2>&1 | tee /tmp/publish.log || {
+            if grep -q "previously published" /tmp/publish.log; then
+              echo "::notice::Version already published — skipping"
+              exit 0
+            fi
+            exit 1
+          }
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

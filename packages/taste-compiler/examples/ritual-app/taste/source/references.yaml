@@ -1,0 +1,9 @@
+- id: ref-editorial
+  type: url
+  uri: "ref://editorial-layout"
+  notes: "Clean editorial layout, generous whitespace"
+
+- id: ref-calm-palette
+  type: image
+  uri: "ref://calm-palette"
+  notes: "Muted earth tones, low contrast"

@@ -1,0 +1,121 @@
+.failure-context {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  margin: 6px 0;
+  font-size: 13px;
+}
+
+.failure-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.failure-category {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.failure-category[data-category="permission"],
+.failure-category[data-category="timeout"] {
+  background: color-mix(in srgb, var(--failure) 12%, transparent);
+  color: var(--failure);
+}
+
+.failure-category[data-category="not-found"],
+.failure-category[data-category="syntax"] {
+  background: color-mix(in srgb, var(--info) 12%, transparent);
+  color: var(--info);
+}
+
+.failure-category[data-category="network"] {
+  background: color-mix(in srgb, var(--info) 12%, transparent);
+  color: var(--info);
+}
+
+.failure-category[data-category="unknown"] {
+  background: color-mix(in srgb, var(--text-muted) 12%, transparent);
+  color: var(--text-muted);
+}
+
+.failure-command {
+  font-family: monospace;
+  font-size: 12px;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.failure-dismiss {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.failure-dismiss:hover {
+  color: var(--text-primary);
+}
+
+.failure-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  padding-left: 2px;
+}
+
+.failure-details {
+  display: flex;
+  gap: 12px;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: monospace;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+}
+
+.failure-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.failure-retry {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 4px 12px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.failure-retry:hover {
+  background: var(--border);
+}
+
+.failure-toggle {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 11px;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+
+.failure-toggle:hover {
+  color: var(--text-primary);
+}

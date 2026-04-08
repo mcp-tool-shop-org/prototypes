@@ -1,0 +1,13 @@
+{
+  "name": "ops",
+  "description": "DevOps, infrastructure, and deployment tools",
+  "rules": [
+    {
+      "tags": ["automation", "packaging", "release", "monitoring"],
+      "operator": "OR"
+    }
+  ],
+  "exclude": {
+    "deprecated": true
+  }
+}

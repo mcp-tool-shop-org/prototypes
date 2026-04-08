@@ -1,0 +1,65 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "0eacabbd-e1f6-462d-99f6-9c9cbdb73dbe",
+  "packageName": "com.mcptoolshop.featurereacher",
+  "developer": {
+    "name": "mcp-tool-shop",
+    "websiteUrl": "https://gentle-bay-0363a0d10.4.azurestaticapps.net",
+    "privacyUrl": "https://gentle-bay-0363a0d10.4.azurestaticapps.net/privacy",
+    "termsOfUseUrl": "https://gentle-bay-0363a0d10.4.azurestaticapps.net/terms"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Feature-Reacher",
+    "full": "Feature-Reacher: Adoption Risk Audits"
+  },
+  "description": {
+    "short": "Surface underutilized features before they become technical debt.",
+    "full": "Feature-Reacher analyzes your product documentation (release notes, help articles, FAQs) and identifies features at risk of low adoption. Get evidence-backed diagnoses, track trends over time, and export stakeholder-ready reports. No analytics integration required\u2014works with what you already have."
+  },
+  "accentColor": "#2563EB",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://gentle-bay-0363a0d10.4.azurestaticapps.net/teams/config",
+      "canUpdateConfiguration": true,
+      "scopes": ["team", "groupchat"],
+      "sharePointPreviewImage": "https://gentle-bay-0363a0d10.4.azurestaticapps.net/teams/preview.png",
+      "supportedSharePointHosts": ["sharePointFullPage", "sharePointWebPart"]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "featurereacher-demo",
+      "name": "Demo Audit",
+      "contentUrl": "https://gentle-bay-0363a0d10.4.azurestaticapps.net/teams/tab?view=demo",
+      "websiteUrl": "https://gentle-bay-0363a0d10.4.azurestaticapps.net/landing",
+      "scopes": ["personal"]
+    },
+    {
+      "entityId": "featurereacher-app",
+      "name": "Feature-Reacher",
+      "contentUrl": "https://gentle-bay-0363a0d10.4.azurestaticapps.net/teams/tab",
+      "websiteUrl": "https://gentle-bay-0363a0d10.4.azurestaticapps.net/landing",
+      "scopes": ["personal"]
+    }
+  ],
+  "permissions": ["identity", "messageTeamMembers"],
+  "validDomains": [
+    "gentle-bay-0363a0d10.4.azurestaticapps.net"
+  ],
+  "showLoadingIndicator": true,
+  "isFullScreen": false,
+  "defaultInstallScope": "personal",
+  "defaultGroupCapability": {
+    "team": "tab",
+    "groupchat": "tab"
+  },
+  "localizationInfo": {
+    "defaultLanguageTag": "en-us"
+  }
+}

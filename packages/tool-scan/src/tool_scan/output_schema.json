@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mcp-tool-shop-org/tool-scan/blob/main/src/tool_scan/output_schema.json",
+  "title": "Tool-Scan JSON Output",
+  "description": "Schema for tool-scan --json output. Validates the complete JSON report structure.",
+  "type": "object",
+  "required": ["results", "summary", "errors"],
+  "additionalProperties": false,
+  "properties": {
+    "results": {
+      "type": "object",
+      "description": "Map of tool names to their grade reports.",
+      "additionalProperties": {
+        "$ref": "#/$defs/GradeReport"
+      }
+    },
+    "summary": {
+      "$ref": "#/$defs/Summary"
+    },
+    "errors": {
+      "type": "array",
+      "description": "List of file-level errors encountered during scanning.",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "GradeReport": {
+      "type": "object",
+      "description": "Complete grading report for a single MCP tool.",
+      "required": [
+        "tool_name",
+        "score",
+        "grade",
+        "grade_description",
+        "is_safe",
+        "is_compliant",
+        "remarks",
+        "summary"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "tool_name": {
+          "type": "string",
+          "description": "Name of the scanned tool."
+        },
+        "score": {
+          "type": "number",
+          "description": "Numeric score from 0 to 100.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "grade": {
+          "type": "string",
+          "description": "Letter grade.",
+          "enum": ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-", "F"]
+        },
+        "grade_description": {
+          "type": "string",
+          "description": "Human-readable grade description.",
+          "examples": [
+            "Excellent - Production Ready",
+            "Good",
+            "Failing - Do Not Use"
+          ]
+        },
+        "is_safe": {
+          "type": "boolean",
+          "description": "True if no HIGH or CRITICAL security threats were detected."
+        },
+        "is_compliant": {
+          "type": "boolean",
+          "description": "True if all required MCP compliance checks passed."
+        },
+        "remarks": {
+          "type": "array",
+          "description": "Actionable findings and recommendations.",
+          "items": {
+            "$ref": "#/$defs/Remark"
+          }
+        },
+        "summary": {
+          "$ref": "#/$defs/ReportSummary"
+        }
+      }
+    },
+    "Remark": {
+      "type": "object",
+      "description": "A single actionable finding.",
+      "required": ["category", "title", "description"],
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Remark category identifier.",
+          "enum": ["CRITICAL", "SECURITY", "COMPLIANCE", "QUALITY", "BEST_PRACTICE", "INFO"]
+        },
+        "title": {
+          "type": "string",
+          "description": "Short title of the finding."
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the finding."
+        },
+        "action": {
+          "type": ["string", "null"],
+          "description": "Suggested remediation action."
+        },
+        "reference": {
+          "type": ["string", "null"],
+          "description": "Link to specification or documentation."
+        }
+      }
+    },
+    "ReportSummary": {
+      "type": "object",
+      "description": "Counts of issues by category.",
+      "required": [
+        "critical_issues",
+        "security_issues",
+        "compliance_issues",
+        "quality_issues"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "critical_issues": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "security_issues": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "compliance_issues": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "quality_issues": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "Summary": {
+      "type": "object",
+      "description": "Aggregate summary across all scanned tools.",
+      "required": ["total", "passed", "failed", "average_score"],
+      "additionalProperties": false,
+      "properties": {
+        "total": {
+          "type": "integer",
+          "description": "Total number of tools scanned.",
+          "minimum": 0
+        },
+        "passed": {
+          "type": "integer",
+          "description": "Number of tools that passed (score >= min-score and safe).",
+          "minimum": 0
+        },
+        "failed": {
+          "type": "integer",
+          "description": "Number of tools that failed.",
+          "minimum": 0
+        },
+        "average_score": {
+          "type": "number",
+          "description": "Average score across all tools.",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    }
+  }
+}

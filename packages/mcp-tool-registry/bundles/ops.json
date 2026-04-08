@@ -1,0 +1,12 @@
+{
+  "id": "ops",
+  "description": "DevOps, infrastructure, and deployment tools",
+  "tools": [
+    "comfy-headless",
+    "control-room",
+    "flexiflow",
+    "headless-wheel-builder",
+    "homebrew-core",
+    "winget-pkgs"
+  ]
+}

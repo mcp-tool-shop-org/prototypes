@@ -1,0 +1,85 @@
+{
+  "name": "@mcptoolshop/mcp-tool-registry",
+  "version": "1.1.5",
+  "description": "Metadata-only registry for MCP Tool Shop tools",
+  "main": "registry.json",
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "verify-pack": "node scripts/verify-pack.mjs",
+    "build:derived": "node scripts/build-derived.mjs",
+    "bundles:build": "node scripts/build-bundles.mjs",
+    "policy": "node scripts/policy-check.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "npm run validate && npm run policy && npm run check:compat && npm run report:health",
+    "lint": "npm run format:check && npm run test",
+    "prepare": "husky",
+    "prepack": "npm run bundles:build && npm run build:derived && npm run report:health",
+    "report:health": "node scripts/health-report.mjs --check-slo",
+    "check:compat": "node scripts/test-compat.mjs",
+    "facets": "node scripts/facets.mjs",
+    "test:search": "node tests/search.test.mjs",
+    "test:site": "node tests/site-smoke.mjs",
+    "build:site": "node scripts/build-site.mjs",
+    "verify": "npm test && npm run build:derived && npm run verify-pack && npm pack --dry-run"
+  },
+  "lint-staged": {
+    "*.{json,md,yml,js}": "prettier --write"
+  },
+  "exports": {
+    ".": "./registry.json",
+    "./schema": "./schema/registry.schema.json",
+    "./bundles/core": "./bundles/core.json",
+    "./bundles/core.json": "./bundles/core.json",
+    "./bundles/agents": "./bundles/agents.json",
+    "./bundles/agents.json": "./bundles/agents.json",
+    "./bundles/ops": "./bundles/ops.json",
+    "./bundles/ops.json": "./bundles/ops.json",
+    "./bundles/evaluation": "./bundles/evaluation.json",
+    "./bundles/evaluation.json": "./bundles/evaluation.json"
+  },
+  "files": [
+    "registry.json",
+    "schema",
+    "bundles",
+    "dist",
+    "logo.jpg",
+    "logo.png",
+    "README.md",
+    "HANDBOOK.md",
+    "CHANGELOG.md"
+  ],
+  "keywords": [
+    "mcp",
+    "registry",
+    "tools",
+    "metadata",
+    "model-context-protocol"
+  ],
+  "author": "mcp-tool-shop <64996768+mcp-tool-shop@users.noreply.github.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcp-tool-shop-org/mcp-tool-registry.git"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/mcp-tool-registry#readme",
+  "bugs": {
+    "url": "https://github.com/mcp-tool-shop-org/mcp-tool-registry/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "ajv": "^8.18.0",
+    "ajv-cli": "^5.0.0",
+    "ajv-formats": "^3.0.1",
+    "chalk": "^5.6.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.8.1"
+  }
+}

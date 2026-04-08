@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "codeteam.verification-policy.schema.v0.1.json",
+  "title": "CodeTeam Verification Policy",
+  "description": "Multi-signer quorum policy for package verification",
+  "type": "object",
+  "required": ["version", "requirements"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Policy version",
+      "const": "0.1"
+    },
+    "requirements": {
+      "type": "array",
+      "description": "List of requirements that must ALL be satisfied",
+      "items": {
+        "$ref": "#/$defs/requirement"
+      }
+    }
+  },
+  "$defs": {
+    "requirement": {
+      "type": "object",
+      "required": ["purpose", "threshold"],
+      "additionalProperties": false,
+      "properties": {
+        "purpose": {
+          "type": "string",
+          "description": "Purpose filter: only signatures/approvals with this purpose count",
+          "enum": ["codeteam.package_attestation", "codeteam.approval"]
+        },
+        "threshold": {
+          "type": "integer",
+          "description": "Minimum number of distinct signers required",
+          "minimum": 1
+        },
+        "allow": {
+          "type": "object",
+          "description": "Allowlist constraints",
+          "additionalProperties": false,
+          "properties": {
+            "key_ids": {
+              "type": "array",
+              "description": "Allowed key IDs. Empty or null means all authorized keys are allowed.",
+              "items": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{16}$"
+              }
+            },
+            "roles": {
+              "type": "array",
+              "description": "Allowed roles. Empty or null means all roles are allowed.",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "distinct_by": {
+          "type": "array",
+          "description": "Fields to use for deduplication. Default: [\"key_id\"]",
+          "items": {
+            "type": "string",
+            "enum": ["key_id"]
+          },
+          "default": ["key_id"]
+        },
+        "roles": {
+          "type": "array",
+          "description": "Optional role filter. If specified, only signatures with matching role count.",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "@mcptoolshop/ai-ui",
+  "version": "1.1.6",
+  "description": "Automated design diagnostics for SPAs — crawl, diff, verify UI against docs",
+  "type": "module",
+  "bin": {
+    "ai-ui": "./cli/bin/ai-ui.mjs"
+  },
+  "files": [
+    "cli/bin/",
+    "cli/src/",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "atlas": "node cli/bin/ai-ui.mjs atlas",
+    "probe": "node cli/bin/ai-ui.mjs probe",
+    "surfaces": "node cli/bin/ai-ui.mjs surfaces",
+    "diff": "node cli/bin/ai-ui.mjs diff",
+    "graph": "node cli/bin/ai-ui.mjs graph",
+    "compose": "node cli/bin/ai-ui.mjs compose",
+    "verify": "node cli/bin/ai-ui.mjs verify",
+    "baseline": "node cli/bin/ai-ui.mjs baseline",
+    "init-memory": "node cli/bin/ai-ui.mjs init-memory",
+    "stage0": "node cli/bin/ai-ui.mjs stage0",
+    "test": "node --test cli/test/**/*.test.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "@mcptoolshop/websketch-ir": "^2.0.0",
+    "markdown-it": "^14.0.0",
+    "playwright": "^1.50.0"
+  }
+}

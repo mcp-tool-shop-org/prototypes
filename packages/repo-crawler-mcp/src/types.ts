@@ -1,0 +1,556 @@
+import { z } from 'zod';
+
+// ─── Error Codes ───────────────────────────────────────────────────────────────
+
+export const ErrorCode = {
+  INVALID_INPUT: 'INVALID_INPUT',
+  REPO_NOT_FOUND: 'REPO_NOT_FOUND',
+  ORG_NOT_FOUND: 'ORG_NOT_FOUND',
+  AUTH_REQUIRED: 'AUTH_REQUIRED',
+  RATE_LIMITED: 'RATE_LIMITED',
+  PERMISSION_DENIED: 'PERMISSION_DENIED',
+  API_ERROR: 'API_ERROR',
+  TIER_UNAVAILABLE: 'TIER_UNAVAILABLE',
+  UNKNOWN_ERROR: 'UNKNOWN_ERROR',
+} as const;
+
+export type ErrorCodeType = (typeof ErrorCode)[keyof typeof ErrorCode];
+
+// ─── Tier 1 Data Interfaces ───────────────────────────────────────────────────
+
+export interface RepoMetadata {
+  name: string;
+  full_name: string;
+  description: string | null;
+  topics: string[];
+  owner: { login: string; type: string; avatar_url: string };
+  visibility: string;
+  license: { spdx_id: string; name: string } | null;
+  default_branch: string;
+  created_at: string;
+  updated_at: string;
+  pushed_at: string;
+  homepage: string | null;
+  fork: boolean;
+  parent?: { full_name: string; html_url: string };
+  stargazers_count: number;
+  forks_count: number;
+  open_issues_count: number;
+  watchers_count: number;
+  size: number;
+  html_url: string;
+  archived: boolean;
+  disabled: boolean;
+  has_issues: boolean;
+  has_wiki: boolean;
+  has_discussions: boolean;
+}
+
+export interface FileTreeEntry {
+  path: string;
+  type: 'blob' | 'tree';
+  size?: number;
+  sha: string;
+}
+
+export interface ReadmeContent {
+  content: string;
+  encoding: string;
+  size: number;
+  path: string;
+  html_url: string;
+}
+
+export interface CommitSummary {
+  sha: string;
+  message: string;
+  author: { name: string; email: string; date: string };
+  committer: { name: string; date: string };
+  html_url: string;
+}
+
+export interface ContributorInfo {
+  login: string;
+  avatar_url: string;
+  contributions: number;
+  html_url: string;
+  type: string;
+}
+
+export interface BranchInfo {
+  name: string;
+  protected: boolean;
+}
+
+export interface TagInfo {
+  name: string;
+  sha: string;
+}
+
+export interface ReleaseInfo {
+  tag_name: string;
+  name: string | null;
+  draft: boolean;
+  prerelease: boolean;
+  created_at: string;
+  published_at: string | null;
+  html_url: string;
+  body: string | null;
+  author: { login: string };
+}
+
+export interface CommunityProfile {
+  health_percentage: number;
+  description: string | null;
+  documentation: string | null;
+  files: {
+    code_of_conduct: { name: string; url: string } | null;
+    contributing: { url: string } | null;
+    license: { spdx_id: string; url: string } | null;
+    readme: { url: string } | null;
+    issue_template: { url: string } | null;
+    pull_request_template: { url: string } | null;
+  };
+}
+
+export interface WorkflowInfo {
+  id: number;
+  name: string;
+  path: string;
+  state: string;
+  created_at: string;
+  updated_at: string;
+  html_url: string;
+}
+
+export interface RateLimitInfo {
+  limit: number;
+  remaining: number;
+  reset: string;
+  used: number;
+}
+
+export interface Tier1Data {
+  metadata: RepoMetadata | null;
+  tree: FileTreeEntry[];
+  languages: Record<string, number>;
+  readme: ReadmeContent | null;
+  commits: CommitSummary[];
+  contributors: ContributorInfo[];
+  branches: BranchInfo[];
+  tags: TagInfo[];
+  releases: ReleaseInfo[];
+  community: CommunityProfile | null;
+  workflows: WorkflowInfo[];
+  rateLimit: RateLimitInfo;
+}
+
+export const TIER1_SECTIONS = [
+  'metadata',
+  'tree',
+  'languages',
+  'readme',
+  'commits',
+  'contributors',
+  'branches',
+  'tags',
+  'releases',
+  'community',
+  'workflows',
+] as const;
+
+export type Tier1Section = (typeof TIER1_SECTIONS)[number];
+
+// ─── Tier 2 Data Interfaces (Advanced) ────────────────────────────────────────
+
+export interface TrafficViews {
+  count: number;
+  uniques: number;
+  views: Array<{ timestamp: string; count: number; uniques: number }>;
+}
+
+export interface TrafficClones {
+  count: number;
+  uniques: number;
+  clones: Array<{ timestamp: string; count: number; uniques: number }>;
+}
+
+export interface TrafficData {
+  views: TrafficViews | null;
+  clones: TrafficClones | null;
+}
+
+export interface IssueDetail {
+  number: number;
+  title: string;
+  state: string;
+  labels: string[];
+  assignees: string[];
+  created_at: string;
+  updated_at: string;
+  closed_at: string | null;
+  author: string;
+  comments: number;
+  body_preview: string;
+  html_url: string;
+  milestone: string | null;
+  reactions_total: number;
+}
+
+export interface PullRequestDetail {
+  number: number;
+  title: string;
+  state: string;
+  labels: string[];
+  assignees: string[];
+  created_at: string;
+  updated_at: string;
+  closed_at: string | null;
+  merged_at: string | null;
+  author: string;
+  draft: boolean;
+  comments: number;
+  body_preview: string;
+  html_url: string;
+  head_ref: string;
+  base_ref: string;
+  additions: number | null;
+  deletions: number | null;
+  changed_files: number | null;
+}
+
+export interface MilestoneInfo {
+  number: number;
+  title: string;
+  state: string;
+  description: string | null;
+  open_issues: number;
+  closed_issues: number;
+  due_on: string | null;
+  created_at: string;
+  updated_at: string;
+  html_url: string;
+}
+
+export interface DiscussionInfo {
+  number: number;
+  title: string;
+  author: string;
+  category: string;
+  created_at: string;
+  updated_at: string;
+  comments: number;
+  answer_chosen: boolean;
+  html_url: string;
+}
+
+export interface Tier2Data {
+  traffic: TrafficData | null;
+  issues: IssueDetail[];
+  pullRequests: PullRequestDetail[];
+  milestones: MilestoneInfo[];
+  discussions: DiscussionInfo[];
+}
+
+export const TIER2_SECTIONS = [
+  'traffic',
+  'issues',
+  'pullRequests',
+  'milestones',
+  'discussions',
+] as const;
+
+export type Tier2Section = (typeof TIER2_SECTIONS)[number];
+
+// ─── Tier 3 Data Interfaces (Security/Admin) ─────────────────────────────────
+
+export type PermissionStatus = 'granted' | 'denied' | 'not_enabled';
+
+export interface DependabotAlert {
+  number: number;
+  state: string;
+  severity: string;
+  summary: string;
+  package_name: string;
+  package_ecosystem: string;
+  vulnerable_version_range: string;
+  patched_version: string | null;
+  created_at: string;
+  updated_at: string;
+  fixed_at: string | null;
+  dismissed_at: string | null;
+  html_url: string;
+  cve_id: string | null;
+  ghsa_id: string | null;
+}
+
+export interface SecurityAdvisory {
+  ghsa_id: string;
+  cve_id: string | null;
+  summary: string;
+  description_preview: string;
+  severity: string;
+  state: string;
+  published_at: string | null;
+  updated_at: string;
+  withdrawn_at: string | null;
+  html_url: string;
+  vulnerabilities: Array<{
+    package: { ecosystem: string; name: string };
+    severity: string;
+    vulnerable_version_range: string;
+    patched_versions: string | null;
+  }>;
+}
+
+export interface SBOMPackage {
+  name: string;
+  version: string | null;
+  ecosystem: string;
+  license: string | null;
+  relationship: string;
+}
+
+export interface SBOMData {
+  spdx_id: string;
+  name: string;
+  created_at: string;
+  packages: SBOMPackage[];
+}
+
+export interface CodeScanningAlert {
+  number: number;
+  state: string;
+  severity: string;
+  description: string;
+  rule_id: string;
+  rule_description: string;
+  tool_name: string;
+  created_at: string;
+  updated_at: string;
+  fixed_at: string | null;
+  dismissed_at: string | null;
+  html_url: string;
+  most_recent_instance: {
+    ref: string;
+    path: string;
+    start_line: number;
+  } | null;
+}
+
+export interface SecretScanningAlert {
+  number: number;
+  state: string;
+  secret_type: string;
+  secret_type_display_name: string;
+  resolution: string | null;
+  resolved_at: string | null;
+  created_at: string;
+  updated_at: string;
+  html_url: string;
+  push_protection_bypassed: boolean;
+}
+
+export interface Tier3Data {
+  dependabotAlerts: DependabotAlert[];
+  securityAdvisories: SecurityAdvisory[];
+  sbom: SBOMData | null;
+  codeScanningAlerts: CodeScanningAlert[];
+  secretScanningAlerts: SecretScanningAlert[];
+  permissions: Record<string, PermissionStatus>;
+}
+
+export const TIER3_SECTIONS = [
+  'dependabotAlerts',
+  'securityAdvisories',
+  'sbom',
+  'codeScanningAlerts',
+  'secretScanningAlerts',
+] as const;
+
+export type Tier3Section = (typeof TIER3_SECTIONS)[number];
+
+// ─── Search Result ───────────────────────────────────────────────────────────
+
+export interface SearchResultItem {
+  full_name: string;
+  description: string | null;
+  html_url: string;
+  stargazers_count: number;
+  forks_count: number;
+  open_issues_count: number;
+  language: string | null;
+  topics: string[];
+  license: { spdx_id: string } | null;
+  updated_at: string;
+  pushed_at: string;
+  archived: boolean;
+  fork: boolean;
+}
+
+export interface SearchResult {
+  totalCount: number;
+  page: number;
+  perPage: number;
+  hasMore: boolean;
+  items: SearchResultItem[];
+}
+
+// ─── File Content ────────────────────────────────────────────────────────────
+
+export interface FileContent {
+  path: string;
+  content: string;
+  size: number;
+  encoding: string;
+  sha: string;
+  html_url: string;
+  download_url: string | null;
+}
+
+// ─── Commit Diff ─────────────────────────────────────────────────────────────
+
+export interface CommitDiffFile {
+  filename: string;
+  status: string;
+  additions: number;
+  deletions: number;
+  changes: number;
+  patch?: string;
+}
+
+export interface CommitDiff {
+  sha: string;
+  message: string;
+  author: { name: string; email: string; date: string };
+  html_url: string;
+  stats: { additions: number; deletions: number; total: number };
+  files: CommitDiffFile[];
+}
+
+// ─── Workflow Run ────────────────────────────────────────────────────────────
+
+export interface WorkflowRunInfo {
+  id: number;
+  name: string;
+  status: string;
+  conclusion: string | null;
+  head_branch: string;
+  event: string;
+  created_at: string;
+  updated_at: string;
+  html_url: string;
+  run_number: number;
+  duration_seconds: number | null;
+}
+
+// ─── Crawl Result Wrapper ─────────────────────────────────────────────────────
+
+/** Metadata about a failed repo crawl within an org crawl. */
+export interface FailedRepo {
+  name: string;
+  error: string;
+}
+
+/** Discovery metadata — surfaces coverage, freshness, and absence truth. */
+export interface DiscoveryMeta {
+  /** Whether the repo_limit was reached (more repos may exist beyond the limit). */
+  limitReached: boolean;
+  /** Number of repos matching filters within the limit. NOT the org total. */
+  matchingReposInLimit: number;
+  /** Repos that failed during crawl (name + error). */
+  failedRepos: FailedRepo[];
+  /** Number of repos that failed during crawl. */
+  failedCount: number;
+  /** Filters that were applied (for caller awareness of what was excluded). */
+  appliedFilters: {
+    includeForks: boolean;
+    includeArchived: boolean;
+    minStars?: number;
+    language?: string;
+  };
+}
+
+export interface CrawlResult {
+  owner: string;
+  repo: string;
+  crawledAt: string;
+  /** Whether any data in this result may have been served from cache. */
+  cacheNote: string;
+  tier: string;
+  sections: string[];
+  data: Tier1Data;
+  tier2Data?: Tier2Data;
+  tier3Data?: Tier3Data;
+}
+
+// ─── Zod Input Schemas ────────────────────────────────────────────────────────
+
+export const CrawlRepoInputSchema = z.object({
+  owner: z.string().min(1).describe('GitHub repository owner (user or org)'),
+  repo: z.string().min(1).describe('GitHub repository name'),
+  tier: z.enum(['1', '2', '3']).default('1').describe('Data tier: 1=default, 2=advanced, 3=security'),
+  sections: z.array(z.string()).optional().describe(
+    'Specific sections to include (e.g. ["metadata","tree","readme","issues","pullRequests"]). If omitted, all sections for the tier are included.'
+  ),
+  exclude_sections: z.array(z.string()).optional().describe(
+    'Sections to exclude from the tier'
+  ),
+  commit_limit: z.number().min(1).max(500).default(30).describe('Max commits to fetch'),
+  contributor_limit: z.number().min(1).max(500).default(30).describe('Max contributors to fetch'),
+  issue_limit: z.number().min(1).max(1000).default(100).describe('Max issues to fetch (Tier 2)'),
+  pr_limit: z.number().min(1).max(1000).default(100).describe('Max pull requests to fetch (Tier 2)'),
+  issue_state: z.enum(['open', 'closed', 'all']).default('all').describe('Issue/PR state filter (Tier 2)'),
+});
+
+export type CrawlRepoInput = z.infer<typeof CrawlRepoInputSchema>;
+
+export const CrawlOrgInputSchema = z.object({
+  org: z.string().min(1).describe('GitHub organization name'),
+  tier: z.enum(['1', '2', '3']).default('1').describe('Data tier per repo'),
+  min_stars: z.number().min(0).default(0).describe('Minimum stars filter'),
+  language: z.string().optional().describe('Filter by primary language'),
+  include_forks: z.boolean().default(false).describe('Include forked repos'),
+  include_archived: z.boolean().default(false).describe('Include archived repos'),
+  repo_limit: z.number().min(1).max(100).default(30).describe('Max repos to crawl'),
+  page: z.number().min(1).default(1).describe('Page number (1-based)'),
+});
+
+export type CrawlOrgInput = z.infer<typeof CrawlOrgInputSchema>;
+
+export const RepoSummaryInputSchema = z.object({
+  owner: z.string().min(1).describe('Repository owner'),
+  repo: z.string().min(1).describe('Repository name'),
+});
+
+export type RepoSummaryInput = z.infer<typeof RepoSummaryInputSchema>;
+
+export const CompareReposInputSchema = z.object({
+  repos: z.array(z.object({
+    owner: z.string().min(1),
+    repo: z.string().min(1),
+  })).min(2).max(5).describe('Repos to compare (2-5)'),
+  aspects: z.array(z.enum([
+    'metadata', 'languages', 'activity', 'community', 'size',
+  ])).optional().describe('Comparison aspects (default: all)'),
+});
+
+export type CompareReposInput = z.infer<typeof CompareReposInputSchema>;
+
+const CrawlResultShape = z.object({
+  owner: z.string().optional(),
+  repo: z.string().optional(),
+  crawledAt: z.string().optional(),
+  tier: z.string().optional(),
+  data: z.record(z.unknown()).optional(),
+  tier2Data: z.record(z.unknown()).optional(),
+  tier3Data: z.record(z.unknown()).optional(),
+}).passthrough();
+
+export const ExportDataInputSchema = z.object({
+  data: z.union([CrawlResultShape, z.array(CrawlResultShape).min(1)]).describe('Previously crawled repo data (CrawlResult or array of CrawlResults)'),
+  format: z.enum(['json', 'csv', 'markdown']).describe('Export format'),
+  sections: z.array(z.string()).optional().describe('Sections to include in export'),
+});
+
+export type ExportDataInput = z.infer<typeof ExportDataInputSchema>;

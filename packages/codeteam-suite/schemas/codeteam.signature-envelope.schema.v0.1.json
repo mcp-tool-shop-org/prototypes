@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "codeteam.signature-envelope.schema.v0.1.json",
+  "title": "CodeTeam Signature Envelope",
+  "description": "Stored artifact containing a signature and its signable payload",
+  "type": "object",
+  "required": ["schema_version", "algorithm", "key_id", "public_key", "signature", "signable", "created_at"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Envelope schema version",
+      "const": "0.1"
+    },
+    "algorithm": {
+      "type": "string",
+      "description": "Signature algorithm",
+      "enum": ["ed25519"]
+    },
+    "key_id": {
+      "type": "string",
+      "description": "Key identifier",
+      "minLength": 1
+    },
+    "public_key": {
+      "type": "string",
+      "description": "Base64-encoded public key",
+      "pattern": "^[A-Za-z0-9+/]+=*$"
+    },
+    "signature": {
+      "type": "string",
+      "description": "Base64-encoded signature bytes",
+      "pattern": "^[A-Za-z0-9+/]+=*$"
+    },
+    "signable": {
+      "type": "object",
+      "description": "The signable payload that was signed",
+      "$comment": "See codeteam.signable.schema.v0.1.json"
+    },
+    "created_at": {
+      "type": "string",
+      "description": "ISO-8601 timestamp when signature was created",
+      "format": "date-time"
+    }
+  }
+}

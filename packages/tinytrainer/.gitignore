@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+*.egg
+.ruff_cache/
+/model/
+/export/
+*.kit.zip
+site/.astro/
+site/dist/
+site/node_modules/
+.polyglot-cache.json
