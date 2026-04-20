@@ -1,0 +1,99 @@
+{
+  "$schema": "../../schemas/passport.schema.json",
+  "conformsTo": [
+    "codemeta:3.0",
+    "ro-crate:1.1",
+    "mcp-prototypes:passport:1"
+  ],
+  "id": "seed:vscode-voice-soundboard:1.0.2",
+  "swhid": null,
+  "name": "vscode-voice-soundboard",
+  "title": "vscode-voice-soundboard",
+  "description": "Text-to-speech extension with 48 voices, presets, and multi-speaker dialogue — powered by MCP Voice Soundboard",
+  "version": "1.0.2",
+  "license": "MIT",
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-04-20",
+  "codeRepository": "https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/vscode-voice-soundboard",
+  "author": [
+    {
+      "name": "mcp-tool-shop"
+    }
+  ],
+  "keywords": [],
+  "lifecycle": {
+    "state": "dormant",
+    "stateSince": "2026-04-08",
+    "maturity": "prototype",
+    "caretaker": null,
+    "graduatedTo": null,
+    "resurrectionNotes": null
+  },
+  "taxonomy": {
+    "category": "vscode-extensions",
+    "domains": [],
+    "tags": [
+      "typescript",
+      "javascript",
+      "cli",
+      "mcp",
+      "vscode"
+    ]
+  },
+  "technical": {
+    "kind": "extension",
+    "programmingLanguages": [
+      "TypeScript",
+      "JavaScript"
+    ],
+    "runtimes": [],
+    "operatingSystems": [
+      "any"
+    ]
+  },
+  "health": {
+    "lineCount": null,
+    "lastCommitAt": null,
+    "commitRecencyDays": null,
+    "hasTests": null,
+    "hasReadme": null,
+    "hasLicense": null,
+    "buildable": null
+  },
+  "lineage": {
+    "sourceRepo": null,
+    "consolidatedAt": "2026-04-08",
+    "relatedSeeds": [],
+    "deprecates": [],
+    "successors": []
+  },
+  "sbom": {
+    "format": "none",
+    "url": null,
+    "hash": null
+  },
+  "discovery": {
+    "oneLiner": "Text-to-speech extension for VS Code with 48 voices, presets, and multi-speaker dialogue — powered by MCP Voice Soundboard.",
+    "whyItMatters": "Provides a rich set of TTS capabilities directly within the VS Code editor environment, enabling users to synthesize speech in multiple languages and styles from within their development workflow."
+  },
+  "patterns": [
+    {
+      "name": "voice-synthesis",
+      "category": "data-model",
+      "summary": "The extension supports synthesis of text-to-speech in 48 distinct voices across 8 languages, demonstrating a wide range of voice customization options for TTS applications."
+    }
+  ],
+  "failureModes": [],
+  "priorArt": [],
+  "agentCapsule": {
+    "insight": null,
+    "excerpt": null
+  },
+  "ingest": {
+    "method": "ollama-backfill",
+    "model": "hermes3:8b",
+    "confidence": 0.9,
+    "manualReview": true,
+    "ingestedAt": "2026-04-20T22:00:03.124Z"
+  }
+}

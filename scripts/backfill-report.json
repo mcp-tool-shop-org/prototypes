@@ -1,0 +1,20 @@
+{
+  "startedAt": "2026-04-20T22:06:26.720Z",
+  "model": "hermes3:8b",
+  "total": 1,
+  "results": [
+    {
+      "slug": "claude-memories",
+      "status": "ok",
+      "confidence": 1,
+      "category": "developer-tools",
+      "kind": "cli"
+    }
+  ],
+  "finishedAt": "2026-04-20T22:06:33.450Z",
+  "summary": {
+    "ok": 1,
+    "failed": 0,
+    "skipped": 0
+  }
+}
