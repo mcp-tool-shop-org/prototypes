@@ -33,17 +33,15 @@
     "category": "typing-and-input",
     "domains": [],
     "tags": [
-      "typescript",
-      "javascript",
       "csharp"
     ]
   },
   "technical": {
     "kind": "desktop",
     "programmingLanguages": [
-      "TypeScript",
-      "JavaScript",
-      "C#"
+      "C#",
+      "XAML",
+      "TypeScript"
     ],
     "runtimes": [],
     "operatingSystems": [
@@ -86,7 +84,7 @@
     "method": "ollama-backfill",
     "model": "hermes3:8b",
     "confidence": 0.9,
-    "manualReview": true,
+    "manualReview": false,
     "ingestedAt": "2026-04-20T21:52:46.672Z"
   }
 }

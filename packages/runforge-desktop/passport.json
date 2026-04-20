@@ -33,19 +33,15 @@
     "category": "desktop-apps",
     "domains": [],
     "tags": [
-      "typescript",
-      "javascript",
-      "python",
       "csharp"
     ]
   },
   "technical": {
     "kind": "desktop",
     "programmingLanguages": [
-      "TypeScript",
-      "JavaScript",
+      "C#",
       "Python",
-      "C#"
+      "XAML"
     ],
     "runtimes": [],
     "operatingSystems": [

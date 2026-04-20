@@ -92,7 +92,7 @@
     "method": "ollama-backfill",
     "model": "hermes3:8b",
     "confidence": 1,
-    "manualReview": true,
+    "manualReview": false,
     "ingestedAt": "2026-04-20T22:00:45.038Z"
   }
 }

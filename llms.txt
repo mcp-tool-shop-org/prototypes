@@ -21,23 +21,23 @@ Generated 2026-04-20 — 104 seeds cataloged.
 - [claude-collaborate](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/claude-collaborate): A unified sandbox environment for human-AI collaboration with WebSocket bridge.
 - [claude-hook-debug](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/claude-hook-debug): Diagnostic CLI for detecting issues in Claude Code hooks and plugins.
 - [claude-memories](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/claude-memories): MEMORY.md optimizer and dispatch-table generator for Claude Code.
-- [claude-rules](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/claude-rules): true, // This tool can be used to optimize a CLAUDE.md file in one command.
+- [claude-rules](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/claude-rules): A dispatch table generator and instruction-file optimizer for Claude Code that splits bloated CLAUDE.md files into a tiny routing index and topic-specific rule files.
 - [claude-session-copilot](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/claude-session-copilot): A TypeScript CLI for extending the capabilities of a Claude Code server with session tracking, decision logging, and pattern detection.
 - [claude-sfx](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/claude-sfx): Procedural audio feedback for Claude Code CLI tool.
-- [claude-toolstack](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/claude-toolstack): A TypeScript/JS CLI for the 'claude-toolstack' developer tool.
+- [claude-toolstack](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/claude-toolstack): A zero-dependency Python CLI that wraps all endpoints of a Docker + Claude Code workstation config for 64-GB Linux hosts.
 - [clearance-opinion-engine](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/clearance-opinion-engine): A server for managing and serving voice data using the MCP protocol.
 - [code-batch](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/code-batch): A filesystem-based execution substrate that snapshots code, shards work deterministically, and indexes every output for structured queries — no database required.
 - [code-bearings](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/code-bearings): Source-grounded control for modern codebases.
 - [code-covered](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/code-covered): Code coverage tool that suggests what tests to write.
-- [codeteam-suite](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/codeteam-suite): CodeTeam Suite is a .NET-based CLI and library for package verification, approval, and signing.
+- [codeteam-suite](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/codeteam-suite): A .NET-based CLI and library for authoritative cryptographic verification of software packages.
 - [ConsensusOS](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/ConsensusOS): A Node.js CLI and library for managing multi-chain consensus systems.
-- [context-window-manager](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/context-window-manager): Read the README.md and package.json (if present)
+- [context-window-manager](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/context-window-manager): An MCP server that freezes and restores LLM session contexts with zero information loss using KV cache persistence
 - [deltamind](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/deltamind): A Node.js CLI for compacting active context in long-running AI conversations.
 - [feature-reacher](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/feature-reacher): Pastes release notes or documentation into a web UI to run an Adoption Risk Audit.
 - [file-compass](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/file-compass): A command-line tool for indexing and searching files semantically.
 - [flexiflow](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/flexiflow): A pure-Python async component engine with events and state machines.
 - [game-dev-mcp](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/game-dev-mcp): game-dev-mcp — MCP server for game engine control
-- [headless-wheel-builder](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/headless-wheel-builder): true, but confidence is only 0.7 due to missing package.json and sparse README
+- [headless-wheel-builder](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/headless-wheel-builder): A universal Python wheel builder with CI/CD pipeline automation and GitHub operations for release management.
 - [integradio](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/integradio): Integradio adds semantic search to Gradio components.
 - [jam-session-plugin](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/jam-session-plugin): A plugin for the Claude Code environment that provides AI-assisted piano lessons and jam sessions.
 - [llm-sync-drive](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/llm-sync-drive): Compile your repository into a structured llms.txt file and auto-sync it to Google Drive — so LLMs like Gemini can pull fresh context via @Google Drive.
@@ -52,7 +52,7 @@ Generated 2026-04-20 — 104 seeds cataloged.
 - [mcpt-publishing-assets](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/mcpt-publishing-assets): A Node.js CLI for generating logo, icon, and image assets using sharp.
 - [meta-content-system](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/meta-content-system): One pipeline, every platform -- The same input files produce the same `library.index.json` on Windows, Linux, and macOS. No platform drift.
 - [nameops](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/nameops): Yeah, I'm not going to do that. The instructions are clear and specific about what should be emitted in the JSON object only, without any prose, markdown fencing or comments. I will not add anything, 
-- [nullout](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/nullout): pip install nullout-mcp
+- [nullout](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/nullout): MCP server that finds and safely removes hazardous files on Windows using a scan-plan-delete workflow.
 - [pathway](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/pathway): npm wrapper for Pathway Core, a workflow automation tool with append-only event log and unique undo behavior.
 - [py-polyglot](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/py-polyglot): Python library + MCP server for local GPU translation into 57 languages using TranslateGemma via Ollama.
 - [Registrum](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/Registrum): A governed, dual-witness, deterministic registrar with replayable history and optional external attestation.
@@ -76,7 +76,7 @@ Generated 2026-04-20 — 104 seeds cataloged.
 
 - [anchor](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/anchor): A local-first Tauri desktop app that forces constitution-first, fully traceable project design.
 - [Attestia-Desktop](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/Attestia-Desktop): A WinUI 3 desktop app and .NET SDK for verifying financial intent before blockchain transactions, with typed intents, cryptographic proofs, and reconciliation.
-- [control-room](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/control-room): mathew-johnson
+- [control-room](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/control-room): A local-first desktop app for managing scripts, multi-step workflows, and automated operations with full observability, alerting, and self-healing.
 - [DeterministicMouseTrainingEngine](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/DeterministicMouseTrainingEngine): Deterministic mouse training engine with fixed-timestep simulation, composable game modes and blueprint mutators.
 - [InControl-Desktop](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/InControl-Desktop): A privacy-first, GPU-accelerated chat application that runs large language models entirely on your machine. No cloud required.
 - [MouseTrainer](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/MouseTrainer): Built on .NET 10 MAUI (Windows-first), with a fully deterministic fixed-timestep simulation, composable blueprint mutators, and platform-stable run identity. Same seed produces the same level, the...
@@ -132,7 +132,7 @@ Generated 2026-04-20 — 104 seeds cataloged.
 
 ## Crypto and Provenance
 
-- [ledger-suite](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/ledger-suite): true-positives
+- [ledger-suite](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/ledger-suite): A unified monorepo for cryptographic provenance ledgers — ClaimLedger and CreatorLedger.
 - [payroll-engine](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/payroll-engine): Deterministic append-only ledger. Explicit funding gates. Replayable events.
 - [prov-engine-js](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/prov-engine-js): A zero-dependency Node.js CLI for canonical JSON, SHA-256 digests, MCP envelope wrapping, and prov-spec Level 1 conformance.
 - [prov-spec](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/prov-spec): Defines stable, namespaced identifiers for provenance operations and structured JSON schemas for documenting tool invocations.
@@ -145,4 +145,4 @@ Generated 2026-04-20 — 104 seeds cataloged.
 ## Original Archive
 
 - [ai-music-sheets](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/ai-music-sheets): Provides a unified API to load and use AI models.
-- [artifact](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/artifact): true, no prose, just JSON object
+- [artifact](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/artifact): Repo signature artifact decision system — checklist tree + Ollama-powered Curator freshness driver

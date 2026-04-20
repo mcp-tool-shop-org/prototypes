@@ -9,7 +9,7 @@
   "swhid": null,
   "name": "ledger-suite",
   "title": "Ledger Suite",
-  "description": "Unified monorepo for cryptographic provenance ledgers — ClaimLedger and CreatorLedger",
+  "description": "Ledger Suite is a local-first collection of cryptographic provenance ledgers that enables scientific claims with Ed25519 signatures, creator attestations, and proof bundles for portable verification. It includes features like citations linking claims, revocations with witness countersignatures, and RFC 3161 timestamps for non-repudiation.",
   "version": "0.1.0",
   "license": "MIT",
   "datePublished": "2026-04-20",
@@ -72,8 +72,8 @@
     "hash": null
   },
   "discovery": {
-    "oneLiner": "true-positives",
-    "whyItMatters": "Provides cryptographic provenance verification for scientific claims and creator attestations, enabling secure tracking of intellectual property and content ownership."
+    "oneLiner": "A unified monorepo for cryptographic provenance ledgers — ClaimLedger and CreatorLedger.",
+    "whyItMatters": null
   },
   "patterns": [],
   "failureModes": [],
@@ -86,7 +86,7 @@
     "method": "ollama-backfill",
     "model": "hermes3:8b",
     "confidence": 0.9,
-    "manualReview": true,
-    "ingestedAt": "2026-04-20T21:53:48.617Z"
+    "manualReview": false,
+    "ingestedAt": "2026-04-20T23:25:13.840Z"
   }
 }

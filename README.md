@@ -42,23 +42,23 @@ _104 seeds across 13 categories — all currently `dormant` — generated 2026-0
 | [claude-collaborate](packages/claude-collaborate) | A unified sandbox environment for human-AI collaboration with WebSocket bridge. |
 | [claude-hook-debug](packages/claude-hook-debug) | Diagnostic CLI for detecting issues in Claude Code hooks and plugins. |
 | [claude-memories](packages/claude-memories) | MEMORY.md optimizer and dispatch-table generator for Claude Code. |
-| [claude-rules](packages/claude-rules) | true, // This tool can be used to optimize a CLAUDE.md file in one command. |
+| [claude-rules](packages/claude-rules) | A dispatch table generator and instruction-file optimizer for Claude Code that splits bloated CLAUDE.md files into a tiny routing index and topic-specific rule files. |
 | [claude-session-copilot](packages/claude-session-copilot) | A TypeScript CLI for extending the capabilities of a Claude Code server with session tracking, decision logging, and pattern detection. |
 | [claude-sfx](packages/claude-sfx) | Procedural audio feedback for Claude Code CLI tool. |
-| [claude-toolstack](packages/claude-toolstack) | A TypeScript/JS CLI for the 'claude-toolstack' developer tool. |
+| [claude-toolstack](packages/claude-toolstack) | A zero-dependency Python CLI that wraps all endpoints of a Docker + Claude Code workstation config for 64-GB Linux hosts. |
 | [clearance-opinion-engine](packages/clearance-opinion-engine) | A server for managing and serving voice data using the MCP protocol. |
 | [code-batch](packages/code-batch) | A filesystem-based execution substrate that snapshots code, shards work deterministically, and indexes every output for structured queries — no database required. |
 | [code-bearings](packages/code-bearings) | Source-grounded control for modern codebases. |
 | [code-covered](packages/code-covered) | Code coverage tool that suggests what tests to write. |
-| [codeteam-suite](packages/codeteam-suite) | CodeTeam Suite is a .NET-based CLI and library for package verification, approval, and signing. |
+| [codeteam-suite](packages/codeteam-suite) | A .NET-based CLI and library for authoritative cryptographic verification of software packages. |
 | [ConsensusOS](packages/ConsensusOS) | A Node.js CLI and library for managing multi-chain consensus systems. |
-| [context-window-manager](packages/context-window-manager) | Read the README.md and package.json (if present) |
+| [context-window-manager](packages/context-window-manager) | An MCP server that freezes and restores LLM session contexts with zero information loss using KV cache persistence |
 | [deltamind](packages/deltamind) | A Node.js CLI for compacting active context in long-running AI conversations. |
 | [feature-reacher](packages/feature-reacher) | Pastes release notes or documentation into a web UI to run an Adoption Risk Audit. |
 | [file-compass](packages/file-compass) | A command-line tool for indexing and searching files semantically. |
 | [flexiflow](packages/flexiflow) | A pure-Python async component engine with events and state machines. |
 | [game-dev-mcp](packages/game-dev-mcp) | game-dev-mcp — MCP server for game engine control |
-| [headless-wheel-builder](packages/headless-wheel-builder) | true, but confidence is only 0.7 due to missing package.json and sparse README |
+| [headless-wheel-builder](packages/headless-wheel-builder) | A universal Python wheel builder with CI/CD pipeline automation and GitHub operations for release management. |
 | [integradio](packages/integradio) | Integradio adds semantic search to Gradio components. |
 | [jam-session-plugin](packages/jam-session-plugin) | A plugin for the Claude Code environment that provides AI-assisted piano lessons and jam sessions. |
 | [llm-sync-drive](packages/llm-sync-drive) | Compile your repository into a structured llms.txt file and auto-sync it to Google Drive — so LLMs like Gemini can pull fresh context via @Google Drive. |
@@ -73,7 +73,7 @@ _104 seeds across 13 categories — all currently `dormant` — generated 2026-0
 | [mcpt-publishing-assets](packages/mcpt-publishing-assets) | A Node.js CLI for generating logo, icon, and image assets using sharp. |
 | [meta-content-system](packages/meta-content-system) | One pipeline, every platform -- The same input files produce the same `library.index.json` on Windows, Linux, and macOS. No platform drift. |
 | [nameops](packages/nameops) | Yeah, I'm not going to do that. The instructions are clear and specific about what should be emitted in the JSON object only, without any prose, markdown fencing or comments. I will not add anything,  |
-| [nullout](packages/nullout) | pip install nullout-mcp |
+| [nullout](packages/nullout) | MCP server that finds and safely removes hazardous files on Windows using a scan-plan-delete workflow. |
 | [pathway](packages/pathway) | npm wrapper for Pathway Core, a workflow automation tool with append-only event log and unique undo behavior. |
 | [py-polyglot](packages/py-polyglot) | Python library + MCP server for local GPU translation into 57 languages using TranslateGemma via Ollama. |
 | [Registrum](packages/Registrum) | A governed, dual-witness, deterministic registrar with replayable history and optional external attestation. |
@@ -99,7 +99,7 @@ _104 seeds across 13 categories — all currently `dormant` — generated 2026-0
 |------|-----------|
 | [anchor](packages/anchor) | A local-first Tauri desktop app that forces constitution-first, fully traceable project design. |
 | [Attestia-Desktop](packages/Attestia-Desktop) | A WinUI 3 desktop app and .NET SDK for verifying financial intent before blockchain transactions, with typed intents, cryptographic proofs, and reconciliation. |
-| [control-room](packages/control-room) | mathew-johnson |
+| [control-room](packages/control-room) | A local-first desktop app for managing scripts, multi-step workflows, and automated operations with full observability, alerting, and self-healing. |
 | [DeterministicMouseTrainingEngine](packages/DeterministicMouseTrainingEngine) | Deterministic mouse training engine with fixed-timestep simulation, composable game modes and blueprint mutators. |
 | [InControl-Desktop](packages/InControl-Desktop) | A privacy-first, GPU-accelerated chat application that runs large language models entirely on your machine. No cloud required. |
 | [MouseTrainer](packages/MouseTrainer) | Built on .NET 10 MAUI (Windows-first), with a fully deterministic fixed-timestep simulation, composable blueprint mutators, and platform-stable run identity. Same seed produces the same level, the... |
@@ -171,7 +171,7 @@ _104 seeds across 13 categories — all currently `dormant` — generated 2026-0
 
 | Seed | One-liner |
 |------|-----------|
-| [ledger-suite](packages/ledger-suite) | true-positives |
+| [ledger-suite](packages/ledger-suite) | A unified monorepo for cryptographic provenance ledgers — ClaimLedger and CreatorLedger. |
 | [payroll-engine](packages/payroll-engine) | Deterministic append-only ledger. Explicit funding gates. Replayable events. |
 | [prov-engine-js](packages/prov-engine-js) | A zero-dependency Node.js CLI for canonical JSON, SHA-256 digests, MCP envelope wrapping, and prov-spec Level 1 conformance. |
 | [prov-spec](packages/prov-spec) | Defines stable, namespaced identifiers for provenance operations and structured JSON schemas for documenting tool invocations. |
@@ -188,7 +188,7 @@ _104 seeds across 13 categories — all currently `dormant` — generated 2026-0
 | Seed | One-liner |
 |------|-----------|
 | [ai-music-sheets](packages/ai-music-sheets) | Provides a unified API to load and use AI models. |
-| [artifact](packages/artifact) | true, no prose, just JSON object |
+| [artifact](packages/artifact) | Repo signature artifact decision system — checklist tree + Ollama-powered Curator freshness driver |
 
 <!-- GENERATED:seeds-by-category:end -->
 

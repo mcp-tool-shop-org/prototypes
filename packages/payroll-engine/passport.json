@@ -32,14 +32,12 @@
   "taxonomy": {
     "category": "crypto-and-provenance",
     "domains": [],
-    "tags": [
-      "typescript",
-      "javascript"
-    ]
+    "tags": []
   },
   "technical": {
     "kind": "library",
     "programmingLanguages": [
+      "Python",
       "TypeScript",
       "JavaScript"
     ],
@@ -95,7 +93,7 @@
     "method": "ollama-backfill",
     "model": "hermes3:8b",
     "confidence": 0.9,
-    "manualReview": true,
+    "manualReview": false,
     "ingestedAt": "2026-04-20T21:55:57.104Z"
   }
 }

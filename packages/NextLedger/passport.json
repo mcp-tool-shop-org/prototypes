@@ -33,7 +33,6 @@
     "category": "desktop-apps",
     "domains": [],
     "tags": [
-      "typescript",
       "csharp",
       "cli"
     ]
@@ -42,10 +41,8 @@
     "kind": "desktop",
     "programmingLanguages": [
       "C#",
-      "TypeScript",
-      "Python",
-      "JavaScript",
-      "Rust"
+      "XAML",
+      "Python"
     ],
     "runtimes": [],
     "operatingSystems": [

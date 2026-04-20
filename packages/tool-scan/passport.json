@@ -33,17 +33,15 @@
     "category": "developer-tools",
     "domains": [],
     "tags": [
-      "typescript",
-      "javascript",
       "python"
     ]
   },
   "technical": {
     "kind": "cli",
     "programmingLanguages": [
+      "Python",
       "TypeScript",
-      "JavaScript",
-      "Python"
+      "JavaScript"
     ],
     "runtimes": [],
     "operatingSystems": [

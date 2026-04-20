@@ -33,7 +33,6 @@
     "category": "developer-tools",
     "domains": [],
     "tags": [
-      "typescript",
       "csharp",
       "cli",
       "mcp"
@@ -42,8 +41,9 @@
   "technical": {
     "kind": "library",
     "programmingLanguages": [
-      "typescript",
-      "csharp"
+      "C#",
+      "JavaScript",
+      "TypeScript"
     ],
     "runtimes": [],
     "operatingSystems": [
@@ -92,7 +92,7 @@
     "method": "ollama-backfill",
     "model": "hermes3:8b",
     "confidence": 1,
-    "manualReview": true,
+    "manualReview": false,
     "ingestedAt": "2026-04-20T22:05:49.324Z"
   }
 }

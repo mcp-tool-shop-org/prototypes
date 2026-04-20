@@ -9,7 +9,7 @@
   "swhid": null,
   "name": "headless-wheel-builder",
   "title": "headless-wheel-builder",
-  "description": "A universal, headless Python wheel builder with integrated GitHub operations, release management, and full CI/CD pipeline automation.",
+  "description": "Headless Wheel Builder automates building Python wheels from local paths, git URLs, or tarballs, then orchestrates CI/CD pipelines to test and publish the packages. It integrates GitHub workflows for draft releases with approval processes.",
   "version": "0.1.0",
   "license": "MIT",
   "datePublished": "2026-04-20",
@@ -71,8 +71,8 @@
     "hash": null
   },
   "discovery": {
-    "oneLiner": "true, but confidence is only 0.7 due to missing package.json and sparse README",
-    "whyItMatters": "This tool automates many aspects of Python package distribution, including build, release management, dependency analysis, CI/CD pipeline orchestration, and GitHub integration."
+    "oneLiner": "A universal Python wheel builder with CI/CD pipeline automation and GitHub operations for release management.",
+    "whyItMatters": null
   },
   "patterns": [],
   "failureModes": [],
@@ -86,6 +86,6 @@
     "model": "hermes3:8b",
     "confidence": 0.7,
     "manualReview": true,
-    "ingestedAt": "2026-04-20T21:53:27.811Z"
+    "ingestedAt": "2026-04-20T23:25:10.305Z"
   }
 }

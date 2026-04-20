@@ -9,7 +9,7 @@
   "swhid": null,
   "name": "claude-toolstack",
   "title": "claude-toolstack",
-  "description": "A ready-to-deploy stack that keeps Claude Code productive on large, multi-language repositories without thrashing a 64-GB Linux workstation.",
+  "description": "The 'claude-toolstack-cli' package provides a command-line interface (CLI) client for the 'claude-toolstack' developer tool. It allows users to interact with the underlying stack, which keeps Claude Code productive on large, multi-language repositories without thrashing a 64-GB Linux workstation.",
   "version": "0.1.0",
   "license": "MIT",
   "datePublished": "2026-04-20",
@@ -33,8 +33,6 @@
     "category": "developer-tools",
     "domains": [],
     "tags": [
-      "typescript",
-      "javascript",
       "python",
       "cli",
       "mcp",
@@ -44,9 +42,9 @@
   "technical": {
     "kind": "cli",
     "programmingLanguages": [
+      "Python",
       "TypeScript",
-      "JavaScript",
-      "Python"
+      "JavaScript"
     ],
     "runtimes": [],
     "operatingSystems": [
@@ -75,8 +73,8 @@
     "hash": null
   },
   "discovery": {
-    "oneLiner": "A TypeScript/JS CLI for the 'claude-toolstack' developer tool.",
-    "whyItMatters": "This stack optimizes the use of large repositories with Claude Code without overloading a 64-GB Linux workstation."
+    "oneLiner": "A zero-dependency Python CLI that wraps all endpoints of a Docker + Claude Code workstation config for 64-GB Linux hosts.",
+    "whyItMatters": null
   },
   "patterns": [],
   "failureModes": [],
@@ -90,6 +88,6 @@
     "model": "hermes3:8b",
     "confidence": 0.7,
     "manualReview": true,
-    "ingestedAt": "2026-04-20T21:51:36.648Z"
+    "ingestedAt": "2026-04-20T23:24:53.163Z"
   }
 }

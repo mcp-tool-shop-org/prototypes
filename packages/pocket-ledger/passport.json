@@ -33,15 +33,15 @@
     "category": "desktop-apps",
     "domains": [],
     "tags": [
-      "typescript",
       "csharp"
     ]
   },
   "technical": {
     "kind": "desktop",
     "programmingLanguages": [
+      "C#",
       "TypeScript",
-      "C#"
+      "JavaScript"
     ],
     "runtimes": [],
     "operatingSystems": [
@@ -84,7 +84,7 @@
     "method": "ollama-backfill",
     "model": "hermes3:8b",
     "confidence": 0.9,
-    "manualReview": true,
+    "manualReview": false,
     "ingestedAt": "2026-04-20T21:56:09.044Z"
   }
 }
