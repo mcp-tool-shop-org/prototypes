@@ -1,0 +1,106 @@
+{
+  "$schema": "https://github.com/mcp-tool-shop-org/prototypes/schemas/taxonomy.schema.json",
+  "version": 1,
+  "note": "Canonical taxonomy for the Seed Vault. Categories are frozen — add by PR. Tags grow freely but must be pre-registered in tagRegistry to prevent drift (e.g. 'typescript' vs 'ts'). Domains are free-form hints.",
+  "categories": [
+    {
+      "id": "voice-and-sound",
+      "label": "Voice and Sound",
+      "description": "TTS engines, audio runtimes, soundboards, adaptive soundtracks."
+    },
+    {
+      "id": "developer-tools",
+      "label": "Developer Tools",
+      "description": "CLIs, MCP servers, and utilities that support agentic and human engineering workflows."
+    },
+    {
+      "id": "desktop-apps",
+      "label": "Desktop Apps",
+      "description": "Native desktop applications — Tauri, WinUI 3, .NET MAUI."
+    },
+    {
+      "id": "vscode-extensions",
+      "label": "VS Code Extensions",
+      "description": "Editor integrations and in-IDE tools."
+    },
+    {
+      "id": "websketch",
+      "label": "WebSketch",
+      "description": "The WebSketch IR ecosystem — capture, render, and reason about web UIs."
+    },
+    {
+      "id": "mouse-and-cursor",
+      "label": "Mouse and Cursor",
+      "description": "Input-device training, tremor compensation, cursor discipline."
+    },
+    {
+      "id": "typing-and-input",
+      "label": "Typing and Input",
+      "description": "Typing practice apps and input pipelines."
+    },
+    {
+      "id": "ml-and-training",
+      "label": "ML and Training",
+      "description": "Model training foundries, dataset pipelines, on-device ML."
+    },
+    {
+      "id": "governance-and-policy",
+      "label": "Governance and Policy",
+      "description": "Policy kernels, attestation, data-promotion gates, throttles."
+    },
+    {
+      "id": "games-and-creative",
+      "label": "Games and Creative",
+      "description": "Game prototypes, creative tools, generative systems."
+    },
+    {
+      "id": "crypto-and-provenance",
+      "label": "Crypto and Provenance",
+      "description": "Signed provenance, receipts, ledgers, payroll engines."
+    },
+    {
+      "id": "suites-and-infrastructure",
+      "label": "Suites and Infrastructure",
+      "description": "Multi-tool suites, shared runtimes, workspace infrastructure."
+    },
+    {
+      "id": "original-archive",
+      "label": "Original Archive",
+      "description": "Seeds that predate the April 2026 consolidation."
+    }
+  ],
+  "tagRegistry": {
+    "typescript": "TypeScript source.",
+    "javascript": "JavaScript source.",
+    "python": "Python source.",
+    "rust": "Rust source.",
+    "csharp": "C# source (.NET).",
+    "go": "Go source.",
+    "cli": "Ships a command-line interface.",
+    "mcp": "Implements Model Context Protocol.",
+    "tauri": "Tauri-based desktop app.",
+    "winui3": "Windows WinUI 3 desktop app.",
+    "maui": ".NET MAUI app.",
+    "astro": "Astro-based site or package.",
+    "starlight": "Uses the Starlight docs theme.",
+    "mcp-server": "Implements an MCP server.",
+    "sdk": "Exposes a library/SDK surface.",
+    "plugin": "Claude Code plugin or equivalent.",
+    "extension": "Chrome/browser extension.",
+    "vscode": "VS Code integration.",
+    "windows-only": "Windows-only.",
+    "cross-platform": "Supports Linux, macOS, and Windows.",
+    "ai-agent": "Designed for AI-agent workflows.",
+    "observability": "Observability / logging / audit.",
+    "testing": "Test generation or coverage.",
+    "training": "Model training or fine-tuning.",
+    "registry": "Metadata or tool registry.",
+    "governance": "Policy / governance / attestation.",
+    "provenance": "Signed or verifiable provenance.",
+    "typing-practice": "Typing practice app.",
+    "mouse-training": "Mouse / input training.",
+    "adaptive-audio": "Adaptive/procedural audio.",
+    "voice-synthesis": "Text-to-speech synthesis.",
+    "local-llm": "Targets local LLM inference (Ollama, llama.cpp)."
+  }
+}

@@ -1,0 +1,173 @@
+---
+import '../../styles/global.css';
+import BaseLayout from '@mcptoolshop/site-theme/components/BaseLayout.astro';
+import { config } from '../../site-config';
+import seedsData from '../../data/seeds.json';
+import taxonomyData from '../../data/taxonomy.json';
+
+const seeds = (seedsData as any).seeds ?? [];
+const taxonomy = taxonomyData as any;
+const total = seeds.length;
+
+const stateOrder = ['active', 'sapling', 'resurrection_candidate', 'dormant', 'archived', 'graduated'];
+const stateCounts = stateOrder.map((state) => ({
+  state,
+  count: seeds.filter((s: any) => s.lifecycle?.state === state).length,
+}));
+
+const categoryCounts = taxonomy.categories.map((c: any) => ({
+  id: c.id,
+  label: c.label,
+  count: seeds.filter((s: any) => s.taxonomy?.category === c.id).length,
+}));
+---
+
+<BaseLayout
+  title={`Seeds — ${config.title}`}
+  description="Browse the seed vault — filter by lifecycle, category, and tags."
+  logoBadge={config.logoBadge}
+  brandName={config.brandName}
+  repoUrl={config.repoUrl}
+  footerText={config.footerText}
+  nav={[
+    { href: '/prototypes/', label: 'Home' },
+    { href: '/prototypes/seeds/', label: 'Seeds' },
+    { href: '/prototypes/handbook/', label: 'Handbook' },
+  ]}
+>
+  <section style="padding: 4rem 1.5rem; max-width: 1200px; margin: 0 auto;">
+    <h1 style="font-size: 2.5rem; font-weight: 700; margin: 0 0 0.5rem;">Seed Vault</h1>
+    <p style="color: var(--color-muted, #a1a1aa); font-size: 1.1rem; margin: 0 0 2rem;">
+      {total} seed{total === 1 ? '' : 's'} cataloged. Filter by lifecycle state, category, or search by name.
+    </p>
+
+    {total === 0 && (
+      <div style="padding: 2rem; border: 1px dashed #3f3f46; border-radius: 0.5rem; background: #0a0a0c; color: #a1a1aa;">
+        <strong style="color: #e4e4e7;">No passports yet.</strong>
+        <p style="margin: 0.5rem 0 0;">
+          Wave 1 ships the infrastructure (schema, generator, validator, indexer, site). Wave 2 will backfill
+          passports for the 104 archived packages via local-LLM extraction.
+          Run <code>pnpm seed:new &lt;slug&gt;</code> to add a seed, or <code>pnpm seed:doctor</code> to see status.
+        </p>
+      </div>
+    )}
+
+    {total > 0 && (
+      <>
+        <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; font-size: 0.9rem;">
+          <div>
+            <strong style="display: block; color: #e4e4e7; margin-bottom: 0.25rem;">By lifecycle</strong>
+            {stateCounts.filter((s) => s.count > 0).map((s) => (
+              <button
+                type="button"
+                data-filter-state={s.state}
+                style="display: inline-block; margin: 0.15rem 0.15rem 0.15rem 0; padding: 0.2rem 0.6rem; background: #18181b; border: 1px solid #27272a; color: #a1a1aa; border-radius: 999px; cursor: pointer; font: inherit;"
+              >
+                {s.state} <span style="color: #52525b;">({s.count})</span>
+              </button>
+            ))}
+          </div>
+          <div>
+            <strong style="display: block; color: #e4e4e7; margin-bottom: 0.25rem;">By category</strong>
+            {categoryCounts.filter((c: any) => c.count > 0).map((c: any) => (
+              <button
+                type="button"
+                data-filter-category={c.id}
+                style="display: inline-block; margin: 0.15rem 0.15rem 0.15rem 0; padding: 0.2rem 0.6rem; background: #18181b; border: 1px solid #27272a; color: #a1a1aa; border-radius: 999px; cursor: pointer; font: inherit;"
+              >
+                {c.label} <span style="color: #52525b;">({c.count})</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <input
+          type="search"
+          id="seed-search"
+          placeholder="Search seeds by name, title, description, or tag..."
+          style="width: 100%; padding: 0.75rem 1rem; background: #09090b; border: 1px solid #27272a; border-radius: 0.5rem; color: #e4e4e7; font-size: 1rem; margin-bottom: 1.5rem;"
+        />
+
+        <div id="seed-grid" style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));">
+          {seeds.map((s: any) => (
+            <a
+              class="seed-card"
+              data-name={s.name}
+              data-title={s.title?.toLowerCase() ?? ''}
+              data-description={s.description?.toLowerCase() ?? ''}
+              data-tags={(s.taxonomy?.tags ?? []).join(' ').toLowerCase()}
+              data-category={s.taxonomy?.category}
+              data-state={s.lifecycle?.state}
+              href={`/prototypes/seeds/${s.name}/`}
+              style="display: block; padding: 1rem 1.25rem; background: #09090b; border: 1px solid #27272a; border-radius: 0.5rem; color: inherit; text-decoration: none; transition: border-color 0.15s;"
+            >
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <strong style="color: #e4e4e7; font-size: 1rem;">{s.name}</strong>
+                <span style="font-size: 0.7rem; color: #6ee7b7; background: #022c22; padding: 0.1rem 0.5rem; border-radius: 999px;">{s.lifecycle?.state}</span>
+              </div>
+              <div style="color: #a1a1aa; font-size: 0.875rem; line-height: 1.4;">{s.discovery?.oneLiner ?? s.title}</div>
+              <div style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.25rem;">
+                {(s.taxonomy?.tags ?? []).slice(0, 4).map((t: string) => (
+                  <span style="font-size: 0.7rem; color: #71717a; background: #18181b; padding: 0.1rem 0.5rem; border-radius: 999px;">{t}</span>
+                ))}
+              </div>
+            </a>
+          ))}
+        </div>
+      </>
+    )}
+  </section>
+
+  <script is:inline>
+    (function () {
+      var grid = document.getElementById('seed-grid');
+      if (!grid) return;
+      var search = document.getElementById('seed-search');
+      var activeState = null;
+      var activeCategory = null;
+
+      function apply() {
+        var q = (search && search.value || '').trim().toLowerCase();
+        var cards = grid.querySelectorAll('.seed-card');
+        cards.forEach(function (card) {
+          var name = card.getAttribute('data-name') || '';
+          var title = card.getAttribute('data-title') || '';
+          var desc = card.getAttribute('data-description') || '';
+          var tags = card.getAttribute('data-tags') || '';
+          var cat = card.getAttribute('data-category');
+          var st = card.getAttribute('data-state');
+          var hitQ = !q || name.toLowerCase().indexOf(q) >= 0 || title.indexOf(q) >= 0 || desc.indexOf(q) >= 0 || tags.indexOf(q) >= 0;
+          var hitState = !activeState || st === activeState;
+          var hitCat = !activeCategory || cat === activeCategory;
+          card.style.display = (hitQ && hitState && hitCat) ? '' : 'none';
+        });
+      }
+
+      if (search) search.addEventListener('input', apply);
+
+      document.querySelectorAll('[data-filter-state]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var v = btn.getAttribute('data-filter-state');
+          activeState = activeState === v ? null : v;
+          document.querySelectorAll('[data-filter-state]').forEach(function (b) {
+            b.style.background = b === btn && activeState ? '#022c22' : '#18181b';
+            b.style.color = b === btn && activeState ? '#6ee7b7' : '#a1a1aa';
+          });
+          apply();
+        });
+      });
+
+      document.querySelectorAll('[data-filter-category]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var v = btn.getAttribute('data-filter-category');
+          activeCategory = activeCategory === v ? null : v;
+          document.querySelectorAll('[data-filter-category]').forEach(function (b) {
+            b.style.background = b === btn && activeCategory ? '#022c22' : '#18181b';
+            b.style.color = b === btn && activeCategory ? '#6ee7b7' : '#a1a1aa';
+          });
+          apply();
+        });
+      });
+    })();
+  </script>
+</BaseLayout>

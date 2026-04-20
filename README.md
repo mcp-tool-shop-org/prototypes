@@ -15,6 +15,10 @@ pnpm build
 
 ## Packages by category
 
+<!-- GENERATED:seeds-by-category:start -->
+<!-- The section below is hand-maintained today. Once Wave 2 backfills per-seed passports,
+     `pnpm seed:index` will regenerate this region from passport.json files. -->
+
 ### Voice and Sound (10)
 
 | Package | Description |
@@ -185,6 +189,8 @@ These were consolidated before the April 2026 reduction.
 | [vector-caliper](packages/vector-caliper) | Geometrical debugger for learning dynamics |
 | [mcpt-publishing-assets](packages/mcpt-publishing-assets) | Logo and icon asset generation for mcpt-publishing |
 | [rippled-windows-debug](packages/rippled-windows-debug) | Windows debugging tools for XRPL rippled node |
+
+<!-- GENERATED:seeds-by-category:end -->
 
 ## Why this exists
 

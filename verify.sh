@@ -54,6 +54,12 @@ for pkg_dir in "$PACKAGES_DIR"/*/; do
 done
 
 echo ""
+echo "--- Seed Passport Validation ---"
+if ! node "$REPO_ROOT/scripts/seed-validate.mjs"; then
+  errors=$((errors + 1))
+fi
+
+echo ""
 
 if [ "$errors" -gt 0 ]; then
   echo "RESULT: $errors error(s) found"
