@@ -73,17 +73,23 @@ const END = '<!-- GENERATED:seeds-by-category:end -->';
 
 function buildReadmeSection() {
   const byCategory = new Map();
+  const states = new Set();
   for (const seed of enriched) {
     const cat = seed.taxonomy?.category ?? 'uncategorized';
     if (!byCategory.has(cat)) byCategory.set(cat, []);
     byCategory.get(cat).push(seed);
+    states.add(seed.lifecycle?.state ?? '?');
   }
+  // Only show the Lifecycle column when there's actual diversity — otherwise it's noise.
+  const showLifecycle = states.size > 1;
+  const onlyState = states.size === 1 ? [...states][0] : null;
+
   const lines = [
     START,
     '',
     '<!-- Regenerate with: pnpm seed:index — do not edit between the markers. -->',
     '',
-    `_${enriched.length} seed${enriched.length === 1 ? '' : 's'} across ${byCategory.size} categor${byCategory.size === 1 ? 'y' : 'ies'} — generated ${nowIso().slice(0, 10)}_`,
+    `_${enriched.length} seed${enriched.length === 1 ? '' : 's'} across ${byCategory.size} categor${byCategory.size === 1 ? 'y' : 'ies'}${onlyState ? ` — all currently \`${onlyState}\`` : ''} — generated ${nowIso().slice(0, 10)}_`,
     '',
   ];
   for (const cat of taxonomy.categoryList) {
@@ -91,12 +97,21 @@ function buildReadmeSection() {
     if (!seeds || seeds.length === 0) continue;
     lines.push(`### ${cat.label} (${seeds.length})`);
     lines.push('');
-    lines.push('| Seed | Lifecycle | One-liner |');
-    lines.push('|------|-----------|-----------|');
-    for (const s of seeds.sort((a, b) => a.name.localeCompare(b.name))) {
-      const state = s.lifecycle?.state ?? '?';
-      const one = (s.discovery?.oneLiner ?? s.title ?? '').replace(/\|/g, '\\|');
-      lines.push(`| [${s.name}](packages/${s.name}) | ${state} | ${one} |`);
+    if (showLifecycle) {
+      lines.push('| Seed | Lifecycle | One-liner |');
+      lines.push('|------|-----------|-----------|');
+      for (const s of seeds.sort((a, b) => a.name.localeCompare(b.name))) {
+        const state = s.lifecycle?.state ?? '?';
+        const one = (s.discovery?.oneLiner ?? s.title ?? '').replace(/\|/g, '\\|');
+        lines.push(`| [${s.name}](packages/${s.name}) | ${state} | ${one} |`);
+      }
+    } else {
+      lines.push('| Seed | One-liner |');
+      lines.push('|------|-----------|');
+      for (const s of seeds.sort((a, b) => a.name.localeCompare(b.name))) {
+        const one = (s.discovery?.oneLiner ?? s.title ?? '').replace(/\|/g, '\\|');
+        lines.push(`| [${s.name}](packages/${s.name}) | ${one} |`);
+      }
     }
     lines.push('');
   }
