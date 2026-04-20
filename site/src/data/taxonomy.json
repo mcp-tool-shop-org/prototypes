@@ -1,0 +1,228 @@
+{
+  "$schema": "https://github.com/mcp-tool-shop-org/prototypes/schemas/taxonomy.schema.json",
+  "version": 1,
+  "note": "Canonical taxonomy for the Seed Vault. Categories are frozen — add by PR. Tags grow freely but must be pre-registered in tagRegistry to prevent drift (e.g. 'typescript' vs 'ts'). Domains are free-form hints.",
+  "categories": [
+    {
+      "id": "voice-and-sound",
+      "label": "Voice and Sound",
+      "description": "TTS engines, audio runtimes, soundboards, adaptive soundtracks."
+    },
+    {
+      "id": "developer-tools",
+      "label": "Developer Tools",
+      "description": "CLIs, MCP servers, and utilities that support agentic and human engineering workflows."
+    },
+    {
+      "id": "desktop-apps",
+      "label": "Desktop Apps",
+      "description": "Native desktop applications — Tauri, WinUI 3, .NET MAUI."
+    },
+    {
+      "id": "vscode-extensions",
+      "label": "VS Code Extensions",
+      "description": "Editor integrations and in-IDE tools."
+    },
+    {
+      "id": "websketch",
+      "label": "WebSketch",
+      "description": "The WebSketch IR ecosystem — capture, render, and reason about web UIs."
+    },
+    {
+      "id": "mouse-and-cursor",
+      "label": "Mouse and Cursor",
+      "description": "Input-device training, tremor compensation, cursor discipline."
+    },
+    {
+      "id": "typing-and-input",
+      "label": "Typing and Input",
+      "description": "Typing practice apps and input pipelines."
+    },
+    {
+      "id": "ml-and-training",
+      "label": "ML and Training",
+      "description": "Model training foundries, dataset pipelines, on-device ML."
+    },
+    {
+      "id": "governance-and-policy",
+      "label": "Governance and Policy",
+      "description": "Policy kernels, attestation, data-promotion gates, throttles."
+    },
+    {
+      "id": "games-and-creative",
+      "label": "Games and Creative",
+      "description": "Game prototypes, creative tools, generative systems."
+    },
+    {
+      "id": "crypto-and-provenance",
+      "label": "Crypto and Provenance",
+      "description": "Signed provenance, receipts, ledgers, payroll engines."
+    },
+    {
+      "id": "suites-and-infrastructure",
+      "label": "Suites and Infrastructure",
+      "description": "Multi-tool suites, shared runtimes, workspace infrastructure."
+    },
+    {
+      "id": "original-archive",
+      "label": "Original Archive",
+      "description": "Seeds that predate the April 2026 consolidation."
+    }
+  ],
+  "patternCategories": [
+    {
+      "id": "signal-processing",
+      "label": "Signal processing",
+      "description": "DSP, filters, tremor compensation, audio analysis."
+    },
+    {
+      "id": "caching",
+      "label": "Caching",
+      "description": "Cache eviction, refresh strategies, invalidation."
+    },
+    {
+      "id": "concurrency",
+      "label": "Concurrency",
+      "description": "Async patterns, queues, pools, mutexes, race-avoidance."
+    },
+    {
+      "id": "storage",
+      "label": "Storage",
+      "description": "File layout, append-only logs, content-addressing."
+    },
+    {
+      "id": "observability",
+      "label": "Observability",
+      "description": "Telemetry, tracing, structured logging, audit trails."
+    },
+    {
+      "id": "ui-primitive",
+      "label": "UI primitive",
+      "description": "Reusable UI components or interaction patterns."
+    },
+    {
+      "id": "input-handling",
+      "label": "Input handling",
+      "description": "Keyboard, mouse, touch, controller, voice input tricks."
+    },
+    {
+      "id": "rendering",
+      "label": "Rendering",
+      "description": "Drawing, sprites, vector graphics, compositing."
+    },
+    {
+      "id": "protocol",
+      "label": "Protocol",
+      "description": "Wire formats, message shapes, state machines."
+    },
+    {
+      "id": "data-model",
+      "label": "Data model",
+      "description": "Schemas, relationships, normalization strategies."
+    },
+    {
+      "id": "search",
+      "label": "Search",
+      "description": "Full-text, vector, hybrid, ranking heuristics."
+    },
+    {
+      "id": "streaming",
+      "label": "Streaming",
+      "description": "SSE, WebSockets, backpressure, chunked I/O."
+    },
+    {
+      "id": "auth",
+      "label": "Auth",
+      "description": "Authentication, authorization, capability passing."
+    },
+    {
+      "id": "supply-chain",
+      "label": "Supply chain",
+      "description": "Signing, attestation, provenance, SBOMs."
+    },
+    {
+      "id": "build-system",
+      "label": "Build system",
+      "description": "Bundling, caching, workspace tooling, reproducibility."
+    },
+    {
+      "id": "testing",
+      "label": "Testing",
+      "description": "Test generation, coverage, property-based testing."
+    },
+    {
+      "id": "cli-ux",
+      "label": "CLI UX",
+      "description": "Terminal ergonomics, progress, argument parsing."
+    },
+    {
+      "id": "agent-workflow",
+      "label": "Agent workflow",
+      "description": "How an AI agent is invoked, orchestrated, sandboxed."
+    },
+    {
+      "id": "prompt-engineering",
+      "label": "Prompt engineering",
+      "description": "Prompt shapes, schema-constrained generation, chaining."
+    },
+    {
+      "id": "llm-integration",
+      "label": "LLM integration",
+      "description": "Local models, context windows, streaming integration."
+    },
+    {
+      "id": "governance",
+      "label": "Governance",
+      "description": "Policy, consent, throttling, preference enforcement."
+    },
+    {
+      "id": "deployment",
+      "label": "Deployment",
+      "description": "Packaging, install paths, update channels."
+    },
+    {
+      "id": "config",
+      "label": "Config",
+      "description": "Settings layers, precedence, schema validation."
+    },
+    {
+      "id": "other",
+      "label": "Other",
+      "description": "Escape hatch — prefer adding a new category when you hit this 3x."
+    }
+  ],
+  "tagRegistry": {
+    "typescript": "TypeScript source.",
+    "javascript": "JavaScript source.",
+    "python": "Python source.",
+    "rust": "Rust source.",
+    "csharp": "C# source (.NET).",
+    "go": "Go source.",
+    "cli": "Ships a command-line interface.",
+    "mcp": "Implements Model Context Protocol.",
+    "tauri": "Tauri-based desktop app.",
+    "winui3": "Windows WinUI 3 desktop app.",
+    "maui": ".NET MAUI app.",
+    "astro": "Astro-based site or package.",
+    "starlight": "Uses the Starlight docs theme.",
+    "mcp-server": "Implements an MCP server.",
+    "sdk": "Exposes a library/SDK surface.",
+    "plugin": "Claude Code plugin or equivalent.",
+    "extension": "Chrome/browser extension.",
+    "vscode": "VS Code integration.",
+    "windows-only": "Windows-only.",
+    "cross-platform": "Supports Linux, macOS, and Windows.",
+    "ai-agent": "Designed for AI-agent workflows.",
+    "observability": "Observability / logging / audit.",
+    "testing": "Test generation or coverage.",
+    "training": "Model training or fine-tuning.",
+    "registry": "Metadata or tool registry.",
+    "governance": "Policy / governance / attestation.",
+    "provenance": "Signed or verifiable provenance.",
+    "typing-practice": "Typing practice app.",
+    "mouse-training": "Mouse / input training.",
+    "adaptive-audio": "Adaptive/procedural audio.",
+    "voice-synthesis": "Text-to-speech synthesis.",
+    "local-llm": "Targets local LLM inference (Ollama, llama.cpp)."
+  }
+}

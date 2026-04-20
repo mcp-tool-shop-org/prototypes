@@ -1,0 +1,196 @@
+---
+import '../../styles/global.css';
+import BaseLayout from '@mcptoolshop/site-theme/components/BaseLayout.astro';
+import { config } from '../../site-config';
+import seedsData from '../../data/seeds.json';
+
+export async function getStaticPaths() {
+  const data = seedsData as any;
+  return (data.seeds ?? []).map((s: any) => ({
+    params: { slug: s.name },
+    props: { seed: s },
+  }));
+}
+
+const { seed } = Astro.props as { seed: any };
+---
+
+<BaseLayout
+  title={`${seed.title ?? seed.name} — ${config.title}`}
+  description={seed.description ?? seed.title}
+  logoBadge={config.logoBadge}
+  brandName={config.brandName}
+  repoUrl={config.repoUrl}
+  footerText={config.footerText}
+  nav={[
+    { href: '/prototypes/', label: 'Home' },
+    { href: '/prototypes/seeds/', label: 'Seeds' },
+    { href: '/prototypes/handbook/', label: 'Handbook' },
+  ]}
+>
+  <section style="padding: 3rem 1.5rem; max-width: 900px; margin: 0 auto;">
+    <a href="/prototypes/seeds/" style="color: #6ee7b7; text-decoration: none; font-size: 0.9rem;">← All seeds</a>
+
+    <div style="display: flex; align-items: center; gap: 0.75rem; margin: 1rem 0 0.5rem; flex-wrap: wrap;">
+      <h1 style="font-size: 2rem; font-weight: 700; margin: 0;">{seed.name}</h1>
+      <span style="font-size: 0.8rem; color: #6ee7b7; background: #022c22; padding: 0.2rem 0.6rem; border-radius: 999px;">{seed.lifecycle?.state}</span>
+      <span style="font-size: 0.8rem; color: #a1a1aa; background: #18181b; padding: 0.2rem 0.6rem; border-radius: 999px;">{seed.lifecycle?.maturity}</span>
+    </div>
+
+    <p style="font-size: 1.15rem; color: #e4e4e7; margin: 0 0 0.25rem;">{seed.title}</p>
+    {seed.discovery?.oneLiner && <p style="color: #a1a1aa; margin: 0 0 1.5rem;">{seed.discovery.oneLiner}</p>}
+
+    <p style="color: #d4d4d8; line-height: 1.6; margin-bottom: 2rem;">{seed.description}</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+      <div style="padding: 1rem; background: #09090b; border: 1px solid #27272a; border-radius: 0.5rem;">
+        <div style="color: #71717a; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.4rem;">Version</div>
+        <div style="color: #e4e4e7;">{seed.version}</div>
+      </div>
+      <div style="padding: 1rem; background: #09090b; border: 1px solid #27272a; border-radius: 0.5rem;">
+        <div style="color: #71717a; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.4rem;">License</div>
+        <div style="color: #e4e4e7;">{seed.license}</div>
+      </div>
+      <div style="padding: 1rem; background: #09090b; border: 1px solid #27272a; border-radius: 0.5rem;">
+        <div style="color: #71717a; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.4rem;">Kind</div>
+        <div style="color: #e4e4e7;">{seed.technical?.kind}</div>
+      </div>
+      <div style="padding: 1rem; background: #09090b; border: 1px solid #27272a; border-radius: 0.5rem;">
+        <div style="color: #71717a; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.4rem;">Languages</div>
+        <div style="color: #e4e4e7;">{(seed.technical?.programmingLanguages ?? []).join(', ')}</div>
+      </div>
+      {seed.health?.lineCount != null && (
+        <div style="padding: 1rem; background: #09090b; border: 1px solid #27272a; border-radius: 0.5rem;">
+          <div style="color: #71717a; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.4rem;">Lines of code</div>
+          <div style="color: #e4e4e7;">{seed.health.lineCount.toLocaleString()}</div>
+        </div>
+      )}
+      {seed.health?.lastCommitAt && (
+        <div style="padding: 1rem; background: #09090b; border: 1px solid #27272a; border-radius: 0.5rem;">
+          <div style="color: #71717a; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.4rem;">Last commit</div>
+          <div style="color: #e4e4e7;">
+            {seed.health.lastCommitAt.slice(0, 10)}
+            {seed.health.commitRecencyDays != null && (
+              <span style="color: #71717a; font-size: 0.8rem;"> ({seed.health.commitRecencyDays}d ago)</span>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+
+    {seed.health && (
+      <section style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.1rem; color: #e4e4e7; margin: 0 0 0.5rem;">Health signals</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+          {[
+            { label: 'Tests', v: seed.health.hasTests },
+            { label: 'README', v: seed.health.hasReadme },
+            { label: 'LICENSE', v: seed.health.hasLicense },
+            { label: 'Buildable', v: seed.health.buildable },
+          ].map((s) => (
+            <span style={`display:inline-block;padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;background:${s.v === true ? '#022c22' : s.v === false ? '#3f1f1f' : '#18181b'};color:${s.v === true ? '#6ee7b7' : s.v === false ? '#fca5a5' : '#71717a'};border:1px solid ${s.v === true ? '#064e3b' : s.v === false ? '#7f1d1d' : '#27272a'};`}>
+              {s.label}: {s.v === true ? 'yes' : s.v === false ? 'no' : 'unknown'}
+            </span>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {(seed.patterns ?? []).length > 0 && (
+      <section style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.1rem; color: #e4e4e7; margin: 0 0 0.75rem;">Patterns proven here</h2>
+        <div style="display: grid; gap: 0.75rem;">
+          {seed.patterns.map((p: any) => (
+            <div style="padding: 0.85rem 1rem; background: #09090b; border: 1px solid #27272a; border-radius: 0.5rem;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.35rem;">
+                <strong style="color: #e4e4e7;">{p.name}</strong>
+                <span style="font-size: 0.7rem; color: #6ee7b7; background: #022c22; padding: 0.1rem 0.5rem; border-radius: 999px;">{p.category}</span>
+              </div>
+              <div style="color: #d4d4d8; font-size: 0.9rem; line-height: 1.5;">{p.summary}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {(seed.failureModes ?? []).length > 0 && (
+      <section style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.1rem; color: #e4e4e7; margin: 0 0 0.75rem;">What didn't work</h2>
+        <div style="display: grid; gap: 0.75rem;">
+          {seed.failureModes.map((f: any) => (
+            <div style="padding: 0.85rem 1rem; background: #09090b; border: 1px solid #7f1d1d; border-radius: 0.5rem;">
+              <div style="color: #fca5a5; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem;">Tried</div>
+              <div style="color: #e4e4e7; margin-bottom: 0.5rem;">{f.tried}</div>
+              <div style="color: #fca5a5; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem;">Didn't work because</div>
+              <div style="color: #d4d4d8; font-size: 0.9rem; line-height: 1.5;">{f.didntWorkBecause}</div>
+              {f.pivoted && (
+                <>
+                  <div style="color: #6ee7b7; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; margin: 0.5rem 0 0.35rem;">Pivoted to</div>
+                  <div style="color: #d4d4d8; font-size: 0.9rem; line-height: 1.5;">{f.pivoted}</div>
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {seed.agentCapsule?.insight && (
+      <section style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.1rem; color: #e4e4e7; margin: 0 0 0.5rem;">Agent capsule <span style="font-size: 0.7rem; color: #71717a; font-weight: 400;">(the 10-second version)</span></h2>
+        <div style="padding: 1rem; background: #09090b; border: 1px solid #27272a; border-radius: 0.5rem;">
+          <div style="color: #6ee7b7; font-weight: 600; margin-bottom: 0.5rem;">{seed.agentCapsule.insight}</div>
+          {seed.agentCapsule.excerpt && (
+            <pre style="margin: 0; padding: 0.6rem 0.8rem; background: #050506; border: 1px solid #1a1a1d; border-radius: 0.25rem; color: #d4d4d8; font-size: 0.8rem; overflow-x: auto;"><code>{seed.agentCapsule.excerpt}</code></pre>
+          )}
+        </div>
+      </section>
+    )}
+
+    {(seed.priorArt ?? []).length > 0 && (
+      <section style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.1rem; color: #e4e4e7; margin: 0 0 0.5rem;">Prior art</h2>
+        <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 0.4rem;">
+          {seed.priorArt.map((p: any) => (
+            <li>
+              <a href={p.url} style="color: #6ee7b7; text-decoration: none;">{p.title ?? p.url}</a>
+              {p.kind && <span style="color: #71717a; font-size: 0.75rem; margin-left: 0.5rem;">({p.kind})</span>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {seed.discovery?.whyItMatters && (
+      <section style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.1rem; color: #e4e4e7; margin: 0 0 0.5rem;">Why it matters</h2>
+        <p style="color: #d4d4d8; line-height: 1.6; margin: 0;">{seed.discovery.whyItMatters}</p>
+      </section>
+    )}
+
+    {seed.discovery?.patternWorthStealing && (
+      <section style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.1rem; color: #e4e4e7; margin: 0 0 0.5rem;">Pattern worth stealing</h2>
+        <p style="color: #d4d4d8; line-height: 1.6; margin: 0;">{seed.discovery.patternWorthStealing}</p>
+      </section>
+    )}
+
+    {(seed.taxonomy?.tags ?? []).length > 0 && (
+      <section style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.1rem; color: #e4e4e7; margin: 0 0 0.5rem;">Tags</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.3rem;">
+          {(seed.taxonomy.tags).map((t: string) => (
+            <span style="font-size: 0.8rem; color: #a1a1aa; background: #18181b; padding: 0.2rem 0.6rem; border-radius: 999px;">{t}</span>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 2rem;">
+      <a href={seed.codeRepository} style="display: inline-block; padding: 0.6rem 1.2rem; background: #18181b; border: 1px solid #27272a; color: #e4e4e7; text-decoration: none; border-radius: 0.375rem;">View source →</a>
+      {seed.lifecycle?.graduatedTo && (
+        <a href={seed.lifecycle.graduatedTo} style="display: inline-block; padding: 0.6rem 1.2rem; background: #022c22; border: 1px solid #6ee7b7; color: #6ee7b7; text-decoration: none; border-radius: 0.375rem;">Graduated repo →</a>
+      )}
+    </div>
+  </section>
+</BaseLayout>

@@ -8,9 +8,15 @@
   "scripts": {
     "build": "turbo build",
     "test": "turbo test",
-    "verify": "bash verify.sh"
+    "verify": "bash verify.sh",
+    "seed:new": "node scripts/seed-new.mjs",
+    "seed:validate": "node scripts/seed-validate.mjs",
+    "seed:index": "node scripts/seed-index.mjs",
+    "seed:doctor": "node scripts/seed-doctor.mjs"
   },
   "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "turbo": "^2.4.0",
     "typescript": "^5.7.0"
   }
