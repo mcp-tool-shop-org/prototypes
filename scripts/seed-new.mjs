@@ -107,8 +107,15 @@ const passport = {
     programmingLanguages: ['TypeScript'],
     runtimes: ['node>=20'],
     operatingSystems: ['any'],
+  },
+  health: {
     lineCount: null,
     lastCommitAt: null,
+    commitRecencyDays: null,
+    hasTests: null,
+    hasReadme: null,
+    hasLicense: null,
+    buildable: null,
   },
   lineage: {
     sourceRepo: null,
@@ -125,7 +132,13 @@ const passport = {
   discovery: {
     oneLiner: `TODO: one line about ${slug}.`,
     whyItMatters: null,
-    patternWorthStealing: null,
+  },
+  patterns: [],
+  failureModes: [],
+  priorArt: [],
+  agentCapsule: {
+    insight: null,
+    excerpt: null,
   },
   ingest: {
     method: 'generator',

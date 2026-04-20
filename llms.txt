@@ -1,0 +1,5 @@
+# Prototypes — Seed Vault
+
+> Archived prototypes from the MCP Tool Shop organization. Every seed solved a real problem, proved a concept, or taught us something. Passports carry structured patterns, failure modes, and agent capsules so LLMs can extract reusable tricks without parsing source.
+
+Generated 2026-04-20 — 0 seeds cataloged.

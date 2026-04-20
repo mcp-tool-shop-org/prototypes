@@ -26,6 +26,8 @@ export function loadTaxonomy() {
     categories: new Set(t.categories.map((c) => c.id)),
     categoryList: t.categories,
     tags: new Set(Object.keys(t.tagRegistry)),
+    patternCategories: new Set((t.patternCategories ?? []).map((c) => c.id)),
+    patternCategoryList: t.patternCategories ?? [],
     raw: t,
   };
 }
@@ -61,6 +63,47 @@ export function gitLastCommitIso(path) {
   } catch {
     return null;
   }
+}
+
+const TEST_PATTERNS = [/\.test\./, /\.spec\./, /_test\./, /\/tests?\//i, /\/__tests__\//];
+const README_NAMES = new Set(['README.md', 'README.MD', 'Readme.md', 'readme.md', 'README']);
+const LICENSE_NAMES = new Set(['LICENSE', 'LICENSE.md', 'LICENSE.txt', 'LICENCE', 'COPYING']);
+
+export function detectHealthSignals(pkgDir) {
+  const skipDirs = new Set(['node_modules', 'dist', 'build', 'out', '.next', '.astro', 'target', 'bin', 'obj', '.git']);
+  let hasTests = false;
+  let hasReadme = false;
+  let hasLicense = false;
+  const walk = (dir, depth) => {
+    let entries;
+    try {
+      entries = readdirSync(dir);
+    } catch {
+      return;
+    }
+    for (const entry of entries) {
+      if (skipDirs.has(entry)) continue;
+      const full = join(dir, entry);
+      let s;
+      try {
+        s = statSync(full);
+      } catch {
+        continue;
+      }
+      if (s.isDirectory()) {
+        if (depth < 4) walk(full, depth + 1);
+      } else if (s.isFile()) {
+        if (depth === 0 && README_NAMES.has(entry)) hasReadme = true;
+        if (depth === 0 && LICENSE_NAMES.has(entry)) hasLicense = true;
+        if (!hasTests) {
+          const full2 = full.replace(/\\/g, '/');
+          if (TEST_PATTERNS.some((re) => re.test(full2))) hasTests = true;
+        }
+      }
+    }
+  };
+  walk(pkgDir, 0);
+  return { hasTests, hasReadme, hasLicense };
 }
 
 export function countLines(pkgDir) {

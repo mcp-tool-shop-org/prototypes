@@ -30,6 +30,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - README `Packages by category` section wrapped with generator markers. Content is
   still hand-maintained until Wave 2 backfill lands.
 
+### Schema tuning (pre-Wave-2, informed by 2026 state-of-the-art research)
+- **`patterns[]`** — structured pattern extraction with controlled-vocabulary
+  category (from `taxonomy.json:patternCategories`). Replaces the free-prose
+  `discovery.patternWorthStealing`. Makes "which seeds touched supply-chain
+  tricks?" queryable across the vault.
+- **`failureModes[]`** — structured lessons-learned (`tried` / `didntWorkBecause`
+  / `pivoted?`). A prototype's most valuable payload is often what broke.
+- **`agentCapsule`** — `{insight, excerpt}` — 10-second LLM-optimized summary
+  plus a ≤400-char code excerpt of the core trick. Agents pick up the idea
+  without parsing source.
+- **`priorArt[]`** — papers, blog posts, prior tools that inspired each seed.
+- **`health` block** — auto-computed signals split out of `technical`:
+  `lineCount`, `lastCommitAt`, `commitRecencyDays`, `hasTests`, `hasReadme`,
+  `hasLicense`, `buildable`. Fills at index time from git + filesystem; no
+  manual upkeep.
+- **`patternCategories`** registry added to `taxonomy.json` (24 canonical
+  categories — signal-processing, caching, concurrency, supply-chain, etc.).
+- **`/llms.txt`** generated at repo root by `seed:index` — follows the
+  Answer.AI emerging spec for LLM-discoverable sites.
+- Astro site: per-seed pages render patterns / failure modes / agent capsule /
+  prior art / health signals; faceted browser adds "has tests / README /
+  LICENSE / fresh ≤90d" filters and searches pattern names + summaries.
+
 ### Next
 - Wave 2: backfill passports for the 104 existing packages via the Ollama Intern MCP
   (`ollama_extract`, hermes3:8b, JSON-schema-constrained generation). Low-confidence

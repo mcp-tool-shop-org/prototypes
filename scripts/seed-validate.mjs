@@ -69,6 +69,16 @@ for (const { name, passport, error: readError } of passports) {
     }
   }
 
+  // Pattern category registry
+  for (const p of passport.patterns ?? []) {
+    if (p.category && !taxonomy.patternCategories.has(p.category)) {
+      err(
+        name,
+        `patterns[].category "${p.category}" is not in taxonomy.json:patternCategories`
+      );
+    }
+  }
+
   // Unique IDs
   if (passport.id) {
     if (seenIds.has(passport.id)) {

@@ -21,9 +21,14 @@
     "lifecycle",
     "taxonomy",
     "technical",
+    "health",
     "lineage",
     "sbom",
     "discovery",
+    "patterns",
+    "failureModes",
+    "priorArt",
+    "agentCapsule",
     "ingest"
   ],
   "properties": {
@@ -128,9 +133,21 @@
         "operatingSystems": {
           "type": "array",
           "items": { "type": "string", "enum": ["linux", "darwin", "win32", "any"] }
-        },
+        }
+      }
+    },
+    "health": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Auto-computed signals from git + filesystem. Do not hand-edit — seed:index overwrites.",
+      "properties": {
         "lineCount": { "type": ["integer", "null"], "minimum": 0 },
-        "lastCommitAt": { "type": ["string", "null"], "format": "date-time" }
+        "lastCommitAt": { "type": ["string", "null"], "format": "date-time" },
+        "commitRecencyDays": { "type": ["integer", "null"], "minimum": 0 },
+        "hasTests": { "type": ["boolean", "null"] },
+        "hasReadme": { "type": ["boolean", "null"] },
+        "hasLicense": { "type": ["boolean", "null"] },
+        "buildable": { "type": ["boolean", "null"], "description": "null = unknown; true = verified builds; false = known broken." }
       }
     },
     "lineage": {
@@ -160,8 +177,64 @@
       "required": ["oneLiner"],
       "properties": {
         "oneLiner": { "type": "string", "minLength": 1, "maxLength": 200 },
-        "whyItMatters": { "type": ["string", "null"], "maxLength": 500 },
-        "patternWorthStealing": { "type": ["string", "null"], "maxLength": 500 }
+        "whyItMatters": { "type": ["string", "null"], "maxLength": 500 }
+      }
+    },
+    "patterns": {
+      "type": "array",
+      "description": "Structured patterns this seed proved or demonstrated. Queryable across the vault.",
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "category", "summary"],
+        "properties": {
+          "name": { "type": "string", "minLength": 3, "maxLength": 80 },
+          "category": { "type": "string", "description": "Must be in taxonomy.json:patternCategories." },
+          "summary": { "type": "string", "minLength": 10, "maxLength": 280 }
+        }
+      }
+    },
+    "failureModes": {
+      "type": "array",
+      "description": "Things tried that didn't work. Negative knowledge is payload.",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["tried", "didntWorkBecause"],
+        "properties": {
+          "tried": { "type": "string", "minLength": 5, "maxLength": 200 },
+          "didntWorkBecause": { "type": "string", "minLength": 5, "maxLength": 280 },
+          "pivoted": { "type": ["string", "null"], "maxLength": 200 }
+        }
+      }
+    },
+    "priorArt": {
+      "type": "array",
+      "description": "Papers, blog posts, or prior tools that inspired this seed.",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["url"],
+        "properties": {
+          "url": { "type": "string", "format": "uri" },
+          "title": { "type": ["string", "null"], "maxLength": 200 },
+          "kind": {
+            "type": ["string", "null"],
+            "enum": ["paper", "blog", "tool", "video", "talk", "rfc", "spec", "other", null]
+          }
+        }
+      }
+    },
+    "agentCapsule": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Minimum payload for an LLM agent to grasp the core trick in seconds.",
+      "properties": {
+        "insight": { "type": ["string", "null"], "minLength": 10, "maxLength": 200 },
+        "excerpt": { "type": ["string", "null"], "maxLength": 400, "description": "Tiny code snippet illustrating the trick. Keep under 400 chars." }
       }
     },
     "ingest": {

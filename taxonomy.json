@@ -69,6 +69,32 @@
       "description": "Seeds that predate the April 2026 consolidation."
     }
   ],
+  "patternCategories": [
+    { "id": "signal-processing", "label": "Signal processing", "description": "DSP, filters, tremor compensation, audio analysis." },
+    { "id": "caching", "label": "Caching", "description": "Cache eviction, refresh strategies, invalidation." },
+    { "id": "concurrency", "label": "Concurrency", "description": "Async patterns, queues, pools, mutexes, race-avoidance." },
+    { "id": "storage", "label": "Storage", "description": "File layout, append-only logs, content-addressing." },
+    { "id": "observability", "label": "Observability", "description": "Telemetry, tracing, structured logging, audit trails." },
+    { "id": "ui-primitive", "label": "UI primitive", "description": "Reusable UI components or interaction patterns." },
+    { "id": "input-handling", "label": "Input handling", "description": "Keyboard, mouse, touch, controller, voice input tricks." },
+    { "id": "rendering", "label": "Rendering", "description": "Drawing, sprites, vector graphics, compositing." },
+    { "id": "protocol", "label": "Protocol", "description": "Wire formats, message shapes, state machines." },
+    { "id": "data-model", "label": "Data model", "description": "Schemas, relationships, normalization strategies." },
+    { "id": "search", "label": "Search", "description": "Full-text, vector, hybrid, ranking heuristics." },
+    { "id": "streaming", "label": "Streaming", "description": "SSE, WebSockets, backpressure, chunked I/O." },
+    { "id": "auth", "label": "Auth", "description": "Authentication, authorization, capability passing." },
+    { "id": "supply-chain", "label": "Supply chain", "description": "Signing, attestation, provenance, SBOMs." },
+    { "id": "build-system", "label": "Build system", "description": "Bundling, caching, workspace tooling, reproducibility." },
+    { "id": "testing", "label": "Testing", "description": "Test generation, coverage, property-based testing." },
+    { "id": "cli-ux", "label": "CLI UX", "description": "Terminal ergonomics, progress, argument parsing." },
+    { "id": "agent-workflow", "label": "Agent workflow", "description": "How an AI agent is invoked, orchestrated, sandboxed." },
+    { "id": "prompt-engineering", "label": "Prompt engineering", "description": "Prompt shapes, schema-constrained generation, chaining." },
+    { "id": "llm-integration", "label": "LLM integration", "description": "Local models, context windows, streaming integration." },
+    { "id": "governance", "label": "Governance", "description": "Policy, consent, throttling, preference enforcement." },
+    { "id": "deployment", "label": "Deployment", "description": "Packaging, install paths, update channels." },
+    { "id": "config", "label": "Config", "description": "Settings layers, precedence, schema validation." },
+    { "id": "other", "label": "Other", "description": "Escape hatch — prefer adding a new category when you hit this 3x." }
+  ],
   "tagRegistry": {
     "typescript": "TypeScript source.",
     "javascript": "JavaScript source.",

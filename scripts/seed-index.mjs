@@ -15,6 +15,7 @@ import {
   loadTaxonomy,
   gitLastCommitIso,
   countLines,
+  detectHealthSignals,
   nowIso,
   fmt,
 } from './lib.mjs';
@@ -28,12 +29,20 @@ for (const { name, passport } of passports) {
   const pkgDir = join(packagesDir, name);
   const lastCommitAt = gitLastCommitIso(pkgDir);
   const lineCount = countLines(pkgDir);
+  const { hasTests, hasReadme, hasLicense } = detectHealthSignals(pkgDir);
+  const commitRecencyDays = lastCommitAt
+    ? Math.max(0, Math.floor((Date.now() - new Date(lastCommitAt).valueOf()) / 86_400_000))
+    : null;
   enriched.push({
     ...passport,
-    technical: {
-      ...passport.technical,
-      lastCommitAt,
+    health: {
       lineCount,
+      lastCommitAt,
+      commitRecencyDays,
+      hasTests,
+      hasReadme,
+      hasLicense,
+      buildable: passport.health?.buildable ?? null,
     },
   });
 }
@@ -121,3 +130,39 @@ if (existsSync(readmePath)) {
 
 console.log(fmt('green', `Wrote site/src/data/seeds.json (${enriched.length} seeds)`));
 console.log(fmt('green', `Wrote site/src/data/taxonomy.json`));
+
+// --- Generate /llms.txt at repo root (https://llmstxt.org) ---
+function buildLlmsTxt() {
+  const lines = [
+    '# Prototypes — Seed Vault',
+    '',
+    '> Archived prototypes from the MCP Tool Shop organization. Every seed solved a real problem, proved a concept, or taught us something. Passports carry structured patterns, failure modes, and agent capsules so LLMs can extract reusable tricks without parsing source.',
+    '',
+    `Generated ${nowIso().slice(0, 10)} — ${enriched.length} seed${enriched.length === 1 ? '' : 's'} cataloged.`,
+    '',
+  ];
+  const byCategory = new Map();
+  for (const seed of enriched) {
+    const cat = seed.taxonomy?.category ?? 'uncategorized';
+    if (!byCategory.has(cat)) byCategory.set(cat, []);
+    byCategory.get(cat).push(seed);
+  }
+  for (const cat of taxonomy.categoryList) {
+    const seeds = byCategory.get(cat.id);
+    if (!seeds || seeds.length === 0) continue;
+    lines.push(`## ${cat.label}`);
+    lines.push('');
+    for (const s of seeds.sort((a, b) => a.name.localeCompare(b.name))) {
+      const one = (s.discovery?.oneLiner ?? s.title ?? '').replace(/\n/g, ' ');
+      lines.push(
+        `- [${s.name}](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/${s.name}): ${one}`
+      );
+    }
+    lines.push('');
+  }
+  return lines.join('\n');
+}
+
+const llmsPath = join(repoRoot, 'llms.txt');
+writeFileSync(llmsPath, buildLlmsTxt(), 'utf8');
+console.log(fmt('green', `Wrote llms.txt (${enriched.length} seeds)`));

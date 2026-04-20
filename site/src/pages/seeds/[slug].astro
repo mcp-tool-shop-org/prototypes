@@ -59,19 +59,107 @@ const { seed } = Astro.props as { seed: any };
         <div style="color: #71717a; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.4rem;">Languages</div>
         <div style="color: #e4e4e7;">{(seed.technical?.programmingLanguages ?? []).join(', ')}</div>
       </div>
-      {seed.technical?.lineCount != null && (
+      {seed.health?.lineCount != null && (
         <div style="padding: 1rem; background: #09090b; border: 1px solid #27272a; border-radius: 0.5rem;">
           <div style="color: #71717a; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.4rem;">Lines of code</div>
-          <div style="color: #e4e4e7;">{seed.technical.lineCount.toLocaleString()}</div>
+          <div style="color: #e4e4e7;">{seed.health.lineCount.toLocaleString()}</div>
         </div>
       )}
-      {seed.technical?.lastCommitAt && (
+      {seed.health?.lastCommitAt && (
         <div style="padding: 1rem; background: #09090b; border: 1px solid #27272a; border-radius: 0.5rem;">
           <div style="color: #71717a; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.4rem;">Last commit</div>
-          <div style="color: #e4e4e7;">{seed.technical.lastCommitAt.slice(0, 10)}</div>
+          <div style="color: #e4e4e7;">
+            {seed.health.lastCommitAt.slice(0, 10)}
+            {seed.health.commitRecencyDays != null && (
+              <span style="color: #71717a; font-size: 0.8rem;"> ({seed.health.commitRecencyDays}d ago)</span>
+            )}
+          </div>
         </div>
       )}
     </div>
+
+    {seed.health && (
+      <section style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.1rem; color: #e4e4e7; margin: 0 0 0.5rem;">Health signals</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+          {[
+            { label: 'Tests', v: seed.health.hasTests },
+            { label: 'README', v: seed.health.hasReadme },
+            { label: 'LICENSE', v: seed.health.hasLicense },
+            { label: 'Buildable', v: seed.health.buildable },
+          ].map((s) => (
+            <span style={`display:inline-block;padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;background:${s.v === true ? '#022c22' : s.v === false ? '#3f1f1f' : '#18181b'};color:${s.v === true ? '#6ee7b7' : s.v === false ? '#fca5a5' : '#71717a'};border:1px solid ${s.v === true ? '#064e3b' : s.v === false ? '#7f1d1d' : '#27272a'};`}>
+              {s.label}: {s.v === true ? 'yes' : s.v === false ? 'no' : 'unknown'}
+            </span>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {(seed.patterns ?? []).length > 0 && (
+      <section style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.1rem; color: #e4e4e7; margin: 0 0 0.75rem;">Patterns proven here</h2>
+        <div style="display: grid; gap: 0.75rem;">
+          {seed.patterns.map((p: any) => (
+            <div style="padding: 0.85rem 1rem; background: #09090b; border: 1px solid #27272a; border-radius: 0.5rem;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.35rem;">
+                <strong style="color: #e4e4e7;">{p.name}</strong>
+                <span style="font-size: 0.7rem; color: #6ee7b7; background: #022c22; padding: 0.1rem 0.5rem; border-radius: 999px;">{p.category}</span>
+              </div>
+              <div style="color: #d4d4d8; font-size: 0.9rem; line-height: 1.5;">{p.summary}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {(seed.failureModes ?? []).length > 0 && (
+      <section style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.1rem; color: #e4e4e7; margin: 0 0 0.75rem;">What didn't work</h2>
+        <div style="display: grid; gap: 0.75rem;">
+          {seed.failureModes.map((f: any) => (
+            <div style="padding: 0.85rem 1rem; background: #09090b; border: 1px solid #7f1d1d; border-radius: 0.5rem;">
+              <div style="color: #fca5a5; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem;">Tried</div>
+              <div style="color: #e4e4e7; margin-bottom: 0.5rem;">{f.tried}</div>
+              <div style="color: #fca5a5; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem;">Didn't work because</div>
+              <div style="color: #d4d4d8; font-size: 0.9rem; line-height: 1.5;">{f.didntWorkBecause}</div>
+              {f.pivoted && (
+                <>
+                  <div style="color: #6ee7b7; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; margin: 0.5rem 0 0.35rem;">Pivoted to</div>
+                  <div style="color: #d4d4d8; font-size: 0.9rem; line-height: 1.5;">{f.pivoted}</div>
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {seed.agentCapsule?.insight && (
+      <section style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.1rem; color: #e4e4e7; margin: 0 0 0.5rem;">Agent capsule <span style="font-size: 0.7rem; color: #71717a; font-weight: 400;">(the 10-second version)</span></h2>
+        <div style="padding: 1rem; background: #09090b; border: 1px solid #27272a; border-radius: 0.5rem;">
+          <div style="color: #6ee7b7; font-weight: 600; margin-bottom: 0.5rem;">{seed.agentCapsule.insight}</div>
+          {seed.agentCapsule.excerpt && (
+            <pre style="margin: 0; padding: 0.6rem 0.8rem; background: #050506; border: 1px solid #1a1a1d; border-radius: 0.25rem; color: #d4d4d8; font-size: 0.8rem; overflow-x: auto;"><code>{seed.agentCapsule.excerpt}</code></pre>
+          )}
+        </div>
+      </section>
+    )}
+
+    {(seed.priorArt ?? []).length > 0 && (
+      <section style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.1rem; color: #e4e4e7; margin: 0 0 0.5rem;">Prior art</h2>
+        <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 0.4rem;">
+          {seed.priorArt.map((p: any) => (
+            <li>
+              <a href={p.url} style="color: #6ee7b7; text-decoration: none;">{p.title ?? p.url}</a>
+              {p.kind && <span style="color: #71717a; font-size: 0.75rem; margin-left: 0.5rem;">({p.kind})</span>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
 
     {seed.discovery?.whyItMatters && (
       <section style="margin-bottom: 2rem;">
