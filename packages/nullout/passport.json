@@ -9,7 +9,7 @@
   "swhid": null,
   "name": "nullout",
   "title": "NullOut",
-  "description": "MCP server that finds and safely removes 'undeletable' files on Windows.",
+  "description": "NullOut is an MCP server that scans allowlisted directories for reserved-name collisions, trailing dots/spaces, and overlong paths; plans the cleanup by generating per-entry confirmation tokens bound to file identity; and deletes the entries safely using extended path namespace and token verification.",
   "version": "0.1.0",
   "license": "MIT",
   "datePublished": "2026-04-20",
@@ -33,8 +33,6 @@
     "category": "developer-tools",
     "domains": [],
     "tags": [
-      "typescript",
-      "javascript",
       "python",
       "cli",
       "mcp"
@@ -43,9 +41,9 @@
   "technical": {
     "kind": "mcp-server",
     "programmingLanguages": [
+      "Python",
       "TypeScript",
-      "JavaScript",
-      "Python"
+      "JavaScript"
     ],
     "runtimes": [],
     "operatingSystems": [
@@ -74,8 +72,8 @@
     "hash": null
   },
   "discovery": {
-    "oneLiner": "pip install nullout-mcp",
-    "whyItMatters": "Defends against destructive misuse, path traversal, reparse point escapes, TOCTOU races, namespace tricks, locked files by using a three-step scan-plan-delete workflow designed for MCP hosts and requiring server-issued confirmation tokens."
+    "oneLiner": "MCP server that finds and safely removes hazardous files on Windows using a scan-plan-delete workflow.",
+    "whyItMatters": null
   },
   "patterns": [
     {
@@ -87,7 +85,7 @@
   "failureModes": [],
   "priorArt": [],
   "agentCapsule": {
-    "insight": null,
+    "insight": "To use NullOut, set the NULLOUT_ROOTS environment variable with allowlisted directories and the NULLOUT_TOKEN_SECRET with a random signing secret for confirmation tokens.",
     "excerpt": null
   },
   "ingest": {
@@ -95,6 +93,6 @@
     "model": "hermes3:8b",
     "confidence": 0.7,
     "manualReview": true,
-    "ingestedAt": "2026-04-20T21:55:42.698Z"
+    "ingestedAt": "2026-04-20T23:25:18.140Z"
   }
 }

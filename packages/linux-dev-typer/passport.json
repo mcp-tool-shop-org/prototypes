@@ -33,8 +33,6 @@
     "category": "typing-and-input",
     "domains": [],
     "tags": [
-      "typescript",
-      "javascript",
       "csharp",
       "cli",
       "astro"
@@ -43,11 +41,9 @@
   "technical": {
     "kind": "desktop",
     "programmingLanguages": [
-      "typescript",
-      "javascript",
-      "csharp",
-      "python",
-      "rust"
+      "C#",
+      "TypeScript",
+      "JavaScript"
     ],
     "runtimes": [],
     "operatingSystems": [
@@ -96,7 +92,7 @@
     "method": "ollama-backfill",
     "model": "hermes3:8b",
     "confidence": 0.9,
-    "manualReview": true,
+    "manualReview": false,
     "ingestedAt": "2026-04-20T21:53:55.776Z"
   }
 }

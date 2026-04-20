@@ -13,7 +13,10 @@
     "seed:validate": "node scripts/seed-validate.mjs",
     "seed:index": "node scripts/seed-index.mjs",
     "seed:doctor": "node scripts/seed-doctor.mjs",
-    "seed:backfill": "node scripts/seed-backfill.mjs"
+    "seed:backfill": "node scripts/seed-backfill.mjs",
+    "seed:review": "node scripts/seed-review.mjs",
+    "seed:autofix": "node scripts/seed-autofix.mjs",
+    "seed:relm": "node scripts/seed-relm.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

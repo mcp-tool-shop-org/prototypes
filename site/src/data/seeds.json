@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-20T23:01:50.388Z",
+  "generatedAt": "2026-04-20T23:26:47.808Z",
   "schema": "mcp-prototypes:seeds-index:1",
   "count": 104,
   "seeds": [
@@ -98,7 +98,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:49:58.578Z"
       }
     },
@@ -197,7 +197,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:50:05.444Z"
       }
     },
@@ -294,7 +294,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:50:12.225Z"
       }
     },
@@ -309,7 +309,7 @@
       "swhid": null,
       "name": "artifact",
       "title": "Artifact Rules for Signature Moves",
-      "description": "Rules to follow when picking signature moves for Artifact projects.",
+      "description": "Artifact is a repo-level decision system that uses a 'Curator' (powered by an Ollama) to drive the creation of structured decision packets for any given repository. These packets include information on tier, format, constraints, hooks, and truth atoms with file:line citations.",
       "version": "1.6.1",
       "license": "MIT",
       "datePublished": "2026-04-20",
@@ -370,8 +370,8 @@
         "hash": null
       },
       "discovery": {
-        "oneLiner": "true, no prose, just JSON object",
-        "whyItMatters": "These rules help ensure consistency and quality in the signature moves picked for Artifact projects."
+        "oneLiner": "Repo signature artifact decision system — checklist tree + Ollama-powered Curator freshness driver",
+        "whyItMatters": null
       },
       "patterns": [],
       "failureModes": [],
@@ -384,8 +384,8 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 1,
-        "manualReview": true,
-        "ingestedAt": "2026-04-20T21:50:19.983Z"
+        "manualReview": false,
+        "ingestedAt": "2026-04-20T23:24:45.068Z"
       }
     },
     {
@@ -481,7 +481,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 1,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:50:26.918Z"
       }
     },
@@ -520,7 +520,6 @@
         "category": "desktop-apps",
         "domains": [],
         "tags": [
-          "typescript",
           "csharp",
           "cli",
           "sdk",
@@ -531,8 +530,9 @@
       "technical": {
         "kind": "desktop",
         "programmingLanguages": [
-          "typescript",
-          "csharp"
+          "C#",
+          "XAML",
+          "TypeScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -581,7 +581,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:48:25.370Z"
       }
     },
@@ -620,8 +620,6 @@
         "category": "developer-tools",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
           "python",
           "cli",
           "mcp"
@@ -630,9 +628,9 @@
       "technical": {
         "kind": "cli",
         "programmingLanguages": [
+          "Python",
           "TypeScript",
-          "JavaScript",
-          "Python"
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -681,7 +679,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:50:34.276Z"
       }
     },
@@ -780,7 +778,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:50:41.620Z"
       }
     },
@@ -1066,7 +1064,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 1,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:50:59.753Z"
       }
     },
@@ -1158,7 +1156,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 1,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T22:06:33.444Z"
       }
     },
@@ -1173,7 +1171,7 @@
       "swhid": null,
       "name": "claude-rules",
       "title": "claude-rules",
-      "description": "A tool for optimizing and splitting CLAUDE.md files into lean indexes + core rules.",
+      "description": "claude-rules is a tool for optimizing and splitting your CLAUDE.md file into two parts: a lean always-loaded routing index, and smaller on-demand rule files. This reduces the number of tokens used every session by only loading relevant rules when needed.",
       "version": "1.2.2",
       "license": "MIT",
       "datePublished": "2026-04-20",
@@ -1241,8 +1239,8 @@
         "hash": null
       },
       "discovery": {
-        "oneLiner": "true, // This tool can be used to optimize a CLAUDE.md file in one command.",
-        "whyItMatters": "By splitting CLAUDE.md into lean indexes + core rules, this tool helps maintain large documentation projects by reducing the cognitive load of reading through all details on every use."
+        "oneLiner": "A dispatch table generator and instruction-file optimizer for Claude Code that splits bloated CLAUDE.md files into a tiny routing index and topic-specific rule files.",
+        "whyItMatters": null
       },
       "patterns": [
         {
@@ -1261,8 +1259,8 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
-        "ingestedAt": "2026-04-20T21:51:13.445Z"
+        "manualReview": false,
+        "ingestedAt": "2026-04-20T23:24:49.075Z"
       }
     },
     {
@@ -1359,7 +1357,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:51:21.769Z"
       }
     },
@@ -1457,7 +1455,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:51:29.365Z"
       }
     },
@@ -1472,7 +1470,7 @@
       "swhid": null,
       "name": "claude-toolstack",
       "title": "claude-toolstack",
-      "description": "A ready-to-deploy stack that keeps Claude Code productive on large, multi-language repositories without thrashing a 64-GB Linux workstation.",
+      "description": "The 'claude-toolstack-cli' package provides a command-line interface (CLI) client for the 'claude-toolstack' developer tool. It allows users to interact with the underlying stack, which keeps Claude Code productive on large, multi-language repositories without thrashing a 64-GB Linux workstation.",
       "version": "0.1.0",
       "license": "MIT",
       "datePublished": "2026-04-20",
@@ -1496,8 +1494,6 @@
         "category": "developer-tools",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
           "python",
           "cli",
           "mcp",
@@ -1507,9 +1503,9 @@
       "technical": {
         "kind": "cli",
         "programmingLanguages": [
+          "Python",
           "TypeScript",
-          "JavaScript",
-          "Python"
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -1538,8 +1534,8 @@
         "hash": null
       },
       "discovery": {
-        "oneLiner": "A TypeScript/JS CLI for the 'claude-toolstack' developer tool.",
-        "whyItMatters": "This stack optimizes the use of large repositories with Claude Code without overloading a 64-GB Linux workstation."
+        "oneLiner": "A zero-dependency Python CLI that wraps all endpoints of a Docker + Claude Code workstation config for 64-GB Linux hosts.",
+        "whyItMatters": null
       },
       "patterns": [],
       "failureModes": [],
@@ -1553,7 +1549,7 @@
         "model": "hermes3:8b",
         "confidence": 0.7,
         "manualReview": true,
-        "ingestedAt": "2026-04-20T21:51:36.648Z"
+        "ingestedAt": "2026-04-20T23:24:53.163Z"
       }
     },
     {
@@ -1651,7 +1647,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:51:44.345Z"
       }
     },
@@ -1690,8 +1686,6 @@
         "category": "developer-tools",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
           "python",
           "cli",
           "mcp"
@@ -1700,9 +1694,9 @@
       "technical": {
         "kind": "cli",
         "programmingLanguages": [
+          "Python",
           "TypeScript",
-          "JavaScript",
-          "Python"
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -1842,7 +1836,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:51:58.841Z"
       }
     },
@@ -1881,8 +1875,6 @@
         "category": "developer-tools",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
           "python",
           "cli",
           "mcp"
@@ -1891,9 +1883,9 @@
       "technical": {
         "kind": "cli",
         "programmingLanguages": [
+          "Python",
           "TypeScript",
-          "JavaScript",
-          "Python"
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -1957,7 +1949,7 @@
       "swhid": null,
       "name": "codeteam-suite",
       "title": "CodeTeam Suite",
-      "description": "The authoritative CodeTeam implementation — a .NET-based CLI and library for package verification, approval, and signing.",
+      "description": "CodeTeam Suite provides a centralized implementation for verifying, approving, and signing software packages using Ed25519 signatures and SHA-256 hashing. It serves as the 'one truth' reference that editor extensions like VS Code and Visual Studio delegate to for package integrity checks.",
       "version": "0.1.0",
       "license": "MIT",
       "datePublished": "2026-04-20",
@@ -1981,8 +1973,6 @@
         "category": "developer-tools",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
           "csharp",
           "cli",
           "mcp"
@@ -1991,9 +1981,9 @@
       "technical": {
         "kind": "cli",
         "programmingLanguages": [
+          "C#",
           "TypeScript",
-          "JavaScript",
-          "C#"
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -2022,8 +2012,8 @@
         "hash": null
       },
       "discovery": {
-        "oneLiner": "CodeTeam Suite is a .NET-based CLI and library for package verification, approval, and signing.",
-        "whyItMatters": "It provides an authoritative implementation of the CodeTeam protocol for verifying, approving, and signing software packages cryptographically."
+        "oneLiner": "A .NET-based CLI and library for authoritative cryptographic verification of software packages.",
+        "whyItMatters": "By establishing an authoritative and cryptographically secure process for package verification, approval, and signing, CodeTeam Suite helps ensure the integrity and trustworthiness of software packages across development tools and environments."
       },
       "patterns": [],
       "failureModes": [],
@@ -2036,8 +2026,8 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 1,
-        "manualReview": true,
-        "ingestedAt": "2026-04-20T21:52:11.371Z"
+        "manualReview": false,
+        "ingestedAt": "2026-04-20T23:24:57.451Z"
       }
     },
     {
@@ -2134,7 +2124,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:48:32.544Z"
       }
     },
@@ -2149,7 +2139,7 @@
       "swhid": null,
       "name": "context-window-manager",
       "title": "Context Window Manager",
-      "description": "Lossless context restoration for LLM sessions via KV cache persistence",
+      "description": "Context Window Manager (CWM) is an MCP server that solves the context exhaustion problem in LLM applications by freezing your current context to persistent storage, allowing you to later restore it with zero information loss. Unlike summarization or RAG approaches, CWM preserves the actual KV cache tensors, giving you true, lossless restoration.",
       "version": "0.1.0",
       "license": "MIT",
       "datePublished": "2026-04-20",
@@ -2173,8 +2163,6 @@
         "category": "developer-tools",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
           "python",
           "mcp",
           "cli"
@@ -2183,9 +2171,9 @@
       "technical": {
         "kind": "cli",
         "programmingLanguages": [
+          "Python",
           "TypeScript",
-          "JavaScript",
-          "Python"
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -2214,8 +2202,8 @@
         "hash": null
       },
       "discovery": {
-        "oneLiner": "Read the README.md and package.json (if present)",
-        "whyItMatters": "This tool addresses a key challenge in using large language models - context exhaustion. It provides a way to persist, restore and manage conversation history with zero information loss."
+        "oneLiner": "An MCP server that freezes and restores LLM session contexts with zero information loss using KV cache persistence",
+        "whyItMatters": "The README explains that traditional approaches to handling context exhaustion in LLM applications result in loss of details when summarizing. By providing a way to freeze and restore contexts with zero information loss using KV cache persistence, CWM offers a superior solution to this problem."
       },
       "patterns": [
         {
@@ -2234,8 +2222,8 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
-        "ingestedAt": "2026-04-20T21:52:18.269Z"
+        "manualReview": false,
+        "ingestedAt": "2026-04-20T23:25:03.012Z"
       }
     },
     {
@@ -2249,7 +2237,7 @@
       "swhid": null,
       "name": "control-room",
       "title": "Control Room",
-      "description": "A local-first desktop app for managing scripts, multi-step workflows, and automated operations with full observability, alerting, and self-healing.",
+      "description": "Control Room turns your scripts into observable, repeatable operations. Instead of running `python train.py --config=prod` in a terminal and hoping for the best, you get: Evidence-grade runs, Failure fingerprinting, Profiles, Runbooks, Triggers, Metrics & Alerts, Health Checks, Self-Healing.",
       "version": "0.1.0",
       "license": "MIT",
       "datePublished": "2026-04-20",
@@ -2273,7 +2261,6 @@
         "category": "desktop-apps",
         "domains": [],
         "tags": [
-          "typescript",
           "csharp",
           "cli",
           "maui",
@@ -2284,9 +2271,9 @@
       "technical": {
         "kind": "desktop",
         "programmingLanguages": [
-          "typescript",
-          "javascript",
-          "csharp"
+          "C#",
+          "XAML",
+          "TypeScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -2315,8 +2302,8 @@
         "hash": null
       },
       "discovery": {
-        "oneLiner": "mathew-johnson",
-        "whyItMatters": "Provides a unified interface for running and monitoring scripts, enabling better reproducibility and observability in software development workflows."
+        "oneLiner": "A local-first desktop app for managing scripts, multi-step workflows, and automated operations with full observability, alerting, and self-healing.",
+        "whyItMatters": null
       },
       "patterns": [
         {
@@ -2340,8 +2327,8 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
-        "ingestedAt": "2026-04-20T21:52:26.295Z"
+        "manualReview": false,
+        "ingestedAt": "2026-04-20T23:25:07.025Z"
       }
     },
     {
@@ -2439,7 +2426,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:48:40.378Z"
       }
     },
@@ -2531,7 +2518,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:52:34.131Z"
       }
     },
@@ -2629,7 +2616,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:52:41.323Z"
       }
     },
@@ -2668,7 +2655,6 @@
         "category": "desktop-apps",
         "domains": [],
         "tags": [
-          "typescript",
           "csharp",
           "maui",
           "cli",
@@ -2678,8 +2664,9 @@
       "technical": {
         "kind": "desktop",
         "programmingLanguages": [
+          "C#",
           "TypeScript",
-          "C#"
+          "XAML"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -2728,7 +2715,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:48:47.611Z"
       }
     },
@@ -2767,17 +2754,15 @@
         "category": "typing-and-input",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
           "csharp"
         ]
       },
       "technical": {
         "kind": "desktop",
         "programmingLanguages": [
-          "TypeScript",
-          "JavaScript",
-          "C#"
+          "C#",
+          "XAML",
+          "TypeScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -2820,7 +2805,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:52:46.672Z"
       }
     },
@@ -2859,17 +2844,15 @@
         "category": "ml-and-training",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
           "python"
         ]
       },
       "technical": {
         "kind": "cli",
         "programmingLanguages": [
+          "Python",
           "TypeScript",
-          "JavaScript",
-          "Python"
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -3010,7 +2993,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:52:58.781Z"
       }
     },
@@ -3049,8 +3032,6 @@
         "category": "developer-tools",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
           "python",
           "cli",
           "mcp",
@@ -3060,9 +3041,9 @@
       "technical": {
         "kind": "cli",
         "programmingLanguages": [
-          "TypeScript",
+          "Python",
           "JavaScript",
-          "Python"
+          "TypeScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -3111,7 +3092,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:53:05.733Z"
       }
     },
@@ -3201,7 +3182,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 1,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:53:11.685Z"
       }
     },
@@ -3294,7 +3275,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:53:20.116Z"
       }
     },
@@ -3309,7 +3290,7 @@
       "swhid": null,
       "name": "headless-wheel-builder",
       "title": "headless-wheel-builder",
-      "description": "A universal, headless Python wheel builder with integrated GitHub operations, release management, and full CI/CD pipeline automation.",
+      "description": "Headless Wheel Builder automates building Python wheels from local paths, git URLs, or tarballs, then orchestrates CI/CD pipelines to test and publish the packages. It integrates GitHub workflows for draft releases with approval processes.",
       "version": "0.1.0",
       "license": "MIT",
       "datePublished": "2026-04-20",
@@ -3371,8 +3352,8 @@
         "hash": null
       },
       "discovery": {
-        "oneLiner": "true, but confidence is only 0.7 due to missing package.json and sparse README",
-        "whyItMatters": "This tool automates many aspects of Python package distribution, including build, release management, dependency analysis, CI/CD pipeline orchestration, and GitHub integration."
+        "oneLiner": "A universal Python wheel builder with CI/CD pipeline automation and GitHub operations for release management.",
+        "whyItMatters": null
       },
       "patterns": [],
       "failureModes": [],
@@ -3386,7 +3367,7 @@
         "model": "hermes3:8b",
         "confidence": 0.7,
         "manualReview": true,
-        "ingestedAt": "2026-04-20T21:53:27.811Z"
+        "ingestedAt": "2026-04-20T23:25:10.305Z"
       }
     },
     {
@@ -3424,7 +3405,6 @@
         "category": "desktop-apps",
         "domains": [],
         "tags": [
-          "typescript",
           "csharp",
           "winui3",
           "astro"
@@ -3433,8 +3413,9 @@
       "technical": {
         "kind": "desktop",
         "programmingLanguages": [
-          "TypeScript",
-          "C#"
+          "C#",
+          "XAML",
+          "TypeScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -3483,7 +3464,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:48:54.558Z"
       }
     },
@@ -3521,14 +3502,14 @@
       "taxonomy": {
         "category": "developer-tools",
         "domains": [],
-        "tags": [
-          "javascript"
-        ]
+        "tags": []
       },
       "technical": {
         "kind": "library",
         "programmingLanguages": [
-          "javascript"
+          "Python",
+          "TypeScript",
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -3577,7 +3558,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:53:33.932Z"
       }
     },
@@ -3676,7 +3657,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:53:41.130Z"
       }
     },
@@ -3691,7 +3672,7 @@
       "swhid": null,
       "name": "ledger-suite",
       "title": "Ledger Suite",
-      "description": "Unified monorepo for cryptographic provenance ledgers — ClaimLedger and CreatorLedger",
+      "description": "Ledger Suite is a local-first collection of cryptographic provenance ledgers that enables scientific claims with Ed25519 signatures, creator attestations, and proof bundles for portable verification. It includes features like citations linking claims, revocations with witness countersignatures, and RFC 3161 timestamps for non-repudiation.",
       "version": "0.1.0",
       "license": "MIT",
       "datePublished": "2026-04-20",
@@ -3754,8 +3735,8 @@
         "hash": null
       },
       "discovery": {
-        "oneLiner": "true-positives",
-        "whyItMatters": "Provides cryptographic provenance verification for scientific claims and creator attestations, enabling secure tracking of intellectual property and content ownership."
+        "oneLiner": "A unified monorepo for cryptographic provenance ledgers — ClaimLedger and CreatorLedger.",
+        "whyItMatters": null
       },
       "patterns": [],
       "failureModes": [],
@@ -3768,8 +3749,8 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
-        "ingestedAt": "2026-04-20T21:53:48.617Z"
+        "manualReview": false,
+        "ingestedAt": "2026-04-20T23:25:13.840Z"
       }
     },
     {
@@ -3807,8 +3788,6 @@
         "category": "typing-and-input",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
           "csharp",
           "cli",
           "astro"
@@ -3817,11 +3796,9 @@
       "technical": {
         "kind": "desktop",
         "programmingLanguages": [
-          "typescript",
-          "javascript",
-          "csharp",
-          "python",
-          "rust"
+          "C#",
+          "TypeScript",
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -3870,7 +3847,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:53:55.776Z"
       }
     },
@@ -3909,17 +3886,15 @@
         "category": "developer-tools",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
           "python"
         ]
       },
       "technical": {
         "kind": "cli",
         "programmingLanguages": [
+          "Python",
           "TypeScript",
-          "JavaScript",
-          "Python"
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -4063,7 +4038,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:49:01.498Z"
       }
     },
@@ -4162,7 +4137,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:54:16.957Z"
       }
     },
@@ -4250,7 +4225,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:54:23.683Z"
       }
     },
@@ -4520,7 +4495,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:54:44.131Z"
       }
     },
@@ -4620,7 +4595,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:54:52.541Z"
       }
     },
@@ -4718,7 +4693,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:54:58.945Z"
       }
     },
@@ -4810,7 +4785,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:55:04.985Z"
       }
     },
@@ -4992,7 +4967,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:55:17.990Z"
       }
     },
@@ -5031,7 +5006,6 @@
         "category": "developer-tools",
         "domains": [],
         "tags": [
-          "typescript",
           "csharp",
           "cli",
           "mcp"
@@ -5040,8 +5014,9 @@
       "technical": {
         "kind": "library",
         "programmingLanguages": [
-          "typescript",
-          "csharp"
+          "C#",
+          "JavaScript",
+          "TypeScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -5090,7 +5065,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 1,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T22:05:49.324Z"
       }
     },
@@ -5129,7 +5104,6 @@
         "category": "desktop-apps",
         "domains": [],
         "tags": [
-          "typescript",
           "csharp",
           "cli",
           "maui"
@@ -5138,8 +5112,9 @@
       "technical": {
         "kind": "desktop",
         "programmingLanguages": [
+          "C#",
           "TypeScript",
-          "C#"
+          "XAML"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -5188,7 +5163,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:49:09.114Z"
       }
     },
@@ -5280,7 +5255,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 1,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:55:29.658Z"
       }
     },
@@ -5319,7 +5294,6 @@
         "category": "desktop-apps",
         "domains": [],
         "tags": [
-          "typescript",
           "csharp",
           "cli"
         ]
@@ -5328,10 +5302,8 @@
         "kind": "desktop",
         "programmingLanguages": [
           "C#",
-          "TypeScript",
-          "Python",
-          "JavaScript",
-          "Rust"
+          "XAML",
+          "Python"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -5475,7 +5447,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:55:35.802Z"
       }
     },
@@ -5490,7 +5462,7 @@
       "swhid": null,
       "name": "nullout",
       "title": "NullOut",
-      "description": "MCP server that finds and safely removes 'undeletable' files on Windows.",
+      "description": "NullOut is an MCP server that scans allowlisted directories for reserved-name collisions, trailing dots/spaces, and overlong paths; plans the cleanup by generating per-entry confirmation tokens bound to file identity; and deletes the entries safely using extended path namespace and token verification.",
       "version": "0.1.0",
       "license": "MIT",
       "datePublished": "2026-04-20",
@@ -5514,8 +5486,6 @@
         "category": "developer-tools",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
           "python",
           "cli",
           "mcp"
@@ -5524,9 +5494,9 @@
       "technical": {
         "kind": "mcp-server",
         "programmingLanguages": [
+          "Python",
           "TypeScript",
-          "JavaScript",
-          "Python"
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -5555,8 +5525,8 @@
         "hash": null
       },
       "discovery": {
-        "oneLiner": "pip install nullout-mcp",
-        "whyItMatters": "Defends against destructive misuse, path traversal, reparse point escapes, TOCTOU races, namespace tricks, locked files by using a three-step scan-plan-delete workflow designed for MCP hosts and requiring server-issued confirmation tokens."
+        "oneLiner": "MCP server that finds and safely removes hazardous files on Windows using a scan-plan-delete workflow.",
+        "whyItMatters": null
       },
       "patterns": [
         {
@@ -5568,7 +5538,7 @@
       "failureModes": [],
       "priorArt": [],
       "agentCapsule": {
-        "insight": null,
+        "insight": "To use NullOut, set the NULLOUT_ROOTS environment variable with allowlisted directories and the NULLOUT_TOKEN_SECRET with a random signing secret for confirmation tokens.",
         "excerpt": null
       },
       "ingest": {
@@ -5576,7 +5546,7 @@
         "model": "hermes3:8b",
         "confidence": 0.7,
         "manualReview": true,
-        "ingestedAt": "2026-04-20T21:55:42.698Z"
+        "ingestedAt": "2026-04-20T23:25:18.140Z"
       }
     },
     {
@@ -5673,7 +5643,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:55:48.902Z"
       }
     },
@@ -5711,14 +5681,12 @@
       "taxonomy": {
         "category": "crypto-and-provenance",
         "domains": [],
-        "tags": [
-          "typescript",
-          "javascript"
-        ]
+        "tags": []
       },
       "technical": {
         "kind": "library",
         "programmingLanguages": [
+          "Python",
           "TypeScript",
           "JavaScript"
         ],
@@ -5774,7 +5742,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:55:57.104Z"
       }
     },
@@ -5864,7 +5832,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:56:04.090Z"
       }
     },
@@ -5903,15 +5871,15 @@
         "category": "desktop-apps",
         "domains": [],
         "tags": [
-          "typescript",
           "csharp"
         ]
       },
       "technical": {
         "kind": "desktop",
         "programmingLanguages": [
+          "C#",
           "TypeScript",
-          "C#"
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -5954,7 +5922,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:56:09.044Z"
       }
     },
@@ -6043,7 +6011,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 1,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T22:02:04.199Z"
       }
     },
@@ -6141,7 +6109,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 1,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:56:58.080Z"
       }
     },
@@ -6233,7 +6201,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 1,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:57:03.393Z"
       }
     },
@@ -6330,7 +6298,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:57:11.474Z"
       }
     },
@@ -6531,7 +6499,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:49:22.084Z"
       }
     },
@@ -6632,7 +6600,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:57:26.556Z"
       }
     },
@@ -6730,7 +6698,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:57:33.252Z"
       }
     },
@@ -6830,7 +6798,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:57:41.404Z"
       }
     },
@@ -6924,7 +6892,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 1,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:57:46.563Z"
       }
     },
@@ -6963,19 +6931,15 @@
         "category": "desktop-apps",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
-          "python",
           "csharp"
         ]
       },
       "technical": {
         "kind": "desktop",
         "programmingLanguages": [
-          "TypeScript",
-          "JavaScript",
+          "C#",
           "Python",
-          "C#"
+          "XAML"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -7119,7 +7083,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:58:00.708Z"
       }
     },
@@ -7158,7 +7122,6 @@
         "category": "desktop-apps",
         "domains": [],
         "tags": [
-          "typescript",
           "csharp",
           "cli",
           "maui"
@@ -7167,8 +7130,9 @@
       "technical": {
         "kind": "desktop",
         "programmingLanguages": [
-          "TypeScript",
-          "C#"
+          "C#",
+          "XAML",
+          "TypeScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -7217,7 +7181,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:49:30.063Z"
       }
     },
@@ -7398,7 +7362,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:58:14.613Z"
       }
     },
@@ -7489,7 +7453,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 1,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:58:20.337Z"
       }
     },
@@ -7528,8 +7492,6 @@
         "category": "developer-tools",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
           "python",
           "cli",
           "mcp",
@@ -7539,9 +7501,9 @@
       "technical": {
         "kind": "plugin",
         "programmingLanguages": [
+          "Python",
           "TypeScript",
-          "JavaScript",
-          "Python"
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -7590,7 +7552,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T22:05:57.265Z"
       }
     },
@@ -7690,7 +7652,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T22:06:04.895Z"
       }
     },
@@ -7780,7 +7742,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:58:41.356Z"
       }
     },
@@ -7880,7 +7842,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:58:47.323Z"
       }
     },
@@ -7978,7 +7940,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:58:53.959Z"
       }
     },
@@ -8075,7 +8037,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:59:00.946Z"
       }
     },
@@ -8175,7 +8137,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:49:37.884Z"
       }
     },
@@ -8214,8 +8176,6 @@
         "category": "ml-and-training",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
           "python",
           "cli"
         ]
@@ -8223,9 +8183,9 @@
       "technical": {
         "kind": "cli",
         "programmingLanguages": [
+          "Python",
           "TypeScript",
-          "JavaScript",
-          "Python"
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -8369,7 +8329,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:59:13.661Z"
       }
     },
@@ -8408,17 +8368,15 @@
         "category": "developer-tools",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
           "python"
         ]
       },
       "technical": {
         "kind": "cli",
         "programmingLanguages": [
+          "Python",
           "TypeScript",
-          "JavaScript",
-          "Python"
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -8560,7 +8518,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T22:05:35.558Z"
       }
     },
@@ -8599,15 +8557,15 @@
         "category": "mouse-and-cursor",
         "domains": [],
         "tags": [
-          "typescript",
           "csharp"
         ]
       },
       "technical": {
         "kind": "desktop",
         "programmingLanguages": [
+          "C#",
           "TypeScript",
-          "C#"
+          "XAML"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -8656,7 +8614,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:49:51.516Z"
       }
     },
@@ -8694,16 +8652,14 @@
       "taxonomy": {
         "category": "desktop-apps",
         "domains": [],
-        "tags": [
-          "typescript",
-          "javascript"
-        ]
+        "tags": []
       },
       "technical": {
         "kind": "desktop",
         "programmingLanguages": [
           "TypeScript",
-          "JavaScript"
+          "C#",
+          "XAML"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -8752,7 +8708,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:59:25.371Z"
       }
     },
@@ -8842,7 +8798,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 1,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:59:30.492Z"
       }
     },
@@ -8934,7 +8890,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:59:38.512Z"
       }
     },
@@ -9031,7 +8987,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:59:47.237Z"
       }
     },
@@ -9070,8 +9026,6 @@
         "category": "voice-and-sound",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
           "python",
           "cli",
           "sdk"
@@ -9080,9 +9034,9 @@
       "technical": {
         "kind": "library",
         "programmingLanguages": [
+          "Python",
           "TypeScript",
-          "JavaScript",
-          "Python"
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -9136,7 +9090,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T21:59:54.917Z"
       }
     },
@@ -9235,7 +9189,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T22:00:03.124Z"
       }
     },
@@ -9338,7 +9292,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T22:00:10.904Z"
       }
     },
@@ -9529,7 +9483,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T22:00:25.705Z"
       }
     },
@@ -9622,7 +9576,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T22:00:36.877Z"
       }
     },
@@ -9720,7 +9674,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 1,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T22:00:45.038Z"
       }
     },
@@ -9769,10 +9723,7 @@
         "kind": "plugin",
         "programmingLanguages": [
           "TypeScript",
-          "JavaScript",
-          "Python",
-          "Rust",
-          "Go"
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -9821,7 +9772,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T22:00:53.519Z"
       }
     },
@@ -9860,8 +9811,6 @@
         "category": "developer-tools",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
           "python",
           "cli",
           "mcp"
@@ -9870,9 +9819,9 @@
       "technical": {
         "kind": "cli",
         "programmingLanguages": [
+          "Python",
           "TypeScript",
-          "JavaScript",
-          "Python"
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -9921,7 +9870,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.9,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T22:01:00.240Z"
       }
     },
@@ -9960,8 +9909,6 @@
         "category": "developer-tools",
         "domains": [],
         "tags": [
-          "typescript",
-          "javascript",
           "python",
           "cli",
           "mcp"
@@ -9970,9 +9917,9 @@
       "technical": {
         "kind": "cli",
         "programmingLanguages": [
+          "Python",
           "TypeScript",
-          "JavaScript",
-          "Python"
+          "JavaScript"
         ],
         "runtimes": [],
         "operatingSystems": [
@@ -10021,7 +9968,7 @@
         "method": "ollama-backfill",
         "model": "hermes3:8b",
         "confidence": 0.95,
-        "manualReview": true,
+        "manualReview": false,
         "ingestedAt": "2026-04-20T22:01:07.646Z"
       }
     }

@@ -9,7 +9,7 @@
   "swhid": null,
   "name": "control-room",
   "title": "Control Room",
-  "description": "A local-first desktop app for managing scripts, multi-step workflows, and automated operations with full observability, alerting, and self-healing.",
+  "description": "Control Room turns your scripts into observable, repeatable operations. Instead of running `python train.py --config=prod` in a terminal and hoping for the best, you get: Evidence-grade runs, Failure fingerprinting, Profiles, Runbooks, Triggers, Metrics & Alerts, Health Checks, Self-Healing.",
   "version": "0.1.0",
   "license": "MIT",
   "datePublished": "2026-04-20",
@@ -33,7 +33,6 @@
     "category": "desktop-apps",
     "domains": [],
     "tags": [
-      "typescript",
       "csharp",
       "cli",
       "maui",
@@ -44,9 +43,9 @@
   "technical": {
     "kind": "desktop",
     "programmingLanguages": [
-      "typescript",
-      "javascript",
-      "csharp"
+      "C#",
+      "XAML",
+      "TypeScript"
     ],
     "runtimes": [],
     "operatingSystems": [
@@ -75,8 +74,8 @@
     "hash": null
   },
   "discovery": {
-    "oneLiner": "mathew-johnson",
-    "whyItMatters": "Provides a unified interface for running and monitoring scripts, enabling better reproducibility and observability in software development workflows."
+    "oneLiner": "A local-first desktop app for managing scripts, multi-step workflows, and automated operations with full observability, alerting, and self-healing.",
+    "whyItMatters": null
   },
   "patterns": [
     {
@@ -100,7 +99,7 @@
     "method": "ollama-backfill",
     "model": "hermes3:8b",
     "confidence": 0.9,
-    "manualReview": true,
-    "ingestedAt": "2026-04-20T21:52:26.295Z"
+    "manualReview": false,
+    "ingestedAt": "2026-04-20T23:25:07.025Z"
   }
 }

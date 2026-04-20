@@ -33,7 +33,6 @@
     "category": "desktop-apps",
     "domains": [],
     "tags": [
-      "typescript",
       "csharp",
       "cli",
       "sdk",
@@ -44,8 +43,9 @@
   "technical": {
     "kind": "desktop",
     "programmingLanguages": [
-      "typescript",
-      "csharp"
+      "C#",
+      "XAML",
+      "TypeScript"
     ],
     "runtimes": [],
     "operatingSystems": [
@@ -94,7 +94,7 @@
     "method": "ollama-backfill",
     "model": "hermes3:8b",
     "confidence": 0.9,
-    "manualReview": true,
+    "manualReview": false,
     "ingestedAt": "2026-04-20T21:48:25.370Z"
   }
 }

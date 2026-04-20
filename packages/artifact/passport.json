@@ -9,7 +9,7 @@
   "swhid": null,
   "name": "artifact",
   "title": "Artifact Rules for Signature Moves",
-  "description": "Rules to follow when picking signature moves for Artifact projects.",
+  "description": "Artifact is a repo-level decision system that uses a 'Curator' (powered by an Ollama) to drive the creation of structured decision packets for any given repository. These packets include information on tier, format, constraints, hooks, and truth atoms with file:line citations.",
   "version": "1.6.1",
   "license": "MIT",
   "datePublished": "2026-04-20",
@@ -70,8 +70,8 @@
     "hash": null
   },
   "discovery": {
-    "oneLiner": "true, no prose, just JSON object",
-    "whyItMatters": "These rules help ensure consistency and quality in the signature moves picked for Artifact projects."
+    "oneLiner": "Repo signature artifact decision system — checklist tree + Ollama-powered Curator freshness driver",
+    "whyItMatters": null
   },
   "patterns": [],
   "failureModes": [],
@@ -84,7 +84,7 @@
     "method": "ollama-backfill",
     "model": "hermes3:8b",
     "confidence": 1,
-    "manualReview": true,
-    "ingestedAt": "2026-04-20T21:50:19.983Z"
+    "manualReview": false,
+    "ingestedAt": "2026-04-20T23:24:45.068Z"
   }
 }

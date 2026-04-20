@@ -33,7 +33,6 @@
     "category": "desktop-apps",
     "domains": [],
     "tags": [
-      "typescript",
       "csharp",
       "winui3",
       "astro"
@@ -42,8 +41,9 @@
   "technical": {
     "kind": "desktop",
     "programmingLanguages": [
-      "TypeScript",
-      "C#"
+      "C#",
+      "XAML",
+      "TypeScript"
     ],
     "runtimes": [],
     "operatingSystems": [
@@ -92,7 +92,7 @@
     "method": "ollama-backfill",
     "model": "hermes3:8b",
     "confidence": 0.9,
-    "manualReview": true,
+    "manualReview": false,
     "ingestedAt": "2026-04-20T21:48:54.558Z"
   }
 }

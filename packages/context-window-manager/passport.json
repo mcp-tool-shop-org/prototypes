@@ -9,7 +9,7 @@
   "swhid": null,
   "name": "context-window-manager",
   "title": "Context Window Manager",
-  "description": "Lossless context restoration for LLM sessions via KV cache persistence",
+  "description": "Context Window Manager (CWM) is an MCP server that solves the context exhaustion problem in LLM applications by freezing your current context to persistent storage, allowing you to later restore it with zero information loss. Unlike summarization or RAG approaches, CWM preserves the actual KV cache tensors, giving you true, lossless restoration.",
   "version": "0.1.0",
   "license": "MIT",
   "datePublished": "2026-04-20",
@@ -33,8 +33,6 @@
     "category": "developer-tools",
     "domains": [],
     "tags": [
-      "typescript",
-      "javascript",
       "python",
       "mcp",
       "cli"
@@ -43,9 +41,9 @@
   "technical": {
     "kind": "cli",
     "programmingLanguages": [
+      "Python",
       "TypeScript",
-      "JavaScript",
-      "Python"
+      "JavaScript"
     ],
     "runtimes": [],
     "operatingSystems": [
@@ -74,8 +72,8 @@
     "hash": null
   },
   "discovery": {
-    "oneLiner": "Read the README.md and package.json (if present)",
-    "whyItMatters": "This tool addresses a key challenge in using large language models - context exhaustion. It provides a way to persist, restore and manage conversation history with zero information loss."
+    "oneLiner": "An MCP server that freezes and restores LLM session contexts with zero information loss using KV cache persistence",
+    "whyItMatters": "The README explains that traditional approaches to handling context exhaustion in LLM applications result in loss of details when summarizing. By providing a way to freeze and restore contexts with zero information loss using KV cache persistence, CWM offers a superior solution to this problem."
   },
   "patterns": [
     {
@@ -94,7 +92,7 @@
     "method": "ollama-backfill",
     "model": "hermes3:8b",
     "confidence": 0.9,
-    "manualReview": true,
-    "ingestedAt": "2026-04-20T21:52:18.269Z"
+    "manualReview": false,
+    "ingestedAt": "2026-04-20T23:25:03.012Z"
   }
 }

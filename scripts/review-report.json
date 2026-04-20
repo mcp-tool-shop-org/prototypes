@@ -1,0 +1,86 @@
+{
+  "leakedOneLiner": [],
+  "tautologicalOneLiner": [],
+  "contradictoryLangTags": [],
+  "contradictoryLangs": [],
+  "shortOneLiner": [],
+  "missingPatterns": [],
+  "lowConfidence": [
+    {
+      "name": "NextLedger",
+      "confidence": 0.7
+    },
+    {
+      "name": "civility-kernel",
+      "confidence": 0.7
+    },
+    {
+      "name": "claude-collaborate",
+      "confidence": 0.7
+    },
+    {
+      "name": "claude-toolstack",
+      "confidence": 0.7
+    },
+    {
+      "name": "code-batch",
+      "confidence": 0.7
+    },
+    {
+      "name": "code-covered",
+      "confidence": 0.7
+    },
+    {
+      "name": "edgepacks",
+      "confidence": 0.7
+    },
+    {
+      "name": "headless-wheel-builder",
+      "confidence": 0.7
+    },
+    {
+      "name": "llm-sync-drive",
+      "confidence": 0.7
+    },
+    {
+      "name": "mcp-bouncer",
+      "confidence": 0.7
+    },
+    {
+      "name": "mcp-examples",
+      "confidence": 0.7
+    },
+    {
+      "name": "mcpt-link-fresh",
+      "confidence": 0.7
+    },
+    {
+      "name": "nullout",
+      "confidence": 0.7
+    },
+    {
+      "name": "receipt-factory",
+      "confidence": 0.7
+    },
+    {
+      "name": "runforge-desktop",
+      "confidence": 0.7
+    },
+    {
+      "name": "sonic-core",
+      "confidence": 0.7
+    },
+    {
+      "name": "tinytrainer",
+      "confidence": 0.7
+    },
+    {
+      "name": "tool-scan",
+      "confidence": 0.7
+    },
+    {
+      "name": "websketch-demo",
+      "confidence": 0.7
+    }
+  ]
+}

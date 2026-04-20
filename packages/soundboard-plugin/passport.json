@@ -33,8 +33,6 @@
     "category": "developer-tools",
     "domains": [],
     "tags": [
-      "typescript",
-      "javascript",
       "python",
       "cli",
       "mcp",
@@ -44,9 +42,9 @@
   "technical": {
     "kind": "plugin",
     "programmingLanguages": [
+      "Python",
       "TypeScript",
-      "JavaScript",
-      "Python"
+      "JavaScript"
     ],
     "runtimes": [],
     "operatingSystems": [
@@ -95,7 +93,7 @@
     "method": "ollama-backfill",
     "model": "hermes3:8b",
     "confidence": 0.9,
-    "manualReview": true,
+    "manualReview": false,
     "ingestedAt": "2026-04-20T22:05:57.265Z"
   }
 }

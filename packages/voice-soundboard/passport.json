@@ -33,8 +33,6 @@
     "category": "voice-and-sound",
     "domains": [],
     "tags": [
-      "typescript",
-      "javascript",
       "python",
       "cli",
       "sdk"
@@ -43,9 +41,9 @@
   "technical": {
     "kind": "library",
     "programmingLanguages": [
+      "Python",
       "TypeScript",
-      "JavaScript",
-      "Python"
+      "JavaScript"
     ],
     "runtimes": [],
     "operatingSystems": [
@@ -99,7 +97,7 @@
     "method": "ollama-backfill",
     "model": "hermes3:8b",
     "confidence": 0.9,
-    "manualReview": true,
+    "manualReview": false,
     "ingestedAt": "2026-04-20T21:59:54.917Z"
   }
 }

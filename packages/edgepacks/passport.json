@@ -33,17 +33,15 @@
     "category": "ml-and-training",
     "domains": [],
     "tags": [
-      "typescript",
-      "javascript",
       "python"
     ]
   },
   "technical": {
     "kind": "cli",
     "programmingLanguages": [
+      "Python",
       "TypeScript",
-      "JavaScript",
-      "Python"
+      "JavaScript"
     ],
     "runtimes": [],
     "operatingSystems": [
