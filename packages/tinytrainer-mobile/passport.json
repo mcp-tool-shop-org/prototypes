@@ -1,0 +1,95 @@
+{
+  "$schema": "../../schemas/passport.schema.json",
+  "conformsTo": [
+    "codemeta:3.0",
+    "ro-crate:1.1",
+    "mcp-prototypes:passport:1"
+  ],
+  "id": "seed:tinytrainer-mobile:0.1.0",
+  "swhid": null,
+  "name": "tinytrainer-mobile",
+  "title": "TinyTrainer Mobile",
+  "description": "iOS/iPadOS reference app for on-device ML personalization.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-04-20",
+  "codeRepository": "https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/tinytrainer-mobile",
+  "author": [
+    {
+      "name": "mcp-tool-shop"
+    }
+  ],
+  "keywords": [],
+  "lifecycle": {
+    "state": "dormant",
+    "stateSince": "2026-04-08",
+    "maturity": "prototype",
+    "caretaker": null,
+    "graduatedTo": null,
+    "resurrectionNotes": null
+  },
+  "taxonomy": {
+    "category": "ml-and-training",
+    "domains": [],
+    "tags": []
+  },
+  "technical": {
+    "kind": "desktop",
+    "programmingLanguages": [
+      "SwiftUI",
+      "Core ML",
+      "NaturalLanguage",
+      "ZIPFoundation"
+    ],
+    "runtimes": [],
+    "operatingSystems": [
+      "any"
+    ]
+  },
+  "health": {
+    "lineCount": null,
+    "lastCommitAt": null,
+    "commitRecencyDays": null,
+    "hasTests": null,
+    "hasReadme": null,
+    "hasLicense": null,
+    "buildable": null
+  },
+  "lineage": {
+    "sourceRepo": null,
+    "consolidatedAt": "2026-04-08",
+    "relatedSeeds": [],
+    "deprecates": [],
+    "successors": []
+  },
+  "sbom": {
+    "format": "none",
+    "url": null,
+    "hash": null
+  },
+  "discovery": {
+    "oneLiner": "Proves the full loop: import kit -> classify locally -> correct predictions -> personalize on device -> measure improvement.",
+    "whyItMatters": "Demonstrates a complete end-to-end ML pipeline running entirely on-device, from importing a pre-trained model to personalizing it with user corrections and measuring accuracy improvements."
+  },
+  "patterns": [
+    {
+      "name": "onDeviceMLPersonalization",
+      "category": "data-model",
+      "summary": "End-to-end pipeline for personalizing an ML model on-device using user corrections."
+    }
+  ],
+  "failureModes": [],
+  "priorArt": [],
+  "agentCapsule": {
+    "insight": null,
+    "excerpt": null
+  },
+  "ingest": {
+    "method": "ollama-backfill",
+    "model": "hermes3:8b",
+    "confidence": 0.9,
+    "manualReview": true,
+    "ingestedAt": "2026-04-20T21:59:13.661Z"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "$schema": "../../schemas/passport.schema.json",
+  "conformsTo": [
+    "codemeta:3.0",
+    "ro-crate:1.1",
+    "mcp-prototypes:passport:1"
+  ],
+  "id": "seed:artifact:1.6.1",
+  "swhid": null,
+  "name": "artifact",
+  "title": "Artifact Rules for Signature Moves",
+  "description": "Rules to follow when picking signature moves for Artifact projects.",
+  "version": "1.6.1",
+  "license": "MIT",
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-04-20",
+  "codeRepository": "https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/artifact",
+  "author": [
+    {
+      "name": "mcp-tool-shop"
+    }
+  ],
+  "keywords": [
+    "rules",
+    "signature-moves",
+    "artifact"
+  ],
+  "lifecycle": {
+    "state": "dormant",
+    "stateSince": "2026-04-08",
+    "maturity": "prototype",
+    "caretaker": null,
+    "graduatedTo": null,
+    "resurrectionNotes": null
+  },
+  "taxonomy": {
+    "category": "original-archive",
+    "domains": [],
+    "tags": []
+  },
+  "technical": {
+    "kind": "library",
+    "programmingLanguages": [
+      "none"
+    ],
+    "runtimes": [],
+    "operatingSystems": [
+      "any"
+    ]
+  },
+  "health": {
+    "lineCount": null,
+    "lastCommitAt": null,
+    "commitRecencyDays": null,
+    "hasTests": null,
+    "hasReadme": null,
+    "hasLicense": null,
+    "buildable": null
+  },
+  "lineage": {
+    "sourceRepo": null,
+    "consolidatedAt": "2026-04-08",
+    "relatedSeeds": [],
+    "deprecates": [],
+    "successors": []
+  },
+  "sbom": {
+    "format": "none",
+    "url": null,
+    "hash": null
+  },
+  "discovery": {
+    "oneLiner": "true, no prose, just JSON object",
+    "whyItMatters": "These rules help ensure consistency and quality in the signature moves picked for Artifact projects."
+  },
+  "patterns": [],
+  "failureModes": [],
+  "priorArt": [],
+  "agentCapsule": {
+    "insight": null,
+    "excerpt": null
+  },
+  "ingest": {
+    "method": "ollama-backfill",
+    "model": "hermes3:8b",
+    "confidence": 1,
+    "manualReview": true,
+    "ingestedAt": "2026-04-20T21:50:19.983Z"
+  }
+}

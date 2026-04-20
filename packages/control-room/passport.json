@@ -1,0 +1,106 @@
+{
+  "$schema": "../../schemas/passport.schema.json",
+  "conformsTo": [
+    "codemeta:3.0",
+    "ro-crate:1.1",
+    "mcp-prototypes:passport:1"
+  ],
+  "id": "seed:control-room:0.1.0",
+  "swhid": null,
+  "name": "control-room",
+  "title": "Control Room",
+  "description": "A local-first desktop app for managing scripts, multi-step workflows, and automated operations with full observability, alerting, and self-healing.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-04-20",
+  "codeRepository": "https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/control-room",
+  "author": [
+    {
+      "name": "mcp-tool-shop"
+    }
+  ],
+  "keywords": [],
+  "lifecycle": {
+    "state": "dormant",
+    "stateSince": "2026-04-08",
+    "maturity": "prototype",
+    "caretaker": null,
+    "graduatedTo": null,
+    "resurrectionNotes": null
+  },
+  "taxonomy": {
+    "category": "desktop-apps",
+    "domains": [],
+    "tags": [
+      "typescript",
+      "csharp",
+      "cli",
+      "maui",
+      "observability",
+      "ai-agent"
+    ]
+  },
+  "technical": {
+    "kind": "desktop",
+    "programmingLanguages": [
+      "typescript",
+      "javascript",
+      "csharp"
+    ],
+    "runtimes": [],
+    "operatingSystems": [
+      "any"
+    ]
+  },
+  "health": {
+    "lineCount": null,
+    "lastCommitAt": null,
+    "commitRecencyDays": null,
+    "hasTests": null,
+    "hasReadme": null,
+    "hasLicense": null,
+    "buildable": null
+  },
+  "lineage": {
+    "sourceRepo": null,
+    "consolidatedAt": "2026-04-08",
+    "relatedSeeds": [],
+    "deprecates": [],
+    "successors": []
+  },
+  "sbom": {
+    "format": "none",
+    "url": null,
+    "hash": null
+  },
+  "discovery": {
+    "oneLiner": "mathew-johnson",
+    "whyItMatters": "Provides a unified interface for running and monitoring scripts, enabling better reproducibility and observability in software development workflows."
+  },
+  "patterns": [
+    {
+      "name": "concurrency",
+      "category": "data-model",
+      "summary": "Supports parallel execution of multi-step workflows (runbooks) with dependencies between steps."
+    },
+    {
+      "name": "observability",
+      "category": "ui-primitive",
+      "summary": "Includes a timeline view and metrics dashboard for tracking script runs and operational metrics."
+    }
+  ],
+  "failureModes": [],
+  "priorArt": [],
+  "agentCapsule": {
+    "insight": null,
+    "excerpt": null
+  },
+  "ingest": {
+    "method": "ollama-backfill",
+    "model": "hermes3:8b",
+    "confidence": 0.9,
+    "manualReview": true,
+    "ingestedAt": "2026-04-20T21:52:26.295Z"
+  }
+}

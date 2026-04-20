@@ -1,0 +1,97 @@
+{
+  "$schema": "../../schemas/passport.schema.json",
+  "conformsTo": [
+    "codemeta:3.0",
+    "ro-crate:1.1",
+    "mcp-prototypes:passport:1"
+  ],
+  "id": "seed:code-bearings:1.0.0",
+  "swhid": null,
+  "name": "code-bearings",
+  "title": "code-bearings",
+  "description": "Code Bearings monorepo — source-grounded control for modern codebases",
+  "version": "1.0.0",
+  "license": "MIT",
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-04-20",
+  "codeRepository": "https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/code-bearings",
+  "author": [
+    {
+      "name": "mcp-tool-shop"
+    }
+  ],
+  "keywords": [],
+  "lifecycle": {
+    "state": "dormant",
+    "stateSince": "2026-04-08",
+    "maturity": "prototype",
+    "caretaker": null,
+    "graduatedTo": null,
+    "resurrectionNotes": null
+  },
+  "taxonomy": {
+    "category": "developer-tools",
+    "domains": [],
+    "tags": [
+      "typescript",
+      "javascript",
+      "cli"
+    ]
+  },
+  "technical": {
+    "kind": "cli",
+    "programmingLanguages": [
+      "TypeScript",
+      "JavaScript"
+    ],
+    "runtimes": [],
+    "operatingSystems": [
+      "any"
+    ]
+  },
+  "health": {
+    "lineCount": null,
+    "lastCommitAt": null,
+    "commitRecencyDays": null,
+    "hasTests": null,
+    "hasReadme": null,
+    "hasLicense": null,
+    "buildable": null
+  },
+  "lineage": {
+    "sourceRepo": null,
+    "consolidatedAt": "2026-04-08",
+    "relatedSeeds": [],
+    "deprecates": [],
+    "successors": []
+  },
+  "sbom": {
+    "format": "none",
+    "url": null,
+    "hash": null
+  },
+  "discovery": {
+    "oneLiner": "Source-grounded control for modern codebases.",
+    "whyItMatters": "Provides a unified CLI, VS Code extension, and CI integration to analyze and review TypeScript projects using source-grounding techniques."
+  },
+  "patterns": [
+    {
+      "name": "graph-based navigation",
+      "category": "data-model",
+      "summary": "Indexes TypeScript projects into graphs of files, symbols, modules, and dependencies for various surfaces like CLI, VS Code, CI."
+    }
+  ],
+  "failureModes": [],
+  "priorArt": [],
+  "agentCapsule": {
+    "insight": null,
+    "excerpt": null
+  },
+  "ingest": {
+    "method": "ollama-backfill",
+    "model": "hermes3:8b",
+    "confidence": 0.9,
+    "manualReview": true,
+    "ingestedAt": "2026-04-20T21:51:58.841Z"
+  }
+}

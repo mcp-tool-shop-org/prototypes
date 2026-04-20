@@ -1,0 +1,94 @@
+{
+  "$schema": "../../schemas/passport.schema.json",
+  "conformsTo": [
+    "codemeta:3.0",
+    "ro-crate:1.1",
+    "mcp-prototypes:passport:1"
+  ],
+  "id": "seed:codeteam-suite:0.1.0",
+  "swhid": null,
+  "name": "codeteam-suite",
+  "title": "CodeTeam Suite",
+  "description": "The authoritative CodeTeam implementation — a .NET-based CLI and library for package verification, approval, and signing.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-04-20",
+  "codeRepository": "https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/codeteam-suite",
+  "author": [
+    {
+      "name": "mcp-tool-shop"
+    }
+  ],
+  "keywords": [],
+  "lifecycle": {
+    "state": "dormant",
+    "stateSince": "2026-04-08",
+    "maturity": "prototype",
+    "caretaker": null,
+    "graduatedTo": null,
+    "resurrectionNotes": null
+  },
+  "taxonomy": {
+    "category": "developer-tools",
+    "domains": [],
+    "tags": [
+      "typescript",
+      "javascript",
+      "csharp",
+      "cli",
+      "mcp"
+    ]
+  },
+  "technical": {
+    "kind": "cli",
+    "programmingLanguages": [
+      "TypeScript",
+      "JavaScript",
+      "C#"
+    ],
+    "runtimes": [],
+    "operatingSystems": [
+      "any"
+    ]
+  },
+  "health": {
+    "lineCount": null,
+    "lastCommitAt": null,
+    "commitRecencyDays": null,
+    "hasTests": null,
+    "hasReadme": null,
+    "hasLicense": null,
+    "buildable": null
+  },
+  "lineage": {
+    "sourceRepo": null,
+    "consolidatedAt": "2026-04-08",
+    "relatedSeeds": [],
+    "deprecates": [],
+    "successors": []
+  },
+  "sbom": {
+    "format": "none",
+    "url": null,
+    "hash": null
+  },
+  "discovery": {
+    "oneLiner": "CodeTeam Suite is a .NET-based CLI and library for package verification, approval, and signing.",
+    "whyItMatters": "It provides an authoritative implementation of the CodeTeam protocol for verifying, approving, and signing software packages cryptographically."
+  },
+  "patterns": [],
+  "failureModes": [],
+  "priorArt": [],
+  "agentCapsule": {
+    "insight": null,
+    "excerpt": null
+  },
+  "ingest": {
+    "method": "ollama-backfill",
+    "model": "hermes3:8b",
+    "confidence": 1,
+    "manualReview": true,
+    "ingestedAt": "2026-04-20T21:52:11.371Z"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "$schema": "../../schemas/passport.schema.json",
+  "conformsTo": [
+    "codemeta:3.0",
+    "ro-crate:1.1",
+    "mcp-prototypes:passport:1"
+  ],
+  "id": "seed:feature-reacher:1.0.1",
+  "swhid": null,
+  "name": "feature-reacher",
+  "title": "Feature-Reacher",
+  "description": "A diagnostic tool that analyzes product documentation and release notes to produce an Adoption Risk Audit—a ranked list of features that users may never discover.",
+  "version": "1.0.1",
+  "license": "MIT",
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-04-20",
+  "codeRepository": "https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/feature-reacher",
+  "author": [
+    {
+      "name": "mcp-tool-shop"
+    }
+  ],
+  "keywords": [],
+  "lifecycle": {
+    "state": "dormant",
+    "stateSince": "2026-04-08",
+    "maturity": "prototype",
+    "caretaker": null,
+    "graduatedTo": null,
+    "resurrectionNotes": null
+  },
+  "taxonomy": {
+    "category": "developer-tools",
+    "domains": [],
+    "tags": [
+      "typescript",
+      "javascript",
+      "cli",
+      "mcp"
+    ]
+  },
+  "technical": {
+    "kind": "cli",
+    "programmingLanguages": [
+      "TypeScript",
+      "JavaScript"
+    ],
+    "runtimes": [],
+    "operatingSystems": [
+      "any"
+    ]
+  },
+  "health": {
+    "lineCount": null,
+    "lastCommitAt": null,
+    "commitRecencyDays": null,
+    "hasTests": null,
+    "hasReadme": null,
+    "hasLicense": null,
+    "buildable": null
+  },
+  "lineage": {
+    "sourceRepo": null,
+    "consolidatedAt": "2026-04-08",
+    "relatedSeeds": [],
+    "deprecates": [],
+    "successors": []
+  },
+  "sbom": {
+    "format": "none",
+    "url": null,
+    "hash": null
+  },
+  "discovery": {
+    "oneLiner": "Pastes release notes or documentation into a web UI to run an Adoption Risk Audit.",
+    "whyItMatters": "Helps product teams identify and prioritize features that are at risk of underutilization due to poor visibility, recency, or documentation quality."
+  },
+  "patterns": [
+    {
+      "name": "feature-extraction",
+      "category": "data-model",
+      "summary": "Extracts feature mentions from product artifacts with evidence linking and heuristics-based scoring."
+    }
+  ],
+  "failureModes": [],
+  "priorArt": [],
+  "agentCapsule": {
+    "insight": null,
+    "excerpt": null
+  },
+  "ingest": {
+    "method": "ollama-backfill",
+    "model": "hermes3:8b",
+    "confidence": 0.9,
+    "manualReview": true,
+    "ingestedAt": "2026-04-20T21:52:58.781Z"
+  }
+}

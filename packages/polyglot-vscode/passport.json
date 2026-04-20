@@ -1,0 +1,89 @@
+{
+  "$schema": "../../schemas/passport.schema.json",
+  "conformsTo": [
+    "codemeta:3.0",
+    "ro-crate:1.1",
+    "mcp-prototypes:passport:1"
+  ],
+  "id": "seed:polyglot-vscode:1.0.3",
+  "swhid": null,
+  "name": "polyglot-vscode",
+  "title": "Polyglot — Local GPU Translation",
+  "description": "Translate text, files, and READMEs using TranslateGemma via Ollama — 55 languages, zero cloud dependency",
+  "version": "1.0.3",
+  "license": "MIT",
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-04-20",
+  "codeRepository": "https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/polyglot-vscode",
+  "author": [
+    {
+      "name": "mcp-tool-shop"
+    }
+  ],
+  "keywords": [],
+  "lifecycle": {
+    "state": "dormant",
+    "stateSince": "2026-04-08",
+    "maturity": "prototype",
+    "caretaker": null,
+    "graduatedTo": null,
+    "resurrectionNotes": null
+  },
+  "taxonomy": {
+    "category": "vscode-extensions",
+    "domains": [],
+    "tags": [
+      "typescript",
+      "javascript"
+    ]
+  },
+  "technical": {
+    "kind": "extension",
+    "programmingLanguages": [
+      "en"
+    ],
+    "runtimes": [],
+    "operatingSystems": [
+      "any"
+    ]
+  },
+  "health": {
+    "lineCount": null,
+    "lastCommitAt": null,
+    "commitRecencyDays": null,
+    "hasTests": null,
+    "hasReadme": null,
+    "hasLicense": null,
+    "buildable": null
+  },
+  "lineage": {
+    "sourceRepo": null,
+    "consolidatedAt": "2026-04-08",
+    "relatedSeeds": [],
+    "deprecates": [],
+    "successors": []
+  },
+  "sbom": {
+    "format": "none",
+    "url": null,
+    "hash": null
+  },
+  "discovery": {
+    "oneLiner": "A VS Code extension that translates text, files and READMEs using TranslateGemma via Ollama on your local GPU in 55 languages with zero cloud dependency.",
+    "whyItMatters": "This prototype demonstrates how to integrate a powerful translation model into a VS Code extension for on-device use without any cloud dependencies."
+  },
+  "patterns": [],
+  "failureModes": [],
+  "priorArt": [],
+  "agentCapsule": {
+    "insight": null,
+    "excerpt": null
+  },
+  "ingest": {
+    "method": "ollama-backfill",
+    "model": "hermes3:8b",
+    "confidence": 1,
+    "manualReview": true,
+    "ingestedAt": "2026-04-20T22:02:04.199Z"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "$schema": "../../schemas/passport.schema.json",
+  "conformsTo": [
+    "codemeta:3.0",
+    "ro-crate:1.1",
+    "mcp-prototypes:passport:1"
+  ],
+  "id": "seed:clearance-opinion-engine:1.0.0",
+  "swhid": null,
+  "name": "clearance-opinion-engine",
+  "title": "MCP Voice Server",
+  "description": "A TypeScript-based server for managing and serving voice data using the MCP protocol.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-04-20",
+  "codeRepository": "https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/clearance-opinion-engine",
+  "author": [
+    {
+      "name": "mcp-tool-shop"
+    }
+  ],
+  "keywords": [],
+  "lifecycle": {
+    "state": "dormant",
+    "stateSince": "2026-04-08",
+    "maturity": "prototype",
+    "caretaker": null,
+    "graduatedTo": null,
+    "resurrectionNotes": null
+  },
+  "taxonomy": {
+    "category": "developer-tools",
+    "domains": [],
+    "tags": [
+      "typescript",
+      "cli",
+      "mcp",
+      "sdk",
+      "plugin"
+    ]
+  },
+  "technical": {
+    "kind": "mcp-server",
+    "programmingLanguages": [
+      "TypeScript",
+      "JavaScript"
+    ],
+    "runtimes": [],
+    "operatingSystems": [
+      "any"
+    ]
+  },
+  "health": {
+    "lineCount": null,
+    "lastCommitAt": null,
+    "commitRecencyDays": null,
+    "hasTests": null,
+    "hasReadme": null,
+    "hasLicense": null,
+    "buildable": null
+  },
+  "lineage": {
+    "sourceRepo": null,
+    "consolidatedAt": "2026-04-08",
+    "relatedSeeds": [],
+    "deprecates": [],
+    "successors": []
+  },
+  "sbom": {
+    "format": "none",
+    "url": null,
+    "hash": null
+  },
+  "discovery": {
+    "oneLiner": "A server for managing and serving voice data using the MCP protocol.",
+    "whyItMatters": "This prototype demonstrates an efficient way to cache and serve voice data in a scalable manner using the MCP protocol. It could be useful for other developers looking to implement similar functionality in their own projects."
+  },
+  "patterns": [
+    {
+      "name": "concurrency",
+      "category": "signal-processing",
+      "summary": "Uses async/await to handle concurrent voice data requests efficiently."
+    }
+  ],
+  "failureModes": [],
+  "priorArt": [],
+  "agentCapsule": {
+    "insight": null,
+    "excerpt": null
+  },
+  "ingest": {
+    "method": "ollama-backfill",
+    "model": "hermes3:8b",
+    "confidence": 0.9,
+    "manualReview": true,
+    "ingestedAt": "2026-04-20T21:51:44.345Z"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "$schema": "../../schemas/passport.schema.json",
+  "conformsTo": [
+    "codemeta:3.0",
+    "ro-crate:1.1",
+    "mcp-prototypes:passport:1"
+  ],
+  "id": "seed:prov-engine-js:1.0.1",
+  "swhid": null,
+  "name": "prov-engine-js",
+  "title": "prov-engine-js",
+  "description": "Minimal Node.js provenance engine for prov-spec interop",
+  "version": "1.0.1",
+  "license": "MIT",
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-04-20",
+  "codeRepository": "https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/prov-engine-js",
+  "author": [
+    {
+      "name": "mcp-tool-shop"
+    }
+  ],
+  "keywords": [],
+  "lifecycle": {
+    "state": "dormant",
+    "stateSince": "2026-04-08",
+    "maturity": "prototype",
+    "caretaker": null,
+    "graduatedTo": null,
+    "resurrectionNotes": null
+  },
+  "taxonomy": {
+    "category": "crypto-and-provenance",
+    "domains": [],
+    "tags": [
+      "typescript",
+      "javascript",
+      "cli",
+      "mcp"
+    ]
+  },
+  "technical": {
+    "kind": "cli",
+    "programmingLanguages": [
+      "TypeScript",
+      "JavaScript"
+    ],
+    "runtimes": [],
+    "operatingSystems": [
+      "any"
+    ]
+  },
+  "health": {
+    "lineCount": null,
+    "lastCommitAt": null,
+    "commitRecencyDays": null,
+    "hasTests": null,
+    "hasReadme": null,
+    "hasLicense": null,
+    "buildable": null
+  },
+  "lineage": {
+    "sourceRepo": null,
+    "consolidatedAt": "2026-04-08",
+    "relatedSeeds": [],
+    "deprecates": [],
+    "successors": []
+  },
+  "sbom": {
+    "format": "none",
+    "url": null,
+    "hash": null
+  },
+  "discovery": {
+    "oneLiner": "A zero-dependency Node.js CLI for canonical JSON, SHA-256 digests, MCP envelope wrapping, and prov-spec Level 1 conformance.",
+    "whyItMatters": "This engine provides a simple way to verify provenance of data using widely adopted standards like JSON and SHA-256. It's useful for any application that needs to ensure the integrity of its inputs or outputs."
+  },
+  "patterns": [
+    {
+      "name": "canonical-json",
+      "category": "data-model",
+      "summary": "Implements a deterministic canonical JSON serialization matching prov-spec Section 6."
+    }
+  ],
+  "failureModes": [],
+  "priorArt": [],
+  "agentCapsule": {
+    "insight": null,
+    "excerpt": null
+  },
+  "ingest": {
+    "method": "ollama-backfill",
+    "model": "hermes3:8b",
+    "confidence": 1,
+    "manualReview": true,
+    "ingestedAt": "2026-04-20T21:56:58.080Z"
+  }
+}

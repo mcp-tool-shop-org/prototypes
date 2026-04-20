@@ -1,0 +1,101 @@
+{
+  "$schema": "../../schemas/passport.schema.json",
+  "conformsTo": [
+    "codemeta:3.0",
+    "ro-crate:1.1",
+    "mcp-prototypes:passport:1"
+  ],
+  "id": "seed:websketch-demo:1.0.0",
+  "swhid": null,
+  "name": "websketch-demo",
+  "title": "websketch-demo",
+  "description": "Interactive demo site for WebSketch IR - visualize UI representation",
+  "version": "1.0.0",
+  "license": "MIT",
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-04-20",
+  "codeRepository": "https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/websketch-demo",
+  "author": [
+    {
+      "name": "mcp-tool-shop"
+    }
+  ],
+  "keywords": [],
+  "lifecycle": {
+    "state": "dormant",
+    "stateSince": "2026-04-08",
+    "maturity": "prototype",
+    "caretaker": null,
+    "graduatedTo": null,
+    "resurrectionNotes": null
+  },
+  "taxonomy": {
+    "category": "websketch",
+    "domains": [],
+    "tags": [
+      "typescript",
+      "javascript"
+    ]
+  },
+  "technical": {
+    "kind": "library",
+    "programmingLanguages": [
+      "TypeScript",
+      "JavaScript"
+    ],
+    "runtimes": [],
+    "operatingSystems": [
+      "any"
+    ]
+  },
+  "health": {
+    "lineCount": null,
+    "lastCommitAt": null,
+    "commitRecencyDays": null,
+    "hasTests": null,
+    "hasReadme": null,
+    "hasLicense": null,
+    "buildable": null
+  },
+  "lineage": {
+    "sourceRepo": null,
+    "consolidatedAt": "2026-04-08",
+    "relatedSeeds": [],
+    "deprecates": [],
+    "successors": []
+  },
+  "sbom": {
+    "format": "none",
+    "url": null,
+    "hash": null
+  },
+  "discovery": {
+    "oneLiner": "Yes, the package.json file is present.",
+    "whyItMatters": "The presence of a package.json file indicates this is a Node.js ecosystem project."
+  },
+  "patterns": [
+    {
+      "name": "ui-primitive",
+      "category": "signal-processing",
+      "summary": "Uses Tree and ASCII views to visualize UI representation from WebSketch IR grammar captures."
+    },
+    {
+      "name": "input-handling",
+      "category": "rendering",
+      "summary": "Accepts user-pasted JSON in browser for visualization, with syntax validation."
+    }
+  ],
+  "failureModes": [],
+  "priorArt": [],
+  "agentCapsule": {
+    "insight": null,
+    "excerpt": null
+  },
+  "ingest": {
+    "method": "ollama-backfill",
+    "model": "hermes3:8b",
+    "confidence": 0.7,
+    "manualReview": true,
+    "ingestedAt": "2026-04-20T22:00:17.910Z"
+  }
+}

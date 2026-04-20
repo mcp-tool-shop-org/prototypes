@@ -1,0 +1,100 @@
+{
+  "$schema": "../../schemas/passport.schema.json",
+  "conformsTo": [
+    "codemeta:3.0",
+    "ro-crate:1.1",
+    "mcp-prototypes:passport:1"
+  ],
+  "id": "seed:Attestia-Desktop:0.1.0",
+  "swhid": null,
+  "name": "Attestia-Desktop",
+  "title": "Attestia-Desktop",
+  "description": "Financial intent verification for Windows -- a WinUI 3 desktop app and .NET SDK for blockchain attestation and reconciliation.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-04-20",
+  "codeRepository": "https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/Attestia-Desktop",
+  "author": [
+    {
+      "name": "mcp-tool-shop"
+    }
+  ],
+  "keywords": [],
+  "lifecycle": {
+    "state": "dormant",
+    "stateSince": "2026-04-08",
+    "maturity": "prototype",
+    "caretaker": null,
+    "graduatedTo": null,
+    "resurrectionNotes": null
+  },
+  "taxonomy": {
+    "category": "desktop-apps",
+    "domains": [],
+    "tags": [
+      "typescript",
+      "csharp",
+      "cli",
+      "sdk",
+      "winui3",
+      "astro"
+    ]
+  },
+  "technical": {
+    "kind": "desktop",
+    "programmingLanguages": [
+      "typescript",
+      "csharp"
+    ],
+    "runtimes": [],
+    "operatingSystems": [
+      "any"
+    ]
+  },
+  "health": {
+    "lineCount": null,
+    "lastCommitAt": null,
+    "commitRecencyDays": null,
+    "hasTests": null,
+    "hasReadme": null,
+    "hasLicense": null,
+    "buildable": null
+  },
+  "lineage": {
+    "sourceRepo": null,
+    "consolidatedAt": "2026-04-08",
+    "relatedSeeds": [],
+    "deprecates": [],
+    "successors": []
+  },
+  "sbom": {
+    "format": "none",
+    "url": null,
+    "hash": null
+  },
+  "discovery": {
+    "oneLiner": "A WinUI 3 desktop app and .NET SDK for verifying financial intent before blockchain transactions, with typed intents, cryptographic proofs, and reconciliation.",
+    "whyItMatters": "Provides a real-time dashboard, intent management, proof explorer, and reconciliation views without leaving Windows, while mapping attestation controls to regulatory frameworks and generating compliance reports."
+  },
+  "patterns": [
+    {
+      "name": "typed-financial-intents",
+      "category": "data-model",
+      "summary": "Declare, approve, execute, and verify transactions with structured records instead of raw payloads."
+    }
+  ],
+  "failureModes": [],
+  "priorArt": [],
+  "agentCapsule": {
+    "insight": null,
+    "excerpt": null
+  },
+  "ingest": {
+    "method": "ollama-backfill",
+    "model": "hermes3:8b",
+    "confidence": 0.9,
+    "manualReview": true,
+    "ingestedAt": "2026-04-20T21:48:25.370Z"
+  }
+}

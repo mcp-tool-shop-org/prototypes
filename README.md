@@ -16,179 +16,179 @@ pnpm build
 ## Packages by category
 
 <!-- GENERATED:seeds-by-category:start -->
-<!-- The section below is hand-maintained today. Once Wave 2 backfills per-seed passports,
-     `pnpm seed:index` will regenerate this region from passport.json files. -->
 
-### Voice and Sound (10)
+<!-- Regenerate with: pnpm seed:index — do not edit between the markers. -->
 
-| Package | Description |
-|---------|-------------|
-| [voice-soundboard](packages/voice-soundboard) | TTS for AI agents — compiler/graph/engine architecture |
-| [vscode-voice-soundboard](packages/vscode-voice-soundboard) | TTS synthesis with 48 voices, presets, and multi-speaker dialogue |
-| [soundboard-plugin](packages/soundboard-plugin) | Claude Code plugin for voice synthesis |
-| [soundboard-maui](packages/soundboard-maui) | SDK-first .NET 8+ soundboard client library |
-| [mcp-voice-engine](packages/mcp-voice-engine) | Streaming prosody engine for expressive voice synthesis |
-| [sonic-core](packages/sonic-core) | Audio control plane for TypeScript |
-| [sonic-runtime](packages/sonic-runtime) | Native audio runtime sidecar — C# NativeAOT over ndjson-stdio |
-| [soundweave](packages/soundweave) | Adaptive soundtrack studio for interactive game music |
-| [vocal-synth-engine](packages/vocal-synth-engine) | Deterministic vocal instrument engine — additive synthesis, voice presets, real-time WebSocket streaming |
-| [claude-sfx](packages/claude-sfx) | Procedural audio feedback for Claude Code — UX for agentic coding |
+_104 seeds across 13 categories — generated 2026-04-20_
 
-### Developer Tools (35)
+### Voice and Sound (6)
 
-| Package | Description |
-|---------|-------------|
-| [aspire-ai](packages/aspire-ai) | Adversarial Student-Professor Internalized Reasoning Engine |
-| [brain-dev](packages/brain-dev) | MCP server for test generation, coverage analysis, and UX insights |
-| [build-governor](packages/build-governor) | Memory-aware parallel C++ build governor preventing OOM |
-| [claude-collaborate](packages/claude-collaborate) | Unified sandbox for real-time human-AI collaboration |
-| [claude-hook-debug](packages/claude-hook-debug) | Diagnostic CLI for Claude Code hook issues |
-| [claude-session-copilot](packages/claude-session-copilot) | Session copilot for Claude Code — decisions, timelines, patterns |
-| [claude-toolstack](packages/claude-toolstack) | CLI client for bounded code intelligence gateway |
-| [code-batch](packages/code-batch) | Content-addressed batch execution engine |
-| [code-bearings](packages/code-bearings) | Source-grounded review and control for modern codebases |
-| [code-covered](packages/code-covered) | Find coverage gaps and suggest missing tests |
-| [context-window-manager](packages/context-window-manager) | MCP server for lossless LLM context restoration via KV cache |
-| [control-room](packages/control-room) | Turn scripts into observable, repeatable operations |
-| [deltamind](packages/deltamind) | Active context compaction for AI agents — typed deltas + reconciler |
-| [flexiflow](packages/flexiflow) | Lightweight async component engine with events and state machines |
-| [headless-wheel-builder](packages/headless-wheel-builder) | Universal Python wheel builder with headless GitHub ops |
-| [integradio](packages/integradio) | Vector-embedded Gradio components for semantic codebase nav |
-| [jam-session-plugin](packages/jam-session-plugin) | AI piano player with 100-song library and structured teaching |
-| [mcp-app-builder](packages/mcp-app-builder) | Build MCP servers with interactive UI components |
-| [mcp-aside](packages/mcp-aside) | MCP interjection inbox with TTL, rate-limit, and dedupe |
-| [mcp-bouncer](packages/mcp-bouncer) | Health-check MCP servers, quarantine broken ones, auto-restore |
-| [mcp-examples](packages/mcp-examples) | Example workspaces for MCP Tool Shop |
-| [ai-ui](packages/ai-ui) | Automated design diagnostics for SPAs — crawl, diff, verify UI against docs |
-| [artifact](packages/artifact) | Repo signature artifact decision system — Curator freshness driver |
-| [claude-memories](packages/claude-memories) | MEMORY.md optimizer and dispatch table generator for Claude Code |
-| [claude-rules](packages/claude-rules) | Dispatch table generator and instruction-file optimizer for Claude Code |
-| [feature-reacher](packages/feature-reacher) | Adoption risk auditing — surface underutilized features before they become debt |
-| [file-compass](packages/file-compass) | Semantic file search for AI workstations using HNSW indexing and Ollama |
-| [mcp-file-forge](packages/mcp-file-forge) | MCP server for file operations and project scaffolding — Windows-first |
-| [mcp-tool-registry](packages/mcp-tool-registry) | Metadata-only registry for MCP Tool Shop tools |
-| [nullout](packages/nullout) | MCP server that finds and safely removes undeletable files on Windows |
-| [repo-crawler-mcp](packages/repo-crawler-mcp) | MCP server that crawls GitHub repos and extracts structured data |
-| [role-os-rollout](packages/role-os-rollout) | Org rollout control plane for Role OS — queue, decisions, audit records |
-| [terminal-tutor](packages/terminal-tutor) | Situated terminal coaching — learn by doing inside Claude Code |
-| [tool-scan](packages/tool-scan) | Security scanner for MCP (Model Context Protocol) tools |
-| [websketch-ir](packages/websketch-ir) | Compiles web page HTML into 23 UI primitives for LLM reasoning |
+| Seed | Lifecycle | One-liner |
+|------|-----------|-----------|
+| [mcp-tool-registry](packages/mcp-tool-registry) | dormant | A CLI for generating high-quality voice synthesis from text. |
+| [sonic-runtime](packages/sonic-runtime) | dormant | NativeAOT-compatible C# audio engine with playback, device routing, and synthesis over ndjson-stdio. |
+| [soundboard-maui](packages/soundboard-maui) | dormant | A .NET MAUI desktop client for the Sound Board voice engine. |
+| [soundweave](packages/soundweave) | dormant | Adaptive soundtrack studio for composing, arranging, scoring, and exporting interactive game music. |
+| [vocal-synth-engine](packages/vocal-synth-engine) | dormant | Web UI for a TTS voice synthesis engine |
+| [voice-soundboard](packages/voice-soundboard) | dormant | Just call engine.speak("Hello") and get audio. |
 
-### Desktop Apps (8)
+### Developer Tools (56)
 
-| Package | Description |
-|---------|-------------|
-| [Attestia-Desktop](packages/Attestia-Desktop) | Financial intent verification for Windows — WinUI 3 |
-| [InControl-Desktop](packages/InControl-Desktop) | Privacy-first local LLM chat — WinUI 3, GPU-accelerated |
-| [ScalarScope-Desktop](packages/ScalarScope-Desktop) | Reproducible ML scalar comparison — .NET MAUI |
-| [NextLedger](packages/NextLedger) | Envelope budgeting app for Windows |
-| [pocket-ledger](packages/pocket-ledger) | Local-first personal finance and budget tracking |
-| [runforge-desktop](packages/runforge-desktop) | Visual ML experiment tracker with live training charts |
-| [studioflow](packages/studioflow) | Desktop creative workspace — Tauri v2, multi-claude proving ground |
-| [anchor](packages/anchor) | Tauri v2 desktop application prototype |
+| Seed | Lifecycle | One-liner |
+|------|-----------|-----------|
+| [ai-ui](packages/ai-ui) | dormant | Yes, the package has a bin entry and can be run directly. |
+| [brain-dev](packages/brain-dev) | dormant | Provides 9 MCP Tools for developer insights: coverage analysis, test generation, refactoring suggestions, security audits, and UX insights. |
+| [build-governor](packages/build-governor) | dormant | A lightweight governor that automatically sits between your build system and the compiler to prevent parallel C++ builds from exhausting system memory. |
+| [claude-collaborate](packages/claude-collaborate) | dormant | A unified sandbox environment for human-AI collaboration with WebSocket bridge. |
+| [claude-hook-debug](packages/claude-hook-debug) | dormant | Diagnostic CLI for detecting issues in Claude Code hooks and plugins. |
+| [claude-memories](packages/claude-memories) | dormant | MEMORY.md optimizer and dispatch-table generator for Claude Code. |
+| [claude-rules](packages/claude-rules) | dormant | true, // This tool can be used to optimize a CLAUDE.md file in one command. |
+| [claude-session-copilot](packages/claude-session-copilot) | dormant | A TypeScript CLI for extending the capabilities of a Claude Code server with session tracking, decision logging, and pattern detection. |
+| [claude-sfx](packages/claude-sfx) | dormant | Procedural audio feedback for Claude Code CLI tool. |
+| [claude-toolstack](packages/claude-toolstack) | dormant | A TypeScript/JS CLI for the 'claude-toolstack' developer tool. |
+| [clearance-opinion-engine](packages/clearance-opinion-engine) | dormant | A server for managing and serving voice data using the MCP protocol. |
+| [code-batch](packages/code-batch) | dormant | A filesystem-based execution substrate that snapshots code, shards work deterministically, and indexes every output for structured queries — no database required. |
+| [code-bearings](packages/code-bearings) | dormant | Source-grounded control for modern codebases. |
+| [code-covered](packages/code-covered) | dormant | Code coverage tool that suggests what tests to write. |
+| [codeteam-suite](packages/codeteam-suite) | dormant | CodeTeam Suite is a .NET-based CLI and library for package verification, approval, and signing. |
+| [ConsensusOS](packages/ConsensusOS) | dormant | A Node.js CLI and library for managing multi-chain consensus systems. |
+| [context-window-manager](packages/context-window-manager) | dormant | Read the README.md and package.json (if present) |
+| [deltamind](packages/deltamind) | dormant | A Node.js CLI for compacting active context in long-running AI conversations. |
+| [feature-reacher](packages/feature-reacher) | dormant | Pastes release notes or documentation into a web UI to run an Adoption Risk Audit. |
+| [file-compass](packages/file-compass) | dormant | A command-line tool for indexing and searching files semantically. |
+| [flexiflow](packages/flexiflow) | dormant | A pure-Python async component engine with events and state machines. |
+| [game-dev-mcp](packages/game-dev-mcp) | dormant | game-dev-mcp — MCP server for game engine control |
+| [headless-wheel-builder](packages/headless-wheel-builder) | dormant | true, but confidence is only 0.7 due to missing package.json and sparse README |
+| [integradio](packages/integradio) | dormant | Integradio adds semantic search to Gradio components. |
+| [jam-session-plugin](packages/jam-session-plugin) | dormant | A plugin for the Claude Code environment that provides AI-assisted piano lessons and jam sessions. |
+| [llm-sync-drive](packages/llm-sync-drive) | dormant | Compile your repository into a structured llms.txt file and auto-sync it to Google Drive — so LLMs like Gemini can pull fresh context via @Google Drive. |
+| [mcp-app-builder](packages/mcp-app-builder) | dormant | A Node/JS CLI for scaffolding, developing, and testing Model Context Protocol (MCP) servers with interactive UI components. |
+| [mcp-aside](packages/mcp-aside) | dormant | Maintains an in-memory interjection inbox for MCP conversations. |
+| [mcp-bouncer](packages/mcp-bouncer) | dormant | .7, The README.md provides a detailed explanation of the package's functionality and usage. |
+| [mcp-examples](packages/mcp-examples) | dormant | Example workspaces for [MCP Tool Shop](https://github.com/mcp-tool-shop-org). |
+| [mcp-file-forge](packages/mcp-file-forge) | dormant | A Model Context Protocol server for secure file operations and project scaffolding. |
+| [mcp-voice-engine](packages/mcp-voice-engine) | dormant | A Node.js library for deterministic, streaming-first voice synthesis and manipulation. |
+| [mcpt](packages/mcpt) | dormant | npm install @mcptoolshop/mcpt |
+| [mcpt-link-fresh](packages/mcpt-link-fresh) | dormant | .7, // README was clear on the core functionality but some details were inferred. |
+| [mcpt-publishing-assets](packages/mcpt-publishing-assets) | dormant | A Node.js CLI for generating logo, icon, and image assets using sharp. |
+| [meta-content-system](packages/meta-content-system) | dormant | One pipeline, every platform -- The same input files produce the same `library.index.json` on Windows, Linux, and macOS. No platform drift. |
+| [nameops](packages/nameops) | dormant | Yeah, I'm not going to do that. The instructions are clear and specific about what should be emitted in the JSON object only, without any prose, markdown fencing or comments. I will not add anything,  |
+| [nullout](packages/nullout) | dormant | pip install nullout-mcp |
+| [pathway](packages/pathway) | dormant | npm wrapper for Pathway Core, a workflow automation tool with append-only event log and unique undo behavior. |
+| [py-polyglot](packages/py-polyglot) | dormant | Python library + MCP server for local GPU translation into 57 languages using TranslateGemma via Ollama. |
+| [Registrum](packages/Registrum) | dormant | A governed, dual-witness, deterministic registrar with replayable history and optional external attestation. |
+| [repo-crawler-mcp](packages/repo-crawler-mcp) | dormant | Extracts metadata, readme, commits, contributors from GitHub repos. |
+| [rippled-windows-debug](packages/rippled-windows-debug) | dormant | Windows debugging toolkit for rippled (XRPL validator node). Automatic build protection and verbose crash diagnostics — preventing and debugging the memory issues that plague parallel C++ builds. |
+| [sonic-core](packages/sonic-core) | dormant | Audio control plane for TypeScript, with a native runtime. |
+| [soundboard-plugin](packages/soundboard-plugin) | dormant | A plugin for the Claude Code editor that uses TTS to narrate code walkthroughs and report build status. |
+| [stresskit-mcp](packages/stresskit-mcp) | dormant | Health and security testing toolkit for MCP servers. |
+| [taste-compiler](packages/taste-compiler) | dormant | A Node/JS CLI that compiles design taste into enforceable constraints for AI-generated code. |
+| [terminal-tutor](packages/terminal-tutor) | dormant | A Node.js CLI for learning terminal skills through situated coaching. |
+| [tool-scan](packages/tool-scan) | dormant | 0.9, {"patterns": [], "confidence": 0.9} |
+| [ToolShopStudio](packages/ToolShopStudio) | dormant | Six schema-first, sandboxed tools for media processing and document conversion. |
+| [venvkit](packages/venvkit) | dormant | Scan Python environments and visualize task runs. |
+| [websketch-cli](packages/websketch-cli) | dormant | Yes, the package.json file is present. |
+| [websketch-extension](packages/websketch-extension) | dormant | Chrome extension for capturing web pages as WebSketch IR data. |
+| [websketch-mcp](packages/websketch-mcp) | dormant | A Node/JS CLI that implements the Model Context Protocol to expose tools for validating, rendering, diffing and fingerprinting WebSketch IR captures. |
+| [witness](packages/witness) | dormant | Witness creates portable proof trails: Deterministic, Verifiable, Portable, Exact. |
+| [zip-meta-map](packages/zip-meta-map) | dormant | zip-meta-map generates a deterministic metadata layer that answers three questions for AI agents: |
 
-### VS Code Extensions (3)
+### Desktop Apps (12)
 
-| Package | Description |
-|---------|-------------|
-| [polyglot-vscode](packages/polyglot-vscode) | VS Code extension for local GPU translation — TranslateGemma via Ollama |
-| [registry-stats-vscode](packages/registry-stats-vscode) | Multi-registry download stats for VS Code — PDF, JSONL, and Markdown reports |
-| [runforge-vscode](packages/runforge-vscode) | RunForge VS Code Extension — push-button ML training with presets |
+| Seed | Lifecycle | One-liner |
+|------|-----------|-----------|
+| [anchor](packages/anchor) | dormant | A local-first Tauri desktop app that forces constitution-first, fully traceable project design. |
+| [Attestia-Desktop](packages/Attestia-Desktop) | dormant | A WinUI 3 desktop app and .NET SDK for verifying financial intent before blockchain transactions, with typed intents, cryptographic proofs, and reconciliation. |
+| [control-room](packages/control-room) | dormant | mathew-johnson |
+| [DeterministicMouseTrainingEngine](packages/DeterministicMouseTrainingEngine) | dormant | Deterministic mouse training engine with fixed-timestep simulation, composable game modes and blueprint mutators. |
+| [InControl-Desktop](packages/InControl-Desktop) | dormant | A privacy-first, GPU-accelerated chat application that runs large language models entirely on your machine. No cloud required. |
+| [MouseTrainer](packages/MouseTrainer) | dormant | Built on .NET 10 MAUI (Windows-first), with a fully deterministic fixed-timestep simulation, composable blueprint mutators, and platform-stable run identity. Same seed produces the same level, the... |
+| [NextLedger](packages/NextLedger) | dormant | A Windows-first personal finance app using envelope budgeting methodology. |
+| [pocket-ledger](packages/pocket-ledger) | dormant | A personal finance app that keeps your financial data on your device. No cloud sync, no telemetry, no external connections. |
+| [runforge-desktop](packages/runforge-desktop) | dormant | A Windows-native desktop application for creating, monitoring, and inspecting ML training runs. |
+| [ScalarScope-Desktop](packages/ScalarScope-Desktop) | dormant | A .NET MAUI desktop app for comparing ML inference runs with scientific rigor. |
+| [studioflow](packages/studioflow) | dormant | Desktop app for visual editing with domain-driven state management. |
+| [training-studio](packages/training-studio) | dormant | A TypeScript/JavaScript powered ML training application that runs entirely locally in the browser. |
 
-### WebSketch (4)
+### VS Code Extensions (5)
 
-| Package | Description |
-|---------|-------------|
-| [websketch-cli](packages/websketch-cli) | CLI for WebSketch IR — render, diff, and fingerprint web UI captures |
-| [websketch-extension](packages/websketch-extension) | Chrome extension to capture web pages as WebSketch IR |
-| [websketch-vscode](packages/websketch-vscode) | VS Code extension for grammar-based IR web capture |
-| [websketch-mcp](packages/websketch-mcp) | MCP server exposing WebSketch IR tools for LLM agents |
+| Seed | Lifecycle | One-liner |
+|------|-----------|-----------|
+| [polyglot-vscode](packages/polyglot-vscode) | dormant | A VS Code extension that translates text, files and READMEs using TranslateGemma via Ollama on your local GPU in 55 languages with zero cloud dependency. |
+| [registry-stats-vscode](packages/registry-stats-vscode) | dormant | The extension scans workspace for package manifests and pulls live download statistics from five registries. |
+| [runforge-vscode](packages/runforge-vscode) | dormant | Provides deterministic, contract-driven ML training via VS Code. |
+| [vscode-voice-soundboard](packages/vscode-voice-soundboard) | dormant | Text-to-speech extension for VS Code with 48 voices, presets, and multi-speaker dialogue — powered by MCP Voice Soundboard. |
+| [websketch-vscode](packages/websketch-vscode) | dormant | A VS Code extension that captures web pages and renders them as LLM-ready IR trees. |
 
-### Mouse and Cursor (3)
+### WebSketch (2)
 
-| Package | Description |
-|---------|-------------|
-| [MouseTrainer](packages/MouseTrainer) | Deterministic mouse training game — .NET 10 MAUI |
-| [DeterministicMouseTrainingEngine](packages/DeterministicMouseTrainingEngine) | Fixed-timestep simulation engine with composable blueprint mutators |
-| [CursorAssist](packages/CursorAssist) | DSP-grounded tremor compensation with velocity-adaptive smoothing |
+| Seed | Lifecycle | One-liner |
+|------|-----------|-----------|
+| [websketch-demo](packages/websketch-demo) | dormant | Yes, the package.json file is present. |
+| [websketch-ir](packages/websketch-ir) | dormant | A grammar-based representation of web UI for LLM consumption. |
 
-### Typing and Input (4)
+### Mouse and Cursor (2)
 
-| Package | Description |
-|---------|-------------|
-| [linux-dev-typer](packages/linux-dev-typer) | Practice typing real code from Python, Rust, JS, C#, and Java |
-| [meta-content-system](packages/meta-content-system) | Portable content pipeline for typing practice apps |
-| [dev-op-typer](packages/dev-op-typer) | Developer-focused typing practice for Windows — 6 languages, adaptive difficulty |
-| [LoKey-Typer](packages/LoKey-Typer) | Calm typing practice with ambient soundscapes and personalized daily sets |
+| Seed | Lifecycle | One-liner |
+|------|-----------|-----------|
+| [CursorAssist](packages/CursorAssist) | dormant | Deterministic assistive cursor control engine with NuGet packages for schemas, trace format, policy mapping, and transform pipeline. |
+| [Trace](packages/Trace) | dormant | Built on .NET 10 MAUI (Windows-first), with a fully deterministic fixed-timestep simulation, a five-state motion state machine, and a parametric visual identity driven entirely by simulation state. |
 
-### ML and Training (3)
+### Typing and Input (3)
 
-| Package | Description |
-|---------|-------------|
-| [edgepacks](packages/edgepacks) | Task-dataset foundry for training small models on narrow jobs |
-| [tinytrainer](packages/tinytrainer) | Desktop training foundry + mobile personalization export pipeline |
-| [tinytrainer-mobile](packages/tinytrainer-mobile) | iOS/iPadOS reference app for on-device ML personalization |
+| Seed | Lifecycle | One-liner |
+|------|-----------|-----------|
+| [dev-op-typer](packages/dev-op-typer) | dormant | A typing practice app that uses real code snippets from six languages. |
+| [linux-dev-typer](packages/linux-dev-typer) | dormant | A typing practice tool with adaptive difficulty and Elo-inspired rating system for developers. |
+| [LoKey-Typer](packages/LoKey-Typer) | dormant | A typing practice app with ambient soundscapes and personalized daily exercises. |
 
-### Governance and Policy (7)
+### ML and Training (5)
 
-| Package | Description |
-|---------|-------------|
-| [civility-kernel](packages/civility-kernel) | Policy layer for preference-governed agent behavior |
-| [datagates](packages/datagates) | Governed data promotion system — data earns trust through layered gates |
-| [nexus-suite](packages/nexus-suite) | Governance, attestation, and routing infrastructure for MCP ecosystems |
-| [Registrum](packages/Registrum) | Deterministic structural registrar — dual-witness state transitions |
-| [taste-compiler](packages/taste-compiler) | Compile product taste into enforceable constraints for visual coherence |
-| [ThrottleAI](packages/ThrottleAI) | Token-based lease governor for AI calls |
-| [stresskit-mcp](packages/stresskit-mcp) | MCP Server health and security testing — trustable evidence |
+| Seed | Lifecycle | One-liner |
+|------|-----------|-----------|
+| [aspire-ai](packages/aspire-ai) | dormant | Teaches AI to develop judgment through adversarial dialogue with internalized teacher models. |
+| [edgepacks](packages/edgepacks) | dormant | A library of narrow, well-structured training packs for specific capabilities. |
+| [tinytrainer](packages/tinytrainer) | dormant | Train tiny classifier heads on frozen sentence embeddings, then export to Core ML and ONNX for mobile deployment. |
+| [tinytrainer-mobile](packages/tinytrainer-mobile) | dormant | Proves the full loop: import kit -> classify locally -> correct predictions -> personalize on device -> measure improvement. |
+| [vector-caliper](packages/vector-caliper) | dormant | Visualizes model-state trajectories during training. |
 
-### Games and Creative (3)
+### Governance and Policy (4)
 
-| Package | Description |
-|---------|-------------|
-| [ConsensusOS](packages/ConsensusOS) | Modular control plane for distributed consensus systems |
-| [Trace](packages/Trace) | Deterministic cursor discipline game — .NET 10 MAUI |
-| [game-dev-mcp](packages/game-dev-mcp) | MCP server giving LLMs control over game engines |
+| Seed | Lifecycle | One-liner |
+|------|-----------|-----------|
+| [civility-kernel](packages/civility-kernel) | dormant | .7, // README was rich and specific. |
+| [datagates](packages/datagates) | dormant | A Node.js CLI for a system that promotes data through trust 'gates' based on schema, semantic rules, batch metrics, and governance policies. |
+| [role-os-rollout](packages/role-os-rollout) | dormant | Yes, the source code is available online. |
+| [ThrottleAI](packages/ThrottleAI) | dormant | A token-based lease governor for AI calls — small enough to embed anywhere, strict enough to prevent stampedes. |
 
-### Crypto and Provenance (4)
+### Games and Creative (1)
 
-| Package | Description |
-|---------|-------------|
-| [prov-engine-js](packages/prov-engine-js) | Zero-dependency Node.js provenance engine for prov-spec |
-| [prov-spec](packages/prov-spec) | Language-neutral specification for verifiable provenance |
-| [receipt-factory](packages/receipt-factory) | Signed, timestamped, reproducible records of what happened |
-| [payroll-engine](packages/payroll-engine) | US Payroll SaaS Engine — ledger, payment rails, settlement |
+| Seed | Lifecycle | One-liner |
+|------|-----------|-----------|
+| [physics-svg](packages/physics-svg) | dormant | A physics engine for web games and simulations, with SVG rendering and React bindings. |
 
-### Suites and Infrastructure (9)
+### Crypto and Provenance (5)
 
-| Package | Description |
-|---------|-------------|
-| [llm-sync-drive](packages/llm-sync-drive) | Compile llms.txt from a repo and sync to Google Drive |
-| [training-studio](packages/training-studio) | TensorFlow.js ML training that runs entirely locally |
-| [witness](packages/witness) | Local-first, append-only event journal for human-AI work |
-| [zip-meta-map](packages/zip-meta-map) | Turn any ZIP or folder into an LLM-friendly metadata bundle |
-| [codeteam-suite](packages/codeteam-suite) | CodeTeam implementation — .NET CLI for package verification and signing |
-| [ledger-suite](packages/ledger-suite) | Unified monorepo for cryptographic provenance ledgers |
-| [ToolShopStudio](packages/ToolShopStudio) | Six MCP tools + live Registry (FFmpeg, Pandoc, FreeCAD, GDAL, OpenSCAD, Blender) |
-| [py-polyglot](packages/py-polyglot) | Local GPU translation Python library + MCP server |
-| [venvkit](packages/venvkit) | Python virtual environment diagnostic toolkit for Windows ML workflows |
+| Seed | Lifecycle | One-liner |
+|------|-----------|-----------|
+| [ledger-suite](packages/ledger-suite) | dormant | true-positives |
+| [payroll-engine](packages/payroll-engine) | dormant | Deterministic append-only ledger. Explicit funding gates. Replayable events. |
+| [prov-engine-js](packages/prov-engine-js) | dormant | A zero-dependency Node.js CLI for canonical JSON, SHA-256 digests, MCP envelope wrapping, and prov-spec Level 1 conformance. |
+| [prov-spec](packages/prov-spec) | dormant | Defines stable, namespaced identifiers for provenance operations and structured JSON schemas for documenting tool invocations. |
+| [receipt-factory](packages/receipt-factory) | dormant | A receipt is a signed, timestamped, reproducible record of what happened: |
 
-### Original Archive (11)
+### Suites and Infrastructure (1)
 
-These were consolidated before the April 2026 reduction.
+| Seed | Lifecycle | One-liner |
+|------|-----------|-----------|
+| [nexus-suite](packages/nexus-suite) | dormant | Composable infrastructure for MCP ecosystems. |
 
-| Package | Description |
-|---------|-------------|
-| [mcpt](packages/mcpt) | CLI for discovering and running MCP Tool Shop tools |
-| [pathway](packages/pathway) | Append-only journey engine where undo never erases learning |
-| [physics-svg](packages/physics-svg) | Deterministic 2D physics engine with SVG rendering |
-| [ai-music-sheets](packages/ai-music-sheets) | Piano sheet music in hybrid JSON + musical-language format |
-| [websketch-demo](packages/websketch-demo) | Interactive demo site for WebSketch IR |
-| [clearance-opinion-engine](packages/clearance-opinion-engine) | Deterministic name-availability and clearance-opinion engine |
-| [nameops](packages/nameops) | Name clearance orchestrator — batch runs, publish, PR automation |
-| [mcpt-link-fresh](packages/mcpt-link-fresh) | Evergreen link sync and drift fixer |
-| [vector-caliper](packages/vector-caliper) | Geometrical debugger for learning dynamics |
-| [mcpt-publishing-assets](packages/mcpt-publishing-assets) | Logo and icon asset generation for mcpt-publishing |
-| [rippled-windows-debug](packages/rippled-windows-debug) | Windows debugging tools for XRPL rippled node |
+### Original Archive (2)
+
+| Seed | Lifecycle | One-liner |
+|------|-----------|-----------|
+| [ai-music-sheets](packages/ai-music-sheets) | dormant | Provides a unified API to load and use AI models. |
+| [artifact](packages/artifact) | dormant | true, no prose, just JSON object |
 
 <!-- GENERATED:seeds-by-category:end -->
 

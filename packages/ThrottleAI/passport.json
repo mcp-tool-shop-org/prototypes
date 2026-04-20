@@ -1,0 +1,100 @@
+{
+  "$schema": "../../schemas/passport.schema.json",
+  "conformsTo": [
+    "codemeta:3.0",
+    "ro-crate:1.1",
+    "mcp-prototypes:passport:1"
+  ],
+  "id": "seed:ThrottleAI:1.1.2",
+  "swhid": null,
+  "name": "ThrottleAI",
+  "title": "ThrottleAI",
+  "description": "Lightweight, token-based AI governance for TypeScript",
+  "version": "1.1.2",
+  "license": "MIT",
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-04-20",
+  "codeRepository": "https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/ThrottleAI",
+  "author": [
+    {
+      "name": "mcp-tool-shop"
+    }
+  ],
+  "keywords": [],
+  "lifecycle": {
+    "state": "dormant",
+    "stateSince": "2026-04-08",
+    "maturity": "prototype",
+    "caretaker": null,
+    "graduatedTo": null,
+    "resurrectionNotes": null
+  },
+  "taxonomy": {
+    "category": "governance-and-policy",
+    "domains": [],
+    "tags": [
+      "typescript",
+      "javascript",
+      "cli",
+      "mcp",
+      "observability",
+      "testing"
+    ]
+  },
+  "technical": {
+    "kind": "library",
+    "programmingLanguages": [
+      "TypeScript",
+      "JavaScript"
+    ],
+    "runtimes": [],
+    "operatingSystems": [
+      "any"
+    ]
+  },
+  "health": {
+    "lineCount": null,
+    "lastCommitAt": null,
+    "commitRecencyDays": null,
+    "hasTests": null,
+    "hasReadme": null,
+    "hasLicense": null,
+    "buildable": null
+  },
+  "lineage": {
+    "sourceRepo": null,
+    "consolidatedAt": "2026-04-08",
+    "relatedSeeds": [],
+    "deprecates": [],
+    "successors": []
+  },
+  "sbom": {
+    "format": "none",
+    "url": null,
+    "hash": null
+  },
+  "discovery": {
+    "oneLiner": "A token-based lease governor for AI calls — small enough to embed anywhere, strict enough to prevent stampedes.",
+    "whyItMatters": "ThrottleAI provides a way to enforce concurrency, rate limits, and fairness when making AI model calls, helping prevent resource exhaustion and ensuring fair access to the underlying models."
+  },
+  "patterns": [
+    {
+      "name": "concurrency",
+      "category": "signal-processing",
+      "summary": "ThrottleAI enforces concurrency limits on in-flight calls with weighted slots and an interactive priority reserve."
+    }
+  ],
+  "failureModes": [],
+  "priorArt": [],
+  "agentCapsule": {
+    "insight": null,
+    "excerpt": null
+  },
+  "ingest": {
+    "method": "ollama-backfill",
+    "model": "hermes3:8b",
+    "confidence": 0.9,
+    "manualReview": true,
+    "ingestedAt": "2026-04-20T21:49:37.884Z"
+  }
+}

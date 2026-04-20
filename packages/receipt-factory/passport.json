@@ -1,0 +1,105 @@
+{
+  "$schema": "../../schemas/passport.schema.json",
+  "conformsTo": [
+    "codemeta:3.0",
+    "ro-crate:1.1",
+    "mcp-prototypes:passport:1"
+  ],
+  "id": "seed:receipt-factory:1.7.3",
+  "swhid": null,
+  "name": "receipt-factory",
+  "title": "receipt-factory",
+  "description": "A receipt is a signed, timestamped, reproducible record of what happened:",
+  "version": "1.7.3",
+  "license": "MIT",
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-04-20",
+  "codeRepository": "https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/receipt-factory",
+  "author": [
+    {
+      "name": "mcp-tool-shop"
+    }
+  ],
+  "keywords": [],
+  "lifecycle": {
+    "state": "dormant",
+    "stateSince": "2026-04-08",
+    "maturity": "prototype",
+    "caretaker": null,
+    "graduatedTo": null,
+    "resurrectionNotes": null
+  },
+  "taxonomy": {
+    "category": "crypto-and-provenance",
+    "domains": [],
+    "tags": [
+      "typescript",
+      "javascript",
+      "cli",
+      "mcp",
+      "provenance",
+      "governance"
+    ]
+  },
+  "technical": {
+    "kind": "cli",
+    "programmingLanguages": [
+      "TypeScript",
+      "JavaScript"
+    ],
+    "runtimes": [],
+    "operatingSystems": [
+      "any"
+    ]
+  },
+  "health": {
+    "lineCount": null,
+    "lastCommitAt": null,
+    "commitRecencyDays": null,
+    "hasTests": null,
+    "hasReadme": null,
+    "hasLicense": null,
+    "buildable": null
+  },
+  "lineage": {
+    "sourceRepo": null,
+    "consolidatedAt": "2026-04-08",
+    "relatedSeeds": [],
+    "deprecates": [],
+    "successors": []
+  },
+  "sbom": {
+    "format": "none",
+    "url": null,
+    "hash": null
+  },
+  "discovery": {
+    "oneLiner": "A receipt is a signed, timestamped, reproducible record of what happened:",
+    "whyItMatters": "Receipts prove process without trusting vibes. They are how we prove work happened."
+  },
+  "patterns": [
+    {
+      "name": "receipt schema",
+      "category": "data-model",
+      "summary": "A standardized schema for receipts that includes what was done, why it was done, who/what did it, proof it happened, and how to verify it."
+    },
+    {
+      "name": "canonicalization",
+      "category": "storage",
+      "summary": "The process of converting data into a standard format so that it can be consistently stored, managed, and shared."
+    }
+  ],
+  "failureModes": [],
+  "priorArt": [],
+  "agentCapsule": {
+    "insight": null,
+    "excerpt": null
+  },
+  "ingest": {
+    "method": "ollama-backfill",
+    "model": "hermes3:8b",
+    "confidence": 0.7,
+    "manualReview": true,
+    "ingestedAt": "2026-04-20T21:57:19.550Z"
+  }
+}

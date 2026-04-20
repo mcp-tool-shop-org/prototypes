@@ -12,7 +12,8 @@
     "seed:new": "node scripts/seed-new.mjs",
     "seed:validate": "node scripts/seed-validate.mjs",
     "seed:index": "node scripts/seed-index.mjs",
-    "seed:doctor": "node scripts/seed-doctor.mjs"
+    "seed:doctor": "node scripts/seed-doctor.mjs",
+    "seed:backfill": "node scripts/seed-backfill.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
