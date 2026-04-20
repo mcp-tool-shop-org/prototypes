@@ -1,0 +1,101 @@
+{
+  "$schema": "../../schemas/passport.schema.json",
+  "conformsTo": [
+    "codemeta:3.0",
+    "ro-crate:1.1",
+    "mcp-prototypes:passport:1"
+  ],
+  "id": "seed:registry-stats-vscode:1.3.1",
+  "swhid": null,
+  "name": "registry-stats-vscode",
+  "title": "Registry Stats",
+  "description": "Multi-registry download stats for npm, PyPI, NuGet, VS Code Marketplace, and Docker Hub",
+  "version": "1.3.1",
+  "license": "MIT",
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-04-20",
+  "codeRepository": "https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/registry-stats-vscode",
+  "author": [
+    {
+      "name": "mcp-tool-shop"
+    }
+  ],
+  "keywords": [],
+  "lifecycle": {
+    "state": "dormant",
+    "stateSince": "2026-04-08",
+    "maturity": "prototype",
+    "caretaker": null,
+    "graduatedTo": null,
+    "resurrectionNotes": null
+  },
+  "taxonomy": {
+    "category": "vscode-extensions",
+    "domains": [],
+    "tags": [
+      "typescript",
+      "javascript",
+      "cli",
+      "mcp",
+      "vscode",
+      "windows-only"
+    ]
+  },
+  "technical": {
+    "kind": "extension",
+    "programmingLanguages": [
+      "TypeScript",
+      "JavaScript",
+      "Node.js (>=20.0.0)"
+    ],
+    "runtimes": [],
+    "operatingSystems": [
+      "any"
+    ]
+  },
+  "health": {
+    "lineCount": null,
+    "lastCommitAt": null,
+    "commitRecencyDays": null,
+    "hasTests": null,
+    "hasReadme": null,
+    "hasLicense": null,
+    "buildable": null
+  },
+  "lineage": {
+    "sourceRepo": null,
+    "consolidatedAt": "2026-04-08",
+    "relatedSeeds": [],
+    "deprecates": [],
+    "successors": []
+  },
+  "sbom": {
+    "format": "none",
+    "url": null,
+    "hash": null
+  },
+  "discovery": {
+    "oneLiner": "The extension scans workspace for package manifests and pulls live download statistics from five registries.",
+    "whyItMatters": "Provides quick insights into dependencies usage across multiple package managers directly in the IDE."
+  },
+  "patterns": [
+    {
+      "name": "caching",
+      "category": "data-model",
+      "summary": "Uses stale-while-revalidate strategy to keep UI responsive while fetching fresh data from registries."
+    }
+  ],
+  "failureModes": [],
+  "priorArt": [],
+  "agentCapsule": {
+    "insight": null,
+    "excerpt": null
+  },
+  "ingest": {
+    "method": "ollama-backfill",
+    "model": "hermes3:8b",
+    "confidence": 0.9,
+    "manualReview": true,
+    "ingestedAt": "2026-04-20T21:57:26.556Z"
+  }
+}
