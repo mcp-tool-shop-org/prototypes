@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-The Prototypes repo is a pnpm + Turborepo monorepo. All 67 packages live under `packages/` and can be explored, built, or tested from the repo root.
+The Prototypes repo is a pnpm + Turborepo monorepo. All 104 packages live under `packages/` and can be explored, built, or tested from the repo root. See [The Seed Vault](/prototypes/handbook/seed-vault/) for the metadata system that keeps them discoverable at scale — passport schema, taxonomy, validators, generator.
 
 ## Prerequisites
 
@@ -63,7 +63,7 @@ prototypes/
     prov-engine-js/           # Crypto & Provenance
     llm-sync-drive/           # Infrastructure
     mcpt/                     # Original Archive
-    ... (67 packages total)
+    ... (104 packages total)
   site/                       # Landing page + handbook
   package.json
   pnpm-workspace.yaml
@@ -72,9 +72,11 @@ prototypes/
 
 ## Reviving a package
 
-If a prototype looks like it should be a real product:
+If a prototype looks like it should be a real product, graduate it. The formal flow is documented in [The Seed Vault → Graduate a seed](/prototypes/handbook/seed-vault/#graduate-a-seed):
 
-1. Copy the package directory out of the monorepo
-2. Create a new repo in `mcp-tool-shop-org`
-3. Push the scaffold commit
-4. Run shipcheck and apply the full treatment
+1. Push the package contents to a new repo under `mcp-tool-shop-org`
+2. Run [shipcheck](https://github.com/mcp-tool-shop-org/shipcheck) on the new repo
+3. Set `lifecycle.state = "graduated"` and `lifecycle.graduatedTo = "<new-repo-url>"` in the seed's `passport.json`
+4. `pnpm seed:validate` enforces the graduation shape
+
+The passport acts as a forwarding address — anyone browsing the vault sees where the seed went.
