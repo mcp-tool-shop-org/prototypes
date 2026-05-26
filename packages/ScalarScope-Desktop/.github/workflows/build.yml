@@ -32,12 +32,12 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         fetch-depth: 0
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
+      uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5.2.0
       with:
         global-json-file: global.json
 
@@ -83,14 +83,14 @@ jobs:
         echo "Version: $version+$shortSha"
 
     - name: Upload ScalarScope artifacts
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
         name: scalarscope-windows-${{ steps.version.outputs.VERSION }}
         path: src/ScalarScope/bin/Release/
         retention-days: 14
 
     - name: Upload VortexKit NuGet
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
         name: vortexkit-nuget-${{ steps.version.outputs.VERSION }}
         path: src/VortexKit/bin/Release/*.nupkg
