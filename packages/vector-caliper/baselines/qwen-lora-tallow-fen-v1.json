@@ -1,0 +1,235 @@
+{
+  "run": "tallow_fen_style_v1",
+  "captured": "2026-06-09",
+  "reference": {
+    "dir": "E:\\AI\\training\\dataset_tallow_fen",
+    "n": 44,
+    "sigma": 0.47900169753130234
+  },
+  "states": [
+    {
+      "id": "tallow-fen-v1-step-250",
+      "time": 250,
+      "geometry": {
+        "effectiveDimension": 7.757477402078029,
+        "anisotropy": 6.621865643989259,
+        "spread": 0.8430308699607849,
+        "density": 7.102524389014206
+      },
+      "uncertainty": {
+        "entropy": 3.576477527618408,
+        "margin": 0.01452073804102838,
+        "calibration": 0.08244698494672775
+      },
+      "performance": {
+        "accuracy": 0.7647979855537415,
+        "loss": 0.16690856218338013
+      },
+      "metadata": {
+        "source": "tallow_fen_style_v1 (Qwen-Image LoRA, RTX 5090)",
+        "version": "1.0.0",
+        "tags": [
+          "n=12",
+          "clip-vit-b32",
+          "proxy-uncertainty"
+        ]
+      }
+    },
+    {
+      "id": "tallow-fen-v1-step-500",
+      "time": 500,
+      "geometry": {
+        "effectiveDimension": 7.180756051976849,
+        "anisotropy": 7.760998726659996,
+        "spread": 0.8325328826904297,
+        "density": 7.181163759334916
+      },
+      "uncertainty": {
+        "entropy": 3.575670003890991,
+        "margin": 0.025575989857316017,
+        "calibration": 0.08706717193126678
+      },
+      "performance": {
+        "accuracy": 0.7735676169395447,
+        "loss": 0.15337598323822021
+      },
+      "metadata": {
+        "source": "tallow_fen_style_v1 (Qwen-Image LoRA, RTX 5090)",
+        "version": "1.0.0",
+        "tags": [
+          "n=12",
+          "clip-vit-b32",
+          "proxy-uncertainty"
+        ]
+      }
+    },
+    {
+      "id": "tallow-fen-v1-step-750",
+      "time": 750,
+      "geometry": {
+        "effectiveDimension": 7.409353421390496,
+        "anisotropy": 6.979115957964436,
+        "spread": 0.8266791701316833,
+        "density": 7.201104059214372
+      },
+      "uncertainty": {
+        "entropy": 3.5770695209503174,
+        "margin": 0.03614329965785146,
+        "calibration": 0.08109613507986069
+      },
+      "performance": {
+        "accuracy": 0.7801888585090637,
+        "loss": 0.14684104919433594
+      },
+      "metadata": {
+        "source": "tallow_fen_style_v1 (Qwen-Image LoRA, RTX 5090)",
+        "version": "1.0.0",
+        "tags": [
+          "n=12",
+          "clip-vit-b32",
+          "proxy-uncertainty"
+        ]
+      }
+    },
+    {
+      "id": "tallow-fen-v1-step-1000",
+      "time": 1000,
+      "geometry": {
+        "effectiveDimension": 7.3610166758567885,
+        "anisotropy": 7.320895825606809,
+        "spread": 0.8148157596588135,
+        "density": 7.246805784660056
+      },
+      "uncertainty": {
+        "entropy": 3.577988862991333,
+        "margin": 0.041199419647455215,
+        "calibration": 0.07699479907751083
+      },
+      "performance": {
+        "accuracy": 0.788444459438324,
+        "loss": 0.13987720012664795
+      },
+      "metadata": {
+        "source": "tallow_fen_style_v1 (Qwen-Image LoRA, RTX 5090)",
+        "version": "1.0.0",
+        "tags": [
+          "n=12",
+          "clip-vit-b32",
+          "proxy-uncertainty"
+        ]
+      }
+    },
+    {
+      "id": "tallow-fen-v1-step-1250",
+      "time": 1250,
+      "geometry": {
+        "effectiveDimension": 7.075301788220325,
+        "anisotropy": 8.279761391066161,
+        "spread": 0.8146253824234009,
+        "density": 7.2864497225930664
+      },
+      "uncertainty": {
+        "entropy": 3.5780458450317383,
+        "margin": 0.045075961388647556,
+        "calibration": 0.07691206783056259
+      },
+      "performance": {
+        "accuracy": 0.7905473709106445,
+        "loss": 0.13513541221618652
+      },
+      "metadata": {
+        "source": "tallow_fen_style_v1 (Qwen-Image LoRA, RTX 5090)",
+        "version": "1.0.0",
+        "tags": [
+          "n=12",
+          "clip-vit-b32",
+          "proxy-uncertainty"
+        ]
+      }
+    },
+    {
+      "id": "tallow-fen-v1-step-1500",
+      "time": 1500,
+      "geometry": {
+        "effectiveDimension": 7.096816902083409,
+        "anisotropy": 8.518901948452722,
+        "spread": 0.8217833638191223,
+        "density": 7.262251305894052
+      },
+      "uncertainty": {
+        "entropy": 3.5785281658172607,
+        "margin": 0.04449977073818445,
+        "calibration": 0.07387224584817886
+      },
+      "performance": {
+        "accuracy": 0.7842926979064941,
+        "loss": 0.1435713768005371
+      },
+      "metadata": {
+        "source": "tallow_fen_style_v1 (Qwen-Image LoRA, RTX 5090)",
+        "version": "1.0.0",
+        "tags": [
+          "n=12",
+          "clip-vit-b32",
+          "proxy-uncertainty"
+        ]
+      }
+    },
+    {
+      "id": "tallow-fen-v1-step-1750",
+      "time": 1750,
+      "geometry": {
+        "effectiveDimension": 7.008293973017701,
+        "anisotropy": 8.21347886570257,
+        "spread": 0.8244690895080566,
+        "density": 7.25062711021022
+      },
+      "uncertainty": {
+        "entropy": 3.5780160427093506,
+        "margin": 0.04056647885590792,
+        "calibration": 0.07635637372732162
+      },
+      "performance": {
+        "accuracy": 0.7795696258544922,
+        "loss": 0.15124398469924927
+      },
+      "metadata": {
+        "source": "tallow_fen_style_v1 (Qwen-Image LoRA, RTX 5090)",
+        "version": "1.0.0",
+        "tags": [
+          "n=12",
+          "clip-vit-b32",
+          "proxy-uncertainty"
+        ]
+      }
+    },
+    {
+      "id": "tallow-fen-v1-step-2000",
+      "time": 2000,
+      "geometry": {
+        "effectiveDimension": 6.761863905951503,
+        "anisotropy": 12.496390278327958,
+        "spread": 0.7998718023300171,
+        "density": 7.395438826698832
+      },
+      "uncertainty": {
+        "entropy": 3.5797951221466064,
+        "margin": 0.051343273371458054,
+        "calibration": 0.0672067403793335
+      },
+      "performance": {
+        "accuracy": 0.7937332987785339,
+        "loss": 0.14313781261444092
+      },
+      "metadata": {
+        "source": "tallow_fen_style_v1 (Qwen-Image LoRA, RTX 5090)",
+        "version": "1.0.0",
+        "tags": [
+          "n=12",
+          "clip-vit-b32",
+          "proxy-uncertainty"
+        ]
+      }
+    }
+  ]
+}
