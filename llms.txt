@@ -2,7 +2,7 @@
 
 > Archived prototypes from the MCP Tool Shop organization. Every seed solved a real problem, proved a concept, or taught us something. Passports carry structured patterns, failure modes, and agent capsules so LLMs can extract reusable tricks without parsing source.
 
-Generated 2026-04-20 — 104 seeds cataloged.
+Generated 2026-06-21 — 103 seeds cataloged.
 
 ## Voice and Sound
 
@@ -98,7 +98,6 @@ Generated 2026-04-20 — 104 seeds cataloged.
 ## WebSketch
 
 - [websketch-demo](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/websketch-demo): Yes, the package.json file is present.
-- [websketch-ir](https://github.com/mcp-tool-shop-org/prototypes/tree/main/packages/websketch-ir): A grammar-based representation of web UI for LLM consumption.
 
 ## Mouse and Cursor
 
