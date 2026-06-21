@@ -1,8 +1,8 @@
 # Prototypes
 
-**104 archived packages** from [MCP Tool Shop](https://mcp-tool-shop.github.io/) — consolidated during the April 2026 org reductions (175 to 51 repos across two rounds).
+**103 archived packages** from [MCP Tool Shop](https://mcp-tool-shop.github.io/) — consolidated during the April 2026 org reductions (175 to 51 repos across two rounds).
 
-This is not a graveyard. It is a seed vault. Every package here solved a real problem, proved a concept, or taught us something that shaped the tools we ship today. Browse the source, steal patterns, revive what is useful.
+This is not a graveyard. It is a seed vault. Every package here solved a real problem, proved a concept, or taught us something that shaped the tools we ship today. Browse the source, steal patterns, revive what is useful. (One seed, `websketch-ir`, has since been revived into its own repo — proof the vault works.)
 
 ## Quick start
 
@@ -19,7 +19,7 @@ pnpm build
 
 <!-- Regenerate with: pnpm seed:index — do not edit between the markers. -->
 
-_104 seeds across 13 categories — all currently `dormant` — generated 2026-04-20_
+_103 seeds across 13 categories — all currently `dormant` — generated 2026-06-21_
 
 ### Voice and Sound (6)
 
@@ -120,12 +120,11 @@ _104 seeds across 13 categories — all currently `dormant` — generated 2026-0
 | [vscode-voice-soundboard](packages/vscode-voice-soundboard) | Text-to-speech extension for VS Code with 48 voices, presets, and multi-speaker dialogue — powered by MCP Voice Soundboard. |
 | [websketch-vscode](packages/websketch-vscode) | A VS Code extension that captures web pages and renders them as LLM-ready IR trees. |
 
-### WebSketch (2)
+### WebSketch (1)
 
 | Seed | One-liner |
 |------|-----------|
 | [websketch-demo](packages/websketch-demo) | Yes, the package.json file is present. |
-| [websketch-ir](packages/websketch-ir) | A grammar-based representation of web UI for LLM consumption. |
 
 ### Mouse and Cursor (2)
 
